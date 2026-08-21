@@ -764,7 +764,30 @@ textarea {
   line-height: 1.45;
 }
 
-.lead-row button {
+.lead-actions {
+  grid-column: 1 / -1;
+  display: grid;
+  grid-template-columns: auto minmax(140px, 0.55fr) minmax(190px, 0.75fr) auto;
+  gap: 10px;
+  align-items: end;
+}
+
+.lead-actions label {
+  display: grid;
+  gap: 5px;
+  color: var(--muted);
+  font-size: 0.76rem;
+  font-weight: 780;
+}
+
+.lead-actions select,
+.lead-actions input {
+  min-height: 36px;
+  padding: 0 9px;
+  background: #fff;
+}
+
+.lead-actions button {
   justify-self: start;
   min-height: 34px;
   padding: 0 11px;
@@ -1267,6 +1290,10 @@ textarea {
 
   .lead-form .form-wide {
     grid-column: auto;
+  }
+
+  .lead-actions {
+    grid-template-columns: 1fr;
   }
 
   .stage-pill,

@@ -244,7 +244,7 @@ export default async function Dashboard() {
                     Export CSV
                   </button>
                   <button className="secondary-action" id="clearLeads" type="button">
-                    Remove examples
+                    Remove tests/examples
                   </button>
                 </div>
               </div>

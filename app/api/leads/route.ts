@@ -1,5 +1,10 @@
 import { env } from "cloudflare:workers";
-import { normalizeLead, type LeadPayload } from "./validation";
+import {
+  normalizeLead,
+  normalizeLeadUpdate,
+  type LeadPayload,
+  type LeadUpdatePayload,
+} from "./validation";
 
 const createTableSql = `
 CREATE TABLE IF NOT EXISTS leads (
@@ -20,6 +25,8 @@ CREATE TABLE IF NOT EXISTS leads (
   consent_at TEXT,
   spam_signal TEXT,
   stage TEXT NOT NULL,
+  next_follow_up_at TEXT,
+  updated_at TEXT,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 )`;
 
@@ -34,6 +41,8 @@ const optionalColumns = [
   ["requirements", "ALTER TABLE leads ADD COLUMN requirements TEXT"],
   ["consent_at", "ALTER TABLE leads ADD COLUMN consent_at TEXT"],
   ["spam_signal", "ALTER TABLE leads ADD COLUMN spam_signal TEXT"],
+  ["next_follow_up_at", "ALTER TABLE leads ADD COLUMN next_follow_up_at TEXT"],
+  ["updated_at", "ALTER TABLE leads ADD COLUMN updated_at TEXT"],
 ] as const;
 
 const createCreatedAtIndexSql = `
@@ -86,7 +95,8 @@ export async function GET(request: Request) {
             property_type AS propertyType, bedrooms, move_date AS moveDate,
             viewing_window AS viewingWindow, contract_term AS contractTerm,
             preferred_language AS preferredLanguage, pets, requirements,
-            consent_at AS consentAt, stage, created_at AS createdAt
+            consent_at AS consentAt, stage, next_follow_up_at AS nextFollowUpAt,
+            updated_at AS updatedAt, created_at AS createdAt
      FROM leads
      ORDER BY created_at DESC
      LIMIT 200`,
@@ -121,14 +131,15 @@ export async function POST(request: Request) {
     `INSERT INTO leads (
        name, contact, source, budget, area, property_type, bedrooms, move_date,
        viewing_window, contract_term, preferred_language, pets, requirements,
-       consent_at, stage
+       consent_at, stage, created_at, updated_at
      )
-     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?)
+     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, CURRENT_TIMESTAMP, ?, CURRENT_TIMESTAMP, CURRENT_TIMESTAMP)
      RETURNING id, name, contact, source, budget, area,
        property_type AS propertyType, bedrooms, move_date AS moveDate,
        viewing_window AS viewingWindow, contract_term AS contractTerm,
        preferred_language AS preferredLanguage, pets, requirements,
-       consent_at AS consentAt, stage, created_at AS createdAt`,
+       consent_at AS consentAt, stage, next_follow_up_at AS nextFollowUpAt,
+       updated_at AS updatedAt, created_at AS createdAt`,
   )
     .bind(
       lead.name,
@@ -151,12 +162,55 @@ export async function POST(request: Request) {
   return json({ lead: result }, { status: 201 });
 }
 
+export async function PATCH(request: Request) {
+  if (!isAuthenticated(request)) {
+    return json({ error: "Sign in required" }, { status: 401 });
+  }
+
+  await ensureSchema();
+  let payload: LeadUpdatePayload;
+  try {
+    payload = (await request.json()) as LeadUpdatePayload;
+  } catch {
+    return json({ error: "Invalid JSON" }, { status: 400 });
+  }
+
+  const update = normalizeLeadUpdate(payload);
+  if (!update) {
+    return json({ error: "Invalid lead update" }, { status: 422 });
+  }
+
+  const result = await env.DB.prepare(
+    `UPDATE leads
+     SET stage = ?, next_follow_up_at = ?, updated_at = CURRENT_TIMESTAMP
+     WHERE id = ?
+     RETURNING id, name, contact, source, budget, area,
+       property_type AS propertyType, bedrooms, move_date AS moveDate,
+       viewing_window AS viewingWindow, contract_term AS contractTerm,
+       preferred_language AS preferredLanguage, pets, requirements,
+       consent_at AS consentAt, stage, next_follow_up_at AS nextFollowUpAt,
+       updated_at AS updatedAt, created_at AS createdAt`,
+  )
+    .bind(update.stage, update.nextFollowUpAt, update.id)
+    .first();
+
+  if (!result) return json({ error: "Lead not found" }, { status: 404 });
+  return json({ lead: result });
+}
+
 export async function DELETE(request: Request) {
   if (!isAuthenticated(request)) {
     return json({ error: "Sign in required" }, { status: 401 });
   }
 
   await ensureSchema();
-  await env.DB.prepare("DELETE FROM leads").run();
-  return json({ leads: [] });
+  const scope = new URL(request.url).searchParams.get("scope");
+  if (scope !== "tests") {
+    return json({ error: "Only test lead cleanup is supported" }, { status: 400 });
+  }
+
+  const result = await env.DB.prepare(
+    "DELETE FROM leads WHERE name LIKE 'TEST%' OR source LIKE '%smoke%'",
+  ).run();
+  return json({ deleted: result.meta?.changes ?? 0 });
 }

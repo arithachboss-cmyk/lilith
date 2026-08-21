@@ -16,7 +16,7 @@
 - Move-in date, viewing window, language, pets and must-have requirements
 - UTM source/campaign/content tracking
 - D1-backed lead storage with protected read access
-- Priority scoring, response scripts and CSV export
+- Priority scoring, protected stage updates, next follow-up scheduling, response scripts and CSV export
 - Campaign copy for expat, corporate relocation, premium Facebook groups, portals and referrals
 - Thai/English social sharing preview
 - Launch plan and outreach pack for qualified premium leads

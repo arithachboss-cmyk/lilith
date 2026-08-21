@@ -57,6 +57,16 @@ const campaignChannel = document.querySelector("#campaignChannel");
 const renterPersona = document.querySelector("#renterPersona");
 const campaignOffer = document.querySelector("#campaignOffer");
 const campaignOutput = document.querySelector("#campaignOutput");
+const leadStages = [
+  "New inquiry",
+  "Qualified",
+  "Shortlist sent",
+  "Viewing booked",
+  "Offer submitted",
+  "Deposit pending",
+  "Won",
+  "Lost",
+];
 
 const seedLeads = [
   {
@@ -161,6 +171,8 @@ function urgencyScore(lead) {
     "Shortlist sent": 27,
     Qualified: 22,
     "New inquiry": 12,
+    Won: 0,
+    Lost: -20,
   };
   const budgetScore = Math.min(Math.round(Number(lead.budget) / 10000), 25);
   const completenessScore =
@@ -170,7 +182,9 @@ function urgencyScore(lead) {
     ? Math.ceil((new Date(lead.moveDate) - new Date()) / 86400000)
     : 30;
   const moveScore = daysUntilMove <= 14 ? 20 : daysUntilMove <= 30 ? 14 : 7;
-  return (stageScore[lead.stage] || 10) + budgetScore + completenessScore + moveScore;
+  const followUpTime = lead.nextFollowUpAt ? new Date(lead.nextFollowUpAt).getTime() : null;
+  const followUpScore = followUpTime && followUpTime <= Date.now() ? 12 : 0;
+  return (stageScore[lead.stage] ?? 10) + budgetScore + completenessScore + moveScore + followUpScore;
 }
 
 function viewingWindowText(lead) {
@@ -179,12 +193,28 @@ function viewingWindowText(lead) {
 
 function nextAction(lead) {
   const viewingCue = lead.viewingWindow ? ` (${lead.viewingWindow})` : "";
+  if (lead.stage === "Won") return "ยืนยันสัญญา วันเข้าอยู่ และเอกสารรับมอบ";
+  if (lead.stage === "Lost") return "บันทึกเหตุผลที่ไม่ปิดดีล แล้วหยุด follow-up";
   if (lead.stage === "Deposit pending") return "ส่งยอดจอง เอกสาร และกำหนดเวลามัดจำ";
   if (lead.stage === "Offer submitted") return "ตามผลข้อเสนอและเตรียมเอกสารสัญญา 12 เดือน";
   if (lead.stage === "Viewing booked") return `ยืนยันนัด${viewingCue} ส่ง route รูป และค่าแรกเข้า`;
   if (lead.stage === "Shortlist sent") return `ถาม feedback แล้วปิดเวลานัดชม${viewingCue}`;
   if (lead.stage === "Qualified") return "ส่ง Private Shortlist 3-5 ตัวเลือกที่ต่างกันชัดเจน";
   return "โทรหรือ LINE ภายใน 15 นาทีเพื่อยืนยันโจทย์และสัญญา 1 ปี";
+}
+
+function stageOptions(selectedStage) {
+  return leadStages
+    .map(
+      (stage) =>
+        `<option${stage === selectedStage ? " selected" : ""}>${escapeHtml(stage)}</option>`,
+    )
+    .join("");
+}
+
+function dateTimeLocalValue(value) {
+  if (!value) return "";
+  return String(value).slice(0, 16).replace(" ", "T");
 }
 
 function primarySource(source) {
@@ -257,6 +287,9 @@ function downloadCsv() {
     "pets",
     "requirements",
     "stage",
+    "nextFollowUpAt",
+    "updatedAt",
+    "createdAt",
     "priorityScore",
     "nextAction",
   ];
@@ -276,6 +309,9 @@ function downloadCsv() {
       lead.pets,
       lead.requirements,
       lead.stage,
+      lead.nextFollowUpAt,
+      lead.updatedAt,
+      lead.createdAt,
       urgencyScore(lead),
       nextAction(lead),
     ]
@@ -294,7 +330,9 @@ function downloadCsv() {
 
 function renderLeads() {
   const ranked = targetLeads().sort((a, b) => urgencyScore(b) - urgencyScore(a));
-  const hotLeads = ranked.filter((lead) => urgencyScore(lead) >= 70 && !lead.example);
+  const hotLeads = ranked.filter(
+    (lead) => urgencyScore(lead) >= 70 && !lead.example && !["Won", "Lost"].includes(lead.stage),
+  );
   hotLeadCount.textContent = String(hotLeads.length);
   exportLeads.disabled = !ranked.some((lead) => !lead.example);
 
@@ -325,7 +363,26 @@ function renderLeads() {
           </div>
           ${lead.requirements ? `<p>${escapeHtml(lead.requirements)}</p>` : ""}
           <p>${escapeHtml(nextAction(lead))}</p>
-          <button type="button" data-script-index="${index}">Build reply</button>
+          <div class="lead-actions">
+            <button type="button" data-script-index="${index}">Build reply</button>
+            ${
+              lead.example || !lead.id
+                ? ""
+                : `
+                  <label>
+                    Stage
+                    <select data-stage-id="${lead.id}" aria-label="Stage for ${escapeHtml(lead.name)}">
+                      ${stageOptions(lead.stage)}
+                    </select>
+                  </label>
+                  <label>
+                    Next follow-up
+                    <input data-follow-up-id="${lead.id}" type="datetime-local" value="${escapeHtml(dateTimeLocalValue(lead.nextFollowUpAt))}" aria-label="Next follow-up for ${escapeHtml(lead.name)}" />
+                  </label>
+                  <button type="button" data-save-id="${lead.id}">Save progress</button>
+                `
+            }
+          </div>
         </article>
       `,
     )
@@ -526,7 +583,38 @@ leadForm.addEventListener("submit", async (event) => {
   submitButton.textContent = "Add qualified lead";
 });
 
-leadTable.addEventListener("click", (event) => {
+leadTable.addEventListener("click", async (event) => {
+  const saveButton = event.target.closest("[data-save-id]");
+  if (saveButton) {
+    const id = Number(saveButton.dataset.saveId);
+    const stage = leadTable.querySelector(`[data-stage-id="${id}"]`).value;
+    const nextFollowUpAt = leadTable.querySelector(`[data-follow-up-id="${id}"]`).value || null;
+    saveButton.disabled = true;
+    saveButton.textContent = "Saving...";
+
+    try {
+      const response = await fetch("/api/leads", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ id, stage, nextFollowUpAt }),
+      });
+      if (!response.ok) throw new Error("Progress update failed");
+      await loadServerLeads();
+      leadConsole.innerHTML = `
+        <strong>Progress saved</strong>
+        <span>Lead #${id} เปลี่ยนเป็น ${escapeHtml(stage)} และบันทึกเวลาติดตามครั้งถัดไปแล้ว</span>
+      `;
+    } catch {
+      saveButton.disabled = false;
+      saveButton.textContent = "Save progress";
+      leadConsole.innerHTML = `
+        <strong>ยังบันทึก progress ไม่สำเร็จ</strong>
+        <span>ข้อมูลเดิมยังอยู่ครบ กรุณาตรวจการเชื่อมต่อแล้วลองอีกครั้ง</span>
+      `;
+    }
+    return;
+  }
+
   const scriptButton = event.target.closest("[data-script-index]");
   if (!scriptButton) return;
   const ranked = targetLeads().sort((a, b) => urgencyScore(b) - urgencyScore(a));
@@ -550,10 +638,30 @@ loadSeedLeads.addEventListener("click", () => {
   renderLeads();
 });
 
-clearLeads.addEventListener("click", () => {
+clearLeads.addEventListener("click", async () => {
   leads = leads.filter((lead) => !lead.example);
   saveLeads();
   renderLeads();
+  clearLeads.disabled = true;
+  clearLeads.textContent = "Cleaning...";
+  try {
+    const response = await fetch("/api/leads?scope=tests", { method: "DELETE" });
+    if (!response.ok) throw new Error("Cleanup failed");
+    const payload = await response.json();
+    await loadServerLeads();
+    leadConsole.innerHTML = `
+      <strong>Test data cleaned</strong>
+      <span>ลบข้อมูลทดสอบจากฐานข้อมูล ${Number(payload.deleted || 0)} รายการ โดยไม่แตะลูกค้าจริง</span>
+    `;
+  } catch {
+    leadConsole.innerHTML = `
+      <strong>ลบตัวอย่างในเครื่องแล้ว</strong>
+      <span>ยังล้าง test lead บน server ไม่สำเร็จ กรุณาลองใหม่หลังเชื่อมต่อ dashboard</span>
+    `;
+  } finally {
+    clearLeads.disabled = false;
+    clearLeads.textContent = "Remove tests/examples";
+  }
 });
 
 buildCampaign.addEventListener("click", renderCampaign);

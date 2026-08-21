@@ -1,7 +1,11 @@
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
-import { normalizeLead } from "../app/api/leads/validation.ts";
+import {
+  leadStages,
+  normalizeLead,
+  normalizeLeadUpdate,
+} from "../app/api/leads/validation.ts";
 
 async function fetchWorker(path, init = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
@@ -109,6 +113,7 @@ test("keeps lead reads private while accepting public inquiries", async () => {
   assert.match(route, /if \(!isAuthenticated\(request\)\)/);
   assert.match(route, /return json\(\{ error: "Sign in required" \}, \{ status: 401 \}\)/);
   assert.match(route, /export async function POST\(request: Request\)/);
+  assert.match(route, /export async function PATCH\(request: Request\)/);
   const postRoute = route.match(
     /export async function POST\(request: Request\) \{[\s\S]*?\n\}/,
   )?.[0] ?? "";
@@ -120,6 +125,35 @@ test("keeps lead reads private while accepting public inquiries", async () => {
   assert.match(route, /contact/);
   assert.match(route, /propertyType/);
   assert.match(route, /preferredLanguage/);
+  assert.match(route, /created_at, updated_at/);
+});
+
+test("validates protected pipeline progress updates", () => {
+  assert.deepEqual(leadStages, [
+    "New inquiry",
+    "Qualified",
+    "Shortlist sent",
+    "Viewing booked",
+    "Offer submitted",
+    "Deposit pending",
+    "Won",
+    "Lost",
+  ]);
+
+  assert.deepEqual(
+    normalizeLeadUpdate({
+      id: 7,
+      stage: "Viewing booked",
+      nextFollowUpAt: "2026-08-22T10:30",
+    }),
+    { id: 7, stage: "Viewing booked", nextFollowUpAt: "2026-08-22T10:30" },
+  );
+  assert.equal(normalizeLeadUpdate({ id: 0, stage: "Qualified" }), null);
+  assert.equal(normalizeLeadUpdate({ id: 7, stage: "Invented stage" }), null);
+  assert.equal(
+    normalizeLeadUpdate({ id: 7, stage: "Qualified", nextFollowUpAt: "tomorrow" }),
+    null,
+  );
 });
 
 test("tracks premium acquisition channels through inquiry source", async () => {
@@ -149,6 +183,10 @@ test("uses the full premium brief in dashboard follow-up tools", async () => {
   assert.match(dashboardScript, /requirements/);
   assert.match(dashboardScript, /Private Shortlist/);
   assert.match(dashboardScript, /Top demand areas/);
+  assert.match(dashboardScript, /Save progress/);
+  assert.match(dashboardScript, /nextFollowUpAt/);
+  assert.match(dashboardScript, /method: "PATCH"/);
+  assert.match(dashboardScript, /scope=tests/);
 });
 
 test("ships the D1 migration for premium qualification fields", async () => {
@@ -163,4 +201,17 @@ test("ships the D1 migration for premium qualification fields", async () => {
   assert.match(migration, /ADD `contract_term` text/);
   assert.match(migration, /ADD `preferred_language` text/);
   assert.match(migration, /ADD `consent_at` text/);
+});
+
+test("ships follow-up workflow fields without a destructive lead delete", async () => {
+  const [migration, route] = await Promise.all([
+    readFile(new URL("../drizzle/0003_lead-follow-up-workflow.sql", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/leads/route.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(migration, /ADD `next_follow_up_at` text/);
+  assert.match(migration, /ADD `updated_at` text/);
+  assert.match(route, /Only test lead cleanup is supported/);
+  assert.match(route, /name LIKE 'TEST%'/);
+  assert.doesNotMatch(route, /prepare\("DELETE FROM leads"\)/);
 });

@@ -18,5 +18,7 @@ export const leads = sqliteTable("leads", {
   consentAt: text("consent_at"),
   spamSignal: text("spam_signal"),
   stage: text("stage").notNull(),
+  nextFollowUpAt: text("next_follow_up_at"),
+  updatedAt: text("updated_at"),
   createdAt: text("created_at").notNull().default("CURRENT_TIMESTAMP"),
 });
