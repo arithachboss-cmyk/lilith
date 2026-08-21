@@ -87,9 +87,124 @@
             <span>lead sources tracked</span>
           </div>
           <div>
-            <strong>3</strong>
-            <span>closing stages</span>
+            <strong id="hotLeadCount">0</strong>
+            <span>hot leads in pipeline</span>
           </div>
+        </section>
+
+        <section class="lead-ops" aria-label="Customer acquisition system">
+          <article class="results-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="label">Lead intake</p>
+                <h3>บันทึกลูกค้าที่สนใจเช่าห้อง</h3>
+              </div>
+              <button class="secondary-action" id="loadSeedLeads" type="button">Load sample leads</button>
+            </div>
+            <form class="lead-form" id="leadForm">
+              <label>
+                ชื่อลูกค้า
+                <input id="leadName" placeholder="เช่น คุณเมย์" required />
+              </label>
+              <label>
+                ช่องทาง
+                <select id="leadSource">
+                  <option>LINE OA</option>
+                  <option>Facebook Marketplace</option>
+                  <option>Property portal</option>
+                  <option>TikTok</option>
+                  <option>Referral</option>
+                </select>
+              </label>
+              <label>
+                งบสูงสุด
+                <input id="leadBudget" type="number" min="3000" step="500" value="18000" required />
+              </label>
+              <label>
+                ทำเลที่ต้องการ
+                <input id="leadArea" value="Asoke" required />
+              </label>
+              <label>
+                วันเข้าอยู่
+                <input id="moveDate" type="date" />
+              </label>
+              <label>
+                สถานะ
+                <select id="leadStage">
+                  <option>New inquiry</option>
+                  <option>Qualified</option>
+                  <option>Viewing booked</option>
+                  <option>Deposit pending</option>
+                </select>
+              </label>
+              <button class="primary-action" type="submit">Add lead</button>
+            </form>
+          </article>
+
+          <article class="results-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="label">Today queue</p>
+                <h3>งานที่ต้องทำเพื่อปิดลูกค้า</h3>
+              </div>
+              <div class="button-row">
+                <button class="secondary-action" id="exportLeads" type="button">Export CSV</button>
+                <button class="secondary-action" id="clearLeads" type="button">Clear</button>
+              </div>
+            </div>
+            <div class="lead-table" id="leadTable"></div>
+          </article>
+        </section>
+
+        <section class="acquisition-launch" aria-label="Acquisition launch system">
+          <article class="results-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="label">Acquisition launch</p>
+                <h3>ปล่อยแคมเปญหาลูกค้าเช่าห้องวันนี้</h3>
+              </div>
+              <button class="primary-action compact-action" id="buildCampaign" type="button">Build campaign</button>
+            </div>
+            <div class="campaign-controls">
+              <label>
+                ช่องทางหลัก
+                <select id="campaignChannel">
+                  <option>LINE OA broadcast</option>
+                  <option>Facebook Marketplace post</option>
+                  <option>Property portal refresh</option>
+                  <option>TikTok short script</option>
+                  <option>Referral push</option>
+                </select>
+              </label>
+              <label>
+                กลุ่มลูกค้า
+                <select id="renterPersona">
+                  <option>คนทำงานย้ายเข้าเร็ว</option>
+                  <option>ต่างชาติใกล้ BTS/MRT</option>
+                  <option>นักศึกษา/เริ่มงานใหม่</option>
+                  <option>ครอบครัวเล็ก</option>
+                </select>
+              </label>
+              <label>
+                ข้อเสนอ
+                <input id="campaignOffer" value="ห้องพร้อมเข้าอยู่ นัดดูได้วันนี้" />
+              </label>
+            </div>
+            <div class="campaign-output" id="campaignOutput">
+              <section>
+                <h4>Post copy</h4>
+                <p>เลือกช่องทางและกด Build campaign เพื่อสร้างข้อความหาลูกค้าพร้อมลงประกาศ</p>
+              </section>
+              <section>
+                <h4>Daily actions</h4>
+                <ul>
+                  <li>ลงประกาศ 3 ทำเลหลักก่อนเที่ยง</li>
+                  <li>ตอบทุก inquiry ภายใน 15 นาที</li>
+                  <li>ปิดนัดดูห้องอย่างน้อย 3 นัดต่อวัน</li>
+                </ul>
+              </section>
+            </div>
+          </article>
         </section>
 
         <section class="content-grid">
@@ -142,6 +257,61 @@
           </aside>
         </section>
 
+        <section class="renter-capture" aria-label="Renter capture page">
+          <article class="capture-hero">
+            <div>
+              <p class="label">Public lead capture</p>
+              <h3>ลิงก์รับลูกค้าสำหรับคนกำลังหาห้อง</h3>
+              <p>
+                ใช้ข้อความนี้เป็นหน้า landing/copy สำหรับโพสต์ประกาศ ให้ลูกค้ากรอกข้อมูลแล้วทีมขายเอาเข้าคิว follow-up ทันที
+              </p>
+            </div>
+            <div class="capture-copy" id="captureCopy">
+              <strong>หาห้องเช่าใกล้ BTS/MRT ใช่ไหม?</strong>
+              <span>บอกงบ ทำเล และวันเข้าอยู่ เดี๋ยว Lilith คัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้ภายในวันนี้</span>
+            </div>
+          </article>
+
+          <article class="results-panel">
+            <div class="panel-heading">
+              <div>
+                <p class="label">Inquiry form</p>
+                <h3>ฟอร์มลูกค้าสนใจเช่าห้อง</h3>
+              </div>
+              <button class="secondary-action" id="copyCapturePost" type="button">Copy renter post</button>
+            </div>
+            <form class="renter-form" id="renterForm">
+              <label>
+                ชื่อ / LINE
+                <input id="renterName" placeholder="เช่น May / @lineid" required />
+              </label>
+              <label>
+                งบประมาณ
+                <select id="renterBudget">
+                  <option value="12000">ไม่เกิน ฿12,000</option>
+                  <option value="18000" selected>ไม่เกิน ฿18,000</option>
+                  <option value="28000">ไม่เกิน ฿28,000</option>
+                  <option value="35000">ไม่เกิน ฿35,000</option>
+                  <option value="50000">ไม่เกิน ฿50,000</option>
+                </select>
+              </label>
+              <label>
+                ทำเลที่อยากได้
+                <input id="renterArea" value="BTS/MRT" required />
+              </label>
+              <label>
+                วันเข้าอยู่
+                <input id="renterMoveDate" type="date" />
+              </label>
+              <button class="primary-action" type="submit">ส่งเข้าระบบ Lilith</button>
+            </form>
+            <div class="share-pack" id="sharePack">
+              <strong>Share copy ready</strong>
+              <p>หาห้องเช่าใกล้ BTS/MRT งบไม่เกิน ฿18,000 พร้อมเข้าอยู่? ส่งชื่อ/LINE งบ ทำเล และวันเข้าอยู่มาได้เลยค่ะ เดี๋ยวคัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้วันนี้</p>
+            </div>
+          </article>
+        </section>
+
         <section class="leasing-command">
           <article class="results-panel">
             <div class="panel-heading">
@@ -177,6 +347,10 @@
             <div class="lead-console" id="leadConsole">
               <strong>Command sample</strong>
               <span>“Lilith, หา lead เช่าห้องงบ 8,000-12,000 ใกล้ BTS/MRT และส่งข้อความนัดดูห้องวันนี้”</span>
+            </div>
+            <div class="script-box" id="scriptBox">
+              <strong>LINE closing script</strong>
+              <p>สวัสดีค่ะ สนใจห้องโซนไหน งบประมาณเท่าไหร่ และสะดวกดูห้องวันนี้/พรุ่งนี้ช่วงไหนคะ เดี๋ยว Lilith คัดห้องที่ตรงงบพร้อมค่าแรกเข้าให้ทันทีค่ะ</p>
             </div>
           </article>
         </section>
