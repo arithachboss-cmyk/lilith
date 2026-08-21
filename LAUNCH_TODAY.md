@@ -5,6 +5,14 @@ https://lilith-renter-leads.yacht369.chatgpt.site
 
 หมายเหตุ: ตอนนี้ URL ยังเป็น private จนกว่าจะอนุมัติ public access. หลังเปิด public แล้ว ใช้ URL เดิมนี้ลงประกาศได้ทันที
 
+## Tracked Links
+
+- Facebook Marketplace: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_marketplace&utm_campaign=launch_day&utm_content=marketplace_post`
+- Facebook group: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_group&utm_campaign=launch_day&utm_content=bts_mrt_group`
+- LINE OA: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=line_oa&utm_campaign=launch_day&utm_content=broadcast`
+- Referral: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=referral&utm_campaign=launch_day&utm_content=tenant_agent`
+- English/expat: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=expat_post&utm_campaign=launch_day&utm_content=english`
+
 ## 1-Hour Launch Sprint
 
 ### 00:00-00:10 เตรียมประกาศ
@@ -24,7 +32,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site
 Lilith ช่วยคัดห้องตามงบ ทำเล และวันเข้าอยู่ให้ ไม่ต้องไล่ทักหลายประกาศเอง
 
 ส่งข้อมูลที่ลิงก์นี้:
-https://lilith-renter-leads.yacht369.chatgpt.site
+https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_marketplace&utm_campaign=launch_day&utm_content=marketplace_post
 
 ทีมจะคัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูห้องให้ภายในวันนี้ค่ะ
 ```
@@ -35,7 +43,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site
 กำลังหาห้องเช่าใกล้ BTS/MRT หรือมีเพื่อนกำลังย้ายห้องไหมคะ?
 
 กรอกงบ ทำเล และวันเข้าอยู่ที่ลิงก์นี้:
-https://lilith-renter-leads.yacht369.chatgpt.site
+https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=line_oa&utm_campaign=launch_day&utm_content=broadcast
 
 เดี๋ยว Lilith คัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้ภายในวันนี้ค่ะ
 ```
@@ -55,7 +63,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site
 หาห้องเช่า Asoke / Phrom Phong ใกล้ BTS/MRT งบ 18,000-35,000 อยู่ไหมคะ?
 
 กรอกโจทย์ที่นี่:
-https://lilith-renter-leads.yacht369.chatgpt.site
+https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_group&utm_campaign=launch_day&utm_content=asoke_phrom_phong
 
 เดี๋ยวคัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้วันนี้ค่ะ
 ```
@@ -66,7 +74,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site
 ห้องเช่ากรุงเทพงบไม่เกิน 18,000 ใกล้รถไฟฟ้า ยังมีตัวเลือกค่ะ
 
 ส่งงบ ทำเล และวันเข้าอยู่:
-https://lilith-renter-leads.yacht369.chatgpt.site
+https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_group&utm_campaign=launch_day&utm_content=budget_12000_18000
 
 Lilith จะช่วยคัด shortlist ให้ ไม่ต้องทักหลายประกาศเองค่ะ
 ```
@@ -77,7 +85,7 @@ Lilith จะช่วยคัด shortlist ให้ ไม่ต้องท�
 Looking for a Bangkok rental near BTS/MRT?
 
 Send your budget, preferred area, and move-in date here:
-https://lilith-renter-leads.yacht369.chatgpt.site
+https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=expat_post&utm_campaign=launch_day&utm_content=english
 
 Lilith will shortlist matching rooms with photos, move-in cost, and viewing times today.
 ```

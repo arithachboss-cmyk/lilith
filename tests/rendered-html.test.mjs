@@ -70,3 +70,17 @@ test("keeps lead reads private while accepting public inquiries", async () => {
   )?.[0] ?? "";
   assert.doesNotMatch(postRoute, /isAuthenticated\(request\)/);
 });
+
+test("tracks launch channels through inquiry source", async () => {
+  const [captureScript, launchPack] = await Promise.all([
+    readFile(new URL("../public/capture.js", import.meta.url), "utf8"),
+    readFile(new URL("../LAUNCH_TODAY.md", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(captureScript, /utm_source/);
+  assert.match(captureScript, /utm_campaign/);
+  assert.match(captureScript, /utm_content/);
+  assert.match(launchPack, /utm_source=facebook_marketplace/);
+  assert.match(launchPack, /utm_source=line_oa/);
+  assert.match(launchPack, /utm_source=expat_post/);
+});

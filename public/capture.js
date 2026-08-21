@@ -1,5 +1,13 @@
 const publicLeadForm = document.querySelector("#publicLeadForm");
 const publicStatus = document.querySelector("#publicStatus");
+const params = new URLSearchParams(window.location.search);
+
+function leadSource() {
+  const source = params.get("utm_source") || "public";
+  const campaign = params.get("utm_campaign") || "launch";
+  const content = params.get("utm_content");
+  return [source, campaign, content].filter(Boolean).join(" / ");
+}
 
 publicLeadForm.addEventListener("submit", async (event) => {
   event.preventDefault();
@@ -7,7 +15,7 @@ publicLeadForm.addEventListener("submit", async (event) => {
 
   const lead = {
     name: document.querySelector("#publicName").value.trim(),
-    source: "Public landing page",
+    source: leadSource(),
     budget: Number(document.querySelector("#publicBudget").value),
     area: document.querySelector("#publicArea").value.trim(),
     moveDate: document.querySelector("#publicMoveDate").value,
