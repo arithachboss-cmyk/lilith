@@ -35,6 +35,13 @@ function json(data: unknown, init?: ResponseInit) {
   });
 }
 
+function isAuthenticated(request: Request) {
+  return Boolean(
+    request.headers.get("oai-authenticated-user-id") &&
+      request.headers.get("oai-authenticated-user-email"),
+  );
+}
+
 async function ensureSchema() {
   await env.DB.batch([
     env.DB.prepare(createTableSql),
@@ -64,7 +71,11 @@ function normalizeLead(payload: LeadPayload) {
   };
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  if (!isAuthenticated(request)) {
+    return json({ error: "Sign in required" }, { status: 401 });
+  }
+
   await ensureSchema();
   const result = await env.DB.prepare(
     `SELECT id, name, source, budget, area, move_date AS moveDate, stage, created_at AS createdAt
@@ -95,7 +106,11 @@ export async function POST(request: Request) {
   return json({ lead: result }, { status: 201 });
 }
 
-export async function DELETE() {
+export async function DELETE(request: Request) {
+  if (!isAuthenticated(request)) {
+    return json({ error: "Sign in required" }, { status: 401 });
+  }
+
   await ensureSchema();
   await env.DB.prepare("DELETE FROM leads").run();
   return json({ leads: [] });

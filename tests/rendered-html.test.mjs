@@ -1,15 +1,18 @@
 import assert from "node:assert/strict";
+import { readFile } from "node:fs/promises";
 import test from "node:test";
 
 async function render() {
+  return fetchWorker("/");
+}
+
+async function fetchWorker(path, init = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}`);
   const { default: worker } = await import(workerUrl.href);
 
   return worker.fetch(
-    new Request("http://localhost/", {
-      headers: { accept: "text/html" },
-    }),
+    new Request(`http://localhost${path}`, init),
     {
       ASSETS: {
         fetch: async () => new Response("Not found", { status: 404 }),
@@ -42,15 +45,28 @@ async function render() {
   );
 }
 
-test("server-renders the Lilith acquisition system", async () => {
+test("server-renders the public Lilith lead form", async () => {
   const response = await render();
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /Tenant acquisition control room/);
-  assert.match(html, /Public lead capture/);
-  assert.match(html, /ส่งเข้าระบบ Lilith/);
-  assert.match(html, /\/script\.js/);
+  assert.match(html, /หาห้องเช่ากรุงเทพที่ตรงงบ/);
+  assert.match(html, /ส่งข้อมูลให้ Lilith/);
+  assert.match(html, /\/capture\.js/);
+  assert.doesNotMatch(html, /Tenant acquisition control room|Export CSV|Clear/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|react-loading-skeleton/);
+});
+
+test("keeps lead reads private while accepting public inquiries", async () => {
+  const route = await readFile(new URL("../app/api/leads/route.ts", import.meta.url), "utf8");
+  assert.match(route, /export async function GET\(request: Request\)/);
+  assert.match(route, /export async function DELETE\(request: Request\)/);
+  assert.match(route, /if \(!isAuthenticated\(request\)\)/);
+  assert.match(route, /return json\(\{ error: "Sign in required" \}, \{ status: 401 \}\)/);
+  assert.match(route, /export async function POST\(request: Request\)/);
+  const postRoute = route.match(
+    /export async function POST\(request: Request\) \{[\s\S]*?\n\}/,
+  )?.[0] ?? "";
+  assert.doesNotMatch(postRoute, /isAuthenticated\(request\)/);
 });
