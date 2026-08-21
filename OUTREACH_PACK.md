@@ -51,6 +51,10 @@ Lilith Homes
 [TRACKED LINK]
 ```
 
+## Partner Introduction Guardrail
+
+ใช้รายชื่อและ tracked link รายองค์กรจาก `PARTNER_PIPELINE.csv` ข้อความเปิดต้องระบุว่าเป็นการขอแนะนำความร่วมมือ ไม่กล่าวอ้างว่ามีลูกค้าที่จับคู่รออยู่ และต้องตกลง consent, lead ownership, ขอบเขตงาน และ referral/co-broke ก่อนส่งข้อมูลลูกค้า ดูลำดับการติดต่อและข้อความฉบับเต็มใน `PARTNER_OUTREACH.md`
+
 ## First Reply · Thai
 
 ```text
