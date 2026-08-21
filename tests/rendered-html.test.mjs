@@ -3,6 +3,7 @@ import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
   leadStages,
+  monthlyBudgetRange,
   normalizeLead,
   normalizeLeadUpdate,
 } from "../app/api/leads/validation.ts";
@@ -53,7 +54,9 @@ test("server-renders the premium 12-month rental brief", async () => {
 
   const html = await response.text();
   assert.match(html, /บ้านและคอนโดเช่าระดับพรีเมียม/);
-  assert.match(html, /50,000–250,000/);
+  assert.match(html, /30,000–250,000/);
+  assert.match(html, /min="30000"/);
+  assert.match(html, /max="250000"/);
   assert.match(html, /สัญญา 1 ปี/);
   assert.match(html, /ขอรับ Private Shortlist/);
   assert.match(html, /publicContact/);
@@ -90,7 +93,13 @@ test("accepts only qualified premium 12-month briefs", async () => {
   assert.equal(validLead.contractTerm, "12 months");
   assert.equal(validLead.stage, "New inquiry");
 
-  assert.equal(normalizeLead({ ...validPayload, budget: 49000 }, false), null);
+  const minimumBudgetLead = normalizeLead({ ...validPayload, budget: 30000 }, false);
+  assert.ok(minimumBudgetLead && !("spam" in minimumBudgetLead));
+  assert.equal(minimumBudgetLead.budget, 30000);
+  assert.equal(monthlyBudgetRange.min, 30000);
+  assert.equal(monthlyBudgetRange.max, 250000);
+
+  assert.equal(normalizeLead({ ...validPayload, budget: 29999 }, false), null);
   assert.equal(normalizeLead({ ...validPayload, budget: 250001 }, false), null);
   assert.equal(normalizeLead({ ...validPayload, contractTerm: "6 months" }, false), null);
   assert.equal(normalizeLead({ ...validPayload, consent: false }, false), null);
@@ -118,8 +127,10 @@ test("keeps lead reads private while accepting public inquiries", async () => {
     /export async function POST\(request: Request\) \{[\s\S]*?\n\}/,
   )?.[0] ?? "";
   assert.doesNotMatch(postRoute, /if \(!isAuthenticated\(request\)\)/);
-  assert.match(validation, /budget < 50000/);
-  assert.match(validation, /budget > 250000/);
+  assert.match(validation, /budget < monthlyBudgetRange\.min/);
+  assert.match(validation, /budget > monthlyBudgetRange\.max/);
+  assert.match(route, /monthlyBudgetRange\.min/);
+  assert.match(route, /monthlyBudgetRange\.max/);
   assert.match(validation, /contractTerm !== "12 months"/);
   assert.match(validation, /payload\.consent !== true/);
   assert.match(route, /contact/);

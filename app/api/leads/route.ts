@@ -1,5 +1,6 @@
 import { env } from "cloudflare:workers";
 import {
+  monthlyBudgetRange,
   normalizeLead,
   normalizeLeadUpdate,
   type LeadPayload,
@@ -122,7 +123,9 @@ export async function POST(request: Request) {
 
   if (!lead) {
     return json(
-      { error: "Lead must match a 12-month lease and a monthly budget of ฿50,000-฿250,000" },
+      {
+        error: `Lead must match a 12-month lease and a monthly budget of ฿${monthlyBudgetRange.min.toLocaleString("en-US")}-฿${monthlyBudgetRange.max.toLocaleString("en-US")}`,
+      },
       { status: 422 },
     );
   }

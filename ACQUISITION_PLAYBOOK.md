@@ -4,7 +4,7 @@
 
 ## Objective
 
-รับและปิดลูกค้าเช่าระยะยาว 12 เดือน งบ 50,000-250,000 บาทต่อเดือน โดยวัดจาก qualified brief, shortlist, viewing, offer และ deposit จริง ไม่ใช้จำนวนโพสต์หรือ page visit เป็นตัวแทนผลลัพธ์
+รับและปิดลูกค้าเช่าระยะยาว 12 เดือน งบ 30,000-250,000 บาทต่อเดือน โดยวัดจาก qualified brief, shortlist, viewing, offer และ deposit จริง ไม่ใช้จำนวนโพสต์หรือ page visit เป็นตัวแทนผลลัพธ์
 
 ## Market Position
 
@@ -28,7 +28,7 @@ Lilith ไม่ขายว่าเป็น portal รวมประกา�
 ## Funnel
 
 1. Tracked visit: ผู้สนใจเข้าจากลิงก์ที่ระบุ source/campaign/content
-2. Qualified inquiry: งบ 50K-250K, contact ใช้งานได้, 12-month lease, area, bedrooms และ move date
+2. Qualified inquiry: งบ 30K-250K, contact ใช้งานได้, 12-month lease, area, bedrooms และ move date
 3. Confirmed brief: ทีมคุยกลับและเติม pets, parking, school/office และ company policy
 4. Private shortlist: ส่งทรัพย์จริงที่ตรวจสถานะแล้ว 3-5 ตัวเลือก
 5. Viewing booked: มีเวลา สถานที่ และผู้ประสานงานยืนยัน

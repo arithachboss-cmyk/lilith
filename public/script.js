@@ -122,7 +122,7 @@ function saveLeads() {
 
 function inTargetRange(lead) {
   const budget = Number(lead.budget);
-  return budget >= 50000 && budget <= 250000;
+  return budget >= 30000 && budget <= 250000;
 }
 
 function targetLeads() {
@@ -339,7 +339,7 @@ function renderLeads() {
   if (!ranked.length) {
     leadTable.innerHTML = `
       <div class="empty-state">
-        <strong>ยังไม่มีลูกค้างบ ฿50K–฿250K</strong>
+        <strong>ยังไม่มีลูกค้างบ ฿30K–฿250K</strong>
         <span>เปิด public form หรือสร้าง campaign ด้านล่าง แล้วตอบ brief แรกภายใน 15 นาที</span>
       </div>
     `;
@@ -445,7 +445,7 @@ function campaignTemplate() {
     "Expat community post": {
       source: "expat_community",
       content: "executive_long_stay",
-      copy: `Relocating to Bangkok? Lilith Homes curates condos and houses in ${anchors} for ${persona}. Monthly budget ฿50,000-฿${budget}, 12-month lease. Share your brief to receive a ${offer}.`,
+      copy: `Relocating to Bangkok? Lilith Homes curates condos and houses in ${anchors} for ${persona}. Monthly budget ฿30,000-฿${budget}, 12-month lease. Share your brief to receive a ${offer}.`,
       actions: [
         "Post in one relevant expat or neighborhood community with a clear area and budget",
         "Answer in English and confirm employer, move date, bedrooms and lease term",
@@ -455,7 +455,7 @@ function campaignTemplate() {
     "Corporate HR / relocation outreach": {
       source: "corporate_relocation",
       content: "hr_partner",
-      copy: `Lilith Homes supports Bangkok relocation briefs for ${persona}. We coordinate 12-month residences in ${anchors} from ฿50,000 to ฿${budget} per month, with curated comparisons, viewing routes and contract support. Submit the employee brief here:`,
+      copy: `Lilith Homes supports Bangkok relocation briefs for ${persona}. We coordinate 12-month residences in ${anchors} from ฿30,000 to ฿${budget} per month, with curated comparisons, viewing routes and contract support. Submit the employee brief here:`,
       actions: [
         "Send to HR, mobility and relocation contacts with one concrete service promise",
         "Ask for policy budget, family size, office or school anchor and target move date",
@@ -465,7 +465,7 @@ function campaignTemplate() {
     "Facebook premium rental group": {
       source: "facebook_premium_group",
       content: "premium_12m",
-      copy: `กำลังหา ${persona} เช่าโซน ${anchors} อยู่ไหมคะ? งบ ฿50,000–฿${budget}/เดือน สัญญา 1 ปี ทีม Lilith ช่วยทำ ${offer} พร้อมเทียบค่าแรกเข้าและจัดนัดชมให้เป็นชุด ส่งโจทย์ได้ที่:`,
+      copy: `กำลังหา ${persona} เช่าโซน ${anchors} อยู่ไหมคะ? งบ ฿30,000–฿${budget}/เดือน สัญญา 1 ปี ทีม Lilith ช่วยทำ ${offer} พร้อมเทียบค่าแรกเข้าและจัดนัดชมให้เป็นชุด ส่งโจทย์ได้ที่:`,
       actions: [
         "ใช้ภาพทรัพย์จริงและระบุทำเล จำนวนห้องนอน งบ และสัญญา 1 ปีในบรรทัดแรก",
         "โพสต์เฉพาะกลุ่มที่อนุญาต agent หรือ service post",
@@ -485,7 +485,7 @@ function campaignTemplate() {
     "Referral partner push": {
       source: "referral_partner",
       content: "premium_tenant_referral",
-      copy: `มีลูกค้ามองหาบ้านหรือคอนโดกรุงเทพ งบ ฿50,000–฿${budget}/เดือน สัญญา 1 ปี โซน ${anchors} ฝาก brief ให้ Lilith ช่วยคัด ${offer} และประสานนัดชมได้ที่:`,
+      copy: `มีลูกค้ามองหาบ้านหรือคอนโดกรุงเทพ งบ ฿30,000–฿${budget}/เดือน สัญญา 1 ปี โซน ${anchors} ฝาก brief ให้ Lilith ช่วยคัด ${offer} และประสานนัดชมได้ที่:`,
       actions: [
         "ส่งให้ agent, owner representative และ relocation partner ที่เคยร่วมงาน",
         "ตกลงขอบเขตการแบ่งงานหรือค่าตอบแทนก่อนส่งข้อมูลลูกค้า",
@@ -539,7 +539,7 @@ generateLeadPlan.addEventListener("click", () => {
   const campaign = campaignTemplate();
   leadConsole.innerHTML = `
     <strong>Today's premium lead plan</strong>
-    <span>1) ตอบ new inquiry ${newLeads} รายภายใน 15 นาที 2) ดัน ${viewingReady} รายให้เลือกเวลานัดชม 3) ปล่อย ${escapeHtml(campaign.target)} ด้วยลิงก์ที่ติดตาม source แล้ว 4) ทุกคนต้องยืนยันงบ ฿50K–฿250K และสัญญา 12 เดือนก่อนส่ง shortlist</span>
+    <span>1) ตอบ new inquiry ${newLeads} รายภายใน 15 นาที 2) ดัน ${viewingReady} รายให้เลือกเวลานัดชม 3) ปล่อย ${escapeHtml(campaign.target)} ด้วยลิงก์ที่ติดตาม source แล้ว 4) ทุกคนต้องยืนยันงบ ฿30K–฿250K และสัญญา 12 เดือนก่อนส่ง shortlist</span>
   `;
 });
 

@@ -24,7 +24,7 @@ Subject: Bangkok 12-month housing referral support for inbound assignees
 ```text
 Hello Asian Tigers Thailand team,
 
-I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel focused on executives and families seeking 12-month homes at THB 50,000-250,000 per month.
+I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel focused on executives and families seeking 12-month homes at THB 30,000-250,000 per month.
 
 Would your relocation team consider a local housing referral arrangement when a confirmed renter brief matches your inbound assignment work? Before exchanging any client information, we would agree consent, lead ownership, service scope and compensation in writing.
 
@@ -48,7 +48,7 @@ Subject: Bangkok family and executive housing referral partnership
 ```text
 Hello Pacific Orientation team,
 
-I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel for relocating executives and families seeking 12-month homes at THB 50,000-250,000 per month.
+I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel for relocating executives and families seeking 12-month homes at THB 30,000-250,000 per month.
 
 Would your team be open to a referral arrangement when a confirmed brief matches your relocation clients? We capture the area or school/office anchor, bedrooms, move date, pets, viewing availability and company-lease requirements before a handoff. Consent, lead ownership, service scope and compensation would be agreed in writing first.
 
@@ -72,7 +72,7 @@ Subject: Local Bangkok housing referral support for corporate relocations
 ```text
 Hello Santa Fe Relocation Thailand team,
 
-I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel focused on executives and families seeking 12-month homes at THB 50,000-250,000 per month.
+I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel focused on executives and families seeking 12-month homes at THB 30,000-250,000 per month.
 
 Does your Bangkok corporate relocation team work with external local housing referral partners? When a brief is confirmed, we can structure the renter's location, policy budget, family needs, move date and viewing window before any agreed handoff. We would confirm consent, lead ownership, service scope and compensation in writing before sharing client data.
 
@@ -96,7 +96,7 @@ Subject: Premium Bangkok housing referral option for destination services
 ```text
 Hello Thai Relo Services team,
 
-I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel for executives and families seeking 12-month homes at THB 50,000-250,000 per month.
+I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel for executives and families seeking 12-month homes at THB 30,000-250,000 per month.
 
 Would your destination-services team consider a referral arrangement for clients who need a long-term Bangkok residence? We confirm the rental term, budget, office or school anchor, bedrooms, move date and viewing availability before handoff. Consent, lead ownership, service scope and compensation would be agreed in writing first.
 
@@ -120,7 +120,7 @@ Subject: Correct contact for Bangkok housing referral partnership
 ```text
 Hello United Relocations Thailand team,
 
-I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel for executives and families seeking 12-month homes at THB 50,000-250,000 per month.
+I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel for executives and families seeking 12-month homes at THB 30,000-250,000 per month.
 
 Could you direct me to the appropriate partnerships or destination-services contact to discuss a consent-based housing referral arrangement? We would agree lead ownership, service scope and compensation in writing before sharing any client information.
 

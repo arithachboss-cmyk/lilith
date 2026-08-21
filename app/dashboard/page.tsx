@@ -6,7 +6,7 @@ import { requireChatGPTUser } from "../chatgpt-auth";
 export const metadata: Metadata = {
   title: "Lilith Homes | Premium Rental Pipeline",
   description:
-    "Private control room for Bangkok 12-month rental leads at ฿50,000-฿250,000 per month.",
+    "Private control room for Bangkok 12-month rental leads at ฿30,000-฿250,000 per month.",
 };
 
 export const dynamic = "force-dynamic";
@@ -38,7 +38,7 @@ export default async function Dashboard() {
             </div>
             <div className="status-strip" aria-label="System status">
               <span className="status-dot" />
-              <span>Accepting ฿50K–฿250K briefs</span>
+              <span>Accepting ฿30K–฿250K briefs</span>
             </div>
           </header>
 
@@ -71,6 +71,8 @@ export default async function Dashboard() {
                 <label>
                   Max monthly rent
                   <select id="budgetInput" defaultValue="150000">
+                    <option value="30000">฿30,000</option>
+                    <option value="40000">฿40,000</option>
                     <option value="50000">฿50,000</option>
                     <option value="75000">฿75,000</option>
                     <option value="100000">฿100,000</option>
@@ -149,7 +151,7 @@ export default async function Dashboard() {
                   <input
                     id="leadBudget"
                     type="number"
-                    min="50000"
+                    min="30000"
                     max="250000"
                     step="5000"
                     defaultValue="100000"
@@ -324,7 +326,7 @@ export default async function Dashboard() {
                 <ul className="service-list">
                   <li>
                     <strong>Fit</strong>
-                    <span>งบ ฿50K–฿250K, ทำเล, ประเภททรัพย์ และจำนวนห้องนอน</span>
+                    <span>งบ ฿30K–฿250K, ทำเล, ประเภททรัพย์ และจำนวนห้องนอน</span>
                   </li>
                   <li>
                     <strong>Timing</strong>

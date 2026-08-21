@@ -15,7 +15,7 @@ This queue is for one-to-one company outreach only. It does not authorize bulk e
 ## Qualification Before Handoff
 
 - Renter has consented to being introduced to the named partner.
-- Contact is reachable and the brief states THB 50,000-250,000 per month.
+- Contact is reachable and the brief states THB 30,000-250,000 per month.
 - A 12-month lease is confirmed.
 - Area or office/school anchor, bedrooms and move date are known.
 - Lead ownership, service boundary and referral/co-broke terms are agreed in writing.
@@ -28,7 +28,7 @@ Subject: Bangkok 12-month housing referral partnership
 ```text
 Hello [Team],
 
-I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel focused on executives and families seeking 12-month homes at THB 50,000-250,000 per month.
+I am reaching out from Lilith Homes. We operate a Bangkok rental brief channel focused on executives and families seeking 12-month homes at THB 30,000-250,000 per month.
 
 Would your team be open to a referral or co-broke arrangement when a confirmed brief matches your relocation service or inventory? Before exchanging client information, we would agree consent, lead ownership, service scope and compensation in writing.
 
@@ -48,7 +48,7 @@ Subject: ขอแนะนำช่องทาง referral/co-broke สำห�
 ```text
 สวัสดีทีม [ชื่อองค์กร]
 
-Lilith Homes ดูแลช่องทางรับโจทย์เช่าบ้านและคอนโดในกรุงเทพสำหรับผู้บริหารและครอบครัว งบ 50,000-250,000 บาทต่อเดือน และสัญญา 12 เดือน
+Lilith Homes ดูแลช่องทางรับโจทย์เช่าบ้านและคอนโดในกรุงเทพสำหรับผู้บริหารและครอบครัว งบ 30,000-250,000 บาทต่อเดือน และสัญญา 12 เดือน
 
 ขอสอบถามว่าทีมเปิดรับความร่วมมือแบบ referral หรือ co-broke เมื่อมี brief ที่ยืนยันแล้วและตรงกับบริการหรือทรัพย์ของทีมไหมคะ ก่อนแลกเปลี่ยนข้อมูลลูกค้า เราจะตกลงเรื่อง consent, ownership ของ lead, ขอบเขตงาน และค่าตอบแทนเป็นลายลักษณ์อักษรค่ะ
 

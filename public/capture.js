@@ -55,7 +55,7 @@ publicLeadForm.addEventListener("submit", async (event) => {
   } catch (error) {
     publicStatus.textContent =
       error instanceof Error && error.message.includes("12-month")
-        ? "กรุณาตรวจว่างบอยู่ระหว่าง 50,000–250,000 บาท และยืนยันสัญญา 1 ปี"
+        ? "กรุณาตรวจว่างบอยู่ระหว่าง 30,000–250,000 บาท และยืนยันสัญญา 1 ปี"
         : "ส่งไม่สำเร็จ กรุณาลองอีกครั้ง และตรวจข้อมูลติดต่อ งบ ทำเล และวันเข้าอยู่";
   } finally {
     publicSubmit.disabled = false;

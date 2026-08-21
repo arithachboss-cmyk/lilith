@@ -10,7 +10,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site/dashboard
 
 ## Target
 
-- ค่าเช่า 50,000-250,000 บาทต่อเดือน
+- ค่าเช่า 30,000-250,000 บาทต่อเดือน
 - สัญญา 12 เดือนเท่านั้น
 - กรุงเทพฯ: สุขุมวิทตอนกลาง, หลังสวน, วิทยุ, ลุมพินี, สาทร, ริเวอร์ไซด์ และโซนโรงเรียนนานาชาติ
 - Persona หลัก: expat executive, corporate relocation, international-school family, diplomatic/international-organization staff และ Thai executive
@@ -26,7 +26,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site/dashboard
 
 ## Before Distribution
 
-- เตรียมทรัพย์จริงที่ยืนยันสถานะแล้วอย่างน้อย 6-10 รายการ ครอบคลุมงบ 50K, 75K, 100K, 150K และ 200K+
+- เตรียมทรัพย์จริงที่ยืนยันสถานะแล้วอย่างน้อย 6-10 รายการ ครอบคลุมงบ 30K, 50K, 75K, 100K, 150K และ 200K+
 - แต่ละรายการต้องมีรูปจริง ราคา จำนวนห้องนอน ขนาด ระยะถึง BTS/โรงเรียน เงื่อนไขสัตว์เลี้ยง ค่าแรกเข้า และวันพร้อมเข้าอยู่
 - ห้ามใช้คำว่า available หรือพร้อมนัดชม หากยังไม่ได้ยืนยันกับเจ้าของหรือ listing agent ในวันนั้น
 - กำหนดคนตอบ lead ให้ชัด และเปิด dashboard ค้างไว้ระหว่างปล่อยแคมเปญ
@@ -60,7 +60,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site/dashboard
 ```text
 Relocating to Bangkok and looking for a 12-month home?
 
-Lilith Homes curates condos, apartments and houses in Phrom Phong, Thong Lo, Ekkamai, Langsuan, Wireless and Sathorn for monthly budgets of THB 50,000-250,000.
+Lilith Homes curates condos, apartments and houses in Phrom Phong, Thong Lo, Ekkamai, Langsuan, Wireless and Sathorn for monthly budgets of THB 30,000-250,000.
 
 Share your preferred area, bedrooms, move date and must-haves here:
 https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=expat_community&utm_campaign=premium_12m&utm_content=executive_long_stay
@@ -71,7 +71,7 @@ We will confirm your brief, compare suitable options and coordinate a practical 
 ### Thai · Premium Rental
 
 ```text
-กำลังหาบ้านหรือคอนโดเช่ากรุงเทพ งบ 50,000-250,000 บาทต่อเดือน สัญญา 1 ปีอยู่ไหมคะ?
+กำลังหาบ้านหรือคอนโดเช่ากรุงเทพ งบ 30,000-250,000 บาทต่อเดือน สัญญา 1 ปีอยู่ไหมคะ?
 
 Lilith ช่วยคัด Private Shortlist ตามทำเล จำนวนห้องนอน วันเข้าอยู่ สัตว์เลี้ยง และเงื่อนไขสำคัญ พร้อมเทียบค่าแรกเข้าและจัดนัดชมให้เป็นชุด
 
@@ -82,7 +82,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_premium_gr
 ### Corporate HR / Relocation
 
 ```text
-Lilith Homes supports Bangkok relocation briefs for executives and families seeking a 12-month residence at THB 50,000-250,000 per month.
+Lilith Homes supports Bangkok relocation briefs for executives and families seeking a 12-month residence at THB 30,000-250,000 per month.
 
 We provide one consolidated brief, curated comparisons, coordinated viewing routes and contract support across prime Bangkok areas.
 

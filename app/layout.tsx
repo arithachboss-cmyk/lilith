@@ -24,7 +24,7 @@ export async function generateMetadata(): Promise<Metadata> {
   const origin = `${protocol}://${host}`;
   const title = "Lilith Homes | Bangkok Long-Stay Rentals";
   const description =
-    "Private Bangkok rental search for 12-month homes at THB 50,000-250,000 per month.";
+    "Private Bangkok rental search for 12-month homes at THB 30,000-250,000 per month.";
 
   return {
     metadataBase: new URL(origin),
@@ -44,7 +44,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${origin}/og.png`,
           width: 1731,
           height: 909,
-          alt: "Lilith Homes Bangkok long-stay rentals, THB 50K-250K per month",
+          alt: "Lilith Homes Bangkok long-stay rentals, THB 30K-250K per month",
         },
       ],
     },

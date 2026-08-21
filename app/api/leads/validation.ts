@@ -17,6 +17,11 @@ export type LeadPayload = {
   stage?: string;
 };
 
+export const monthlyBudgetRange = {
+  min: 30000,
+  max: 250000,
+} as const;
+
 export const leadStages = [
   "New inquiry",
   "Qualified",
@@ -65,8 +70,8 @@ export function normalizeLead(payload: LeadPayload, authenticated: boolean) {
     !propertyType ||
     !preferredLanguage ||
     !Number.isFinite(budget) ||
-    budget < 50000 ||
-    budget > 250000 ||
+    budget < monthlyBudgetRange.min ||
+    budget > monthlyBudgetRange.max ||
     !Number.isInteger(bedrooms) ||
     bedrooms < 1 ||
     bedrooms > 5 ||

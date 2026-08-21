@@ -4,7 +4,7 @@ import Script from "next/script";
 export const metadata: Metadata = {
   title: "Lilith Homes | บ้านและคอนโดเช่าพรีเมียม กรุงเทพ",
   description:
-    "บริการคัดบ้าน คอนโด และเพนต์เฮาส์เช่าในกรุงเทพ งบ 50,000-250,000 บาทต่อเดือน สำหรับสัญญา 1 ปี",
+    "บริการคัดบ้าน คอนโด และเพนต์เฮาส์เช่าในกรุงเทพ งบ 30,000-250,000 บาทต่อเดือน สำหรับสัญญา 1 ปี",
 };
 
 export default function Home() {
@@ -22,7 +22,7 @@ export default function Home() {
         <article className="public-copy">
           <div>
             <p className="label">Private rental search · Bangkok</p>
-            <h1>บ้านและคอนโดเช่าระดับพรีเมียม งบ 50,000–250,000 บาท</h1>
+            <h1>บ้านและคอนโดเช่าระดับพรีเมียม งบ 30,000–250,000 บาท</h1>
             <p className="public-intro">
               บอกโจทย์ครั้งเดียว แล้ว Lilith คัดตัวเลือกสำหรับสัญญา 1 ปี
               พร้อมเทียบห้อง ค่าแรกเข้า เงื่อนไข และจัดเส้นทางนัดชมให้เป็นชุด
@@ -34,7 +34,7 @@ export default function Home() {
           </div>
 
           <div className="public-stats" aria-label="Service scope">
-            <span>฿50K–฿250K / month</span>
+            <span>฿30K–฿250K / month</span>
             <span>12-month contract</span>
             <span>Condo · House · Penthouse</span>
           </div>
@@ -78,14 +78,17 @@ export default function Home() {
             </label>
             <label>
               งบต่อเดือน
-              <select id="publicBudget" name="budget" defaultValue="100000">
-                <option value="50000">ไม่เกิน ฿50,000</option>
-                <option value="75000">ไม่เกิน ฿75,000</option>
-                <option value="100000">ไม่เกิน ฿100,000</option>
-                <option value="150000">ไม่เกิน ฿150,000</option>
-                <option value="200000">ไม่เกิน ฿200,000</option>
-                <option value="250000">ไม่เกิน ฿250,000</option>
-              </select>
+              <input
+                id="publicBudget"
+                name="budget"
+                type="number"
+                inputMode="numeric"
+                min="30000"
+                max="250000"
+                step="5000"
+                defaultValue="100000"
+                required
+              />
             </label>
             <label>
               ประเภทที่พัก
@@ -205,7 +208,7 @@ export default function Home() {
 
       <footer className="public-footer">
         <strong>Lilith Homes</strong>
-        <span>Private Bangkok rental search · ฿50,000–฿250,000 / month</span>
+        <span>Private Bangkok rental search · ฿30,000–฿250,000 / month</span>
       </footer>
 
       <Script src="/capture.js" strategy="afterInteractive" />
