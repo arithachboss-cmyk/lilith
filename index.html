@@ -3,194 +3,180 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Lilith Operating Prototype</title>
+    <title>Lilith Homes | Tenant Acquisition Command</title>
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="app-shell">
-      <aside class="rail" aria-label="Workspace navigation">
-        <div class="mark" aria-hidden="true">L</div>
-        <button class="icon-button active" title="Operate" aria-label="Operate">⌁</button>
-        <button class="icon-button" title="Specs" aria-label="Specs">≡</button>
-        <button class="icon-button" title="Adapt" aria-label="Adapt">◫</button>
+      <aside class="rail" aria-label="Leasing navigation">
+        <div class="mark" aria-hidden="true">LH</div>
+        <button class="icon-button active" title="Command" aria-label="Command">⌕</button>
+        <button class="icon-button" title="Listings" aria-label="Listings">⌖</button>
+        <button class="icon-button" title="Leads" aria-label="Leads">♡</button>
+        <button class="icon-button" title="Messages" aria-label="Messages">✉</button>
       </aside>
 
       <section class="workspace">
         <header class="topbar">
           <div>
-            <p class="eyebrow">Lilith Project</p>
-            <h1>Lilith control room</h1>
+            <p class="eyebrow">Bangkok leasing intelligence</p>
+            <h1>Tenant acquisition control room</h1>
           </div>
           <div class="status-strip" aria-label="System status">
             <span class="status-dot"></span>
-            <span>Project live</span>
+            <span>Ready to outperform listing portals</span>
           </div>
         </header>
 
-        <section class="hero-board" aria-label="Current operating view">
-          <div class="hero-copy">
-            <p class="label">Current intent</p>
-            <h2>ปรับโครงการลิลิธให้ทำงานสะดวกขึ้น โดยไม่หยุดการปฏิบัติการ.</h2>
-            <p>
-              The Lilith prototype keeps the active spec, decisions, next actions, and adaptation controls visible in one operating surface.
-            </p>
+        <section class="hero-board" aria-label="Tenant acquisition command">
+          <div class="hero-media">
+            <img
+              src="https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1300&q=82"
+              alt="Modern rental room interior"
+            />
           </div>
-          <div class="signal-panel" aria-label="Operational signal">
-            <div class="meter">
-              <span style="--level: 76%"></span>
+          <article class="search-panel">
+            <div class="search-copy">
+              <p class="label">Command</p>
+              <h2>สั่งการให้ Lilith หาลูกค้ามาเช่าห้อง</h2>
+              <p>
+                Convert room inventory into ranked listings, qualified lead capture,
+                same-day viewing routes, and deposit-ready follow-up.
+              </p>
             </div>
-            <div>
-              <strong>76%</strong>
-              <span>Lilith readiness</span>
-            </div>
+
+            <form class="filters" id="filters">
+              <label>
+                Location anchors
+                <input id="areaInput" value="Asoke, Phrom Phong, Thong Lo" />
+              </label>
+              <label>
+                Max rent
+                <select id="budgetInput">
+                  <option value="18000">฿18,000</option>
+                  <option value="28000">฿28,000</option>
+                  <option value="35000" selected>฿35,000</option>
+                  <option value="50000">฿50,000</option>
+                </select>
+              </label>
+              <label>
+                Lead goal
+                <select id="leadGoal">
+                  <option>10 leads/week</option>
+                  <option selected>25 leads/week</option>
+                  <option>50 leads/week</option>
+                </select>
+              </label>
+              <button class="primary-action" type="submit">Match rooms</button>
+            </form>
+          </article>
+        </section>
+
+        <section class="insight-strip" aria-label="Leasing metrics">
+          <div>
+            <strong id="matchCount">0</strong>
+            <span>qualified room matches</span>
+          </div>
+          <div>
+            <strong>24h</strong>
+            <span>first reply target</span>
+          </div>
+          <div>
+            <strong>5</strong>
+            <span>lead sources tracked</span>
+          </div>
+          <div>
+            <strong>3</strong>
+            <span>closing stages</span>
           </div>
         </section>
 
-        <section class="grid">
-          <article class="panel spec-panel">
+        <section class="content-grid">
+          <article class="results-panel">
             <div class="panel-heading">
               <div>
-                <p class="label">Spec reference</p>
-                <h3>Lilith Google Drive source</h3>
+                <p class="label">Listing engine</p>
+                <h3>Rooms ready for renter discovery</h3>
               </div>
-              <button class="small-button" id="loadSample">Load Lilith</button>
+              <div class="segmented">
+                <button class="tab-button active" type="button">Ready</button>
+                <button class="tab-button" type="button">Refresh</button>
+                <button class="tab-button" type="button">Top Ad</button>
+              </div>
             </div>
-            <textarea id="specInput" spellcheck="false" aria-label="Spec notes">Reference: Project Lilith. Sync or paste the Google Drive spec here, then extract goals, workflows, and unresolved decisions into the operating board.</textarea>
+            <div class="listing-list" id="listingList"></div>
           </article>
 
-          <article class="panel">
+          <aside class="side-stack">
+            <article class="map-panel">
+              <p class="label">Search behavior</p>
+              <h3>Location demand map</h3>
+              <div class="map-canvas" aria-hidden="true">
+                <span class="train-line"></span>
+                <span class="zone zone-a">BTS</span>
+                <span class="zone zone-b">MRT</span>
+                <span class="zone zone-c">Mall</span>
+                <span class="zone zone-d">Uni</span>
+              </div>
+            </article>
+
+            <article class="service-panel">
+              <p class="label">Lead pipeline</p>
+              <h3>From inquiry to contract</h3>
+              <ul class="service-list" id="leadPipeline">
+                <li>
+                  <strong>Intake</strong>
+                  <span>Capture name, LINE/phone, budget, move-in date, and preferred station.</span>
+                </li>
+                <li>
+                  <strong>Viewing</strong>
+                  <span>Offer 2-3 visit slots, send map, photos, cost summary, and room rules.</span>
+                </li>
+                <li>
+                  <strong>Closing</strong>
+                  <span>Follow up deposit, contract documents, move-in date, and room status.</span>
+                </li>
+              </ul>
+            </article>
+          </aside>
+        </section>
+
+        <section class="leasing-command">
+          <article class="results-panel">
             <div class="panel-heading">
               <div>
-                <p class="label">Convenience controls</p>
-                <h3>Lilith adaptation knobs</h3>
+                <p class="label">Overall command</p>
+                <h3>ระบบสั่งการหาลูกค้าเช่าห้อง</h3>
               </div>
+              <button class="primary-action" id="generateLeadPlan" type="button">Generate lead plan</button>
             </div>
-            <div class="control-list">
-              <label>
-                <span>Reduce operator steps</span>
-                <input type="range" min="0" max="100" value="82" />
-              </label>
-              <label>
-                <span>Surface spec context</span>
-                <input type="range" min="0" max="100" value="68" />
-              </label>
-              <label>
-                <span>Keep Lilith focus</span>
-                <input type="range" min="0" max="100" value="91" />
-              </label>
-            </div>
-          </article>
-
-          <article class="panel wide">
-            <div class="panel-heading">
-              <div>
-                <p class="label">Extracted operating board</p>
-                <h3>Lilith changes now</h3>
-              </div>
-              <button class="small-button primary" id="analyzeSpec">Analyze Lilith</button>
-            </div>
-            <div class="kanban" id="board" aria-live="polite">
+            <div class="channel-grid">
               <section>
-                <h4>Goals</h4>
-                <ul id="goals">
-                  <li>Keep Lilith usable while project details evolve.</li>
-                  <li>Make the next operator action obvious.</li>
+                <h4>Inventory</h4>
+                <ul>
+                  <li>นำเข้าห้องว่าง ราคา รูปภาพ พิกัด สิ่งอำนวยความสะดวก และวันพร้อมเข้าอยู่</li>
+                  <li>ติดสถานะ: พร้อมลงประกาศ, ต้องถ่ายรูป, รอนัดดู, มีมัดจำ, ปิดดีล</li>
                 </ul>
               </section>
               <section>
-                <h4>Workflow</h4>
-                <ul id="workflow">
-                  <li>Read the Lilith source spec.</li>
-                  <li>Capture active decision points.</li>
-                  <li>Adapt layout and controls for operation.</li>
+                <h4>Acquisition</h4>
+                <ul>
+                  <li>ลงประกาศแบบค้นหาเจอง่ายตามสถานี ทำเล ถนน ห้าง มหาวิทยาลัย และโรงพยาบาล</li>
+                  <li>ใช้ refresh / featured / top slot เมื่อ lead ต่ำกว่าตัวชี้วัดรายสัปดาห์</li>
                 </ul>
               </section>
               <section>
-                <h4>Open Items</h4>
-                <ul id="openItems">
-                  <li>Attach the exact Lilith Google Drive file once available.</li>
+                <h4>Follow-up</h4>
+                <ul>
+                  <li>สร้างข้อความ LINE ตอบกลับทันที พร้อมรูป ห้องที่ match และเวลานัดดูห้อง</li>
+                  <li>สรุป objection หลังดูห้อง แล้วเสนอห้องสำรองหรือเงื่อนไขปิดดีล</li>
                 </ul>
               </section>
             </div>
-          </article>
-
-          <article class="panel wide plan-panel">
-            <div class="panel-heading">
-              <div>
-                <p class="label">Market and service plan</p>
-                <h3>แผนการตลาด และ การบริการ</h3>
-              </div>
-              <div class="plan-tabs" aria-label="Plan horizon">
-                <button class="tab-button active" type="button">Now</button>
-                <button class="tab-button" type="button">Next</button>
-                <button class="tab-button" type="button">Scale</button>
-              </div>
-            </div>
-
-            <div class="plan-grid">
-              <section class="plan-column">
-                <div class="plan-title">
-                  <span class="plan-icon" aria-hidden="true">◎</span>
-                  <div>
-                    <p class="label">Marketing</p>
-                    <h4>ตลาดเป้าหมาย</h4>
-                  </div>
-                </div>
-                <ul>
-                  <li>กลุ่มแรก: ผู้ใช้ที่ต้องการระบบช่วยคิดและจัดการงานที่มีรายละเอียดหลายชั้น</li>
-                  <li>ตำแหน่งแบรนด์: ลิลิธเป็น control room ที่ช่วยเปลี่ยนข้อมูลกระจัดกระจายให้เป็นการตัดสินใจที่ทำต่อได้</li>
-                  <li>ข้อความหลัก: ลดเวลาจับบริบท เพิ่มความต่อเนื่องของงาน และเห็น next action ชัดขึ้น</li>
-                </ul>
-              </section>
-
-              <section class="plan-column">
-                <div class="plan-title">
-                  <span class="plan-icon" aria-hidden="true">↗</span>
-                  <div>
-                    <p class="label">Channels</p>
-                    <h4>ช่องทางและแคมเปญ</h4>
-                  </div>
-                </div>
-                <ul>
-                  <li>Demo-led content: โชว์ก่อนและหลังการจัดระบบงานด้วยลิลิธ</li>
-                  <li>Founder/community updates: เล่า progress เป็นจังหวะสั้น ๆ เพื่อสร้างความน่าเชื่อถือ</li>
-                  <li>Reference workflow: ใช้ Google Drive spec เป็นแหล่งจริง แล้วแปลงเป็น dashboard ให้เห็นคุณค่าทันที</li>
-                </ul>
-              </section>
-
-              <section class="plan-column">
-                <div class="plan-title">
-                  <span class="plan-icon" aria-hidden="true">◬</span>
-                  <div>
-                    <p class="label">Service</p>
-                    <h4>บริการและประสบการณ์</h4>
-                  </div>
-                </div>
-                <ul>
-                  <li>Onboarding: รับ spec, สรุปเป้าหมาย, ตั้งค่า operating board ภายใน session แรก</li>
-                  <li>Support rhythm: daily check-in สำหรับงานเร่ง และ weekly review สำหรับงานต่อเนื่อง</li>
-                  <li>Retention: ส่งมอบ decision log, unresolved items, และ action list ทุกครั้งหลังใช้งาน</li>
-                </ul>
-              </section>
-            </div>
-
-            <div class="metrics-row" aria-label="Plan metrics">
-              <div>
-                <strong>3</strong>
-                <span>launch audiences</span>
-              </div>
-              <div>
-                <strong>5</strong>
-                <span>service checkpoints</span>
-              </div>
-              <div>
-                <strong>14d</strong>
-                <span>first learning cycle</span>
-              </div>
-              <div>
-                <strong>1</strong>
-                <span>source of truth</span>
-              </div>
+            <div class="lead-console" id="leadConsole">
+              <strong>Command sample</strong>
+              <span>“Lilith, หา lead เช่าห้องงบ 8,000-12,000 ใกล้ BTS/MRT และส่งข้อความนัดดูห้องวันนี้”</span>
             </div>
           </article>
         </section>
