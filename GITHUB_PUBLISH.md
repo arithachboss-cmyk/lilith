@@ -1,16 +1,11 @@
 # GitHub Publish Notes
 
-Current local state is ready to publish.
+- Local branch: `codex/lilith-prototype`
+- GitHub remote: `git@github.com:arithachboss-cmyk/lilith.git`
+- Sites production: `https://lilith-renter-leads.yacht369.chatgpt.site`
 
-- Branch: `codex/lilith-prototype`
-- Commit: `1d0e08f Build Lilith operating prototype`
-- Intended repository: `arithachboss-cmyk/lilith`
-
-After GitHub authentication is available, publish with:
+Sites source and production deployment are updated through the Sites publishing flow. The GitHub remote is separate and should be pushed only when the repository owner wants this branch published there.
 
 ```sh
-git remote add origin git@github.com:arithachboss-cmyk/lilith.git
 git push -u origin codex/lilith-prototype
 ```
-
-If the repository does not exist yet, create `lilith` on GitHub first, then run the commands above.

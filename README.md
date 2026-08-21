@@ -1,38 +1,44 @@
-# Lilith Operating Prototype
+# Lilith Homes Premium Rental Pipeline
 
-Static prototype for Project Lilith's control room.
+ระบบรับและจัดการลูกค้าเช่ากรุงเทพสำหรับงบ 50,000-250,000 บาทต่อเดือน และสัญญา 12 เดือน
 
-## Open Locally
+## Production
 
-```sh
-python3 -m http.server 4174
-```
+- Public rental brief: `https://lilith-renter-leads.yacht369.chatgpt.site`
+- Private operator dashboard: `https://lilith-renter-leads.yacht369.chatgpt.site/dashboard`
 
-Then open:
-
-```text
-http://127.0.0.1:4174/
-```
+หน้า public รับโจทย์จากผู้เช่าโดยไม่ต้องล็อกอิน ส่วนรายชื่อลูกค้า การ export และเครื่องมือหลังบ้านต้องผ่าน ChatGPT sign-in
 
 ## Current Scope
 
-- Lilith operating dashboard
-- Google Drive spec reference slot
-- Extracted goals, workflow, and open items
-- Marketing and service plan section
-- Customer acquisition lead intake
-- Hot lead scoring and same-day follow-up queue
-- LINE closing script generator
-- Campaign copy builder and CSV export
-- Public renter inquiry capture form
-- Daily acquisition playbook in `ACQUISITION_PLAYBOOK.md`
-- Ready-to-post outreach pack in `OUTREACH_PACK.md`
-- One-hour public launch checklist in `LAUNCH_TODAY.md`
-- Responsive desktop and mobile layout
+- Premium renter brief with contact, budget, area, property type and bedrooms
+- Required 12-month lease confirmation and monthly budget gate
+- Move-in date, viewing window, language, pets and must-have requirements
+- UTM source/campaign/content tracking
+- D1-backed lead storage with protected read access
+- Priority scoring, response scripts and CSV export
+- Campaign copy for expat, corporate relocation, premium Facebook groups, portals and referrals
+- Thai/English social sharing preview
+- Launch plan and outreach pack for qualified premium leads
 
-## Production Launch
+## Local Development
 
-- Public renter form: `https://lilith-renter-leads.yacht369.chatgpt.site`
-- Private dashboard: `https://lilith-renter-leads.yacht369.chatgpt.site/dashboard`
+```sh
+pnpm install
+pnpm dev
+```
 
-The Sites deployment is currently private until public access is approved.
+Build and tests:
+
+```sh
+pnpm test
+pnpm lint
+```
+
+## Operating Documents
+
+- `LAUNCH_TODAY.md`: tracked links and launch sequence
+- `OUTREACH_PACK.md`: Thai/English outreach and follow-up copy
+- `ACQUISITION_PLAYBOOK.md`: qualification, funnel and response standard
+
+The system is ready to receive qualified briefs. A customer is counted only after real contact details, target budget and a 12-month lease are confirmed.
