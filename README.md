@@ -27,4 +27,12 @@ http://127.0.0.1:4174/
 - Public renter inquiry capture form
 - Daily acquisition playbook in `ACQUISITION_PLAYBOOK.md`
 - Ready-to-post outreach pack in `OUTREACH_PACK.md`
+- One-hour public launch checklist in `LAUNCH_TODAY.md`
 - Responsive desktop and mobile layout
+
+## Production Launch
+
+- Public renter form: `https://lilith-renter-leads.yacht369.chatgpt.site`
+- Private dashboard: `https://lilith-renter-leads.yacht369.chatgpt.site/dashboard`
+
+The Sites deployment is currently private until public access is approved.
