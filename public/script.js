@@ -72,6 +72,7 @@ const seedLeads = [
     budget: 18000,
     area: "Asoke",
     moveDate: "2026-08-24",
+    viewingWindow: "วันนี้ช่วงเย็น",
     stage: "Qualified",
   },
   {
@@ -80,6 +81,7 @@ const seedLeads = [
     budget: 32000,
     area: "Phrom Phong",
     moveDate: "2026-08-28",
+    viewingWindow: "พรุ่งนี้ช่วงเช้า",
     stage: "Viewing booked",
   },
   {
@@ -88,6 +90,7 @@ const seedLeads = [
     budget: 12000,
     area: "On Nut",
     moveDate: "2026-09-01",
+    viewingWindow: "เสาร์-อาทิตย์",
     stage: "New inquiry",
   },
 ];
@@ -158,10 +161,15 @@ function urgencyScore(lead) {
 }
 
 function nextAction(lead) {
+  const viewingCue = lead.viewingWindow ? ` (${lead.viewingWindow})` : "";
   if (lead.stage === "Deposit pending") return "ส่งยอดจอง เอกสาร และ deadline มัดจำ";
-  if (lead.stage === "Viewing booked") return "ยืนยันเวลานัด ส่งแผนที่ รูป และค่าแรกเข้า";
-  if (lead.stage === "Qualified") return "เสนอ 2-3 ห้องที่ตรงงบ แล้วปิดเวลานัดดู";
-  return "ถามงบ ทำเล วันเข้าอยู่ และส่ง shortlist ภายใน 15 นาที";
+  if (lead.stage === "Viewing booked") return `ยืนยันเวลานัด${viewingCue} ส่งแผนที่ รูป และค่าแรกเข้า`;
+  if (lead.stage === "Qualified") return `เสนอ 2-3 ห้องที่ตรงงบ แล้วปิดเวลานัดดู${viewingCue}`;
+  return `ถามงบ ทำเล วันเข้าอยู่ และส่ง shortlist ภายใน 15 นาที${viewingCue}`;
+}
+
+function viewingWindowText(lead) {
+  return lead.viewingWindow || "ยังไม่ระบุเวลาดูห้อง";
 }
 
 function csvValue(value) {
@@ -170,7 +178,17 @@ function csvValue(value) {
 
 function downloadCsv() {
   if (!leads.length) return;
-  const headers = ["name", "source", "budget", "area", "moveDate", "stage", "heat", "nextAction"];
+  const headers = [
+    "name",
+    "source",
+    "budget",
+    "area",
+    "moveDate",
+    "viewingWindow",
+    "stage",
+    "heat",
+    "nextAction",
+  ];
   const rows = leads.map((lead) =>
     [
       lead.name,
@@ -178,6 +196,7 @@ function downloadCsv() {
       lead.budget,
       lead.area,
       lead.moveDate,
+      lead.viewingWindow,
       lead.stage,
       urgencyScore(lead),
       nextAction(lead),
@@ -217,7 +236,7 @@ function renderLeads() {
         <article class="lead-row">
           <div>
             <strong>${escapeHtml(lead.name)}</strong>
-            <span>${escapeHtml(lead.source)} · ${escapeHtml(lead.area)} · ฿${formatter.format(Number(lead.budget))}</span>
+            <span>${escapeHtml(lead.source)} · ${escapeHtml(lead.area)} · ฿${formatter.format(Number(lead.budget))} · ${escapeHtml(viewingWindowText(lead))}</span>
           </div>
           <div>
             <span class="stage-pill">${escapeHtml(lead.stage)}</span>
@@ -398,7 +417,7 @@ leadTable.addEventListener("click", (event) => {
   const lead = ranked[Number(scriptButton.dataset.scriptIndex)];
   scriptBox.innerHTML = `
     <strong>LINE closing script for ${escapeHtml(lead.name)}</strong>
-    <p>สวัสดีค่ะ ${escapeHtml(lead.name)} ห้องโซน ${escapeHtml(lead.area)} งบไม่เกิน ฿${formatter.format(Number(lead.budget))} ยังสนใจอยู่ไหมคะ ตอนนี้มีห้องที่ตรงงบให้เลือกดูได้วันนี้/พรุ่งนี้ ขอเวลาที่สะดวก 2 ช่วง เดี๋ยวส่งรูป ค่าแรกเข้า และแผนที่ให้ครบค่ะ</p>
+    <p>สวัสดีค่ะ ${escapeHtml(lead.name)} ห้องโซน ${escapeHtml(lead.area)} งบไม่เกิน ฿${formatter.format(Number(lead.budget))} ยังสนใจอยู่ไหมคะ ตอนนี้มีห้องที่ตรงงบให้เลือกดูได้ ${escapeHtml(viewingWindowText(lead))} เดี๋ยวส่งรูป ค่าแรกเข้า และแผนที่ให้ครบค่ะ</p>
   `;
 });
 

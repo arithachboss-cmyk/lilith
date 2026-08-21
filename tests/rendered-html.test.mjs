@@ -91,3 +91,13 @@ test("tracks launch channels through inquiry source", async () => {
   assert.match(launchPack, /utm_source=line_oa/);
   assert.match(launchPack, /utm_source=expat_post/);
 });
+
+test("uses viewing windows in dashboard follow-up tools", async () => {
+  const dashboardScript = await readFile(new URL("../public/script.js", import.meta.url), "utf8");
+
+  assert.match(dashboardScript, /viewingWindowText/);
+  assert.match(dashboardScript, /viewingWindow/);
+  assert.match(dashboardScript, /ยังไม่ระบุเวลาดูห้อง/);
+  assert.match(dashboardScript, /"viewingWindow"/);
+  assert.match(dashboardScript, /LINE closing script/);
+});
