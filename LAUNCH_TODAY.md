@@ -20,7 +20,7 @@ https://lilith-renter-leads.yacht369.chatgpt.site
 - เปิด public access ของ Sites
 - เปิด URL ด้วย browser ที่ไม่ได้ sign in เพื่อยืนยันว่าลูกค้าเข้าฟอร์มได้
 - ทดสอบส่ง lead 1 รายด้วยชื่อ `TEST - ลบได้`
-- เข้า `/dashboard` เพื่อดูว่า lead เข้า queue แล้ว
+- เข้า `/dashboard` เพื่อดูว่า lead เข้า queue แล้ว พร้อม source และเวลาสะดวกดูห้อง
 
 ### 00:10-00:25 ยิงโพสต์แรก
 
@@ -53,7 +53,8 @@ https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=line_oa&utm_campaig
 - เปิด `/dashboard`
 - Export CSV ถ้าจะส่งต่อทีมขาย
 - LINE กลับ lead ใหม่ภายใน 15 นาที
-- ปิดเวลานัดดูด้วย 2 ตัวเลือก: วันนี้เย็น หรือพรุ่งนี้เช้า
+- เรียงความสำคัญจาก source ที่เข้าเยอะ + เวลาสะดวกดูห้องที่ใกล้ที่สุด
+- ปิดเวลานัดดูด้วยตัวเลือกที่ลูกค้ากดไว้ เช่น วันนี้เย็น หรือพรุ่งนี้เช้า
 
 ## Channel Variants
 
@@ -97,6 +98,7 @@ Lilith will shortlist matching rooms with photos, move-in cost, and viewing time
 - 3+ inquiries submitted
 - 1+ viewing booked
 - 0 lead read/delete endpoints exposed publicly
+- ทุก inquiry มี source tracking และเวลาสะดวกดูห้อง
 
 ## Dashboard
 

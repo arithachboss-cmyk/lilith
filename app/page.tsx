@@ -54,6 +54,19 @@ export default function Home() {
               วันเข้าอยู่
               <input id="publicMoveDate" type="date" />
             </label>
+            <label>
+              เวลาสะดวกดูห้อง
+              <select id="publicViewingWindow">
+                <option>วันนี้ช่วงเย็น</option>
+                <option>พรุ่งนี้ช่วงเช้า</option>
+                <option>พรุ่งนี้ช่วงเย็น</option>
+                <option>เสาร์-อาทิตย์</option>
+              </select>
+            </label>
+            <label className="trap-field" aria-hidden="true">
+              Website
+              <input id="publicWebsite" tabIndex={-1} autoComplete="off" />
+            </label>
             <button className="primary-action" type="submit">
               ส่งข้อมูลให้ Lilith
             </button>

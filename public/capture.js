@@ -19,6 +19,8 @@ publicLeadForm.addEventListener("submit", async (event) => {
     budget: Number(document.querySelector("#publicBudget").value),
     area: document.querySelector("#publicArea").value.trim(),
     moveDate: document.querySelector("#publicMoveDate").value,
+    viewingWindow: document.querySelector("#publicViewingWindow").value,
+    website: document.querySelector("#publicWebsite").value,
     stage: "New inquiry",
   };
 

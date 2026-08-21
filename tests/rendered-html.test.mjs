@@ -53,6 +53,8 @@ test("server-renders the public Lilith lead form", async () => {
   const html = await response.text();
   assert.match(html, /หาห้องเช่ากรุงเทพที่ตรงงบ/);
   assert.match(html, /ส่งข้อมูลให้ Lilith/);
+  assert.match(html, /เวลาสะดวกดูห้อง/);
+  assert.match(html, /publicWebsite/);
   assert.match(html, /\/capture\.js/);
   assert.doesNotMatch(html, /Tenant acquisition control room|Export CSV|Clear/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|react-loading-skeleton/);
@@ -65,6 +67,9 @@ test("keeps lead reads private while accepting public inquiries", async () => {
   assert.match(route, /if \(!isAuthenticated\(request\)\)/);
   assert.match(route, /return json\(\{ error: "Sign in required" \}, \{ status: 401 \}\)/);
   assert.match(route, /export async function POST\(request: Request\)/);
+  assert.match(route, /viewingWindow/);
+  assert.match(route, /Public capture URL/);
+  assert.match(route, /spamSignal|website/);
   const postRoute = route.match(
     /export async function POST\(request: Request\) \{[\s\S]*?\n\}/,
   )?.[0] ?? "";
@@ -80,6 +85,8 @@ test("tracks launch channels through inquiry source", async () => {
   assert.match(captureScript, /utm_source/);
   assert.match(captureScript, /utm_campaign/);
   assert.match(captureScript, /utm_content/);
+  assert.match(captureScript, /publicViewingWindow/);
+  assert.match(captureScript, /publicWebsite/);
   assert.match(launchPack, /utm_source=facebook_marketplace/);
   assert.match(launchPack, /utm_source=line_oa/);
   assert.match(launchPack, /utm_source=expat_post/);

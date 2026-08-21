@@ -7,6 +7,8 @@ export const leads = sqliteTable("leads", {
   budget: integer("budget").notNull(),
   area: text("area").notNull(),
   moveDate: text("move_date"),
+  viewingWindow: text("viewing_window"),
+  spamSignal: text("spam_signal"),
   stage: text("stage").notNull(),
   createdAt: text("created_at").notNull().default("CURRENT_TIMESTAMP"),
 });

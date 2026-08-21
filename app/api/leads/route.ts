@@ -6,6 +6,8 @@ type LeadPayload = {
   budget?: number | string;
   area?: string;
   moveDate?: string;
+  viewingWindow?: string;
+  website?: string;
   stage?: string;
 };
 
@@ -17,9 +19,17 @@ CREATE TABLE IF NOT EXISTS leads (
   budget INTEGER NOT NULL,
   area TEXT NOT NULL,
   move_date TEXT,
+  viewing_window TEXT,
+  spam_signal TEXT,
   stage TEXT NOT NULL,
   created_at TEXT NOT NULL DEFAULT CURRENT_TIMESTAMP
 )`;
+
+const addViewingWindowSql = `
+ALTER TABLE leads ADD COLUMN viewing_window TEXT`;
+
+const addSpamSignalSql = `
+ALTER TABLE leads ADD COLUMN spam_signal TEXT`;
 
 const createCreatedAtIndexSql = `
 CREATE INDEX IF NOT EXISTS idx_leads_created_at
@@ -47,14 +57,28 @@ async function ensureSchema() {
     env.DB.prepare(createTableSql),
     env.DB.prepare(createCreatedAtIndexSql),
   ]);
+  await addColumnIfMissing("viewing_window", addViewingWindowSql);
+  await addColumnIfMissing("spam_signal", addSpamSignalSql);
+}
+
+async function addColumnIfMissing(columnName: string, sql: string) {
+  const existing = await env.DB.prepare("PRAGMA table_info(leads)").all();
+  const hasColumn = (existing.results ?? []).some(
+    (column) => String(column.name) === columnName,
+  );
+  if (!hasColumn) await env.DB.prepare(sql).run();
 }
 
 function normalizeLead(payload: LeadPayload) {
+  const spamSignal = String(payload.website ?? "").trim().slice(0, 120);
+  if (spamSignal) return null;
+
   const name = String(payload.name ?? "").trim().slice(0, 120);
   const source = String(payload.source ?? "Public capture URL").trim().slice(0, 80);
   const area = String(payload.area ?? "").trim().slice(0, 120);
   const stage = String(payload.stage ?? "New inquiry").trim().slice(0, 80);
   const moveDate = String(payload.moveDate ?? "").trim().slice(0, 20) || null;
+  const viewingWindow = String(payload.viewingWindow ?? "").trim().slice(0, 80) || null;
   const budget = Number(payload.budget);
 
   if (!name || !area || !Number.isFinite(budget) || budget < 3000) {
@@ -67,6 +91,7 @@ function normalizeLead(payload: LeadPayload) {
     budget: Math.round(budget),
     area,
     moveDate,
+    viewingWindow,
     stage,
   };
 }
@@ -78,7 +103,7 @@ export async function GET(request: Request) {
 
   await ensureSchema();
   const result = await env.DB.prepare(
-    `SELECT id, name, source, budget, area, move_date AS moveDate, stage, created_at AS createdAt
+    `SELECT id, name, source, budget, area, move_date AS moveDate, viewing_window AS viewingWindow, stage, created_at AS createdAt
      FROM leads
      ORDER BY created_at DESC
      LIMIT 200`,
@@ -96,11 +121,19 @@ export async function POST(request: Request) {
   }
 
   const result = await env.DB.prepare(
-    `INSERT INTO leads (name, source, budget, area, move_date, stage)
-     VALUES (?, ?, ?, ?, ?, ?)
-     RETURNING id, name, source, budget, area, move_date AS moveDate, stage, created_at AS createdAt`,
+    `INSERT INTO leads (name, source, budget, area, move_date, viewing_window, stage)
+     VALUES (?, ?, ?, ?, ?, ?, ?)
+     RETURNING id, name, source, budget, area, move_date AS moveDate, viewing_window AS viewingWindow, stage, created_at AS createdAt`,
   )
-    .bind(lead.name, lead.source, lead.budget, lead.area, lead.moveDate, lead.stage)
+    .bind(
+      lead.name,
+      lead.source,
+      lead.budget,
+      lead.area,
+      lead.moveDate,
+      lead.viewingWindow,
+      lead.stage,
+    )
     .first();
 
   return json({ lead: result }, { status: 201 });
