@@ -4,12 +4,12 @@ Current local state is ready to publish.
 
 - Branch: `codex/lilith-prototype`
 - Commit: `1d0e08f Build Lilith operating prototype`
-- Intended repository: `lilith`
+- Intended repository: `arithachboss-cmyk/lilith`
 
 After GitHub authentication is available, publish with:
 
 ```sh
-git remote add origin https://github.com/arithachbossabc/lilith.git
+git remote add origin git@github.com:arithachboss-cmyk/lilith.git
 git push -u origin codex/lilith-prototype
 ```
 
