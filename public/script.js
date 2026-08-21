@@ -1,39 +1,39 @@
-const listings = [
+const targetBriefs = [
   {
-    title: "Muniq Sukhumvit 23",
-    area: "Asoke / Sukhumvit",
-    price: 33000,
-    details: "1 bed · 42 sqm · high floor · fully furnished",
-    image: "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?auto=format&fit=crop&w=900&q=82",
-    score: "96 match",
-    meta: ["6 min MRT", "Owner verified", "No duplicate risk", "View today"],
+    title: "Executive residence",
+    area: "Phrom Phong / Thong Lo / Ekkamai",
+    price: 85000,
+    details: "2 bedrooms · 70-110 sqm · work-from-home space · 12-month lease",
+    image:
+      "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=82",
+    meta: ["BTS access", "Move-in ready", "Bilingual contract support"],
   },
   {
-    title: "Noble Around 33",
-    area: "Phrom Phong",
-    price: 30000,
-    details: "1 bed · 35 sqm · quiet side · pet-friendly option",
-    image: "https://images.unsplash.com/photo-1560448075-bb485b067938?auto=format&fit=crop&w=900&q=82",
-    score: "94 match",
-    meta: ["9 min BTS", "Below median", "Fast reply", "Deposit checked"],
+    title: "Family home",
+    area: "Sathorn / Rama 3 / school corridors",
+    price: 150000,
+    details: "3-4 bedrooms · family layout · parking · school-run friendly",
+    image:
+      "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=82",
+    meta: ["International school access", "Pet options", "Maid room"],
   },
   {
-    title: "The Lofts Ekkamai",
-    area: "Thong Lo / Ekkamai",
-    price: 42000,
-    details: "1 bed loft · 48 sqm · city view · work desk ready",
-    image: "https://images.unsplash.com/photo-1560185007-c5ca9d2c014d?auto=format&fit=crop&w=900&q=82",
-    score: "91 match",
-    meta: ["4 min BTS", "Fresh listing", "Video tour", "Flexible term"],
+    title: "Prime luxury condo",
+    area: "Langsuan / Wireless / Chidlom",
+    price: 250000,
+    details: "3 bedrooms or penthouse · concierge standard · private viewing",
+    image:
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=82",
+    meta: ["CBD", "Premium facilities", "Corporate lease ready"],
   },
   {
-    title: "Rhythm Sukhumvit 36",
-    area: "Thong Lo",
-    price: 28000,
-    details: "1 bed · 33 sqm · renovated · morning light",
-    image: "https://images.unsplash.com/photo-1560184897-ae75f418493e?auto=format&fit=crop&w=900&q=82",
-    score: "89 match",
-    meta: ["11 min BTS", "Great value", "Agent verified", "Route bundled"],
+    title: "Riverside residence",
+    area: "Charoen Nakhon / Riverside / Sathorn",
+    price: 120000,
+    details: "2-3 bedrooms · river or skyline view · generous living area",
+    image:
+      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=82",
+    meta: ["Family layout", "Parking", "Coordinated viewing route"],
   },
 ];
 
@@ -57,49 +57,48 @@ const campaignChannel = document.querySelector("#campaignChannel");
 const renterPersona = document.querySelector("#renterPersona");
 const campaignOffer = document.querySelector("#campaignOffer");
 const campaignOutput = document.querySelector("#campaignOutput");
-const renterForm = document.querySelector("#renterForm");
-const renterName = document.querySelector("#renterName");
-const renterBudget = document.querySelector("#renterBudget");
-const renterArea = document.querySelector("#renterArea");
-const renterMoveDate = document.querySelector("#renterMoveDate");
-const copyCapturePost = document.querySelector("#copyCapturePost");
-const sharePack = document.querySelector("#sharePack");
 
 const seedLeads = [
   {
-    name: "คุณเมย์",
-    source: "LINE OA",
-    budget: 18000,
-    area: "Asoke",
-    moveDate: "2026-08-24",
-    viewingWindow: "วันนี้ช่วงเย็น",
-    stage: "Qualified",
-  },
-  {
-    name: "Mr. Chen",
-    source: "Property portal",
-    budget: 32000,
+    name: "Ms. Maya",
+    contact: "maya@example.com",
+    source: "Corporate HR / relocation",
+    budget: 120000,
     area: "Phrom Phong",
-    moveDate: "2026-08-28",
-    viewingWindow: "พรุ่งนี้ช่วงเช้า",
-    stage: "Viewing booked",
+    propertyType: "Condo",
+    bedrooms: 2,
+    moveDate: "2026-09-15",
+    viewingWindow: "วันธรรมดา",
+    contractTerm: "12 months",
+    preferredLanguage: "English",
+    pets: "ไม่มี",
+    requirements: "Walkable to BTS, quiet unit, home office",
+    stage: "Qualified",
+    example: true,
   },
   {
-    name: "คุณฟ้า",
-    source: "Facebook Marketplace",
-    budget: 12000,
-    area: "On Nut",
-    moveDate: "2026-09-01",
+    name: "คุณภัทร",
+    contact: "@sample-line",
+    source: "Referral partner",
+    budget: 200000,
+    area: "Sathorn",
+    propertyType: "House",
+    bedrooms: 4,
+    moveDate: "2026-10-01",
     viewingWindow: "เสาร์-อาทิตย์",
-    stage: "New inquiry",
+    contractTerm: "12 months",
+    preferredLanguage: "ไทย",
+    pets: "มีสุนัข",
+    requirements: "ใกล้โรงเรียนนานาชาติ มีสนามและที่จอดรถ 2 คัน",
+    stage: "Viewing booked",
+    example: true,
   },
 ];
 
-let leads = JSON.parse(localStorage.getItem("lilithLeads") || "[]");
-let serverBackedLeads = false;
+let leads = JSON.parse(localStorage.getItem("lilithPremiumLeads") || "[]");
 
 function escapeHtml(value) {
-  return String(value)
+  return String(value ?? "")
     .replaceAll("&", "&amp;")
     .replaceAll("<", "&lt;")
     .replaceAll(">", "&gt;")
@@ -108,7 +107,16 @@ function escapeHtml(value) {
 }
 
 function saveLeads() {
-  localStorage.setItem("lilithLeads", JSON.stringify(leads));
+  localStorage.setItem("lilithPremiumLeads", JSON.stringify(leads));
+}
+
+function inTargetRange(lead) {
+  const budget = Number(lead.budget);
+  return budget >= 50000 && budget <= 250000;
+}
+
+function targetLeads() {
+  return leads.filter(inTargetRange);
 }
 
 async function loadServerLeads() {
@@ -117,59 +125,66 @@ async function loadServerLeads() {
     if (!response.ok) return;
     const payload = await response.json();
     if (!Array.isArray(payload.leads)) return;
-    serverBackedLeads = true;
-    leads = payload.leads;
+    const examples = leads.filter((lead) => lead.example);
+    leads = [...payload.leads, ...examples];
     saveLeads();
     renderLeads();
   } catch {
-    serverBackedLeads = false;
+    return;
   }
 }
 
 async function addLead(lead) {
-  leads.push(lead);
-  saveLeads();
-  renderLeads();
-
   try {
     const response = await fetch("/api/leads", {
       method: "POST",
       headers: { "Content-Type": "application/json", Accept: "application/json" },
       body: JSON.stringify(lead),
     });
-    if (!response.ok) return;
-    serverBackedLeads = true;
+    if (!response.ok) throw new Error("Lead save failed");
     await loadServerLeads();
+    return true;
   } catch {
-    serverBackedLeads = false;
+    leadConsole.innerHTML = `
+      <strong>ยังบันทึก lead ไม่สำเร็จ</strong>
+      <span>ตรวจการเชื่อมต่อแล้วลองอีกครั้ง ข้อมูลยังคงอยู่ในฟอร์มเพื่อให้ส่งใหม่ได้</span>
+    `;
+    return false;
   }
 }
 
 function urgencyScore(lead) {
   const stageScore = {
-    "Deposit pending": 40,
-    "Viewing booked": 32,
-    Qualified: 24,
+    "Deposit pending": 46,
+    "Offer submitted": 40,
+    "Viewing booked": 34,
+    "Shortlist sent": 27,
+    Qualified: 22,
     "New inquiry": 12,
   };
-  const budgetScore = Math.min(Math.round(Number(lead.budget) / 1000), 35);
+  const budgetScore = Math.min(Math.round(Number(lead.budget) / 10000), 25);
+  const completenessScore =
+    [lead.contact, lead.propertyType, lead.bedrooms, lead.moveDate, lead.viewingWindow].filter(Boolean)
+      .length * 3;
   const daysUntilMove = lead.moveDate
     ? Math.ceil((new Date(lead.moveDate) - new Date()) / 86400000)
-    : 14;
-  const moveScore = daysUntilMove <= 3 ? 25 : daysUntilMove <= 10 ? 16 : 8;
-  return (stageScore[lead.stage] || 10) + budgetScore + moveScore;
+    : 30;
+  const moveScore = daysUntilMove <= 14 ? 20 : daysUntilMove <= 30 ? 14 : 7;
+  return (stageScore[lead.stage] || 10) + budgetScore + completenessScore + moveScore;
+}
+
+function viewingWindowText(lead) {
+  return lead.viewingWindow || "ยังไม่ระบุเวลานัดชม";
 }
 
 function nextAction(lead) {
   const viewingCue = lead.viewingWindow ? ` (${lead.viewingWindow})` : "";
-  if (lead.stage === "Deposit pending") return "ส่งยอดจอง เอกสาร และ deadline มัดจำ";
-  if (lead.stage === "Viewing booked") return `ยืนยันเวลานัด${viewingCue} ส่งแผนที่ รูป และค่าแรกเข้า`;
-  if (lead.stage === "Qualified") return `เสนอ 2-3 ห้องที่ตรงงบ แล้วปิดเวลานัดดู${viewingCue}`;
-  return `ถามงบ ทำเล วันเข้าอยู่ และส่ง shortlist ภายใน 15 นาที${viewingCue}`;
-}
-
-function viewingWindowText(lead) {
-  return lead.viewingWindow || "ยังไม่ระบุเวลาดูห้อง";
+  if (lead.stage === "Deposit pending") return "ส่งยอดจอง เอกสาร และกำหนดเวลามัดจำ";
+  if (lead.stage === "Offer submitted") return "ตามผลข้อเสนอและเตรียมเอกสารสัญญา 12 เดือน";
+  if (lead.stage === "Viewing booked") return `ยืนยันนัด${viewingCue} ส่ง route รูป และค่าแรกเข้า`;
+  if (lead.stage === "Shortlist sent") return `ถาม feedback แล้วปิดเวลานัดชม${viewingCue}`;
+  if (lead.stage === "Qualified") return "ส่ง Private Shortlist 3-5 ตัวเลือกที่ต่างกันชัดเจน";
+  return "โทรหรือ LINE ภายใน 15 นาทีเพื่อยืนยันโจทย์และสัญญา 1 ปี";
 }
 
 function primarySource(source) {
@@ -189,7 +204,7 @@ function topEntries(counts) {
 }
 
 function summaryPills(entries) {
-  if (!entries.length) return "<span>No data yet</span>";
+  if (!entries.length) return "<span>No qualified data yet</span>";
   return entries.map(([label, count]) => `<span>${escapeHtml(label)} · ${count}</span>`).join("");
 }
 
@@ -203,9 +218,9 @@ function renderAcquisitionSummary(ranked) {
   }
 
   const sourceEntries = topEntries(countBy(ranked, (lead) => primarySource(lead.source)));
-  const viewingEntries = topEntries(countBy(ranked, viewingWindowText));
-  const topSource = sourceEntries[0]?.[0] || "ช่องทางที่เริ่มมี lead";
-  const topWindow = viewingEntries[0]?.[0] || "ช่วงเวลาที่ลูกค้าสะดวก";
+  const areaEntries = topEntries(countBy(ranked, (lead) => lead.area || "Unknown"));
+  const topSource = sourceEntries[0]?.[0] || "ช่องทางแรก";
+  const topArea = areaEntries[0]?.[0] || "ทำเลเป้าหมาย";
 
   summary.innerHTML = `
     <div>
@@ -213,10 +228,10 @@ function renderAcquisitionSummary(ranked) {
       <div class="summary-pills">${summaryPills(sourceEntries)}</div>
     </div>
     <div>
-      <strong>Viewing demand</strong>
-      <div class="summary-pills">${summaryPills(viewingEntries)}</div>
+      <strong>Top demand areas</strong>
+      <div class="summary-pills">${summaryPills(areaEntries)}</div>
     </div>
-    <p>Next push: ยิงซ้ำ ${escapeHtml(topSource)} พร้อม CTA นัดดูห้อง ${escapeHtml(topWindow)}</p>
+    <p>Next push: ยิงซ้ำ ${escapeHtml(topSource)} ด้วยข้อเสนอสำหรับ ${escapeHtml(topArea)} และสัญญา 12 เดือน</p>
   `;
 }
 
@@ -225,26 +240,41 @@ function csvValue(value) {
 }
 
 function downloadCsv() {
-  if (!leads.length) return;
+  const exportable = targetLeads().filter((lead) => !lead.example);
+  if (!exportable.length) return;
   const headers = [
     "name",
+    "contact",
     "source",
     "budget",
     "area",
+    "propertyType",
+    "bedrooms",
     "moveDate",
     "viewingWindow",
+    "contractTerm",
+    "preferredLanguage",
+    "pets",
+    "requirements",
     "stage",
-    "heat",
+    "priorityScore",
     "nextAction",
   ];
-  const rows = leads.map((lead) =>
+  const rows = exportable.map((lead) =>
     [
       lead.name,
+      lead.contact,
       lead.source,
       lead.budget,
       lead.area,
+      lead.propertyType,
+      lead.bedrooms,
       lead.moveDate,
       lead.viewingWindow,
+      lead.contractTerm,
+      lead.preferredLanguage,
+      lead.pets,
+      lead.requirements,
       lead.stage,
       urgencyScore(lead),
       nextAction(lead),
@@ -257,22 +287,22 @@ function downloadCsv() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `lilith-leads-${new Date().toISOString().slice(0, 10)}.csv`;
+  link.download = `lilith-premium-leads-${new Date().toISOString().slice(0, 10)}.csv`;
   link.click();
   URL.revokeObjectURL(url);
 }
 
 function renderLeads() {
-  const ranked = [...leads].sort((a, b) => urgencyScore(b) - urgencyScore(a));
-  const hotLeads = ranked.filter((lead) => urgencyScore(lead) >= 65);
+  const ranked = targetLeads().sort((a, b) => urgencyScore(b) - urgencyScore(a));
+  const hotLeads = ranked.filter((lead) => urgencyScore(lead) >= 70 && !lead.example);
   hotLeadCount.textContent = String(hotLeads.length);
-  exportLeads.disabled = !ranked.length;
+  exportLeads.disabled = !ranked.some((lead) => !lead.example);
 
   if (!ranked.length) {
     leadTable.innerHTML = `
       <div class="empty-state">
-        <strong>ยังไม่มี lead</strong>
-        <span>เพิ่มลูกค้าจากฟอร์ม หรือกด Load sample leads เพื่อเริ่มระบบวันนี้</span>
+        <strong>ยังไม่มีลูกค้างบ ฿50K–฿250K</strong>
+        <span>เปิด public form หรือสร้าง campaign ด้านล่าง แล้วตอบ brief แรกภายใน 15 นาที</span>
       </div>
     `;
     renderAcquisitionSummary([]);
@@ -282,22 +312,25 @@ function renderLeads() {
   leadTable.innerHTML = ranked
     .map(
       (lead, index) => `
-        <article class="lead-row">
+        <article class="lead-row${lead.example ? " example-lead" : ""}">
           <div>
-            <strong>${escapeHtml(lead.name)}</strong>
-            <span>${escapeHtml(lead.source)} · ${escapeHtml(lead.area)} · ฿${formatter.format(Number(lead.budget))} · ${escapeHtml(viewingWindowText(lead))}</span>
+            <strong>${escapeHtml(lead.name)}${lead.example ? " · EXAMPLE" : ""}</strong>
+            <span>${escapeHtml(lead.contact || "No contact")} · ${escapeHtml(lead.source)}</span>
+            <span>${escapeHtml(lead.area)} · ${escapeHtml(lead.propertyType || "Property")} · ${escapeHtml(lead.bedrooms || "?")} bed · ฿${formatter.format(Number(lead.budget))}</span>
+            <span>${escapeHtml(viewingWindowText(lead))} · ${escapeHtml(lead.contractTerm || "Contract unconfirmed")} · ${escapeHtml(lead.pets || "Pets not stated")}</span>
           </div>
           <div>
             <span class="stage-pill">${escapeHtml(lead.stage)}</span>
-            <span class="score-pill">${urgencyScore(lead)} heat</span>
+            <span class="score-pill">${urgencyScore(lead)} priority</span>
           </div>
-          <p>${nextAction(lead)}</p>
-          <button type="button" data-script-index="${index}">LINE script</button>
+          ${lead.requirements ? `<p>${escapeHtml(lead.requirements)}</p>` : ""}
+          <p>${escapeHtml(nextAction(lead))}</p>
+          <button type="button" data-script-index="${index}">Build reply</button>
         </article>
       `,
     )
     .join("");
-  renderAcquisitionSummary(ranked);
+  renderAcquisitionSummary(ranked.filter((lead) => !lead.example));
 }
 
 function renderListings() {
@@ -308,123 +341,110 @@ function renderListings() {
     .map((term) => term.trim())
     .filter(Boolean);
 
-  const visible = listings.filter((listing) => {
-    const isAffordable = listing.price <= budget;
-    const searchableText = `${listing.title} ${listing.area}`.toLowerCase();
-    const matchesArea =
-      areaTerms.length === 0 || areaTerms.some((term) => searchableText.includes(term));
-    return isAffordable && matchesArea;
+  const affordable = targetBriefs.filter((brief) => brief.price <= budget);
+  const areaMatches = affordable.filter((brief) => {
+    const searchable = `${brief.title} ${brief.area}`.toLowerCase();
+    return areaTerms.some((term) => searchable.includes(term));
   });
+  const visible = areaMatches.length ? areaMatches : affordable;
 
-  listingList.innerHTML = "";
-  const fallback = visible.length ? visible : listings.filter((listing) => listing.price <= budget);
-
-  for (const listing of fallback) {
-    const card = document.createElement("article");
-    card.className = "listing-card";
-    card.innerHTML = `
-      <div class="listing-photo">
-        <img src="${listing.image}" alt="${listing.title} interior" />
-        <span class="badge">${listing.score}</span>
-      </div>
-      <div class="listing-body">
-        <div class="listing-title">
-          <div>
-            <h4>${listing.title}</h4>
-            <p>${listing.area}</p>
+  listingList.innerHTML = visible
+    .map(
+      (brief) => `
+        <article class="listing-card">
+          <div class="listing-photo">
+            <img src="${brief.image}" alt="${escapeHtml(brief.title)} interior reference" />
+            <span class="badge">Campaign brief</span>
           </div>
-          <div class="price">฿${formatter.format(listing.price)}</div>
-        </div>
-        <p>${listing.details}</p>
-        <div class="listing-meta">
-          ${listing.meta.map((item) => `<span>${item}</span>`).join("")}
-        </div>
-        <div class="listing-actions">
-          <button type="button">Book viewing</button>
-          <button type="button">Compare</button>
-          <button type="button">LINE script</button>
-        </div>
-      </div>
-    `;
-    listingList.append(card);
-  }
+          <div class="listing-body">
+            <div class="listing-title">
+              <div>
+                <h4>${escapeHtml(brief.title)}</h4>
+                <p>${escapeHtml(brief.area)}</p>
+              </div>
+              <div class="price">to ฿${formatter.format(brief.price)}</div>
+            </div>
+            <p>${escapeHtml(brief.details)}</p>
+            <div class="listing-meta">
+              ${brief.meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}
+            </div>
+          </div>
+        </article>
+      `,
+    )
+    .join("");
 
-  matchCount.textContent = String(Math.max(fallback.length * 11 - (budget < 40000 ? 2 : 0), 8));
+  matchCount.textContent = String(visible.length);
 }
-
-filters.addEventListener("submit", (event) => {
-  event.preventDefault();
-  renderListings();
-});
-
-budgetInput.addEventListener("change", renderListings);
-areaInput.addEventListener("input", renderListings);
-
-generateLeadPlan.addEventListener("click", () => {
-  const budget = formatter.format(Number(budgetInput.value));
-  const anchors = areaInput.value || "BTS/MRT";
-  const totalLeads = leads.length;
-  const hotLeads = leads.filter((lead) => urgencyScore(lead) >= 65).length;
-  leadConsole.innerHTML = `
-    <strong>Lead plan ready</strong>
-    <span>Publish refreshed listings near ${anchors}, prioritize rooms under ฿${budget}, reply to ${totalLeads || "new"} leads within 15 minutes, push ${hotLeads || "hot"} prospects toward viewing, and bundle qualified renters into same-day routes.</span>
-  `;
-});
 
 function campaignTemplate() {
   const budget = formatter.format(Number(budgetInput.value));
-  const anchors = areaInput.value || "BTS/MRT";
+  const anchors = areaInput.value || "prime Bangkok areas";
   const channel = campaignChannel.value;
   const persona = renterPersona.value;
-  const offer = campaignOffer.value || "ห้องพร้อมเข้าอยู่";
+  const offer = campaignOffer.value || "private shortlist and coordinated viewing route";
   const leadTarget = document.querySelector("#leadGoal").value;
-  const roomCount = listingList.children.length;
-  const channelActions = {
-    "LINE OA broadcast": [
-      "ส่ง broadcast รอบ 11:30 และ 18:30 พร้อมปุ่มนัดดูห้อง",
-      "แยกคนกดสนใจเข้าฟอร์ม lead แล้วโทร/LINE กลับใน 15 นาที",
-      "ปิดด้วย 2 ตัวเลือกเวลา: วันนี้เย็น หรือพรุ่งนี้เช้า",
-    ],
-    "Facebook Marketplace post": [
-      "ลงโพสต์ 3 เวอร์ชัน: ใกล้รถไฟฟ้า, พร้อมเข้าอยู่, คุ้มกว่าราคาเฉลี่ย",
-      "ตอบคอมเมนต์ด้วยคำถามคัดกรองงบและวันเข้าอยู่",
-      "ดันโพสต์ช่วง 19:00-22:00 เมื่อคนหาห้องหลังเลิกงาน",
-    ],
-    "Property portal refresh": [
-      "refresh ห้องที่ตรงงบก่อน 10:00 และ 17:00",
-      "ใส่ keyword สถานี ถนน ห้าง และโรงพยาบาลในหัวประกาศ",
-      "ซื้อ top slot เฉพาะห้องที่พร้อมดูภายใน 24 ชั่วโมง",
-    ],
-    "TikTok short script": [
-      "ถ่ายคลิป 20 วินาที: ประตูเข้า, วิว, โต๊ะทำงาน, ห้องน้ำ, ระยะไป BTS/MRT",
-      "เปิดคลิปด้วยราคา ทำเล และค่าแรกเข้าใน 3 วินาทีแรก",
-      "ปิดท้ายให้ทัก LINE พร้อมคำว่า 'ขอห้องโซนนี้'",
-    ],
-    "Referral push": [
-      "ส่งข้อความให้ tenant/agent เดิมพร้อมค่าขอบคุณเมื่อปิดดีล",
-      "แนบรูปห้อง ราคา และวันพร้อมเข้าอยู่แบบส่งต่อได้",
-      "ตาม referral ภายในวันเดียวพร้อมสถานะห้องล่าสุด",
-    ],
+  const channelConfig = {
+    "Expat community post": {
+      source: "expat_community",
+      content: "executive_long_stay",
+      copy: `Relocating to Bangkok? Lilith Homes curates condos and houses in ${anchors} for ${persona}. Monthly budget ฿50,000-฿${budget}, 12-month lease. Share your brief to receive a ${offer}.`,
+      actions: [
+        "Post in one relevant expat or neighborhood community with a clear area and budget",
+        "Answer in English and confirm employer, move date, bedrooms and lease term",
+        "Send 3-5 meaningfully different options before asking for a viewing slot",
+      ],
+    },
+    "Corporate HR / relocation outreach": {
+      source: "corporate_relocation",
+      content: "hr_partner",
+      copy: `Lilith Homes supports Bangkok relocation briefs for ${persona}. We coordinate 12-month residences in ${anchors} from ฿50,000 to ฿${budget} per month, with curated comparisons, viewing routes and contract support. Submit the employee brief here:`,
+      actions: [
+        "Send to HR, mobility and relocation contacts with one concrete service promise",
+        "Ask for policy budget, family size, office or school anchor and target move date",
+        "Provide one consolidated comparison instead of forwarding raw listing links",
+      ],
+    },
+    "Facebook premium rental group": {
+      source: "facebook_premium_group",
+      content: "premium_12m",
+      copy: `กำลังหา ${persona} เช่าโซน ${anchors} อยู่ไหมคะ? งบ ฿50,000–฿${budget}/เดือน สัญญา 1 ปี ทีม Lilith ช่วยทำ ${offer} พร้อมเทียบค่าแรกเข้าและจัดนัดชมให้เป็นชุด ส่งโจทย์ได้ที่:`,
+      actions: [
+        "ใช้ภาพทรัพย์จริงและระบุทำเล จำนวนห้องนอน งบ และสัญญา 1 ปีในบรรทัดแรก",
+        "โพสต์เฉพาะกลุ่มที่อนุญาต agent หรือ service post",
+        "ตอบคอมเมนต์ด้วยลิงก์ที่ติด UTM และตามต่อภายใน 15 นาที",
+      ],
+    },
+    "Property portal refresh": {
+      source: "property_portal",
+      content: "premium_listing",
+      copy: `Premium Bangkok residence for a 12-month lease in ${anchors}. Suitable for ${persona}, with a monthly budget up to ฿${budget}. Request a private comparison and coordinated viewing route:`,
+      actions: [
+        "Refresh only verified available inventory with current price and minimum term",
+        "Lead with project, bedrooms, usable area, exact rent and nearest anchor",
+        "Route every inquiry into the same qualification form before building a shortlist",
+      ],
+    },
+    "Referral partner push": {
+      source: "referral_partner",
+      content: "premium_tenant_referral",
+      copy: `มีลูกค้ามองหาบ้านหรือคอนโดกรุงเทพ งบ ฿50,000–฿${budget}/เดือน สัญญา 1 ปี โซน ${anchors} ฝาก brief ให้ Lilith ช่วยคัด ${offer} และประสานนัดชมได้ที่:`,
+      actions: [
+        "ส่งให้ agent, owner representative และ relocation partner ที่เคยร่วมงาน",
+        "ตกลงขอบเขตการแบ่งงานหรือค่าตอบแทนก่อนส่งข้อมูลลูกค้า",
+        "อัปเดตสถานะ shortlist, viewing และ offer ให้ผู้แนะนำทราบตามสมควร",
+      ],
+    },
   };
+  const config = channelConfig[channel];
+  const link = `${window.location.origin}/?utm_source=${config.source}&utm_campaign=premium_12m&utm_content=${config.content}`;
 
   return {
-    post: `หา${persona} งบไม่เกิน ฿${budget} โซน ${anchors} — ${offer} มี ${roomCount || "หลาย"} ห้องคัดแล้ว พร้อมส่งรูป ค่าแรกเข้า และนัดดูห้องวันนี้ ทัก LINE พร้อมบอกงบ/วันเข้าอยู่ได้เลยค่ะ`,
-    actions: channelActions[channel],
-    target: `${channel} · เป้าหมาย ${leadTarget}`,
+    post: `${config.copy}\n${link}`,
+    actions: config.actions,
+    target: `${channel} · ${leadTarget}`,
+    link,
   };
-}
-
-function capturePostTemplate() {
-  const budget = formatter.format(Number(renterBudget.value));
-  const area = renterArea.value || "BTS/MRT";
-  return `หาห้องเช่าโซน ${area} งบไม่เกิน ฿${budget} พร้อมเข้าอยู่ไหมคะ? ส่งชื่อ/LINE งบ ทำเล และวันเข้าอยู่มาได้เลย เดี๋ยว Lilith คัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้ภายในวันนี้`;
-}
-
-function renderSharePack(status = "Share copy ready") {
-  sharePack.innerHTML = `
-    <strong>${escapeHtml(status)}</strong>
-    <p>${escapeHtml(capturePostTemplate())}</p>
-  `;
 }
 
 function renderCampaign() {
@@ -433,7 +453,7 @@ function renderCampaign() {
     <section>
       <h4>Post copy</h4>
       <p>${escapeHtml(campaign.post)}</p>
-      <button class="secondary-action" type="button" id="copyCampaign">Copy copy</button>
+      <button class="secondary-action" type="button" id="copyCampaign">Copy campaign</button>
     </section>
     <section>
       <h4>Daily actions</h4>
@@ -445,79 +465,95 @@ function renderCampaign() {
   `;
 }
 
+filters.addEventListener("submit", (event) => {
+  event.preventDefault();
+  renderListings();
+});
+
+budgetInput.addEventListener("change", renderListings);
+areaInput.addEventListener("input", renderListings);
+
+generateLeadPlan.addEventListener("click", () => {
+  const qualified = targetLeads().filter((lead) => !lead.example);
+  const newLeads = qualified.filter((lead) => lead.stage === "New inquiry").length;
+  const viewingReady = qualified.filter((lead) =>
+    ["Shortlist sent", "Viewing booked"].includes(lead.stage),
+  ).length;
+  const campaign = campaignTemplate();
+  leadConsole.innerHTML = `
+    <strong>Today's premium lead plan</strong>
+    <span>1) ตอบ new inquiry ${newLeads} รายภายใน 15 นาที 2) ดัน ${viewingReady} รายให้เลือกเวลานัดชม 3) ปล่อย ${escapeHtml(campaign.target)} ด้วยลิงก์ที่ติดตาม source แล้ว 4) ทุกคนต้องยืนยันงบ ฿50K–฿250K และสัญญา 12 เดือนก่อนส่ง shortlist</span>
+  `;
+});
+
 leadForm.addEventListener("submit", async (event) => {
   event.preventDefault();
-  await addLead({
+  const submitButton = leadForm.querySelector('button[type="submit"]');
+  submitButton.disabled = true;
+  submitButton.textContent = "Saving...";
+
+  const saved = await addLead({
     name: document.querySelector("#leadName").value.trim(),
+    contact: document.querySelector("#leadContact").value.trim(),
     source: document.querySelector("#leadSource").value,
     budget: Number(document.querySelector("#leadBudget").value),
     area: document.querySelector("#leadArea").value.trim(),
+    propertyType: document.querySelector("#leadPropertyType").value,
+    bedrooms: Number(document.querySelector("#leadBedrooms").value),
     moveDate: document.querySelector("#moveDate").value,
+    viewingWindow: document.querySelector("#leadViewingWindow").value,
+    contractTerm: "12 months",
+    preferredLanguage: document.querySelector("#leadLanguage").value,
+    pets: document.querySelector("#leadPets").value,
+    requirements: document.querySelector("#leadRequirements").value.trim(),
+    consent: true,
     stage: document.querySelector("#leadStage").value,
   });
-  leadForm.reset();
-  document.querySelector("#leadBudget").value = 18000;
-  document.querySelector("#leadArea").value = "Asoke";
+
+  if (saved) {
+    leadForm.reset();
+    document.querySelector("#leadBudget").value = "100000";
+    document.querySelector("#leadArea").value = "Phrom Phong";
+    document.querySelector("#leadPropertyType").value = "Condo";
+    document.querySelector("#leadBedrooms").value = "2";
+    leadConsole.innerHTML = `
+      <strong>Lead saved</strong>
+      <span>ข้อมูลเข้าคิวแล้ว ขั้นต่อไปคือยืนยันโจทย์และส่ง Private Shortlist ภายในเวลาที่ตกลงกับลูกค้า</span>
+    `;
+  }
+
+  submitButton.disabled = false;
+  submitButton.textContent = "Add qualified lead";
 });
 
 leadTable.addEventListener("click", (event) => {
   const scriptButton = event.target.closest("[data-script-index]");
   if (!scriptButton) return;
-  const ranked = [...leads].sort((a, b) => urgencyScore(b) - urgencyScore(a));
+  const ranked = targetLeads().sort((a, b) => urgencyScore(b) - urgencyScore(a));
   const lead = ranked[Number(scriptButton.dataset.scriptIndex)];
+  const details = `${lead.propertyType || "home"}, ${lead.bedrooms || "?"} bedroom(s), ${lead.area}, up to ฿${formatter.format(Number(lead.budget))}/month`;
+  const english = String(lead.preferredLanguage).includes("English");
+  const reply = english
+    ? `Hi ${lead.name}, thank you for your 12-month Bangkok rental brief. I have ${details}. Before I prepare your private shortlist, may I confirm your move-in date, must-have requirements and whether ${viewingWindowText(lead)} still works for a viewing?`
+    : `สวัสดีค่ะ ${lead.name} ทีมได้รับโจทย์เช่าสัญญา 1 ปีแล้วนะคะ: ${details} ก่อนคัด Private Shortlist ขอขอยืนยันวันเข้าอยู่ เงื่อนไขที่ต้องมี และยังสะดวกนัดชม ${viewingWindowText(lead)} อยู่ไหมคะ`;
   scriptBox.innerHTML = `
-    <strong>LINE closing script for ${escapeHtml(lead.name)}</strong>
-    <p>สวัสดีค่ะ ${escapeHtml(lead.name)} ห้องโซน ${escapeHtml(lead.area)} งบไม่เกิน ฿${formatter.format(Number(lead.budget))} ยังสนใจอยู่ไหมคะ ตอนนี้มีห้องที่ตรงงบให้เลือกดูได้ ${escapeHtml(viewingWindowText(lead))} เดี๋ยวส่งรูป ค่าแรกเข้า และแผนที่ให้ครบค่ะ</p>
+    <strong>Reply for ${escapeHtml(lead.name)}</strong>
+    <p>${escapeHtml(reply)}</p>
   `;
 });
 
 exportLeads.addEventListener("click", downloadCsv);
 
-renterForm.addEventListener("submit", async (event) => {
-  event.preventDefault();
-  await addLead({
-    name: renterName.value.trim(),
-    source: serverBackedLeads ? "Public capture URL" : "Public capture",
-    budget: Number(renterBudget.value),
-    area: renterArea.value.trim(),
-    moveDate: renterMoveDate.value,
-    stage: "New inquiry",
-  });
-  renderSharePack("Inquiry added to pipeline");
-  renterForm.reset();
-  renterBudget.value = "18000";
-  renterArea.value = "BTS/MRT";
-});
-
-copyCapturePost.addEventListener("click", async () => {
-  try {
-    await navigator.clipboard.writeText(capturePostTemplate());
-    renderSharePack("Copied renter post");
-  } catch {
-    renderSharePack("Select and copy this post");
-  }
-});
-
-renterBudget.addEventListener("change", () => renderSharePack());
-renterArea.addEventListener("input", () => renderSharePack());
-
 loadSeedLeads.addEventListener("click", () => {
-  leads = [...seedLeads];
+  leads = [...leads.filter((lead) => !lead.example), ...seedLeads];
   saveLeads();
   renderLeads();
 });
 
-clearLeads.addEventListener("click", async () => {
-  leads = [];
+clearLeads.addEventListener("click", () => {
+  leads = leads.filter((lead) => !lead.example);
   saveLeads();
   renderLeads();
-  if (!serverBackedLeads) return;
-  try {
-    await fetch("/api/leads", { method: "DELETE" });
-    await loadServerLeads();
-  } catch {
-    serverBackedLeads = false;
-  }
 });
 
 buildCampaign.addEventListener("click", renderCampaign);
@@ -535,5 +571,4 @@ campaignOutput.addEventListener("click", async (event) => {
 
 renderListings();
 renderLeads();
-renderSharePack();
 loadServerLeads();

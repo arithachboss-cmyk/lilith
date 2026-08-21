@@ -1,87 +1,86 @@
-# Lilith Customer Acquisition Playbook
+# Lilith Premium Rental Acquisition Playbook
 
-วันที่เริ่มใช้งาน: 2026-08-21
+เริ่มใช้: 2026-08-21
 
-## เป้าหมายวันนี้
+## Objective
 
-- สร้าง lead ใหม่ 25 รายต่อสัปดาห์
-- ปิดนัดดูห้องอย่างน้อย 3 นัดต่อวัน
-- ตอบ lead ใหม่ภายใน 15 นาที
-- ดัน hot lead เข้าสถานะ Viewing booked หรือ Deposit pending ภายในวันเดียว
+รับและปิดลูกค้าเช่าระยะยาว 12 เดือน งบ 50,000-250,000 บาทต่อเดือน โดยวัดจาก qualified brief, shortlist, viewing, offer และ deposit จริง ไม่ใช้จำนวนโพสต์หรือ page visit เป็นตัวแทนผลลัพธ์
 
-## ช่องทางที่ต้องยิงก่อน
+## Market Position
 
-1. PropertyHub
-   - URL: https://propertyhub.in.th/en/condo-for-rent/bangkok
-   - เหตุผล: มีรายการ condo for rent ในกรุงเทพจำนวนมาก เหมาะกับคนที่กำลัง search active
-   - งานวันนี้: refresh ห้องพร้อมเข้าอยู่, ใส่ชื่อ BTS/MRT/ถนน/ห้างในหัวประกาศ, ใช้รูปห้องจริง 8-12 รูป
+Lilith ไม่ขายว่าเป็น portal รวมประกาศ แต่เป็น private rental search ที่ลดงานเทียบประกาศซ้ำ ตรวจโจทย์ก่อนค้นหา จัด shortlist ที่ต่างกันชัดเจน และรวมหลายห้องเป็น viewing route เดียว
 
-2. DDproperty
-   - URL: https://www.ddproperty.com/en
-   - เหตุผล: portal ใหญ่สำหรับ sale/rent ในไทย มีหน้า Bangkok และ Sukhumvit
-   - งานวันนี้: ลงห้องที่ราคาคุ้มที่สุดก่อน แล้วใช้ข้อความปิดนัดดูใน 24 ชั่วโมง
+กลุ่มหลัก:
 
-3. Hipflat
-   - URL: https://www.hipflat.com/condo-for-rent/bangkok
-   - เหตุผล: มี listing condo for rent ใน Bangkok จำนวนมาก และเหมาะกับ expat/local ที่เทียบโครงการ
-   - งานวันนี้: ใส่ project name, station, walk time, room size, view, furniture, minimum contract
+- Expat executive ที่ย้ายมาทำงานในกรุงเทพ
+- Corporate HR, mobility และ relocation partner
+- ครอบครัวที่มี international-school anchor
+- Diplomatic/international-organization staff
+- Thai executive ที่ต้องการ residence ระดับพรีเมียม
 
-4. RentHub
-   - URL: https://www.renthub.in.th/en/apartment/bangkok
-   - เหตุผล: เหมาะกับ apartment/serviced apartment และกลุ่มงบกลางถึงประหยัด
-   - งานวันนี้: แยกห้องงบ 4,000-15,000 และ short-term/monthly ให้ชัด
+ทำเลเริ่มต้น:
 
-5. Facebook Marketplace และกลุ่มเช่า
-   - URL: https://www.facebook.com/marketplace/bangkok/propertyrentals/
-   - เหตุผล: lead คุยเร็ว เหมาะกับการปิดนัดดูห้องวันนี้
-   - งานวันนี้: โพสต์ 3 เวอร์ชันต่อทำเล แล้วตอบด้วยคำถามคัดกรองงบ/วันเข้าอยู่ทันที
+- Phrom Phong, Thong Lo, Ekkamai และ Asoke
+- Langsuan, Wireless, Chidlom และ Lumphini
+- Sathorn, Yen Akat และ Riverside
+- School corridors ตามโจทย์ครอบครัว
 
-## Daily Operating Cadence
+## Funnel
 
-09:00
-- เช็คห้องพร้อมเข้าอยู่และราคา
-- เลือก 3 ห้องหลักที่ปิดได้เร็ว
-- สร้าง campaign copy ในหน้าเว็บ Lilith
+1. Tracked visit: ผู้สนใจเข้าจากลิงก์ที่ระบุ source/campaign/content
+2. Qualified inquiry: งบ 50K-250K, contact ใช้งานได้, 12-month lease, area, bedrooms และ move date
+3. Confirmed brief: ทีมคุยกลับและเติม pets, parking, school/office และ company policy
+4. Private shortlist: ส่งทรัพย์จริงที่ตรวจสถานะแล้ว 3-5 ตัวเลือก
+5. Viewing booked: มีเวลา สถานที่ และผู้ประสานงานยืนยัน
+6. Offer submitted: ลูกค้าเลือกทรัพย์และส่งเงื่อนไขเสนอ
+7. Deposit pending / won: ยืนยันยอด เอกสาร และ deadline
 
-10:00
-- Refresh portal listings
-- โพสต์ Facebook Marketplace
-- ส่ง LINE OA broadcast ถ้ามีฐานลูกค้าเดิม
+## Channel Priority
 
-12:00
-- Export CSV จาก Lilith
-- โทร/LINE กลับ hot lead ทั้งหมด
-- ปิดเวลานัดดูห้อง 2 ช่วง: เย็นวันนี้หรือเช้าพรุ่งนี้
+1. Referral and co-broke partners
+   - เหมาะกับการเริ่มเร็วเมื่อยังไม่มีฐาน audience ใหญ่
+   - ต้องตกลง ownership ของ lead, viewing coordination และค่าตอบแทนก่อนส่งข้อมูลลูกค้า
 
-17:00
-- ดัน listing รอบเย็น
-- ส่งรูป/ค่าแรกเข้า/แผนที่ให้ lead ที่ qualified
-- ทำ follow-up คนที่ยังไม่ตอบ
+2. Corporate HR / relocation
+   - ส่งข้อเสนอแบบ service introduction ไม่ใช่ mass message
+   - ใช้ brief form เดียวเพื่อเก็บ policy budget, office, family size และ move date
 
-21:00
-- สรุป lead ใหม่, hot lead, viewing booked, deposit pending
-- อัปเดตสถานะใน Lilith
-- เตรียม 3 ห้องสำหรับแคมเปญพรุ่งนี้
+3. Expat and neighborhood communities
+   - เลือก community ที่ตรงทำเลหรือ persona และอ่านกติกาก่อนโพสต์
+   - ใช้ภาษาอังกฤษ ภาพจริง และระบุ 12-month lease กับช่วงงบในย่อหน้าแรก
 
-## Posting Formula
+4. Premium property portals
+   - ใช้เฉพาะ inventory ที่ยืนยันราคาและสถานะแล้ว
+   - หัวประกาศต้องมี project/area, bedrooms, size, rent และ minimum term
 
-หัวประกาศ:
-`[ทำเล/สถานี] ห้องพร้อมเข้าอยู่ งบไม่เกิน [ราคา] นัดดูได้วันนี้`
+5. International-school referrals
+   - ทำผ่าน partner, parent liaison หรือ relocation contact ที่มีสิทธิ์แชร์
+   - ห้ามเข้า community ปิดเพื่อโพสต์บริการโดยไม่ได้รับอนุญาต
 
-เนื้อหา:
-`หา [persona] งบไม่เกิน [ราคา] โซน [ทำเล] มีห้องคัดแล้ว พร้อมส่งรูป ค่าแรกเข้า และนัดดูห้องวันนี้ ทัก LINE พร้อมบอกงบ/วันเข้าอยู่ได้เลยค่ะ`
+## Response Standard
 
-คำถามคัดกรอง:
-- งบสูงสุดเท่าไหร่
-- ต้องการเข้าอยู่วันไหน
-- สะดวก BTS/MRT สถานีไหน
-- สะดวกดูห้องวันนี้หรือพรุ่งนี้ช่วงไหน
-- สัญญา 6 เดือนหรือ 1 ปี
+- ภายใน 15 นาที: รับเรื่องและขอยืนยันข้อมูลที่ขาด
+- ภายในเวลาที่ตกลง: ส่ง shortlist แรกที่มีทรัพย์ตรวจสถานะแล้ว
+- ก่อนนัดชม: ยืนยัน availability, ราคา, ผู้พาชม, จุดนัดพบ และค่าแรกเข้า
+- หลังชมภายใน 2 ชั่วโมง: เก็บ feedback แยก must-have, objection และ decision owner
+- เมื่อพร้อม offer: ส่งเงื่อนไขเป็นลายลักษณ์อักษรและกำหนด deadline ที่จริง ไม่สร้าง scarcity ปลอม
 
-## Closing Rule
+## Daily Scoreboard
 
-ทุก lead ต้องมี next action เดียวที่ชัดเจน:
-- New inquiry: ถามงบ/ทำเล/วันเข้าอยู่
-- Qualified: เสนอ 2-3 ห้องและปิดเวลานัดดู
-- Viewing booked: ส่งแผนที่ รูป ค่าแรกเข้า และยืนยันเวลา
-- Deposit pending: ส่งยอดจอง เอกสาร และ deadline มัดจำ
+- Qualified inquiries
+- Median first-response time
+- Confirmed briefs
+- Shortlists sent
+- Viewing booked
+- Offers submitted
+- Deposits / won leases
+- Conversion by source
+- Lost reason: budget, area, timing, inventory, pets, contract or no response
+
+## Market References
+
+- CBRE Thailand Residential Leasing: corporate and individual Bangkok residential leasing, including relocation support
+- CBRE Bangkok Overall Figures Q4 2025: current Bangkok residential and economic context
+- BKK Oracle 2026 area guide: indicative prime-area long-term rents and one-year lease framing
+
+ใช้ข้อมูลตลาดเป็นทิศทางเท่านั้น ราคาและ availability ของทรัพย์ต้องยืนยันกับเจ้าของหรือ listing agent ทุกครั้งก่อนส่งลูกค้า

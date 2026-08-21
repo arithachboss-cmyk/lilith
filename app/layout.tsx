@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
+import { headers } from "next/headers";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -12,15 +13,49 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Lilith Homes | Find Bangkok Renters",
-  description:
-    "Bangkok rental lead capture and tenant acquisition for Lilith Homes.",
-  icons: {
-    icon: "/favicon.svg",
-    shortcut: "/favicon.svg",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const incomingHeaders = await headers();
+  const host =
+    incomingHeaders.get("x-forwarded-host") ??
+    incomingHeaders.get("host") ??
+    "lilith-renter-leads.yacht369.chatgpt.site";
+  const protocol =
+    incomingHeaders.get("x-forwarded-proto") ?? (host.startsWith("localhost") ? "http" : "https");
+  const origin = `${protocol}://${host}`;
+  const title = "Lilith Homes | Bangkok Long-Stay Rentals";
+  const description =
+    "Private Bangkok rental search for 12-month homes at THB 50,000-250,000 per month.";
+
+  return {
+    metadataBase: new URL(origin),
+    title,
+    description,
+    icons: {
+      icon: "/favicon.svg",
+      shortcut: "/favicon.svg",
+    },
+    openGraph: {
+      title,
+      description,
+      type: "website",
+      url: origin,
+      images: [
+        {
+          url: `${origin}/og.png`,
+          width: 1731,
+          height: 909,
+          alt: "Lilith Homes Bangkok long-stay rentals, THB 50K-250K per month",
+        },
+      ],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description,
+      images: [`${origin}/og.png`],
+    },
+  };
+}
 
 export default function RootLayout({
   children,
@@ -28,7 +63,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="th">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

@@ -1,20 +1,374 @@
 import type { Metadata } from "next";
+import Image from "next/image";
 import Script from "next/script";
 import { requireChatGPTUser } from "../chatgpt-auth";
 
 export const metadata: Metadata = {
-  title: "Lilith Homes | Find Bangkok Renters",
-  description: "A Bangkok rental lead capture and tenant acquisition system for Lilith Homes.",
+  title: "Lilith Homes | Premium Rental Pipeline",
+  description:
+    "Private control room for Bangkok 12-month rental leads at ฿50,000-฿250,000 per month.",
 };
 
-const lilithMarkup = "<main class=\"app-shell\">\n      <aside class=\"rail\" aria-label=\"Leasing navigation\">\n        <div class=\"mark\" aria-hidden=\"true\">LH</div>\n        <button class=\"icon-button active\" title=\"Command\" aria-label=\"Command\">⌕</button>\n        <button class=\"icon-button\" title=\"Listings\" aria-label=\"Listings\">⌖</button>\n        <button class=\"icon-button\" title=\"Leads\" aria-label=\"Leads\">♡</button>\n        <button class=\"icon-button\" title=\"Messages\" aria-label=\"Messages\">✉</button>\n      </aside>\n\n      <section class=\"workspace\">\n        <header class=\"topbar\">\n          <div>\n            <p class=\"eyebrow\">Bangkok leasing intelligence</p>\n            <h1>Tenant acquisition control room</h1>\n          </div>\n          <div class=\"status-strip\" aria-label=\"System status\">\n            <span class=\"status-dot\"></span>\n            <span>Ready to outperform listing portals</span>\n          </div>\n        </header>\n\n        <section class=\"hero-board\" aria-label=\"Tenant acquisition command\">\n          <div class=\"hero-media\">\n            <img\n              src=\"https://images.unsplash.com/photo-1560448204-e02f11c3d0e2?auto=format&fit=crop&w=1300&q=82\"\n              alt=\"Modern rental room interior\"\n            />\n          </div>\n          <article class=\"search-panel\">\n            <div class=\"search-copy\">\n              <p class=\"label\">Command</p>\n              <h2>สั่งการให้ Lilith หาลูกค้ามาเช่าห้อง</h2>\n              <p>\n                Convert room inventory into ranked listings, qualified lead capture,\n                same-day viewing routes, and deposit-ready follow-up.\n              </p>\n            </div>\n\n            <form class=\"filters\" id=\"filters\">\n              <label>\n                Location anchors\n                <input id=\"areaInput\" value=\"Asoke, Phrom Phong, Thong Lo\" />\n              </label>\n              <label>\n                Max rent\n                <select id=\"budgetInput\">\n                  <option value=\"18000\">฿18,000</option>\n                  <option value=\"28000\">฿28,000</option>\n                  <option value=\"35000\" selected>฿35,000</option>\n                  <option value=\"50000\">฿50,000</option>\n                </select>\n              </label>\n              <label>\n                Lead goal\n                <select id=\"leadGoal\">\n                  <option>10 leads/week</option>\n                  <option selected>25 leads/week</option>\n                  <option>50 leads/week</option>\n                </select>\n              </label>\n              <button class=\"primary-action\" type=\"submit\">Match rooms</button>\n            </form>\n          </article>\n        </section>\n\n        <section class=\"insight-strip\" aria-label=\"Leasing metrics\">\n          <div>\n            <strong id=\"matchCount\">0</strong>\n            <span>qualified room matches</span>\n          </div>\n          <div>\n            <strong>24h</strong>\n            <span>first reply target</span>\n          </div>\n          <div>\n            <strong>5</strong>\n            <span>lead sources tracked</span>\n          </div>\n          <div>\n            <strong id=\"hotLeadCount\">0</strong>\n            <span>hot leads in pipeline</span>\n          </div>\n        </section>\n\n        <section class=\"lead-ops\" aria-label=\"Customer acquisition system\">\n          <article class=\"results-panel\">\n            <div class=\"panel-heading\">\n              <div>\n                <p class=\"label\">Lead intake</p>\n                <h3>บันทึกลูกค้าที่สนใจเช่าห้อง</h3>\n              </div>\n              <button class=\"secondary-action\" id=\"loadSeedLeads\" type=\"button\">Load sample leads</button>\n            </div>\n            <form class=\"lead-form\" id=\"leadForm\">\n              <label>\n                ชื่อลูกค้า\n                <input id=\"leadName\" placeholder=\"เช่น คุณเมย์\" required />\n              </label>\n              <label>\n                ช่องทาง\n                <select id=\"leadSource\">\n                  <option>LINE OA</option>\n                  <option>Facebook Marketplace</option>\n                  <option>Property portal</option>\n                  <option>TikTok</option>\n                  <option>Referral</option>\n                </select>\n              </label>\n              <label>\n                งบสูงสุด\n                <input id=\"leadBudget\" type=\"number\" min=\"3000\" step=\"500\" value=\"18000\" required />\n              </label>\n              <label>\n                ทำเลที่ต้องการ\n                <input id=\"leadArea\" value=\"Asoke\" required />\n              </label>\n              <label>\n                วันเข้าอยู่\n                <input id=\"moveDate\" type=\"date\" />\n              </label>\n              <label>\n                สถานะ\n                <select id=\"leadStage\">\n                  <option>New inquiry</option>\n                  <option>Qualified</option>\n                  <option>Viewing booked</option>\n                  <option>Deposit pending</option>\n                </select>\n              </label>\n              <button class=\"primary-action\" type=\"submit\">Add lead</button>\n            </form>\n          </article>\n\n          <article class=\"results-panel\">\n            <div class=\"panel-heading\">\n              <div>\n                <p class=\"label\">Today queue</p>\n                <h3>งานที่ต้องทำเพื่อปิดลูกค้า</h3>\n              </div>\n              <div class=\"button-row\">\n                <button class=\"secondary-action\" id=\"exportLeads\" type=\"button\">Export CSV</button>\n                <button class=\"secondary-action\" id=\"clearLeads\" type=\"button\">Clear</button>\n              </div>\n            </div>\n            <div class=\"lead-table\" id=\"leadTable\"></div>\n          </article>\n        </section>\n\n        <section class=\"acquisition-launch\" aria-label=\"Acquisition launch system\">\n          <article class=\"results-panel\">\n            <div class=\"panel-heading\">\n              <div>\n                <p class=\"label\">Acquisition launch</p>\n                <h3>ปล่อยแคมเปญหาลูกค้าเช่าห้องวันนี้</h3>\n              </div>\n              <button class=\"primary-action compact-action\" id=\"buildCampaign\" type=\"button\">Build campaign</button>\n            </div>\n            <div class=\"campaign-controls\">\n              <label>\n                ช่องทางหลัก\n                <select id=\"campaignChannel\">\n                  <option>LINE OA broadcast</option>\n                  <option>Facebook Marketplace post</option>\n                  <option>Property portal refresh</option>\n                  <option>TikTok short script</option>\n                  <option>Referral push</option>\n                </select>\n              </label>\n              <label>\n                กลุ่มลูกค้า\n                <select id=\"renterPersona\">\n                  <option>คนทำงานย้ายเข้าเร็ว</option>\n                  <option>ต่างชาติใกล้ BTS/MRT</option>\n                  <option>นักศึกษา/เริ่มงานใหม่</option>\n                  <option>ครอบครัวเล็ก</option>\n                </select>\n              </label>\n              <label>\n                ข้อเสนอ\n                <input id=\"campaignOffer\" value=\"ห้องพร้อมเข้าอยู่ นัดดูได้วันนี้\" />\n              </label>\n            </div>\n            <div class=\"campaign-output\" id=\"campaignOutput\">\n              <section>\n                <h4>Post copy</h4>\n                <p>เลือกช่องทางและกด Build campaign เพื่อสร้างข้อความหาลูกค้าพร้อมลงประกาศ</p>\n              </section>\n              <section>\n                <h4>Daily actions</h4>\n                <ul>\n                  <li>ลงประกาศ 3 ทำเลหลักก่อนเที่ยง</li>\n                  <li>ตอบทุก inquiry ภายใน 15 นาที</li>\n                  <li>ปิดนัดดูห้องอย่างน้อย 3 นัดต่อวัน</li>\n                </ul>\n              </section>\n            </div>\n          </article>\n        </section>\n\n        <section class=\"content-grid\">\n          <article class=\"results-panel\">\n            <div class=\"panel-heading\">\n              <div>\n                <p class=\"label\">Listing engine</p>\n                <h3>Rooms ready for renter discovery</h3>\n              </div>\n              <div class=\"segmented\">\n                <button class=\"tab-button active\" type=\"button\">Ready</button>\n                <button class=\"tab-button\" type=\"button\">Refresh</button>\n                <button class=\"tab-button\" type=\"button\">Top Ad</button>\n              </div>\n            </div>\n            <div class=\"listing-list\" id=\"listingList\"></div>\n          </article>\n\n          <aside class=\"side-stack\">\n            <article class=\"map-panel\">\n              <p class=\"label\">Search behavior</p>\n              <h3>Location demand map</h3>\n              <div class=\"map-canvas\" aria-hidden=\"true\">\n                <span class=\"train-line\"></span>\n                <span class=\"zone zone-a\">BTS</span>\n                <span class=\"zone zone-b\">MRT</span>\n                <span class=\"zone zone-c\">Mall</span>\n                <span class=\"zone zone-d\">Uni</span>\n              </div>\n            </article>\n\n            <article class=\"service-panel\">\n              <p class=\"label\">Lead pipeline</p>\n              <h3>From inquiry to contract</h3>\n              <ul class=\"service-list\" id=\"leadPipeline\">\n                <li>\n                  <strong>Intake</strong>\n                  <span>Capture name, LINE/phone, budget, move-in date, and preferred station.</span>\n                </li>\n                <li>\n                  <strong>Viewing</strong>\n                  <span>Offer 2-3 visit slots, send map, photos, cost summary, and room rules.</span>\n                </li>\n                <li>\n                  <strong>Closing</strong>\n                  <span>Follow up deposit, contract documents, move-in date, and room status.</span>\n                </li>\n              </ul>\n            </article>\n          </aside>\n        </section>\n\n        <section class=\"renter-capture\" aria-label=\"Renter capture page\">\n          <article class=\"capture-hero\">\n            <div>\n              <p class=\"label\">Public lead capture</p>\n              <h3>ลิงก์รับลูกค้าสำหรับคนกำลังหาห้อง</h3>\n              <p>\n                ใช้ข้อความนี้เป็นหน้า landing/copy สำหรับโพสต์ประกาศ ให้ลูกค้ากรอกข้อมูลแล้วทีมขายเอาเข้าคิว follow-up ทันที\n              </p>\n            </div>\n            <div class=\"capture-copy\" id=\"captureCopy\">\n              <strong>หาห้องเช่าใกล้ BTS/MRT ใช่ไหม?</strong>\n              <span>บอกงบ ทำเล และวันเข้าอยู่ เดี๋ยว Lilith คัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้ภายในวันนี้</span>\n            </div>\n          </article>\n\n          <article class=\"results-panel\">\n            <div class=\"panel-heading\">\n              <div>\n                <p class=\"label\">Inquiry form</p>\n                <h3>ฟอร์มลูกค้าสนใจเช่าห้อง</h3>\n              </div>\n              <button class=\"secondary-action\" id=\"copyCapturePost\" type=\"button\">Copy renter post</button>\n            </div>\n            <form class=\"renter-form\" id=\"renterForm\">\n              <label>\n                ชื่อ / LINE\n                <input id=\"renterName\" placeholder=\"เช่น May / @lineid\" required />\n              </label>\n              <label>\n                งบประมาณ\n                <select id=\"renterBudget\">\n                  <option value=\"12000\">ไม่เกิน ฿12,000</option>\n                  <option value=\"18000\" selected>ไม่เกิน ฿18,000</option>\n                  <option value=\"28000\">ไม่เกิน ฿28,000</option>\n                  <option value=\"35000\">ไม่เกิน ฿35,000</option>\n                  <option value=\"50000\">ไม่เกิน ฿50,000</option>\n                </select>\n              </label>\n              <label>\n                ทำเลที่อยากได้\n                <input id=\"renterArea\" value=\"BTS/MRT\" required />\n              </label>\n              <label>\n                วันเข้าอยู่\n                <input id=\"renterMoveDate\" type=\"date\" />\n              </label>\n              <button class=\"primary-action\" type=\"submit\">ส่งเข้าระบบ Lilith</button>\n            </form>\n            <div class=\"share-pack\" id=\"sharePack\">\n              <strong>Share copy ready</strong>\n              <p>หาห้องเช่าใกล้ BTS/MRT งบไม่เกิน ฿18,000 พร้อมเข้าอยู่? ส่งชื่อ/LINE งบ ทำเล และวันเข้าอยู่มาได้เลยค่ะ เดี๋ยวคัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้วันนี้</p>\n            </div>\n          </article>\n        </section>\n\n        <section class=\"leasing-command\">\n          <article class=\"results-panel\">\n            <div class=\"panel-heading\">\n              <div>\n                <p class=\"label\">Overall command</p>\n                <h3>ระบบสั่งการหาลูกค้าเช่าห้อง</h3>\n              </div>\n              <button class=\"primary-action\" id=\"generateLeadPlan\" type=\"button\">Generate lead plan</button>\n            </div>\n            <div class=\"channel-grid\">\n              <section>\n                <h4>Inventory</h4>\n                <ul>\n                  <li>นำเข้าห้องว่าง ราคา รูปภาพ พิกัด สิ่งอำนวยความสะดวก และวันพร้อมเข้าอยู่</li>\n                  <li>ติดสถานะ: พร้อมลงประกาศ, ต้องถ่ายรูป, รอนัดดู, มีมัดจำ, ปิดดีล</li>\n                </ul>\n              </section>\n              <section>\n                <h4>Acquisition</h4>\n                <ul>\n                  <li>ลงประกาศแบบค้นหาเจอง่ายตามสถานี ทำเล ถนน ห้าง มหาวิทยาลัย และโรงพยาบาล</li>\n                  <li>ใช้ refresh / featured / top slot เมื่อ lead ต่ำกว่าตัวชี้วัดรายสัปดาห์</li>\n                </ul>\n              </section>\n              <section>\n                <h4>Follow-up</h4>\n                <ul>\n                  <li>สร้างข้อความ LINE ตอบกลับทันที พร้อมรูป ห้องที่ match และเวลานัดดูห้อง</li>\n                  <li>สรุป objection หลังดูห้อง แล้วเสนอห้องสำรองหรือเงื่อนไขปิดดีล</li>\n                </ul>\n              </section>\n            </div>\n            <div class=\"lead-console\" id=\"leadConsole\">\n              <strong>Command sample</strong>\n              <span>“Lilith, หา lead เช่าห้องงบ 8,000-12,000 ใกล้ BTS/MRT และส่งข้อความนัดดูห้องวันนี้”</span>\n            </div>\n            <div class=\"script-box\" id=\"scriptBox\">\n              <strong>LINE closing script</strong>\n              <p>สวัสดีค่ะ สนใจห้องโซนไหน งบประมาณเท่าไหร่ และสะดวกดูห้องวันนี้/พรุ่งนี้ช่วงไหนคะ เดี๋ยว Lilith คัดห้องที่ตรงงบพร้อมค่าแรกเข้าให้ทันทีค่ะ</p>\n            </div>\n          </article>\n        </section>\n      </section>\n    </main>";
+export const dynamic = "force-dynamic";
 
 export default async function Dashboard() {
   await requireChatGPTUser("/dashboard");
 
   return (
     <>
-      <div dangerouslySetInnerHTML={{ __html: lilithMarkup }} />
+      <main className="app-shell">
+        <aside className="rail" aria-label="Leasing navigation">
+          <a className="mark" href="#top" aria-label="Lilith Homes">
+            LH
+          </a>
+          <a href="#pipeline">Pipeline</a>
+          <a href="#campaign">Campaign</a>
+          <a href="#inventory">Briefs</a>
+          <a href="#scripts">Scripts</a>
+          <a href="/" target="_blank" rel="noreferrer">
+            Public form
+          </a>
+        </aside>
+
+        <section className="workspace" id="top">
+          <header className="topbar">
+            <div>
+              <p className="eyebrow">Lilith Homes · Bangkok premium leasing</p>
+              <h1>12-month rental pipeline</h1>
+            </div>
+            <div className="status-strip" aria-label="System status">
+              <span className="status-dot" />
+              <span>Accepting ฿50K–฿250K briefs</span>
+            </div>
+          </header>
+
+          <section className="hero-board" aria-label="Premium rental command">
+            <div className="hero-media">
+              <Image
+                src="https://images.unsplash.com/photo-1600210492486-724fe5c67fb0?auto=format&fit=crop&w=1400&q=84"
+                alt="Premium Bangkok residence interior"
+                width={1400}
+                height={900}
+                priority
+                unoptimized
+              />
+            </div>
+            <article className="search-panel">
+              <div className="search-copy">
+                <p className="label">Demand command</p>
+                <h2>หาผู้เช่าที่พร้อมเซ็นสัญญา 1 ปี</h2>
+                <p>
+                  คัดลีดตามงบ ทำเล จำนวนห้องนอน วันเข้าอยู่ และเงื่อนไขสำคัญ
+                  แล้วจัดลำดับเพื่อปิด Private Shortlist และนัดชมให้เร็วที่สุด
+                </p>
+              </div>
+
+              <form className="filters" id="filters">
+                <label>
+                  Prime areas
+                  <input id="areaInput" defaultValue="Phrom Phong, Thong Lo, Sathorn" />
+                </label>
+                <label>
+                  Max monthly rent
+                  <select id="budgetInput" defaultValue="150000">
+                    <option value="50000">฿50,000</option>
+                    <option value="75000">฿75,000</option>
+                    <option value="100000">฿100,000</option>
+                    <option value="150000">฿150,000</option>
+                    <option value="200000">฿200,000</option>
+                    <option value="250000">฿250,000</option>
+                  </select>
+                </label>
+                <label>
+                  Qualified lead goal
+                  <select id="leadGoal" defaultValue="10 qualified leads/week">
+                    <option>5 qualified leads/week</option>
+                    <option>10 qualified leads/week</option>
+                    <option>20 qualified leads/week</option>
+                  </select>
+                </label>
+                <button className="primary-action" type="submit">
+                  Match target briefs
+                </button>
+              </form>
+            </article>
+          </section>
+
+          <section className="insight-strip" aria-label="Leasing metrics">
+            <div>
+              <strong id="matchCount">0</strong>
+              <span>target search briefs</span>
+            </div>
+            <div>
+              <strong>15m</strong>
+              <span>first response target</span>
+            </div>
+            <div>
+              <strong>12 mo.</strong>
+              <span>required lease term</span>
+            </div>
+            <div>
+              <strong id="hotLeadCount">0</strong>
+              <span>priority leads</span>
+            </div>
+          </section>
+
+          <section className="lead-ops" id="pipeline" aria-label="Lead pipeline">
+            <article className="results-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="label">Qualified intake</p>
+                  <h3>เพิ่มลูกค้าเช่าสัญญา 1 ปี</h3>
+                </div>
+                <button className="secondary-action" id="loadSeedLeads" type="button">
+                  Load examples
+                </button>
+              </div>
+              <form className="lead-form" id="leadForm">
+                <label>
+                  ชื่อลูกค้า
+                  <input id="leadName" placeholder="เช่น Ms. Maya" required />
+                </label>
+                <label>
+                  ข้อมูลติดต่อ
+                  <input id="leadContact" placeholder="LINE / phone / email" required />
+                </label>
+                <label>
+                  ช่องทาง
+                  <select id="leadSource">
+                    <option>Expat community</option>
+                    <option>Corporate HR / relocation</option>
+                    <option>Facebook group</option>
+                    <option>Property portal</option>
+                    <option>Referral partner</option>
+                    <option>LINE OA</option>
+                  </select>
+                </label>
+                <label>
+                  งบสูงสุดต่อเดือน
+                  <input
+                    id="leadBudget"
+                    type="number"
+                    min="50000"
+                    max="250000"
+                    step="5000"
+                    defaultValue="100000"
+                    required
+                  />
+                </label>
+                <label>
+                  ทำเลที่ต้องการ
+                  <input id="leadArea" defaultValue="Phrom Phong" required />
+                </label>
+                <label>
+                  ประเภทที่พัก
+                  <select id="leadPropertyType" defaultValue="Condo">
+                    <option>Condo</option>
+                    <option>House</option>
+                    <option>Apartment</option>
+                    <option>Penthouse</option>
+                    <option>Townhome</option>
+                  </select>
+                </label>
+                <label>
+                  ห้องนอน
+                  <select id="leadBedrooms" defaultValue="2">
+                    <option value="1">1 bedroom</option>
+                    <option value="2">2 bedrooms</option>
+                    <option value="3">3 bedrooms</option>
+                    <option value="4">4 bedrooms</option>
+                    <option value="5">5+ bedrooms</option>
+                  </select>
+                </label>
+                <label>
+                  วันเข้าอยู่
+                  <input id="moveDate" type="date" required />
+                </label>
+                <label>
+                  เวลาสะดวกนัดชม
+                  <select id="leadViewingWindow">
+                    <option>วันนี้ช่วงเย็น</option>
+                    <option>พรุ่งนี้ช่วงเช้า</option>
+                    <option>พรุ่งนี้ช่วงเย็น</option>
+                    <option>วันธรรมดา</option>
+                    <option>เสาร์-อาทิตย์</option>
+                    <option>Video viewing first</option>
+                  </select>
+                </label>
+                <label>
+                  ภาษา
+                  <select id="leadLanguage">
+                    <option>ไทย</option>
+                    <option>English</option>
+                    <option>ไทย / English</option>
+                  </select>
+                </label>
+                <label>
+                  สัตว์เลี้ยง
+                  <select id="leadPets">
+                    <option>ไม่มี</option>
+                    <option>มีสุนัข</option>
+                    <option>มีแมว</option>
+                    <option>มีสัตว์เลี้ยงอื่น</option>
+                  </select>
+                </label>
+                <label>
+                  สถานะ
+                  <select id="leadStage">
+                    <option>New inquiry</option>
+                    <option>Qualified</option>
+                    <option>Shortlist sent</option>
+                    <option>Viewing booked</option>
+                    <option>Offer submitted</option>
+                    <option>Deposit pending</option>
+                  </select>
+                </label>
+                <label className="form-wide">
+                  เงื่อนไขสำคัญ
+                  <textarea id="leadRequirements" rows={3} placeholder="Pet-friendly, school, maid room, parking..." />
+                </label>
+                <button className="primary-action" type="submit">
+                  Add qualified lead
+                </button>
+              </form>
+            </article>
+
+            <article className="results-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="label">Priority queue</p>
+                  <h3>งานที่ต้องทำเพื่อปิดนัดชม</h3>
+                </div>
+                <div className="button-row">
+                  <button className="secondary-action" id="exportLeads" type="button">
+                    Export CSV
+                  </button>
+                  <button className="secondary-action" id="clearLeads" type="button">
+                    Remove examples
+                  </button>
+                </div>
+              </div>
+              <div className="lead-table" id="leadTable" />
+            </article>
+          </section>
+
+          <section className="acquisition-launch" id="campaign" aria-label="Campaign builder">
+            <article className="results-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="label">Premium acquisition</p>
+                  <h3>สร้างข้อความหาผู้เช่าที่ตรงกลุ่ม</h3>
+                </div>
+                <button className="primary-action compact-action" id="buildCampaign" type="button">
+                  Build campaign
+                </button>
+              </div>
+              <div className="campaign-controls">
+                <label>
+                  ช่องทางหลัก
+                  <select id="campaignChannel">
+                    <option>Expat community post</option>
+                    <option>Corporate HR / relocation outreach</option>
+                    <option>Facebook premium rental group</option>
+                    <option>Property portal refresh</option>
+                    <option>Referral partner push</option>
+                  </select>
+                </label>
+                <label>
+                  กลุ่มลูกค้า
+                  <select id="renterPersona">
+                    <option>expat executive relocating to Bangkok</option>
+                    <option>family near an international school</option>
+                    <option>diplomatic or international organization staff</option>
+                    <option>Thai executive seeking a premium residence</option>
+                  </select>
+                </label>
+                <label>
+                  ข้อเสนอ
+                  <input id="campaignOffer" defaultValue="private shortlist and coordinated viewing route" />
+                </label>
+              </div>
+              <div className="campaign-output" id="campaignOutput">
+                <section>
+                  <h4>Post copy</h4>
+                  <p>เลือกช่องทางและกด Build campaign เพื่อสร้างข้อความพร้อมลิงก์ติดตามผล</p>
+                </section>
+                <section>
+                  <h4>Daily actions</h4>
+                  <ul>
+                    <li>เลือก persona เดียวต่อโพสต์</li>
+                    <li>ตอบทุก brief ภายใน 15 นาที</li>
+                    <li>ยืนยันงบ สัญญา 1 ปี และวันเข้าอยู่ก่อนส่ง shortlist</li>
+                  </ul>
+                </section>
+              </div>
+            </article>
+          </section>
+
+          <section className="content-grid" id="inventory" aria-label="Target inventory briefs">
+            <article className="results-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="label">Target inventory</p>
+                  <h3>รูปแบบทรัพย์ที่ควรหาให้แคมเปญ</h3>
+                </div>
+                <span className="stage-pill">Planning briefs</span>
+              </div>
+              <div className="listing-list" id="listingList" />
+            </article>
+
+            <aside className="side-stack">
+              <article className="service-panel">
+                <p className="label">Qualification standard</p>
+                <h3>Lead พร้อมคุยต่อเมื่อมีข้อมูลครบ</h3>
+                <ul className="service-list">
+                  <li>
+                    <strong>Fit</strong>
+                    <span>งบ ฿50K–฿250K, ทำเล, ประเภททรัพย์ และจำนวนห้องนอน</span>
+                  </li>
+                  <li>
+                    <strong>Timing</strong>
+                    <span>วันเข้าอยู่และช่วงเวลาที่สะดวกนัดชม</span>
+                  </li>
+                  <li>
+                    <strong>Commitment</strong>
+                    <span>ยืนยันสัญญา 12 เดือน พร้อมข้อมูลติดต่อที่ตอบกลับได้</span>
+                  </li>
+                  <li>
+                    <strong>Constraints</strong>
+                    <span>สัตว์เลี้ยง โรงเรียน ที่จอดรถ ห้องแม่บ้าน และเงื่อนไขบริษัท</span>
+                  </li>
+                </ul>
+              </article>
+            </aside>
+          </section>
+
+          <section className="leasing-command" id="scripts">
+            <article className="results-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="label">Closing desk</p>
+                  <h3>สคริปต์ตอบกลับและแผนวันนี้</h3>
+                </div>
+                <button className="primary-action compact-action" id="generateLeadPlan" type="button">
+                  Generate lead plan
+                </button>
+              </div>
+              <div className="lead-console" id="leadConsole">
+                <strong>Lead plan</strong>
+                <span>เลือกทำเล งบ และช่องทางด้านบน แล้วสร้างแผนติดตามรายวัน</span>
+              </div>
+              <div className="script-box" id="scriptBox">
+                <strong>LINE closing script</strong>
+                <p>
+                  สวัสดีค่ะ ขอบคุณที่ส่งโจทย์เช่า 1 ปีเข้ามา ทีมขอยืนยันงบ ทำเล
+                  วันเข้าอยู่ และช่วงเวลานัดชมก่อนเริ่มคัด Private Shortlist ค่ะ
+                </p>
+              </div>
+            </article>
+          </section>
+        </section>
+      </main>
       <Script src="/script.js" strategy="afterInteractive" />
     </>
   );

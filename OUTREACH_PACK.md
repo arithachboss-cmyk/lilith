@@ -1,90 +1,101 @@
-# Lilith Outreach Pack
+# Lilith Premium Outreach Pack
 
-ใช้คัดลอกไปลง LINE OA, Facebook Marketplace, กลุ่มเช่าคอนโด, portal description, หรือส่งให้ referral ได้ทันที
+ใช้กับลูกค้าเช่ากรุงเทพ งบ 50,000-250,000 บาทต่อเดือน และสัญญา 12 เดือนเท่านั้น
 
-## Facebook Marketplace / Group Post
+## English Expat Post
 
-### โซน BTS/MRT งบไม่เกิน 18,000
+```text
+Looking for a Bangkok home for the next 12 months?
 
-หาห้องเช่าใกล้ BTS/MRT งบไม่เกิน 18,000 บาท พร้อมเข้าอยู่ไหมคะ?
+Lilith Homes curates premium condos, apartments and houses for executives, expats and families with monthly budgets from THB 50,000 to THB 250,000.
 
-Lilith คัดห้องให้ตามงบและทำเล พร้อมส่ง:
-- รูปห้องจริง
-- ค่าแรกเข้า
-- ระยะจาก BTS/MRT
-- เวลานัดดูห้องวันนี้หรือพรุ่งนี้
+Tell us your preferred area, bedrooms, move-in date, pets and must-haves. We will confirm your brief, compare suitable options and coordinate a focused viewing route.
 
-สนใจทักมาได้เลย พร้อมส่ง:
-1. งบสูงสุด
-2. ทำเล/สถานีที่อยากได้
-3. วันเข้าอยู่
-4. LINE หรือเบอร์โทร
+[TRACKED LINK]
+```
 
-เดี๋ยวคัด 2-3 ห้องที่ตรงที่สุดให้ค่ะ
+## Thai Premium Post
 
-### โซนสุขุมวิท งบ 28,000-35,000
+```text
+กำลังหาบ้านหรือคอนโดเช่ากรุงเทพ สัญญา 1 ปี งบ 50,000-250,000 บาทต่อเดือนอยู่ไหมคะ?
 
-มีห้องเช่าโซน Asoke / Phrom Phong / Thong Lo สำหรับคนอยากย้ายเข้าเร็ว
+ส่งทำเล จำนวนห้องนอน วันเข้าอยู่ สัตว์เลี้ยง และสิ่งที่ต้องมีให้ Lilith ช่วยคัด Private Shortlist พร้อมเทียบราคา ค่าแรกเข้า และจัดนัดชมหลายห้องให้เป็นเส้นทางเดียว
 
-เหมาะกับคนทำงานหรือ expat ที่อยากได้ห้องพร้อมเฟอร์ ใกล้ BTS/MRT นัดดูได้เร็ว
+[TRACKED LINK]
+```
 
-ส่งงบ ทำเล และวันเข้าอยู่มาได้เลยค่ะ เดี๋ยวคัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้ภายในวันนี้
+## Corporate Relocation Introduction
 
-## LINE OA Broadcast
+Subject: Bangkok 12-month housing support for relocating employees
 
-กำลังหาห้องเช่าใกล้ BTS/MRT อยู่ไหมคะ?
+```text
+Hello [Name],
 
-วันนี้ Lilith คัดห้องพร้อมเข้าอยู่หลายโซน งบเริ่มต้น 12,000-35,000 บาท
+Lilith Homes supports Bangkok housing briefs for relocating executives and families with monthly budgets of THB 50,000-250,000.
 
-ตอบกลับข้อความนี้ด้วย:
-งบ:
-ทำเล:
+For each employee, we consolidate the location, policy budget, family needs and move date into one brief, then coordinate a curated comparison, viewing route and 12-month contract process.
+
+Brief form: [TRACKED LINK]
+
+Best,
+Lilith Homes
+```
+
+## Referral Partner Message
+
+```text
+มีลูกค้ามองหาบ้านหรือคอนโดกรุงเทพ งบ 50,000-250,000 บาทต่อเดือน สัญญา 1 ปี ฝาก brief ให้ Lilith ช่วยคัดตัวเลือกและประสานนัดชมได้ค่ะ
+
+ก่อนส่งข้อมูลลูกค้า เราตกลงขอบเขตการทำงานและ referral/co-broke ให้ชัดเจนได้เลย
+
+[TRACKED LINK]
+```
+
+## First Reply · Thai
+
+```text
+สวัสดีค่ะ ขอบคุณที่ส่งโจทย์เช่า 1 ปีเข้ามานะคะ ทีมขอยืนยันข้อมูลก่อนเริ่มคัด Private Shortlist ค่ะ
+
+งบสูงสุดต่อเดือน:
+ทำเลหรือ office/school anchor:
+ประเภทที่พักและจำนวนห้องนอน:
 วันเข้าอยู่:
-เวลาสะดวกดูห้อง:
+สัตว์เลี้ยง/ที่จอดรถ/เงื่อนไขสำคัญ:
+สะดวกนัดชมช่วงไหน:
+```
 
-เดี๋ยวส่ง shortlist พร้อมรูป ค่าแรกเข้า และแผนที่ให้ค่ะ
+## First Reply · English
 
-## TikTok Short Script
+```text
+Hi [Name], thank you for your 12-month Bangkok rental brief. Before I prepare your private shortlist, may I confirm:
 
-เปิดคลิป:
-หาห้องเช่าใกล้ BTS/MRT งบไม่เกิน 18,000 อยู่ไหม?
+- Maximum monthly budget
+- Preferred areas or office/school anchor
+- Property type and bedrooms
+- Move-in date
+- Pets, parking and must-haves
+- Preferred viewing window
+```
 
-ช่วงกลาง:
-วันนี้มีห้องพร้อมเข้าอยู่ คัดตามงบ ทำเล และวันย้ายเข้าให้ ไม่ต้องไล่ทักหลายประกาศเอง
+## Shortlist Sent
 
-ปิดคลิป:
-คอมเมนต์หรือทัก LINE ว่า "หาห้อง" พร้อมงบและทำเล เดี๋ยวส่งรูป ค่าแรกเข้า และเวลานัดดูให้วันนี้
+```text
+ส่ง Private Shortlist ให้แล้วนะคะ แต่ละตัวเลือกต่างกันที่ทำเล พื้นที่ใช้สอย และเงื่อนไข หากเลือก 2-3 ห้องที่ชอบที่สุดได้ ทีมจะตรวจสถานะล่าสุดและจัดเส้นทางนัดชมให้ค่ะ
+```
 
-## Portal Description
+## Viewing Close
 
-ห้องพร้อมเข้าอยู่ ทำเลเดินทางสะดวก ใกล้ BTS/MRT เหมาะกับคนทำงานที่ต้องการย้ายเข้าเร็ว
+```text
+เพื่อยืนยันนัดชม ขอเลือกช่วงเวลาได้ 2 ตัวเลือกค่ะ: [OPTION A] หรือ [OPTION B] เมื่อเลือกแล้วทีมจะยืนยันสถานะห้อง ผู้พาชม จุดนัดพบ และค่าแรกเข้าให้ครบก่อนเดินทาง
+```
 
-สอบถามเพิ่มเติมพร้อมแจ้งงบ ทำเล และวันเข้าอยู่ ทีม Lilith จะคัดห้องที่ตรงงบ ส่งรูป ค่าแรกเข้า และนัดดูห้องให้ภายในวันเดียว
+## Qualification Gate
 
-## Quick Replies
-
-### New inquiry
-
-สวัสดีค่ะ สนใจห้องโซนไหน งบประมาณเท่าไหร่ และต้องการเข้าอยู่วันไหนคะ เดี๋ยวคัดห้องที่ตรงงบพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้ค่ะ
-
-### Qualified lead
-
-จากงบและทำเลที่แจ้งมา เดี๋ยวส่งให้ 2-3 ห้องที่ตรงที่สุดนะคะ สะดวกดูห้องวันนี้เย็นหรือพรุ่งนี้ช่วงไหนคะ
-
-### Viewing booked
-
-ยืนยันนัดดูห้องนะคะ เดี๋ยวส่งแผนที่ รูปห้อง ค่าแรกเข้า และรายละเอียดสัญญาให้ครบก่อนถึงเวลาเข้าดูค่ะ
-
-### Deposit pending
-
-ถ้าห้องนี้ตรงใจ แนะนำล็อกห้องด้วยมัดจำวันนี้นะคะ เพราะห้องพร้อมเข้าอยู่และมีคนถามเข้ามาเรื่อย ๆ เดี๋ยวส่งยอดจองและเอกสารให้ค่ะ
-
-## Lead Qualification Checklist
-
-- ชื่อ/LINE/เบอร์โทร
-- งบสูงสุด
-- ทำเลหรือสถานี
-- วันเข้าอยู่
-- สัญญา 6 เดือนหรือ 1 ปี
-- สัตว์เลี้ยงหรือข้อจำกัดพิเศษ
-- เวลาสะดวกดูห้อง
+- Contact ตอบกลับได้จริง
+- Budget 50,000-250,000 บาทต่อเดือน
+- Contract 12 months confirmed
+- Area or office/school anchor
+- Property type and bedrooms
+- Move-in date within a defined window
+- Pets, parking and company-lease requirements
+- Viewing availability

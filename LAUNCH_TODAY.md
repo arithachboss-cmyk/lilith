@@ -1,108 +1,103 @@
-# Lilith Launch Today
+# Lilith Premium Rental Launch
 
 Production URL:
 https://lilith-renter-leads.yacht369.chatgpt.site
 
-หมายเหตุ: ตอนนี้ URL ยังเป็น private จนกว่าจะอนุมัติ public access. หลังเปิด public แล้ว ใช้ URL เดิมนี้ลงประกาศได้ทันที
+Public brief: เปิดให้ผู้เช่าเข้าถึงได้แล้ว
+
+Private dashboard:
+https://lilith-renter-leads.yacht369.chatgpt.site/dashboard
+
+## Target
+
+- ค่าเช่า 50,000-250,000 บาทต่อเดือน
+- สัญญา 12 เดือนเท่านั้น
+- กรุงเทพฯ: สุขุมวิทตอนกลาง, หลังสวน, วิทยุ, ลุมพินี, สาทร, ริเวอร์ไซด์ และโซนโรงเรียนนานาชาติ
+- Persona หลัก: expat executive, corporate relocation, international-school family, diplomatic/international-organization staff และ Thai executive
 
 ## Tracked Links
 
-- Facebook Marketplace: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_marketplace&utm_campaign=launch_day&utm_content=marketplace_post`
-- Facebook group: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_group&utm_campaign=launch_day&utm_content=bts_mrt_group`
-- LINE OA: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=line_oa&utm_campaign=launch_day&utm_content=broadcast`
-- Referral: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=referral&utm_campaign=launch_day&utm_content=tenant_agent`
-- English/expat: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=expat_post&utm_campaign=launch_day&utm_content=english`
+- Expat community: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=expat_community&utm_campaign=premium_12m&utm_content=executive_long_stay`
+- Corporate HR / relocation: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=corporate_relocation&utm_campaign=premium_12m&utm_content=hr_partner`
+- Facebook premium rental group: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_premium_group&utm_campaign=premium_12m&utm_content=premium_12m`
+- Property portal: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=property_portal&utm_campaign=premium_12m&utm_content=premium_listing`
+- Referral partner: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=referral_partner&utm_campaign=premium_12m&utm_content=premium_tenant_referral`
+- International-school referral: `https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=school_referral&utm_campaign=premium_12m&utm_content=family_home`
 
-## 1-Hour Launch Sprint
+## Before Distribution
 
-### 00:00-00:10 เตรียมประกาศ
+- เตรียมทรัพย์จริงที่ยืนยันสถานะแล้วอย่างน้อย 6-10 รายการ ครอบคลุมงบ 50K, 75K, 100K, 150K และ 200K+
+- แต่ละรายการต้องมีรูปจริง ราคา จำนวนห้องนอน ขนาด ระยะถึง BTS/โรงเรียน เงื่อนไขสัตว์เลี้ยง ค่าแรกเข้า และวันพร้อมเข้าอยู่
+- ห้ามใช้คำว่า available หรือพร้อมนัดชม หากยังไม่ได้ยืนยันกับเจ้าของหรือ listing agent ในวันนั้น
+- กำหนดคนตอบ lead ให้ชัด และเปิด dashboard ค้างไว้ระหว่างปล่อยแคมเปญ
 
-- เปิด public access ของ Sites
-- เปิด URL ด้วย browser ที่ไม่ได้ sign in เพื่อยืนยันว่าลูกค้าเข้าฟอร์มได้
-- ทดสอบส่ง lead 1 รายด้วยชื่อ `TEST - ลบได้`
-- เข้า `/dashboard` เพื่อดูว่า lead เข้า queue แล้ว พร้อม source และเวลาสะดวกดูห้อง
+## 90-Minute Launch Sprint
 
-### 00:10-00:25 ยิงโพสต์แรก
+### 00:00-00:20 · Inventory proof
 
-ใช้ข้อความนี้กับ Facebook Marketplace / กลุ่มเช่าคอนโดกรุงเทพ:
+- เลือกทรัพย์จริง 3 รายการสำหรับ executive condo และ 3 รายการสำหรับ family residence
+- สร้าง comparison สั้น: ราคา, จุดเด่น, trade-off และเวลานัดชม
+- ตรวจว่าทุกทรัพย์รับสัญญา 12 เดือนและตรงงบเป้าหมาย
 
-```text
-หาห้องเช่ากรุงเทพใกล้ BTS/MRT ที่ตรงงบอยู่ไหมคะ?
+### 00:20-00:45 · First distribution
 
-Lilith ช่วยคัดห้องตามงบ ทำเล และวันเข้าอยู่ให้ ไม่ต้องไล่ทักหลายประกาศเอง
+- ลง 1 โพสต์ใน community ที่ตรง persona และอนุญาตโพสต์บริการหรือประกาศเช่า
+- ส่งข้อความหา referral/agent partner 5 รายที่เคยทำงานร่วมกัน
+- ส่ง corporate relocation introduction 3 ราย เฉพาะ contact ที่มีความสัมพันธ์หรือมีสิทธิ์ติดต่อ
+- ใช้ tracked link ให้ตรงกับแต่ละช่องทาง ห้ามใช้ลิงก์เดียวทุกโพสต์
 
-ส่งข้อมูลที่ลิงก์นี้:
-https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_marketplace&utm_campaign=launch_day&utm_content=marketplace_post
+### 00:45-01:30 · Response desk
 
-ทีมจะคัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูห้องให้ภายในวันนี้ค่ะ
-```
+- ตอบทุก inquiry ภายใน 15 นาที
+- ยืนยัน 6 เรื่องก่อนส่งทรัพย์: contact, budget, area, bedrooms, move date, 12-month lease
+- เพิ่ม pets, school/office anchor, parking และ company lease requirement ถ้ามี
+- ส่ง Private Shortlist 3-5 ตัวเลือกที่แตกต่างกันชัดเจน แล้วเสนอเวลานัดชม 2 ช่วง
 
-### 00:25-00:40 ยิง LINE / Referral
+## Launch Copy
 
-```text
-กำลังหาห้องเช่าใกล้ BTS/MRT หรือมีเพื่อนกำลังย้ายห้องไหมคะ?
-
-กรอกงบ ทำเล และวันเข้าอยู่ที่ลิงก์นี้:
-https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=line_oa&utm_campaign=launch_day&utm_content=broadcast
-
-เดี๋ยว Lilith คัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้ภายในวันนี้ค่ะ
-```
-
-### 00:40-01:00 Follow-up
-
-- เปิด `/dashboard`
-- Export CSV ถ้าจะส่งต่อทีมขาย
-- LINE กลับ lead ใหม่ภายใน 15 นาที
-- เรียงความสำคัญจาก source ที่เข้าเยอะ + เวลาสะดวกดูห้องที่ใกล้ที่สุด
-- ปิดเวลานัดดูด้วยตัวเลือกที่ลูกค้ากดไว้ เช่น วันนี้เย็น หรือพรุ่งนี้เช้า
-
-## Channel Variants
-
-### Asoke / Phrom Phong
+### English · Expat / Executive
 
 ```text
-หาห้องเช่า Asoke / Phrom Phong ใกล้ BTS/MRT งบ 18,000-35,000 อยู่ไหมคะ?
+Relocating to Bangkok and looking for a 12-month home?
 
-กรอกโจทย์ที่นี่:
-https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_group&utm_campaign=launch_day&utm_content=asoke_phrom_phong
+Lilith Homes curates condos, apartments and houses in Phrom Phong, Thong Lo, Ekkamai, Langsuan, Wireless and Sathorn for monthly budgets of THB 50,000-250,000.
 
-เดี๋ยวคัดห้องพร้อมรูป ค่าแรกเข้า และเวลานัดดูให้วันนี้ค่ะ
+Share your preferred area, bedrooms, move date and must-haves here:
+https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=expat_community&utm_campaign=premium_12m&utm_content=executive_long_stay
+
+We will confirm your brief, compare suitable options and coordinate a practical viewing route for a 12-month lease.
 ```
 
-### Budget 12,000-18,000
+### Thai · Premium Rental
 
 ```text
-ห้องเช่ากรุงเทพงบไม่เกิน 18,000 ใกล้รถไฟฟ้า ยังมีตัวเลือกค่ะ
+กำลังหาบ้านหรือคอนโดเช่ากรุงเทพ งบ 50,000-250,000 บาทต่อเดือน สัญญา 1 ปีอยู่ไหมคะ?
 
-ส่งงบ ทำเล และวันเข้าอยู่:
-https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_group&utm_campaign=launch_day&utm_content=budget_12000_18000
+Lilith ช่วยคัด Private Shortlist ตามทำเล จำนวนห้องนอน วันเข้าอยู่ สัตว์เลี้ยง และเงื่อนไขสำคัญ พร้อมเทียบค่าแรกเข้าและจัดนัดชมให้เป็นชุด
 
-Lilith จะช่วยคัด shortlist ให้ ไม่ต้องทักหลายประกาศเองค่ะ
+ส่งโจทย์ได้ที่:
+https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=facebook_premium_group&utm_campaign=premium_12m&utm_content=premium_12m
 ```
 
-### Expat / English
+### Corporate HR / Relocation
 
 ```text
-Looking for a Bangkok rental near BTS/MRT?
+Lilith Homes supports Bangkok relocation briefs for executives and families seeking a 12-month residence at THB 50,000-250,000 per month.
 
-Send your budget, preferred area, and move-in date here:
-https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=expat_post&utm_campaign=launch_day&utm_content=english
+We provide one consolidated brief, curated comparisons, coordinated viewing routes and contract support across prime Bangkok areas.
 
-Lilith will shortlist matching rooms with photos, move-in cost, and viewing times today.
+Employee brief:
+https://lilith-renter-leads.yacht369.chatgpt.site?utm_source=corporate_relocation&utm_campaign=premium_12m&utm_content=hr_partner
 ```
 
-## Success Criteria Today
+## Success Evidence
 
-- 5 posts sent
-- 10+ landing page visits
-- 3+ inquiries submitted
-- 1+ viewing booked
-- 0 lead read/delete endpoints exposed publicly
-- ทุก inquiry มี source tracking และเวลาสะดวกดูห้อง
+ระบบยังไม่ถือว่าหาลูกค้าสำเร็จจนมีหลักฐานจริงตามลำดับนี้:
 
-## Dashboard
+- Qualified inquiry: งบอยู่ในช่วงเป้าหมายและยืนยันสัญญา 12 เดือน
+- Contacted: ติดต่อกลับได้จริงและโจทย์ผ่านการยืนยัน
+- Shortlist sent: ส่งทรัพย์จริงที่ตรวจสถานะแล้วอย่างน้อย 3 ตัวเลือก
+- Viewing booked: มีวัน เวลา สถานที่ และผู้ประสานงานยืนยัน
+- Offer/deposit: มีข้อเสนอหรือหลักฐานจองจากลูกค้าจริง
 
-Private operator dashboard:
-https://lilith-renter-leads.yacht369.chatgpt.site/dashboard
-
-ใช้ดู lead, export CSV, สร้าง LINE closing script, และจัด queue follow-up
+เป้าหมายรอบแรก: 5 qualified inquiries, 3 confirmed briefs, 2 viewings และ 1 offer/deposit
