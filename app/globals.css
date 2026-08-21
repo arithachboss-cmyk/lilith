@@ -544,6 +544,42 @@ select {
   margin-top: 18px;
 }
 
+.source-summary {
+  display: grid;
+  gap: 12px;
+  margin-top: 12px;
+  padding: 14px;
+  border: 1px solid #c8d9d3;
+  border-radius: 8px;
+  background: #f8fbf9;
+}
+
+.source-summary strong,
+.source-summary p {
+  margin: 0;
+}
+
+.source-summary p {
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+.summary-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 7px;
+  margin-top: 8px;
+}
+
+.summary-pills span {
+  padding: 6px 8px;
+  border-radius: 8px;
+  background: var(--panel-soft);
+  color: var(--accent-dark);
+  font-size: 0.78rem;
+  font-weight: 850;
+}
+
 .lead-row {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) auto;

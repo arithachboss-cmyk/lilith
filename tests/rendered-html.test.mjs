@@ -101,3 +101,17 @@ test("uses viewing windows in dashboard follow-up tools", async () => {
   assert.match(dashboardScript, /"viewingWindow"/);
   assert.match(dashboardScript, /LINE closing script/);
 });
+
+test("summarizes sources and viewing demand for channel decisions", async () => {
+  const [dashboardScript, styles] = await Promise.all([
+    readFile(new URL("../public/script.js", import.meta.url), "utf8"),
+    readFile(new URL("../app/globals.css", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(dashboardScript, /renderAcquisitionSummary/);
+  assert.match(dashboardScript, /Top sources/);
+  assert.match(dashboardScript, /Viewing demand/);
+  assert.match(dashboardScript, /Next push/);
+  assert.match(styles, /source-summary/);
+  assert.match(styles, /summary-pills/);
+});

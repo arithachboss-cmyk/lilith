@@ -172,6 +172,54 @@ function viewingWindowText(lead) {
   return lead.viewingWindow || "ยังไม่ระบุเวลาดูห้อง";
 }
 
+function primarySource(source) {
+  return String(source || "Unknown").split("/")[0].trim();
+}
+
+function countBy(items, mapper) {
+  return items.reduce((counts, item) => {
+    const key = mapper(item);
+    counts.set(key, (counts.get(key) || 0) + 1);
+    return counts;
+  }, new Map());
+}
+
+function topEntries(counts) {
+  return [...counts.entries()].sort((a, b) => b[1] - a[1]).slice(0, 3);
+}
+
+function summaryPills(entries) {
+  if (!entries.length) return "<span>No data yet</span>";
+  return entries.map(([label, count]) => `<span>${escapeHtml(label)} · ${count}</span>`).join("");
+}
+
+function renderAcquisitionSummary(ranked) {
+  let summary = document.querySelector("#sourceSummary");
+  if (!summary) {
+    summary = document.createElement("section");
+    summary.id = "sourceSummary";
+    summary.className = "source-summary";
+    leadTable.after(summary);
+  }
+
+  const sourceEntries = topEntries(countBy(ranked, (lead) => primarySource(lead.source)));
+  const viewingEntries = topEntries(countBy(ranked, viewingWindowText));
+  const topSource = sourceEntries[0]?.[0] || "ช่องทางที่เริ่มมี lead";
+  const topWindow = viewingEntries[0]?.[0] || "ช่วงเวลาที่ลูกค้าสะดวก";
+
+  summary.innerHTML = `
+    <div>
+      <strong>Top sources</strong>
+      <div class="summary-pills">${summaryPills(sourceEntries)}</div>
+    </div>
+    <div>
+      <strong>Viewing demand</strong>
+      <div class="summary-pills">${summaryPills(viewingEntries)}</div>
+    </div>
+    <p>Next push: ยิงซ้ำ ${escapeHtml(topSource)} พร้อม CTA นัดดูห้อง ${escapeHtml(topWindow)}</p>
+  `;
+}
+
 function csvValue(value) {
   return `"${String(value ?? "").replaceAll('"', '""')}"`;
 }
@@ -227,6 +275,7 @@ function renderLeads() {
         <span>เพิ่มลูกค้าจากฟอร์ม หรือกด Load sample leads เพื่อเริ่มระบบวันนี้</span>
       </div>
     `;
+    renderAcquisitionSummary([]);
     return;
   }
 
@@ -248,6 +297,7 @@ function renderLeads() {
       `,
     )
     .join("");
+  renderAcquisitionSummary(ranked);
 }
 
 function renderListings() {
