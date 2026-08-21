@@ -2,7 +2,7 @@
 
 Prepared: 2026-08-21
 
-Status: local review copies only. Nothing in this file has been sent or submitted.
+Status: drafts 1, 2 and 4 were sent on 2026-08-22. Draft 3 has not been sent and draft 5 has not been submitted.
 
 ## Pre-Send Fields
 
@@ -16,6 +16,8 @@ Add these once before creating email drafts:
 Do not add claims about active tenants, exclusive inventory, licensing, commissions or existing partnerships unless documented.
 
 ## 1. Asian Tigers Thailand
+
+Sent: 2026-08-22
 
 To: `inbound@asiantigers-thailand.com`
 
@@ -41,7 +43,9 @@ Lilith Homes
 
 ## 2. Pacific Orientation Relocation
 
-To: `pors@pacificorientation.com`
+Sent: 2026-08-22
+
+To: `porsspoc@porsthailand.com`
 
 Subject: Bangkok family and executive housing referral partnership
 
@@ -64,6 +68,8 @@ Lilith Homes
 ```
 
 ## 3. Santa Fe Relocation Thailand
+
+Status: not sent
 
 To: `thailand@santaferelo.com`
 
@@ -89,6 +95,8 @@ Lilith Homes
 
 ## 4. Thai Relo Services
 
+Sent: 2026-08-22
+
 To: `enquiry@thaireloservices.com`
 
 Subject: Premium Bangkok housing referral option for destination services
@@ -112,6 +120,8 @@ Lilith Homes
 ```
 
 ## 5. United Relocations Thailand
+
+Status: contact form not submitted
 
 Submit through: `https://www.unitedreloth.com/contacts/`
 
