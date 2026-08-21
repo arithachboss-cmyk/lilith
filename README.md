@@ -41,6 +41,7 @@ pnpm lint
 - `OUTREACH_PACK.md`: Thai/English outreach and follow-up copy
 - `PARTNER_PIPELINE.csv`: prioritized company-level partner contacts and tracked links
 - `PARTNER_OUTREACH.md`: permission-aware partner launch sequence and message templates
+- `OUTBOUND_DRAFTS.md`: personalized Priority A drafts ready for sender details and approval
 - `ACQUISITION_PLAYBOOK.md`: qualification, funnel and response standard
 
 The system is ready to receive qualified briefs. A customer is counted only after real contact details, target budget and a 12-month lease are confirmed.
