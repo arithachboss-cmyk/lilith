@@ -22,6 +22,7 @@ export default async function Dashboard() {
             LH
           </a>
           <a href="#pipeline">Pipeline</a>
+          <a href="#import">Import API</a>
           <a href="#campaign">Campaign</a>
           <a href="#inventory">Briefs</a>
           <a href="#scripts">Scripts</a>
@@ -34,11 +35,11 @@ export default async function Dashboard() {
           <header className="topbar">
             <div>
               <p className="eyebrow">Lilith Homes · Bangkok premium leasing</p>
-              <h1>12-month rental pipeline</h1>
+              <h1>International property pipeline</h1>
             </div>
             <div className="status-strip" aria-label="System status">
               <span className="status-dot" />
-              <span>Accepting ฿30K–฿250K briefs</span>
+              <span>Accepting Thai · Chinese · English · Russian briefs</span>
             </div>
           </header>
 
@@ -56,10 +57,10 @@ export default async function Dashboard() {
             <article className="search-panel">
               <div className="search-copy">
                 <p className="label">Demand command</p>
-                <h2>หาผู้เช่าที่พร้อมเซ็นสัญญา 1 ปี</h2>
+                <h2>จัดการ lead อสังหา 4 ภาษาให้พร้อมตามต่อ</h2>
                 <p>
-                  คัดลีดตามงบ ทำเล จำนวนห้องนอน วันเข้าอยู่ และเงื่อนไขสำคัญ
-                  แล้วจัดลำดับเพื่อปิด Private Shortlist และนัดชมให้เร็วที่สุด
+                  รวม lead เช่า ซื้อ ขาย และ referral จากเอเจนต์จีนเข้าคิวเดียว
+                  พร้อมงบ ทำเล ภาษา WeChat และ action ถัดไปสำหรับทีมปิดดีล
                 </p>
               </div>
 
@@ -106,8 +107,8 @@ export default async function Dashboard() {
               <span>first response target</span>
             </div>
             <div>
-              <strong>12 mo.</strong>
-              <span>required lease term</span>
+              <strong>4</strong>
+              <span>client languages</span>
             </div>
             <div>
               <strong id="hotLeadCount">0</strong>
@@ -128,6 +129,25 @@ export default async function Dashboard() {
               </div>
               <form className="lead-form" id="leadForm">
                 <label>
+                  ประเภทโจทย์
+                  <select id="leadDealIntent" defaultValue="Rent 12-month">
+                    <option>Rent 12-month</option>
+                    <option>Buy condo</option>
+                    <option>Sell/List property</option>
+                    <option>China agent referral</option>
+                  </select>
+                </label>
+                <label>
+                  ประเทศลูกค้า
+                  <select id="leadCustomerCountry" defaultValue="China">
+                    <option>Thailand</option>
+                    <option>China</option>
+                    <option>United States</option>
+                    <option>Russia</option>
+                    <option>Other</option>
+                  </select>
+                </label>
+                <label>
                   ชื่อลูกค้า
                   <input id="leadName" placeholder="เช่น Ms. Maya" required />
                 </label>
@@ -138,6 +158,8 @@ export default async function Dashboard() {
                 <label>
                   ช่องทาง
                   <select id="leadSource">
+                    <option>China broker / WeChat</option>
+                    <option>Little Red Book / Xiaohongshu</option>
                     <option>Expat community</option>
                     <option>Corporate HR / relocation</option>
                     <option>Facebook group</option>
@@ -147,7 +169,15 @@ export default async function Dashboard() {
                   </select>
                 </label>
                 <label>
-                  งบสูงสุดต่อเดือน
+                  ประเภทงบ
+                  <select id="leadBudgetPeriod" defaultValue="Monthly rent">
+                    <option>Monthly rent</option>
+                    <option>Purchase budget</option>
+                    <option>Listing value</option>
+                  </select>
+                </label>
+                <label>
+                  งบ THB
                   <input
                     id="leadBudget"
                     type="number"
@@ -159,6 +189,10 @@ export default async function Dashboard() {
                   />
                 </label>
                 <label>
+                  WeChat / 微信
+                  <input id="leadWechat" placeholder="WeChat ID ถ้ามี" />
+                </label>
+                <label>
                   ทำเลที่ต้องการ
                   <input id="leadArea" defaultValue="Phrom Phong" required />
                 </label>
@@ -167,14 +201,17 @@ export default async function Dashboard() {
                   <select id="leadPropertyType" defaultValue="Condo">
                     <option>Condo</option>
                     <option>House</option>
+                    <option>Villa</option>
                     <option>Apartment</option>
                     <option>Penthouse</option>
                     <option>Townhome</option>
+                    <option>Land</option>
                   </select>
                 </label>
                 <label>
                   ห้องนอน
                   <select id="leadBedrooms" defaultValue="2">
+                    <option value="0">Studio / N/A</option>
                     <option value="1">1 bedroom</option>
                     <option value="2">2 bedrooms</option>
                     <option value="3">3 bedrooms</option>
@@ -201,7 +238,10 @@ export default async function Dashboard() {
                   ภาษา
                   <select id="leadLanguage">
                     <option>ไทย</option>
+                    <option>中文</option>
                     <option>English</option>
+                    <option>Русский</option>
+                    <option>中文 / English</option>
                     <option>ไทย / English</option>
                   </select>
                 </label>
@@ -224,6 +264,14 @@ export default async function Dashboard() {
                     <option>Offer submitted</option>
                     <option>Deposit pending</option>
                   </select>
+                </label>
+                <label>
+                  บริษัทพาร์ตเนอร์
+                  <input id="leadPartnerAgency" placeholder="เช่น Shanghai relocation desk" />
+                </label>
+                <label>
+                  ติดต่อพาร์ตเนอร์
+                  <input id="leadPartnerContact" placeholder="WeChat / email / phone" />
                 </label>
                 <label className="form-wide">
                   เงื่อนไขสำคัญ
@@ -254,6 +302,52 @@ export default async function Dashboard() {
             </article>
           </section>
 
+          <section className="import-desk" id="import" aria-label="Lead import API">
+            <article className="results-panel">
+              <div className="panel-heading">
+                <div>
+                  <p className="label">Excel + API intake</p>
+                  <h3>นำเข้า lead จากจีนหรือระบบภายนอก</h3>
+                </div>
+                <div className="button-row">
+                  <button className="secondary-action" id="loadImportSample" type="button">
+                    Sample
+                  </button>
+                  <button className="primary-action compact-action" id="sendImport" type="button">
+                    Import leads
+                  </button>
+                </div>
+              </div>
+              <div className="import-grid">
+                <label>
+                  CSV จาก Excel
+                  <input id="importCsvFile" type="file" accept=".csv,text/csv" />
+                </label>
+                <label>
+                  Import token status
+                  <input id="importTokenHint" value="Use dashboard sign-in or x-lilith-import-token" readOnly />
+                </label>
+                <label className="form-wide">
+                  JSON หรือ CSV payload
+                  <textarea
+                    id="importPayload"
+                    rows={7}
+                    defaultValue={`name,contact,wechat,budget,budgetPeriod,dealIntent,customerCountry,preferredLanguage,area,propertyType,bedrooms,moveDate,requirements,partnerAgency,partnerAgent,partnerContact,externalId
+Ms. Li,li@example.cn,li-bkk-home,120000,Monthly rent,Rent 12-month,China,中文 / English,Phrom Phong,Condo,2,2026-10-01,Near BTS and invoice support,Shanghai Relocation Desk,Agent Chen,chen-wechat,CN-001`}
+                  />
+                </label>
+              </div>
+              <div className="api-notes">
+                <span>Endpoint: <code>/api/import</code></span>
+                <span>Formats: JSON, CSV, multipart file</span>
+                <span>Required: name, contact/WeChat, budget, area, property type, language</span>
+              </div>
+              <p className="public-status" id="importStatus" role="status" aria-live="polite">
+                พร้อมรับ CSV จาก Excel หรือ JSON จากระบบ partner หลังตรวจสิทธิ์ import
+              </p>
+            </article>
+          </section>
+
           <section className="acquisition-launch" id="campaign" aria-label="Campaign builder">
             <article className="results-panel">
               <div className="panel-heading">
@@ -269,6 +363,9 @@ export default async function Dashboard() {
                 <label>
                   ช่องทางหลัก
                   <select id="campaignChannel">
+                    <option>China broker / WeChat push</option>
+                    <option>Little Red Book / Xiaohongshu post</option>
+                    <option>Russian relocation partner</option>
                     <option>Expat community post</option>
                     <option>Corporate HR / relocation outreach</option>
                     <option>Facebook premium rental group</option>
@@ -279,8 +376,10 @@ export default async function Dashboard() {
                 <label>
                   กลุ่มลูกค้า
                   <select id="renterPersona">
+                    <option>Chinese buyer or tenant referred by an overseas agent</option>
                     <option>expat executive relocating to Bangkok</option>
                     <option>family near an international school</option>
+                    <option>Russian-speaking family relocating to Thailand</option>
                     <option>diplomatic or international organization staff</option>
                     <option>Thai executive seeking a premium residence</option>
                   </select>

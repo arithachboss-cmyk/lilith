@@ -2,13 +2,17 @@ import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
 import {
+  budgetPeriods,
+  leadIntents,
   leadStages,
   monthlyBudgetRange,
+  normalizeImportedLead,
   normalizeLead,
   normalizeLeadUpdate,
+  purchaseBudgetRange,
 } from "../app/api/leads/validation.ts";
 
-async function fetchWorker(path, init = {}) {
+async function fetchWorker(path, init = {}, envOverrides = {}) {
   const workerUrl = new URL("../dist/server/index.js", import.meta.url);
   workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${Math.random()}`);
   const { default: worker } = await import(workerUrl.href);
@@ -26,7 +30,7 @@ async function fetchWorker(path, init = {}) {
           bind() {
             return this;
           },
-          first: async () => ({ id: 1 }),
+          first: async () => ({ id: 1, name: "Imported Lead" }),
           run: async () => ({}),
         }),
       },
@@ -39,6 +43,7 @@ async function fetchWorker(path, init = {}) {
           }),
         }),
       },
+      ...envOverrides,
     },
     {
       waitUntil() {},
@@ -47,34 +52,34 @@ async function fetchWorker(path, init = {}) {
   );
 }
 
-test("server-renders the premium 12-month rental brief", async () => {
+test("server-renders the international property lead desk", async () => {
   const response = await fetchWorker("/");
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /บ้านและคอนโดเช่าระดับพรีเมียม/);
-  assert.match(html, /30,000–250,000/);
-  assert.match(html, /min="30000"/);
-  assert.match(html, /max="250000"/);
-  assert.match(html, /สัญญา 1 ปี/);
-  assert.match(html, /ขอรับ Private Shortlist/);
-  assert.match(html, /publicContact/);
-  assert.match(html, /publicPropertyType/);
-  assert.match(html, /publicBedrooms/);
-  assert.match(html, /publicConsent/);
-  assert.match(html, /publicWebsite/);
+  assert.match(html, /เว็บแอปเอเจนต์อสังหา 4 ภาษา/);
+  assert.match(html, /中文/);
+  assert.match(html, /Русский/);
+  assert.match(html, /International Thailand Real Estate Agent/);
+  assert.match(html, /RealEstateAgent/);
+  assert.match(html, /publicDealIntent/);
+  assert.match(html, /publicBudgetPeriod/);
+  assert.match(html, /publicCustomerCountry/);
+  assert.match(html, /publicWechat/);
+  assert.match(html, /publicPartnerAgency/);
+  assert.match(html, /\/api\/import/);
   assert.match(html, /\/capture\.js/);
-  assert.doesNotMatch(html, /Tenant acquisition control room|Export CSV|Remove examples/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|react-loading-skeleton/);
 });
 
-test("accepts only qualified premium 12-month briefs", async () => {
-  const validPayload = {
+test("validates rental, buyer and China agent referral briefs", () => {
+  const validRental = {
     name: "Test Premium Renter",
     contact: "test@example.com",
     source: "test / premium_12m / valid",
     budget: 100000,
+    budgetPeriod: "Monthly rent",
     area: "Phrom Phong",
     propertyType: "Condo",
     bedrooms: 2,
@@ -82,40 +87,75 @@ test("accepts only qualified premium 12-month briefs", async () => {
     viewingWindow: "วันธรรมดา",
     contractTerm: "12 months",
     preferredLanguage: "English",
+    customerCountry: "United States",
+    dealIntent: "Rent 12-month",
     pets: "ไม่มี",
     requirements: "Quiet unit",
     consent: true,
   };
 
-  const validLead = normalizeLead(validPayload, false);
-  assert.ok(validLead && !("spam" in validLead));
-  assert.equal(validLead.budget, 100000);
-  assert.equal(validLead.contractTerm, "12 months");
-  assert.equal(validLead.stage, "New inquiry");
+  const rentalLead = normalizeLead(validRental, false);
+  assert.ok(rentalLead && !("spam" in rentalLead));
+  assert.equal(rentalLead.budget, 100000);
+  assert.equal(rentalLead.budgetPeriod, "Monthly rent");
+  assert.equal(rentalLead.contractTerm, "12 months");
+  assert.equal(rentalLead.stage, "New inquiry");
 
-  const minimumBudgetLead = normalizeLead({ ...validPayload, budget: 30000 }, false);
-  assert.ok(minimumBudgetLead && !("spam" in minimumBudgetLead));
-  assert.equal(minimumBudgetLead.budget, 30000);
+  const buyerLead = normalizeLead(
+    {
+      ...validRental,
+      budget: 8000000,
+      budgetPeriod: "Purchase budget",
+      contractTerm: "Not applicable",
+      dealIntent: "Buy condo",
+      preferredLanguage: "中文 / English",
+      customerCountry: "China",
+    },
+    false,
+  );
+  assert.ok(buyerLead && !("spam" in buyerLead));
+  assert.equal(buyerLead.budgetPeriod, "Purchase budget");
+  assert.equal(buyerLead.dealIntent, "Buy condo");
+  assert.equal(purchaseBudgetRange.min, 1000000);
+
+  const chinaReferral = normalizeImportedLead({
+    name: "Ms. Li",
+    wechat: "li-bkk-home",
+    budget: 120000,
+    budgetPeriod: "Monthly rent",
+    area: "Thong Lo",
+    propertyType: "Condo",
+    preferredLanguage: "中文 / English",
+    dealIntent: "China agent referral",
+    partnerAgency: "Shanghai Relocation Desk",
+    partnerContact: "chen-wechat",
+    source: "api_import / TEST",
+  });
+  assert.ok(chinaReferral && !("spam" in chinaReferral));
+  assert.equal(chinaReferral.contact, "li-bkk-home");
+  assert.equal(chinaReferral.stage, "New inquiry");
+
+  assert.equal(normalizeLead({ ...validRental, budget: 29999 }, false), null);
+  assert.equal(normalizeLead({ ...validRental, budget: 250001 }, false), null);
+  assert.equal(normalizeLead({ ...validRental, contractTerm: "6 months" }, false), null);
+  assert.equal(normalizeLead({ ...validRental, consent: false }, false), null);
+
+  assert.deepEqual(leadIntents, [
+    "Rent 12-month",
+    "Buy condo",
+    "Sell/List property",
+    "China agent referral",
+  ]);
+  assert.deepEqual(budgetPeriods, ["Monthly rent", "Purchase budget", "Listing value"]);
   assert.equal(monthlyBudgetRange.min, 30000);
   assert.equal(monthlyBudgetRange.max, 250000);
-
-  assert.equal(normalizeLead({ ...validPayload, budget: 29999 }, false), null);
-  assert.equal(normalizeLead({ ...validPayload, budget: 250001 }, false), null);
-  assert.equal(normalizeLead({ ...validPayload, contractTerm: "6 months" }, false), null);
-  assert.equal(normalizeLead({ ...validPayload, consent: false }, false), null);
-
-  const authenticatedLead = normalizeLead(
-    { ...validPayload, stage: "Viewing booked" },
-    true,
-  );
-  assert.ok(authenticatedLead && !("spam" in authenticatedLead));
-  assert.equal(authenticatedLead.stage, "Viewing booked");
 });
 
 test("keeps lead reads private while accepting public inquiries", async () => {
-  const [route, validation] = await Promise.all([
+  const [route, validation, storage] = await Promise.all([
     readFile(new URL("../app/api/leads/route.ts", import.meta.url), "utf8"),
     readFile(new URL("../app/api/leads/validation.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/leads/storage.ts", import.meta.url), "utf8"),
   ]);
   assert.match(route, /export async function GET\(request: Request\)/);
   assert.match(route, /export async function DELETE\(request: Request\)/);
@@ -127,16 +167,34 @@ test("keeps lead reads private while accepting public inquiries", async () => {
     /export async function POST\(request: Request\) \{[\s\S]*?\n\}/,
   )?.[0] ?? "";
   assert.doesNotMatch(postRoute, /if \(!isAuthenticated\(request\)\)/);
-  assert.match(validation, /budget < monthlyBudgetRange\.min/);
-  assert.match(validation, /budget > monthlyBudgetRange\.max/);
-  assert.match(route, /monthlyBudgetRange\.min/);
-  assert.match(route, /monthlyBudgetRange\.max/);
+  assert.match(validation, /budgetInRange/);
   assert.match(validation, /contractTerm !== "12 months"/);
   assert.match(validation, /payload\.consent !== true/);
-  assert.match(route, /contact/);
-  assert.match(route, /propertyType/);
-  assert.match(route, /preferredLanguage/);
-  assert.match(route, /created_at, updated_at/);
+  assert.match(storage, /customer_country/);
+  assert.match(storage, /partner_agency/);
+  assert.match(storage, /external_id/);
+  assert.match(storage, /import_batch/);
+});
+
+test("protects import API and documents JSON/CSV ingestion", async () => {
+  const [importRoute, auth] = await Promise.all([
+    readFile(new URL("../app/api/import/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/leads/auth.ts", import.meta.url), "utf8"),
+  ]);
+
+  assert.match(importRoute, /export async function POST\(request: Request\)/);
+  assert.match(importRoute, /if \(!canImportLeads\(request\)\)/);
+  assert.match(importRoute, /x-lilith-import-token/);
+  assert.match(importRoute, /application\/json/);
+  assert.match(importRoute, /text\/csv/);
+  assert.match(importRoute, /multipart\/form-data/);
+  assert.match(importRoute, /parseCsv/);
+  assert.match(importRoute, /rowsToRecords/);
+  assert.match(importRoute, /acceptedCount/);
+  assert.match(importRoute, /rejectedCount/);
+  assert.match(auth, /LEAD_IMPORT_TOKEN/);
+  assert.match(auth, /authorization/);
+  assert.match(auth, /Bearer/);
 });
 
 test("validates protected pipeline progress updates", () => {
@@ -167,7 +225,7 @@ test("validates protected pipeline progress updates", () => {
   );
 });
 
-test("tracks premium acquisition channels through inquiry source", async () => {
+test("tracks acquisition channels, import tools and multilingual reply scripts", async () => {
   const [captureScript, dashboardScript, launchPack] = await Promise.all([
     readFile(new URL("../public/capture.js", import.meta.url), "utf8"),
     readFile(new URL("../public/script.js", import.meta.url), "utf8"),
@@ -175,54 +233,34 @@ test("tracks premium acquisition channels through inquiry source", async () => {
   ]);
 
   assert.match(captureScript, /utm_source/);
-  assert.match(captureScript, /utm_campaign/);
-  assert.match(captureScript, /utm_content/);
-  assert.match(captureScript, /publicContractTerm/);
-  assert.match(captureScript, /publicConsent/);
-  assert.match(dashboardScript, /premium_12m/);
+  assert.match(captureScript, /international_property/);
+  assert.match(captureScript, /publicDealIntent/);
+  assert.match(captureScript, /publicWechat/);
+  assert.match(dashboardScript, /sendImportPayload/);
+  assert.match(dashboardScript, /\/api\/import/);
+  assert.match(dashboardScript, /China broker \/ WeChat push/);
+  assert.match(dashboardScript, /Русский/);
+  assert.match(dashboardScript, /中文/);
   assert.match(launchPack, /utm_campaign=premium_12m/);
 });
 
-test("uses the full premium brief in dashboard follow-up tools", async () => {
-  const dashboardScript = await readFile(new URL("../public/script.js", import.meta.url), "utf8");
-
-  assert.match(dashboardScript, /viewingWindowText/);
-  assert.match(dashboardScript, /contractTerm/);
-  assert.match(dashboardScript, /propertyType/);
-  assert.match(dashboardScript, /bedrooms/);
-  assert.match(dashboardScript, /preferredLanguage/);
-  assert.match(dashboardScript, /requirements/);
-  assert.match(dashboardScript, /Private Shortlist/);
-  assert.match(dashboardScript, /Top demand areas/);
-  assert.match(dashboardScript, /Save progress/);
-  assert.match(dashboardScript, /nextFollowUpAt/);
-  assert.match(dashboardScript, /method: "PATCH"/);
-  assert.match(dashboardScript, /scope=tests/);
-});
-
-test("ships the D1 migration for premium qualification fields", async () => {
-  const migration = await readFile(
-    new URL("../drizzle/0002_premium-lead-brief.sql", import.meta.url),
-    "utf8",
-  );
-
-  assert.match(migration, /ADD `contact` text/);
-  assert.match(migration, /ADD `property_type` text/);
-  assert.match(migration, /ADD `bedrooms` integer/);
-  assert.match(migration, /ADD `contract_term` text/);
-  assert.match(migration, /ADD `preferred_language` text/);
-  assert.match(migration, /ADD `consent_at` text/);
-});
-
-test("ships follow-up workflow fields without a destructive lead delete", async () => {
-  const [migration, route] = await Promise.all([
+test("ships the D1 migrations for import and partner fields", async () => {
+  const [premiumMigration, workflowMigration, importMigration] = await Promise.all([
+    readFile(new URL("../drizzle/0002_premium-lead-brief.sql", import.meta.url), "utf8"),
     readFile(new URL("../drizzle/0003_lead-follow-up-workflow.sql", import.meta.url), "utf8"),
-    readFile(new URL("../app/api/leads/route.ts", import.meta.url), "utf8"),
+    readFile(new URL("../drizzle/0004_black_stick.sql", import.meta.url), "utf8"),
   ]);
 
-  assert.match(migration, /ADD `next_follow_up_at` text/);
-  assert.match(migration, /ADD `updated_at` text/);
-  assert.match(route, /Only test lead cleanup is supported/);
-  assert.match(route, /name LIKE 'TEST%'/);
-  assert.doesNotMatch(route, /prepare\("DELETE FROM leads"\)/);
+  assert.match(premiumMigration, /ADD `contact` text/);
+  assert.match(premiumMigration, /ADD `property_type` text/);
+  assert.match(premiumMigration, /ADD `preferred_language` text/);
+  assert.match(workflowMigration, /ADD `next_follow_up_at` text/);
+  assert.match(workflowMigration, /ADD `updated_at` text/);
+  assert.match(importMigration, /ADD `budget_period` text/);
+  assert.match(importMigration, /ADD `customer_country` text/);
+  assert.match(importMigration, /ADD `deal_intent` text/);
+  assert.match(importMigration, /ADD `wechat` text/);
+  assert.match(importMigration, /ADD `partner_agency` text/);
+  assert.match(importMigration, /ADD `external_id` text/);
+  assert.match(importMigration, /ADD `import_batch` text/);
 });

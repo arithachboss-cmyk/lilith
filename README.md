@@ -1,25 +1,27 @@
-# Lilith Homes Premium Rental Pipeline
+# Lilith Homes International Real Estate Pipeline
 
-ระบบรับและจัดการลูกค้าเช่ากรุงเทพสำหรับงบ 30,000-250,000 บาทต่อเดือน และสัญญา 12 เดือน
+ระบบรับและจัดการ lead อสังหาไทยสำหรับลูกค้าไทย จีน อังกฤษ และรัสเซีย รองรับเช่า ซื้อ ขาย/listing และ China agent referral พร้อม public form, dashboard, SEO on-page และ CSV/JSON import API
 
 ## Production
 
 - Public rental brief: `https://lilith-renter-leads.yacht369.chatgpt.site`
 - Private operator dashboard: `https://lilith-renter-leads.yacht369.chatgpt.site/dashboard`
 
-หน้า public รับโจทย์จากผู้เช่าโดยไม่ต้องล็อกอิน ส่วนรายชื่อลูกค้า การ export และเครื่องมือหลังบ้านต้องผ่าน ChatGPT sign-in
+หน้า public รับโจทย์ลูกค้าโดยไม่ต้องล็อกอิน ส่วนรายชื่อลูกค้า การ export การ import และเครื่องมือหลังบ้านต้องผ่าน ChatGPT sign-in หรือ import token
 
 ## Current Scope
 
-- Premium renter brief with contact, budget, area, property type and bedrooms
-- Required 12-month lease confirmation and monthly budget gate
-- Move-in date, viewing window, language, pets and must-have requirements
+- Multilingual public intake: Thai, Chinese, English and Russian
+- Real estate brief types: rent 12-month, buy condo, sell/list property and China agent referral
+- Contact, WeChat, customer country, language, budget period, area, property type and bedrooms
+- Required 12-month lease confirmation for monthly rental leads
 - UTM source/campaign/content tracking
 - D1-backed lead storage with protected read access
-- Priority scoring, protected stage updates, next follow-up scheduling, response scripts and CSV export
-- Campaign copy for expat, corporate relocation, premium Facebook groups, portals and referrals
+- Protected `/api/import` for JSON, CSV and Excel-exported lead files
+- Priority scoring, protected stage updates, next follow-up scheduling, multilingual response scripts and CSV export
+- Campaign copy for China brokers, Xiaohongshu, Russian relocation, expat, corporate relocation, portals and referrals
 - Thai/English social sharing preview
-- Launch plan and outreach pack for qualified premium leads
+- DBD planning, acquisition plan, bug analysis, project report and slide deck deliverables
 
 ## Local Development
 
@@ -37,6 +39,12 @@ pnpm lint
 
 ## Operating Documents
 
+- `docs/IMPORT_API.md`: JSON/CSV import contract and Excel header template
+- `docs/DBD_BUSINESS_STRUCTURE.md`: business structure draft for DBD planning
+- `docs/ONLINE_ACQUISITION_PLAN.md`: online acquisition strategy and weekly plan
+- `docs/BUG_ANALYSIS.md`: expected bugs and verification notes
+- `docs/PROJECT_REPORT.md`: project implementation report
+- `deliverables/LILITH_HOMES_DELIVERABLES.md`: final deliverables index
 - `LAUNCH_TODAY.md`: tracked links and launch sequence
 - `OUTREACH_PACK.md`: Thai/English outreach and follow-up copy
 - `PARTNER_PIPELINE.csv`: prioritized company-level partner contacts and tracked links
@@ -44,4 +52,4 @@ pnpm lint
 - `OUTBOUND_DRAFTS.md`: personalized Priority A drafts ready for sender details and approval
 - `ACQUISITION_PLAYBOOK.md`: qualification, funnel and response standard
 
-The system is ready to receive qualified briefs. A customer is counted only after real contact details, target budget and a 12-month lease are confirmed.
+The system is ready to receive qualified briefs. A lead is counted only after contact/WeChat, target budget, area, property type, language and intent are confirmed.

@@ -1,39 +1,43 @@
 const targetBriefs = [
   {
-    title: "Executive residence",
+    title: "Executive rental residence",
     area: "Phrom Phong / Thong Lo / Ekkamai",
     price: 85000,
+    budgetPeriod: "Monthly rent",
     details: "2 bedrooms · 70-110 sqm · work-from-home space · 12-month lease",
     image:
       "https://images.unsplash.com/photo-1600566753190-17f0baa2a6c3?auto=format&fit=crop&w=900&q=82",
     meta: ["BTS access", "Move-in ready", "Bilingual contract support"],
   },
   {
+    title: "China buyer condo brief",
+    area: "Sukhumvit / Rama 9 / Riverside",
+    price: 8000000,
+    budgetPeriod: "Purchase budget",
+    details: "Foreign quota · rental yield story · bank transfer document support",
+    image:
+      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=82",
+    meta: ["Chinese copy", "WeChat handoff", "Foreign quota check"],
+  },
+  {
     title: "Family home",
     area: "Sathorn / Rama 3 / school corridors",
     price: 150000,
+    budgetPeriod: "Monthly rent",
     details: "3-4 bedrooms · family layout · parking · school-run friendly",
     image:
       "https://images.unsplash.com/photo-1600047509807-ba8f99d2cdde?auto=format&fit=crop&w=900&q=82",
     meta: ["International school access", "Pet options", "Maid room"],
   },
   {
-    title: "Prime luxury condo",
-    area: "Langsuan / Wireless / Chidlom",
-    price: 250000,
-    details: "3 bedrooms or penthouse · concierge standard · private viewing",
+    title: "Russian-speaking relocation brief",
+    area: "Pattaya / Phuket / Bangkok Riverside",
+    price: 12000000,
+    budgetPeriod: "Purchase budget",
+    details: "Condo or villa search · family relocation · language-sensitive follow-up",
     image:
-      "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?auto=format&fit=crop&w=900&q=82",
-    meta: ["CBD", "Premium facilities", "Corporate lease ready"],
-  },
-  {
-    title: "Riverside residence",
-    area: "Charoen Nakhon / Riverside / Sathorn",
-    price: 120000,
-    details: "2-3 bedrooms · river or skyline view · generous living area",
-    image:
-      "https://images.unsplash.com/photo-1600566753086-00f18fb6b3ea?auto=format&fit=crop&w=900&q=82",
-    meta: ["Family layout", "Parking", "Coordinated viewing route"],
+      "https://images.unsplash.com/photo-1600607688969-a5bfcd646154?auto=format&fit=crop&w=900&q=82",
+    meta: ["Русский intake", "Lifestyle filters", "Partner referral"],
   },
 ];
 
@@ -57,6 +61,17 @@ const campaignChannel = document.querySelector("#campaignChannel");
 const renterPersona = document.querySelector("#renterPersona");
 const campaignOffer = document.querySelector("#campaignOffer");
 const campaignOutput = document.querySelector("#campaignOutput");
+const leadDealIntent = document.querySelector("#leadDealIntent");
+const leadBudgetPeriod = document.querySelector("#leadBudgetPeriod");
+const leadBudget = document.querySelector("#leadBudget");
+const leadCustomerCountry = document.querySelector("#leadCustomerCountry");
+const leadLanguage = document.querySelector("#leadLanguage");
+const importCsvFile = document.querySelector("#importCsvFile");
+const importPayload = document.querySelector("#importPayload");
+const importStatus = document.querySelector("#importStatus");
+const sendImport = document.querySelector("#sendImport");
+const loadImportSample = document.querySelector("#loadImportSample");
+
 const leadStages = [
   "New inquiry",
   "Qualified",
@@ -68,12 +83,35 @@ const leadStages = [
   "Lost",
 ];
 
+const importSample = `[
+  {
+    "name": "Ms. Li",
+    "contact": "li@example.cn",
+    "wechat": "li-bkk-home",
+    "budget": 120000,
+    "budgetPeriod": "Monthly rent",
+    "dealIntent": "Rent 12-month",
+    "customerCountry": "China",
+    "preferredLanguage": "中文 / English",
+    "area": "Phrom Phong",
+    "propertyType": "Condo",
+    "bedrooms": 2,
+    "moveDate": "2026-10-01",
+    "requirements": "Near BTS, quiet building, invoice support",
+    "partnerAgency": "Shanghai Relocation Desk",
+    "partnerAgent": "Agent Chen",
+    "partnerContact": "chen-wechat",
+    "externalId": "CN-001"
+  }
+]`;
+
 const seedLeads = [
   {
     name: "Ms. Maya",
     contact: "maya@example.com",
     source: "Corporate HR / relocation",
     budget: 120000,
+    budgetPeriod: "Monthly rent",
     area: "Phrom Phong",
     propertyType: "Condo",
     bedrooms: 2,
@@ -81,25 +119,62 @@ const seedLeads = [
     viewingWindow: "วันธรรมดา",
     contractTerm: "12 months",
     preferredLanguage: "English",
+    customerCountry: "United States",
+    dealIntent: "Rent 12-month",
+    wechat: "",
+    partnerAgency: "",
+    partnerAgent: "",
+    partnerContact: "",
     pets: "ไม่มี",
     requirements: "Walkable to BTS, quiet unit, home office",
     stage: "Qualified",
     example: true,
   },
   {
-    name: "คุณภัทร",
-    contact: "@sample-line",
+    name: "Ms. Li",
+    contact: "li@example.cn",
+    source: "China broker / WeChat",
+    budget: 8000000,
+    budgetPeriod: "Purchase budget",
+    area: "Rama 9",
+    propertyType: "Condo",
+    bedrooms: 1,
+    moveDate: "",
+    viewingWindow: "Video viewing first",
+    contractTerm: "Not applicable",
+    preferredLanguage: "中文 / English",
+    customerCountry: "China",
+    dealIntent: "Buy condo",
+    wechat: "li-bkk-home",
+    partnerAgency: "Shanghai Relocation Desk",
+    partnerAgent: "Agent Chen",
+    partnerContact: "chen-wechat",
+    pets: "ไม่มี",
+    requirements: "Foreign quota, easy rental management, close to MRT",
+    stage: "Shortlist sent",
+    example: true,
+  },
+  {
+    name: "Ivan Petrov",
+    contact: "ivan@example.ru",
     source: "Referral partner",
-    budget: 200000,
-    area: "Sathorn",
-    propertyType: "House",
-    bedrooms: 4,
-    moveDate: "2026-10-01",
-    viewingWindow: "เสาร์-อาทิตย์",
-    contractTerm: "12 months",
-    preferredLanguage: "ไทย",
+    budget: 12000000,
+    budgetPeriod: "Purchase budget",
+    area: "Pattaya / Phuket",
+    propertyType: "Villa",
+    bedrooms: 3,
+    moveDate: "2026-11-01",
+    viewingWindow: "Video viewing first",
+    contractTerm: "Not applicable",
+    preferredLanguage: "Русский",
+    customerCountry: "Russia",
+    dealIntent: "Buy condo",
+    wechat: "",
+    partnerAgency: "RU relocation partner",
+    partnerAgent: "Anna",
+    partnerContact: "anna@example.ru",
     pets: "มีสุนัข",
-    requirements: "ใกล้โรงเรียนนานาชาติ มีสนามและที่จอดรถ 2 คัน",
+    requirements: "Family relocation, school access, sunny unit",
     stage: "Viewing booked",
     example: true,
   },
@@ -120,14 +195,66 @@ function saveLeads() {
   localStorage.setItem("lilithPremiumLeads", JSON.stringify(leads));
 }
 
+function isMonthlyLead(lead) {
+  return (lead.budgetPeriod || "Monthly rent") === "Monthly rent";
+}
+
 function inTargetRange(lead) {
   const budget = Number(lead.budget);
+  if ((lead.budgetPeriod || "Monthly rent") === "Purchase budget") {
+    return budget >= 1000000 && budget <= 250000000;
+  }
+  if (lead.budgetPeriod === "Listing value") {
+    return budget >= 1000000 && budget <= 500000000;
+  }
   return budget >= 30000 && budget <= 250000;
 }
 
 function targetLeads() {
   return leads.filter(inTargetRange);
 }
+
+function budgetLabel(lead) {
+  const value = `฿${formatter.format(Number(lead.budget || 0))}`;
+  if (lead.budgetPeriod === "Purchase budget") return `${value} purchase`;
+  if (lead.budgetPeriod === "Listing value") return `${value} listing`;
+  return `${value}/month`;
+}
+
+function syncDashboardBudgetMode() {
+  const intent = leadDealIntent.value;
+  if (intent === "Buy condo") {
+    leadBudgetPeriod.value = "Purchase budget";
+    leadBudget.min = "1000000";
+    leadBudget.max = "250000000";
+    leadBudget.step = "100000";
+    if (Number(leadBudget.value) < 1000000) leadBudget.value = "8000000";
+    return;
+  }
+  if (intent === "Sell/List property") {
+    leadBudgetPeriod.value = "Listing value";
+    leadBudget.min = "1000000";
+    leadBudget.max = "500000000";
+    leadBudget.step = "100000";
+    if (Number(leadBudget.value) < 1000000) leadBudget.value = "12000000";
+    return;
+  }
+  leadBudgetPeriod.value = "Monthly rent";
+  leadBudget.min = "30000";
+  leadBudget.max = "250000";
+  leadBudget.step = "5000";
+  if (Number(leadBudget.value) < 30000 || Number(leadBudget.value) > 250000) {
+    leadBudget.value = "100000";
+  }
+}
+
+leadDealIntent.addEventListener("change", () => {
+  if (leadDealIntent.value === "China agent referral") {
+    leadCustomerCountry.value = "China";
+    leadLanguage.value = "中文 / English";
+  }
+  syncDashboardBudgetMode();
+});
 
 async function loadServerLeads() {
   try {
@@ -174,10 +301,19 @@ function urgencyScore(lead) {
     Won: 0,
     Lost: -20,
   };
-  const budgetScore = Math.min(Math.round(Number(lead.budget) / 10000), 25);
+  const budgetScore = isMonthlyLead(lead)
+    ? Math.min(Math.round(Number(lead.budget) / 10000), 25)
+    : Math.min(Math.round(Number(lead.budget) / 1000000), 25);
   const completenessScore =
-    [lead.contact, lead.propertyType, lead.bedrooms, lead.moveDate, lead.viewingWindow].filter(Boolean)
-      .length * 3;
+    [
+      lead.contact,
+      lead.propertyType,
+      lead.budgetPeriod,
+      lead.dealIntent,
+      lead.customerCountry,
+      lead.preferredLanguage,
+      lead.wechat || lead.partnerContact,
+    ].filter(Boolean).length * 3;
   const daysUntilMove = lead.moveDate
     ? Math.ceil((new Date(lead.moveDate) - new Date()) / 86400000)
     : 30;
@@ -193,14 +329,17 @@ function viewingWindowText(lead) {
 
 function nextAction(lead) {
   const viewingCue = lead.viewingWindow ? ` (${lead.viewingWindow})` : "";
-  if (lead.stage === "Won") return "ยืนยันสัญญา วันเข้าอยู่ และเอกสารรับมอบ";
+  if (lead.stage === "Won") return "ยืนยันเอกสาร ปิดรายการ และบันทึก partner/referral source";
   if (lead.stage === "Lost") return "บันทึกเหตุผลที่ไม่ปิดดีล แล้วหยุด follow-up";
   if (lead.stage === "Deposit pending") return "ส่งยอดจอง เอกสาร และกำหนดเวลามัดจำ";
-  if (lead.stage === "Offer submitted") return "ตามผลข้อเสนอและเตรียมเอกสารสัญญา 12 เดือน";
+  if (lead.stage === "Offer submitted") return "ตามผลข้อเสนอและเตรียมเอกสารสัญญาหรือโอนกรรมสิทธิ์";
   if (lead.stage === "Viewing booked") return `ยืนยันนัด${viewingCue} ส่ง route รูป และค่าแรกเข้า`;
   if (lead.stage === "Shortlist sent") return `ถาม feedback แล้วปิดเวลานัดชม${viewingCue}`;
+  if (lead.dealIntent === "Buy condo") return "ยืนยัน foreign quota, payment route, purpose และ timeline ก่อนส่ง shortlist";
+  if (lead.dealIntent === "Sell/List property") return "ตรวจเอกสารเจ้าของ รูปทรัพย์ ราคา และขอบเขต listing agreement";
+  if (lead.dealIntent === "China agent referral") return "ยืนยันสิทธิ์ส่งข้อมูลลูกค้า, WeChat, fee split และ brief ภาษาจีน";
   if (lead.stage === "Qualified") return "ส่ง Private Shortlist 3-5 ตัวเลือกที่ต่างกันชัดเจน";
-  return "โทรหรือ LINE ภายใน 15 นาทีเพื่อยืนยันโจทย์และสัญญา 1 ปี";
+  return "โทรหรือ LINE ภายใน 15 นาทีเพื่อยืนยันโจทย์ งบ ภาษา และ action ถัดไป";
 }
 
 function stageOptions(selectedStage) {
@@ -249,6 +388,7 @@ function renderAcquisitionSummary(ranked) {
 
   const sourceEntries = topEntries(countBy(ranked, (lead) => primarySource(lead.source)));
   const areaEntries = topEntries(countBy(ranked, (lead) => lead.area || "Unknown"));
+  const countryEntries = topEntries(countBy(ranked, (lead) => lead.customerCountry || "Unknown"));
   const topSource = sourceEntries[0]?.[0] || "ช่องทางแรก";
   const topArea = areaEntries[0]?.[0] || "ทำเลเป้าหมาย";
 
@@ -261,7 +401,11 @@ function renderAcquisitionSummary(ranked) {
       <strong>Top demand areas</strong>
       <div class="summary-pills">${summaryPills(areaEntries)}</div>
     </div>
-    <p>Next push: ยิงซ้ำ ${escapeHtml(topSource)} ด้วยข้อเสนอสำหรับ ${escapeHtml(topArea)} และสัญญา 12 เดือน</p>
+    <div>
+      <strong>Top countries</strong>
+      <div class="summary-pills">${summaryPills(countryEntries)}</div>
+    </div>
+    <p>Next push: ยิงซ้ำ ${escapeHtml(topSource)} ด้วยข้อเสนอสำหรับ ${escapeHtml(topArea)} และ follow-up ภาษาที่ลูกค้าตอบกลับได้</p>
   `;
 }
 
@@ -275,17 +419,26 @@ function downloadCsv() {
   const headers = [
     "name",
     "contact",
+    "wechat",
     "source",
+    "customerCountry",
+    "preferredLanguage",
+    "dealIntent",
     "budget",
+    "budgetPeriod",
     "area",
     "propertyType",
     "bedrooms",
     "moveDate",
     "viewingWindow",
     "contractTerm",
-    "preferredLanguage",
     "pets",
     "requirements",
+    "partnerAgency",
+    "partnerAgent",
+    "partnerContact",
+    "externalId",
+    "importBatch",
     "stage",
     "nextFollowUpAt",
     "updatedAt",
@@ -297,17 +450,26 @@ function downloadCsv() {
     [
       lead.name,
       lead.contact,
+      lead.wechat,
       lead.source,
+      lead.customerCountry,
+      lead.preferredLanguage,
+      lead.dealIntent,
       lead.budget,
+      lead.budgetPeriod,
       lead.area,
       lead.propertyType,
       lead.bedrooms,
       lead.moveDate,
       lead.viewingWindow,
       lead.contractTerm,
-      lead.preferredLanguage,
       lead.pets,
       lead.requirements,
+      lead.partnerAgency,
+      lead.partnerAgent,
+      lead.partnerContact,
+      lead.externalId,
+      lead.importBatch,
       lead.stage,
       lead.nextFollowUpAt,
       lead.updatedAt,
@@ -323,7 +485,7 @@ function downloadCsv() {
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = `lilith-premium-leads-${new Date().toISOString().slice(0, 10)}.csv`;
+  link.download = `lilith-property-leads-${new Date().toISOString().slice(0, 10)}.csv`;
   link.click();
   URL.revokeObjectURL(url);
 }
@@ -339,8 +501,8 @@ function renderLeads() {
   if (!ranked.length) {
     leadTable.innerHTML = `
       <div class="empty-state">
-        <strong>ยังไม่มีลูกค้างบ ฿30K–฿250K</strong>
-        <span>เปิด public form หรือสร้าง campaign ด้านล่าง แล้วตอบ brief แรกภายใน 15 นาที</span>
+        <strong>ยังไม่มี lead อสังหาที่พร้อมตามต่อ</strong>
+        <span>เปิด public form, import CSV จาก Excel หรือสร้าง campaign แล้วตอบ brief แรกภายใน 15 นาที</span>
       </div>
     `;
     renderAcquisitionSummary([]);
@@ -353,9 +515,15 @@ function renderLeads() {
         <article class="lead-row${lead.example ? " example-lead" : ""}">
           <div>
             <strong>${escapeHtml(lead.name)}${lead.example ? " · EXAMPLE" : ""}</strong>
-            <span>${escapeHtml(lead.contact || "No contact")} · ${escapeHtml(lead.source)}</span>
-            <span>${escapeHtml(lead.area)} · ${escapeHtml(lead.propertyType || "Property")} · ${escapeHtml(lead.bedrooms || "?")} bed · ฿${formatter.format(Number(lead.budget))}</span>
+            <span>${escapeHtml(lead.contact || "No contact")} ${lead.wechat ? `· WeChat ${escapeHtml(lead.wechat)}` : ""}</span>
+            <span>${escapeHtml(lead.customerCountry || "Unknown country")} · ${escapeHtml(lead.preferredLanguage || "Language not set")} · ${escapeHtml(lead.dealIntent || "Brief")}</span>
+            <span>${escapeHtml(lead.area)} · ${escapeHtml(lead.propertyType || "Property")} · ${escapeHtml(lead.bedrooms ?? "?")} bed · ${escapeHtml(budgetLabel(lead))}</span>
             <span>${escapeHtml(viewingWindowText(lead))} · ${escapeHtml(lead.contractTerm || "Contract unconfirmed")} · ${escapeHtml(lead.pets || "Pets not stated")}</span>
+            ${
+              lead.partnerAgency || lead.partnerAgent || lead.partnerContact
+                ? `<span>Partner: ${escapeHtml([lead.partnerAgency, lead.partnerAgent, lead.partnerContact].filter(Boolean).join(" · "))}</span>`
+                : ""
+            }
           </div>
           <div>
             <span class="stage-pill">${escapeHtml(lead.stage)}</span>
@@ -398,7 +566,10 @@ function renderListings() {
     .map((term) => term.trim())
     .filter(Boolean);
 
-  const affordable = targetBriefs.filter((brief) => brief.price <= budget);
+  const affordable = targetBriefs.filter((brief) => {
+    if (brief.budgetPeriod === "Monthly rent") return brief.price <= budget;
+    return brief.price <= Math.max(budget, 10000000);
+  });
   const areaMatches = affordable.filter((brief) => {
     const searchable = `${brief.title} ${brief.area}`.toLowerCase();
     return areaTerms.some((term) => searchable.includes(term));
@@ -419,7 +590,7 @@ function renderListings() {
                 <h4>${escapeHtml(brief.title)}</h4>
                 <p>${escapeHtml(brief.area)}</p>
               </div>
-              <div class="price">to ฿${formatter.format(brief.price)}</div>
+              <div class="price">${brief.budgetPeriod === "Monthly rent" ? "to " : ""}฿${formatter.format(brief.price)}</div>
             </div>
             <p>${escapeHtml(brief.details)}</p>
             <div class="listing-meta">
@@ -442,20 +613,50 @@ function campaignTemplate() {
   const offer = campaignOffer.value || "private shortlist and coordinated viewing route";
   const leadTarget = document.querySelector("#leadGoal").value;
   const channelConfig = {
+    "China broker / WeChat push": {
+      source: "china_broker_wechat",
+      content: "partner_referral_cn",
+      copy: `Lilith Homes 泰国房产团队可接收 ${persona} 的租赁、购买和转介需求。重点区域：${anchors}。请通过表单提交客户预算、微信、语言和看房时间，我们会准备 ${offer}:`,
+      actions: [
+        "Ask the partner to confirm client consent before sharing personal data",
+        "Collect WeChat, country, budget period, target area and purchase or rental intent",
+        "Reply with Chinese-friendly shortlist notes and one English/Thai operations summary",
+      ],
+    },
+    "Little Red Book / Xiaohongshu post": {
+      source: "xiaohongshu",
+      content: "thai_property_cn",
+      copy: `想在泰国找房吗？Lilith Homes 支持中文/英文沟通，覆盖 ${anchors}，可处理长租、买房和中介转介。提交需求后我们会准备 ${offer}:`,
+      actions: [
+        "Use real project photos and avoid exaggerated ROI language",
+        "Lead with area, budget, foreign quota or lease term and contact method",
+        "Move serious inquiries to the form so consent, source and follow-up are recorded",
+      ],
+    },
+    "Russian relocation partner": {
+      source: "russian_relocation",
+      content: "ru_family_property",
+      copy: `Lilith Homes помогает русскоязычным клиентам подобрать недвижимость в Таиланде: ${anchors}. Отправьте запрос, бюджет и сроки, чтобы получить ${offer}:`,
+      actions: [
+        "Confirm city, family size, school needs, payment readiness and viewing format",
+        "Keep claims conservative and route legal questions to a qualified advisor",
+        "Follow up in Russian first, then maintain an English operation note for the team",
+      ],
+    },
     "Expat community post": {
       source: "expat_community",
       content: "executive_long_stay",
-      copy: `Relocating to Bangkok? Lilith Homes curates condos and houses in ${anchors} for ${persona}. Monthly budget ฿30,000-฿${budget}, 12-month lease. Share your brief to receive a ${offer}.`,
+      copy: `Relocating to Thailand? Lilith Homes curates rentals and purchase briefs in ${anchors} for ${persona}. Share your brief to receive a ${offer}.`,
       actions: [
         "Post in one relevant expat or neighborhood community with a clear area and budget",
-        "Answer in English and confirm employer, move date, bedrooms and lease term",
+        "Answer in English and confirm country, move date, bedrooms and lease or purchase intent",
         "Send 3-5 meaningfully different options before asking for a viewing slot",
       ],
     },
     "Corporate HR / relocation outreach": {
       source: "corporate_relocation",
       content: "hr_partner",
-      copy: `Lilith Homes supports Bangkok relocation briefs for ${persona}. We coordinate 12-month residences in ${anchors} from ฿30,000 to ฿${budget} per month, with curated comparisons, viewing routes and contract support. Submit the employee brief here:`,
+      copy: `Lilith Homes supports Thailand relocation briefs for ${persona}. We coordinate residences in ${anchors} with curated comparisons, viewing routes and contract support. Submit the employee brief here:`,
       actions: [
         "Send to HR, mobility and relocation contacts with one concrete service promise",
         "Ask for policy budget, family size, office or school anchor and target move date",
@@ -475,17 +676,17 @@ function campaignTemplate() {
     "Property portal refresh": {
       source: "property_portal",
       content: "premium_listing",
-      copy: `Premium Bangkok residence for a 12-month lease in ${anchors}. Suitable for ${persona}, with a monthly budget up to ฿${budget}. Request a private comparison and coordinated viewing route:`,
+      copy: `Premium Thailand residence in ${anchors}. Suitable for ${persona}, with rental and purchase briefs routed to one multilingual desk. Request a private comparison here:`,
       actions: [
         "Refresh only verified available inventory with current price and minimum term",
-        "Lead with project, bedrooms, usable area, exact rent and nearest anchor",
+        "Lead with project, bedrooms, usable area, exact rent or asking price and nearest anchor",
         "Route every inquiry into the same qualification form before building a shortlist",
       ],
     },
     "Referral partner push": {
       source: "referral_partner",
       content: "premium_tenant_referral",
-      copy: `มีลูกค้ามองหาบ้านหรือคอนโดกรุงเทพ งบ ฿30,000–฿${budget}/เดือน สัญญา 1 ปี โซน ${anchors} ฝาก brief ให้ Lilith ช่วยคัด ${offer} และประสานนัดชมได้ที่:`,
+      copy: `มีลูกค้ามองหาอสังหาไทย โซน ${anchors} ฝาก brief ให้ Lilith ช่วยคัด ${offer} และประสานนัดชมได้ที่:`,
       actions: [
         "ส่งให้ agent, owner representative และ relocation partner ที่เคยร่วมงาน",
         "ตกลงขอบเขตการแบ่งงานหรือค่าตอบแทนก่อนส่งข้อมูลลูกค้า",
@@ -494,7 +695,7 @@ function campaignTemplate() {
     },
   };
   const config = channelConfig[channel];
-  const link = `${window.location.origin}/?utm_source=${config.source}&utm_campaign=premium_12m&utm_content=${config.content}`;
+  const link = `${window.location.origin}/?utm_source=${config.source}&utm_campaign=international_property&utm_content=${config.content}`;
 
   return {
     post: `${config.copy}\n${link}`,
@@ -522,6 +723,49 @@ function renderCampaign() {
   `;
 }
 
+async function sendImportPayload() {
+  sendImport.disabled = true;
+  sendImport.textContent = "Importing...";
+  importStatus.textContent = "กำลังตรวจและนำเข้า lead...";
+
+  try {
+    let body;
+    let headers = { Accept: "application/json" };
+
+    if (importCsvFile.files?.[0]) {
+      body = new FormData();
+      body.append("file", importCsvFile.files[0]);
+    } else {
+      const text = importPayload.value.trim();
+      if (text.startsWith("[") || text.startsWith("{")) {
+        body = text;
+        headers = { ...headers, "Content-Type": "application/json" };
+      } else {
+        body = text;
+        headers = { ...headers, "Content-Type": "text/csv;charset=utf-8" };
+      }
+    }
+
+    const response = await fetch("/api/import", {
+      method: "POST",
+      headers,
+      body,
+    });
+    const payload = await response.json().catch(() => ({}));
+    if (!response.ok) throw new Error(payload.error || "Import failed");
+    await loadServerLeads();
+    importStatus.textContent = `นำเข้าแล้ว ${payload.acceptedCount || 0} รายการ, ไม่ผ่าน ${payload.rejectedCount || 0} รายการ`;
+  } catch (error) {
+    importStatus.textContent =
+      error instanceof Error && error.message.includes("token")
+        ? "ยัง import ไม่ได้: ต้องเปิด dashboard ด้วย sign-in หรือกำหนด LEAD_IMPORT_TOKEN สำหรับ partner"
+        : "นำเข้าไม่สำเร็จ กรุณาตรวจ header/field: name, contact หรือ WeChat, budget, area, propertyType";
+  } finally {
+    sendImport.disabled = false;
+    sendImport.textContent = "Import leads";
+  }
+}
+
 filters.addEventListener("submit", (event) => {
   event.preventDefault();
   renderListings();
@@ -536,10 +780,11 @@ generateLeadPlan.addEventListener("click", () => {
   const viewingReady = qualified.filter((lead) =>
     ["Shortlist sent", "Viewing booked"].includes(lead.stage),
   ).length;
+  const chinaLeads = qualified.filter((lead) => lead.customerCountry === "China").length;
   const campaign = campaignTemplate();
   leadConsole.innerHTML = `
-    <strong>Today's premium lead plan</strong>
-    <span>1) ตอบ new inquiry ${newLeads} รายภายใน 15 นาที 2) ดัน ${viewingReady} รายให้เลือกเวลานัดชม 3) ปล่อย ${escapeHtml(campaign.target)} ด้วยลิงก์ที่ติดตาม source แล้ว 4) ทุกคนต้องยืนยันงบ ฿30K–฿250K และสัญญา 12 เดือนก่อนส่ง shortlist</span>
+    <strong>Today's international lead plan</strong>
+    <span>1) ตอบ new inquiry ${newLeads} รายภายใน 15 นาที 2) ดัน ${viewingReady} รายให้เลือกเวลานัดชม 3) เช็ก China/WeChat lead ${chinaLeads} รายเรื่องสิทธิ์ส่งข้อมูล 4) ปล่อย ${escapeHtml(campaign.target)} ด้วยลิงก์ UTM แล้วตามต่อด้วยภาษาที่ลูกค้าตอบกลับได้</span>
   `;
 });
 
@@ -553,14 +798,20 @@ leadForm.addEventListener("submit", async (event) => {
     name: document.querySelector("#leadName").value.trim(),
     contact: document.querySelector("#leadContact").value.trim(),
     source: document.querySelector("#leadSource").value,
-    budget: Number(document.querySelector("#leadBudget").value),
+    budget: Number(leadBudget.value),
+    budgetPeriod: leadBudgetPeriod.value,
     area: document.querySelector("#leadArea").value.trim(),
     propertyType: document.querySelector("#leadPropertyType").value,
     bedrooms: Number(document.querySelector("#leadBedrooms").value),
     moveDate: document.querySelector("#moveDate").value,
     viewingWindow: document.querySelector("#leadViewingWindow").value,
-    contractTerm: "12 months",
-    preferredLanguage: document.querySelector("#leadLanguage").value,
+    contractTerm: isMonthlyLead({ budgetPeriod: leadBudgetPeriod.value }) ? "12 months" : "Not applicable",
+    preferredLanguage: leadLanguage.value,
+    customerCountry: leadCustomerCountry.value,
+    dealIntent: leadDealIntent.value,
+    wechat: document.querySelector("#leadWechat").value.trim(),
+    partnerAgency: document.querySelector("#leadPartnerAgency").value.trim(),
+    partnerContact: document.querySelector("#leadPartnerContact").value.trim(),
     pets: document.querySelector("#leadPets").value,
     requirements: document.querySelector("#leadRequirements").value.trim(),
     consent: true,
@@ -569,13 +820,17 @@ leadForm.addEventListener("submit", async (event) => {
 
   if (saved) {
     leadForm.reset();
-    document.querySelector("#leadBudget").value = "100000";
+    leadDealIntent.value = "Rent 12-month";
+    leadCustomerCountry.value = "China";
+    leadLanguage.value = "中文 / English";
+    leadBudget.value = "100000";
     document.querySelector("#leadArea").value = "Phrom Phong";
     document.querySelector("#leadPropertyType").value = "Condo";
     document.querySelector("#leadBedrooms").value = "2";
+    syncDashboardBudgetMode();
     leadConsole.innerHTML = `
       <strong>Lead saved</strong>
-      <span>ข้อมูลเข้าคิวแล้ว ขั้นต่อไปคือยืนยันโจทย์และส่ง Private Shortlist ภายในเวลาที่ตกลงกับลูกค้า</span>
+      <span>ข้อมูลเข้าคิวแล้ว ขั้นต่อไปคือยืนยันโจทย์ ภาษา ช่องทางติดต่อ และ action ถัดไป</span>
     `;
   }
 
@@ -619,11 +874,15 @@ leadTable.addEventListener("click", async (event) => {
   if (!scriptButton) return;
   const ranked = targetLeads().sort((a, b) => urgencyScore(b) - urgencyScore(a));
   const lead = ranked[Number(scriptButton.dataset.scriptIndex)];
-  const details = `${lead.propertyType || "home"}, ${lead.bedrooms || "?"} bedroom(s), ${lead.area}, up to ฿${formatter.format(Number(lead.budget))}/month`;
-  const english = String(lead.preferredLanguage).includes("English");
-  const reply = english
-    ? `Hi ${lead.name}, thank you for your 12-month Bangkok rental brief. I have ${details}. Before I prepare your private shortlist, may I confirm your move-in date, must-have requirements and whether ${viewingWindowText(lead)} still works for a viewing?`
-    : `สวัสดีค่ะ ${lead.name} ทีมได้รับโจทย์เช่าสัญญา 1 ปีแล้วนะคะ: ${details} ก่อนคัด Private Shortlist ขอขอยืนยันวันเข้าอยู่ เงื่อนไขที่ต้องมี และยังสะดวกนัดชม ${viewingWindowText(lead)} อยู่ไหมคะ`;
+  const details = `${lead.propertyType || "home"}, ${lead.bedrooms ?? "?"} bedroom(s), ${lead.area}, ${budgetLabel(lead)}`;
+  const language = String(lead.preferredLanguage || "");
+  const reply = language.includes("中文")
+    ? `您好 ${lead.name}，我们已收到您的泰国房产需求：${details}。为了准备合适的房源清单，请确认预算、区域、付款/入住时间，以及是否方便通过微信继续沟通。`
+    : language.includes("Русский")
+      ? `Здравствуйте, ${lead.name}. Мы получили ваш запрос по недвижимости в Таиланде: ${details}. Пожалуйста, подтвердите бюджет, район, срок и удобное время для просмотра.`
+      : language.includes("English")
+        ? `Hi ${lead.name}, thank you for your Thailand property brief. I have ${details}. Before I prepare the shortlist, may I confirm your timing, must-have requirements and preferred viewing window?`
+        : `สวัสดีค่ะ ${lead.name} ทีมได้รับโจทย์อสังหาแล้วนะคะ: ${details} ก่อนคัด shortlist ขอขอยืนยันงบ ทำเล เงื่อนไขที่ต้องมี และยังสะดวกนัดชม ${viewingWindowText(lead)} อยู่ไหมคะ`;
   scriptBox.innerHTML = `
     <strong>Reply for ${escapeHtml(lead.name)}</strong>
     <p>${escapeHtml(reply)}</p>
@@ -665,6 +924,12 @@ clearLeads.addEventListener("click", async () => {
 });
 
 buildCampaign.addEventListener("click", renderCampaign);
+sendImport.addEventListener("click", sendImportPayload);
+loadImportSample.addEventListener("click", () => {
+  importCsvFile.value = "";
+  importPayload.value = importSample;
+  importStatus.textContent = "ใส่ JSON sample แล้ว กด Import leads เพื่อทดสอบผ่าน dashboard sign-in";
+});
 
 campaignOutput.addEventListener("click", async (event) => {
   if (event.target.id !== "copyCampaign") return;
@@ -679,4 +944,5 @@ campaignOutput.addEventListener("click", async (event) => {
 
 renderListings();
 renderLeads();
+syncDashboardBudgetMode();
 loadServerLeads();
