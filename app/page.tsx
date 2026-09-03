@@ -137,6 +137,9 @@ export default function Home() {
           <a href="#languages" data-i18n="navLanguages">
             7 languages
           </a>
+          <a href="#capabilities" data-i18n="navCapabilities">
+            Capabilities
+          </a>
           <a href="#asia-agent" data-i18n="navAgent">
             Asia agent desk
           </a>
@@ -454,6 +457,76 @@ export default function Home() {
           <strong data-i18n="workflowCloseTitle">04 · Close</strong>
           <span data-i18n="workflowCloseBody">Send shortlist, book viewings, prepare offers and coordinate referrals</span>
         </article>
+      </section>
+
+      <section className="capability-section" id="capabilities" aria-label="Lead capture capabilities">
+        <article className="capability-lead">
+          <p className="label" data-i18n="capabilityLabel">
+            Live capability demonstration
+          </p>
+          <h2 data-i18n="capabilityTitle">
+            Show the client what Lilith can do before the first call
+          </h2>
+          <p data-i18n="capabilityIntro">
+            The page does more than collect a name. It turns each request into a
+            workable rental, buyer or partner brief so the team can qualify,
+            shortlist and book the next step faster.
+          </p>
+          <a className="capability-link" href="#publicLeadForm" data-i18n="capabilityCta">
+            Test the brief flow
+          </a>
+        </article>
+
+        <div className="capability-grid">
+          <article>
+            <span>01</span>
+            <h3 data-i18n="capabilityOneTitle">Budget-fit screening</h3>
+            <p data-i18n="capabilityOneBody">
+              Separates monthly rental, purchase and listing budgets so weak-fit
+              inquiries do not enter the same queue as serious clients.
+            </p>
+          </article>
+          <article>
+            <span>02</span>
+            <h3 data-i18n="capabilityTwoTitle">Area and lifestyle matching</h3>
+            <p data-i18n="capabilityTwoBody">
+              Captures BTS, school, pet, invoice and preferred-project details
+              that make the first shortlist more relevant.
+            </p>
+          </article>
+          <article>
+            <span>03</span>
+            <h3 data-i18n="capabilityThreeTitle">Partner-ready handoff</h3>
+            <p data-i18n="capabilityThreeBody">
+              Keeps overseas agent, WeChat, Kakao, Zalo and referral fields in
+              the same structured lead record.
+            </p>
+          </article>
+          <article>
+            <span>04</span>
+            <h3 data-i18n="capabilityFourTitle">Private owner dashboard</h3>
+            <p data-i18n="capabilityFourBody">
+              Public visitors can submit briefs while lead review, stage updates
+              and import tools remain protected for the team.
+            </p>
+          </article>
+        </div>
+
+        <aside className="capability-metrics" aria-label="Example operating signals">
+          <strong data-i18n="metricsTitle">Operating signals the team can act on</strong>
+          <div>
+            <span data-i18n="metricResponse">Same-day callback priority</span>
+            <b>12M</b>
+          </div>
+          <div>
+            <span data-i18n="metricSegments">Client segments covered</span>
+            <b>7</b>
+          </div>
+          <div>
+            <span data-i18n="metricInputs">Lead sources accepted</span>
+            <b>Form + API</b>
+          </div>
+        </aside>
       </section>
 
       <section className="seo-api-section" id="seo-api" aria-label="SEO and API readiness">

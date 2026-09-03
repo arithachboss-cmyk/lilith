@@ -75,6 +75,10 @@ test("server-renders the international property lead desk", async () => {
   assert.match(html, /publicWechat/);
   assert.match(html, /publicPartnerAgency/);
   assert.match(html, /\/api\/import/);
+  assert.match(html, /Live capability demonstration/);
+  assert.match(html, /Budget-fit screening/);
+  assert.match(html, /Private owner dashboard/);
+  assert.match(html, /Test the brief flow/);
   assert.match(html, /\/capture\.js/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|react-loading-skeleton/);
 });

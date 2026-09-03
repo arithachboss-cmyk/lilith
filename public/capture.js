@@ -12,6 +12,7 @@ const publicLanguage = document.querySelector("#publicLanguage");
 const translations = {
   en: {
     navLanguages: "7 languages",
+    navCapabilities: "Capabilities",
     navAgent: "Asia agent desk",
     navSeo: "SEO + API",
     heroLabel: "International real estate agent · Thailand",
@@ -87,6 +88,27 @@ const translations = {
     workflowMatchBody: "Prioritize property shortlists and follow-up tasks for the team",
     workflowCloseTitle: "04 · Close",
     workflowCloseBody: "Send shortlist, book viewings, prepare offers and coordinate referrals",
+    capabilityLabel: "Live capability demonstration",
+    capabilityTitle: "Show the client what Lilith can do before the first call",
+    capabilityIntro:
+      "The page does more than collect a name. It turns each request into a workable rental, buyer or partner brief so the team can qualify, shortlist and book the next step faster.",
+    capabilityCta: "Test the brief flow",
+    capabilityOneTitle: "Budget-fit screening",
+    capabilityOneBody:
+      "Separates monthly rental, purchase and listing budgets so weak-fit inquiries do not enter the same queue as serious clients.",
+    capabilityTwoTitle: "Area and lifestyle matching",
+    capabilityTwoBody:
+      "Captures BTS, school, pet, invoice and preferred-project details that make the first shortlist more relevant.",
+    capabilityThreeTitle: "Partner-ready handoff",
+    capabilityThreeBody:
+      "Keeps overseas agent, WeChat, Kakao, Zalo and referral fields in the same structured lead record.",
+    capabilityFourTitle: "Private owner dashboard",
+    capabilityFourBody:
+      "Public visitors can submit briefs while lead review, stage updates and import tools remain protected for the team.",
+    metricsTitle: "Operating signals the team can act on",
+    metricResponse: "Same-day callback priority",
+    metricSegments: "Client segments covered",
+    metricInputs: "Lead sources accepted",
     seoLabel: "On-page SEO",
     seoTitle: "Ready for seven-language search intent",
     seoBody:
@@ -99,6 +121,7 @@ const translations = {
   },
   vi: {
     navLanguages: "7 ngôn ngữ",
+    navCapabilities: "Năng lực",
     navAgent: "Bàn hỗ trợ châu Á",
     navSeo: "SEO + API",
     heroLabel: "Môi giới bất động sản quốc tế · Thái Lan",
@@ -170,6 +193,27 @@ const translations = {
     workflowMatchBody: "Ưu tiên danh sách căn phù hợp và việc cần theo dõi cho đội ngũ",
     workflowCloseTitle: "04 · Chốt việc",
     workflowCloseBody: "Gửi shortlist, đặt lịch xem nhà, chuẩn bị offer và phối hợp referral",
+    capabilityLabel: "Minh họa năng lực trực tiếp",
+    capabilityTitle: "Cho khách thấy Lilith làm được gì trước cuộc gọi đầu tiên",
+    capabilityIntro:
+      "Trang này không chỉ thu tên liên hệ. Mỗi yêu cầu được chuyển thành brief thuê, mua hoặc đối tác để đội ngũ sàng lọc, chọn căn và đặt bước tiếp theo nhanh hơn.",
+    capabilityCta: "Thử luồng gửi brief",
+    capabilityOneTitle: "Sàng lọc theo ngân sách",
+    capabilityOneBody:
+      "Tách ngân sách thuê tháng, mua và ký gửi để lead không phù hợp không lẫn với khách nghiêm túc.",
+    capabilityTwoTitle: "Ghép khu vực và lối sống",
+    capabilityTwoBody:
+      "Thu thập BTS, trường học, thú cưng, hóa đơn và dự án ưu tiên để shortlist đầu tiên sát nhu cầu hơn.",
+    capabilityThreeTitle: "Bàn giao cho đối tác",
+    capabilityThreeBody:
+      "Giữ thông tin đại lý nước ngoài, WeChat, Kakao, Zalo và referral trong cùng một record lead có cấu trúc.",
+    capabilityFourTitle: "Dashboard riêng cho owner",
+    capabilityFourBody:
+      "Khách public có thể gửi brief, còn review lead, cập nhật stage và import tool vẫn được bảo vệ cho đội ngũ.",
+    metricsTitle: "Tín hiệu vận hành để đội ngũ hành động",
+    metricResponse: "Ưu tiên gọi lại trong ngày",
+    metricSegments: "Nhóm khách hàng được hỗ trợ",
+    metricInputs: "Nguồn lead có thể tiếp nhận",
     seoLabel: "SEO trên trang",
     seoTitle: "Sẵn sàng cho intent tìm kiếm 7 ngôn ngữ",
     seoBody: "Có title, description, intent từ khóa, cấu trúc heading, nội dung đa ngôn ngữ, anchor nội bộ, Open Graph và structured data.",
@@ -180,6 +224,7 @@ const translations = {
   },
   th: {
     navLanguages: "7 ภาษา",
+    navCapabilities: "ความสามารถ",
     navAgent: "โต๊ะเอเจนต์เอเชีย",
     navSeo: "SEO + API",
     heroLabel: "เอเจนต์อสังหาริมทรัพย์ต่างชาติ · ประเทศไทย",
@@ -251,6 +296,27 @@ const translations = {
     workflowMatchBody: "คัดทรัพย์และจัดลำดับงานให้ทีมตอบกลับหรือนัดชม",
     workflowCloseTitle: "04 · Close",
     workflowCloseBody: "ส่ง shortlist, นัดชม, ทำข้อเสนอ และประสาน partner referral",
+    capabilityLabel: "แสดงความสามารถของระบบ",
+    capabilityTitle: "ให้ลูกค้าเห็นว่า Lilith ช่วยอะไรได้ก่อนคุยสายแรก",
+    capabilityIntro:
+      "หน้านี้ไม่ได้เก็บแค่ชื่อและเบอร์ แต่แปลงโจทย์เป็น brief เช่า ซื้อ หรือ referral ที่ทีมใช้คัดกรอง คัดทรัพย์ และปิดนัดขั้นถัดไปได้เร็วขึ้น",
+    capabilityCta: "ทดลองส่ง brief",
+    capabilityOneTitle: "คัดงบให้ตรงโจทย์",
+    capabilityOneBody:
+      "แยกงบเช่ารายเดือน งบซื้อ และมูลค่าฝากขาย เพื่อไม่ให้ lead ที่ยังไม่เข้าเงื่อนไขปนกับลูกค้าที่พร้อมเดินหน้า",
+    capabilityTwoTitle: "จับคู่ทำเลและไลฟ์สไตล์",
+    capabilityTwoBody:
+      "เก็บรายละเอียด BTS โรงเรียน สัตว์เลี้ยง ใบกำกับภาษี และโครงการที่สนใจ เพื่อให้ shortlist แรกแม่นขึ้น",
+    capabilityThreeTitle: "พร้อมส่งต่องานพาร์ตเนอร์",
+    capabilityThreeBody:
+      "เก็บข้อมูล overseas agent, WeChat, Kakao, Zalo และ referral ไว้ใน lead record เดียวที่ทีมตามต่อได้",
+    capabilityFourTitle: "แดชบอร์ดส่วนตัวของเจ้าของ",
+    capabilityFourBody:
+      "คนทั่วไปส่ง brief ได้ แต่การดู lead, อัปเดต stage และเครื่องมือนำเข้าข้อมูลยังป้องกันไว้สำหรับทีม",
+    metricsTitle: "สัญญาณปฏิบัติการที่ทีมใช้ตัดสินใจได้",
+    metricResponse: "ลำดับโทรกลับภายในวันเดียว",
+    metricSegments: "กลุ่มลูกค้าที่รองรับ",
+    metricInputs: "แหล่ง lead ที่รับได้",
     seoLabel: "On-page SEO",
     seoTitle: "พร้อมทำ SEO สำหรับ 7 ภาษา",
     seoBody: "มี title, description, keyword intent, heading hierarchy, language content, internal anchors, Open Graph และ structured data สำหรับ real estate agent",
@@ -261,6 +327,7 @@ const translations = {
   },
   ko: {
     navLanguages: "7개 언어",
+    navCapabilities: "기능",
     navAgent: "아시아 에이전트 데스크",
     navSeo: "SEO + API",
     heroLabel: "국제 부동산 에이전트 · 태국",
@@ -332,6 +399,27 @@ const translations = {
     workflowMatchBody: "팀을 위해 매물 후보와 후속 작업 우선순위를 정합니다",
     workflowCloseTitle: "04 · 진행",
     workflowCloseBody: "후보 매물 전송, 뷰잉 예약, 오퍼 준비, 추천 건 조율",
+    capabilityLabel: "실시간 기능 데모",
+    capabilityTitle: "첫 통화 전 Lilith가 할 수 있는 일을 보여줍니다",
+    capabilityIntro:
+      "이 페이지는 이름만 받지 않습니다. 각 요청을 렌트, 구매 또는 파트너 브리프로 정리해 팀이 더 빠르게 검증, shortlist, 다음 일정을 잡을 수 있게 합니다.",
+    capabilityCta: "브리프 흐름 테스트",
+    capabilityOneTitle: "예산 적합성 확인",
+    capabilityOneBody:
+      "월세, 구매, 매물 등록 예산을 구분해 적합도가 낮은 문의가 진지한 고객 큐와 섞이지 않게 합니다.",
+    capabilityTwoTitle: "지역과 라이프스타일 매칭",
+    capabilityTwoBody:
+      "BTS, 학교, 반려동물, 인보이스, 선호 프로젝트 정보를 받아 첫 shortlist의 정확도를 높입니다.",
+    capabilityThreeTitle: "파트너 전달 준비",
+    capabilityThreeBody:
+      "해외 에이전트, WeChat, Kakao, Zalo, referral 정보를 하나의 구조화된 lead record에 보관합니다.",
+    capabilityFourTitle: "비공개 owner dashboard",
+    capabilityFourBody:
+      "방문자는 brief를 보낼 수 있고, lead review, stage update, import tool은 팀용으로 보호됩니다.",
+    metricsTitle: "팀이 바로 활용할 운영 신호",
+    metricResponse: "당일 콜백 우선순위",
+    metricSegments: "지원 고객 세그먼트",
+    metricInputs: "허용 lead 소스",
     seoLabel: "온페이지 SEO",
     seoTitle: "7개 언어 검색 의도 대응",
     seoBody: "타이틀, 설명, 키워드 의도, heading 구조, 언어 콘텐츠, 내부 앵커, Open Graph 및 부동산 structured data를 포함합니다.",
@@ -342,6 +430,7 @@ const translations = {
   },
   ja: {
     navLanguages: "7言語",
+    navCapabilities: "機能",
     navAgent: "アジア代理店デスク",
     navSeo: "SEO + API",
     heroLabel: "国際不動産エージェント · タイ",
@@ -413,6 +502,27 @@ const translations = {
     workflowMatchBody: "物件候補とチームのフォローアップを優先順位付けします",
     workflowCloseTitle: "04 · 成約支援",
     workflowCloseBody: "候補物件送付、内見予約、オファー準備、紹介案件調整",
+    capabilityLabel: "機能デモ",
+    capabilityTitle: "初回連絡の前にLilithの対応力を見せます",
+    capabilityIntro:
+      "このページは名前を集めるだけではありません。各リクエストを賃貸、購入、パートナー紹介のbriefに変換し、確認、物件選定、次の予約を速めます。",
+    capabilityCta: "briefフローを試す",
+    capabilityOneTitle: "予算適合チェック",
+    capabilityOneBody:
+      "月額賃料、購入予算、売却想定額を分け、条件に合わない問い合わせと本気度の高い顧客を混在させません。",
+    capabilityTwoTitle: "エリアと生活条件の照合",
+    capabilityTwoBody:
+      "BTS、学校、ペット、請求書、希望プロジェクトを取得し、最初のshortlistの精度を高めます。",
+    capabilityThreeTitle: "パートナー連携に対応",
+    capabilityThreeBody:
+      "海外代理店、WeChat、Kakao、Zalo、紹介情報を同じstructured lead recordに保持します。",
+    capabilityFourTitle: "非公開owner dashboard",
+    capabilityFourBody:
+      "公開訪問者はbriefを送信でき、lead確認、stage更新、import toolsはチーム向けに保護されます。",
+    metricsTitle: "チームが使える運用シグナル",
+    metricResponse: "当日折り返し優先",
+    metricSegments: "対応顧客セグメント",
+    metricInputs: "受け付けるlead source",
     seoLabel: "オンページSEO",
     seoTitle: "7言語の検索意図に対応",
     seoBody: "title、description、キーワード意図、heading構造、多言語コンテンツ、内部アンカー、Open Graph、不動産structured dataを含みます。",
@@ -423,6 +533,7 @@ const translations = {
   },
   zh: {
     navLanguages: "7种语言",
+    navCapabilities: "能力",
     navAgent: "亚洲代理服务台",
     navSeo: "SEO + API",
     heroLabel: "国际房地产经纪 · 泰国",
@@ -493,6 +604,27 @@ const translations = {
     workflowMatchBody: "为团队优先整理房源shortlist和跟进任务",
     workflowCloseTitle: "04 · 推进",
     workflowCloseBody: "发送shortlist、预约看房、准备报价并协调转介",
+    capabilityLabel: "实时能力展示",
+    capabilityTitle: "在第一次通话前展示Lilith能提供什么",
+    capabilityIntro:
+      "这个页面不只是收集姓名。每个需求都会变成可执行的租赁、购买或合作伙伴brief，帮助团队更快筛选、整理shortlist并安排下一步。",
+    capabilityCta: "测试brief流程",
+    capabilityOneTitle: "预算匹配筛选",
+    capabilityOneBody:
+      "区分月租、购买和委托预算，避免低匹配询盘与认真客户进入同一队列。",
+    capabilityTwoTitle: "区域与生活方式匹配",
+    capabilityTwoBody:
+      "收集BTS、学校、宠物、发票和偏好项目等信息，让第一版shortlist更准确。",
+    capabilityThreeTitle: "适合合作伙伴交接",
+    capabilityThreeBody:
+      "把海外代理、WeChat、Kakao、Zalo和转介信息保存在同一个结构化lead record中。",
+    capabilityFourTitle: "私密owner dashboard",
+    capabilityFourBody:
+      "公开访客可以提交brief，lead review、stage更新和import工具仍只对团队开放。",
+    metricsTitle: "团队可执行的运营信号",
+    metricResponse: "当天回访优先级",
+    metricSegments: "覆盖客户类型",
+    metricInputs: "可接收lead来源",
     seoLabel: "页面SEO",
     seoTitle: "支持7语言搜索意图",
     seoBody: "包含title、description、关键词意图、heading结构、多语言内容、内部锚点、Open Graph和房产经纪structured data。",
@@ -503,6 +635,7 @@ const translations = {
   },
   ru: {
     navLanguages: "7 языков",
+    navCapabilities: "Возможности",
     navAgent: "Азиатский агентский стол",
     navSeo: "SEO + API",
     heroLabel: "Международный агент по недвижимости · Таиланд",
@@ -574,6 +707,27 @@ const translations = {
     workflowMatchBody: "Приоритизируем shortlist объектов и задачи команды",
     workflowCloseTitle: "04 · Закрытие",
     workflowCloseBody: "Отправляем shortlist, бронируем просмотры, готовим offers и координируем referrals",
+    capabilityLabel: "Демонстрация возможностей",
+    capabilityTitle: "Покажите клиенту, что делает Lilith, до первого звонка",
+    capabilityIntro:
+      "Страница не просто собирает имя. Каждый запрос превращается в рабочий brief по аренде, покупке или партнерской рекомендации, чтобы команда быстрее проверяла, подбирала shortlist и назначала следующий шаг.",
+    capabilityCta: "Проверить brief flow",
+    capabilityOneTitle: "Проверка бюджета",
+    capabilityOneBody:
+      "Разделяет месячную аренду, покупку и листинг, чтобы слабые запросы не попадали в очередь с серьезными клиентами.",
+    capabilityTwoTitle: "Район и образ жизни",
+    capabilityTwoBody:
+      "Собирает BTS, школу, pets, invoice и preferred projects, чтобы первый shortlist был точнее.",
+    capabilityThreeTitle: "Готово для партнеров",
+    capabilityThreeBody:
+      "Хранит overseas agent, WeChat, Kakao, Zalo и referral fields в одной structured lead record.",
+    capabilityFourTitle: "Закрытый owner dashboard",
+    capabilityFourBody:
+      "Публичные посетители отправляют briefs, а lead review, stage updates и import tools остаются защищенными для команды.",
+    metricsTitle: "Операционные сигналы для команды",
+    metricResponse: "Приоритет звонка в тот же день",
+    metricSegments: "Сегменты клиентов",
+    metricInputs: "Источники lead",
     seoLabel: "On-page SEO",
     seoTitle: "Готово для семиязычного поискового спроса",
     seoBody: "Включены title, description, keyword intent, hierarchy, language content, internal anchors, Open Graph и structured data для агента недвижимости.",
