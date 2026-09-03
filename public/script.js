@@ -52,6 +52,9 @@ const leadConsole = document.querySelector("#leadConsole");
 const leadForm = document.querySelector("#leadForm");
 const leadTable = document.querySelector("#leadTable");
 const hotLeadCount = document.querySelector("#hotLeadCount");
+const flowReceivedCount = document.querySelector("#flowReceivedCount");
+const flowQualifiedCount = document.querySelector("#flowQualifiedCount");
+const flowFilteredRows = document.querySelector("#flowFilteredRows");
 const loadSeedLeads = document.querySelector("#loadSeedLeads");
 const clearLeads = document.querySelector("#clearLeads");
 const exportLeads = document.querySelector("#exportLeads");
@@ -377,6 +380,33 @@ function summaryPills(entries) {
   return entries.map(([label, count]) => `<span>${escapeHtml(label)} · ${count}</span>`).join("");
 }
 
+function renderDataFlow(ranked) {
+  if (!flowReceivedCount || !flowQualifiedCount || !flowFilteredRows) return;
+
+  flowReceivedCount.textContent = String(leads.length);
+  flowQualifiedCount.textContent = String(ranked.length);
+
+  if (!ranked.length) {
+    flowFilteredRows.innerHTML = `
+      <span>ยังไม่มีข้อมูลที่ผ่านเงื่อนไขใน queue</span>
+    `;
+    return;
+  }
+
+  flowFilteredRows.innerHTML = ranked
+    .slice(0, 3)
+    .map(
+      (lead) => `
+        <article>
+          <strong>${escapeHtml(lead.name)} · ${escapeHtml(budgetLabel(lead))}</strong>
+          <span>${escapeHtml(lead.area || "Area not set")} · ${escapeHtml(lead.preferredLanguage || "Language not set")} · ${urgencyScore(lead)} priority</span>
+          <p>${escapeHtml(nextAction(lead))}</p>
+        </article>
+      `,
+    )
+    .join("");
+}
+
 function renderAcquisitionSummary(ranked) {
   let summary = document.querySelector("#sourceSummary");
   if (!summary) {
@@ -497,6 +527,7 @@ function renderLeads() {
   );
   hotLeadCount.textContent = String(hotLeads.length);
   exportLeads.disabled = !ranked.some((lead) => !lead.example);
+  renderDataFlow(ranked);
 
   if (!ranked.length) {
     leadTable.innerHTML = `

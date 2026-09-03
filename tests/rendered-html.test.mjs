@@ -236,9 +236,10 @@ test("validates protected pipeline progress updates", () => {
 });
 
 test("tracks acquisition channels, import tools and multilingual reply scripts", async () => {
-  const [captureScript, dashboardScript, launchPack] = await Promise.all([
+  const [captureScript, dashboardScript, dashboardPage, launchPack] = await Promise.all([
     readFile(new URL("../public/capture.js", import.meta.url), "utf8"),
     readFile(new URL("../public/script.js", import.meta.url), "utf8"),
+    readFile(new URL("../app/dashboard/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../LAUNCH_TODAY.md", import.meta.url), "utf8"),
   ]);
 
@@ -251,6 +252,10 @@ test("tracks acquisition channels, import tools and multilingual reply scripts",
   assert.match(dashboardScript, /China broker \/ WeChat push/);
   assert.match(dashboardScript, /Русский/);
   assert.match(dashboardScript, /中文/);
+  assert.match(dashboardScript, /renderDataFlow/);
+  assert.match(dashboardPage, /Send data/);
+  assert.match(dashboardPage, /Receive data/);
+  assert.match(dashboardPage, /Filtered queue/);
   assert.match(launchPack, /utm_campaign=premium_12m/);
 });
 
