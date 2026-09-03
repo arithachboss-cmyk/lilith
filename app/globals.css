@@ -140,6 +140,30 @@ body {
   gap: 10px;
 }
 
+.language-switcher {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.language-pill {
+  min-height: 38px;
+  padding: 0 12px;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  font-weight: 900;
+}
+
+.language-pill.active,
+.language-pill:hover,
+.language-pill:focus-visible {
+  border-color: var(--sun);
+  background: var(--sun);
+  color: #10231f;
+}
+
 .public-stats span {
   padding: 9px 11px;
   border: 1px solid rgba(255, 255, 255, 0.26);
@@ -283,7 +307,7 @@ body {
 
 .language-section {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
   gap: 1px;
   overflow: hidden;
   width: min(1180px, calc(100% - 32px));
@@ -324,6 +348,18 @@ body {
 
 .language-card:nth-child(4) span {
   background: #5a5f2c;
+}
+
+.language-card:nth-child(5) span {
+  background: #7d4d86;
+}
+
+.language-card:nth-child(6) span {
+  background: #a03f3f;
+}
+
+.language-card:nth-child(7) span {
+  background: #405f83;
 }
 
 .language-card h2 {

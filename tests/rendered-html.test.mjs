@@ -58,11 +58,17 @@ test("server-renders the international property lead desk", async () => {
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /เว็บแอปเอเจนต์อสังหา 4 ภาษา/);
+  assert.match(html, /Seven-language Thailand property desk/);
+  assert.match(html, /Tiếng Việt/);
+  assert.match(html, /한국어/);
+  assert.match(html, /日本語/);
   assert.match(html, /中文/);
   assert.match(html, /Русский/);
-  assert.match(html, /International Thailand Real Estate Agent/);
+  assert.match(html, /Multilingual Thailand Real Estate Agent/);
   assert.match(html, /RealEstateAgent/);
+  assert.match(html, /data-lang-option="vi"/);
+  assert.match(html, /data-lang-option="ko"/);
+  assert.match(html, /data-lang-option="ja"/);
   assert.match(html, /publicDealIntent/);
   assert.match(html, /publicBudgetPeriod/);
   assert.match(html, /publicCustomerCountry/);

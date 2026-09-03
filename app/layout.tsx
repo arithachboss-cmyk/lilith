@@ -30,9 +30,9 @@ export async function generateMetadata(): Promise<Metadata> {
   );
   const protocol = host.startsWith("localhost") ? "http" : "https";
   const origin = `${protocol}://${host}`;
-  const title = "Lilith Homes | International Thailand Real Estate Agent";
+  const title = "Lilith Homes | Multilingual Thailand Real Estate Agent";
   const description =
-    "Multilingual Thailand real estate lead desk for Thai, Chinese, English-speaking and Russian clients, with SEO-ready capture and CSV/JSON import.";
+    "Seven-language Thailand real estate lead desk for English, Vietnamese, Thai, Korean, Japanese, Chinese and Russian clients, with SEO-ready capture and CSV/JSON import.";
 
   return {
     metadataBase: new URL(origin),
@@ -41,9 +41,12 @@ export async function generateMetadata(): Promise<Metadata> {
     alternates: {
       canonical: origin,
       languages: {
-        th: `${origin}/?lang=th`,
-        "zh-CN": `${origin}/?lang=zh`,
         "en-US": `${origin}/?lang=en`,
+        vi: `${origin}/?lang=vi`,
+        th: `${origin}/?lang=th`,
+        ko: `${origin}/?lang=ko`,
+        ja: `${origin}/?lang=ja`,
+        "zh-CN": `${origin}/?lang=zh`,
         ru: `${origin}/?lang=ru`,
       },
     },
@@ -61,7 +64,7 @@ export async function generateMetadata(): Promise<Metadata> {
           url: `${origin}/og.png`,
           width: 1731,
           height: 909,
-          alt: "Lilith Homes international Thailand real estate lead desk",
+          alt: "Lilith Homes seven-language Thailand real estate lead desk",
         },
       ],
     },
@@ -80,7 +83,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="th">
+    <html lang="en">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
