@@ -21,12 +21,17 @@ export default async function Dashboard() {
           <a className="mark" href="#top" aria-label="Lilith Homes">
             LH
           </a>
+          <a href="/agents">Agent M1 / ทรัพย์</a>
           <a href="#pipeline">Pipeline</a>
+          <a href="#data-flow">Data flow</a>
           <a href="#import">Import API</a>
           <a href="#campaign">Campaign</a>
           <a href="#inventory">Briefs</a>
           <a href="#scripts">Scripts</a>
-          <a href="/" target="_blank" rel="noreferrer">
+          <a href="/display" target="_blank" rel="noreferrer">
+            Display
+          </a>
+          <a href="/lead-form" target="_blank" rel="noreferrer">
             Public form
           </a>
         </aside>
@@ -114,6 +119,48 @@ export default async function Dashboard() {
               <strong id="hotLeadCount">0</strong>
               <span>priority leads</span>
             </div>
+          </section>
+
+          <section className="data-flow-board" id="data-flow" aria-label="Send receive and filtered lead data">
+            <article className="flow-panel flow-send">
+              <p className="label">Send data</p>
+              <h3>ส่งข้อมูลเข้า queue</h3>
+              <p>
+                รับได้ทั้ง public form, dashboard manual entry, CSV จาก Excel และ JSON API
+                โดยต้องมีชื่อ ช่องทางติดต่อ งบ ทำเล ประเภททรัพย์ และ consent
+              </p>
+              <div className="flow-code">
+                <span>POST /api/leads</span>
+                <span>POST /api/import</span>
+                <span>Manual dashboard entry</span>
+              </div>
+            </article>
+
+            <article className="flow-panel flow-receive">
+              <p className="label">Receive data</p>
+              <h3>รับข้อมูลที่ผ่าน validation</h3>
+              <div className="flow-counter">
+                <strong id="flowReceivedCount">0</strong>
+                <span>records currently visible in this queue</span>
+              </div>
+              <ul>
+                <li>แยกงบเช่า ซื้อ และฝากขาย</li>
+                <li>เก็บภาษา ประเทศ และช่องทาง WeChat / LINE / Email</li>
+                <li>กัน lead spam และ brief ที่ข้อมูลไม่ครบ</li>
+              </ul>
+            </article>
+
+            <article className="flow-panel flow-filter">
+              <p className="label">Filtered queue</p>
+              <h3>ข้อมูลที่กรองเข้ามา</h3>
+              <div className="flow-counter">
+                <strong id="flowQualifiedCount">0</strong>
+                <span>qualified records sorted by priority</span>
+              </div>
+              <div className="flow-filtered-list" id="flowFilteredRows">
+                <span>โหลดตัวอย่างหรือรับ lead จริงเพื่อดูรายการที่ผ่านเกณฑ์</span>
+              </div>
+            </article>
           </section>
 
           <section className="lead-ops" id="pipeline" aria-label="Lead pipeline">

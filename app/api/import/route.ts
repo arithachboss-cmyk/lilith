@@ -176,7 +176,7 @@ async function readImportPayload(request: Request) {
   const contentType = request.headers.get("content-type") ?? "";
 
   if (contentType.includes("application/json")) {
-    const payload = await request.json();
+    const payload = await request.json() as { leads?: unknown; rows?: unknown };
     if (Array.isArray(payload)) return payload;
     if (Array.isArray(payload?.leads)) return payload.leads;
     if (Array.isArray(payload?.rows)) return payload.rows;

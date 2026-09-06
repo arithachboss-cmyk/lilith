@@ -53,22 +53,34 @@ async function fetchWorker(path, init = {}, envOverrides = {}) {
 }
 
 test("server-renders the international property lead desk", async () => {
-  const response = await fetchWorker("/");
+  const response = await fetchWorker("/lead-form");
   assert.equal(response.status, 200);
   assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
 
   const html = await response.text();
-  assert.match(html, /เว็บแอปเอเจนต์อสังหา 4 ภาษา/);
+  assert.match(html, /Seven-language Thailand property desk/);
+  assert.match(html, /Tiếng Việt/);
+  assert.match(html, /한국어/);
+  assert.match(html, /日本語/);
   assert.match(html, /中文/);
   assert.match(html, /Русский/);
-  assert.match(html, /International Thailand Real Estate Agent/);
+  assert.match(html, /Multilingual Thailand Real Estate Agent/);
   assert.match(html, /RealEstateAgent/);
+  assert.match(html, /data-lang-option="vi"/);
+  assert.match(html, /data-lang-option="ko"/);
+  assert.match(html, /data-lang-option="ja"/);
   assert.match(html, /publicDealIntent/);
   assert.match(html, /publicBudgetPeriod/);
   assert.match(html, /publicCustomerCountry/);
   assert.match(html, /publicWechat/);
   assert.match(html, /publicPartnerAgency/);
+  assert.match(html, /https:\/\/www\.middleproperty\.com\//);
+  assert.match(html, /MiddleProperty\.com/);
   assert.match(html, /\/api\/import/);
+  assert.match(html, /Live capability demonstration/);
+  assert.match(html, /Budget-fit screening/);
+  assert.match(html, /Private owner dashboard/);
+  assert.match(html, /Test the brief flow/);
   assert.match(html, /\/capture\.js/);
   assert.doesNotMatch(html, /Your site is taking shape|codex-preview|react-loading-skeleton/);
 });
@@ -226,9 +238,10 @@ test("validates protected pipeline progress updates", () => {
 });
 
 test("tracks acquisition channels, import tools and multilingual reply scripts", async () => {
-  const [captureScript, dashboardScript, launchPack] = await Promise.all([
+  const [captureScript, dashboardScript, dashboardPage, launchPack] = await Promise.all([
     readFile(new URL("../public/capture.js", import.meta.url), "utf8"),
     readFile(new URL("../public/script.js", import.meta.url), "utf8"),
+    readFile(new URL("../app/dashboard/page.tsx", import.meta.url), "utf8"),
     readFile(new URL("../LAUNCH_TODAY.md", import.meta.url), "utf8"),
   ]);
 
@@ -241,6 +254,10 @@ test("tracks acquisition channels, import tools and multilingual reply scripts",
   assert.match(dashboardScript, /China broker \/ WeChat push/);
   assert.match(dashboardScript, /Русский/);
   assert.match(dashboardScript, /中文/);
+  assert.match(dashboardScript, /renderDataFlow/);
+  assert.match(dashboardPage, /Send data/);
+  assert.match(dashboardPage, /Receive data/);
+  assert.match(dashboardPage, /Filtered queue/);
   assert.match(launchPack, /utm_campaign=premium_12m/);
 });
 
@@ -263,4 +280,33 @@ test("ships the D1 migrations for import and partner fields", async () => {
   assert.match(importMigration, /ADD `partner_agency` text/);
   assert.match(importMigration, /ADD `external_id` text/);
   assert.match(importMigration, /ADD `import_batch` text/);
+});
+
+test("keeps public capture friendly to foreign referral leads", async () => {
+  const [publicPage, captureScript, storage] = await Promise.all([
+    readFile(new URL("../app/page.tsx", import.meta.url), "utf8"),
+    readFile(new URL("../public/capture.js", import.meta.url), "utf8"),
+    readFile(new URL("../app/api/leads/storage.ts", import.meta.url), "utf8"),
+  ]);
+
+  const contactInput = publicPage.slice(
+    publicPage.indexOf('id="publicContact"'),
+    publicPage.indexOf('id="publicWechat"'),
+  );
+  assert.match(publicPage, /id="publicLeadForm" noValidate/);
+  assert.doesNotMatch(contactInput, /required/);
+  assert.match(captureScript, /function validatePublicLead/);
+  assert.match(captureScript, /lead\.contact, lead\.wechat, lead\.partnerContact/);
+  assert.match(captureScript, /ช่องทางติดต่ออย่างน้อยหนึ่งช่อง/);
+  assert.match(captureScript, /โจทย์เช่าต้องเป็นสัญญา 12 เดือน/);
+
+  const ensureSchemaStart = storage.indexOf("export async function ensureLeadSchema()");
+  const addColumnStart = storage.indexOf("async function addColumnIfMissing", ensureSchemaStart);
+  const ensureSchemaBody = storage.slice(ensureSchemaStart, addColumnStart);
+  const firstBatch = ensureSchemaBody.slice(0, ensureSchemaBody.indexOf("]);") + 3);
+  assert.doesNotMatch(firstBatch, /createExternalIdIndexSql/);
+  assert.ok(
+    ensureSchemaBody.indexOf("for (const [columnName, sql] of optionalColumns)") <
+      ensureSchemaBody.indexOf("env.DB.prepare(createExternalIdIndexSql).run()"),
+  );
 });

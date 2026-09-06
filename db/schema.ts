@@ -1,4 +1,5 @@
-import { integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
+import { sql } from "drizzle-orm";
+import { index, real, integer, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const leads = sqliteTable("leads", {
   id: integer("id").primaryKey({ autoIncrement: true }),
@@ -31,3 +32,12 @@ export const leads = sqliteTable("leads", {
   updatedAt: text("updated_at"),
   createdAt: text("created_at").notNull().default("CURRENT_TIMESTAMP"),
 });
+
+export const agentMembers = sqliteTable('agent_members', {
+ id:text('id').primaryKey(),email:text('email').notNull().unique(),team:text('team').notNull(),tier:integer('tier').notNull(),score:integer('score').notNull().default(0),note:text('note').notNull().default(''),
+});
+export const agentProperties = sqliteTable('agent_properties', {
+ id:text('id').primaryKey(),name:text('name').notNull(),area:text('area').notNull(),rent:integer('rent').notNull(),bedrooms:integer('bedrooms').notNull(),size:real('size').notNull(),tier:integer('tier').notNull(),status:text('status').notNull(),owner:text('owner').notNull(),photos:text('photos').notNull(),updatedAt:text('updated_at').notNull(),
+}, table => [index('agent_properties_tier').on(table.tier)]);
+export const agentPhotos = sqliteTable('agent_photos',{id:text('id').primaryKey(),owner:text('owner').notNull()});
+export const agentReviews = sqliteTable('agent_reviews',{id:integer('id').primaryKey({autoIncrement:true}),agentId:text('agent_id').notNull(),reviewer:text('reviewer').notNull(),score:integer('score').notNull(),tier:integer('tier').notNull(),note:text('note').notNull(),createdAt:text('created_at').notNull().default(sql`CURRENT_TIMESTAMP`)});

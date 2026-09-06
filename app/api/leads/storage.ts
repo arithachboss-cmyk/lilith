@@ -81,11 +81,11 @@ export async function ensureLeadSchema() {
   await env.DB.batch([
     env.DB.prepare(createTableSql),
     env.DB.prepare(createCreatedAtIndexSql),
-    env.DB.prepare(createExternalIdIndexSql),
   ]);
   for (const [columnName, sql] of optionalColumns) {
     await addColumnIfMissing(columnName, sql);
   }
+  await env.DB.prepare(createExternalIdIndexSql).run();
 }
 
 async function addColumnIfMissing(columnName: string, sql: string) {
