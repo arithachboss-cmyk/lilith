@@ -44,13 +44,18 @@ pnpm --filter @lilith/core typecheck
 pnpm --filter @lilith/core test
 pnpm --filter @lilith/core lint
 pnpm check
+pnpm --filter @lilith/config typecheck
+git diff --check
+git diff --exit-code 54b7ca1 -- index.html styles.css script.js GITHUB_PUBLISH.md
+git push -u origin feat/ARCH-002-shared-kernel
+gh pr checks 3 --repo arithachboss-cmyk/lilith
 ```
 
 `pnpm check` runs build, typecheck, lint, workspace tests, real-file workspace lint probes and source/compiled export checks sequentially. Probe exit 1 is the expected successful boundary rejection.
 
 ## TEST_RESULTS
 
-Local validation passed: build, typecheck and lint across all nine workspaces; 78 kernel and 88 boundary tests; three workspace-cwd lint probes; all declared shared source exports and emitted JS imports. The five runtime kernel modules reached 100% measured lines, statements, branches and functions. Strict typecheck includes tests and compile-only negative assertions. Hosted CI is pending; its evidence will be recorded before review.
+Local validation passed: build, typecheck and lint across all nine workspaces; 78 kernel and 88 boundary tests; three workspace-cwd lint probes; all declared shared source exports and emitted JS imports. The five runtime kernel modules reached 100% measured lines, statements, branches and functions. Strict typecheck includes tests and compile-only negative assertions. Hosted [foundation CI passed](https://github.com/arithachboss-cmyk/lilith/actions/runs/34163931133) on implementation commit `32f81c1a0f0c19d6440c31764afd4bddbbf44f8e`. [Draft PR #3](https://github.com/arithachboss-cmyk/lilith/pull/3) contains the task. Later documentation-only commits receive the same CI checks. All nine Blueprint source hashes and the preserved root prototype comparison passed; probe files/directories were cleaned up. Two independent read-only internal reviews found no blocking acceptance defects.
 
 ## KNOWN_LIMITATIONS
 
@@ -66,11 +71,11 @@ Review/merge ARCH-002, then ARCH-003 → ARCH-004 → ARCH-005. Fee basis/payer 
 
 ## Completion report
 
-STATUS: local foundation acceptance passed; hosted CI pending.
+STATUS: ARCH-002 acceptance passed locally and in hosted CI; draft PR #3 awaits independent review/merge.
 EVIDENCE: executable tests/probes, ADR-0014 and task report.
 RISKS: future production/domain enforcement remains unimplemented.
 BLOCKERS: no owner decision needed for this task; ARCH-003 waits for merge.
-NEXT: complete verification and submit ARCH-002 for review.
+NEXT: review/merge ARCH-002 PR #3, then begin ARCH-003.
 OWNER APPROVAL: no new business-policy decision requested by ARCH-002.
 
-READY_FOR_REVIEW: false.
+READY_FOR_REVIEW: true.
