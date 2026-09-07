@@ -13,6 +13,8 @@
     "skipLibCheck": true,
     "noEmitOnError": true,
     "resolveJsonModule": true,
-    "esModuleInterop": true
+    "esModuleInterop": true,
+    "rewriteRelativeImportExtensions": true,
+    "erasableSyntaxOnly": true
   }
 }

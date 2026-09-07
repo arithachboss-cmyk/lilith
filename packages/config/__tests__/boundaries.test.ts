@@ -19,6 +19,8 @@ async function lint(file: string, source: string) {
 }
 
 const forbidden = [
+  ["packages/core/shared/money.ts", 'import "@lilith/i18n";'],
+  ["packages/core/matching/score.ts", 'import "@lilith/i18n";'],
   ["apps/web/src/app/page.tsx", 'import "@lilith/ai";'],
   ["apps/web/src/app/api/test/route.ts", '"use client"; import "@lilith/ai";'],
   ["apps/web/src/components/card.tsx", '"use client"; import "@lilith/core";'],
@@ -119,6 +121,8 @@ const forbidden = [
 ] as const;
 
 const allowed = [
+  ["packages/core/matching/reasons.ts", 'import "@lilith/i18n";'],
+  ["apps/worker/src/notifications.ts", 'import "@lilith/i18n";'],
   ["apps/web/src/app/api/ai/route.ts", 'import "@lilith/ai";'],
   ["apps/web/src/lib/server/lilith.ts", 'import "@lilith/ai";'],
   ["packages/ai/src/runs.ts", 'import "@lilith/db";'],

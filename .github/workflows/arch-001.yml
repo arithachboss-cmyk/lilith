@@ -1,10 +1,9 @@
-name: ARCH-001 foundation
+name: Architecture foundation
 
 on:
   pull_request:
   push:
-    branches:
-      ["feat/ARCH-001-monorepo-scaffold", "codex/lilith-prototype", "main"]
+    branches: ["feat/ARCH-*", "codex/lilith-prototype", "main"]
 
 permissions:
   contents: read
@@ -33,6 +32,8 @@ jobs:
       - run: pnpm build
       - run: pnpm typecheck
       - run: pnpm lint
-      - run: pnpm test:boundaries
+      - run: pnpm test
+      - run: pnpm test:workspace-boundaries
+      - run: pnpm test:exports
       - name: Verify the lockfile did not change
         run: git diff --exit-code -- pnpm-lock.yaml
