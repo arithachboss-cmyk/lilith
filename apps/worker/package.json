@@ -11,7 +11,9 @@
   "dependencies": {
     "@lilith/core": "workspace:*",
     "@lilith/db": "workspace:*",
-    "@lilith/ai": "workspace:*"
+    "@lilith/ai": "workspace:*",
+    "@lilith/i18n": "workspace:*",
+    "@lilith/contracts": "workspace:*"
   },
   "devDependencies": {
     "@lilith/config": "workspace:*",

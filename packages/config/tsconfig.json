@@ -6,6 +6,6 @@
     "checkJs": true,
     "types": ["node"]
   },
-  "include": ["**/*.ts", "**/*.js"],
+  "include": ["**/*.ts", "**/*.js", "**/*.mjs"],
   "exclude": ["node_modules"]
 }

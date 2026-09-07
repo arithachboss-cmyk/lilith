@@ -83,9 +83,9 @@ function literalValue(node) {
 /** @type {Record<string, readonly string[]>} */
 const dependencies = {
   web: ["web", "contracts", "core", "ui", "i18n", "ai"],
-  worker: ["worker", "contracts", "core", "db", "ai"],
+  worker: ["worker", "contracts", "core", "db", "ai", "i18n"],
   contracts: ["contracts"],
-  core: ["core", "contracts", "db"],
+  core: ["core", "contracts", "db", "i18n"],
   db: ["db", "contracts"],
   ai: ["ai", "contracts", "core", "db"],
   ui: ["ui", "contracts", "i18n"],

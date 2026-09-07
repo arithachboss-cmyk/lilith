@@ -7,7 +7,9 @@
     "packages/config/rules/**"
   ],
   "tasks": {
-    "@lilith/config#build": { "outputs": [] },
+    "@lilith/config#build": {
+      "outputs": []
+    },
     "build": {
       "dependsOn": ["^build"],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
@@ -26,6 +28,9 @@
     "dev": {
       "cache": false,
       "persistent": true
+    },
+    "@lilith/core#test": {
+      "outputs": ["coverage/**"]
     }
   }
 }

@@ -3,20 +3,33 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./index.ts"
+    ".": "./index.ts",
+    "./shared": "./shared/index.ts",
+    "./shared/result": "./shared/result.ts",
+    "./shared/errors": "./shared/errors.ts",
+    "./shared/actor": "./shared/actor.ts",
+    "./shared/money": "./shared/money.ts",
+    "./shared/ids": "./shared/ids.ts",
+    "./shared/clock": "./shared/clock.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run --coverage"
   },
   "devDependencies": {
     "@lilith/config": "workspace:*",
+    "@types/node": "22.19.19",
+    "@vitest/coverage-v8": "5.0.0",
+    "eslint": "9.39.4",
+    "fast-check": "4.9.0",
     "typescript": "5.9.3",
-    "eslint": "9.39.4"
+    "vitest": "5.0.0"
   },
   "dependencies": {
     "@lilith/contracts": "workspace:*",
-    "@lilith/db": "workspace:*"
+    "@lilith/db": "workspace:*",
+    "@lilith/i18n": "workspace:*"
   }
 }
