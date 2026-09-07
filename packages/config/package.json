@@ -1,0 +1,27 @@
+{
+  "name": "@lilith/config",
+  "private": true,
+  "type": "module",
+  "exports": {
+    "./eslint": "./eslint.config.js"
+  },
+  "scripts": {
+    "build": "node --check eslint.config.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint .",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@eslint/js": "9.39.4",
+    "@next/eslint-plugin-next": "15.5.25",
+    "globals": "16.4.0",
+    "typescript-eslint": "8.59.3"
+  },
+  "devDependencies": {
+    "@types/estree": "1.0.9",
+    "@types/node": "22.19.19",
+    "eslint": "9.39.4",
+    "typescript": "5.9.3",
+    "vitest": "5.0.0"
+  }
+}

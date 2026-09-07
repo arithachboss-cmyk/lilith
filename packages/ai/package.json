@@ -1,0 +1,23 @@
+{
+  "name": "@lilith/ai",
+  "private": true,
+  "type": "module",
+  "exports": {
+    ".": "./src/index.ts"
+  },
+  "scripts": {
+    "build": "tsc -p tsconfig.build.json",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "devDependencies": {
+    "@lilith/config": "workspace:*",
+    "typescript": "5.9.3",
+    "eslint": "9.39.4"
+  },
+  "dependencies": {
+    "@lilith/contracts": "workspace:*",
+    "@lilith/core": "workspace:*",
+    "@lilith/db": "workspace:*"
+  }
+}

@@ -1,3 +1,16 @@
 prototype-check.png
 prototype-mobile-check.png
 .DS_Store
+
+# Monorepo generated files and local secrets
+**/node_modules/
+**/.next/
+**/dist/
+**/.turbo/
+**/*.tsbuildinfo
+**/coverage/
+**/.env
+**/.env.*
+!**/.env.example
+**/playwright-report/
+**/test-results/
