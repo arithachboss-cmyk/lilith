@@ -1,0 +1,38 @@
+name: ARCH-001 foundation
+
+on:
+  pull_request:
+  push:
+    branches:
+      ["feat/ARCH-001-monorepo-scaffold", "codex/lilith-prototype", "main"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: foundation-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  foundation:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CI: "true"
+      NEXT_TELEMETRY_DISABLED: "1"
+      TURBO_TELEMETRY_DISABLED: "1"
+      AI_ENABLED: "false"
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "24"
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm build
+      - run: pnpm typecheck
+      - run: pnpm lint
+      - run: pnpm test:boundaries
+      - name: Verify the lockfile did not change
+        run: git diff --exit-code -- pnpm-lock.yaml

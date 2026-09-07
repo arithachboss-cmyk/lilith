@@ -1,0 +1,30 @@
+{
+  "name": "@lilith/web",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "next dev --hostname 127.0.0.1 --port 3100",
+    "build": "next build && node scripts/package-standalone.mjs",
+    "start": "HOSTNAME=127.0.0.1 PORT=3100 node .next/standalone/apps/web/server.js",
+    "typecheck": "tsc --noEmit",
+    "lint": "eslint ."
+  },
+  "dependencies": {
+    "next": "15.5.25",
+    "react": "19.2.6",
+    "react-dom": "19.2.6",
+    "@lilith/contracts": "workspace:*",
+    "@lilith/core": "workspace:*",
+    "@lilith/ui": "workspace:*",
+    "@lilith/i18n": "workspace:*",
+    "@lilith/ai": "workspace:*"
+  },
+  "devDependencies": {
+    "@lilith/config": "workspace:*",
+    "@types/node": "22.19.19",
+    "@types/react": "19.2.14",
+    "@types/react-dom": "19.2.3",
+    "typescript": "5.9.3",
+    "eslint": "9.39.4"
+  }
+}

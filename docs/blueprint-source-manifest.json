@@ -1,0 +1,50 @@
+{
+  "version": "1.0",
+  "files": [
+    {
+      "archive_path": "lilith-architecture/IMPLEMENTATION_ORDER.md",
+      "repository_path": "IMPLEMENTATION_ORDER.md",
+      "sha256": "c12c76fba100242f3dcef2ce968b09a78fe2eeb0892f4ddb9de72a7c18d869e6"
+    },
+    {
+      "archive_path": "lilith-architecture/README.md",
+      "repository_path": "BLUEPRINT_README.md",
+      "sha256": "a6cf17457e02f97027ada370479acc3634d3d41f600db24cbb9ef18c875adb6b"
+    },
+    {
+      "archive_path": "lilith-architecture/docs/01-product-and-system-architecture.md",
+      "repository_path": "docs/01-product-and-system-architecture.md",
+      "sha256": "4e7b448f09ac0b9e1eb162c38ac18922fc6705f043b203a14e4ad6a1be946062"
+    },
+    {
+      "archive_path": "lilith-architecture/docs/02-matching-ai-deal-fee.md",
+      "repository_path": "docs/02-matching-ai-deal-fee.md",
+      "sha256": "ac71b9cf65bc395a0dbc4532808a212c432474265562b72f71e4a3603a53b755"
+    },
+    {
+      "archive_path": "lilith-architecture/docs/03-security-events-admin.md",
+      "repository_path": "docs/03-security-events-admin.md",
+      "sha256": "731c724c4155c50ba17afb19a187783811e683000ef6f3776d1a2eddf83c862e"
+    },
+    {
+      "archive_path": "lilith-architecture/docs/04-api-contracts.md",
+      "repository_path": "docs/04-api-contracts.md",
+      "sha256": "f5a9cac58706ccebe45893b3a844bc5335972d1cd0302560fbe3c83a18835208"
+    },
+    {
+      "archive_path": "lilith-architecture/docs/05-engineering-handbook.md",
+      "repository_path": "docs/05-engineering-handbook.md",
+      "sha256": "4178a23c11dbe78b3136cc7f52bd4e5b647ebdc666b92145d0cd876374dd2ef7"
+    },
+    {
+      "archive_path": "lilith-architecture/docs/06-roadmap-and-adrs.md",
+      "repository_path": "docs/06-roadmap-and-adrs.md",
+      "sha256": "6f4d68be039a86ca5c4eb7b067c6c2145122ce86a06ee1c00515cd709a5630b8"
+    },
+    {
+      "archive_path": "lilith-architecture/docs/07-codex-handoff.md",
+      "repository_path": "docs/07-codex-handoff.md",
+      "sha256": "549dd93ee52a10d2fdf10cb293afbdea058392b107b212826914a473c6c1703f"
+    }
+  ]
+}

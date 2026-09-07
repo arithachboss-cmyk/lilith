@@ -1,0 +1,7 @@
+pnpm-lock.yaml
+BLUEPRINT_README.md
+IMPLEMENTATION_ORDER.md
+docs/0*.md
+**/.next/**
+**/dist/**
+**/node_modules/**
