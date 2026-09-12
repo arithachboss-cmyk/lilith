@@ -1,0 +1,56 @@
+Command: pnpm test:integration
+Source SHA: e4d643538a8a2b61c2ba52c4cf0eed524ad1449b
+Started: 2026-09-12T22:37:06.879Z
+✔ validates levels and rejects malformed inventory (2.637404ms)
+✔ persistent agent API enforces memberships, ownership, tier and photo access (533.151599ms)
+✔ P0-07 forged identity headers deny every API identity boundary and private image access (350.381614ms)
+✔ P0-07 signatures reject changed identity, URL, method, expiry and non-loopback origins (116.848254ms)
+✔ P0-07 mock mode or an allowlist never substitutes for a valid server-only identity key (4.17866ms)
+✔ P0-07 SSR identity is verified at Worker ingress and isolated across concurrent requests (612.154761ms)
+✔ P0-07 signed outsider cannot promote raw headers; forged writes change no rows (62.697276ms)
+✔ P0-01 normal submit commits one unique Lead ID, consent, attribution and correlated outbox (319.866852ms)
+✔ P0-01 double click / concurrent retry yields exactly one lead and one notification (69.934356ms)
+✔ P0-01 lost response and retry preserves Lead ID and does not duplicate (53.28861ms)
+platform_request_failed { requestId: '5c223fc8-0328-4629-a62c-33e6bc0715e3', type: 'Error' }
+✔ P0-01 injected notification/database failure rolls back all writes; retry succeeds once (15.769162ms)
+✔ P0-01 invalid input, malformed JSON, wrong type, oversized body and hostile origin fail closed (100.179504ms)
+✔ P0-02 no consent, false consent and wrong policy version cannot create a session or lead (89.378678ms)
+✔ P0-03 four images persist, retry reuses upload ID, fifth/concurrent extras are rejected (139.819358ms)
+✔ P0-03 reorder/removal persist and foreign images cannot be attached; no orphan reference (58.7401ms)
+platform_request_failed { requestId: 'd24d8a96-26bf-48ac-a5cb-aee52cfaab52', type: 'Error' }
+✔ P0-03 invalid and interrupted uploads save no partial image and retry succeeds (27.137638ms)
+✔ P0-04 authorized mock operator sees correlated record, qualifies and makes it viewing-ready (257.016889ms)
+✔ P0-06 debug events retain first/last touch, reject arbitrary PII and prevent forged qualification (66.071324ms)
+✔ P0-07 no real mode, no authorization default, private image/read tokens and legacy writes closed (396.174786ms)
+✔ P0-01/P0-03 persistent SQLite survives process binding reopen with identical record and bytes (14.756809ms)
+✔ P0-04 concurrent qualification retry never downgrades viewing-ready and records operator (36.001246ms)
+✔ P0-02 lifecycle withdrawal atomically erases all content, preserves other leads and deduplicates retries (79.347043ms)
+platform_request_failed { requestId: '39698e51-6dde-45ae-ad82-9339e27fc6cf', type: 'Error' }
+✔ P0-02 erasure failure rolls back receipt and content; retry keeps original capability (30.341561ms)
+✔ P0-07 erasure requires its own capability, same origin and mock mode; sweep requires operator (33.966084ms)
+✔ P0-07 expired content is hidden from operator and capability; retention sweep erases only due content (82.481983ms)
+✔ P0-07 erasure racing save, uploads and progression never leaves content or permits resurrection (125.762733ms)
+✔ P0-07 writes authorized before erasure are rejected at SQL execution; mixed identity replays cannot recreate (46.499598ms)
+platform_request_failed { requestId: '5b2be73e-4e44-4485-84f2-0a39bb4cf277', type: 'Error' }
+platform_request_failed { requestId: '59809db4-a205-4346-ac35-1a1c7a0cded7', type: 'Error' }
+✔ real Worker + SQLite: complete slice, authorization, concurrency and rollback (1362.8261ms)
+✔ legacy lead form routes into the mock-only Middle Property consent journey (509.379304ms)
+✔ validates rental, buyer and China agent referral briefs (2.618035ms)
+✔ keeps lead reads private while accepting public inquiries (47.817389ms)
+✔ protects import API and documents JSON/CSV ingestion (2.169453ms)
+✔ validates protected pipeline progress updates (0.677811ms)
+✔ tracks acquisition channels, import tools and multilingual reply scripts (5.865554ms)
+✔ ships the D1 migrations for import and partner fields (3.556066ms)
+✔ keeps public capture friendly to foreign referral leads (1.991461ms)
+ℹ tests 36
+ℹ suites 0
+ℹ pass 36
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 2714.398267
+
+$ node --test tests/*.test.mjs
+
+Exit code: 0

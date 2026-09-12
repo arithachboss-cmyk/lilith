@@ -2,7 +2,7 @@
 
 Current recommendation: **NO-GO FOR REAL LEADS**. This packet is a proposal, not approval or activation.
 
-Confirmed contacts: **Middle Property**, LINE OA **@middleproperty**, business phone **0933888594**. The phone has already been supplied; it is not being requested again. It does not identify a notification transport or grant an Operations account access.
+Confirmed contacts: **Middle Property**, LINE OA **@middleproperty**, business phone **0933888594**. The Owner additionally approved **email notifications to themiddleproperty@gmail.com** in this conversation. This identifies the destination; it does not grant Operations account access or approve the real-lead pilot. See the [recorded scope](docs/READINESS_OWNER_AUTHORIZATION.json).
 
 ## 1. Operations destination and people
 
@@ -10,8 +10,9 @@ Recommended initial scope: Arithach as the only pilot operator, with one destina
 
 Owner to specify:
 
-- Where the generated lead notice should arrive: the exact controlled LINE destination, business inbox, or another named destination. A LINE OA handle is a contact path; an outbound messaging destination and its credentials still need verified integration.
 - Which actual accounts may open the lead record, and whether each can only read or also qualify and prepare a viewing.
+
+Destination is already decided: email to **themiddleproperty@gmail.com**. Sender/provider integration and delivery evidence remain pending; no email configuration or test message was sent by this round.
 
 Implementation follows these decisions: verify the identity provider and site-scoped account IDs; enforce the approved role list; build the approved notification transport; verify the same Lead ID from creation to the authorized record. Credentials belong in server-managed runtime storage, never in chat, Git or browser code. Mock tests continue until authorization is complete.
 

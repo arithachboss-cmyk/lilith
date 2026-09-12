@@ -1,0 +1,131 @@
+{
+  "repository": "https://github.com/arithachboss-cmyk/lilith",
+  "branch": "",
+  "source_sha": "e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd",
+  "started_at": "2026-09-12T22:44:05.234Z",
+  "mock_data": true,
+  "production_published": false,
+  "real_leads_enabled": false,
+  "paid_traffic": false,
+  "google_ads": false,
+  "node": "v24.20.0",
+  "browser_channel": "chromium",
+  "steps": [
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "exit_code": 0,
+      "log": "typecheck.log",
+      "sha256": "7217b32c4dcd40babb61193476852924a4c89c7a6f1cb341a8ad472a2e08a2f3"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "exit_code": 0,
+      "log": "lint.log",
+      "sha256": "28acec9bc4fc182636121b01ecafead878657aa62c90fd8390c02c1c1f66a0a7"
+    },
+    {
+      "label": "unit",
+      "command": "pnpm test:unit",
+      "exit_code": 0,
+      "log": "unit.log",
+      "sha256": "368172a4dbaca36d9b151cc735d30294284e8dd4f000b5fa2f58259ebd0828d4"
+    },
+    {
+      "label": "build",
+      "command": "pnpm build",
+      "exit_code": 0,
+      "log": "build.log",
+      "sha256": "106c0b75ce0c9bf6c351d7fcead4f3b9a8703431d08c8d931cbca56de0390f37"
+    },
+    {
+      "label": "integration",
+      "command": "pnpm test:integration",
+      "exit_code": 0,
+      "log": "integration.log",
+      "sha256": "2812776a4acf79517ab07ff0e69d677525dd00a651a1d747f0a34463347a6703"
+    },
+    {
+      "label": "browser",
+      "command": "pnpm test:e2e",
+      "exit_code": 0,
+      "log": "browser.log",
+      "sha256": "3f7c312640bbf8ef65d81ab01685f12df4e92857dd4cdd26ac11241654bdfeaa"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "desktop-consent.png",
+      "sha256": "ea7836ade5fabfbe1a6a018b0fcb513140b4866c1ac1d6b469d38c0e01dc4796",
+      "mock_data": true
+    },
+    {
+      "file": "desktop-operations.png",
+      "sha256": "4e45725bcc610d32d6d767d86ea799bdf44d4cafef8b6bd065c41170784fb5f9",
+      "mock_data": true
+    },
+    {
+      "file": "desktop-saved.png",
+      "sha256": "4652dbf35f4619705a444979424091a81d4000726c3afcb52ed01074caee2089",
+      "mock_data": true
+    },
+    {
+      "file": "landing.png",
+      "sha256": "38360aedbce307255f2d41d74ab57c17a8010cdc21a8cb755ad03479a44fe876",
+      "mock_data": true
+    },
+    {
+      "file": "lost-response-recovered.png",
+      "sha256": "2dddeafdba7ca7bb5a05dfa91285d037b369ca9fbcaf9232f04e1a184803d24c",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-200-double-click.png",
+      "sha256": "2908e6b215a9204b9dc385612847722bc51276b419d79466fb0ab13b1e39de93",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-200-percent.png",
+      "sha256": "df358cc15efa8e791cc7470eb5ae734605f4933eaf2b8df27c4bbd3cf9fdee63",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-consent.png",
+      "sha256": "1df07a5cbeaa19f07dea2a94692e1e8f020a6cbbab6820cbb92a98159a061fc5",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-operations.png",
+      "sha256": "8e66d3c7d0f26f772ec2746531251d80d7356b41f0968298181f9a62d3353ba3",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-saved.png",
+      "sha256": "8262ba44f5dfac2d439c3a2682355949a462cbf061622050535a9cda88c3d3cb",
+      "mock_data": true
+    },
+    {
+      "file": "reopen-race-fixed.png",
+      "sha256": "eca23a4cc4f9ec2bb24539c769b23698824af9012bb01791e7cee3583694a1b5",
+      "mock_data": true
+    },
+    {
+      "file": "withdrawal-1440.png",
+      "sha256": "90535648c3677a0465eab4498aea1a7de5eeede97b88871ab9d899164173a19c",
+      "mock_data": true
+    },
+    {
+      "file": "withdrawal-390.png",
+      "sha256": "13a16efd250b9464c71675823fa734d06709e3a9e5068c81ce1f33f9db5cda23",
+      "mock_data": true
+    },
+    {
+      "file": "withdrawal-restoration.png",
+      "sha256": "9ca6f8006b8569536c87c5ce6e2b9dc38c5be086841d0ef6bc9314e26d543662",
+      "mock_data": true
+    }
+  ],
+  "completed_at": "2026-09-12T22:44:54.639Z",
+  "result": "PASS — Codex local mock verification only"
+}

@@ -1,0 +1,79 @@
+diff --git a/tests/e2e/readiness.spec.ts b/tests/e2e/readiness.spec.ts
+index ca3bbf8..7bf6fcc 100644
+--- a/tests/e2e/readiness.spec.ts
++++ b/tests/e2e/readiness.spec.ts
+@@ -604,3 +604,74 @@ test("P0 contact: a click during held image restoration is recorded and acknowle
+   );
+   await expect(page.getByText("1 / 4 images", { exact: true })).toBeVisible();
+ });
++
++test("P0 lifecycle: restoration cannot replace withdrawal confirmation with an old event error", async ({
++  page,
++}) => {
++  await details(page);
++  await page
++    .getByLabel("Test images", { exact: true })
++    .setInputFiles(images(1));
++  await consent(page);
++  await page.getByRole("button", { name: /Save test request/ }).click();
++  await expect(page.getByTestId("lead-id")).toBeVisible();
++  const imagePaused = deferred(),
++    releaseImage = deferred();
++  const eventPaused = deferred(),
++    releaseEvent = deferred();
++  let imageHeld = false,
++    eventHeld = false;
++  await page.route("**/api/pilot/images/*", async (route) => {
++    if (route.request().method() === "GET" && !imageHeld) {
++      imageHeld = true;
++      imagePaused.resolve();
++      await releaseImage.promise;
++    }
++    await route.continue();
++  });
++  await page.route("**/api/pilot/events", async (route) => {
++    if (!eventHeld) {
++      eventHeld = true;
++      eventPaused.resolve();
++      await releaseEvent.promise;
++    }
++    await route.continue();
++  });
++  await page.reload();
++  await imagePaused.promise;
++  await page
++    .getByRole("link", { name: "Test call", exact: true })
++    .first()
++    .click();
++  await eventPaused.promise;
++  releaseImage.resolve();
++  await expect(
++    page.getByRole("button", { name: "Reopen saved request", exact: true }),
++  ).toBeEnabled();
++  await page
++    .getByRole("button", { name: /Withdraw consent and delete test data/ })
++    .click();
++  await expect(page.getByRole("status").first()).toContainText(
++    "Consent withdrawn",
++  );
++  const staleResponse = page.waitForResponse((response) =>
++    response.url().endsWith("/api/pilot/events"),
++  );
++  releaseEvent.resolve();
++  const response = await staleResponse;
++  expect(response.status()).toBe(401);
++  await response.finished();
++  await page.evaluate(
++    () =>
++      new Promise((resolve) =>
++        requestAnimationFrame(() => requestAnimationFrame(resolve)),
++      ),
++  );
++  await page.screenshot({
++    path: `${output}/withdrawal-restoration.png`,
++    fullPage: true,
++  });
++  await expect(page.getByRole("status").first()).toContainText(
++    "Consent withdrawn",
++  );
++});

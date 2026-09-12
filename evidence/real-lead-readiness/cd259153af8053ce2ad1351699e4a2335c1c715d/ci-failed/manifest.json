@@ -1,0 +1,59 @@
+{
+  "repository": "https://github.com/arithachboss-cmyk/lilith",
+  "branch": "",
+  "source_sha": "cd259153af8053ce2ad1351699e4a2335c1c715d",
+  "started_at": "2026-09-12T22:31:26.805Z",
+  "mock_data": true,
+  "production_published": false,
+  "real_leads_enabled": false,
+  "paid_traffic": false,
+  "google_ads": false,
+  "node": "v24.20.0",
+  "browser_channel": "chromium",
+  "steps": [
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "exit_code": 0,
+      "log": "typecheck.log",
+      "sha256": "4197b5d0abf442ef97bafc6306216af7129788c95d7fe24ae4ef3dabc9e76e42"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "exit_code": 0,
+      "log": "lint.log",
+      "sha256": "7eae17e7e0e8cccb598c230c3ba83ae67b07928b43a7936b8b2a0a1ce9dc4311"
+    },
+    {
+      "label": "unit",
+      "command": "pnpm test:unit",
+      "exit_code": 0,
+      "log": "unit.log",
+      "sha256": "eee0fe99b5c46d54901cd813fc3ff7d651c26d52177409dd89aa02e77cc5f66b"
+    },
+    {
+      "label": "build",
+      "command": "pnpm build",
+      "exit_code": 0,
+      "log": "build.log",
+      "sha256": "786b83d2c631a11da2abfbd92675218359b5fb08a381db4a5261e4a3ae29ad56"
+    },
+    {
+      "label": "integration",
+      "command": "pnpm test:integration",
+      "exit_code": 0,
+      "log": "integration.log",
+      "sha256": "233c53267a7727b634c02f579a2800e752be4226e8524aaf1e65cc230d36da4f"
+    },
+    {
+      "label": "browser",
+      "command": "pnpm test:e2e",
+      "exit_code": 1,
+      "log": "browser.log",
+      "sha256": "f10008b8c43e01bb73330df0c000a53c68b16ea6ad074eb3b46d52bf615c66d1"
+    }
+  ],
+  "artifacts": [],
+  "completed_at": "2026-09-12T22:32:16.851Z"
+}

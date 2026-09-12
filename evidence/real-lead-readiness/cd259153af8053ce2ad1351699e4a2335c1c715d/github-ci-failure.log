@@ -1,0 +1,76 @@
+verify	Verify immutable mock source and capture evidence	﻿2026-09-12T22:31:26.6883101Z ##[group]Run node scripts/verify-readiness.mjs
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:26.6883680Z ^[[36;1mnode scripts/verify-readiness.mjs^[[0m
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:26.6912880Z shell: /usr/bin/bash -e {0}
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:26.6913349Z env:
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:26.6913856Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:26.6914388Z ##[endgroup]
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:26.8071740Z RUN typecheck cd259153af8053ce2ad1351699e4a2335c1c715d
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:31.6201789Z PASS typecheck
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:31.6202505Z RUN lint cd259153af8053ce2ad1351699e4a2335c1c715d
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:37.3339077Z PASS lint
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:37.3339803Z RUN unit cd259153af8053ce2ad1351699e4a2335c1c715d
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:38.9057802Z PASS unit
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:38.9058463Z RUN build cd259153af8053ce2ad1351699e4a2335c1c715d
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:44.1058172Z PASS build
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:45.6545009Z RUN integration cd259153af8053ce2ad1351699e4a2335c1c715d
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:45.6545804Z PASS integration
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:31:45.6546601Z RUN browser cd259153af8053ce2ad1351699e4a2335c1c715d
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8519379Z REVISE browser
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8520983Z Command: pnpm test:e2e
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8521636Z Source SHA: cd259153af8053ce2ad1351699e4a2335c1c715d
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8522357Z Started: 2026-09-12T22:31:45.654Z
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8522711Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8523101Z Running 17 tests using 1 worker
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8523693Z ···F·············
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8523891Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8524468Z   1) tests/e2e/readiness.spec.ts:175:3 › P0 journey mobile: consent, images, unique Lead ID, refresh and operations handoff 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8524847Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8525064Z     Error: expect(locator).toContainText(expected) failed
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8525320Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8525439Z     Locator: getByRole('status')
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8525899Z     Expected substring: "No call or external message"
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8526506Z     Received string:    ""
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8527070Z     Timeout: 10000ms
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8527322Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8527489Z     Call log:
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8527969Z       - Expect "toContainText" getByRole('status') with timeout 10000ms
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8528406Z       - waiting for getByRole('status')
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8530860Z         4 × locator resolved to <p role="status" aria-live="polite" class="pilot-status">Restoring saved request and images… / กำลังเปิดข้…</p>
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8531781Z           - unexpected value "Restoring saved request and images… / กำลังเปิดข้อมูลและรูปที่บันทึก"
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8532480Z         20 × locator resolved to <p role="status" aria-live="polite" class="pilot-status"></p>
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8532979Z            - unexpected value ""
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8533180Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8533187Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8533379Z       242 |       .getByRole("link", { name: "Test call", exact: true })
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8533780Z       243 |       .click();
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8534168Z     > 244 |     await expect(page.getByRole("status")).toContainText(
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8534590Z           |                                            ^
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8535012Z       245 |       "No call or external message",
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8535325Z       246 |     );
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8535730Z       247 |     await expect(page.locator('a[href*="@themiddleproperty"]')).toHaveCount(0);
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8536461Z         at /home/runner/work/lilith/lilith/tests/e2e/readiness.spec.ts:244:44
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8536793Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8537144Z     attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8537851Z     test-results/readiness-P0-journey-mobil-e6c0a-resh-and-operations-handoff/test-failed-1.png
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8538563Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8538850Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8539219Z     Error Context: test-results/readiness-P0-journey-mobil-e6c0a-resh-and-operations-handoff/error-context.md
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8539932Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8540375Z     attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8540998Z     test-results/readiness-P0-journey-mobil-e6c0a-resh-and-operations-handoff/trace.zip
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8541495Z     Usage:
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8541620Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8542034Z         pnpm exec playwright show-trace test-results/readiness-P0-journey-mobil-e6c0a-resh-and-operations-handoff/trace.zip
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8542645Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8543031Z     ────────────────────────────────────────────────────────────────────────────────────────────────
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8543279Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8543412Z   1 failed
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8543993Z     tests/e2e/readiness.spec.ts:175:3 › P0 journey mobile: consent, images, unique Lead ID, refresh and operations handoff 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8544548Z   16 passed (30.3s)
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8544919Z [ELIFECYCLE] Command failed with exit code 1.
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8545156Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8545304Z $ playwright test
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8545480Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8545597Z Exit code: 1
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8545738Z 
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:32:16.8564432Z ##[error]Process completed with exit code 1.

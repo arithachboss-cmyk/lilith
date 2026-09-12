@@ -1,0 +1,56 @@
+Command: pnpm test:e2e
+Source SHA: cd259153af8053ce2ad1351699e4a2335c1c715d
+Started: 2026-09-12T22:31:45.654Z
+
+Running 17 tests using 1 worker
+···F·············
+
+  1) tests/e2e/readiness.spec.ts:175:3 › P0 journey mobile: consent, images, unique Lead ID, refresh and operations handoff 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('status')
+    Expected substring: "No call or external message"
+    Received string:    ""
+    Timeout: 10000ms
+
+    Call log:
+      - Expect "toContainText" getByRole('status') with timeout 10000ms
+      - waiting for getByRole('status')
+        4 × locator resolved to <p role="status" aria-live="polite" class="pilot-status">Restoring saved request and images… / กำลังเปิดข้…</p>
+          - unexpected value "Restoring saved request and images… / กำลังเปิดข้อมูลและรูปที่บันทึก"
+        20 × locator resolved to <p role="status" aria-live="polite" class="pilot-status"></p>
+           - unexpected value ""
+
+
+      242 |       .getByRole("link", { name: "Test call", exact: true })
+      243 |       .click();
+    > 244 |     await expect(page.getByRole("status")).toContainText(
+          |                                            ^
+      245 |       "No call or external message",
+      246 |     );
+      247 |     await expect(page.locator('a[href*="@themiddleproperty"]')).toHaveCount(0);
+        at /home/runner/work/lilith/lilith/tests/e2e/readiness.spec.ts:244:44
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/readiness-P0-journey-mobil-e6c0a-resh-and-operations-handoff/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/readiness-P0-journey-mobil-e6c0a-resh-and-operations-handoff/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/readiness-P0-journey-mobil-e6c0a-resh-and-operations-handoff/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/readiness-P0-journey-mobil-e6c0a-resh-and-operations-handoff/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/readiness.spec.ts:175:3 › P0 journey mobile: consent, images, unique Lead ID, refresh and operations handoff 
+  16 passed (30.3s)
+[ELIFECYCLE] Command failed with exit code 1.
+
+$ playwright test
+
+Exit code: 1

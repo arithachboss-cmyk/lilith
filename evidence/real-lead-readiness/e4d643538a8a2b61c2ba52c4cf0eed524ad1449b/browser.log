@@ -1,0 +1,34 @@
+Command: pnpm test:e2e
+Source SHA: e4d643538a8a2b61c2ba52c4cf0eed524ad1449b
+Started: 2026-09-12T22:37:10.749Z
+
+Running 18 tests using 1 worker
+
+  ✓   1 tests/e2e/readiness.spec.ts:32:1 › P0 regression: save and restore exclude competing Reopen/New actions without losing images (4.9s)
+  ✓   2 tests/e2e/readiness.spec.ts:126:1 › P0 regression: immediate mobile double-click at 200% preserves four staged images (3.7s)
+  ✓   3 tests/e2e/readiness.spec.ts:175:3 › P0 journey desktop: consent, images, unique Lead ID, refresh and operations handoff (7.6s)
+  ✓   4 tests/e2e/readiness.spec.ts:175:3 › P0 journey mobile: consent, images, unique Lead ID, refresh and operations handoff (7.4s)
+  ✓   5 tests/e2e/readiness.spec.ts:287:1 › P0-01 lost submit response retries and recovers the same persisted Lead ID (2.3s)
+  ✓   6 tests/e2e/readiness.spec.ts:314:1 › P0-01/P0-02 invalid input and declined consent never submit; controls recover (2.1s)
+  ✓   7 tests/e2e/readiness.spec.ts:338:1 › P0-01 offline failure is visible and retry succeeds without a duplicate (1.9s)
+  ✓   8 tests/e2e/readiness.spec.ts:351:1 › P0-03 failed upload retains preview, reports error, and retries the same image ID (2.0s)
+  ✓   9 tests/e2e/readiness.spec.ts:387:1 › P0-05/P0-06 landing contact routes preserve source and simulate canonical contact (1.9s)
+  ✓  10 tests/e2e/readiness.spec.ts:402:1 › P0-02 mobile 200% text remains scrollable with unobstructed consent controls (2.5s)
+  ✓  11 tests/e2e/readiness.spec.ts:418:1 › P0-05 actual Landing preserves canonical contacts and UTM into requirement flow (2.8s)
+  ✓  12 tests/e2e/readiness.spec.ts:445:1 › P0-03 saving waits for slow image decoding instead of silently dropping selected files (3.6s)
+  ✓  13 tests/e2e/readiness.spec.ts:473:3 › P0 lifecycle: withdraw 390px erases four images, retries lost response and starts with new consent (4.0s)
+  ✓  14 tests/e2e/readiness.spec.ts:473:3 › P0 lifecycle: withdraw 1440px erases four images, retries lost response and starts with new consent (3.9s)
+  ✓  15 tests/e2e/readiness.spec.ts:525:1 › P0 lifecycle: a delayed contact event cannot overwrite withdrawal or poison the next request (2.4s)
+  ✓  16 tests/e2e/readiness.spec.ts:565:1 › P0 contact: a click during held image restoration is recorded and acknowledged (2.5s)
+  ✓  17 tests/e2e/vertical-slice.spec.ts:3:1 › owner and agent complete the first vertical slice through persisted UI actions (10.5s)
+  ✓  18 tests/e2e/vertical-slice.spec.ts:161:1 › anonymous workspace uses the real sign-in entry point (1.4s)
+
+  18 passed (1.3m)
+
+$ playwright test
+[WebServer] (node:63193) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:63194) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+Exit code: 0

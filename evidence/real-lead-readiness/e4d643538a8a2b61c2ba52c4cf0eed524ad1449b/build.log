@@ -1,0 +1,82 @@
+Command: pnpm build
+Source SHA: e4d643538a8a2b61c2ba52c4cf0eed524ad1449b
+Started: 2026-09-12T22:36:53.815Z
+
+  vinext build  (Vite 8.0.13)
+
+[1/5] analyze client references...
+[2Ktransforming...✓ 384 modules transformed.
+rendering chunks...
+✓ built in 1.59s
+[2/5] analyze server references...
+[2Ktransforming...✓ 282 modules transformed.
+rendering chunks...
+✓ built in 984ms
+[3/5] build rsc environment...
+[2Ktransforming...✓ 382 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 1.85s
+[4/5] build client environment...
+[2Ktransforming...✓ 288 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 2.18s
+[5/5] build ssr environment...
+[2Ktransforming...✓ 283 modules transformed.
+rendering chunks...
+computing gzip size...
+✓ built in 1.84s
+[0m
+  Route (app)
+  ┌ ? /                         
+  ├ ƒ /agents                   
+  ├ λ /api/agents               
+  ├ λ /api/agents/photos        
+  ├ λ /api/analytics            
+  ├ λ /api/deals                
+  ├ λ /api/deals/:id            
+  ├ λ /api/deals/:id/messages   
+  ├ λ /api/deals/:id/timeline   
+  ├ λ /api/deals/:id/transitions
+  ├ λ /api/deals/:id/viewings   
+  ├ λ /api/discover             
+  ├ λ /api/import               
+  ├ λ /api/leads                
+  ├ λ /api/matches              
+  ├ λ /api/matches/:id/interests
+  ├ λ /api/matches/:id/view     
+  ├ λ /api/matches/generate     
+  ├ λ /api/notifications        
+  ├ λ /api/pilot/build          
+  ├ λ /api/pilot/draft          
+  ├ λ /api/pilot/events         
+  ├ λ /api/pilot/images/:id     
+  ├ λ /api/pilot/inbox          
+  ├ λ /api/pilot/leads          
+  ├ λ /api/pilot/maintenance    
+  ├ λ /api/pilot/session        
+  ├ λ /api/profile              
+  ├ λ /api/properties           
+  ├ λ /api/properties/:id       
+  ├ λ /api/requirements         
+  ├ λ /api/requirements/:id     
+  ├ ? /connect                  
+  ├ ƒ /dashboard                
+  ├ ? /display                  
+  ├ ƒ /middle/:segments*        
+  ├ ? /pilot                    
+  └ ? /pilot/inbox              
+
+  λ API  ƒ Dynamic  ? Unknown
+
+  ? Some routes could not be classified. vinext currently uses static analysis
+    and cannot detect dynamic API usage (headers(), cookies(), etc.) at build time.
+    Automatic classification will be improved in a future release.
+
+  Build complete. Run `vinext start` to start the production server.
+
+
+$ WRANGLER_LOG_PATH=.wrangler/wrangler.log vinext build
+
+Exit code: 0

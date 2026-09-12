@@ -1,0 +1,51 @@
+[WebServer] (node:63386) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+
+Running 1 test using 1 worker
+
+(node:63387) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+  ✘  1 tests/e2e/readiness.spec.ts:608:1 › P0 lifecycle: restoration cannot replace withdrawal confirmation with an old event error (14.3s)
+
+
+  1) tests/e2e/readiness.spec.ts:608:1 › P0 lifecycle: restoration cannot replace withdrawal confirmation with an old event error 
+
+    Error: expect(locator).toContainText(expected) failed
+
+    Locator: getByRole('status').first()
+    Expected substring: "Consent withdrawn"
+    Received string:    "Your session expired. Start again with consent."
+    Timeout: 10000ms
+
+    Call log:
+      - Expect "toContainText" getByRole('status').first() with timeout 10000ms
+      - waiting for getByRole('status').first()
+        24 × locator resolved to <p role="status" aria-live="polite" class="pilot-status">Your session expired. Start again with consent.</p>
+           - unexpected value "Your session expired. Start again with consent."
+
+
+      672 |     fullPage: true,
+      673 |   });
+    > 674 |   await expect(page.getByRole("status").first()).toContainText(
+          |                                                  ^
+      675 |     "Consent withdrawn",
+      676 |   );
+      677 | });
+        at /Users/arithachbossabc/Documents/lilith-readiness/tests/e2e/readiness.spec.ts:674:50
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    test-results/readiness-P0-lifecycle-res-ea8f0-ion-with-an-old-event-error/test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: test-results/readiness-P0-lifecycle-res-ea8f0-ion-with-an-old-event-error/error-context.md
+
+    attachment #3: trace (application/zip) ─────────────────────────────────────────────────────────
+    test-results/readiness-P0-lifecycle-res-ea8f0-ion-with-an-old-event-error/trace.zip
+    Usage:
+
+        pnpm exec playwright show-trace test-results/readiness-P0-lifecycle-res-ea8f0-ion-with-an-old-event-error/trace.zip
+
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    tests/e2e/readiness.spec.ts:608:1 › P0 lifecycle: restoration cannot replace withdrawal confirmation with an old event error 

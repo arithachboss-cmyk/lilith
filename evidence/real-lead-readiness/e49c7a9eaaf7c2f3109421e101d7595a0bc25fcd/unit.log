@@ -1,0 +1,16 @@
+Command: pnpm test:unit
+Source SHA: e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+Started: 2026-09-12T22:40:41.260Z
+
+ RUN  v5.0.0 /Users/arithachbossabc/Documents/lilith-readiness
+
+
+ Test Files  3 passed (3)
+      Tests  26 passed (26)
+   Start at  05:40:43
+   Duration  3.78s (environment 55%, import 19%, transform 16%, tests 9%, worker 1%)
+
+
+$ vitest run
+
+Exit code: 0

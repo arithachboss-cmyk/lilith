@@ -1,0 +1,19 @@
+Command: pnpm lint
+Source SHA: f3cbd7443a6b6676df3a963c2ae8f6be6c1f399e
+Started: 2026-09-12T22:27:40.570Z
+
+/Users/arithachbossabc/Documents/lilith-readiness/src/components/pilot/journey.tsx
+  803:34  error  `'` can be escaped with `&apos;`, `&lsquo;`, `&#39;`, `&rsquo;`  react/no-unescaped-entities
+
+/Users/arithachbossabc/Documents/lilith-readiness/worker-env.d.ts
+  10027:44  warning  Unused eslint-disable directive (no problems were reported)
+  10044:70  warning  Unused eslint-disable directive (no problems were reported)
+
+✖ 3 problems (1 error, 2 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+
+[ELIFECYCLE] Command failed with exit code 1.
+
+$ eslint . --ignore-pattern dist --ignore-pattern .next
+
+Exit code: 1

@@ -1,0 +1,121 @@
+{
+  "source_sha": "cd259153af8053ce2ad1351699e4a2335c1c715d",
+  "files": [
+    {
+      "file": "src/services/identity.ts",
+      "sha256": "c7aa9d2c4993c0f836d9c2ca6d26e1337f36fdada52718070d134aa0b0b95985",
+      "bytes": 2768
+    },
+    {
+      "file": "src/services/request-identity.ts",
+      "sha256": "d2d3c1be92be2b2b3f0396459961a8b258fb97a14e6614371dee21fd5d37e7a7",
+      "bytes": 803
+    },
+    {
+      "file": "worker/index.ts",
+      "sha256": "0fcdc3070f73bfdd9a1f7daa8588397488804908d0034421700f251aa81fabac",
+      "bytes": 2926
+    },
+    {
+      "file": "app/chatgpt-auth.ts",
+      "sha256": "d2c2f2612f2095697f1642a891b5b863edb287dca77fc4da414102bd705b1c70",
+      "bytes": 1804
+    },
+    {
+      "file": "src/services/platform/auth.ts",
+      "sha256": "74f01d73bad0f48f0281048c3f36fb18a23be5de42b2116fed0867c8ad7a9d65",
+      "bytes": 2633
+    },
+    {
+      "file": "app/api/leads/auth.ts",
+      "sha256": "ec0906cee260c38cb92b8adeeb603d5c8e513256af8b7d35a803fb387c8430ed",
+      "bytes": 1030
+    },
+    {
+      "file": "app/api/leads/route.ts",
+      "sha256": "5b62b2e15170de05642ee38787a85713f9750f54b23c855eb0e12f4bd1b805a3",
+      "bytes": 3555
+    },
+    {
+      "file": "app/api/agents/storage.ts",
+      "sha256": "38a2be9b6db731170181cf16f4207f949aa18b6a2b6aba4ac23416a2cc886800",
+      "bytes": 1553
+    },
+    {
+      "file": "app/api/import/route.ts",
+      "sha256": "a0568338932f9429e5cbe30ed431a21e1596d1f58f50d737b706611c7cebad23",
+      "bytes": 8821
+    },
+    {
+      "file": "app/api/profile/route.ts",
+      "sha256": "c74618d94d5e61580ad1f6718ce47355734dc6c985e99ed9061afec3f3ecf5c0",
+      "bytes": 503
+    },
+    {
+      "file": "src/services/pilot.ts",
+      "sha256": "2d6c6fb51b830d1a28025ae76831b27cd768efca1445517e478ec1b8d0a957c1",
+      "bytes": 18305
+    },
+    {
+      "file": "src/components/pilot/journey.tsx",
+      "sha256": "1524ee1834b1e3e9521685017870cbd43277c0520925891e8114157c141caeef",
+      "bytes": 36927
+    },
+    {
+      "file": "drizzle/0008_readiness.sql",
+      "sha256": "3e938871cabc1aac8d63af3e9d98b097ee54ada03ced627b166c08acfbde0b3a",
+      "bytes": 2642
+    },
+    {
+      "file": "drizzle/0009_pilot_lifecycle.sql",
+      "sha256": "e6f471e3ee0d69692f25fd2b8fa036d6b8fe0219b7c3b2918cb0882a0a1efd01",
+      "bytes": 1930
+    },
+    {
+      "file": "tests/helpers/worker.mjs",
+      "sha256": "6e3a7b7be2a1c72039c60b569b65c630ea0130ea3558d982beaf4cbb1e458e36",
+      "bytes": 6515
+    },
+    {
+      "file": "tests/identity.test.mjs",
+      "sha256": "d9f97d51c2f223b1d8f4954e7852c604073eb5fcb9405ec422d0c8ae5665ed83",
+      "bytes": 5380
+    },
+    {
+      "file": "tests/pilot.test.mjs",
+      "sha256": "cba50ddd58956392adfadde7548ba5f1d08147c3ac7e9e68ecc2dee67c6f70a7",
+      "bytes": 24156
+    },
+    {
+      "file": "tests/e2e/server.mjs",
+      "sha256": "cceda63521eb932ee0317fa72a5e20a17d2ba4b2b8f312e58cf5ac7ab975dd34",
+      "bytes": 3570
+    },
+    {
+      "file": "tests/e2e/readiness.spec.ts",
+      "sha256": "e5609cc9f81bc87bc2f61e1bb38dce62a61447dd2cf1c92e9ba8ea1a2a5e77ee",
+      "bytes": 20673
+    },
+    {
+      "file": "scripts/verify-readiness.mjs",
+      "sha256": "c23691ba86185eafe1139a7c901cc6f3743acff9497a9df94b33f48e2fd907b3",
+      "bytes": 3304
+    },
+    {
+      "file": "docs/READINESS_ARCHITECTURE.md",
+      "sha256": "a0975cd76ad2019c2aeec49b97ae8feb2619e48f35d07fc66ea2e5c986d4c000",
+      "bytes": 10151
+    },
+    {
+      "file": "docs/READINESS_HOSTING_SNAPSHOT.json",
+      "sha256": "0222734f40b8e97680f0fb30ea7009dae25faf348bb258e271cf738e248eeb2d",
+      "bytes": 660
+    },
+    {
+      "file": "OWNER_DECISION_PACKET.md",
+      "sha256": "2e5d96d20f760e4d212642e926debea6f54c78305f9d15ef7d5a8d8da9fe8e76",
+      "bytes": 2910
+    }
+  ],
+  "pack_sha256": "d0789be9519ac3449e62d378036b72f82ae9e9cc8f1eebe8b8914a8bc4b89ad0"
+}

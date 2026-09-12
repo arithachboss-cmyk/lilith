@@ -1,0 +1,538 @@
+verify	Set up job	﻿2026-09-12T22:43:24.3363311Z Current runner version: '2.337.0'
+verify	Set up job	2026-09-12T22:43:24.3391885Z ##[group]Runner Image Provisioner
+verify	Set up job	2026-09-12T22:43:24.3392902Z Hosted Compute Agent
+verify	Set up job	2026-09-12T22:43:24.3393643Z Version: 20260828.587
+verify	Set up job	2026-09-12T22:43:24.3394327Z Commit: abac92662cab4cc7352de4f9f9d2e2419aad9c29
+verify	Set up job	2026-09-12T22:43:24.3395275Z Build Date: 2026-08-28T16:44:25Z
+verify	Set up job	2026-09-12T22:43:24.3396117Z Worker ID: {5775d590-7cde-47e0-8c7b-a62c9a3f14f4}
+verify	Set up job	2026-09-12T22:43:24.3396879Z Azure Region: centralus
+verify	Set up job	2026-09-12T22:43:24.3397528Z ##[endgroup]
+verify	Set up job	2026-09-12T22:43:24.3399268Z ##[group]Operating System
+verify	Set up job	2026-09-12T22:43:24.3399960Z Ubuntu
+verify	Set up job	2026-09-12T22:43:24.3400632Z 24.04.5
+verify	Set up job	2026-09-12T22:43:24.3401230Z LTS
+verify	Set up job	2026-09-12T22:43:24.3401842Z ##[endgroup]
+verify	Set up job	2026-09-12T22:43:24.3402454Z ##[group]Runner Image
+verify	Set up job	2026-09-12T22:43:24.3403075Z Image: ubuntu-24.04
+verify	Set up job	2026-09-12T22:43:24.3403783Z Version: 20260907.300.1
+verify	Set up job	2026-09-12T22:43:24.3405237Z Included Software: https://github.com/actions/runner-images/blob/ubuntu24/20260907.300/images/ubuntu/Ubuntu2404-Readme.md
+verify	Set up job	2026-09-12T22:43:24.3407127Z Image Release: https://github.com/actions/runner-images/releases/tag/ubuntu24%2F20260907.300
+verify	Set up job	2026-09-12T22:43:24.3408090Z ##[endgroup]
+verify	Set up job	2026-09-12T22:43:24.3409844Z ##[group]GITHUB_TOKEN Permissions
+verify	Set up job	2026-09-12T22:43:24.3412367Z Contents: read
+verify	Set up job	2026-09-12T22:43:24.3413061Z Metadata: read
+verify	Set up job	2026-09-12T22:43:24.3413661Z ##[endgroup]
+verify	Set up job	2026-09-12T22:43:24.3417166Z Secret source: Actions
+verify	Set up job	2026-09-12T22:43:24.3418268Z Cache mode: write
+verify	Set up job	2026-09-12T22:43:24.3419101Z Prepare workflow directory
+verify	Set up job	2026-09-12T22:43:24.3770303Z Prepare all required actions
+verify	Set up job	2026-09-12T22:43:24.3823775Z Getting action download info
+verify	Set up job	2026-09-12T22:43:24.6434185Z Download action repository 'actions/checkout@v4' (SHA:11d5960a326750d5838078e36cf38b85af677262)
+verify	Set up job	2026-09-12T22:43:24.7691178Z Download action repository 'pnpm/action-setup@v4' (SHA:b906affcce14559ad1aafd4ab0e942779e9f58b1)
+verify	Set up job	2026-09-12T22:43:25.2736958Z Download action repository 'actions/setup-node@v4' (SHA:49933ea5288caeca8642d1e84afbd3f7d6820020)
+verify	Set up job	2026-09-12T22:43:25.3683638Z Download action repository 'actions/upload-artifact@v4' (SHA:ea165f8d65b6e75b540449e92b4886f43607fa02)
+verify	Set up job	2026-09-12T22:43:25.6021084Z Complete job name: verify
+verify	Checkout immutable implementation under review	﻿2026-09-12T22:43:25.6851229Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6860727Z ##[group]Run actions/checkout@v4
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6861548Z with:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6862067Z   ref: e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6862766Z   repository: arithachboss-cmyk/lilith
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6867701Z   token: ***
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6868187Z   ssh-strict: true
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6868680Z   ssh-user: git
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6869160Z   persist-credentials: true
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6869688Z   clean: true
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6870177Z   sparse-checkout-cone-mode: true
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6870800Z   fetch-depth: 1
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6871309Z   fetch-tags: false
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6871799Z   show-progress: true
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6872363Z   lfs: false
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6872817Z   submodules: false
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6873305Z   set-safe-directory: true
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6873858Z   allow-unsafe-pr-checkout: false
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.6874841Z ##[endgroup]
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.7938857Z Syncing repository: arithachboss-cmyk/lilith
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.7941281Z ##[group]Getting Git version info
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.7942090Z Working directory is '/home/runner/work/lilith/lilith'
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.7943180Z [command]/usr/bin/git version
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8043739Z git version 2.55.0
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8082817Z ##[endgroup]
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8096933Z Temporarily overriding HOME='/home/runner/work/_temp/0804fe44-1c18-4a5b-b7ef-cf71d63213d6' before making global git config changes
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8099270Z Adding repository directory to the temporary git global config as a safe directory
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8103314Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lilith/lilith
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8183573Z Deleting the contents of '/home/runner/work/lilith/lilith'
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8196093Z ##[group]Initializing the repository
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8197824Z [command]/usr/bin/git init /home/runner/work/lilith/lilith
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8303783Z hint: Using 'master' as the name for the initial branch. This default branch name
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8306200Z hint: will change to "main" in Git 3.0. To configure the initial branch name
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8308745Z hint: to use in all of your new repositories, which will suppress this warning,
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8310619Z hint: call:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8311885Z hint:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8312948Z hint: 	git config --global init.defaultBranch <name>
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8314070Z hint:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8315333Z hint: Names commonly chosen instead of 'master' are 'main', 'trunk' and
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8317114Z hint: 'development'. The just-created branch can be renamed via this command:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8318553Z hint:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8319354Z hint: 	git branch -m <name>
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8320172Z hint:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8320875Z hint: Disable this message with "git config set advice.defaultBranchName false"
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8321987Z Initialized empty Git repository in /home/runner/work/lilith/lilith/.git/
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8324028Z [command]/usr/bin/git remote add origin https://github.com/arithachboss-cmyk/lilith
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8373478Z ##[endgroup]
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8375128Z ##[group]Disabling automatic garbage collection
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8379857Z [command]/usr/bin/git config --local gc.auto 0
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8420387Z ##[endgroup]
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8421587Z ##[group]Setting up auth
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8424352Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8477524Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8908921Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.8953263Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.9238638Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.9284365Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.9581028Z [command]/usr/bin/git config --local http.https://github.com/.extraheader AUTHORIZATION: basic ***
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.9644191Z ##[endgroup]
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.9645951Z ##[group]Fetching the repository
+verify	Checkout immutable implementation under review	2026-09-12T22:43:25.9656062Z [command]/usr/bin/git -c protocol.version=2 fetch --no-tags --prune --no-recurse-submodules --depth=1 origin e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4274230Z From https://github.com/arithachboss-cmyk/lilith
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4276006Z  * branch            e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd -> FETCH_HEAD
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4278694Z ##[endgroup]
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4279196Z ##[group]Determining the checkout info
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4282122Z ##[endgroup]
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4289458Z [command]/usr/bin/git sparse-checkout disable
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4344064Z [command]/usr/bin/git config --local --unset-all extensions.worktreeConfig
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4396312Z ##[group]Checking out the ref
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.4397349Z [command]/usr/bin/git checkout --progress --force e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5678469Z Note: switching to 'e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd'.
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5679203Z 
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5680170Z You are in 'detached HEAD' state. You can look around, make experimental
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5681021Z changes and commit them, and you can discard any commits you make in this
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5681925Z state without impacting any branches by switching back to a branch.
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5682386Z 
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5682702Z If you want to create a new branch to retain commits you create, you may
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5683242Z do so (now or later) by using -c with the switch command. Example:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5683548Z 
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5683695Z   git switch -c <new-branch-name>
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5683913Z 
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5684052Z Or undo this operation with:
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5684270Z 
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5684473Z   git switch -
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5684956Z 
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5685223Z Turn off this advice by setting config variable advice.detachedHead to false
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5685573Z 
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5685864Z HEAD is now at e49c7a9 Keep erased-session errors from replacing withdrawal confirmation
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5694438Z ##[endgroup]
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5747700Z [command]/usr/bin/git log -1 --format=%H
+verify	Checkout immutable implementation under review	2026-09-12T22:43:27.5798625Z e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Assert source identity	﻿2026-09-12T22:43:27.6131121Z ##[group]Run test "$(git rev-parse HEAD)" = e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Assert source identity	2026-09-12T22:43:27.6131897Z ^[[36;1mtest "$(git rev-parse HEAD)" = e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd^[[0m
+verify	Assert source identity	2026-09-12T22:43:27.6179461Z shell: /usr/bin/bash -e {0}
+verify	Assert source identity	2026-09-12T22:43:27.6179872Z ##[endgroup]
+verify	Run pnpm/action-setup@v4	﻿2026-09-12T22:43:27.6371229Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6373013Z ##[group]Run pnpm/action-setup@v4
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6373345Z with:
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6373640Z   version: 11.19.0
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6373936Z   dest: ~/setup-pnpm
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6374228Z   run_install: null
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6374504Z   cache: false
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6375126Z   cache_dependency_path: pnpm-lock.yaml
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6375499Z   package_json_file: package.json
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6375821Z   standalone: false
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.6376090Z ##[endgroup]
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:27.7923068Z ##[group]Running self-installer...
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:28.1974371Z (node:2208) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:28.1976321Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:28.4300870Z Progress: resolved 1, reused 0, downloaded 0, added 0
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:28.4406609Z Packages: +1
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:28.4407405Z +
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:28.9976814Z Progress: resolved 1, reused 0, downloaded 1, added 1, done
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:29.0249348Z 
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:29.0249985Z dependencies:
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:29.0250406Z + pnpm 11.19.0 (12.4.1 is available)
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:29.0250735Z 
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:29.0302991Z Done in 1s
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:29.0675970Z ##[endgroup]
+verify	Run pnpm/action-setup@v4	2026-09-12T22:43:29.0676438Z Installation Completed!
+verify	Run actions/setup-node@v4	﻿2026-09-12T22:43:29.0910121Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0911432Z ##[group]Run actions/setup-node@v4
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0911697Z with:
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0911923Z   node-version: 24
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0912143Z   cache: pnpm
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0912353Z   always-auth: false
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0912583Z   check-latest: false
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0915646Z   token: ***
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0916076Z env:
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0916342Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.0916675Z ##[endgroup]
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.2421526Z Found in cache @ /opt/hostedtoolcache/node/24.20.0/x64
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.2425105Z (node:2222) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.2425912Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.2428135Z ##[group]Environment details
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.6144218Z node: v24.20.0
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.6144965Z npm: 11.19.0
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.6145274Z yarn: 1.22.22
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.6146442Z ##[endgroup]
+verify	Run actions/setup-node@v4	2026-09-12T22:43:29.6190482Z [command]/home/runner/setup-pnpm/node_modules/.bin/pnpm store path --silent
+verify	Run actions/setup-node@v4	2026-09-12T22:43:30.2381393Z /home/runner/setup-pnpm/node_modules/.bin/store/v11
+verify	Run actions/setup-node@v4	2026-09-12T22:43:30.3828168Z Cache hit for: node-cache-Linux-x64-pnpm-808a5b6ce5feeeee9d53ade91ac0df1df03116f7a499a993f7fb9eb9fc374a14
+verify	Run actions/setup-node@v4	2026-09-12T22:43:30.3935577Z (node:2222) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+verify	Run actions/setup-node@v4	2026-09-12T22:43:31.5053821Z Received 121634816 of 137998242 (88.1%), 115.9 MBs/sec
+verify	Run actions/setup-node@v4	2026-09-12T22:43:32.2192089Z Received 137998242 of 137998242 (100.0%), 76.8 MBs/sec
+verify	Run actions/setup-node@v4	2026-09-12T22:43:32.2193075Z Cache Size: ~132 MB (137998242 B)
+verify	Run actions/setup-node@v4	2026-09-12T22:43:32.2227362Z [command]/usr/bin/tar -xf /home/runner/work/_temp/20d1b677-90c3-453f-87d6-3aeaf1311b0d/cache.tzst -P -C /home/runner/work/lilith/lilith --use-compress-program unzstd
+verify	Run actions/setup-node@v4	2026-09-12T22:43:33.6418222Z Cache restored successfully
+verify	Run actions/setup-node@v4	2026-09-12T22:43:33.6533609Z Cache restored from key: node-cache-Linux-x64-pnpm-808a5b6ce5feeeee9d53ade91ac0df1df03116f7a499a993f7fb9eb9fc374a14
+verify	Run pnpm install --frozen-lockfile	﻿2026-09-12T22:43:33.6737335Z ##[group]Run pnpm install --frozen-lockfile
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:33.6737744Z ^[[36;1mpnpm install --frozen-lockfile^[[0m
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:33.7016865Z shell: /usr/bin/bash -e {0}
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:33.7017179Z env:
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:33.7017471Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:33.7017802Z ##[endgroup]
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:34.2342673Z ? Verifying lockfile against supply-chain policies (714 entries)...
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:34.2419467Z Lockfile is up to date, resolution step is skipped
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:34.3761322Z Progress: resolved 1, reused 0, downloaded 0, added 0
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:34.4523430Z Packages: +539
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:34.4524974Z ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:35.3792701Z Progress: resolved 539, reused 425, downloaded 0, added 0
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:35.6337659Z Packages are hard linked from the content-addressable store to the virtual store.
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:35.6338877Z   Content-addressable store is at: /home/runner/setup-pnpm/node_modules/.bin/store/v11
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:35.6339852Z   Virtual store is at:             node_modules/.pnpm
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:36.3813714Z Progress: resolved 539, reused 539, downloaded 0, added 201
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:36.9908754Z Progress: resolved 539, reused 539, downloaded 0, added 539, done
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.3726874Z ✓ Lockfile passes supply-chain policies (714 entries in 8.1s)
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.3866438Z .../sharp@0.34.5/node_modules/sharp install$ node install/check.js || npm run build
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.4833502Z .../sharp@0.34.5/node_modules/sharp install: Done
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5928521Z 
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5929248Z dependencies:
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5929725Z + drizzle-orm 0.45.2
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5930113Z + react 19.2.6
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5930489Z + react-dom 19.2.6
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5930857Z + zod 4.5.4
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5931040Z 
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5931208Z devDependencies:
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5931666Z + @cloudflare/vite-plugin 1.37.1
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5932106Z + @eslint/js 9.39.4
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5932610Z + @next/eslint-plugin-next 16.2.6
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5933096Z + @playwright/test 1.63.0
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5933953Z + @tailwindcss/postcss 4.2.1
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5934481Z + @testing-library/jest-dom 7.0.1
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5935545Z + @testing-library/react 16.3.3
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5935952Z + @types/node 22.19.19
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5936345Z + @types/react 19.2.14
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5936759Z + @types/react-dom 19.2.3
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5937181Z + @vitejs/plugin-react 6.0.2
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5937704Z + @vitejs/plugin-rsc 0.5.26
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5938019Z + drizzle-kit 0.31.10
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5938253Z + eslint 9.39.4
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5938531Z + eslint-plugin-jsx-a11y 6.10.2
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5938841Z + eslint-plugin-react 7.37.5
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5939147Z + eslint-plugin-react-hooks 7.1.1
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5939424Z + globals 16.4.0
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5939659Z + jsdom 30.0.1
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5939876Z + prettier 3.9.6
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5940140Z + react-server-dom-webpack 19.2.6
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5940454Z + tailwindcss 4.2.1
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5940729Z + typescript 5.9.3
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5940991Z + typescript-eslint 8.59.3
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5941257Z + vinext 1.0.0-beta.2
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5941494Z + vite 8.0.13
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5941706Z + vitest 5.0.0
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5941929Z + wrangler 4.92.0
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.5942063Z 
+verify	Run pnpm install --frozen-lockfile	2026-09-12T22:43:42.6450998Z Done in 8.9s using pnpm v11.19.0
+verify	Run pnpm exec playwright install --with-deps chromium	﻿2026-09-12T22:43:42.7168901Z ##[group]Run pnpm exec playwright install --with-deps chromium
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:42.7169675Z ^[[36;1mpnpm exec playwright install --with-deps chromium^[[0m
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:42.7221268Z shell: /usr/bin/bash -e {0}
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:42.7221696Z env:
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:42.7222102Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:42.7222631Z ##[endgroup]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:43.7337918Z Installing dependencies...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:43.7421763Z Switching to root user to install dependencies...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:43.8575577Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:43.8841758Z Get:6 https://packages.microsoft.com/ubuntu/24.04/prod noble InRelease [3600 B]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:43.9620114Z Get:7 https://packages.microsoft.com/ubuntu/24.04/prod noble/main amd64 Packages [463 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:43.9770044Z Get:8 https://packages.microsoft.com/ubuntu/24.04/prod noble/main arm64 Packages [414 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.0338026Z Get:9 https://dl.google.com/linux/chrome-stable/deb stable InRelease [2548 B]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.0936177Z Hit:2 http://azure.archive.ubuntu.com/ubuntu noble InRelease
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.0942732Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble-updates InRelease [126 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.0966909Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble-backports InRelease [126 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.0982127Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble-security InRelease [126 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.1328040Z Get:10 https://dl.google.com/linux/chrome-stable/deb stable/main amd64 Packages [1409 B]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2107152Z Get:11 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Packages [1263 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2173939Z Get:12 http://azure.archive.ubuntu.com/ubuntu noble-updates/main Translation-en [292 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2194135Z Get:13 http://azure.archive.ubuntu.com/ubuntu noble-updates/main amd64 Components [180 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2208614Z Get:14 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Packages [1690 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2316828Z Get:15 http://azure.archive.ubuntu.com/ubuntu noble-updates/universe amd64 Components [388 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2318704Z Get:16 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted amd64 Packages [1544 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2398867Z Get:17 http://azure.archive.ubuntu.com/ubuntu noble-updates/restricted Translation-en [354 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2427512Z Get:18 http://azure.archive.ubuntu.com/ubuntu noble-updates/multiverse amd64 Components [940 B]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2702459Z Get:19 http://azure.archive.ubuntu.com/ubuntu noble-backports/main amd64 Components [5748 B]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.2712242Z Get:20 http://azure.archive.ubuntu.com/ubuntu noble-backports/universe amd64 Components [12.6 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.3699451Z Get:21 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Packages [1006 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.3755618Z Get:22 http://azure.archive.ubuntu.com/ubuntu noble-security/main Translation-en [213 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.3770903Z Get:23 http://azure.archive.ubuntu.com/ubuntu noble-security/main amd64 Components [46.4 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.3778376Z Get:24 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Packages [1206 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.3843339Z Get:25 http://azure.archive.ubuntu.com/ubuntu noble-security/universe amd64 Components [76.3 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.3853897Z Get:26 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted amd64 Packages [1445 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:44.3929051Z Get:27 http://azure.archive.ubuntu.com/ubuntu noble-security/restricted Translation-en [336 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:48.7449221Z Fetched 11.3 MB in 1s (7723 kB/s)
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.5539516Z Reading package lists...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.5801436Z Reading package lists...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.8049785Z Building dependency tree...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.8057705Z Reading state information...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9871654Z libasound2t64 is already the newest version (1.2.11-1ubuntu0.3).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9872542Z libasound2t64 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9874068Z libatk-bridge2.0-0t64 is already the newest version (2.52.0-1build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9875136Z libatk-bridge2.0-0t64 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9875910Z libatk1.0-0t64 is already the newest version (2.52.0-1build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9876570Z libatk1.0-0t64 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9877263Z libatspi2.0-0t64 is already the newest version (2.52.0-1build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9877921Z libatspi2.0-0t64 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9878522Z libcairo2 is already the newest version (1.18.0-3build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9879061Z libcairo2 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9879613Z libcups2t64 is already the newest version (2.4.7-1.2ubuntu7.14).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9880026Z libcups2t64 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9880443Z libdbus-1-3 is already the newest version (1.14.10-4ubuntu4.1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9881099Z libdbus-1-3 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9881662Z libdrm2 is already the newest version (2.4.125-1ubuntu0.1~24.04.2).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9882087Z libdrm2 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9882505Z libgbm1 is already the newest version (25.2.8-0ubuntu0.24.04.2).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9882906Z libgbm1 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9883529Z libglib2.0-0t64 is already the newest version (2.80.0-6ubuntu3.8).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9883961Z libglib2.0-0t64 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9884406Z libnspr4 is already the newest version (2:4.35-1.1build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9885206Z libnspr4 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9885775Z libnss3 is already the newest version (2:3.98-1ubuntu0.2).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9886353Z libnss3 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9886999Z libpango-1.0-0 is already the newest version (1.52.1+ds-1build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9887683Z libpango-1.0-0 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9888327Z libx11-6 is already the newest version (2:1.8.7-1build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9888730Z libx11-6 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9889412Z libxcb1 is already the newest version (1.15-1ubuntu2).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9890025Z libxcb1 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9890702Z libxcomposite1 is already the newest version (1:0.4.5-1build3).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9891282Z libxcomposite1 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9891715Z libxdamage1 is already the newest version (1:1.1.6-1build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9892353Z libxdamage1 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9892982Z libxext6 is already the newest version (2:1.3.4-1build2).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9893864Z libxext6 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9894703Z libxfixes3 is already the newest version (1:6.0.0-2build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9895346Z libxfixes3 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9896012Z libxkbcommon0 is already the newest version (1.6.0-1build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9896687Z libxkbcommon0 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9897351Z libxrandr2 is already the newest version (2:1.5.2-2build1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9897971Z libxrandr2 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9898612Z xvfb is already the newest version (2:21.1.12-1ubuntu1.6).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9899478Z fonts-noto-color-emoji is already the newest version (2.047-0ubuntu0.24.04.1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9900376Z libfontconfig1 is already the newest version (2.15.0-1.1ubuntu2).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9901057Z libfontconfig1 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9901784Z libfreetype6 is already the newest version (2.13.2+dfsg-1ubuntu0.1).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9902473Z libfreetype6 set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9903156Z fonts-liberation is already the newest version (1:2.1.5-3).
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9903826Z fonts-liberation set to manually installed.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9904473Z The following additional packages will be installed:
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9905193Z   xfonts-encodings xfonts-utils
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9905657Z Recommended packages:
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:49.9906309Z   fonts-ipafont-mincho fonts-tlwg-loma
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0100883Z The following NEW packages will be installed:
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0101929Z   fonts-freefont-ttf fonts-ipafont-gothic fonts-tlwg-loma-otf fonts-unifont
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0111257Z   fonts-wqy-zenhei xfonts-cyrillic xfonts-encodings xfonts-scalable
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0111714Z   xfonts-utils
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0326045Z 0 upgraded, 9 newly installed, 0 to remove and 50 not upgraded.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0326614Z Need to get 21.1 MB of archives.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0327078Z After this operation, 79.5 MB of additional disk space will be used.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0327631Z Get:1 file:/etc/apt/apt-mirrors.txt Mirrorlist [144 B]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.0891690Z Get:2 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-ipafont-gothic all 00303-21ubuntu1 [3513 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.1639163Z Get:3 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 fonts-freefont-ttf all 20211204+svn4273-2 [5641 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.2615223Z Get:4 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-tlwg-loma-otf all 1:0.7.3-1 [107 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.2974211Z Get:5 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-unifont all 1:15.1.01-1build1 [2993 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.3667528Z Get:6 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 fonts-wqy-zenhei all 0.9.45-8 [7472 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.4844772Z Get:7 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-encodings all 1:1.0.5-0ubuntu2 [578 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.5250962Z Get:8 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-utils amd64 1:7.7+6build3 [94.4 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.5609912Z Get:9 http://azure.archive.ubuntu.com/ubuntu noble/universe amd64 xfonts-cyrillic all 1:1.0.5+nmu1 [384 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.5994421Z Get:10 http://azure.archive.ubuntu.com/ubuntu noble/main amd64 xfonts-scalable all 1:1.0.3-1.3 [304 kB]
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.8712932Z Fetched 21.1 MB in 1s (36.2 MB/s)
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.8956411Z Selecting previously unselected package fonts-ipafont-gothic.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9189180Z (Reading database ... 
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9189713Z (Reading database ... 5%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9190255Z (Reading database ... 10%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9190682Z (Reading database ... 15%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9191078Z (Reading database ... 20%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9191435Z (Reading database ... 25%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9191712Z (Reading database ... 30%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9191977Z (Reading database ... 35%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9192222Z (Reading database ... 40%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9192493Z (Reading database ... 45%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9192745Z (Reading database ... 50%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:50.9218561Z (Reading database ... 55%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:51.0570254Z (Reading database ... 60%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:51.2410018Z (Reading database ... 65%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:51.4043152Z (Reading database ... 70%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:51.6035379Z (Reading database ... 75%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:51.7676973Z (Reading database ... 80%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:51.9978074Z (Reading database ... 85%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.1518715Z (Reading database ... 90%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.3597703Z (Reading database ... 95%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.3598246Z (Reading database ... 100%
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.3598714Z (Reading database ... 201818 files and directories currently installed.)
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.3646875Z Preparing to unpack .../0-fonts-ipafont-gothic_00303-21ubuntu1_all.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.4050437Z Unpacking fonts-ipafont-gothic (00303-21ubuntu1) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.6429309Z Selecting previously unselected package fonts-freefont-ttf.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.6571438Z Preparing to unpack .../1-fonts-freefont-ttf_20211204+svn4273-2_all.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.6575489Z Unpacking fonts-freefont-ttf (20211204+svn4273-2) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.7457566Z Selecting previously unselected package fonts-tlwg-loma-otf.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.7595163Z Preparing to unpack .../2-fonts-tlwg-loma-otf_1%3a0.7.3-1_all.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.7601260Z Unpacking fonts-tlwg-loma-otf (1:0.7.3-1) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.7825544Z Selecting previously unselected package fonts-unifont.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.7961251Z Preparing to unpack .../3-fonts-unifont_1%3a15.1.01-1build1_all.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.7969777Z Unpacking fonts-unifont (1:15.1.01-1build1) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.9089350Z Selecting previously unselected package fonts-wqy-zenhei.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.9226653Z Preparing to unpack .../4-fonts-wqy-zenhei_0.9.45-8_all.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:52.9332548Z Unpacking fonts-wqy-zenhei (0.9.45-8) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.4019053Z Selecting previously unselected package xfonts-encodings.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.4155724Z Preparing to unpack .../5-xfonts-encodings_1%3a1.0.5-0ubuntu2_all.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.4163218Z Unpacking xfonts-encodings (1:1.0.5-0ubuntu2) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.4476266Z Selecting previously unselected package xfonts-utils.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.4614186Z Preparing to unpack .../6-xfonts-utils_1%3a7.7+6build3_amd64.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.4621703Z Unpacking xfonts-utils (1:7.7+6build3) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.4952012Z Selecting previously unselected package xfonts-cyrillic.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.5087621Z Preparing to unpack .../7-xfonts-cyrillic_1%3a1.0.5+nmu1_all.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.5095205Z Unpacking xfonts-cyrillic (1:1.0.5+nmu1) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.5466172Z Selecting previously unselected package xfonts-scalable.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.5604108Z Preparing to unpack .../8-xfonts-scalable_1%3a1.0.3-1.3_all.deb ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.5611156Z Unpacking xfonts-scalable (1:1.0.3-1.3) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6050726Z Setting up fonts-wqy-zenhei (0.9.45-8) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6170096Z Setting up fonts-freefont-ttf (20211204+svn4273-2) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6187252Z Setting up fonts-tlwg-loma-otf (1:0.7.3-1) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6203495Z Setting up xfonts-encodings (1:1.0.5-0ubuntu2) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6221430Z Setting up fonts-ipafont-gothic (00303-21ubuntu1) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6291327Z update-alternatives: using /usr/share/fonts/opentype/ipafont-gothic/ipag.ttf to provide /usr/share/fonts/truetype/fonts-japanese-gothic.ttf (fonts-japanese-gothic.ttf) in auto mode
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6304296Z Setting up fonts-unifont (1:15.1.01-1build1) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6319781Z Setting up xfonts-utils (1:7.7+6build3) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6358803Z Setting up xfonts-cyrillic (1:1.0.5+nmu1) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6677485Z Setting up xfonts-scalable (1:1.0.3-1.3) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6981026Z Processing triggers for man-db (2.12.0-4build2) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.6999513Z Not building database; man-db/auto-update is not 'true'.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:53.7016344Z Processing triggers for fontconfig (2.15.0-1.1ubuntu2) ...
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3900256Z 
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3902336Z Running kernel seems to be up-to-date.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3902648Z 
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3902816Z No services need to be restarted.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3903014Z 
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3903174Z No containers need to be restarted.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3903360Z 
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3903550Z No user sessions are running outdated binaries.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3903820Z 
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:54.3904112Z No VM guests are running outdated hypervisor (qemu) binaries on this host.
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:55.4501634Z Downloading Chrome for Testing 153.0.8010.12 (playwright chromium v1243) from https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-linux64.zip
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:55.9178484Z |                                                                                |   0% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:56.2243418Z |■■■■■■■■                                                                        |  10% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:56.3431779Z |■■■■■■■■■■■■■■■■                                                                |  20% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:56.4760063Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:56.6041256Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:56.7101488Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:56.8237386Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:56.9439764Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:57.0689243Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:57.1989926Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:43:57.3114967Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 186.8 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:00.4115033Z Chrome for Testing 153.0.8010.12 (playwright chromium v1243) downloaded to /home/runner/.cache/ms-playwright/chromium-1243
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:00.4119273Z Downloading FFmpeg (playwright ffmpeg v1011) from https://cdn.playwright.dev/dbazure/download/playwright/builds/ffmpeg/1011/ffmpeg-linux.zip
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:00.8893993Z |                                                                                |   0% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:00.9380095Z |■■■■■■■■                                                                        |  10% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:00.9908727Z |■■■■■■■■■■■■■■■■                                                                |  20% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.0192021Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.0463704Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.0790191Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.0869568Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.1049415Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.1121610Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.1254856Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.1301134Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 2.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.1889505Z FFmpeg (playwright ffmpeg v1011) downloaded to /home/runner/.cache/ms-playwright/ffmpeg-1011
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.1891319Z Downloading Chrome Headless Shell 153.0.8010.12 (playwright chromium-headless-shell v1243) from https://cdn.playwright.dev/builds/cft/153.0.8010.12/linux64/chrome-headless-shell-linux64.zip
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.6312997Z |                                                                                |   0% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.8376450Z |■■■■■■■■                                                                        |  10% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.9294379Z |■■■■■■■■■■■■■■■■                                                                |  20% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:01.9966201Z |■■■■■■■■■■■■■■■■■■■■■■■■                                                        |  30% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:02.0566111Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                                |  40% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:02.1448741Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                        |  50% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:02.2449805Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                                |  60% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:02.3439572Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                        |  70% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:02.4351535Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■                |  80% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:02.6609716Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■        |  90% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:02.8233493Z |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■| 100% of 114.3 MiB
+verify	Run pnpm exec playwright install --with-deps chromium	2026-09-12T22:44:05.0683031Z Chrome Headless Shell 153.0.8010.12 (playwright chromium-headless-shell v1243) downloaded to /home/runner/.cache/ms-playwright/chromium_headless_shell-1243
+verify	Verify immutable mock source and capture evidence	﻿2026-09-12T22:44:05.1052014Z ##[group]Run node scripts/verify-readiness.mjs
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:05.1052428Z ^[[36;1mnode scripts/verify-readiness.mjs^[[0m
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:05.1092830Z shell: /usr/bin/bash -e {0}
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:05.1093120Z env:
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:05.1093391Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:05.1093924Z ##[endgroup]
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:05.2368631Z RUN typecheck e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:11.0976286Z PASS typecheck
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:11.0976948Z RUN lint e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:18.2684492Z PASS lint
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:18.2686054Z RUN unit e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:20.2761426Z PASS unit
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:20.2761895Z RUN build e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:26.3984385Z PASS build
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:26.3985411Z RUN integration e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:28.0607674Z PASS integration
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:28.0608390Z RUN browser e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:54.6310216Z PASS browser
+verify	Verify immutable mock source and capture evidence	2026-09-12T22:44:54.6403826Z {"source_sha":"e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd","evidence":"/home/runner/work/lilith/lilith/output/readiness/e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd","result":"PASS — Codex local mock verification only"}
+verify	Run actions/upload-artifact@v4	﻿2026-09-12T22:44:54.6524840Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6526194Z ##[group]Run actions/upload-artifact@v4
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6526493Z with:
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6526775Z   name: readiness-e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6527147Z   path: output/readiness/
+verify	Run actions/upload-artifact@v4	test-results/
+verify	Run actions/upload-artifact@v4	
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6527450Z   if-no-files-found: warn
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6527703Z   compression-level: 6
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6527941Z   overwrite: false
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6528178Z   include-hidden-files: false
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6528425Z env:
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6528668Z   PNPM_HOME: /home/runner/setup-pnpm/node_modules/.bin
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.6528982Z ##[endgroup]
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.8269212Z (node:3664) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.8271352Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.8386256Z Multiple search paths detected. Calculating the least common ancestor of all paths
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.8388180Z The least common ancestor is /home/runner/work/lilith/lilith. This will be the root directory of the artifact
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.8389282Z With the provided path, there will be 21 files uploaded
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.8390133Z Artifact name is valid!
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:54.8390602Z Root directory input is valid!
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.0892368Z Beginning upload of artifact content to blob storage
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.2534145Z (node:3664) [DEP0169] DeprecationWarning: `url.parse()` behavior is not standardized and prone to errors that have security implications. Use the WHATWG URL API instead. CVEs are not issued for `url.parse()` vulnerabilities.
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.6179046Z Uploaded bytes 3189347
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.6562067Z Finished uploading artifact content to blob storage!
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.6563324Z SHA256 digest of uploaded artifact zip is bfbcb31fa2c84fec3a6a7362c81a8b7046195f3e406662e9e3eb76c4a7a744c6
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.6565138Z Finalizing artifact upload
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.9207432Z Artifact readiness-e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd.zip successfully finalized. Artifact ID 10307261471
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.9209332Z Artifact readiness-e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd has been successfully uploaded! Final size is 3189347 bytes. Artifact ID is 10307261471
+verify	Run actions/upload-artifact@v4	2026-09-12T22:44:55.9215327Z Artifact download URL: https://github.com/arithachboss-cmyk/lilith/actions/runs/34723511082/artifacts/10307261471
+verify	Post Run actions/setup-node@v4	﻿2026-09-12T22:44:55.9403096Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Post Run actions/setup-node@v4	2026-09-12T22:44:55.9404830Z Post job cleanup.
+verify	Post Run actions/setup-node@v4	2026-09-12T22:44:56.0758073Z (node:3676) [DEP0040] DeprecationWarning: The `punycode` module is deprecated. Please use a userland alternative instead.
+verify	Post Run actions/setup-node@v4	2026-09-12T22:44:56.0758971Z (Use `node --trace-deprecation ...` to show where the warning was created)
+verify	Post Run actions/setup-node@v4	2026-09-12T22:44:56.0761265Z Cache hit occurred on the primary key node-cache-Linux-x64-pnpm-808a5b6ce5feeeee9d53ade91ac0df1df03116f7a499a993f7fb9eb9fc374a14, not saving cache.
+verify	Post Run pnpm/action-setup@v4	﻿2026-09-12T22:44:56.0870036Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Post Run pnpm/action-setup@v4	2026-09-12T22:44:56.0871273Z Post job cleanup.
+verify	Post Run pnpm/action-setup@v4	2026-09-12T22:44:56.2354746Z Pruning is unnecessary.
+verify	Post Checkout immutable implementation under review	﻿2026-09-12T22:44:56.2512086Z Node 20 is being deprecated. This workflow is running with Node 24 by default. If you need to temporarily use Node 20, you can set the ACTIONS_ALLOW_USE_UNSECURE_NODE_VERSION=true environment variable. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.2514348Z Post job cleanup.
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.3501674Z [command]/usr/bin/git version
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.3549153Z git version 2.55.0
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.3603064Z Temporarily overriding HOME='/home/runner/work/_temp/8610de6f-5a3d-4035-bc4f-093c986eee4f' before making global git config changes
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.3604703Z Adding repository directory to the temporary git global config as a safe directory
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.3605869Z [command]/usr/bin/git config --global --add safe.directory /home/runner/work/lilith/lilith
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.3658365Z [command]/usr/bin/git config --local --name-only --get-regexp core\.sshCommand
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.3696522Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'core\.sshCommand' && git config --local --unset-all 'core.sshCommand' || :"
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.3996824Z [command]/usr/bin/git config --local --name-only --get-regexp http\.https\:\/\/github\.com\/\.extraheader
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.4027697Z http.https://github.com/.extraheader
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.4040772Z [command]/usr/bin/git config --local --unset-all http.https://github.com/.extraheader
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.4088572Z [command]/usr/bin/git submodule foreach --recursive sh -c "git config --local --name-only --get-regexp 'http\.https\:\/\/github\.com\/\.extraheader' && git config --local --unset-all 'http.https://github.com/.extraheader' || :"
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.4394719Z [command]/usr/bin/git config --local --name-only --get-regexp ^includeIf\.gitdir:
+verify	Post Checkout immutable implementation under review	2026-09-12T22:44:56.4442123Z [command]/usr/bin/git submodule foreach --recursive git config --local --show-origin --name-only --get-regexp remote.origin.url
+verify	Complete job	﻿2026-09-12T22:44:56.4858585Z Cleaning up orphan processes
+verify	Complete job	2026-09-12T22:44:56.5180365Z ##[warning]Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-node@v4, actions/upload-artifact@v4, pnpm/action-setup@v4. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/

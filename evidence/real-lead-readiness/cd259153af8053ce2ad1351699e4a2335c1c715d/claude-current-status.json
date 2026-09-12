@@ -1,0 +1,11 @@
+{
+  "source_sha": "cd259153af8053ce2ad1351699e4a2335c1c715d",
+  "review_url": "https://claude.ai/chat/6b239ce1-13aa-4895-9877-16cc24bb7789",
+  "observed_ui_text": "Usage limit reached \u00b7 Resets 7:50 AM \u00b7 limits shared with Claude CodeGet more usage",
+  "current_sha_verdict": "BLOCKED \u2014 reviewer unavailable; no new review performed",
+  "pack_status": "Prepared locally from 23 exact-SHA files; not submitted",
+  "prior_review_sha": "8bd0e3d7a223db392e55c5f2533451bff716a464",
+  "prior_verdict": "APPROVE mock source / BLOCK real release; not applicable to new source",
+  "credit_purchase_or_reset": false,
+  "recorded_at": "2026-09-12T22:31:40Z"
+}

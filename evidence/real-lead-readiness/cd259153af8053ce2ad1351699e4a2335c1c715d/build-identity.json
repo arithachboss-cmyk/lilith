@@ -1,0 +1,12 @@
+{
+  "observed_at": "2026-09-12T22:31:12.096Z",
+  "status": 200,
+  "body": {
+    "project": "Middle Property",
+    "source_sha": "cd259153af8053ce2ad1351699e4a2335c1c715d",
+    "mode": "mock-only",
+    "real_leads": false,
+    "paid_traffic": false,
+    "google_ads": false
+  }
+}

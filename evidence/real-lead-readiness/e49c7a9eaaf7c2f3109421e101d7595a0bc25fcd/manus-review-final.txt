@@ -1,0 +1,150 @@
+Captured actual browser-visible Manus final response at 2026-09-12 22:52:43 UTC.
+Task: https://manus.im/app/jQo0f4UnRbBdC0hiaFEczB
+This is a DOM text capture; artifact paths below are visible links, not invented IDs.
+Relative /app links resolve against https://manus.im.
+
+  - heading "Middle Property Independent QA — Final Result" [level=1]
+  - strong: "Final tested SHA:"
+  - code: e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
+  - strong: "Repository:"
+  - code: arithachboss-cmyk/lilith
+  - strong: "Checkout:"
+  - text: detached and clean
+  - strong: "Runtime:"
+  - text: Node 24.21.0, pnpm 11.24.0, Chromium
+  - strong: "Data:"
+  - text: synthetic/mock only; no external contact, deployment, ads, or real personal data
+  - strong: "Test server:"
+  - text: loopback-only
+  - code: 127.0.0.1:4199
+  - text: ", stopped after testing"
+  - heading "Verdict" [level=2]
+  - table:
+    - rowgroup:
+      - row "Gate Result":
+        - columnheader "Gate":
+          - generic: Gate
+        - columnheader "Result":
+          - generic: Result
+    - rowgroup:
+      - row "P0 product behavior on exact e49 PASS":
+        - cell "P0 product behavior on exact e49":
+          - generic: P0 product behavior on exact e49
+        - cell "PASS":
+          - strong: PASS
+      - row "P0 identity, authorization, retention, and privacy PASS":
+        - cell "P0 identity, authorization, retention, and privacy":
+          - generic: P0 identity, authorization, retention, and privacy
+        - cell "PASS":
+          - strong: PASS
+      - row "Mock Operations Inbox and viewing-ready flow PASS — fixture only":
+        - cell "Mock Operations Inbox and viewing-ready flow":
+          - generic: Mock Operations Inbox and viewing-ready flow
+        - cell "PASS — fixture only":
+          - strong: PASS — fixture only
+      - row "Real inbox recipient / hosted ingress / Owner authorization BLOCKED":
+        - cell "Real inbox recipient / hosted ingress / Owner authorization":
+          - generic: Real inbox recipient / hosted ingress / Owner authorization
+        - cell "BLOCKED":
+          - strong: BLOCKED
+      - row "Overall real-lead recommendation NO-GO":
+        - cell "Overall real-lead recommendation":
+          - generic: Overall real-lead recommendation
+        - cell "NO-GO":
+          - strong: NO-GO
+  - generic: "The build endpoint reported:"
+  - generic: JSON
+  - code: "{ \"project\": \"Middle Property\", \"source_sha\": \"e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd\", \"mode\": \"mock-only\", \"real_leads\": false, \"paid_traffic\": false, \"google_ads\": false }"
+  - heading "Verification results" [level=2]
+  - list:
+    - code: pnpm install --frozen-lockfile
+    - text: ":"
+    - strong: PASS
+    - text: "Chromium installation:"
+    - strong: PASS
+    - text: Explicit
+    - code: MIDDLE_BUILD_SHA=<e49> pnpm build
+    - text: ":"
+    - strong: PASS
+    - text: "Typecheck:"
+    - strong: PASS
+    - text: "Lint:"
+    - strong: PASS
+    - text: "Unit:"
+    - strong: 26/26 PASS
+    - text: "Integration:"
+    - strong: 36/36 PASS
+    - text: "Browser:"
+    - strong: 19/19 PASS
+    - text: "Independent API scenarios:"
+    - strong: 13/13 PASS
+    - text: "Independent browser scenarios:"
+    - strong: 5/5 PASS
+    - text: "Contact click during held saved-image restoration:"
+    - strong: PASS
+    - text: Withdrawal confirmation after delayed old event returns
+    - code: "401"
+    - text: ":"
+    - strong: PASS
+  - text: Coverage included the requested lead journey, consent Accept/Decline, persistence, Lead ID, mock notification, authorized mock Operations Inbox, viewing-ready state, retries, lost responses, offline mode, invalid input, 0–4 synthetic PNGs, preview/slide/remove/reorder/save/reopen, fifth-image rejection, failed uploads, cross-lead isolation, unauthorized access, mobile/desktop, 200% text, canonical
+  - strong: Middle Property
+  - text: ","
+  - code: "@middleproperty"
+  - text: ", phone"
+  - code: "0933888594"
+  - text: /
+  - code: tel:+6693388594
+  - text: ", and first/last-touch attribution."
+  - heading "Historical defects" [level=2]
+  - list:
+    - strong:
+      - code: cd259153af8053ce2ad1351699e4a2335c1c715d
+      - text: — REVISE, fixed by e4
+    - text: During saved-image restoration, a visible
+    - strong: Test call
+    - text: click was silently dropped because contact telemetry returned early while restoring. Independent reproduction confirmed the event log remained
+    - code: page_view
+    - text: without
+    - code: call_click
+    - text: .
+    - strong:
+      - code: e4d643538a8a2b61c2ba52c4cf0eed524ad1449b
+      - text: — P2 REVISE, fixed by e49
+    - text: A delayed old event response could overwrite a successful withdrawal confirmation with
+    - strong: “Your session expired.”
+    - text: Data remained erased; this was stale feedback only. The deterministic e49 reproduction now preserves
+    - strong: “Consent withdrawn…”
+    - text: after the delayed
+    - code: "401"
+    - text: .
+  - text: No reproducible product defect remains on e49.
+  - strong:
+    - code: TEST-operations
+    - text: remains only a mock fixture and is not Owner authorization.
+  - heading "Evidence" [level=2]
+  - list:
+    - link "Final independent QA report":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2FINDEPENDENT_QA_REPORT.md
+    - link "Evidence index":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2FEVIDENCE_INDEX.md
+    - link "Complete e49 QA bundle with checksums":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd-qa-bundle.zip
+    - link "Independent API result":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2Findependent-api-e49.json
+    - link "Independent browser result":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2Findependent-browser-e49.json
+    - link "Contact-during-restoration result":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2Frepro-contact-during-restoration-e49.json
+    - link "Contact-during-restoration screenshot":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2Fbrowser%2Fcontact-during-restoration.png
+    - link "Stale-feedback result":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2Frepro-withdrawal-stale-feedback-e49.json
+    - link "Stale-feedback screenshot":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2Fbrowser%2Fstale-after-event-and-frames.png
+    - link "Historical cd259 contact-race evidence":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fcd259153af8053ce2ad1351699e4a2335c1c715d%2Frepro-contact-during-restoration-cd259.json
+    - link "Final SHA, clean checkout, and stopped-server proof":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=MkHs6MuRGsrfjM1LfhbofL&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2Fe49c7a9eaaf7c2f3109421e101d7595a0bc25fcd%2Ffinal-source-server-check.txt
+  - strong: Release remains blocked until real recipient identity, hosted ingress authorization, Owner authorization, notification authorization, and required external approvals are independently confirmed.
+
+

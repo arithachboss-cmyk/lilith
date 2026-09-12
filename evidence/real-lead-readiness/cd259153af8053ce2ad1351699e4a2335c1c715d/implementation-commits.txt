@@ -1,0 +1,170 @@
+commit cd259153af8053ce2ad1351699e4a2335c1c715d
+Author:     Arithach Boss Chartariyapong <arithachbossabc@Arithachs-MacBook-Pro.local>
+AuthorDate: Sun Sep 13 05:28:04 2026 +0700
+Commit:     Arithach Boss Chartariyapong <arithachbossabc@Arithachs-MacBook-Pro.local>
+CommitDate: Sun Sep 13 05:28:04 2026 +0700
+
+    Correct consent copy for JSX validation
+
+ src/components/pilot/journey.tsx | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+commit f3cbd7443a6b6676df3a963c2ae8f6be6c1f399e
+Author:     Arithach Boss Chartariyapong <arithachbossabc@Arithachs-MacBook-Pro.local>
+AuthorDate: Sun Sep 13 05:27:21 2026 +0700
+Commit:     Arithach Boss Chartariyapong <arithachbossabc@Arithachs-MacBook-Pro.local>
+CommitDate: Sun Sep 13 05:27:21 2026 +0700
+
+    Close unsigned identity access and add mock consent erasure lifecycle
+
+ .env.example                         |   3 +
+ OWNER_DECISION_PACKET.md             |  30 +++++
+ app/api/agents/storage.ts            |  62 ++++++---
+ app/api/import/route.ts              |  84 ++++++++----
+ app/api/leads/auth.ts                |  28 ++--
+ app/api/leads/route.ts               |  34 +++--
+ app/api/pilot/maintenance/route.ts   |   3 +
+ app/api/pilot/session/route.ts       |   4 +-
+ app/api/profile/route.ts             |   2 +-
+ app/chatgpt-auth.ts                  |  33 +----
+ docs/READINESS_ARCHITECTURE.md       |  12 +-
+ docs/READINESS_HOSTING_SNAPSHOT.json |  16 +++
+ drizzle/0009_pilot_lifecycle.sql     |  26 ++++
+ drizzle/meta/_journal.json           |   7 +
+ scripts/verify-readiness.mjs         |   7 +
+ src/components/pilot/journey.tsx     |  89 +++++++++++--
+ src/services/identity.ts             |  79 +++++++++++
+ src/services/pilot.ts                | 136 +++++++++++++++++--
+ src/services/platform/auth.ts        |  22 +---
+ src/services/request-identity.ts     |  17 +++
+ tests/agents.test.mjs                | 222 ++++++++++++++++++++++++++-----
+ tests/e2e/readiness.spec.ts          |  98 +++++++++++++-
+ tests/e2e/server.mjs                 |  27 +++-
+ tests/helpers/worker.mjs             |  69 ++++++++--
+ tests/identity.test.mjs              | 155 ++++++++++++++++++++++
+ tests/pilot.test.mjs                 | 245 +++++++++++++++++++++++++++++++++++
+ tests/rendered-html.test.mjs         | 171 +++++++++++++-----------
+ worker/index.ts                      |  59 +++++++--
+ 28 files changed, 1468 insertions(+), 272 deletions(-)
+
+commit 316bfd3a530c8f0827a1ec6712d90d66e63d39c1
+Author:     Arithach Boss Chartariyapong <arithachbossabc@Arithachs-MacBook-Pro.local>
+AuthorDate: Sun Sep 13 05:06:21 2026 +0700
+Commit:     Arithach Boss Chartariyapong <arithachbossabc@Arithachs-MacBook-Pro.local>
+CommitDate: Sun Sep 13 05:06:21 2026 +0700
+
+    Record real lead NO-GO report, independent QA, and exact-SHA evidence
+
+ REAL_LEAD_READINESS_REPORT.md                      |  127 +
+ .../CLAUDE_SOURCE_PACK.md                          | 3671 ++++++++++++++++++++
+ .../CLAUDE_SUPPLEMENTAL_PACK.md                    | 1056 ++++++
+ .../browser.log                                    |   28 +
+ .../build-identity.json                            |    8 +
+ .../build.log                                      |   81 +
+ .../ci/browser.log                                 |   11 +
+ .../ci/build.log                                   |   81 +
+ .../ci/desktop-consent.png                         |  Bin 0 -> 272955 bytes
+ .../ci/desktop-operations.png                      |  Bin 0 -> 74901 bytes
+ .../ci/desktop-saved.png                           |  Bin 0 -> 262093 bytes
+ .../ci/integration.log                             |   44 +
+ .../ci/landing.png                                 |  Bin 0 -> 352174 bytes
+ .../ci/lint.log                                    |   15 +
+ .../ci/lost-response-recovered.png                 |  Bin 0 -> 247952 bytes
+ .../ci/manifest.json                               |  106 +
+ .../ci/mobile-200-percent.png                      |  Bin 0 -> 434394 bytes
+ .../ci/mobile-consent.png                          |  Bin 0 -> 234107 bytes
+ .../ci/mobile-operations.png                       |  Bin 0 -> 85015 bytes
+ .../ci/mobile-saved.png                            |  Bin 0 -> 224314 bytes
+ .../ci/typecheck.log                               |    7 +
+ .../ci/unit.log                                    |   19 +
+ .../claude-review-addendum.txt                     |   48 +
+ .../claude-review-original.txt                     |  143 +
+ .../desktop-consent.png                            |  Bin 0 -> 288969 bytes
+ .../desktop-operations.png                         |  Bin 0 -> 72753 bytes
+ .../desktop-saved.png                              |  Bin 0 -> 268149 bytes
+ .../files-changed.txt                              |   39 +
+ .../github-ci-run.json                             |    1 +
+ .../github-ci.log                                  |  549 +++
+ .../github-pr-ci.json                              |    1 +
+ .../integration.log                                |   44 +
+ .../landing.png                                    |  Bin 0 -> 342607 bytes
+ .../lint.log                                       |   15 +
+ .../lost-response-recovered.png                    |  Bin 0 -> 253723 bytes
+ .../manifest.json                                  |  106 +
+ .../manus-review-original.txt                      |  374 ++
+ .../mobile-200-percent.png                         |  Bin 0 -> 416630 bytes
+ .../mobile-consent.png                             |  Bin 0 -> 237449 bytes
+ .../mobile-operations.png                          |  Bin 0 -> 83779 bytes
+ .../mobile-saved.png                               |  Bin 0 -> 224035 bytes
+ .../reopen-race/execution.log                      |   39 +
+ .../reopen-before-image-snapshot-after.png         |  Bin 0 -> 416910 bytes
+ .../reopen-before-image-snapshot-before.png        |  Bin 0 -> 438277 bytes
+ .../reopen-race/reproduction.json                  |  320 ++
+ .../reopen-race/reproduction.mjs                   |   49 +
+ .../reopen-race/stale-reopen-after-save-after.png  |  Bin 0 -> 416591 bytes
+ .../reopen-race/stale-reopen-after-save-before.png |  Bin 0 -> 438277 bytes
+ .../review-inputs.json                             |   17 +
+ .../security-pattern-scan.json                     |  876 +++++
+ .../source-input-state.json                        |   40 +
+ .../typecheck.log                                  |    7 +
+ .../unit.log                                       |   16 +
+ .../real-lead-readiness/EVIDENCE_INVENTORY.json    |  502 +++
+ evidence/real-lead-readiness/README.md             |   10 +
+ .../browser.log                                    |   30 +
+ .../build-identity.json                            |    8 +
+ .../build.log                                      |   81 +
+ .../ci/browser.log                                 |   11 +
+ .../ci/build.log                                   |   81 +
+ .../ci/desktop-consent.png                         |  Bin 0 -> 272953 bytes
+ .../ci/desktop-operations.png                      |  Bin 0 -> 97397 bytes
+ .../ci/desktop-saved.png                           |  Bin 0 -> 301870 bytes
+ .../ci/integration.log                             |   44 +
+ .../ci/landing.png                                 |  Bin 0 -> 352174 bytes
+ .../ci/lint.log                                    |   15 +
+ .../ci/lost-response-recovered.png                 |  Bin 0 -> 255078 bytes
+ .../ci/manifest.json                               |  116 +
+ .../ci/mobile-200-double-click.png                 |  Bin 0 -> 256313 bytes
+ .../ci/mobile-200-percent.png                      |  Bin 0 -> 444208 bytes
+ .../ci/mobile-consent.png                          |  Bin 0 -> 233980 bytes
+ .../ci/mobile-operations.png                       |  Bin 0 -> 109084 bytes
+ .../ci/mobile-saved.png                            |  Bin 0 -> 265794 bytes
+ .../ci/reopen-race-fixed.png                       |  Bin 0 -> 259844 bytes
+ .../ci/typecheck.log                               |    7 +
+ .../ci/unit.log                                    |   19 +
+ .../desktop-consent.png                            |  Bin 0 -> 287807 bytes
+ .../desktop-operations.png                         |  Bin 0 -> 94293 bytes
+ .../desktop-saved.png                              |  Bin 0 -> 306629 bytes
+ .../files-changed.txt                              |   37 +
+ .../fix-files-changed.txt                          |    5 +
+ .../github-ci-run.json                             |    1 +
+ .../github-ci.log                                  |  538 +++
+ .../github-pr-ci.json                              |    1 +
+ .../integration.log                                |   44 +
+ .../landing.png                                    |  Bin 0 -> 342607 bytes
+ .../lint.log                                       |   15 +
+ .../lost-response-recovered.png                    |  Bin 0 -> 260946 bytes
+ .../manifest.json                                  |  116 +
+ .../manus-review-fixed.txt                         |  402 +++
+ .../mobile-200-double-click.png                    |  Bin 0 -> 254078 bytes
+ .../mobile-200-percent.png                         |  Bin 0 -> 429625 bytes
+ .../mobile-consent.png                             |  Bin 0 -> 235381 bytes
+ .../mobile-operations.png                          |  Bin 0 -> 106096 bytes
+ .../mobile-saved.png                               |  Bin 0 -> 258887 bytes
+ .../reopen-race-fixed.png                          |  Bin 0 -> 256906 bytes
+ .../security-pattern-scan.json                     |  876 +++++
+ .../security-scan.mjs                              |   62 +
+ .../typecheck.log                                  |    7 +
+ .../unit.log                                       |   16 +
+ evidence/real-lead-readiness/scan-source.mjs       |   62 +
+ 101 files changed, 11044 insertions(+)
+
+commit 6d9b70531f480ad59e0b5f350b332819f5459414
+Author:     Arithach Boss Chartariyapong <arithachbossabc@Arithachs-MacBook-Pro.local>
+AuthorDate: Sun Sep 13 04:56:25 2026 +0700
+Commit:     Arithach Boss Chartariyapong <arithachbossabc@Arithachs-MacBook-Pro.local>
+CommitDate: Sun Sep 13 04:56:25 2026 +0700
+
+    Verify repaired immutable readiness source in CI
+
+ .github/workflows/readiness-evidence.yml | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
