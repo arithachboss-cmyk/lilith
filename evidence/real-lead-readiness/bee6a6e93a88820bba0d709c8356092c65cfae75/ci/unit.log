@@ -1,0 +1,19 @@
+Command: pnpm test:unit
+Source SHA: bee6a6e93a88820bba0d709c8356092c65cfae75
+Started: 2026-09-12T21:57:36.480Z
+
+[1m[30m[46m RUN [49m[39m[22m [36mv5.0.0 [39m[90m/home/runner/work/lilith/lilith[39m
+
+ [32m✓[39m tests/unit/connect.test.ts [2m([22m[2m7 tests[22m[2m)[22m[32m 38[2mms[22m[39m
+ [32m✓[39m tests/unit/domain.test.ts [2m([22m[2m17 tests[22m[2m)[22m[32m 14[2mms[22m[39m
+ [32m✓[39m tests/unit/property-card.test.tsx [2m([22m[2m2 tests[22m[2m)[22m[32m 106[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m3 passed[39m[22m[90m (3)[39m
+[2m      Tests [22m [1m[32m26 passed[39m[22m[90m (26)[39m
+[2m   Start at [22m 21:57:36
+[2m   Duration [22m 776ms[2m (environment 44%, transform 22%, import 18%, tests 15%, worker 1%)[22m
+
+
+$ vitest run
+
+Exit code: 0

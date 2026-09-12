@@ -1,0 +1,374 @@
+Captured actual Manus QA report DOM snapshot
+Task: https://manus.im/app/jQo0f4UnRbBdC0hiaFEczB
+Source: 8bd0e3d7a223db392e55c5f2533451bff716a464
+Relative artifact URLs below resolve against https://manus.im
+
+ 1.6
+  - button "Share":
+    - generic: Share
+  - generic: Please preserve the no-delay double-click+200% result as an unresolved timing defect unless click-target/network evidence proves the driver acted outside the supported UI. Adding a human-like settling delay is not itself a product fix or sufficient reason to dismiss image loss after an apparent 4-image preview. Return the no-delay driver/log/screenshots with final evidence. Internal read-only analysis found Reopen and Start new remain enabled during save, and Decline disappears when session appears, potentially shifting the second click onto Reopen; a concurrent empty draft reopen can overwrite picturesRef before upload. We are reproducing that separately now. Keep routine passing scenarios separate from this unresolved case; do not automatically PASS it because a delay avoids it.
+  - generic: Worked for 2m 48s
+  - heading "Independent QA Final Report" [level=1]
+  - strong: "Affected SHA:"
+  - code: 8bd0e3d7a223db392e55c5f2533451bff716a464
+  - strong: "Repository:"
+  - code: arithachboss-cmyk/lilith
+  - strong: "Checkout:"
+  - text: detached exact SHA;
+  - code: git status --porcelain
+  - text: clean
+  - strong: "Build:"
+  - text: Node
+  - code: v24.21.0
+  - text: ", frozen pnpm install, Chromium installed, build passed"
+  - strong: "Harness:"
+  - text: compiled Worker, temporary SQLite, loopback-only
+  - code: 127.0.0.1:4199
+  - text: ","
+  - code: mock_data:true
+  - text: only
+  - strong: "Overall recommendation:"
+  - strong: NO-GO for real leads
+  - heading "P0 gate results" [level=2]
+  - table:
+    - rowgroup:
+      - row "Gate Result Summary":
+        - columnheader "Gate":
+          - generic: Gate
+        - columnheader "Result":
+          - generic: Result
+        - columnheader "Summary":
+          - generic: Summary
+    - rowgroup:
+      - row "P0-00 Exact source/build identity PASS HEAD and /api/pilot/build.source_sha both equal the requested SHA. Build flags report mock-only, real_leads:false, paid_traffic:false, google_ads:false.":
+        - cell "P0-00 Exact source/build identity":
+          - generic: P0-00 Exact source/build identity
+        - cell "PASS":
+          - strong: PASS
+        - cell "HEAD and /api/pilot/build.source_sha both equal the requested SHA. Build flags report mock-only, real_leads:false, paid_traffic:false, google_ads:false.":
+          - code: HEAD
+          - text: and
+          - code: /api/pilot/build.source_sha
+          - text: both equal the requested SHA. Build flags report
+          - code: mock-only
+          - text: ","
+          - code: real_leads:false
+          - text: ","
+          - code: paid_traffic:false
+          - text: ","
+          - code: google_ads:false
+          - text: .
+      - row "P0-01 Lead persistence, idempotency, retries, lost response, offline, invalid input PASS Independent API and browser checks passed normal save, double/concurrent retry, changed-payload conflict, lost response, offline retry, malformed/oversized/invalid input, and hostile-origin rejection.":
+        - cell "P0-01 Lead persistence, idempotency, retries, lost response, offline, invalid input":
+          - generic: P0-01 Lead persistence, idempotency, retries, lost response, offline, invalid input
+        - cell "PASS":
+          - strong: PASS
+        - cell "Independent API and browser checks passed normal save, double/concurrent retry, changed-payload conflict, lost response, offline retry, malformed/oversized/invalid input, and hostile-origin rejection.":
+          - generic: Independent API and browser checks passed normal save, double/concurrent retry, changed-payload conflict, lost response, offline retry, malformed/oversized/invalid input, and hostile-origin rejection.
+      - row "P0-02 Consent, decline, mobile, 200% text, capability access PASS Desktop/mobile consent, decline, capability gates, and separate mobile 200% text checks passed.":
+        - cell "P0-02 Consent, decline, mobile, 200% text, capability access":
+          - generic: P0-02 Consent, decline, mobile, 200% text, capability access
+        - cell "PASS":
+          - strong: PASS
+        - cell "Desktop/mobile consent, decline, capability gates, and separate mobile 200% text checks passed.":
+          - generic: Desktop/mobile consent, decline, capability gates, and separate mobile 200% text checks passed.
+      - row "P0-03 Image preview, reorder/remove, save/reopen, fifth rejection, failed upload REVISE Routine 0–4 image API coverage, image ownership, reorder/remove, fifth rejection, failed-upload retry, and separated desktop/mobile flows passed. The required no-delay mobile 200% + 4-image + double-click case reproducibly loses images.":
+        - cell "P0-03 Image preview, reorder/remove, save/reopen, fifth rejection, failed upload":
+          - generic: P0-03 Image preview, reorder/remove, save/reopen, fifth rejection, failed upload
+        - cell "REVISE":
+          - strong: REVISE
+        - cell "Routine 0–4 image API coverage, image ownership, reorder/remove, fifth rejection, failed-upload retry, and separated desktop/mobile flows passed. The required no-delay mobile 200% + 4-image + double-click case reproducibly loses images.":
+          - generic: Routine 0–4 image API coverage, image ownership, reorder/remove, fifth rejection, failed-upload retry, and separated desktop/mobile flows passed. The required no-delay mobile 200% + 4-image + double-click case reproducibly loses images.
+      - row "P0-04 Mock Operations Inbox and viewing-ready PASS mock / BLOCKED hosted TEST-operations successfully viewed, qualified, and marked a lead viewing-ready. Wrong and missing operators were denied. This fixture is not Owner authorization.":
+        - cell "P0-04 Mock Operations Inbox and viewing-ready":
+          - generic: P0-04 Mock Operations Inbox and viewing-ready
+        - cell "PASS mock / BLOCKED hosted":
+          - strong: PASS mock / BLOCKED hosted
+        - cell "TEST-operations successfully viewed, qualified, and marked a lead viewing-ready. Wrong and missing operators were denied. This fixture is not Owner authorization.":
+          - code: TEST-operations
+          - text: successfully viewed, qualified, and marked a lead viewing-ready. Wrong and missing operators were denied. This fixture is not Owner authorization.
+      - row "P0-05 Canonical brand/contact/attribution PASS mock Middle Property, @middleproperty, and 0933888594 were verified; old @themiddleproperty was absent. First/last-touch attribution and event dedupe passed. Contact actions were simulated only.":
+        - cell "P0-05 Canonical brand/contact/attribution":
+          - generic: P0-05 Canonical brand/contact/attribution
+        - cell "PASS mock":
+          - strong: PASS mock
+        - cell "Middle Property, @middleproperty, and 0933888594 were verified; old @themiddleproperty was absent. First/last-touch attribution and event dedupe passed. Contact actions were simulated only.":
+          - code: Middle Property
+          - text: ","
+          - code: "@middleproperty"
+          - text: ", and"
+          - code: "0933888594"
+          - text: were verified; old
+          - code: "@themiddleproperty"
+          - text: was absent. First/last-touch attribution and event dedupe passed. Contact actions were simulated only.
+      - row "P0-06 Notification and hosted ingress BLOCKED Only mock://middle-property-operations, generated_mock, sent:false were observed. Real recipient approval and hosted authentication/header-integrity evidence remain unconfirmed.":
+        - cell "P0-06 Notification and hosted ingress":
+          - generic: P0-06 Notification and hosted ingress
+        - cell "BLOCKED":
+          - strong: BLOCKED
+        - cell "Only mock://middle-property-operations, generated_mock, sent:false were observed. Real recipient approval and hosted authentication/header-integrity evidence remain unconfirmed.":
+          - text: Only
+          - code: mock://middle-property-operations
+          - text: ","
+          - code: generated_mock
+          - text: ","
+          - code: sent:false
+          - text: were observed. Real recipient approval and hosted authentication/header-integrity evidence remain unconfirmed.
+      - row "P0-07 Real-lead release authorization BLOCKED Real lead writes and paid traffic remain closed. Required Owner approvals, external QA, hosted ingress authorization, real recipient authorization, and production storage/retention controls are incomplete.":
+        - cell "P0-07 Real-lead release authorization":
+          - generic: P0-07 Real-lead release authorization
+        - cell "BLOCKED":
+          - strong: BLOCKED
+        - cell "Real lead writes and paid traffic remain closed. Required Owner approvals, external QA, hosted ingress authorization, real recipient authorization, and production storage/retention controls are incomplete.":
+          - generic: Real lead writes and paid traffic remain closed. Required Owner approvals, external QA, hosted ingress authorization, real recipient authorization, and production storage/retention controls are incomplete.
+  - heading "Confirmed defect D1 — P0 image loss during no-delay double-click" [level=2]
+  - strong: "Severity:"
+  - strong: P0 / release-blocking
+  - strong: "Classification:"
+  - text: reproducible product interaction race
+  - strong: "SHA:"
+  - code: 8bd0e3d7a223db392e55c5f2533451bff716a464
+  - heading "Steps" [level=3]
+  - list:
+    - listitem: Use a 390×844 touch viewport.
+    - text: Open
+    - code: /pilot
+    - text: .
+    - listitem: Fill synthetic details and select four valid synthetic PNGs.
+    - text: Wait for visible
+    - code: 4 / 4 images
+    - text: .
+    - listitem: Open consent, accept, and apply 200% text scaling.
+    - listitem: Confirm the four-image preview remains visible.
+    - text: Immediately double-click
+    - strong: Save test request
+    - text: with no settling delay.
+  - heading "Expected" [level=3]
+  - generic: One lead is created, four image PUTs occur, the persisted draft contains four images, and refresh/reopen displays all four.
+  - heading "Actual" [level=3]
+  - text: The first click targets the enabled Save button. After the first click causes the layout to reflow, the second click at the same screen coordinate targets the newly rendered enabled
+  - strong: Reopen saved request
+  - text: button.
+  - generic: "Evidence from pointer telemetry:"
+  - list:
+    - text: "First click:"
+    - code: Save test request
+    - text: ","
+    - code: disabled:false
+    - text: .
+    - text: "Second click:"
+    - code: Reopen saved request
+    - text: ","
+    - code: disabled:false
+    - text: .
+    - text: "No"
+    - code: PUT /api/pilot/images/*
+    - text: requests occurred.
+    - text: Lead creation returned
+    - code: "201"
+    - text: .
+    - text: Authorized draft returned
+    - code: "200"
+    - text: with
+    - code: "images: []"
+    - text: .
+    - listitem: The final UI displayed a Lead ID but no image gallery.
+  - text: This is not dismissed as a Playwright selector issue. The click-target and
+  - code: elementFromPoint
+  - text: telemetry prove the second pointer event reaches a different enabled product control. The likely race is that
+  - code: Reopen saved request
+  - text: remains enabled outside the busy-disabled fieldset and overwrites
+  - code: picturesRef
+  - text: while the asynchronous submit flow is preparing image uploads.
+  - heading "Defect evidence" [level=3]
+  - list:
+    - link "No-delay structured telemetry":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fno-delay-dblclick-200.json
+    - link "No-delay full log":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Frepro-no-delay-dblclick-200.log
+    - link "Exact reproduction driver":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Frepro-no-delay-dblclick-200.mjs
+    - link "Pre-submit screenshot showing four-image preview":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fno-delay-before-submit-200.png
+    - link "Post-submit screenshot showing Lead ID without images":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fno-delay-after-submit-200.png
+    - 'link "Single-click 200% control evidence: four PUTs and four persisted images"':
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fdebug-mobile-persistence-phases.json
+  - generic: "Relevant source locations inspected:"
+  - list:
+    - code: src/components/pilot/journey.tsx:121-153
+    - text: — asynchronous
+    - code: reopen()
+    - text: .
+    - code: src/components/pilot/journey.tsx:271-363
+    - text: — asynchronous submit/upload flow.
+    - code: src/components/pilot/journey.tsx:481
+    - text: — only the form fieldset is disabled while busy.
+    - code: src/components/pilot/journey.tsx:743-759
+    - text: — Reopen and Start New controls remain active during save.
+  - heading "Passing independent evidence" [level=2]
+  - list:
+    - link "Independent API result":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Findependent-api-qa.json
+    - link "Independent API log":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Findependent-api-qa.log
+    - link "Independent browser result":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Findependent-browser-qa.json
+    - link "Independent browser log":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Findependent-browser-qa.log
+    - 'link "Committed readiness Playwright log: 10/10 passed"':
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fcommitted-readiness-playwright.log
+    - link "Landing screenshot":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Flanding-independent.png
+    - link "Desktop consent screenshot":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fdesktop-consent-independent.png
+    - link "Desktop saved screenshot":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fdesktop-saved-independent.png
+    - link "Mobile consent screenshot":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fmobile-consent-independent.png
+    - link "Mobile 200% screenshot":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Fmobile-200-independent.png
+    - link "Operations Inbox screenshot":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Foperations-independent.png
+  - heading "Commands executed" [level=2]
+  - generic: sh
+  - code:
+    - generic: git rev-parse HEAD
+    - generic: git status --porcelain
+    - generic: pnpm install --frozen-lockfile
+    - generic: pnpm exec playwright install --with-deps chromium
+    - generic: MIDDLE_BUILD_SHA=8bd0e3d7a223db392e55c5f2533451bff716a464 pnpm build
+    - generic: MIDDLE_READINESS_MODE=mock node tests/e2e/server.mjs
+    - generic: pnpm exec playwright test tests/e2e/readiness.spec.ts --reporter=line
+    - generic: node independent-api-qa.mjs
+    - generic: node independent-browser-qa.mjs
+    - generic: node repro-no-delay-dblclick-200.mjs
+  - generic: The server was loopback-only and has been stopped; the temporary SQLite harness was removed.
+  - heading "Downloads" [level=2]
+  - list:
+    - link "Final independent QA report":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2FINDEPENDENT_QA_REPORT.md
+    - link "Evidence index":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2FEVIDENCE_INDEX.md
+    - link "Complete 63-file QA evidence bundle":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464-qa-bundle.zip
+    - link "Final clean-checkout and server-stop verification":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2Ffinal-source-and-server-check.txt
+    - link "Artifact SHA-256 checksums":
+      - /url: /app/jQo0f4UnRbBdC0hiaFEczB?previewEventId=lcX77ZI5DQ790YCUDl1XDn&previewSandboxPath=%2Fhome%2Fubuntu%2Fqa-artifacts%2F8bd0e3d7a223db392e55c5f2533451bff716a464%2FSHA256SUMS.txt
+  - strong: "Final decision: NO-GO until D1 is fixed and the blocked external authorization gates are independently completed."
+  - img "no-delay-before-submit-200.png"
+  - button:
+  - img "no-delay-after-submit-200.png"
+  - button:
+  - img "landing-independent.png"
+  - button:
+  - img "desktop-consent-independent.png"
+  - button:
+  - img "desktop-saved-independent.png"
+  - button:
+  - img "mobile-consent-independent.png"
+  - generic: "+2"
+  - generic "no-delay-dblclick-200.json"
+  - generic "Code · 20.21 KB"
+  - button:
+  - generic "repro-no-delay-dblclick-200.log"
+  - generic "Code · 20.21 KB"
+  - button:
+  - generic "repro-no-delay-dblclick-200.mjs"
+  - generic "Code · 5.13 KB"
+  - button:
+  - generic "debug-mobile-persistence-phases.json"
+  - generic "Code · 3.31 KB"
+  - button:
+  - generic "independent-api-qa.json"
+  - generic "Code · 2.15 KB"
+  - button:
+  - generic "independent-api-qa.log"
+  - generic "Code · 3.27 KB"
+  - button:
+  - generic "independent-browser-qa.json"
+  - generic "Code · 1.75 KB"
+  - button:
+  - generic "independent-browser-qa.log"
+  - generic "Code · 2.73 KB"
+  - button:
+  - generic "committed-readiness-playwright.log"
+  - generic "Code · 1.27 KB"
+  - button:
+  - generic "Middle Property Independent QA Report"
+  - generic "Markdown · 10.94 KB"
+  - button:
+  - generic "Evidence Index — exact SHA"
+  - generic "Markdown · 2.48 KB"
+  - button:
+  - generic "8bd0e3d7a223db392e55c5f2533451bff716a464-qa-bundle.zip"
+  - generic "Archive · 5.32 MB"
+  - button:
+  - generic "final-source-and-server-check.txt"
+  - generic "Text · 74 B"
+  - button:
+  - generic "SHA256SUMS.txt"
+  - generic "Text · 947 B"
+  - button:
+  - generic: View all files in this task
+  - generic: Task completed
+  - generic: How was this result?
+  - generic: Make the process we used here into a re-usable skill with /skill-creator
+  - generic: Analyze the source code of src/components/pilot/journey.tsx around lines 743-759 to propose a robust code fix for defect D1.
+  - generic: Draft a remediation plan for P0-06 and P0-07 gates to achieve real-lead release authorization.
+  - generic: Generate a slide presentation summarizing the Independent QA Final Report, P0 gate results, and confirmed defect D1.
+  - button:
+    - textbox "Terminal input"
+    - generic: u
+    - generic: buntu@sandbox:~/qa-artifacts$
+    - generic: set -euo pipefail
+    - generic: c
+    - generic: d /home/ubuntu/qa-artifacts
+    - generic: r
+    - generic: m -f 8bd0e3d7a223db392e55c5f2533451bff716a464-qa-bundle.zip
+    - generic: z
+    - generic: ip -qr 8bd0e3d7a223db392e55c5f2533451bff716a464-qa-bundle.zip 8bd0e3d7a223db392e55c5f2533451bff716a464
+    - generic: u
+    - generic: nzip -t 8bd0e3d7a223db392e55c5f2533451bff716a464-qa-bundle.zip | tail -2
+    - generic: s
+    - generic: tat -c 'SIZE=%s PATH=%n' 8bd0e3d7a223db392e55c5f2533451bff716a464-qa-bundle.zip
+    - generic: "testing: 8bd0e3d7a223db392e55c5f2533451bff716a464/final-source-and-server-check.txt OK"
+    - generic: "N"
+    - generic: o errors detected in compressed data of 8bd0e3d7a223db392e55c5f2533451bff716a464-qa-bundle.zip.
+    - generic: S
+    - generic: IZE=5578612 PATH=8bd0e3d7a223db392e55c5f2533451bff716a464-qa-bundle.zip
+    - generic: u
+    - generic: buntu@sandbox:~/qa-artifacts$
+  - generic: Agent todo completed
+  - paragraph: Message Manus
+  - button:
+  - img "Ahrefs"
+  - generic: C
+  - img "Cloudflare"
+  - generic: "+7"
+  - button "Manus Desktop":
+    - generic: Manus Desktop
+  - button [disabled]:
+  - paragraph: Manus is an AI Agent and can make mistakes. Please double-check before use.
+- button "Messages":
+  - generic: Messages
+- region "scrollable content":
+  - button "DIRECTOR ORDER — Middle Property independent QA. Owner Arithach. Begin now in an isolated cloud/test environment. Repository https://github.com/arithachboss-cmyk/lilith ; branch codex/real-lead-readi…":
+    - generic: DIRECTOR ORDER — Middle Property independent QA. Owner Arithach. Begin now in an isolated cloud/test environment. Repository https://github.com/arithachboss-cmyk/lilith ; branch codex/real-lead-readi…
+  - button "Continue to completion and return the independent final P0 report with downloadable evidence. The visible task shows the last browser driver run Failed, Agent todo completed, and only one background …":
+    - generic: Continue to completion and return the independent final P0 report with downloadable evidence. The visible task shows the last browser driver run Failed, Agent todo completed, and only one background …
+  - button "The latest independent browser run has FAILED and the agent is idle again. Please immediately inspect the final browser error log and show the exact assertion/error with screenshot, expected/actual, …":
+    - generic: The latest independent browser run has FAILED and the agent is idle again. Please immediately inspect the final browser error log and show the exact assertion/error with screenshot, expected/actual, …
+  - 'button "For the mobile gallery=0 reproduction, please inspect upload PUT count and /api/pilot/draft.images before save and after reload. One hypothesis to check (not a verdict): Decline intentionally clears …"':
+    - generic: "For the mobile gallery=0 reproduction, please inspect upload PUT count and /api/pilot/draft.images before save and after reload. One hypothesis to check (not a verdict): Decline intentionally clears …"
+  - button "Please preserve the no-delay double-click+200% result as an unresolved timing defect unless click-target/network evidence proves the driver acted outside the supported UI. Adding a human-like settlin…":
+    - generic: Please preserve the no-delay double-click+200% result as an unresolved timing defect unless click-target/network evidence proves the driver acted outside the supported UI. Adding a human-like settlin…
+- tooltip "Voice input ⌃D":
+  - text: Voice input
+  - generic: ⌃D
+- list
+- alert
+- status
+- alert
+- alert

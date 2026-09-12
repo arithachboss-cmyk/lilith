@@ -1,0 +1,116 @@
+{
+  "repository": "https://github.com/arithachboss-cmyk/lilith",
+  "branch": "codex/real-lead-readiness-20260913",
+  "source_sha": "bee6a6e93a88820bba0d709c8356092c65cfae75",
+  "started_at": "2026-09-12T21:53:56.296Z",
+  "mock_data": true,
+  "production_published": false,
+  "real_leads_enabled": false,
+  "paid_traffic": false,
+  "google_ads": false,
+  "node": "v24.19.0",
+  "browser_channel": "chrome",
+  "steps": [
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "exit_code": 0,
+      "log": "typecheck.log",
+      "sha256": "d08b4f76d5880c36e6d618ae720b3e75f4db2f341ae69b46063a83f51144e4f9"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "exit_code": 0,
+      "log": "lint.log",
+      "sha256": "5a54ac5f58b665ad25d1bb7985a8e92066763e88edcb4a0968cfc98d4e32b1b8"
+    },
+    {
+      "label": "unit",
+      "command": "pnpm test:unit",
+      "exit_code": 0,
+      "log": "unit.log",
+      "sha256": "ab077c9db21b0bf12e809191fda3eb5094ff13ead46f594c839a5e8e33602a43"
+    },
+    {
+      "label": "build",
+      "command": "pnpm build",
+      "exit_code": 0,
+      "log": "build.log",
+      "sha256": "a4e53b5d0807e6f61675a3a7847517f5e8c39f3bbd1a738dbf03dfc8e76aacca"
+    },
+    {
+      "label": "integration",
+      "command": "pnpm test:integration",
+      "exit_code": 0,
+      "log": "integration.log",
+      "sha256": "06d18fb26b8f806e034116c9b311ad1b66db67cd4b5ba12273d2d68bb3d72b70"
+    },
+    {
+      "label": "browser",
+      "command": "pnpm test:e2e",
+      "exit_code": 0,
+      "log": "browser.log",
+      "sha256": "5cffd0f697097d17d4b132ebc23cc2a654a34ca93fed3613af433b6455eac553"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "desktop-consent.png",
+      "sha256": "3e27347cd29abeac697ffa43339b54436e9b6616cd38ef71177fd5e7c7334c41",
+      "mock_data": true
+    },
+    {
+      "file": "desktop-operations.png",
+      "sha256": "646c608e5f51a9eda0896ac5ab4be1cb8c131741155082b44dd193b275b447f1",
+      "mock_data": true
+    },
+    {
+      "file": "desktop-saved.png",
+      "sha256": "b054f3098a9f82c55d5e02f9b8c34537149a52b415bebbcf666e38445413cd2a",
+      "mock_data": true
+    },
+    {
+      "file": "landing.png",
+      "sha256": "bc050ac24a05942dc46ee64bb177219e145ba3120c395673d6c89b8efbfa13b7",
+      "mock_data": true
+    },
+    {
+      "file": "lost-response-recovered.png",
+      "sha256": "9c8faa5c81e6c585d162d14e75cef9fef9c6a64757d957d12f2885ee55a2ae4a",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-200-double-click.png",
+      "sha256": "59b4d4b2c59f6bd685de4f26fd478ac4496556e23936898c6645c198ba24acf5",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-200-percent.png",
+      "sha256": "f8d5b67313060749a43413a0d0ace45620382d7f3a28b922bba49109220aa28d",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-consent.png",
+      "sha256": "ab29bf4aa5b788e78bf3fd40578220dc907c9dc74e00ea9dd225ba31a3ec7745",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-operations.png",
+      "sha256": "f7482be85ce91d5fcf1410093df50fb79230f7e913b98a573146b8d3de6c410f",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-saved.png",
+      "sha256": "e2beff2bd5d162336f104bcf896f17b4fb719c0ac5109754b4941296909cbdbc",
+      "mock_data": true
+    },
+    {
+      "file": "reopen-race-fixed.png",
+      "sha256": "0ea4f72288f65326ab7eaaf1f4063bf33f581e02f748a9d25a20658529257efb",
+      "mock_data": true
+    }
+  ],
+  "completed_at": "2026-09-12T21:55:33.590Z",
+  "result": "PASS — Codex local mock verification only"
+}

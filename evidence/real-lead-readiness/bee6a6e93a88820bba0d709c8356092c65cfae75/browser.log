@@ -1,0 +1,30 @@
+Command: pnpm test:e2e
+Source SHA: bee6a6e93a88820bba0d709c8356092c65cfae75
+Started: 2026-09-12T21:54:31.519Z
+
+Running 14 tests using 1 worker
+
+  ✓   1 tests/e2e/readiness.spec.ts:32:1 › P0 regression: save and restore exclude competing Reopen/New actions without losing images (4.7s)
+  ✓   2 tests/e2e/readiness.spec.ts:126:1 › P0 regression: immediate mobile double-click at 200% preserves four staged images (3.2s)
+  ✓   3 tests/e2e/readiness.spec.ts:175:3 › P0 journey desktop: consent, images, unique Lead ID, refresh and operations handoff (7.6s)
+  ✓   4 tests/e2e/readiness.spec.ts:175:3 › P0 journey mobile: consent, images, unique Lead ID, refresh and operations handoff (6.8s)
+  ✓   5 tests/e2e/readiness.spec.ts:284:1 › P0-01 lost submit response retries and recovers the same persisted Lead ID (2.2s)
+  ✓   6 tests/e2e/readiness.spec.ts:311:1 › P0-01/P0-02 invalid input and declined consent never submit; controls recover (2.2s)
+  ✓   7 tests/e2e/readiness.spec.ts:335:1 › P0-01 offline failure is visible and retry succeeds without a duplicate (2.3s)
+  ✓   8 tests/e2e/readiness.spec.ts:348:1 › P0-03 failed upload retains preview, reports error, and retries the same image ID (2.3s)
+  ✓   9 tests/e2e/readiness.spec.ts:384:1 › P0-05/P0-06 landing contact routes preserve source and simulate canonical contact (1.8s)
+  ✓  10 tests/e2e/readiness.spec.ts:399:1 › P0-02 mobile 200% text remains scrollable with unobstructed consent controls (2.2s)
+  ✓  11 tests/e2e/readiness.spec.ts:415:1 › P0-05 actual Landing preserves canonical contacts and UTM into requirement flow (2.3s)
+  ✓  12 tests/e2e/readiness.spec.ts:442:1 › P0-03 saving waits for slow image decoding instead of silently dropping selected files (3.0s)
+  ✓  13 tests/e2e/vertical-slice.spec.ts:3:1 › owner and agent complete the first vertical slice through persisted UI actions (10.4s)
+  ✓  14 tests/e2e/vertical-slice.spec.ts:161:1 › anonymous workspace uses the real sign-in entry point (1.3s)
+
+  14 passed (1.0m)
+
+$ playwright test
+[WebServer] (node:57948) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:57949) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+Exit code: 0

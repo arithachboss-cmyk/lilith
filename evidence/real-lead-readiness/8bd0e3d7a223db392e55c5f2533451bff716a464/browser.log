@@ -1,0 +1,28 @@
+Command: pnpm test:e2e
+Source SHA: 8bd0e3d7a223db392e55c5f2533451bff716a464
+Started: 2026-09-12T21:27:23.024Z
+
+Running 12 tests using 1 worker
+
+  ✓   1 tests/e2e/readiness.spec.ts:26:3 › P0 journey desktop: consent, images, unique Lead ID, refresh and operations handoff (7.3s)
+  ✓   2 tests/e2e/readiness.spec.ts:26:3 › P0 journey mobile: consent, images, unique Lead ID, refresh and operations handoff (4.9s)
+  ✓   3 tests/e2e/readiness.spec.ts:135:1 › P0-01 lost submit response retries and recovers the same persisted Lead ID (2.2s)
+  ✓   4 tests/e2e/readiness.spec.ts:162:1 › P0-01/P0-02 invalid input and declined consent never submit; controls recover (1.4s)
+  ✓   5 tests/e2e/readiness.spec.ts:186:1 › P0-01 offline failure is visible and retry succeeds without a duplicate (1.4s)
+  ✓   6 tests/e2e/readiness.spec.ts:199:1 › P0-03 failed upload retains preview, reports error, and retries the same image ID (1.5s)
+  ✓   7 tests/e2e/readiness.spec.ts:235:1 › P0-05/P0-06 landing contact routes preserve source and simulate canonical contact (1.5s)
+  ✓   8 tests/e2e/readiness.spec.ts:250:1 › P0-02 mobile 200% text remains scrollable with unobstructed consent controls (2.3s)
+  ✓   9 tests/e2e/readiness.spec.ts:266:1 › P0-05 actual Landing preserves canonical contacts and UTM into requirement flow (2.7s)
+  ✓  10 tests/e2e/readiness.spec.ts:293:1 › P0-03 saving waits for slow image decoding instead of silently dropping selected files (2.9s)
+  ✓  11 tests/e2e/vertical-slice.spec.ts:3:1 › owner and agent complete the first vertical slice through persisted UI actions (10.6s)
+  ✓  12 tests/e2e/vertical-slice.spec.ts:161:1 › anonymous workspace uses the real sign-in entry point (1.1s)
+
+  12 passed (45.7s)
+
+$ playwright test
+[WebServer] (node:54167) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[WebServer] (Use `node --trace-warnings ...` to show where the warning was created)
+(node:54168) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+Exit code: 0

@@ -1,0 +1,116 @@
+{
+  "repository": "https://github.com/arithachboss-cmyk/lilith",
+  "branch": "",
+  "source_sha": "bee6a6e93a88820bba0d709c8356092c65cfae75",
+  "started_at": "2026-09-12T21:57:27.641Z",
+  "mock_data": true,
+  "production_published": false,
+  "real_leads_enabled": false,
+  "paid_traffic": false,
+  "google_ads": false,
+  "node": "v24.20.0",
+  "browser_channel": "chromium",
+  "steps": [
+    {
+      "label": "typecheck",
+      "command": "pnpm typecheck",
+      "exit_code": 0,
+      "log": "typecheck.log",
+      "sha256": "4526e2cfc07d341d15f93b18e13b8daf3181df61dd502dbe3236c82c70edd997"
+    },
+    {
+      "label": "lint",
+      "command": "pnpm lint",
+      "exit_code": 0,
+      "log": "lint.log",
+      "sha256": "4a7e03120a1a68c70152e346e0f5ba4dc9ab10e2b4e8e35d44bc335669c11dd7"
+    },
+    {
+      "label": "unit",
+      "command": "pnpm test:unit",
+      "exit_code": 0,
+      "log": "unit.log",
+      "sha256": "58043f0e061108e5a72ede2b8ec44c65ab606ea3a7fc38d8f860e6274a26828f"
+    },
+    {
+      "label": "build",
+      "command": "pnpm build",
+      "exit_code": 0,
+      "log": "build.log",
+      "sha256": "b141d645c7387fafd9ba29c57d8c73f036ded98df41d38b3c3ec061195a3c34d"
+    },
+    {
+      "label": "integration",
+      "command": "pnpm test:integration",
+      "exit_code": 0,
+      "log": "integration.log",
+      "sha256": "a089effd0de39880f5251c57af59971b5ee1af474ac3bd798a48c8c91759e3ec"
+    },
+    {
+      "label": "browser",
+      "command": "pnpm test:e2e",
+      "exit_code": 0,
+      "log": "browser.log",
+      "sha256": "4940d08f1c9cab11a3536a46cb87bacd02e705663e1493f9d96e1caf767cc113"
+    }
+  ],
+  "artifacts": [
+    {
+      "file": "desktop-consent.png",
+      "sha256": "4fce12a8a5da54df897d24681002b35337083e866c5fb1690dfc67dd21194784",
+      "mock_data": true
+    },
+    {
+      "file": "desktop-operations.png",
+      "sha256": "000cf74c9f006604f71f6dd9a553707b6c7d8968037d0b01aaafbae7a3449713",
+      "mock_data": true
+    },
+    {
+      "file": "desktop-saved.png",
+      "sha256": "63df3826d13ad8a55198bb0054b4f5ba7ddcbecab639b007ef931c91ce82ef30",
+      "mock_data": true
+    },
+    {
+      "file": "landing.png",
+      "sha256": "38360aedbce307255f2d41d74ab57c17a8010cdc21a8cb755ad03479a44fe876",
+      "mock_data": true
+    },
+    {
+      "file": "lost-response-recovered.png",
+      "sha256": "54531bc9e62eff0fffd3ca75b22d468eb496ffe9e77a645d79bb1b1a0f4488a0",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-200-double-click.png",
+      "sha256": "c4a97b9c557cfa79775042af9a029e4fee0fbc3ecf2458fce002a482cc182cfc",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-200-percent.png",
+      "sha256": "2026c35c29b58746b22c6abae8e492e900c1c4c9a5070eb598f58295d4aa1ec7",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-consent.png",
+      "sha256": "2473b8b95eb5a5586213d56ee01f1784b155ea42391b24a9af979a374e5f9b89",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-operations.png",
+      "sha256": "96ae8fd2284c750edce41be0b380d82ac249988b8d3e0ef3efb1bb5e38c91128",
+      "mock_data": true
+    },
+    {
+      "file": "mobile-saved.png",
+      "sha256": "96e59ef7006d15275fd5c07659a9ef5b42e6068b2bcf380e0bb8fc0e9943e0d8",
+      "mock_data": true
+    },
+    {
+      "file": "reopen-race-fixed.png",
+      "sha256": "6ca81922612430a46ae5edff01111d15160422852d829c0435879c8f12204adf",
+      "mock_data": true
+    }
+  ],
+  "completed_at": "2026-09-12T21:58:12.329Z",
+  "result": "PASS — Codex local mock verification only"
+}

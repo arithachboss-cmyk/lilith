@@ -1,0 +1,5 @@
+bee6a6e Prevent concurrent reopen from discarding staged lead images
+ docs/READINESS_ARCHITECTURE.md   |   2 +
+ src/components/pilot/journey.tsx | 183 +++++++++++++++++++++++++++------------
+ tests/e2e/readiness.spec.ts      | 149 +++++++++++++++++++++++++++++++
+ 3 files changed, 281 insertions(+), 53 deletions(-)

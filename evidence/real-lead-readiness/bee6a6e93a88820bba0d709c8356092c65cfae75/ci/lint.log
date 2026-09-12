@@ -1,0 +1,15 @@
+Command: pnpm lint
+Source SHA: bee6a6e93a88820bba0d709c8356092c65cfae75
+Started: 2026-09-12T21:57:31.683Z
+
+/home/runner/work/lilith/lilith/worker-env.d.ts
+  10027:44  warning  Unused eslint-disable directive (no problems were reported)
+  10044:70  warning  Unused eslint-disable directive (no problems were reported)
+
+✖ 2 problems (0 errors, 2 warnings)
+  0 errors and 2 warnings potentially fixable with the `--fix` option.
+
+
+$ eslint . --ignore-pattern dist --ignore-pattern .next
+
+Exit code: 0

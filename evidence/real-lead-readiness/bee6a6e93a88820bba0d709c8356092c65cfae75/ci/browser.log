@@ -1,0 +1,11 @@
+Command: pnpm test:e2e
+Source SHA: bee6a6e93a88820bba0d709c8356092c65cfae75
+Started: 2026-09-12T21:57:44.373Z
+
+Running 14 tests using 1 worker
+··············
+  14 passed (27.2s)
+
+$ playwright test
+
+Exit code: 0

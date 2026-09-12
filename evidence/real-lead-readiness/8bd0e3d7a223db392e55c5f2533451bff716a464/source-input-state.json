@@ -1,0 +1,40 @@
+{
+  "captured_at": "2026-09-12T21:42:07.036450+00:00",
+  "tested_source_sha": "8bd0e3d7a223db392e55c5f2533451bff716a464",
+  "current_head": "188293234bfa1004233b36871e10d0e51e88020e",
+  "tracked_diff_from_tested_source": [
+    ".github/workflows/readiness-evidence.yml"
+  ],
+  "untracked_nonignored_files": [
+    "REAL_LEAD_READINESS_REPORT.md",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/browser.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/build-identity.json",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/build.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/ci/browser.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/ci/build.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/ci/integration.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/ci/lint.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/ci/manifest.json",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/ci/typecheck.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/ci/unit.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/files-changed.txt",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/github-ci-run.json",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/github-ci.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/github-pr-ci.json",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/integration.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/lint.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/manifest.json",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/security-pattern-scan.json",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/typecheck.log",
+    "evidence/real-lead-readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/unit.log",
+    "evidence/real-lead-readiness/scan-source.mjs",
+    "output/ci-34720524952/output/readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/browser.log",
+    "output/ci-34720524952/output/readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/build.log",
+    "output/ci-34720524952/output/readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/integration.log",
+    "output/ci-34720524952/output/readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/lint.log",
+    "output/ci-34720524952/output/readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/manifest.json",
+    "output/ci-34720524952/output/readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/typecheck.log",
+    "output/ci-34720524952/output/readiness/8bd0e3d7a223db392e55c5f2533451bff716a464/unit.log"
+  ],
+  "limitation": "Captured after local verification, not an attestation of the tree at run start. CI independently checked out the immutable tested SHA."
+}

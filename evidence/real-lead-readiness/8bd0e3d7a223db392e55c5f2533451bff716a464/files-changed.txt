@@ -1,0 +1,39 @@
+Readiness changes relative to inherited baseline 1fdae501966b32c17171b5092681ebed1f46f713
+Source SHA 8bd0e3d7a223db392e55c5f2533451bff716a464
+
+M	.env.example
+M	.github/workflows/quality.yml
+M	.gitignore
+M	app/api/import/route.ts
+M	app/api/leads/route.ts
+A	app/api/pilot/build/route.ts
+A	app/api/pilot/draft/route.ts
+A	app/api/pilot/events/route.ts
+A	app/api/pilot/images/[id]/route.ts
+A	app/api/pilot/inbox/route.ts
+A	app/api/pilot/leads/route.ts
+A	app/api/pilot/session/route.ts
+A	app/pilot/inbox/page.tsx
+A	app/pilot/page.tsx
+A	app/pilot/pilot.css
+A	docs/READINESS_ARCHITECTURE.md
+A	drizzle/0008_readiness.sql
+M	drizzle/meta/_journal.json
+M	env.d.ts
+M	public/capture.js
+M	public/current-home.html
+A	scripts/verify-readiness.mjs
+A	src/components/pilot/journey.tsx
+A	src/domain/pilot.ts
+A	src/services/pilot-image.ts
+A	src/services/pilot.ts
+M	tests/connect/explorer.test.tsx
+A	tests/e2e/readiness.spec.ts
+M	tests/e2e/server.mjs
+A	tests/helpers/synthetic-image.mjs
+M	tests/helpers/worker.mjs
+A	tests/pilot.test.mjs
+M	tests/platform.test.mjs
+M	tests/rendered-html.test.mjs
+M	vite.config.ts
+M	worker/index.ts

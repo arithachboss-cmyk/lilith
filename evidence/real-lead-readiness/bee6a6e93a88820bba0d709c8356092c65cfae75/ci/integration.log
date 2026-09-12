@@ -1,0 +1,44 @@
+Command: pnpm test:integration
+Source SHA: bee6a6e93a88820bba0d709c8356092c65cfae75
+Started: 2026-09-12T21:57:42.152Z
+✔ validates levels and rejects malformed inventory (0.735812ms)
+✔ persistent agent API enforces memberships, ownership, tier and photo access (112.557106ms)
+✔ P0-01 normal submit commits one unique Lead ID, consent, attribution and correlated outbox (60.845005ms)
+✔ P0-01 double click / concurrent retry yields exactly one lead and one notification (18.729277ms)
+✔ P0-01 lost response and retry preserves Lead ID and does not duplicate (8.186777ms)
+platform_request_failed { requestId: '3c39b219-cea6-4f50-b877-fe2b1d1b99c0', type: 'Error' }
+✔ P0-01 injected notification/database failure rolls back all writes; retry succeeds once (21.953486ms)
+✔ P0-01 invalid input, malformed JSON, wrong type, oversized body and hostile origin fail closed (15.14786ms)
+✔ P0-02 no consent, false consent and wrong policy version cannot create a session or lead (3.714438ms)
+✔ P0-03 four images persist, retry reuses upload ID, fifth/concurrent extras are rejected (164.921512ms)
+✔ P0-03 reorder/removal persist and foreign images cannot be attached; no orphan reference (31.518877ms)
+platform_request_failed { requestId: 'e7e79028-fb34-4bfe-acda-7e535c5ad62c', type: 'Error' }
+✔ P0-03 invalid and interrupted uploads save no partial image and retry succeeds (70.780865ms)
+✔ P0-04 authorized mock operator sees correlated record, qualifies and makes it viewing-ready (207.017819ms)
+✔ P0-06 debug events retain first/last touch, reject arbitrary PII and prevent forged qualification (29.603588ms)
+✔ P0-07 no real mode, no authorization default, private image/read tokens and legacy writes closed (61.897894ms)
+✔ P0-01/P0-03 persistent SQLite survives process binding reopen with identical record and bytes (49.702351ms)
+✔ P0-04 concurrent qualification retry never downgrades viewing-ready and records operator (34.908488ms)
+platform_request_failed { requestId: '3cbcb9f3-6d06-4319-80fb-d91988869ba6', type: 'Error' }
+platform_request_failed { requestId: '49c6abff-3065-4e50-b8c6-8736407c7e4d', type: 'Error' }
+✔ real Worker + SQLite: complete slice, authorization, concurrency and rollback (272.347294ms)
+✔ legacy lead form routes into the mock-only Middle Property consent journey (164.6755ms)
+✔ validates rental, buyer and China agent referral briefs (1.03448ms)
+✔ keeps lead reads private while accepting public inquiries (2.101644ms)
+✔ protects import API and documents JSON/CSV ingestion (8.493252ms)
+✔ validates protected pipeline progress updates (0.442715ms)
+✔ tracks acquisition channels, import tools and multilingual reply scripts (1.421407ms)
+✔ ships the D1 migrations for import and partner fields (0.744864ms)
+✔ keeps public capture friendly to foreign referral leads (0.867532ms)
+ℹ tests 25
+ℹ suites 0
+ℹ pass 25
+ℹ fail 0
+ℹ cancelled 0
+ℹ skipped 0
+ℹ todo 0
+ℹ duration_ms 1884.473329
+
+$ node --test tests/*.test.mjs
+
+Exit code: 0
