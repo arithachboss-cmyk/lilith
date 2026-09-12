@@ -1,4 +1,4 @@
-import { z } from "zod";
+import { verifiedIdentity } from "../identity";
 import {
   profileInput,
   roleSchema,
@@ -7,19 +7,11 @@ import {
 } from "../../domain/platform/contracts";
 import { audit, database, event, now, statement } from "./database";
 import { ApiError } from "./http";
-const identitySchema = z.object({
-  id: z.string().min(1).max(200),
-  email: z.email().max(254),
-});
-/** Only trust these headers behind the Sites dispatcher. No direct public Worker ingress. */
-export function identity(request: Request) {
-  const parsed = identitySchema.safeParse({
-    id: request.headers.get("oai-authenticated-user-id"),
-    email: request.headers.get("oai-authenticated-user-email"),
-  });
-  if (!parsed.success)
+export async function identity(request: Request) {
+  const account = await verifiedIdentity(request);
+  if (!account)
     throw new ApiError(401, "UNAUTHENTICATED", "Sign in to continue");
-  return parsed.data;
+  return account;
 }
 export async function findActor(id: string): Promise<Actor | null> {
   const row = await statement(
@@ -30,7 +22,7 @@ export async function findActor(id: string): Promise<Actor | null> {
   return row;
 }
 export async function actor(request: Request): Promise<Actor> {
-  const account = identity(request);
+  const account = await identity(request);
   const found = await findActor(account.id);
   if (!found)
     throw new ApiError(
@@ -50,7 +42,7 @@ export function requireRole(account: Actor, allowed: readonly Actor["role"][]) {
 }
 export async function saveProfile(request: Request, value: ProfileInput) {
   profileInput.parse(value);
-  const account = identity(request);
+  const account = await identity(request);
   const old = await findActor(account.id);
   if (old)
     throw new ApiError(

@@ -1,3 +1,4 @@
+import { createWorkerHarness } from "./helpers/worker.mjs";
 import assert from "node:assert/strict";
 import { readFile } from "node:fs/promises";
 import test from "node:test";
@@ -12,59 +13,28 @@ import {
   purchaseBudgetRange,
 } from "../app/api/leads/validation.ts";
 
-async function fetchWorker(path, init = {}, envOverrides = {}) {
-  const workerUrl = new URL("../dist/server/index.js", import.meta.url);
-  workerUrl.searchParams.set("test", `${process.pid}-${Date.now()}-${Math.random()}`);
-  const { default: worker } = await import(workerUrl.href);
-
-  return worker.fetch(
-    new Request(`http://localhost${path}`, init),
-    {
-      ASSETS: {
-        fetch: async () => new Response("Not found", { status: 404 }),
-      },
-      DB: {
-        batch: async () => [],
-        prepare: () => ({
-          all: async () => ({ results: [] }),
-          bind() {
-            return this;
-          },
-          first: async () => ({ id: 1, name: "Imported Lead" }),
-          run: async () => ({}),
-        }),
-      },
-      IMAGES: {
-        input: () => ({
-          transform: () => ({
-            output: async () => ({
-              response: () => new Response(""),
-            }),
-          }),
-        }),
-      },
-      ...envOverrides,
-    },
-    {
-      waitUntil() {},
-      passThroughOnException() {},
-    },
-  );
+let renderHarness;
+test.before(async () => {
+  renderHarness = await createWorkerHarness();
+});
+test.after(() => renderHarness.close());
+async function fetchWorker(path, init = {}) {
+  return renderHarness.dispatch(new Request(`http://localhost${path}`, init));
 }
 
 test("legacy lead form routes into the mock-only Middle Property consent journey", async () => {
   const legacy = await fetchWorker("/lead-form");
-  assert.equal(legacy.status,307);
-  assert.equal(legacy.headers.get("location"),"http://localhost/pilot");
-  const response=await fetchWorker("/pilot");
-  assert.equal(response.status,200);
-  const html=await response.text();
-  assert.match(html,/Middle Property/);
-  assert.match(html,/NO-GO FOR REAL LEADS/);
-  assert.match(html,/@middleproperty/);
-  assert.match(html,/0933888594/);
-  assert.match(html,/Fill synthetic test details/);
-  assert.doesNotMatch(html,/@themiddleproperty|tel:0812345678/);
+  assert.equal(legacy.status, 307);
+  assert.equal(legacy.headers.get("location"), "http://localhost/pilot");
+  const response = await fetchWorker("/pilot");
+  assert.equal(response.status, 200);
+  const html = await response.text();
+  assert.match(html, /Middle Property/);
+  assert.match(html, /NO-GO FOR REAL LEADS/);
+  assert.match(html, /@middleproperty/);
+  assert.match(html, /0933888594/);
+  assert.match(html, /Fill synthetic test details/);
+  assert.doesNotMatch(html, /@themiddleproperty|tel:0812345678/);
 });
 
 test("validates rental, buyer and China agent referral briefs", () => {
@@ -131,7 +101,10 @@ test("validates rental, buyer and China agent referral briefs", () => {
 
   assert.equal(normalizeLead({ ...validRental, budget: 29999 }, false), null);
   assert.equal(normalizeLead({ ...validRental, budget: 250001 }, false), null);
-  assert.equal(normalizeLead({ ...validRental, contractTerm: "6 months" }, false), null);
+  assert.equal(
+    normalizeLead({ ...validRental, contractTerm: "6 months" }, false),
+    null,
+  );
   assert.equal(normalizeLead({ ...validRental, consent: false }, false), null);
 
   assert.deepEqual(leadIntents, [
@@ -140,7 +113,11 @@ test("validates rental, buyer and China agent referral briefs", () => {
     "Sell/List property",
     "China agent referral",
   ]);
-  assert.deepEqual(budgetPeriods, ["Monthly rent", "Purchase budget", "Listing value"]);
+  assert.deepEqual(budgetPeriods, [
+    "Monthly rent",
+    "Purchase budget",
+    "Listing value",
+  ]);
   assert.equal(monthlyBudgetRange.min, 30000);
   assert.equal(monthlyBudgetRange.max, 250000);
 });
@@ -148,19 +125,29 @@ test("validates rental, buyer and China agent referral briefs", () => {
 test("keeps lead reads private while accepting public inquiries", async () => {
   const [route, validation, storage] = await Promise.all([
     readFile(new URL("../app/api/leads/route.ts", import.meta.url), "utf8"),
-    readFile(new URL("../app/api/leads/validation.ts", import.meta.url), "utf8"),
+    readFile(
+      new URL("../app/api/leads/validation.ts", import.meta.url),
+      "utf8",
+    ),
     readFile(new URL("../app/api/leads/storage.ts", import.meta.url), "utf8"),
   ]);
   assert.match(route, /export async function GET\(request: Request\)/);
   assert.match(route, /export async function DELETE\(request: Request\)/);
-  assert.match(route, /if \(!isAuthenticated\(request\)\)/);
-  assert.match(route, /return json\(\{ error: "Sign in required" \}, \{ status: 401 \}\)/);
+  assert.match(route, /if \(!\(await isAuthenticated\(request\)\)\)/);
+  assert.match(
+    route,
+    /return json\(\{ error: "Sign in required" \}, \{ status: 401 \}\)/,
+  );
   assert.match(route, /export async function POST\(request: Request\)/);
   assert.match(route, /export async function PATCH\(request: Request\)/);
-  const postRoute = route.match(
-    /export async function POST\(request: Request\) \{[\s\S]*?\n\}/,
-  )?.[0] ?? "";
-  assert.doesNotMatch(postRoute, /if \(!isAuthenticated\(request\)\)/);
+  const postRoute =
+    route.match(
+      /export async function POST\(request: Request\) \{[\s\S]*?\n\}/,
+    )?.[0] ?? "";
+  assert.doesNotMatch(
+    postRoute,
+    /if \(!\(await isAuthenticated\(request\)\)\)/,
+  );
   assert.match(validation, /budgetInRange/);
   assert.match(validation, /contractTerm !== "12 months"/);
   assert.match(validation, /payload\.consent !== true/);
@@ -177,7 +164,7 @@ test("protects import API and documents JSON/CSV ingestion", async () => {
   ]);
 
   assert.match(importRoute, /export async function POST\(request: Request\)/);
-  assert.match(importRoute, /if \(!canImportLeads\(request\)\)/);
+  assert.match(importRoute, /if \(!\(await canImportLeads\(request\)\)\)/);
   assert.match(importRoute, /x-lilith-import-token/);
   assert.match(importRoute, /application\/json/);
   assert.match(importRoute, /text\/csv/);
@@ -214,18 +201,23 @@ test("validates protected pipeline progress updates", () => {
   assert.equal(normalizeLeadUpdate({ id: 0, stage: "Qualified" }), null);
   assert.equal(normalizeLeadUpdate({ id: 7, stage: "Invented stage" }), null);
   assert.equal(
-    normalizeLeadUpdate({ id: 7, stage: "Qualified", nextFollowUpAt: "tomorrow" }),
+    normalizeLeadUpdate({
+      id: 7,
+      stage: "Qualified",
+      nextFollowUpAt: "tomorrow",
+    }),
     null,
   );
 });
 
 test("tracks acquisition channels, import tools and multilingual reply scripts", async () => {
-  const [captureScript, dashboardScript, dashboardPage, launchPack] = await Promise.all([
-    readFile(new URL("../public/capture.js", import.meta.url), "utf8"),
-    readFile(new URL("../public/script.js", import.meta.url), "utf8"),
-    readFile(new URL("../app/dashboard/page.tsx", import.meta.url), "utf8"),
-    readFile(new URL("../LAUNCH_TODAY.md", import.meta.url), "utf8"),
-  ]);
+  const [captureScript, dashboardScript, dashboardPage, launchPack] =
+    await Promise.all([
+      readFile(new URL("../public/capture.js", import.meta.url), "utf8"),
+      readFile(new URL("../public/script.js", import.meta.url), "utf8"),
+      readFile(new URL("../app/dashboard/page.tsx", import.meta.url), "utf8"),
+      readFile(new URL("../LAUNCH_TODAY.md", import.meta.url), "utf8"),
+    ]);
 
   assert.match(captureScript, /utm_source/);
   assert.match(captureScript, /international_property/);
@@ -244,11 +236,21 @@ test("tracks acquisition channels, import tools and multilingual reply scripts",
 });
 
 test("ships the D1 migrations for import and partner fields", async () => {
-  const [premiumMigration, workflowMigration, importMigration] = await Promise.all([
-    readFile(new URL("../drizzle/0002_premium-lead-brief.sql", import.meta.url), "utf8"),
-    readFile(new URL("../drizzle/0003_lead-follow-up-workflow.sql", import.meta.url), "utf8"),
-    readFile(new URL("../drizzle/0004_black_stick.sql", import.meta.url), "utf8"),
-  ]);
+  const [premiumMigration, workflowMigration, importMigration] =
+    await Promise.all([
+      readFile(
+        new URL("../drizzle/0002_premium-lead-brief.sql", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("../drizzle/0003_lead-follow-up-workflow.sql", import.meta.url),
+        "utf8",
+      ),
+      readFile(
+        new URL("../drizzle/0004_black_stick.sql", import.meta.url),
+        "utf8",
+      ),
+    ]);
 
   assert.match(premiumMigration, /ADD `contact` text/);
   assert.match(premiumMigration, /ADD `property_type` text/);
@@ -278,17 +280,32 @@ test("keeps public capture friendly to foreign referral leads", async () => {
   assert.match(publicPage, /id="publicLeadForm" noValidate/);
   assert.doesNotMatch(contactInput, /required/);
   assert.match(captureScript, /function validatePublicLead/);
-  assert.match(captureScript, /lead\.contact, lead\.wechat, lead\.partnerContact/);
+  assert.match(
+    captureScript,
+    /lead\.contact, lead\.wechat, lead\.partnerContact/,
+  );
   assert.match(captureScript, /ช่องทางติดต่ออย่างน้อยหนึ่งช่อง/);
   assert.match(captureScript, /โจทย์เช่าต้องเป็นสัญญา 12 เดือน/);
 
-  const ensureSchemaStart = storage.indexOf("export async function ensureLeadSchema()");
-  const addColumnStart = storage.indexOf("async function addColumnIfMissing", ensureSchemaStart);
+  const ensureSchemaStart = storage.indexOf(
+    "export async function ensureLeadSchema()",
+  );
+  const addColumnStart = storage.indexOf(
+    "async function addColumnIfMissing",
+    ensureSchemaStart,
+  );
   const ensureSchemaBody = storage.slice(ensureSchemaStart, addColumnStart);
-  const firstBatch = ensureSchemaBody.slice(0, ensureSchemaBody.indexOf("]);") + 3);
+  const firstBatch = ensureSchemaBody.slice(
+    0,
+    ensureSchemaBody.indexOf("]);") + 3,
+  );
   assert.doesNotMatch(firstBatch, /createExternalIdIndexSql/);
   assert.ok(
-    ensureSchemaBody.indexOf("for (const [columnName, sql] of optionalColumns)") <
-      ensureSchemaBody.indexOf("env.DB.prepare(createExternalIdIndexSql).run()"),
+    ensureSchemaBody.indexOf(
+      "for (const [columnName, sql] of optionalColumns)",
+    ) <
+      ensureSchemaBody.indexOf(
+        "env.DB.prepare(createExternalIdIndexSql).run()",
+      ),
   );
 });

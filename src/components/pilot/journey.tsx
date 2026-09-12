@@ -102,7 +102,10 @@ export function PilotJourney() {
     if (flushing.current) return flushing.current;
     const run = async () => {
       if (!attribution.current) return;
-      while (events.current.length) {
+      while (
+        events.current.length &&
+        sessionRef.current?.token === current.token
+      ) {
         const event = events.current[0];
         await api("events", current, {
           method: "POST",
@@ -111,10 +114,11 @@ export function PilotJourney() {
         events.current = events.current.filter((item) => item.id !== event.id);
       }
     };
-    flushing.current = run().finally(() => {
-      flushing.current = null;
+    const pending = run().finally(() => {
+      if (flushing.current === pending) flushing.current = null;
     });
-    return flushing.current;
+    flushing.current = pending;
+    return pending;
   }
   function showPictures(next: Picture[]) {
     picturesRef.current = next;
@@ -400,13 +404,17 @@ export function PilotJourney() {
     kind: "line_click" | "call_click",
   ) {
     event.preventDefault();
+    if (busyRef.current || restoringRef.current) return;
+    const current = sessionRef.current;
     track(kind);
-    if (sessionRef.current)
+    if (current)
       try {
-        await flush(sessionRef.current);
+        await flush(current);
       } catch {
+        if (current !== sessionRef.current || busyRef.current) return;
         setNotice("Event retained for retry.");
       }
+    if (current !== sessionRef.current || busyRef.current) return;
     setNotice(
       th
         ? "บันทึกการกดแบบทดสอบแล้ว ไม่มีการโทรหรือส่งข้อความจริง"
@@ -463,6 +471,59 @@ export function PilotJourney() {
         ? "ไม่ยินยอม — ไม่บันทึกข้อมูลและไม่ส่งต่อ"
         : "Declined. No details or images were saved or handed off.",
     );
+  }
+  async function withdraw() {
+    if (
+      !session ||
+      busyRef.current ||
+      restoringRef.current ||
+      imageProcessingRef.current
+    )
+      return;
+    busyRef.current = true;
+    setBusy(true);
+    try {
+      await api("session", session, {
+        method: "DELETE",
+        body: JSON.stringify({ mock_data: true, reason: "withdrawn" }),
+      });
+      // Clear browser state only after confirmed erasure. A lost response can retry
+      // with the same capability and receive the existing closure receipt.
+      sessionStorage.removeItem(SESSION);
+      sessionStorage.removeItem(TOUCH);
+      sessionRef.current = null;
+      flushing.current = null;
+      setSession(null);
+      setLead(null);
+      setConsent(false);
+      setStep("details");
+      picturesRef.current.forEach((p) => URL.revokeObjectURL(p.url));
+      showPictures([]);
+      form.current?.reset();
+      events.current = [];
+      const touch = getTouch();
+      attribution.current = {
+        landing_locale: attribution.current?.landing_locale ?? "th",
+        first_touch: touch,
+        last_touch: touch,
+      };
+      started.current = false;
+      setDebug([]);
+      setActive(0);
+      track("page_view");
+      setNotice(
+        "Consent withdrawn. Test details, images and notification erased. A minimal closure receipt remains until test-database teardown. / ถอนความยินยอมและลบข้อมูลทดสอบแล้ว",
+      );
+    } catch (error) {
+      setNotice(
+        error instanceof Error
+          ? error.message
+          : "Erasure failed. Retry with this session.",
+      );
+    } finally {
+      busyRef.current = false;
+      setBusy(false);
+    }
   }
   return (
     <main className="pilot-shell">
@@ -738,8 +799,11 @@ export function PilotJourney() {
               <p>
                 Before acceptance, details and images remain in this page only.
                 Decline clears the unsaved draft. Test sessions expire after 24
-                hours; the isolated test database is removed when the test
-                server stops. No external contact is made.
+                hours. Expired content is hidden immediately and erased by the
+                local test server's maintenance sweep. You can withdraw consent
+                and erase test details and images after saving. A minimal
+                receipt keeps the request from being recreated by retries; the
+                entire isolated test database is removed when the server stops.
               </p>
             </div>
             <label className="pilot-check">
@@ -817,6 +881,15 @@ export function PilotJourney() {
           }}
         >
           Reopen saved request
+        </button>
+      )}
+      {session && (
+        <button
+          className="secondary"
+          disabled={busy || imageProcessing || restoring}
+          onClick={() => void withdraw()}
+        >
+          Withdraw consent and delete test data / ถอนความยินยอมและลบข้อมูลทดสอบ
         </button>
       )}
       <button

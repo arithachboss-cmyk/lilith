@@ -1,5 +1,5 @@
 import { legacyLeadWritesClosed } from "@/src/domain/pilot";
-import { canImportLeads } from "../leads/auth";
+import { canImportLeads, isAuthenticated } from "../leads/auth";
 import { ensureLeadSchema, insertLead } from "../leads/storage";
 import { normalizeImportedLead, type LeadPayload } from "../leads/validation";
 
@@ -60,18 +60,18 @@ const fieldAliases: Record<string, keyof LeadPayload> = {
   externalid: "externalId",
   crm: "externalId",
   importbatch: "importBatch",
-  "客户姓名": "name",
-  "姓名": "name",
-  "电话": "contact",
-  "手机": "contact",
-  "微信": "wechat",
-  "预算": "budget",
-  "区域": "area",
-  "需求": "requirements",
-  "国家": "customerCountry",
-  "语言": "preferredLanguage",
-  "中介公司": "partnerAgency",
-  "中介": "partnerAgent",
+  客户姓名: "name",
+  姓名: "name",
+  电话: "contact",
+  手机: "contact",
+  微信: "wechat",
+  预算: "budget",
+  区域: "area",
+  需求: "requirements",
+  国家: "customerCountry",
+  语言: "preferredLanguage",
+  中介公司: "partnerAgency",
+  中介: "partnerAgent",
 };
 
 function json(data: unknown, init?: ResponseInit) {
@@ -85,7 +85,10 @@ function json(data: unknown, init?: ResponseInit) {
 }
 
 function normalizeHeader(header: string) {
-  return header.trim().toLowerCase().replace(/[^a-z0-9\u0E00-\u0E7F\u4E00-\u9FFF]+/g, "");
+  return header
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9\u0E00-\u0E7F\u4E00-\u9FFF]+/g, "");
 }
 
 function canonicalField(header: string) {
@@ -167,8 +170,10 @@ function mapRecord(input: unknown, importBatch: string) {
   mapped.contractTerm = mapped.contractTerm || "12 months";
   mapped.consent = true;
 
-  if (!mapped.budgetPeriod && mapped.monthlyRent) mapped.budgetPeriod = "Monthly rent";
-  if (!mapped.budgetPeriod && mapped.purchaseBudget) mapped.budgetPeriod = "Purchase budget";
+  if (!mapped.budgetPeriod && mapped.monthlyRent)
+    mapped.budgetPeriod = "Monthly rent";
+  if (!mapped.budgetPeriod && mapped.purchaseBudget)
+    mapped.budgetPeriod = "Purchase budget";
 
   return mapped as LeadPayload;
 }
@@ -177,7 +182,10 @@ async function readImportPayload(request: Request) {
   const contentType = request.headers.get("content-type") ?? "";
 
   if (contentType.includes("application/json")) {
-    const payload = await request.json() as { leads?: unknown; rows?: unknown };
+    const payload = (await request.json()) as {
+      leads?: unknown;
+      rows?: unknown;
+    };
     if (Array.isArray(payload)) return payload;
     if (Array.isArray(payload?.leads)) return payload.leads;
     if (Array.isArray(payload?.rows)) return payload.rows;
@@ -198,7 +206,12 @@ async function readImportPayload(request: Request) {
   return rowsToRecords(parseCsv(text));
 }
 
-export async function GET() {
+export async function GET(request: Request) {
+  if (!(await isAuthenticated(request)))
+    return json(
+      { error: "Authorized operator access required" },
+      { status: 401 },
+    );
   return json({
     endpoint: "/api/import",
     auth: "Use ChatGPT sign-in on the dashboard or send x-lilith-import-token / Bearer token after LEAD_IMPORT_TOKEN is configured.",
@@ -209,8 +222,8 @@ export async function GET() {
     example: {
       leads: [
         {
-          name: "Ms. Li",
-          contact: "li@example.cn",
+          name: "TEST Import",
+          contact: "import@example.test",
           wechat: "li-bkk-home",
           budget: 120000,
           budgetPeriod: "Monthly rent",
@@ -230,10 +243,17 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
-  if (legacyLeadWritesClosed()) return Response.json({ error: "NO-GO: real lead intake is closed in this readiness build." }, {status:503,headers:{"Cache-Control":"no-store"}});
-  if (!canImportLeads(request)) {
+  if (legacyLeadWritesClosed())
+    return Response.json(
+      { error: "NO-GO: real lead intake is closed in this readiness build." },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
+  if (!(await canImportLeads(request))) {
     return json(
-      { error: "Import requires dashboard sign-in or a valid x-lilith-import-token" },
+      {
+        error:
+          "Import requires dashboard sign-in or a valid x-lilith-import-token",
+      },
       { status: 401 },
     );
   }
@@ -242,12 +262,19 @@ export async function POST(request: Request) {
   try {
     incoming = await readImportPayload(request);
   } catch {
-    return json({ error: "Could not read JSON or CSV import payload" }, { status: 400 });
+    return json(
+      { error: "Could not read JSON or CSV import payload" },
+      { status: 400 },
+    );
   }
 
-  if (!incoming.length) return json({ error: "No import rows found" }, { status: 422 });
+  if (!incoming.length)
+    return json({ error: "No import rows found" }, { status: 422 });
   if (incoming.length > MAX_IMPORT_ROWS) {
-    return json({ error: `Import is limited to ${MAX_IMPORT_ROWS} rows per request` }, { status: 413 });
+    return json(
+      { error: `Import is limited to ${MAX_IMPORT_ROWS} rows per request` },
+      { status: 413 },
+    );
   }
 
   const importBatch = `IMPORT-${new Date().toISOString().replace(/[:.]/g, "-")}`;
@@ -261,7 +288,10 @@ export async function POST(request: Request) {
     const lead = mapped ? normalizeImportedLead(mapped) : null;
 
     if (!lead || "spam" in lead) {
-      rejected.push({ row: index + 1, reason: "Missing required name/contact/budget/area/property data" });
+      rejected.push({
+        row: index + 1,
+        reason: "Missing required name/contact/budget/area/property data",
+      });
       continue;
     }
 

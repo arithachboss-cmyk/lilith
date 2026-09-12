@@ -15,6 +15,13 @@ const git = (...args) => {
 };
 if (git("status", "--porcelain", "--untracked-files=no"))
   throw new Error("Commit source changes before exact-SHA verification.");
+const untracked = git("ls-files", "--others", "--exclude-standard")
+  .split("\n")
+  .filter(Boolean);
+if (untracked.some((path) => !path.startsWith("output/")))
+  throw new Error(
+    "Untracked files outside the evidence output directory invalidate source verification.",
+  );
 const sha = git("rev-parse", "HEAD"),
   directory = resolve("output/readiness", sha);
 mkdirSync(directory, { recursive: true });

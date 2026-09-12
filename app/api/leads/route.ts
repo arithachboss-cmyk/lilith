@@ -27,7 +27,7 @@ function json(data: unknown, init?: ResponseInit) {
 }
 
 export async function GET(request: Request) {
-  if (!isAuthenticated(request)) {
+  if (!(await isAuthenticated(request))) {
     return json({ error: "Sign in required" }, { status: 401 });
   }
 
@@ -38,7 +38,11 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
-  if (legacyLeadWritesClosed()) return Response.json({ error: "NO-GO: real lead intake is closed in this readiness build." }, {status:503,headers:{"Cache-Control":"no-store"}});
+  if (legacyLeadWritesClosed())
+    return Response.json(
+      { error: "NO-GO: real lead intake is closed in this readiness build." },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
   await ensureLeadSchema();
   let payload: LeadPayload;
   try {
@@ -47,7 +51,7 @@ export async function POST(request: Request) {
     return json({ error: "Invalid JSON" }, { status: 400 });
   }
 
-  const lead = normalizeLead(payload, isAuthenticated(request));
+  const lead = normalizeLead(payload, await isAuthenticated(request));
 
   if (lead && "spam" in lead) {
     return json({ accepted: true }, { status: 201 });
@@ -56,8 +60,7 @@ export async function POST(request: Request) {
   if (!lead) {
     return json(
       {
-        error:
-          `Lead must be a valid real estate brief. Rental leads need a 12-month lease and monthly budget of ฿${monthlyBudgetRange.min.toLocaleString("en-US")}-฿${monthlyBudgetRange.max.toLocaleString("en-US")}; purchase/listing leads need THB ${purchaseBudgetRange.min.toLocaleString("en-US")}+ and verified contact details.`,
+        error: `Lead must be a valid real estate brief. Rental leads need a 12-month lease and monthly budget of ฿${monthlyBudgetRange.min.toLocaleString("en-US")}-฿${monthlyBudgetRange.max.toLocaleString("en-US")}; purchase/listing leads need THB ${purchaseBudgetRange.min.toLocaleString("en-US")}+ and verified contact details.`,
       },
       { status: 422 },
     );
@@ -69,8 +72,12 @@ export async function POST(request: Request) {
 }
 
 export async function PATCH(request: Request) {
-  if (legacyLeadWritesClosed()) return Response.json({ error: "NO-GO: real lead intake is closed in this readiness build." }, {status:503,headers:{"Cache-Control":"no-store"}});
-  if (!isAuthenticated(request)) {
+  if (legacyLeadWritesClosed())
+    return Response.json(
+      { error: "NO-GO: real lead intake is closed in this readiness build." },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
+  if (!(await isAuthenticated(request))) {
     return json({ error: "Sign in required" }, { status: 401 });
   }
 
@@ -94,15 +101,22 @@ export async function PATCH(request: Request) {
 }
 
 export async function DELETE(request: Request) {
-  if (legacyLeadWritesClosed()) return Response.json({ error: "NO-GO: real lead intake is closed in this readiness build." }, {status:503,headers:{"Cache-Control":"no-store"}});
-  if (!isAuthenticated(request)) {
+  if (legacyLeadWritesClosed())
+    return Response.json(
+      { error: "NO-GO: real lead intake is closed in this readiness build." },
+      { status: 503, headers: { "Cache-Control": "no-store" } },
+    );
+  if (!(await isAuthenticated(request))) {
     return json({ error: "Sign in required" }, { status: 401 });
   }
 
   await ensureLeadSchema();
   const scope = new URL(request.url).searchParams.get("scope");
   if (scope !== "tests") {
-    return json({ error: "Only test lead cleanup is supported" }, { status: 400 });
+    return json(
+      { error: "Only test lead cleanup is supported" },
+      { status: 400 },
+    );
   }
 
   const result = await deleteTestLeads();

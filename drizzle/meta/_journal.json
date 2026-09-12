@@ -64,6 +64,13 @@
       "when": 1789257600000,
       "tag": "0008_readiness",
       "breakpoints": true
+    },
+    {
+      "idx": 9,
+      "version": "6",
+      "when": 1789257600001,
+      "tag": "0009_pilot_lifecycle",
+      "breakpoints": true
     }
   ]
 }

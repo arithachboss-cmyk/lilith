@@ -1,0 +1,16 @@
+{
+  "observed_at": "2026-09-12T22:13:42Z",
+  "source_tool": "Sites get_site (read-only)",
+  "project_id": "appgprj_6a8856b74a948191bd05a5ca442a8941",
+  "current_user_role": "owner",
+  "access_mode": "public",
+  "current_live_url": "https://lilith-renter-leads.yacht369.chatgpt.site",
+  "latest_version_number": 14,
+  "auth_client_configured": true,
+  "allowed_account_count": 1,
+  "external_visitor_count": 0,
+  "identity_integrity_proven": false,
+  "operations_authorization_inferred": false,
+  "publication_performed": false,
+  "redactions": "Credential, bypass token, signed screenshot URL, account identifiers and email addresses intentionally omitted."
+}

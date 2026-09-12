@@ -498,3 +498,248 @@ test("P0-04 concurrent qualification retry never downgrades viewing-ready and re
   assert.equal(events.length, 2);
   assert.ok(events.every((e) => e.actor_id === operator.id));
 });
+
+const erase = (s, reason = "withdrawn", options = {}) =>
+  call(
+    s,
+    "session",
+    { mock_data: true, reason },
+    { method: "DELETE", ...options },
+  );
+const contentTables = [
+  "pilot_drafts",
+  "pilot_leads",
+  "pilot_images",
+  "pilot_outbox",
+  "pilot_events",
+];
+function assertErased(s, leadId) {
+  assert.equal(
+    h.sqlite
+      .prepare("SELECT COUNT(*) n FROM pilot_drafts WHERE id=?")
+      .get(s.draft_id).n,
+    0,
+  );
+  for (const table of ["pilot_leads", "pilot_images", "pilot_events"])
+    assert.equal(
+      h.sqlite
+        .prepare(`SELECT COUNT(*) n FROM ${table} WHERE draft_id=?`)
+        .get(s.draft_id).n,
+      0,
+    );
+  if (leadId)
+    assert.equal(
+      h.sqlite
+        .prepare("SELECT COUNT(*) n FROM pilot_outbox WHERE lead_id=?")
+        .get(leadId).n,
+      0,
+    );
+  assert.deepEqual(h.sqlite.prepare("PRAGMA foreign_key_check").all(), []);
+}
+test("P0-02 lifecycle withdrawal atomically erases all content, preserves other leads and deduplicates retries", async () => {
+  const a = await session(),
+    b = await session();
+  const imageId = crypto.randomUUID();
+  await upload(a, imageId);
+  const lead = await data(await call(a, "leads", payload()));
+  const other = await data(await call(b, "leads", payload()));
+  const first = await data(await erase(a));
+  assert.equal(first.content_erased, true);
+  assert.equal(first.reason, "withdrawn");
+  assert.deepEqual(await data(await erase(a, "deleted")), first);
+  assertErased(a, lead.lead_id);
+  assert.equal((await data(await call(b, "draft"))).lead.id, other.lead_id);
+  assert.equal((await call(a, "draft")).status, 401);
+  assert.equal(
+    (await h.call(`/api/pilot/images/${imageId}`, operator)).status,
+    404,
+  );
+  assert.equal((await call(a, "leads", payload())).status, 401);
+  const replay = await call(a, "session", {
+    draft_id: a.draft_id,
+    mock_data: true,
+    consent: { accepted: true, version: "middle-property-2026-09-13-v1" },
+  });
+  assert.equal(replay.status, 410);
+  h.close();
+  h = await createWorkerHarness(file);
+  assert.deepEqual(await data(await erase(a)), first);
+  assertErased(a, lead.lead_id);
+});
+test("P0-02 erasure failure rolls back receipt and content; retry keeps original capability", async () => {
+  const s = await session();
+  await upload(s);
+  const lead = await data(await call(s, "leads", payload()));
+  h.injectFailure("DELETE FROM pilot_drafts");
+  assert.equal((await erase(s)).status, 500);
+  assert.equal(
+    h.sqlite
+      .prepare("SELECT COUNT(*) n FROM pilot_closures WHERE draft_id=?")
+      .get(s.draft_id).n,
+    0,
+  );
+  assert.equal((await data(await call(s, "draft"))).lead.id, lead.lead_id);
+  assert.equal((await data(await call(s, "draft"))).images.length, 1);
+  assert.equal((await erase(s)).status, 200);
+  assertErased(s, lead.lead_id);
+});
+test("P0-07 erasure requires its own capability, same origin and mock mode; sweep requires operator", async () => {
+  const a = await session();
+  const before = contentTables.map(count);
+  assert.equal(
+    (
+      await h.call(
+        "/api/pilot/session",
+        operator,
+        { mock_data: true, reason: "deleted" },
+        { method: "DELETE" },
+      )
+    ).status,
+    401,
+  );
+  assert.equal((await erase({ token: "e".repeat(64) })).status, 401);
+  assert.equal(
+    (
+      await erase(a, "deleted", {
+        headers: { origin: "https://outside.invalid" },
+      })
+    ).status,
+    403,
+  );
+  assert.equal(
+    (
+      await call(
+        a,
+        "session",
+        { mock_data: true, reason: "deleted", draft_id: a.draft_id },
+        { method: "DELETE" },
+      )
+    ).status,
+    422,
+  );
+  assert.equal(
+    (await h.call("/api/pilot/maintenance", null, { mock_data: true })).status,
+    403,
+  );
+  globalThis.__middleTestEnv.MIDDLE_READINESS_MODE = "real";
+  try {
+    assert.equal((await erase(a)).status, 503);
+  } finally {
+    globalThis.__middleTestEnv.MIDDLE_READINESS_MODE = "mock";
+  }
+  assert.deepEqual(contentTables.map(count), before);
+});
+test("P0-07 expired content is hidden from operator and capability; retention sweep erases only due content", async () => {
+  const due = await session(),
+    fresh = await session();
+  const imageId = crypto.randomUUID();
+  await upload(due, imageId);
+  await upload(fresh);
+  const lead = await data(await call(due, "leads", payload()));
+  h.sqlite
+    .prepare("UPDATE pilot_drafts SET expires_at=? WHERE id=?")
+    .run("2000-01-01T00:00:00.000Z", due.draft_id);
+  assert.equal((await call(due, "draft")).status, 401);
+  assert.equal(
+    (await h.call(`/api/pilot/images/${imageId}`, operator)).status,
+    404,
+  );
+  const list = await data(await h.call("/api/pilot/inbox", operator));
+  assert.equal(
+    list.leads.some((l) => l.id === lead.lead_id),
+    false,
+  );
+  assert.equal(
+    (
+      await h.call(
+        "/api/pilot/inbox",
+        operator,
+        { lead_id: lead.lead_id, status: "qualified" },
+        { method: "PATCH" },
+      )
+    ).status,
+    404,
+  );
+  const sweep = () =>
+    h.call("/api/pilot/maintenance", operator, { mock_data: true });
+  assert.equal((await data(await sweep())).processed, 1);
+  assert.equal((await data(await sweep())).processed, 0);
+  assertErased(due, lead.lead_id);
+  assert.equal((await data(await erase(due))).reason, "expired");
+  assert.equal((await data(await call(fresh, "draft"))).images.length, 1);
+});
+test("P0-07 erasure racing save, uploads and progression never leaves content or permits resurrection", async () => {
+  for (const saved of [false, true]) {
+    const s = await session();
+    await upload(s);
+    const lead = saved ? await data(await call(s, "leads", payload())) : null;
+    const responses = await Promise.all([
+      erase(s),
+      call(s, "leads", payload()),
+      upload(s),
+      ...(lead
+        ? [
+            h.call(
+              "/api/pilot/inbox",
+              operator,
+              { lead_id: lead.lead_id, status: "qualified" },
+              { method: "PATCH" },
+            ),
+          ]
+        : []),
+    ]);
+    assert.equal(responses[0].status, 200);
+    for (const response of responses.slice(1))
+      assert.ok(
+        [200, 201, 401, 404, 409, 410].includes(response.status),
+        `Unexpected racing response: ${response.status}`,
+      );
+    assertErased(s, lead?.lead_id);
+    assert.equal((await erase(s)).status, 200);
+    assert.equal((await upload(s)).status, 401);
+  }
+});
+
+test("P0-07 writes authorized before erasure are rejected at SQL execution; mixed identity replays cannot recreate", async () => {
+  for (const kind of ["image", "event"]) {
+    const s = await session();
+    const hold = h.holdNextRun(
+      kind === "image"
+        ? "INSERT INTO pilot_images"
+        : "INSERT OR IGNORE INTO pilot_events",
+    );
+    const pending =
+      kind === "image"
+        ? upload(s)
+        : call(s, "events", {
+            id: crypto.randomUUID(),
+            name: "page_view",
+            occurred_at: new Date().toISOString(),
+            attribution,
+          });
+    await hold.paused;
+    try {
+      assert.equal((await erase(s)).status, 200);
+    } finally {
+      hold.release();
+    }
+    assert.equal((await pending).status, 410);
+    assertErased(s);
+    for (const [token, draft_id] of [
+      [s.token, crypto.randomUUID()],
+      ["a".repeat(64), s.draft_id],
+    ]) {
+      const response = await h.call(
+        "/api/pilot/session",
+        null,
+        {
+          draft_id,
+          mock_data: true,
+          consent: { accepted: true, version: "middle-property-2026-09-13-v1" },
+        },
+        { headers: { "x-pilot-token": token } },
+      );
+      assert.equal(response.status, 410);
+    }
+  }
+});

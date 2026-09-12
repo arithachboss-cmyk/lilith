@@ -1,3 +1,4 @@
+import { verifiedIdentity } from "./identity";
 import { validImage } from "./pilot-image";
 import { env } from "cloudflare:workers";
 import { z } from "zod";
@@ -6,7 +7,7 @@ import {
   input,
   assertSameOrigin,
   json,
-  endpoint,
+  endpoint as httpEndpoint,
 } from "./platform/http";
 import {
   attributionSchema,
@@ -15,7 +16,24 @@ import {
   sessionSchema,
 } from "../domain/pilot";
 
-export { json, endpoint };
+export { json };
+export const endpoint = (action: () => Promise<Response>) =>
+  httpEndpoint(async () => {
+    try {
+      return await action();
+    } catch (error) {
+      if (
+        error instanceof Error &&
+        error.message.includes("PILOT_SESSION_CLOSED")
+      )
+        throw new ApiError(
+          410,
+          "SESSION_CLOSED",
+          "This test request has expired or was erased. Start again with new consent.",
+        );
+      throw error;
+    }
+  });
 type Draft = {
   id: string;
   consent_version: string;
@@ -68,9 +86,9 @@ async function tokenHash(request: Request) {
     );
   return hash(token);
 }
-export function operator(request: Request) {
+export async function operator(request: Request) {
   mockOnly();
-  const id = request.headers.get("oai-authenticated-user-id");
+  const id = (await verifiedIdentity(request))?.id;
   const ids = (settings().MIDDLE_OPERATIONS_USER_IDS ?? "")
     .split(",")
     .map((s) => s.trim())
@@ -246,7 +264,12 @@ export async function putImage(request: Request, id: string) {
         new Date().toISOString(),
       )
       .run();
-  } catch {
+  } catch (error) {
+    if (
+      error instanceof Error &&
+      error.message.includes("PILOT_SESSION_CLOSED")
+    )
+      throw error;
     const saved = await env.DB.prepare(
       "SELECT id FROM pilot_images WHERE id = ? AND draft_id = ? AND content_hash = ?",
     )
@@ -270,13 +293,14 @@ export async function putImage(request: Request, id: string) {
 }
 export async function getImage(request: Request, id: string) {
   mockOnly();
+  z.string().uuid().parse(id);
   let scope: string | null = null;
   if (request.headers.has("x-pilot-token")) scope = (await draft(request)).id;
-  else operator(request);
+  else await operator(request);
   const row = await env.DB.prepare(
-    `SELECT * FROM pilot_images WHERE id = ?${scope ? " AND draft_id = ?" : ""}`,
+    `SELECT i.* FROM pilot_images i JOIN pilot_drafts d ON d.id=i.draft_id WHERE i.id = ? AND d.expires_at > ?${scope ? " AND i.draft_id = ?" : ""}`,
   )
-    .bind(...(scope ? [id, scope] : [id]))
+    .bind(id, new Date().toISOString(), ...(scope ? [scope] : []))
     .first<Photo>();
   if (!row) throw new ApiError(404, "NOT_FOUND", "Image not found.");
   const bytes = Uint8Array.from(atob(row.content), (c) => c.charCodeAt(0));
@@ -396,12 +420,14 @@ export async function recordEvent(request: Request) {
   return json({ recorded: true, mock_data: true });
 }
 export async function inbox(request: Request) {
-  operator(request);
+  await operator(request);
   const rows =
     (
       await env.DB.prepare(
-        "SELECT l.*,d.consent_version,d.consent_at,o.id AS notification_id,o.destination,o.status AS notification_status FROM pilot_leads l JOIN pilot_drafts d ON d.id=l.draft_id JOIN pilot_outbox o ON o.lead_id=l.id ORDER BY l.created_at DESC LIMIT 100",
-      ).all<Lead & Record<string, unknown>>()
+        "SELECT l.*,d.consent_version,d.consent_at,o.id AS notification_id,o.destination,o.status AS notification_status FROM pilot_leads l JOIN pilot_drafts d ON d.id=l.draft_id JOIN pilot_outbox o ON o.lead_id=l.id WHERE d.expires_at > ? ORDER BY l.created_at DESC LIMIT 100",
+      )
+        .bind(new Date().toISOString())
+        .all<Lead & Record<string, unknown>>()
     ).results ?? [];
   return json({
     leads: await Promise.all(
@@ -416,7 +442,7 @@ export async function inbox(request: Request) {
   });
 }
 export async function progress(request: Request) {
-  const actor = operator(request);
+  const actor = await operator(request);
   const body = await input(
     request,
     z
@@ -430,8 +456,10 @@ export async function progress(request: Request) {
       })
       .strict(),
   );
-  const lead = await env.DB.prepare("SELECT * FROM pilot_leads WHERE id = ?")
-    .bind(body.lead_id)
+  const lead = await env.DB.prepare(
+    "SELECT l.* FROM pilot_leads l JOIN pilot_drafts d ON d.id=l.draft_id WHERE l.id = ? AND d.expires_at > ?",
+  )
+    .bind(body.lead_id, new Date().toISOString())
     .first<Lead>();
   if (!lead) throw new ApiError(404, "NOT_FOUND", "Lead not found.");
   if (
@@ -493,4 +521,84 @@ export async function progress(request: Request) {
     actor,
     mock_data: true,
   });
+}
+
+type Closure = { draft_id: string; reason: string; closed_at: string };
+async function eraseContent(
+  ids: string[],
+  reason: "withdrawn" | "deleted" | "expired",
+) {
+  if (!ids.length) return;
+  const closedAt = new Date().toISOString();
+  // Receipt and every related content row change in one D1 transaction.
+  // Delete leads first: finalized-image triggers otherwise reject parent cascade.
+  await env.DB.batch(
+    ids.flatMap((id) => [
+      env.DB.prepare(
+        "INSERT OR IGNORE INTO pilot_closures (draft_id,token_hash,reason,closed_at,mock_data) SELECT id,token_hash,?,?,1 FROM pilot_drafts WHERE id=?",
+      ).bind(reason, closedAt, id),
+      env.DB.prepare(
+        "DELETE FROM pilot_leads WHERE draft_id=? AND EXISTS (SELECT 1 FROM pilot_closures WHERE draft_id=?)",
+      ).bind(id, id),
+      env.DB.prepare(
+        "DELETE FROM pilot_drafts WHERE id=? AND EXISTS (SELECT 1 FROM pilot_closures WHERE draft_id=?)",
+      ).bind(id, id),
+    ]),
+  );
+}
+
+export async function closeSession(request: Request) {
+  mockOnly();
+  const body = await input(
+    request,
+    z
+      .object({
+        mock_data: z.literal(true),
+        reason: z.enum(["withdrawn", "deleted"]),
+      })
+      .strict(),
+  );
+  const token = await tokenHash(request);
+  const existing = await env.DB.prepare(
+    "SELECT id FROM pilot_drafts WHERE token_hash=?",
+  )
+    .bind(token)
+    .first<{ id: string }>();
+  if (existing) await eraseContent([existing.id], body.reason);
+  const receipt = await env.DB.prepare(
+    "SELECT draft_id,reason,closed_at FROM pilot_closures WHERE token_hash=?",
+  )
+    .bind(token)
+    .first<Closure>();
+  if (!receipt)
+    throw new ApiError(
+      401,
+      "SESSION_REQUIRED",
+      "No test request belongs to this capability.",
+    );
+  return json({
+    receipt_id: `closure-${receipt.draft_id}`,
+    reason: receipt.reason,
+    closed_at: receipt.closed_at,
+    content_erased: true,
+    mock_data: true,
+  });
+}
+
+export async function expireSessions(request: Request) {
+  await operator(request);
+  await input(request, z.object({ mock_data: z.literal(true) }).strict());
+  const due =
+    (
+      await env.DB.prepare(
+        "SELECT id FROM pilot_drafts WHERE expires_at <= ? ORDER BY expires_at LIMIT 100",
+      )
+        .bind(new Date().toISOString())
+        .all<{ id: string }>()
+    ).results ?? [];
+  await eraseContent(
+    due.map((d) => d.id),
+    "expired",
+  );
+  return json({ processed: due.length, batch_limit: 100, mock_data: true });
 }

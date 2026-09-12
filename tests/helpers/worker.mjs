@@ -1,3 +1,4 @@
+import { createHmac, randomBytes } from "node:crypto";
 import { DatabaseSync } from "node:sqlite";
 import { registerHooks } from "node:module";
 import { readFileSync } from "node:fs";
@@ -34,6 +35,7 @@ export async function createWorkerHarness(filename = ":memory:") {
       .run(migration.tag);
   }
   let failBatchContaining = null;
+  let heldRun = null;
   const DB = {
     prepare(sql) {
       let params = [];
@@ -50,6 +52,15 @@ export async function createWorkerHarness(filename = ":memory:") {
           return { results: sqlite.prepare(sql).all(...params), success: true };
         },
         async run() {
+          if (heldRun && sql.includes(heldRun.sql)) {
+            const hold = heldRun;
+            heldRun = null;
+            hold.started();
+            await hold.wait;
+          }
+          return this.runSync();
+        },
+        runSync() {
           const result = sqlite.prepare(sql).run(...params);
           return {
             results: [],
@@ -74,7 +85,7 @@ export async function createWorkerHarness(filename = ":memory:") {
             failBatchContaining = null;
             throw new Error("TEST injected transaction failure");
           }
-          output.push(await statement.run());
+          output.push(statement.runSync());
         }
         sqlite.exec("COMMIT");
         return output;
@@ -102,6 +113,7 @@ export async function createWorkerHarness(filename = ":memory:") {
     LILITH_ADMIN_EMAIL: "TEST-manager@example.test",
     MIDDLE_READINESS_MODE: "mock",
     MIDDLE_OPERATIONS_USER_IDS: "TEST-operations",
+    MIDDLE_MOCK_IDENTITY_KEY: randomBytes(32).toString("hex"),
   });
   registerHooks({
     resolve(specifier, context, next) {
@@ -123,6 +135,35 @@ export async function createWorkerHarness(filename = ":memory:") {
       waitUntil() {},
       passThroughOnException() {},
     });
+  function signMock(request, account, overrides = {}) {
+    const issued_at = Math.floor(Date.now() / 1000);
+    const payload = Buffer.from(
+      JSON.stringify({
+        id: account.id,
+        email: account.email,
+        method: request.method,
+        url: request.url,
+        issued_at,
+        expires_at: issued_at + 60,
+        ...overrides,
+      }),
+    ).toString("base64url");
+    const signature = createHmac(
+      "sha256",
+      Buffer.from(globalThis.__middleTestEnv.MIDDLE_MOCK_IDENTITY_KEY, "hex"),
+    )
+      .update(payload)
+      .digest("hex");
+    const headers = new Headers(request.headers);
+    headers.set("x-middle-mock-identity", `${payload}.${signature}`);
+    return new Request(request, { headers });
+  }
+  // Deliberately trusted local simulation. Never use this for spoof-negative tests.
+  const dispatchMock = (request) => {
+    const id = request.headers.get("oai-authenticated-user-id");
+    const email = request.headers.get("oai-authenticated-user-email");
+    return dispatch(id && email ? signMock(request, { id, email }) : request);
+  };
   async function call(path, account, body, options = {}) {
     const headers = {
       ...(account
@@ -136,13 +177,12 @@ export async function createWorkerHarness(filename = ":memory:") {
         : {}),
       ...options.headers,
     };
-    return dispatch(
-      new Request("http://localhost" + path, {
-        method: options.method ?? (body !== undefined ? "POST" : "GET"),
-        headers,
-        ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
-      }),
-    );
+    const request = new Request("http://localhost" + path, {
+      method: options.method ?? (body !== undefined ? "POST" : "GET"),
+      headers,
+      ...(body !== undefined ? { body: JSON.stringify(body) } : {}),
+    });
+    return dispatch(account ? signMock(request, account) : request);
   }
   return {
     sqlite,
@@ -151,9 +191,22 @@ export async function createWorkerHarness(filename = ":memory:") {
       workerEnv.ASSETS.fetch = fetcher;
     },
     dispatch,
+    dispatchMock,
+    signMock,
     call,
     injectFailure: (text) => {
       failBatchContaining = text;
+    },
+    holdNextRun: (sql) => {
+      let started, release;
+      const paused = new Promise((resolve) => {
+        started = resolve;
+      });
+      const wait = new Promise((resolve) => {
+        release = resolve;
+      });
+      heldRun = { sql, started, wait };
+      return { paused, release };
     },
     close: () => sqlite.close(),
   };

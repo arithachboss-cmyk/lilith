@@ -1,6 +1,11 @@
 /** Cloudflare Worker entry point for the vinext-starter template. */
-import { handleImageOptimization, DEFAULT_DEVICE_SIZES, DEFAULT_IMAGE_SIZES } from "vinext/server/image-optimization";
+import {
+  handleImageOptimization,
+  DEFAULT_DEVICE_SIZES,
+  DEFAULT_IMAGE_SIZES,
+} from "vinext/server/image-optimization";
 import handler from "vinext/server/app-router-entry";
+import { withRequestIdentity } from "../src/services/request-identity";
 
 interface Env {
   ASSETS: Fetcher;
@@ -8,7 +13,10 @@ interface Env {
   IMAGES: {
     input(stream: ReadableStream): {
       transform(options: Record<string, unknown>): {
-        output(options: { format: string; quality: number }): Promise<{ response(): Response }>;
+        output(options: {
+          format: string;
+          quality: number;
+        }): Promise<{ response(): Response }>;
       };
     };
   };
@@ -26,32 +34,55 @@ interface ExecutionContext {
 // const imageConfig: ImageConfig = { dangerouslyAllowSVG: true };
 
 const worker = {
-  async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
+  async fetch(
+    request: Request,
+    env: Env,
+    ctx: ExecutionContext,
+  ): Promise<Response> {
     const url = new URL(request.url);
     // This readiness build cannot receive legacy real leads through an alternate CTA.
     // Existing production is unchanged. Keep closed until the separate pilot approval gate.
-    if (["/api/leads", "/api/import"].includes(url.pathname) && !["GET", "HEAD"].includes(request.method)) {
-      return Response.json({ error: "NO-GO: legacy lead writes are closed in the readiness build. Use the isolated mock journey." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+    if (
+      ["/api/leads", "/api/import"].includes(url.pathname) &&
+      !["GET", "HEAD"].includes(request.method)
+    ) {
+      return Response.json(
+        {
+          error:
+            "NO-GO: legacy lead writes are closed in the readiness build. Use the isolated mock journey.",
+        },
+        { status: 503, headers: { "Cache-Control": "no-store" } },
+      );
     }
-    if (url.pathname === "/lead-form") return Response.redirect(new URL("/pilot", request.url), 307);
+    if (url.pathname === "/lead-form")
+      return Response.redirect(new URL("/pilot", request.url), 307);
 
     // Preserve the currently published listing homepage when enabling the agent backend.
     if (url.pathname === "/" || url.pathname === "/index.html") {
-      return env.ASSETS.fetch(new Request(new URL("/current-home.html", request.url), request));
+      return env.ASSETS.fetch(
+        new Request(new URL("/current-home.html", request.url), request),
+      );
     }
 
     if (url.pathname === "/_vinext/image") {
       const allowedWidths = [...DEFAULT_DEVICE_SIZES, ...DEFAULT_IMAGE_SIZES];
-      return handleImageOptimization(request, {
-        fetchAsset: (path) => env.ASSETS.fetch(new Request(new URL(path, request.url))),
-        transformImage: async (body, { width, format, quality }) => {
-          const result = await env.IMAGES.input(body).transform(width > 0 ? { width } : {}).output({ format, quality });
-          return result.response();
+      return handleImageOptimization(
+        request,
+        {
+          fetchAsset: (path) =>
+            env.ASSETS.fetch(new Request(new URL(path, request.url))),
+          transformImage: async (body, { width, format, quality }) => {
+            const result = await env.IMAGES.input(body)
+              .transform(width > 0 ? { width } : {})
+              .output({ format, quality });
+            return result.response();
+          },
         },
-      }, allowedWidths);
+        allowedWidths,
+      );
     }
 
-    return handler.fetch(request, env, ctx);
+    return withRequestIdentity(request, () => handler.fetch(request, env, ctx));
   },
 };
 

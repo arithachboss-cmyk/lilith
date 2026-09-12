@@ -55,7 +55,7 @@ const server = createServer(async (request, response) => {
     for (const [key, value] of Object.entries(request.headers))
       if (value)
         headers.set(key, Array.isArray(value) ? value.join(", ") : value);
-    const result = await harness.dispatch(
+    const result = await harness.dispatchMock(
       new Request(url, { method: request.method, headers, body }),
     );
     response.writeHead(result.status, Object.fromEntries(result.headers));
@@ -67,12 +67,33 @@ const server = createServer(async (request, response) => {
     response.end("Test server error");
   }
 });
-// Trusted identity headers are injected by the test browser context. This test
-// ingress is loopback-only and is never included in the product Worker.
+// The loopback test adapter signs synthetic browser identities with an ephemeral
+// key. It is trusted simulation, never hosted identity evidence.
 server.listen(4199, "127.0.0.1", () =>
   console.log("TEST Worker available at http://127.0.0.1:4199"),
 );
+// Mock retention is driven only by this local harness. No hosted scheduler is configured.
+let sweeping = false;
+async function sweep() {
+  if (sweeping) return;
+  sweeping = true;
+  try {
+    const result = await harness.call(
+      "/api/pilot/maintenance",
+      { id: "TEST-operations", email: "operations@example.test" },
+      { mock_data: true },
+    );
+    if (!result.ok) console.error("TEST retention sweep failed", result.status);
+  } catch {
+    console.error("TEST retention sweep request failed");
+  } finally {
+    sweeping = false;
+  }
+}
+const retentionTimer = setInterval(() => void sweep(), 60_000);
+void sweep();
 function close() {
+  clearInterval(retentionTimer);
   server.close();
   harness.close();
   rmSync(directory, { recursive: true, force: true });

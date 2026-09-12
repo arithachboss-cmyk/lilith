@@ -3,7 +3,7 @@ import { findActor, identity, saveProfile } from "@/src/services/platform/auth";
 import { profileInput } from "@/src/domain/platform/contracts";
 export const GET = (request: Request) =>
   endpoint(async () =>
-    json({ profile: await findActor(identity(request).id) }),
+    json({ profile: await findActor((await identity(request)).id) }),
   );
 export const POST = (request: Request) =>
   endpoint(async () =>

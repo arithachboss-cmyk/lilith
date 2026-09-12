@@ -253,7 +253,10 @@ for (const device of ["desktop", "mobile"] as const) {
     expect(await phone.count()).toBeGreaterThanOrEqual(5);
     const ops = await browser.newContext({
       baseURL: "http://127.0.0.1:4199",
-      extraHTTPHeaders: { "oai-authenticated-user-id": "TEST-operations" },
+      extraHTTPHeaders: {
+        "oai-authenticated-user-id": "TEST-operations",
+        "oai-authenticated-user-email": "operations@example.test",
+      },
     });
     const inbox = await ops.newPage();
     await inbox.goto("/pilot/inbox");
@@ -464,4 +467,97 @@ test("P0-03 saving waits for slow image decoding instead of silently dropping se
   await expect(page.getByTestId("lead-id")).toBeVisible();
   await page.reload();
   await expect(page.getByText("2 / 4 images", { exact: true })).toBeVisible();
+});
+
+for (const width of [390, 1440]) {
+  test(`P0 lifecycle: withdraw ${width}px erases four images, retries lost response and starts with new consent`, async ({
+    page,
+  }) => {
+    await page.setViewportSize({ width, height: 900 });
+    await details(page);
+    await page
+      .getByLabel("Test images", { exact: true })
+      .setInputFiles(images(4));
+    await consent(page);
+    await page.getByRole("button", { name: /Save test request/ }).click();
+    const leadId = await page.getByTestId("lead-id").textContent();
+    await expect(page.getByTestId("lead-id")).toBeVisible();
+    let lost = false;
+    await page.route("**/api/pilot/session", async (route) => {
+      if (route.request().method() === "DELETE" && !lost) {
+        lost = true;
+        const response = await route.fetch();
+        expect(response.status()).toBe(200);
+        await route.abort("failed");
+      } else await route.continue();
+    });
+    const withdraw = page.getByRole("button", {
+      name: /Withdraw consent and delete test data/,
+    });
+    await withdraw.click();
+    await expect(page.getByRole("status").first()).toContainText(
+      /fetch|Failed|failed/,
+    );
+    await expect(withdraw).toBeEnabled();
+    await withdraw.click();
+    await expect(page.getByRole("status").first()).toContainText(
+      "Consent withdrawn",
+    );
+    await expect(page.getByTestId("lead-id")).toHaveCount(0);
+    await page.screenshot({
+      path: `${output}/withdrawal-${width}.png`,
+      fullPage: true,
+    });
+    await page.reload();
+    await expect(
+      page.getByRole("button", { name: "Reopen saved request", exact: true }),
+    ).toHaveCount(0);
+    await page
+      .getByRole("button", { name: "Fill synthetic test details" })
+      .click();
+    await consent(page);
+    await page.getByRole("button", { name: /Save test request/ }).click();
+    await expect(page.getByTestId("lead-id")).toBeVisible();
+    expect(await page.getByTestId("lead-id").textContent()).not.toBe(leadId);
+  });
+}
+
+test("P0 lifecycle: a delayed contact event cannot overwrite withdrawal or poison the next request", async ({
+  page,
+}) => {
+  await details(page);
+  await consent(page);
+  await page.getByRole("button", { name: /Save test request/ }).click();
+  await expect(page.getByTestId("lead-id")).toBeVisible();
+  const oldId = await page.getByTestId("lead-id").textContent();
+  const paused = deferred(),
+    release = deferred();
+  let held = false;
+  await page.route("**/api/pilot/events", async (route) => {
+    if (!held) {
+      held = true;
+      paused.resolve();
+      await release.promise;
+    }
+    await route.continue();
+  });
+  await page
+    .locator("#contact")
+    .getByRole("link", { name: "@middleproperty", exact: true })
+    .click();
+  await paused.promise;
+  await page
+    .getByRole("button", { name: /Withdraw consent and delete test data/ })
+    .click();
+  await expect(page.getByRole("status").first()).toContainText(
+    "Consent withdrawn",
+  );
+  release.resolve();
+  await page
+    .getByRole("button", { name: "Fill synthetic test details" })
+    .click();
+  await consent(page);
+  await page.getByRole("button", { name: /Save test request/ }).click();
+  await expect(page.getByTestId("lead-id")).toBeVisible();
+  expect(await page.getByTestId("lead-id").textContent()).not.toBe(oldId);
 });
