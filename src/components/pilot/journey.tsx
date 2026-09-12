@@ -800,7 +800,7 @@ export function PilotJourney() {
                 Before acceptance, details and images remain in this page only.
                 Decline clears the unsaved draft. Test sessions expire after 24
                 hours. Expired content is hidden immediately and erased by the
-                local test server's maintenance sweep. You can withdraw consent
+                maintenance sweep in the local test server. You can withdraw consent
                 and erase test details and images after saving. A minimal
                 receipt keeps the request from being recreated by retries; the
                 entire isolated test database is removed when the server stops.
