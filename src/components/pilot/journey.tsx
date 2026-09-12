@@ -404,7 +404,9 @@ export function PilotJourney() {
     kind: "line_click" | "call_click",
   ) {
     event.preventDefault();
-    if (busyRef.current || restoringRef.current) return;
+    // Contact telemetry can run during read-only restoration. Suppressing it
+    // silently loses a visible CTA click while the saved images are loading.
+    if (busyRef.current) return;
     const current = sessionRef.current;
     track(kind);
     if (current)
@@ -800,10 +802,11 @@ export function PilotJourney() {
                 Before acceptance, details and images remain in this page only.
                 Decline clears the unsaved draft. Test sessions expire after 24
                 hours. Expired content is hidden immediately and erased by the
-                maintenance sweep in the local test server. You can withdraw consent
-                and erase test details and images after saving. A minimal
-                receipt keeps the request from being recreated by retries; the
-                entire isolated test database is removed when the server stops.
+                maintenance sweep in the local test server. You can withdraw
+                consent and erase test details and images after saving. A
+                minimal receipt keeps the request from being recreated by
+                retries; the entire isolated test database is removed when the
+                server stops.
               </p>
             </div>
             <label className="pilot-check">

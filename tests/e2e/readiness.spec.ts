@@ -561,3 +561,46 @@ test("P0 lifecycle: a delayed contact event cannot overwrite withdrawal or poiso
   await expect(page.getByTestId("lead-id")).toBeVisible();
   expect(await page.getByTestId("lead-id").textContent()).not.toBe(oldId);
 });
+
+test("P0 contact: a click during held image restoration is recorded and acknowledged", async ({
+  page,
+}) => {
+  await details(page);
+  await page
+    .getByLabel("Test images", { exact: true })
+    .setInputFiles(images(1));
+  await consent(page);
+  await page.getByRole("button", { name: /Save test request/ }).click();
+  await expect(page.getByTestId("lead-id")).toBeVisible();
+  const paused = deferred(),
+    release = deferred();
+  let held = false;
+  await page.route("**/api/pilot/images/*", async (route) => {
+    if (route.request().method() === "GET" && !held) {
+      held = true;
+      paused.resolve();
+      await release.promise;
+    }
+    await route.continue();
+  });
+  await page.reload();
+  await paused.promise;
+  try {
+    const recorded = page.waitForResponse(
+      (response) =>
+        response.url().endsWith("/api/pilot/events") &&
+        response.request().postDataJSON()?.name === "call_click",
+    );
+    await page
+      .getByRole("link", { name: "Test call", exact: true })
+      .first()
+      .click();
+    expect((await recorded).status()).toBe(200);
+  } finally {
+    release.resolve();
+  }
+  await expect(page.getByRole("status").first()).toContainText(
+    "No call or external message",
+  );
+  await expect(page.getByText("1 / 4 images", { exact: true })).toBeVisible();
+});
