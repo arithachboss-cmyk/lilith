@@ -1,5 +1,5 @@
 {
-  "recorded_at_utc": "2026-09-12 22:53:53 UTC",
+  "recorded_at_utc": "2026-09-12 23:41:41 UTC",
   "source": "Owner reply in current Codex conversation",
   "owner": "Arithach",
   "canonical_brand": "Middle Property",
@@ -7,8 +7,8 @@
   "approved_business_phone": "0933888594",
   "notification_destination": {
     "channel": "email",
-    "address": "themiddleproperty@gmail.com",
-    "owner_instruction_verbatim": "แจ้งเตือนlead ให้ใช้เมล themiddleproperty@gmail.com",
+    "address": "mukdawan@asiancoding.com",
+    "owner_instruction_verbatim": "ไปที่ mukdawan@asiancoding.com",
     "authorization_scope": "Destination selection for lead notifications; no Ops role or real pilot approval inferred",
     "delivery_verified": false,
     "sender_provider_configured_by_this_round": false,
@@ -22,5 +22,15 @@
   "owner_pilot_approval": false,
   "real_leads": false,
   "paid_traffic": false,
-  "google_ads": false
+  "google_ads": false,
+  "superseded_notification_destinations": [
+    {
+      "recorded_at_utc": "2026-09-12 22:53:53 UTC",
+      "channel": "email",
+      "address": "themiddleproperty@gmail.com",
+      "owner_instruction_verbatim": "แจ้งเตือนlead ให้ใช้เมล themiddleproperty@gmail.com",
+      "status": "superseded_by_later_owner_instruction",
+      "superseded_at_utc": "2026-09-12 23:41:41 UTC"
+    }
+  ]
 }
