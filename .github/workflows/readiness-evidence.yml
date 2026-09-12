@@ -18,9 +18,9 @@ jobs:
       - name: Checkout immutable implementation under review
         uses: actions/checkout@v4
         with:
-          ref: cd259153af8053ce2ad1351699e4a2335c1c715d
+          ref: e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
       - name: Assert source identity
-        run: test "$(git rev-parse HEAD)" = cd259153af8053ce2ad1351699e4a2335c1c715d
+        run: test "$(git rev-parse HEAD)" = e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
       - uses: pnpm/action-setup@v4
         with:
           version: 11.19.0
@@ -35,7 +35,7 @@ jobs:
       - uses: actions/upload-artifact@v4
         if: always()
         with:
-          name: readiness-cd259153af8053ce2ad1351699e4a2335c1c715d
+          name: readiness-e49c7a9eaaf7c2f3109421e101d7595a0bc25fcd
           path: |
             output/readiness/
             test-results/
