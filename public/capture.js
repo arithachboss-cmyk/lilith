@@ -944,6 +944,8 @@ publicLeadForm?.addEventListener("submit", async (event) => {
 
   const validationMessage = validatePublicLead(lead);
   if (validationMessage) {
+    publicSubmit.disabled = false;
+    publicSubmit.textContent = copy.submitButton;
     publicStatus.textContent = validationMessage;
     return;
   }

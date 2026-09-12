@@ -38,3 +38,6 @@ yarn-error.log*
 # env files
 .env*
 !.env.example
+
+# Readiness verification outputs are copied into reviewed evidence separately.
+/output/readiness/

@@ -28,14 +28,16 @@ interface ExecutionContext {
 const worker = {
   async fetch(request: Request, env: Env, ctx: ExecutionContext): Promise<Response> {
     const url = new URL(request.url);
+    // This readiness build cannot receive legacy real leads through an alternate CTA.
+    // Existing production is unchanged. Keep closed until the separate pilot approval gate.
+    if (["/api/leads", "/api/import"].includes(url.pathname) && !["GET", "HEAD"].includes(request.method)) {
+      return Response.json({ error: "NO-GO: legacy lead writes are closed in the readiness build. Use the isolated mock journey." }, { status: 503, headers: { "Cache-Control": "no-store" } });
+    }
+    if (url.pathname === "/lead-form") return Response.redirect(new URL("/pilot", request.url), 307);
 
     // Preserve the currently published listing homepage when enabling the agent backend.
     if (url.pathname === "/" || url.pathname === "/index.html") {
       return env.ASSETS.fetch(new Request(new URL("/current-home.html", request.url), request));
-    }
-    if (url.pathname === "/lead-form") {
-      url.pathname = "/";
-      return handler.fetch(new Request(url, request), env, ctx);
     }
 
     if (url.pathname === "/_vinext/image") {

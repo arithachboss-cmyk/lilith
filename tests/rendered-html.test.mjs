@@ -52,37 +52,19 @@ async function fetchWorker(path, init = {}, envOverrides = {}) {
   );
 }
 
-test("server-renders the international property lead desk", async () => {
-  const response = await fetchWorker("/lead-form");
-  assert.equal(response.status, 200);
-  assert.match(response.headers.get("content-type") ?? "", /^text\/html\b/i);
-
-  const html = await response.text();
-  assert.match(html, /Seven-language Thailand property desk/);
-  assert.match(html, /Tiếng Việt/);
-  assert.match(html, /한국어/);
-  assert.match(html, /日本語/);
-  assert.match(html, /中文/);
-  assert.match(html, /Русский/);
-  assert.match(html, /Multilingual Thailand Real Estate Agent/);
-  assert.match(html, /RealEstateAgent/);
-  assert.match(html, /data-lang-option="vi"/);
-  assert.match(html, /data-lang-option="ko"/);
-  assert.match(html, /data-lang-option="ja"/);
-  assert.match(html, /publicDealIntent/);
-  assert.match(html, /publicBudgetPeriod/);
-  assert.match(html, /publicCustomerCountry/);
-  assert.match(html, /publicWechat/);
-  assert.match(html, /publicPartnerAgency/);
-  assert.match(html, /https:\/\/www\.middleproperty\.com\//);
-  assert.match(html, /MiddleProperty\.com/);
-  assert.match(html, /\/api\/import/);
-  assert.match(html, /Live capability demonstration/);
-  assert.match(html, /Budget-fit screening/);
-  assert.match(html, /Private owner dashboard/);
-  assert.match(html, /Test the brief flow/);
-  assert.match(html, /\/capture\.js/);
-  assert.doesNotMatch(html, /Your site is taking shape|codex-preview|react-loading-skeleton/);
+test("legacy lead form routes into the mock-only Middle Property consent journey", async () => {
+  const legacy = await fetchWorker("/lead-form");
+  assert.equal(legacy.status,307);
+  assert.equal(legacy.headers.get("location"),"http://localhost/pilot");
+  const response=await fetchWorker("/pilot");
+  assert.equal(response.status,200);
+  const html=await response.text();
+  assert.match(html,/Middle Property/);
+  assert.match(html,/NO-GO FOR REAL LEADS/);
+  assert.match(html,/@middleproperty/);
+  assert.match(html,/0933888594/);
+  assert.match(html,/Fill synthetic test details/);
+  assert.doesNotMatch(html,/@themiddleproperty|tel:0812345678/);
 });
 
 test("validates rental, buyer and China agent referral briefs", () => {

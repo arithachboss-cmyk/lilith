@@ -1,3 +1,4 @@
+import { legacyLeadWritesClosed } from "@/src/domain/pilot";
 import { isAuthenticated } from "./auth";
 import {
   deleteTestLeads,
@@ -37,6 +38,7 @@ export async function GET(request: Request) {
 }
 
 export async function POST(request: Request) {
+  if (legacyLeadWritesClosed()) return Response.json({ error: "NO-GO: real lead intake is closed in this readiness build." }, {status:503,headers:{"Cache-Control":"no-store"}});
   await ensureLeadSchema();
   let payload: LeadPayload;
   try {
@@ -67,6 +69,7 @@ export async function POST(request: Request) {
 }
 
 export async function PATCH(request: Request) {
+  if (legacyLeadWritesClosed()) return Response.json({ error: "NO-GO: real lead intake is closed in this readiness build." }, {status:503,headers:{"Cache-Control":"no-store"}});
   if (!isAuthenticated(request)) {
     return json({ error: "Sign in required" }, { status: 401 });
   }
@@ -91,6 +94,7 @@ export async function PATCH(request: Request) {
 }
 
 export async function DELETE(request: Request) {
+  if (legacyLeadWritesClosed()) return Response.json({ error: "NO-GO: real lead intake is closed in this readiness build." }, {status:503,headers:{"Cache-Control":"no-store"}});
   if (!isAuthenticated(request)) {
     return json({ error: "Sign in required" }, { status: 401 });
   }

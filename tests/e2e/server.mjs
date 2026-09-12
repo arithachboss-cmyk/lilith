@@ -15,6 +15,20 @@ const types = {
   ".html": "text/html",
   ".woff2": "font/woff2",
 };
+harness.setAssetFetcher((request) => {
+  const path = resolve(assets, "." + new URL(request.url).pathname);
+  if (!path.startsWith(assets + sep))
+    return new Response("Not found", { status: 404 });
+  try {
+    return new Response(readFileSync(path), {
+      headers: {
+        "Content-Type": types[extname(path)] ?? "application/octet-stream",
+      },
+    });
+  } catch {
+    return new Response("Not found", { status: 404 });
+  }
+});
 const server = createServer(async (request, response) => {
   try {
     const url = new URL(request.url ?? "/", "http://127.0.0.1:4199");

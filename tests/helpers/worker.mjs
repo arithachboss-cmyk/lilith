@@ -13,13 +13,26 @@ export async function createWorkerHarness(filename = ":memory:") {
       "utf8",
     ),
   );
-  for (const migration of journal.entries)
+  sqlite.exec(
+    "CREATE TABLE IF NOT EXISTS __test_migrations (tag TEXT PRIMARY KEY)",
+  );
+  for (const migration of journal.entries) {
+    if (
+      sqlite
+        .prepare("SELECT tag FROM __test_migrations WHERE tag=?")
+        .get(migration.tag)
+    )
+      continue;
     sqlite.exec(
       readFileSync(
         new URL(`../../drizzle/${migration.tag}.sql`, import.meta.url),
         "utf8",
       ),
     );
+    sqlite
+      .prepare("INSERT INTO __test_migrations(tag) VALUES (?)")
+      .run(migration.tag);
+  }
   let failBatchContaining = null;
   const DB = {
     prepare(sql) {
@@ -83,10 +96,13 @@ export async function createWorkerHarness(filename = ":memory:") {
     );
     return result;
   };
-  globalThis.__middleTestEnv = {
+  globalThis.__middleTestEnv ??= {};
+  Object.assign(globalThis.__middleTestEnv, {
     DB,
     LILITH_ADMIN_EMAIL: "TEST-manager@example.test",
-  };
+    MIDDLE_READINESS_MODE: "mock",
+    MIDDLE_OPERATIONS_USER_IDS: "TEST-operations",
+  });
   registerHooks({
     resolve(specifier, context, next) {
       if (specifier === "cloudflare:workers")
@@ -131,6 +147,9 @@ export async function createWorkerHarness(filename = ":memory:") {
   return {
     sqlite,
     DB,
+    setAssetFetcher: (fetcher) => {
+      workerEnv.ASSETS.fetch = fetcher;
+    },
     dispatch,
     call,
     injectFailure: (text) => {

@@ -44,6 +44,7 @@ export default defineConfig(async () => {
   const { cloudflare } = await import("@cloudflare/vite-plugin");
 
   return {
+    define: { __READINESS_BUILD_SHA__: JSON.stringify(process.env.MIDDLE_BUILD_SHA ?? "UNCOMMITTED_LOCAL") },
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }
       : undefined,

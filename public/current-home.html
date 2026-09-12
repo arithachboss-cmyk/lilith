@@ -378,6 +378,7 @@
 </style>
 </head>
 <body>
+<div style="padding:12px;background:#fff1c7;color:#53400a;text-align:center">MOCK PREVIEW · NO-GO FOR REAL LEADS · Listings are test examples · <a href="/pilot">Start a test request</a></div>
 
 <header class="site">
   <div class="site-bar">
@@ -387,8 +388,8 @@
     </div>
     <nav class="site-nav">
       <a href="#top" data-i18n="nav_home">หน้าแรก</a>
-      <a href="#listings" data-i18n="nav_listings">ประกาศทั้งหมด</a>
-      <a href="#footer" data-i18n="nav_contact">ติดต่อเรา</a>
+      <a href="/pilot" data-i18n="nav_listings">ประกาศทั้งหมด</a>
+      <a href="/pilot" data-i18n="nav_contact">ติดต่อเรา</a>
     </nav>
     <div class="site-bar-right">
       <div class="lang-switch" id="langSwitch">
@@ -404,7 +405,7 @@
           <button class="lang-option" data-lang="ru"><span>Русский</span><span class="code">RU</span></button>
         </div>
       </div>
-      <a href="tel:0812345678" class="nav-cta" data-i18n="nav_call">โทรหาเรา</a>
+      <a href="tel:+66933888594" class="nav-cta" data-i18n="nav_call">โทรหาเรา</a>
     </div>
   </div>
 </header>
@@ -463,8 +464,8 @@
     </div>
     <div class="foot-links">
       <a href="#top" data-i18n="nav_home">หน้าแรก</a>
-      <a href="#listings" data-i18n="nav_listings">ประกาศทั้งหมด</a>
-      <a href="tel:0812345678">081-234-5678</a>
+      <a href="/pilot" data-i18n="nav_listings">ประกาศทั้งหมด</a>
+      <a href="tel:+66933888594">0933888594</a>
     </div>
   </div>
   <p class="foot-note" id="footerCopyright" style="max-width:1180px;margin:30px auto 0;"></p>
@@ -655,18 +656,18 @@
 
   const langNames = { th:"ไทย", en:"English", zh:"中文", ru:"Русский" };
   const htmlLangCode = { th:"th", en:"en", zh:"zh-CN", ru:"ru" };
-  const LINE_OA_URL = "https://line.me/R/ti/p/@themiddleproperty";
+  const LINE_OA_URL = "https://line.me/R/ti/p/@middleproperty";
 
   // ============ Base listing data (language-independent) ============
   const listingsBase = [
-    { id:1, name:"The Line Asoke-Ratchada", type:"bts", price:15000, bed:1, bath:1, area:32, phone:"0891234501", lat:13.7360, lng:100.5615 },
-    { id:2, name:"Ideo Q Siam-Ratchathewi", type:"bts", price:22000, bed:1, bath:1, area:35, phone:"0891234502", lat:13.7565, lng:100.5335 },
-    { id:3, name:"Rhythm Ekkamai Estate", type:"bts", price:18500, bed:1, bath:1, area:30, phone:"0891234503", lat:13.7180, lng:100.5865 },
-    { id:4, name:"Life Ladprao Valley", type:"mrt", price:13000, bed:1, bath:1, area:28, phone:"0891234504", lat:13.8140, lng:100.5620 },
-    { id:5, name:"Noble Reveal Sukhumvit", type:"mrt", price:25000, bed:2, bath:2, area:55, phone:"0891234501", lat:13.7390, lng:100.5625 },
-    { id:6, name:"Aspire Rama 9", type:"mrt", price:16000, bed:1, bath:1, area:33, phone:"0891234502", lat:13.7595, lng:100.5660 },
-    { id:7, name:"The Base Garden Phra Khanong", type:"bts", price:12500, bed:0, bath:1, area:26, phone:"0891234503", lat:13.7035, lng:100.6030 },
-    { id:8, name:"Whizdom Inspire Sathorn", type:"bts", price:30000, bed:2, bath:2, area:60, phone:"0891234504", lat:13.7190, lng:100.5230 }
+    { id:1, name:"The Line Asoke-Ratchada", type:"bts", price:15000, bed:1, bath:1, area:32, phone:"0933888594", mock_data:true, lat:13.7360, lng:100.5615 },
+    { id:2, name:"Ideo Q Siam-Ratchathewi", type:"bts", price:22000, bed:1, bath:1, area:35, phone:"0933888594", mock_data:true, lat:13.7565, lng:100.5335 },
+    { id:3, name:"Rhythm Ekkamai Estate", type:"bts", price:18500, bed:1, bath:1, area:30, phone:"0933888594", mock_data:true, lat:13.7180, lng:100.5865 },
+    { id:4, name:"Life Ladprao Valley", type:"mrt", price:13000, bed:1, bath:1, area:28, phone:"0933888594", mock_data:true, lat:13.8140, lng:100.5620 },
+    { id:5, name:"Noble Reveal Sukhumvit", type:"mrt", price:25000, bed:2, bath:2, area:55, phone:"0933888594", mock_data:true, lat:13.7390, lng:100.5625 },
+    { id:6, name:"Aspire Rama 9", type:"mrt", price:16000, bed:1, bath:1, area:33, phone:"0933888594", mock_data:true, lat:13.7595, lng:100.5660 },
+    { id:7, name:"The Base Garden Phra Khanong", type:"bts", price:12500, bed:0, bath:1, area:26, phone:"0933888594", mock_data:true, lat:13.7035, lng:100.6030 },
+    { id:8, name:"Whizdom Inspire Sathorn", type:"bts", price:30000, bed:2, bath:2, area:60, phone:"0933888594", mock_data:true, lat:13.7190, lng:100.5230 }
   ];
 
   // ============ Localized listing content ============
@@ -927,7 +928,7 @@
     document.getElementById('agentAvatar').textContent = item.agent.replace('คุณ','').trim().charAt(0);
     document.getElementById('agentName').textContent = item.agent;
     document.getElementById('agentRole').textContent = tt('agent_role');
-    document.getElementById('callBtn').href = 'tel:' + item.phone;
+    document.getElementById('callBtn').href = 'tel:+66933888594';
     document.getElementById('lineBtn').href = LINE_OA_URL;
 
     document.getElementById('detailMap').src = `https://www.google.com/maps?q=${item.lat},${item.lng}&z=16&output=embed`;
@@ -989,5 +990,20 @@
   setLanguage();
 </script>
 
+<script>
+  document.addEventListener('click', function(event) {
+    const link = event.target.closest('a');
+    if (!link) return;
+    if (link.href.startsWith('tel:') || link.href.includes('line.me/')) {
+      event.preventDefault();
+      const query = new URLSearchParams(location.search);
+      query.set('channel', link.href.startsWith('tel:') ? 'call' : 'line');
+      location.href = '/pilot?' + query.toString();
+    }
+    if (link.getAttribute('href') === '/pilot') {
+      event.preventDefault(); location.href='/pilot'+location.search;
+    }
+  }, true);
+</script>
 </body>
 </html>

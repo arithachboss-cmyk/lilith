@@ -1,3 +1,4 @@
+import { legacyLeadWritesClosed } from "@/src/domain/pilot";
 import { canImportLeads } from "../leads/auth";
 import { ensureLeadSchema, insertLead } from "../leads/storage";
 import { normalizeImportedLead, type LeadPayload } from "../leads/validation";
@@ -229,6 +230,7 @@ export async function GET() {
 }
 
 export async function POST(request: Request) {
+  if (legacyLeadWritesClosed()) return Response.json({ error: "NO-GO: real lead intake is closed in this readiness build." }, {status:503,headers:{"Cache-Control":"no-store"}});
   if (!canImportLeads(request)) {
     return json(
       { error: "Import requires dashboard sign-in or a valid x-lilith-import-token" },

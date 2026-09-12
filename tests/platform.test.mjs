@@ -264,7 +264,7 @@ test("real Worker + SQLite: complete slice, authorization, concurrency and rollb
           path.includes("import") ? { rows: [] } : undefined,
         )
       ).status,
-      401,
+      path.includes("import") ? 503 : 401,
     );
   await data(`/api/deals/${roomId}/transitions`, owner, {
     to: "CANCELLED",

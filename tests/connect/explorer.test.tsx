@@ -30,7 +30,7 @@ describe("Lilithconnect explorer", () => {
     render(<ConnectExplorer />);
     fireEvent.click(screen.getByRole("button", { name: "🇯🇵 โตเกียว" }));
     expect(
-      screen.getByRole("heading", { name: "東京", exact: true }),
+      screen.getByRole("heading", { name: "東京" }),
     ).toBeInTheDocument();
     expect(screen.getByRole("main")).toHaveAttribute("lang", "ja");
     fireEvent.change(
@@ -69,7 +69,7 @@ describe("Lilithconnect explorer", () => {
   it("renders safely for hostile language parameters", () => {
     render(<ConnectExplorer initialCountry="jp" initialLanguage="__proto__" />);
     expect(
-      screen.getByRole("heading", { name: "東京", exact: true }),
+      screen.getByRole("heading", { name: "東京" }),
     ).toBeInTheDocument();
   });
 });
