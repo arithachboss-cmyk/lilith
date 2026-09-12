@@ -1,0 +1,42 @@
+name: Exact-source readiness evidence
+
+on:
+  push:
+    branches: [codex/real-lead-readiness-20260913]
+    paths:
+      - .github/workflows/readiness-evidence.yml
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - name: Checkout immutable implementation under review
+        uses: actions/checkout@v4
+        with:
+          ref: 8bd0e3d7a223db392e55c5f2533451bff716a464
+      - name: Assert source identity
+        run: test "$(git rev-parse HEAD)" = 8bd0e3d7a223db392e55c5f2533451bff716a464
+      - uses: pnpm/action-setup@v4
+        with:
+          version: 11.19.0
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec playwright install --with-deps chromium
+      - name: Verify immutable mock source and capture evidence
+        run: node scripts/verify-readiness.mjs
+      - uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: readiness-8bd0e3d7a223db392e55c5f2533451bff716a464
+          path: |
+            output/readiness/
+            test-results/
+          if-no-files-found: warn
