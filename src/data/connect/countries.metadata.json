@@ -1,0 +1,82 @@
+{
+  "retrievedAt": "2026-09-10",
+  "countryCount": 195,
+  "coverage": "193 UN members plus the Holy See (represented geographically as Vatican City) and State of Palestine. Dependent territories and other non-UN states are excluded.",
+  "membershipCorrection": "Upstream incorrectly marks Vatican City as unMember=true. Treated as observer, yielding 193 members plus 2 observers.",
+  "baseSource": "https://github.com/mledoze/countries",
+  "rawSource": "https://raw.githubusercontent.com/mledoze/countries/master/countries.json",
+  "license": "ODbL-1.0 — retain attribution and make the derived database available under the same terms.",
+  "fallbackReason": "REST Countries v3.1 returned a legacy API deprecation response; the saved response is restcountries.json.",
+  "languageCoverage": "Selected country language reference. Source mixes official, regional, national, working and widely used languages. Not an exhaustive current inventory of official languages or of all living languages. Display as Languages, not All official languages.",
+  "languageCodes": "ISO 639-1 where available; otherwise ISO 639-3. Non-ISO639-3 collective language entries excluded from arrays and retained in country notes.",
+  "languageCodeSource": "https://iso639-3.sil.org/sites/iso639-3/files/downloads/iso-639-3.tab",
+  "currenciesCoverage": "Reference currencies, not rates. Some countries use several currencies; arrays are not a verified exhaustive legal-tender inventory. ZWG and several stale/missing entries corrected.",
+  "capitalCoverage": "Capital cities and selected administrative seats, with role distinctions in notes. Nauru has no official capital. Capital changes in Equatorial Guinea and Indonesia were checked against official sources.",
+  "coordinates": "Omitted: upstream latlng denotes country coordinates rather than capital coordinates.",
+  "regionConvention": "Africa, Asia, Europe, North America, South America, Oceania. Caribbean and Central American countries placed in North America. Transcontinental countries retain upstream broad region.",
+  "membershipSources": [
+    "https://www.un.org/en/about-us",
+    "https://www.un.org/en/about-us/non-member-states"
+  ],
+  "verifiedSourcesByCountry": {
+    "gq": [
+      "https://www.guineaecuatorialpress.com/index.php/noticias/el_presidente_de_la_republica_proclama_la_ciudad_de_la_paz_como_capital_de_la_republica_de_guinea_ecuatorial_con_la_firma_de_un_decreto_ley"
+    ],
+    "id": [
+      "https://www.mkri.id/berita/waktu-pemindahan-ikn-bergantung-pada-pemberlakuan-keputusan-presiden-25031"
+    ],
+    "lk": [
+      "https://www.kotte.mc.gov.lk/index.php?Itemid=175&id=25&lang=en&option=com_content&view=article"
+    ],
+    "za": [
+      "https://www.gov.za/about-sa/south-africas-provinces",
+      "https://www.statssa.gov.za/?p=19168"
+    ],
+    "nl": [
+      "https://www.consilium.europa.eu/media/29692/qc0616198enn.pdf"
+    ],
+    "nr": [
+      "https://www.theprif.org/country-profile/republic-nauru"
+    ],
+    "ps": [
+      "https://data.un.org/en/iso/ps.html"
+    ],
+    "il": [
+      "https://www.un.org/unispal/permanent-status-issues/"
+    ],
+    "va": [
+      "https://www.un.org/en/about-us/non-member-states"
+    ],
+    "sz": [
+      "https://www.sadc.int/member-states/kingdom-eswatini"
+    ],
+    "at": [
+      "https://www.bmeia.gv.at/oev-wien/about-austria/fast-facts/"
+    ],
+    "bg": [
+      "https://economy-finance.ec.europa.eu/euro/eu-countries-and-euro/bulgaria-and-euro_en"
+    ],
+    "zw": [
+      "https://www.rbz.co.zw/index.php/publications-notices/notices/press-release/1419-press-statement-introduction-of-zimbabwe-gold-zig-currency-code-zwg"
+    ],
+    "fm": [
+      "https://www.elibrary.imf.org/view/journals/002/2026/090/article-A003-en.xml"
+    ],
+    "cu": [
+      "https://www.cibercuba.com/s/gacetaoficial/resolucion-178-de-2021-de-banco-central-de-cuba"
+    ],
+    "bf": [
+      "https://www.aib.media/burkina-langlais-et-le-francais-deviennent-des-langues-de-travail-les-langues-nationales-officielles/"
+    ],
+    "ml": [
+      "https://sgg-mali.ml/JO/2023/mali-jo-2023-20.pdf"
+    ],
+    "ne": [
+      "https://www.youtube.com/watch?v=d2p5jJgvDaI"
+    ],
+    "ch": [
+      "https://www.aboutswitzerland.eda.admin.ch/en/language"
+    ]
+  },
+  "reviewLimits": "Targeted source verification, not a complete legal audit of all 195 countries. Do not describe every data field as verified current."
+}

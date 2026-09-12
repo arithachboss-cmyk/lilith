@@ -10,6 +10,10 @@
 
 # testing
 /coverage
+/playwright-report/
+/test-results/
+/output/playwright/
+tsconfig.tsbuildinfo
 
 # next/vinext build output
 /.next/
@@ -33,3 +37,4 @@ yarn-error.log*
 
 # env files
 .env*
+!.env.example

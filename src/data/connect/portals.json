@@ -1,0 +1,92 @@
+[
+  {
+    "countryId": "th",
+    "name": "DDproperty",
+    "url": "https://www.ddproperty.com/en?hl=en-US"
+  },
+  {
+    "countryId": "jp",
+    "name": "SUUMO",
+    "url": "https://suumo.jp/chintai/tokyo/"
+  },
+  {
+    "countryId": "kr",
+    "name": "Naver Pay Real Estate",
+    "url": "https://land.naver.com/"
+  },
+  {
+    "countryId": "gb",
+    "name": "Rightmove",
+    "url": "https://www.rightmove.co.uk/property-for-sale/London.html"
+  },
+  {
+    "countryId": "fr",
+    "name": "SeLoger",
+    "url": "https://www.seloger.com/recherche/location/appartement/ile-de-france/paris-75000/ad08fr31096"
+  },
+  {
+    "countryId": "sg",
+    "name": "PropertyGuru Singapore",
+    "url": "https://www.propertyguru.com.sg/condo-for-sale"
+  },
+  {
+    "countryId": "de",
+    "name": "ImmoScout24",
+    "url": "https://www.immobilienscout24.de/Suche/de/berlin/berlin/wohnung-mieten"
+  },
+  {
+    "countryId": "es",
+    "name": "idealista Spain",
+    "url": "https://www.idealista.com/alquiler-viviendas/madrid-madrid/"
+  },
+  {
+    "countryId": "pt",
+    "name": "idealista Portugal",
+    "url": "https://www.idealista.pt/arrendar-casas/lisboa/"
+  },
+  {
+    "countryId": "it",
+    "name": "idealista Italy",
+    "url": "https://www.idealista.it/affitto-case/roma-roma/"
+  },
+  {
+    "countryId": "nl",
+    "name": "Funda",
+    "url": "https://www.funda.nl/zoeken/huur/?selected_area=amsterdam"
+  },
+  {
+    "countryId": "us",
+    "name": "Zillow",
+    "url": "https://www.zillow.com/washington-dc/apartments/"
+  },
+  {
+    "countryId": "ca",
+    "name": "REALTOR.ca",
+    "url": "https://www.realtor.ca/on/ottawa/appartement-a-louer"
+  },
+  {
+    "countryId": "au",
+    "name": "Allhomes",
+    "url": "https://www.allhomes.com.au/"
+  },
+  {
+    "countryId": "my",
+    "name": "PropertyGuru Malaysia",
+    "url": "https://www.propertyguru.com.my/apartment-for-rent/in-kuala-lumpur-58jok"
+  },
+  {
+    "countryId": "mx",
+    "name": "Inmuebles24",
+    "url": "https://www.inmuebles24.com/departamentos-en-renta-en-ciudad-de-mexico.html"
+  },
+  {
+    "countryId": "ar",
+    "name": "Zonaprop",
+    "url": "https://www.zonaprop.com.ar/departamentos-alquiler-capital-federal.html"
+  },
+  {
+    "countryId": "ke",
+    "name": "Property24 Kenya",
+    "url": "https://www.property24.co.ke/apartments-flats-to-rent-in-nairobi-c1890"
+  }
+]

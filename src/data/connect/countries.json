@@ -1,0 +1,4838 @@
+[
+  {
+    "id": "af",
+    "country": "Afghanistan",
+    "capitals": [
+      "Kabul"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "AFN",
+        "name": "Afghan afghani"
+      }
+    ],
+    "languages": [
+      {
+        "code": "prs",
+        "name": "Dari"
+      },
+      {
+        "code": "ps",
+        "name": "Pashto"
+      },
+      {
+        "code": "tk",
+        "name": "Turkmen"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "al",
+    "country": "Albania",
+    "capitals": [
+      "Tirana"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "ALL",
+        "name": "Albanian lek"
+      }
+    ],
+    "languages": [
+      {
+        "code": "sq",
+        "name": "Albanian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "dz",
+    "country": "Algeria",
+    "capitals": [
+      "Algiers"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "DZD",
+        "name": "Algerian dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ad",
+    "country": "Andorra",
+    "capitals": [
+      "Andorra la Vella"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ca",
+        "name": "Catalan"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ao",
+    "country": "Angola",
+    "capitals": [
+      "Luanda"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "AOA",
+        "name": "Angolan kwanza"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ag",
+    "country": "Antigua and Barbuda",
+    "capitals": [
+      "Saint John's"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ar",
+    "country": "Argentina",
+    "capitals": [
+      "Buenos Aires"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "ARS",
+        "name": "Argentine peso"
+      }
+    ],
+    "languages": [
+      {
+        "code": "gn",
+        "name": "Guaraní"
+      },
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "am",
+    "country": "Armenia",
+    "capitals": [
+      "Yerevan"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "AMD",
+        "name": "Armenian dram"
+      }
+    ],
+    "languages": [
+      {
+        "code": "hy",
+        "name": "Armenian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "au",
+    "country": "Australia",
+    "capitals": [
+      "Canberra"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "AUD",
+        "name": "Australian dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "at",
+    "country": "Austria",
+    "capitals": [
+      "Vienna"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "de",
+        "name": "German"
+      }
+    ],
+    "sourceUrl": "https://www.bmeia.gv.at/oev-wien/about-austria/fast-facts/",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.bmeia.gv.at/oev-wien/about-austria/fast-facts/"
+      }
+    ]
+  },
+  {
+    "id": "az",
+    "country": "Azerbaijan",
+    "capitals": [
+      "Baku"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "AZN",
+        "name": "Azerbaijani manat"
+      }
+    ],
+    "languages": [
+      {
+        "code": "az",
+        "name": "Azerbaijani"
+      },
+      {
+        "code": "ru",
+        "name": "Russian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bs",
+    "country": "Bahamas",
+    "capitals": [
+      "Nassau"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "BSD",
+        "name": "Bahamian dollar"
+      },
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bh",
+    "country": "Bahrain",
+    "capitals": [
+      "Manama"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "BHD",
+        "name": "Bahraini dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bd",
+    "country": "Bangladesh",
+    "capitals": [
+      "Dhaka"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "BDT",
+        "name": "Bangladeshi taka"
+      }
+    ],
+    "languages": [
+      {
+        "code": "bn",
+        "name": "Bengali"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bb",
+    "country": "Barbados",
+    "capitals": [
+      "Bridgetown"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "BBD",
+        "name": "Barbadian dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "by",
+    "country": "Belarus",
+    "capitals": [
+      "Minsk"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "BYN",
+        "name": "Belarusian ruble"
+      }
+    ],
+    "languages": [
+      {
+        "code": "be",
+        "name": "Belarusian"
+      },
+      {
+        "code": "ru",
+        "name": "Russian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "be",
+    "country": "Belgium",
+    "capitals": [
+      "Brussels"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "de",
+        "name": "German"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "nl",
+        "name": "Dutch"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bz",
+    "country": "Belize",
+    "capitals": [
+      "Belmopan"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "BZD",
+        "name": "Belize dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "bjz",
+        "name": "Belizean Creole"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bj",
+    "country": "Benin",
+    "capitals": [
+      "Porto-Novo"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bt",
+    "country": "Bhutan",
+    "capitals": [
+      "Thimphu"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "BTN",
+        "name": "Bhutanese ngultrum"
+      },
+      {
+        "code": "INR",
+        "name": "Indian rupee"
+      }
+    ],
+    "languages": [
+      {
+        "code": "dz",
+        "name": "Dzongkha"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bo",
+    "country": "Bolivia",
+    "capitals": [
+      "Sucre"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "BOB",
+        "name": "Bolivian boliviano"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ay",
+        "name": "Aymara"
+      },
+      {
+        "code": "gn",
+        "name": "Guaraní"
+      },
+      {
+        "code": "qu",
+        "name": "Quechua"
+      },
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries",
+    "note": "Sucre is the constitutional capital; La Paz is the seat of government. The country’s official indigenous-language inventory is much broader than the reference list shown here."
+  },
+  {
+    "id": "ba",
+    "country": "Bosnia and Herzegovina",
+    "capitals": [
+      "Sarajevo"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "BAM",
+        "name": "Bosnia and Herzegovina convertible mark"
+      }
+    ],
+    "languages": [
+      {
+        "code": "bs",
+        "name": "Bosnian"
+      },
+      {
+        "code": "hr",
+        "name": "Croatian"
+      },
+      {
+        "code": "sr",
+        "name": "Serbian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bw",
+    "country": "Botswana",
+    "capitals": [
+      "Gaborone"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "BWP",
+        "name": "Botswana pula"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "tn",
+        "name": "Tswana"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "br",
+    "country": "Brazil",
+    "capitals": [
+      "Brasília"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "BRL",
+        "name": "Brazilian real"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bn",
+    "country": "Brunei",
+    "capitals": [
+      "Bandar Seri Begawan"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "BND",
+        "name": "Brunei dollar"
+      },
+      {
+        "code": "SGD",
+        "name": "Singapore dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ms",
+        "name": "Malay"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "bg",
+    "country": "Bulgaria",
+    "capitals": [
+      "Sofia"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "bg",
+        "name": "Bulgarian"
+      }
+    ],
+    "sourceUrl": "https://economy-finance.ec.europa.eu/euro/eu-countries-and-euro/bulgaria-and-euro_en",
+    "note": "Bulgaria adopted the euro on 1 January 2026.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://economy-finance.ec.europa.eu/euro/eu-countries-and-euro/bulgaria-and-euro_en"
+      }
+    ]
+  },
+  {
+    "id": "bf",
+    "country": "Burkina Faso",
+    "capitals": [
+      "Ouagadougou"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://www.aib.media/burkina-langlais-et-le-francais-deviennent-des-langues-de-travail-les-langues-nationales-officielles/",
+    "note": "French and English are working languages. National languages have official status; they are not fully enumerated in this reference list.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.aib.media/burkina-langlais-et-le-francais-deviennent-des-langues-de-travail-les-langues-nationales-officielles/"
+      }
+    ]
+  },
+  {
+    "id": "bi",
+    "country": "Burundi",
+    "capitals": [
+      "Gitega"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "BIF",
+        "name": "Burundian franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "rn",
+        "name": "Kirundi"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "kh",
+    "country": "Cambodia",
+    "capitals": [
+      "Phnom Penh"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "KHR",
+        "name": "Cambodian riel"
+      },
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "km",
+        "name": "Khmer"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cm",
+    "country": "Cameroon",
+    "capitals": [
+      "Yaoundé"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ca",
+    "country": "Canada",
+    "capitals": [
+      "Ottawa"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "CAD",
+        "name": "Canadian dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cv",
+    "country": "Cape Verde",
+    "capitals": [
+      "Praia"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "CVE",
+        "name": "Cape Verdean escudo"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cf",
+    "country": "Central African Republic",
+    "capitals": [
+      "Bangui"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "sg",
+        "name": "Sango"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "td",
+    "country": "Chad",
+    "capitals": [
+      "N'Djamena"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cl",
+    "country": "Chile",
+    "capitals": [
+      "Santiago"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "CLP",
+        "name": "Chilean peso"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cn",
+    "country": "China",
+    "capitals": [
+      "Beijing"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "CNY",
+        "name": "Chinese yuan"
+      }
+    ],
+    "languages": [
+      {
+        "code": "zh",
+        "name": "Chinese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "co",
+    "country": "Colombia",
+    "capitals": [
+      "Bogotá"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "COP",
+        "name": "Colombian peso"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "km",
+    "country": "Comoros",
+    "capitals": [
+      "Moroni"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "KMF",
+        "name": "Comorian franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "zdj",
+        "name": "Comorian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cg",
+    "country": "Congo",
+    "capitals": [
+      "Brazzaville"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "kg",
+        "name": "Kikongo"
+      },
+      {
+        "code": "ln",
+        "name": "Lingala"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cr",
+    "country": "Costa Rica",
+    "capitals": [
+      "San José"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "CRC",
+        "name": "Costa Rican colón"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "hr",
+    "country": "Croatia",
+    "capitals": [
+      "Zagreb"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "hr",
+        "name": "Croatian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cu",
+    "country": "Cuba",
+    "capitals": [
+      "Havana"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "CUP",
+        "name": "Cuban peso"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://www.cibercuba.com/s/gacetaoficial/resolucion-178-de-2021-de-banco-central-de-cuba",
+    "note": "The former Cuban convertible peso (CUC) was withdrawn.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.cibercuba.com/s/gacetaoficial/resolucion-178-de-2021-de-banco-central-de-cuba"
+      }
+    ]
+  },
+  {
+    "id": "cy",
+    "country": "Cyprus",
+    "capitals": [
+      "Nicosia"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "el",
+        "name": "Greek"
+      },
+      {
+        "code": "tr",
+        "name": "Turkish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cz",
+    "country": "Czechia",
+    "capitals": [
+      "Prague"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "CZK",
+        "name": "Czech koruna"
+      }
+    ],
+    "languages": [
+      {
+        "code": "cs",
+        "name": "Czech"
+      },
+      {
+        "code": "sk",
+        "name": "Slovak"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "cd",
+    "country": "DR Congo",
+    "capitals": [
+      "Kinshasa"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "CDF",
+        "name": "Congolese franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "kg",
+        "name": "Kikongo"
+      },
+      {
+        "code": "ln",
+        "name": "Lingala"
+      },
+      {
+        "code": "lua",
+        "name": "Tshiluba"
+      },
+      {
+        "code": "sw",
+        "name": "Swahili"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "dk",
+    "country": "Denmark",
+    "capitals": [
+      "Copenhagen"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "DKK",
+        "name": "Danish krone"
+      }
+    ],
+    "languages": [
+      {
+        "code": "da",
+        "name": "Danish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "dj",
+    "country": "Djibouti",
+    "capitals": [
+      "Djibouti"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "DJF",
+        "name": "Djiboutian franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "dm",
+    "country": "Dominica",
+    "capitals": [
+      "Roseau"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "do",
+    "country": "Dominican Republic",
+    "capitals": [
+      "Santo Domingo"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "DOP",
+        "name": "Dominican peso"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ec",
+    "country": "Ecuador",
+    "capitals": [
+      "Quito"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "eg",
+    "country": "Egypt",
+    "capitals": [
+      "Cairo"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "EGP",
+        "name": "Egyptian pound"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sv",
+    "country": "El Salvador",
+    "capitals": [
+      "San Salvador"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gq",
+    "country": "Equatorial Guinea",
+    "capitals": [
+      "Ciudad de la Paz"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      },
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://www.guineaecuatorialpress.com/index.php/noticias/el_presidente_de_la_republica_proclama_la_ciudad_de_la_paz_como_capital_de_la_republica_de_guinea_ecuatorial_con_la_firma_de_un_decreto_ley",
+    "note": "Ciudad de la Paz was proclaimed the national capital on 2 January 2026, replacing Malabo.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.guineaecuatorialpress.com/index.php/noticias/el_presidente_de_la_republica_proclama_la_ciudad_de_la_paz_como_capital_de_la_republica_de_guinea_ecuatorial_con_la_firma_de_un_decreto_ley"
+      }
+    ]
+  },
+  {
+    "id": "er",
+    "country": "Eritrea",
+    "capitals": [
+      "Asmara"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "ERN",
+        "name": "Eritrean nakfa"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "ti",
+        "name": "Tigrinya"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ee",
+    "country": "Estonia",
+    "capitals": [
+      "Tallinn"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "et",
+        "name": "Estonian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sz",
+    "country": "Eswatini",
+    "capitals": [
+      "Mbabane",
+      "Lobamba"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "SZL",
+        "name": "Swazi lilangeni"
+      },
+      {
+        "code": "ZAR",
+        "name": "South African rand"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "ss",
+        "name": "Swazi"
+      }
+    ],
+    "sourceUrl": "https://www.sadc.int/member-states/kingdom-eswatini",
+    "note": "Mbabane is the administrative capital; Lobamba is the royal and legislative capital.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.sadc.int/member-states/kingdom-eswatini"
+      }
+    ]
+  },
+  {
+    "id": "et",
+    "country": "Ethiopia",
+    "capitals": [
+      "Addis Ababa"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "ETB",
+        "name": "Ethiopian birr"
+      }
+    ],
+    "languages": [
+      {
+        "code": "am",
+        "name": "Amharic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "fj",
+    "country": "Fiji",
+    "capitals": [
+      "Suva"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "FJD",
+        "name": "Fijian dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "fj",
+        "name": "Fijian"
+      },
+      {
+        "code": "hif",
+        "name": "Fiji Hindi"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "fi",
+    "country": "Finland",
+    "capitals": [
+      "Helsinki"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fi",
+        "name": "Finnish"
+      },
+      {
+        "code": "sv",
+        "name": "Swedish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "fr",
+    "country": "France",
+    "capitals": [
+      "Paris"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ga",
+    "country": "Gabon",
+    "capitals": [
+      "Libreville"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XAF",
+        "name": "Central African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gm",
+    "country": "Gambia",
+    "capitals": [
+      "Banjul"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "GMD",
+        "name": "dalasi"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ge",
+    "country": "Georgia",
+    "capitals": [
+      "Tbilisi"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "GEL",
+        "name": "lari"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ka",
+        "name": "Georgian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "de",
+    "country": "Germany",
+    "capitals": [
+      "Berlin"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "de",
+        "name": "German"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gh",
+    "country": "Ghana",
+    "capitals": [
+      "Accra"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "GHS",
+        "name": "Ghanaian cedi"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gr",
+    "country": "Greece",
+    "capitals": [
+      "Athens"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "el",
+        "name": "Greek"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gd",
+    "country": "Grenada",
+    "capitals": [
+      "St. George's"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gt",
+    "country": "Guatemala",
+    "capitals": [
+      "Guatemala City"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "GTQ",
+        "name": "Guatemalan quetzal"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gn",
+    "country": "Guinea",
+    "capitals": [
+      "Conakry"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "GNF",
+        "name": "Guinean franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gw",
+    "country": "Guinea-Bissau",
+    "capitals": [
+      "Bissau"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      },
+      {
+        "code": "pov",
+        "name": "Upper Guinea Creole"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gy",
+    "country": "Guyana",
+    "capitals": [
+      "Georgetown"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "GYD",
+        "name": "Guyanese dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ht",
+    "country": "Haiti",
+    "capitals": [
+      "Port-au-Prince"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "HTG",
+        "name": "Haitian gourde"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "ht",
+        "name": "Haitian Creole"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "hn",
+    "country": "Honduras",
+    "capitals": [
+      "Tegucigalpa"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "HNL",
+        "name": "Honduran lempira"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "hu",
+    "country": "Hungary",
+    "capitals": [
+      "Budapest"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "HUF",
+        "name": "Hungarian forint"
+      }
+    ],
+    "languages": [
+      {
+        "code": "hu",
+        "name": "Hungarian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "is",
+    "country": "Iceland",
+    "capitals": [
+      "Reykjavik"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "ISK",
+        "name": "Icelandic króna"
+      }
+    ],
+    "languages": [
+      {
+        "code": "is",
+        "name": "Icelandic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "in",
+    "country": "India",
+    "capitals": [
+      "New Delhi"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "INR",
+        "name": "Indian rupee"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "hi",
+        "name": "Hindi"
+      },
+      {
+        "code": "ta",
+        "name": "Tamil"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries",
+    "note": "Language entries are a selected reference list, including regional languages; they do not enumerate all constitutionally scheduled languages or imply nationwide official status."
+  },
+  {
+    "id": "id",
+    "country": "Indonesia",
+    "capitals": [
+      "Jakarta"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "IDR",
+        "name": "Indonesian rupiah"
+      }
+    ],
+    "languages": [
+      {
+        "code": "id",
+        "name": "Indonesian"
+      }
+    ],
+    "sourceUrl": "https://www.mkri.id/berita/waktu-pemindahan-ikn-bergantung-pada-pemberlakuan-keputusan-presiden-25031",
+    "note": "Nusantara is the planned new capital. The Constitutional Court confirmed in May 2026 that Jakarta retains capital functions until a presidential transfer decree takes effect; no later transfer was verified in this review.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.mkri.id/berita/waktu-pemindahan-ikn-bergantung-pada-pemberlakuan-keputusan-presiden-25031"
+      }
+    ]
+  },
+  {
+    "id": "ir",
+    "country": "Iran",
+    "capitals": [
+      "Tehran"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "IRR",
+        "name": "Iranian rial"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fa",
+        "name": "Persian (Farsi)"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "iq",
+    "country": "Iraq",
+    "capitals": [
+      "Baghdad"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "IQD",
+        "name": "Iraqi dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "arc",
+        "name": "Aramaic"
+      },
+      {
+        "code": "ckb",
+        "name": "Sorani"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ie",
+    "country": "Ireland",
+    "capitals": [
+      "Dublin"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "ga",
+        "name": "Irish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "il",
+    "country": "Israel",
+    "capitals": [
+      "Jerusalem"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "ILS",
+        "name": "Israeli new shekel"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "he",
+        "name": "Hebrew"
+      }
+    ],
+    "sourceUrl": "https://www.un.org/unispal/permanent-status-issues/",
+    "note": "Israel designates Jerusalem as its capital. Jerusalem’s final status remains disputed internationally; Palestinian claims concern East Jerusalem.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.un.org/unispal/permanent-status-issues/"
+      }
+    ]
+  },
+  {
+    "id": "it",
+    "country": "Italy",
+    "capitals": [
+      "Rome"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "it",
+        "name": "Italian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ci",
+    "country": "Ivory Coast",
+    "capitals": [
+      "Yamoussoukro"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "jm",
+    "country": "Jamaica",
+    "capitals": [
+      "Kingston"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "JMD",
+        "name": "Jamaican dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "jam",
+        "name": "Jamaican Patois"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "jp",
+    "country": "Japan",
+    "capitals": [
+      "Tokyo"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "JPY",
+        "name": "Japanese yen"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ja",
+        "name": "Japanese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "jo",
+    "country": "Jordan",
+    "capitals": [
+      "Amman"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "JOD",
+        "name": "Jordanian dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "kz",
+    "country": "Kazakhstan",
+    "capitals": [
+      "Astana"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "KZT",
+        "name": "Kazakhstani tenge"
+      }
+    ],
+    "languages": [
+      {
+        "code": "kk",
+        "name": "Kazakh"
+      },
+      {
+        "code": "ru",
+        "name": "Russian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ke",
+    "country": "Kenya",
+    "capitals": [
+      "Nairobi"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "KES",
+        "name": "Kenyan shilling"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "sw",
+        "name": "Swahili"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ki",
+    "country": "Kiribati",
+    "capitals": [
+      "South Tarawa"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "AUD",
+        "name": "Australian dollar"
+      },
+      {
+        "code": "KID",
+        "name": "Kiribati dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "gil",
+        "name": "Gilbertese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "kw",
+    "country": "Kuwait",
+    "capitals": [
+      "Kuwait City"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "KWD",
+        "name": "Kuwaiti dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "kg",
+    "country": "Kyrgyzstan",
+    "capitals": [
+      "Bishkek"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "KGS",
+        "name": "Kyrgyzstani som"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ky",
+        "name": "Kyrgyz"
+      },
+      {
+        "code": "ru",
+        "name": "Russian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "la",
+    "country": "Laos",
+    "capitals": [
+      "Vientiane"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "LAK",
+        "name": "Lao kip"
+      }
+    ],
+    "languages": [
+      {
+        "code": "lo",
+        "name": "Lao"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "lv",
+    "country": "Latvia",
+    "capitals": [
+      "Riga"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "lv",
+        "name": "Latvian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "lb",
+    "country": "Lebanon",
+    "capitals": [
+      "Beirut"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "LBP",
+        "name": "Lebanese pound"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ls",
+    "country": "Lesotho",
+    "capitals": [
+      "Maseru"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "LSL",
+        "name": "Lesotho loti"
+      },
+      {
+        "code": "ZAR",
+        "name": "South African rand"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "st",
+        "name": "Sotho"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "lr",
+    "country": "Liberia",
+    "capitals": [
+      "Monrovia"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "LRD",
+        "name": "Liberian dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ly",
+    "country": "Libya",
+    "capitals": [
+      "Tripoli"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "LYD",
+        "name": "Libyan dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "li",
+    "country": "Liechtenstein",
+    "capitals": [
+      "Vaduz"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "CHF",
+        "name": "Swiss franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "de",
+        "name": "German"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "lt",
+    "country": "Lithuania",
+    "capitals": [
+      "Vilnius"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "lt",
+        "name": "Lithuanian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "lu",
+    "country": "Luxembourg",
+    "capitals": [
+      "Luxembourg"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "de",
+        "name": "German"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "lb",
+        "name": "Luxembourgish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mg",
+    "country": "Madagascar",
+    "capitals": [
+      "Antananarivo"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "MGA",
+        "name": "Malagasy ariary"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "mg",
+        "name": "Malagasy"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mw",
+    "country": "Malawi",
+    "capitals": [
+      "Lilongwe"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "MWK",
+        "name": "Malawian kwacha"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "ny",
+        "name": "Chewa"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "my",
+    "country": "Malaysia",
+    "capitals": [
+      "Kuala Lumpur"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "MYR",
+        "name": "Malaysian ringgit"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "ms",
+        "name": "Malay"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries",
+    "note": "Kuala Lumpur is the capital; Putrajaya is the federal administrative centre. Language entries include widely used languages."
+  },
+  {
+    "id": "mv",
+    "country": "Maldives",
+    "capitals": [
+      "Malé"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "MVR",
+        "name": "Maldivian rufiyaa"
+      }
+    ],
+    "languages": [
+      {
+        "code": "dv",
+        "name": "Maldivian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ml",
+    "country": "Mali",
+    "capitals": [
+      "Bamako"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://sgg-mali.ml/JO/2023/mali-jo-2023-20.pdf",
+    "note": "The 2023 constitution gives national languages official status. French is a working language; the national-language inventory is not enumerated here.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://sgg-mali.ml/JO/2023/mali-jo-2023-20.pdf"
+      }
+    ]
+  },
+  {
+    "id": "mt",
+    "country": "Malta",
+    "capitals": [
+      "Valletta"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "mt",
+        "name": "Maltese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mh",
+    "country": "Marshall Islands",
+    "capitals": [
+      "Majuro"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "mh",
+        "name": "Marshallese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mr",
+    "country": "Mauritania",
+    "capitals": [
+      "Nouakchott"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "MRU",
+        "name": "Mauritanian ouguiya"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mu",
+    "country": "Mauritius",
+    "capitals": [
+      "Port Louis"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "MUR",
+        "name": "Mauritian rupee"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "mfe",
+        "name": "Mauritian Creole"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mx",
+    "country": "Mexico",
+    "capitals": [
+      "Mexico City"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "MXN",
+        "name": "Mexican peso"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "fm",
+    "country": "Micronesia",
+    "capitals": [
+      "Palikir"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://www.elibrary.imf.org/view/journals/002/2026/090/article-A003-en.xml",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.elibrary.imf.org/view/journals/002/2026/090/article-A003-en.xml"
+      }
+    ]
+  },
+  {
+    "id": "md",
+    "country": "Moldova",
+    "capitals": [
+      "Chișinău"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "MDL",
+        "name": "Moldovan leu"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ro",
+        "name": "Moldavian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mc",
+    "country": "Monaco",
+    "capitals": [
+      "Monaco"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mn",
+    "country": "Mongolia",
+    "capitals": [
+      "Ulan Bator"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "MNT",
+        "name": "Mongolian tögrög"
+      }
+    ],
+    "languages": [
+      {
+        "code": "mn",
+        "name": "Mongolian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "me",
+    "country": "Montenegro",
+    "capitals": [
+      "Podgorica"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "cnr",
+        "name": "Montenegrin"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ma",
+    "country": "Morocco",
+    "capitals": [
+      "Rabat"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "MAD",
+        "name": "Moroccan dirham"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries",
+    "note": "Additional language groups in the source: Berber. The language list is not exhaustive."
+  },
+  {
+    "id": "mz",
+    "country": "Mozambique",
+    "capitals": [
+      "Maputo"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "MZN",
+        "name": "Mozambican metical"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mm",
+    "country": "Myanmar",
+    "capitals": [
+      "Naypyidaw"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "MMK",
+        "name": "Burmese kyat"
+      }
+    ],
+    "languages": [
+      {
+        "code": "my",
+        "name": "Burmese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "na",
+    "country": "Namibia",
+    "capitals": [
+      "Windhoek"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "NAD",
+        "name": "Namibian dollar"
+      },
+      {
+        "code": "ZAR",
+        "name": "South African rand"
+      }
+    ],
+    "languages": [
+      {
+        "code": "af",
+        "name": "Afrikaans"
+      },
+      {
+        "code": "de",
+        "name": "German"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "hz",
+        "name": "Herero"
+      },
+      {
+        "code": "hgm",
+        "name": "Khoekhoe"
+      },
+      {
+        "code": "kwn",
+        "name": "Kwangali"
+      },
+      {
+        "code": "loz",
+        "name": "Lozi"
+      },
+      {
+        "code": "ng",
+        "name": "Ndonga"
+      },
+      {
+        "code": "tn",
+        "name": "Tswana"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "nr",
+    "country": "Nauru",
+    "capitals": [
+      "Yaren"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "AUD",
+        "name": "Australian dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "na",
+        "name": "Nauru"
+      }
+    ],
+    "sourceUrl": "https://www.theprif.org/country-profile/republic-nauru",
+    "note": "Nauru has no official capital. Yaren district is shown as the location of government offices.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.theprif.org/country-profile/republic-nauru"
+      }
+    ]
+  },
+  {
+    "id": "np",
+    "country": "Nepal",
+    "capitals": [
+      "Kathmandu"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "NPR",
+        "name": "Nepalese rupee"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ne",
+        "name": "Nepali"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "nl",
+    "country": "Netherlands",
+    "capitals": [
+      "Amsterdam"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "nl",
+        "name": "Dutch"
+      }
+    ],
+    "sourceUrl": "https://www.consilium.europa.eu/media/29692/qc0616198enn.pdf",
+    "note": "Amsterdam is the capital; The Hague is the seat of government, Parliament and the Supreme Court.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.consilium.europa.eu/media/29692/qc0616198enn.pdf"
+      }
+    ]
+  },
+  {
+    "id": "nz",
+    "country": "New Zealand",
+    "capitals": [
+      "Wellington"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "NZD",
+        "name": "New Zealand dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "mi",
+        "name": "Māori"
+      },
+      {
+        "code": "nzs",
+        "name": "New Zealand Sign Language"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ni",
+    "country": "Nicaragua",
+    "capitals": [
+      "Managua"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "NIO",
+        "name": "Nicaraguan córdoba"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ne",
+    "country": "Niger",
+    "capitals": [
+      "Niamey"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ha",
+        "name": "Hausa"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://www.youtube.com/watch?v=d2p5jJgvDaI",
+    "note": "Under the 2025 charter, Hausa is the national language; French and English are working languages. This reference list does not enumerate all languages spoken in Niger.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.youtube.com/watch?v=d2p5jJgvDaI"
+      }
+    ]
+  },
+  {
+    "id": "ng",
+    "country": "Nigeria",
+    "capitals": [
+      "Abuja"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "NGN",
+        "name": "Nigerian naira"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "kp",
+    "country": "North Korea",
+    "capitals": [
+      "Pyongyang"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "KPW",
+        "name": "North Korean won"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ko",
+        "name": "Korean"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "mk",
+    "country": "North Macedonia",
+    "capitals": [
+      "Skopje"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "MKD",
+        "name": "denar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "mk",
+        "name": "Macedonian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "no",
+    "country": "Norway",
+    "capitals": [
+      "Oslo"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "NOK",
+        "name": "Norwegian krone"
+      }
+    ],
+    "languages": [
+      {
+        "code": "nn",
+        "name": "Norwegian Nynorsk"
+      },
+      {
+        "code": "nb",
+        "name": "Norwegian Bokmål"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries",
+    "note": "Additional language groups in the source: Sami. The language list is not exhaustive."
+  },
+  {
+    "id": "om",
+    "country": "Oman",
+    "capitals": [
+      "Muscat"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "OMR",
+        "name": "Omani rial"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "pk",
+    "country": "Pakistan",
+    "capitals": [
+      "Islamabad"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "PKR",
+        "name": "Pakistani rupee"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "ur",
+        "name": "Urdu"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "pw",
+    "country": "Palau",
+    "capitals": [
+      "Ngerulmud"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "pau",
+        "name": "Palauan"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "pa",
+    "country": "Panama",
+    "capitals": [
+      "Panama City"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "PAB",
+        "name": "Panamanian balboa"
+      },
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "pg",
+    "country": "Papua New Guinea",
+    "capitals": [
+      "Port Moresby"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "PGK",
+        "name": "Papua New Guinean kina"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "ho",
+        "name": "Hiri Motu"
+      },
+      {
+        "code": "tpi",
+        "name": "Tok Pisin"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "py",
+    "country": "Paraguay",
+    "capitals": [
+      "Asunción"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "PYG",
+        "name": "Paraguayan guaraní"
+      }
+    ],
+    "languages": [
+      {
+        "code": "gn",
+        "name": "Guaraní"
+      },
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "pe",
+    "country": "Peru",
+    "capitals": [
+      "Lima"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "PEN",
+        "name": "Peruvian sol"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ay",
+        "name": "Aymara"
+      },
+      {
+        "code": "qu",
+        "name": "Quechua"
+      },
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ph",
+    "country": "Philippines",
+    "capitals": [
+      "Manila"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "PHP",
+        "name": "Philippine peso"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "fil",
+        "name": "Filipino"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "pl",
+    "country": "Poland",
+    "capitals": [
+      "Warsaw"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "PLN",
+        "name": "Polish złoty"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pl",
+        "name": "Polish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "pt",
+    "country": "Portugal",
+    "capitals": [
+      "Lisbon"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "qa",
+    "country": "Qatar",
+    "capitals": [
+      "Doha"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "QAR",
+        "name": "Qatari riyal"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ro",
+    "country": "Romania",
+    "capitals": [
+      "Bucharest"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "RON",
+        "name": "Romanian leu"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ro",
+        "name": "Romanian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ru",
+    "country": "Russia",
+    "capitals": [
+      "Moscow"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "RUB",
+        "name": "Russian ruble"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ru",
+        "name": "Russian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "rw",
+    "country": "Rwanda",
+    "capitals": [
+      "Kigali"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "RWF",
+        "name": "Rwandan franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "rw",
+        "name": "Kinyarwanda"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "kn",
+    "country": "Saint Kitts and Nevis",
+    "capitals": [
+      "Basseterre"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "lc",
+    "country": "Saint Lucia",
+    "capitals": [
+      "Castries"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "vc",
+    "country": "Saint Vincent and the Grenadines",
+    "capitals": [
+      "Kingstown"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "XCD",
+        "name": "Eastern Caribbean dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ws",
+    "country": "Samoa",
+    "capitals": [
+      "Apia"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "WST",
+        "name": "Samoan tālā"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "sm",
+        "name": "Samoan"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sm",
+    "country": "San Marino",
+    "capitals": [
+      "City of San Marino"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "it",
+        "name": "Italian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sa",
+    "country": "Saudi Arabia",
+    "capitals": [
+      "Riyadh"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "SAR",
+        "name": "Saudi riyal"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sn",
+    "country": "Senegal",
+    "capitals": [
+      "Dakar"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "rs",
+    "country": "Serbia",
+    "capitals": [
+      "Belgrade"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "RSD",
+        "name": "Serbian dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "sr",
+        "name": "Serbian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sc",
+    "country": "Seychelles",
+    "capitals": [
+      "Victoria"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "SCR",
+        "name": "Seychellois rupee"
+      }
+    ],
+    "languages": [
+      {
+        "code": "crs",
+        "name": "Seychellois Creole"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sl",
+    "country": "Sierra Leone",
+    "capitals": [
+      "Freetown"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "SLE",
+        "name": "Sierra Leonean leone"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sg",
+    "country": "Singapore",
+    "capitals": [
+      "Singapore"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "SGD",
+        "name": "Singapore dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "ms",
+        "name": "Malay"
+      },
+      {
+        "code": "ta",
+        "name": "Tamil"
+      },
+      {
+        "code": "zh",
+        "name": "Chinese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sk",
+    "country": "Slovakia",
+    "capitals": [
+      "Bratislava"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "sk",
+        "name": "Slovak"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "si",
+    "country": "Slovenia",
+    "capitals": [
+      "Ljubljana"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "sl",
+        "name": "Slovene"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sb",
+    "country": "Solomon Islands",
+    "capitals": [
+      "Honiara"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "SBD",
+        "name": "Solomon Islands dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "so",
+    "country": "Somalia",
+    "capitals": [
+      "Mogadishu"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "SOS",
+        "name": "Somali shilling"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "so",
+        "name": "Somali"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "za",
+    "country": "South Africa",
+    "capitals": [
+      "Pretoria",
+      "Cape Town",
+      "Bloemfontein"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "ZAR",
+        "name": "South African rand"
+      }
+    ],
+    "languages": [
+      {
+        "code": "af",
+        "name": "Afrikaans"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "nr",
+        "name": "Southern Ndebele"
+      },
+      {
+        "code": "nso",
+        "name": "Northern Sotho"
+      },
+      {
+        "code": "st",
+        "name": "Southern Sotho"
+      },
+      {
+        "code": "ss",
+        "name": "Swazi"
+      },
+      {
+        "code": "tn",
+        "name": "Tswana"
+      },
+      {
+        "code": "ts",
+        "name": "Tsonga"
+      },
+      {
+        "code": "ve",
+        "name": "Venda"
+      },
+      {
+        "code": "xh",
+        "name": "Xhosa"
+      },
+      {
+        "code": "zu",
+        "name": "Zulu"
+      },
+      {
+        "code": "sfs",
+        "name": "South African Sign Language"
+      }
+    ],
+    "sourceUrl": "https://www.gov.za/about-sa/south-africas-provinces",
+    "note": "Pretoria: administrative; Cape Town: legislative; Bloemfontein: judicial (Supreme Court of Appeal).",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.gov.za/about-sa/south-africas-provinces"
+      },
+      {
+        "title": "Capital and country reference 2",
+        "url": "https://www.statssa.gov.za/?p=19168"
+      }
+    ]
+  },
+  {
+    "id": "kr",
+    "country": "South Korea",
+    "capitals": [
+      "Seoul"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "KRW",
+        "name": "South Korean won"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ko",
+        "name": "Korean"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ss",
+    "country": "South Sudan",
+    "capitals": [
+      "Juba"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "SSP",
+        "name": "South Sudanese pound"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "es",
+    "country": "Spain",
+    "capitals": [
+      "Madrid"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "lk",
+    "country": "Sri Lanka",
+    "capitals": [
+      "Sri Jayewardenepura Kotte",
+      "Colombo"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "LKR",
+        "name": "Sri Lankan rupee"
+      }
+    ],
+    "languages": [
+      {
+        "code": "si",
+        "name": "Sinhala"
+      },
+      {
+        "code": "ta",
+        "name": "Tamil"
+      }
+    ],
+    "sourceUrl": "https://www.kotte.mc.gov.lk/index.php?Itemid=175&id=25&lang=en&option=com_content&view=article",
+    "note": "Sri Jayewardenepura Kotte is the administrative capital and seat of Parliament; Colombo is the commercial capital and retains government offices.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.kotte.mc.gov.lk/index.php?Itemid=175&id=25&lang=en&option=com_content&view=article"
+      }
+    ]
+  },
+  {
+    "id": "ps",
+    "country": "State of Palestine",
+    "capitals": [
+      "East Jerusalem",
+      "Ramallah"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "EGP",
+        "name": "Egyptian pound"
+      },
+      {
+        "code": "ILS",
+        "name": "Israeli new shekel"
+      },
+      {
+        "code": "JOD",
+        "name": "Jordanian dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://data.un.org/en/iso/ps.html",
+    "note": "East Jerusalem is the claimed capital, listed by UN Data; Ramallah is the administrative seat. Jerusalem’s final status is disputed. Palestine is a UN non-member observer state.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://data.un.org/en/iso/ps.html"
+      }
+    ]
+  },
+  {
+    "id": "sd",
+    "country": "Sudan",
+    "capitals": [
+      "Khartoum"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "SDG",
+        "name": "Sudanese pound"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "sr",
+    "country": "Suriname",
+    "capitals": [
+      "Paramaribo"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "SRD",
+        "name": "Surinamese dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "nl",
+        "name": "Dutch"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "se",
+    "country": "Sweden",
+    "capitals": [
+      "Stockholm"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "SEK",
+        "name": "Swedish krona"
+      }
+    ],
+    "languages": [
+      {
+        "code": "sv",
+        "name": "Swedish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ch",
+    "country": "Switzerland",
+    "capitals": [
+      "Bern"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "CHF",
+        "name": "Swiss franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "de",
+        "name": "German"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      },
+      {
+        "code": "gsw",
+        "name": "Swiss German"
+      },
+      {
+        "code": "it",
+        "name": "Italian"
+      },
+      {
+        "code": "rm",
+        "name": "Romansh"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries",
+    "note": "Bern is the federal city and seat of federal authorities. Language names follow the source reference list.",
+    "sources": [
+      {
+        "title": "Switzerland: national languages",
+        "url": "https://www.aboutswitzerland.eda.admin.ch/en/language"
+      }
+    ]
+  },
+  {
+    "id": "sy",
+    "country": "Syria",
+    "capitals": [
+      "Damascus"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "SYP",
+        "name": "Syrian pound"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "st",
+    "country": "São Tomé and Príncipe",
+    "capitals": [
+      "São Tomé"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "STN",
+        "name": "São Tomé and Príncipe dobra"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tj",
+    "country": "Tajikistan",
+    "capitals": [
+      "Dushanbe"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "TJS",
+        "name": "Tajikistani somoni"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ru",
+        "name": "Russian"
+      },
+      {
+        "code": "tg",
+        "name": "Tajik"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tz",
+    "country": "Tanzania",
+    "capitals": [
+      "Dodoma"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "TZS",
+        "name": "Tanzanian shilling"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "sw",
+        "name": "Swahili"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "th",
+    "country": "Thailand",
+    "capitals": [
+      "Bangkok"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "THB",
+        "name": "Thai baht"
+      }
+    ],
+    "languages": [
+      {
+        "code": "th",
+        "name": "Thai"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tl",
+    "country": "Timor-Leste",
+    "capitals": [
+      "Dili"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "pt",
+        "name": "Portuguese"
+      },
+      {
+        "code": "tet",
+        "name": "Tetum"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tg",
+    "country": "Togo",
+    "capitals": [
+      "Lomé"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "XOF",
+        "name": "West African CFA franc"
+      }
+    ],
+    "languages": [
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "to",
+    "country": "Tonga",
+    "capitals": [
+      "Nuku'alofa"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "TOP",
+        "name": "Tongan paʻanga"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "to",
+        "name": "Tongan"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tt",
+    "country": "Trinidad and Tobago",
+    "capitals": [
+      "Port of Spain"
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "TTD",
+        "name": "Trinidad and Tobago dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tn",
+    "country": "Tunisia",
+    "capitals": [
+      "Tunis"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "TND",
+        "name": "Tunisian dinar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tm",
+    "country": "Turkmenistan",
+    "capitals": [
+      "Ashgabat"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "TMT",
+        "name": "Turkmenistan manat"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ru",
+        "name": "Russian"
+      },
+      {
+        "code": "tk",
+        "name": "Turkmen"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tv",
+    "country": "Tuvalu",
+    "capitals": [
+      "Funafuti"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "AUD",
+        "name": "Australian dollar"
+      },
+      {
+        "code": "TVD",
+        "name": "Tuvaluan dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "tvl",
+        "name": "Tuvaluan"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "tr",
+    "country": "Türkiye",
+    "capitals": [
+      "Ankara"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "TRY",
+        "name": "Turkish lira"
+      }
+    ],
+    "languages": [
+      {
+        "code": "tr",
+        "name": "Turkish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ug",
+    "country": "Uganda",
+    "capitals": [
+      "Kampala"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "UGX",
+        "name": "Ugandan shilling"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "sw",
+        "name": "Swahili"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ua",
+    "country": "Ukraine",
+    "capitals": [
+      "Kyiv"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "UAH",
+        "name": "Ukrainian hryvnia"
+      }
+    ],
+    "languages": [
+      {
+        "code": "uk",
+        "name": "Ukrainian"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ae",
+    "country": "United Arab Emirates",
+    "capitals": [
+      "Abu Dhabi"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "AED",
+        "name": "United Arab Emirates dirham"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "gb",
+    "country": "United Kingdom",
+    "capitals": [
+      "London"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "GBP",
+        "name": "British pound"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "us",
+    "country": "United States",
+    "capitals": [
+      "Washington D.C."
+    ],
+    "region": "North America",
+    "currencies": [
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "uy",
+    "country": "Uruguay",
+    "capitals": [
+      "Montevideo"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "UYU",
+        "name": "Uruguayan peso"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "uz",
+    "country": "Uzbekistan",
+    "capitals": [
+      "Tashkent"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "UZS",
+        "name": "Uzbekistani soʻm"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ru",
+        "name": "Russian"
+      },
+      {
+        "code": "uz",
+        "name": "Uzbek"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "vu",
+    "country": "Vanuatu",
+    "capitals": [
+      "Port Vila"
+    ],
+    "region": "Oceania",
+    "currencies": [
+      {
+        "code": "VUV",
+        "name": "Vanuatu vatu"
+      }
+    ],
+    "languages": [
+      {
+        "code": "bi",
+        "name": "Bislama"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "fr",
+        "name": "French"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "va",
+    "country": "Vatican City (Holy See)",
+    "capitals": [
+      "Vatican City"
+    ],
+    "region": "Europe",
+    "currencies": [
+      {
+        "code": "EUR",
+        "name": "Euro"
+      }
+    ],
+    "languages": [
+      {
+        "code": "it",
+        "name": "Italian"
+      },
+      {
+        "code": "la",
+        "name": "Latin"
+      }
+    ],
+    "sourceUrl": "https://www.un.org/en/about-us/non-member-states",
+    "note": "Vatican City is represented internationally by the Holy See, a UN non-member observer state.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.un.org/en/about-us/non-member-states"
+      }
+    ]
+  },
+  {
+    "id": "ve",
+    "country": "Venezuela",
+    "capitals": [
+      "Caracas"
+    ],
+    "region": "South America",
+    "currencies": [
+      {
+        "code": "VES",
+        "name": "Venezuelan bolívar soberano"
+      }
+    ],
+    "languages": [
+      {
+        "code": "es",
+        "name": "Spanish"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "vn",
+    "country": "Vietnam",
+    "capitals": [
+      "Hanoi"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "VND",
+        "name": "Vietnamese đồng"
+      }
+    ],
+    "languages": [
+      {
+        "code": "vi",
+        "name": "Vietnamese"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "ye",
+    "country": "Yemen",
+    "capitals": [
+      "Sana'a"
+    ],
+    "region": "Asia",
+    "currencies": [
+      {
+        "code": "YER",
+        "name": "Yemeni rial"
+      }
+    ],
+    "languages": [
+      {
+        "code": "ar",
+        "name": "Arabic"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "zm",
+    "country": "Zambia",
+    "capitals": [
+      "Lusaka"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "ZMW",
+        "name": "Zambian kwacha"
+      }
+    ],
+    "languages": [
+      {
+        "code": "en",
+        "name": "English"
+      }
+    ],
+    "sourceUrl": "https://github.com/mledoze/countries"
+  },
+  {
+    "id": "zw",
+    "country": "Zimbabwe",
+    "capitals": [
+      "Harare"
+    ],
+    "region": "Africa",
+    "currencies": [
+      {
+        "code": "ZWG",
+        "name": "Zimbabwe Gold"
+      },
+      {
+        "code": "USD",
+        "name": "United States dollar"
+      }
+    ],
+    "languages": [
+      {
+        "code": "bwg",
+        "name": "Chibarwe"
+      },
+      {
+        "code": "en",
+        "name": "English"
+      },
+      {
+        "code": "kck",
+        "name": "Kalanga"
+      },
+      {
+        "code": "ndc",
+        "name": "Ndau"
+      },
+      {
+        "code": "nd",
+        "name": "Northern Ndebele"
+      },
+      {
+        "code": "ny",
+        "name": "Chewa"
+      },
+      {
+        "code": "sn",
+        "name": "Shona"
+      },
+      {
+        "code": "st",
+        "name": "Sotho"
+      },
+      {
+        "code": "toi",
+        "name": "Tonga"
+      },
+      {
+        "code": "tn",
+        "name": "Tswana"
+      },
+      {
+        "code": "ts",
+        "name": "Tsonga"
+      },
+      {
+        "code": "ve",
+        "name": "Venda"
+      },
+      {
+        "code": "xh",
+        "name": "Xhosa"
+      },
+      {
+        "code": "zib",
+        "name": "Zimbabwean Sign Language"
+      }
+    ],
+    "sourceUrl": "https://www.rbz.co.zw/index.php/publications-notices/notices/press-release/1419-press-statement-introduction-of-zimbabwe-gold-zig-currency-code-zwg",
+    "note": "Additional language groups in the source: Khoisan. The language list is not exhaustive. Selected currencies: Zimbabwe Gold (ZiG) and US dollars. The multi-currency regime permits other foreign currencies; this is not an exhaustive legal-tender list.",
+    "sources": [
+      {
+        "title": "Capital and country reference 1",
+        "url": "https://www.rbz.co.zw/index.php/publications-notices/notices/press-release/1419-press-statement-introduction-of-zimbabwe-gold-zig-currency-code-zwg"
+      }
+    ]
+  }
+]

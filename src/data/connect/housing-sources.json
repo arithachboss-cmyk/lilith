@@ -1,0 +1,416 @@
+{
+  "checkedOn": "2026-09-10",
+  "contentRole": "Editorial project examples with official sources; external property portals are further-search resources.",
+  "displayNote": "Explore real residential projects through their official websites. Examples are not live inventory, and inclusion does not imply a partnership. Confirm current terms and availability with the provider.",
+  "suggestedSectionLabels": {
+    "projects": "Residential places to explore",
+    "furtherSearch": "Continue your search locally",
+    "officialLink": "Official project website",
+    "portalLink": "Open local property search"
+  },
+  "cities": [
+    {
+      "city": "Bangkok",
+      "countryCode": "TH",
+      "localLanguage": "th",
+      "projects": [
+        {
+          "id": "xt-ekkamai",
+          "name": "XT Ekkamai",
+          "city": "Bangkok",
+          "neighborhood": "Ekkamai, Watthana",
+          "housingType": "condo",
+          "developerOrOperator": "Sansiri",
+          "sourceUrl": "https://www.sansiri.com/en/condominium/xt-ekkamai/",
+          "supportingSourceUrl": "https://www.sansiri.com/media-project/XT-ekkamai/XT-ekkamai_E-Brochure-200410.PDF",
+          "description": "A 38-storey condominium on Ekkamai Road, with one- and two-bedroom homes and shared work, garden and recreation spaces."
+        }
+      ],
+      "furtherSearch": [
+        {
+          "name": "DDproperty",
+          "url": "https://www.ddproperty.com/en?hl=en-US",
+          "sourceUrl": "https://www.ddproperty.com/en/bangkok/condo-for-rent/2717",
+          "language": "en",
+          "instruction": "Select Bangkok and choose rent or buy.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Tokyo",
+      "countryCode": "JP",
+      "localLanguage": "ja",
+      "projects": [
+        {
+          "id": "roppongi-hills-residence",
+          "name": "Roppongi Hills Residence",
+          "city": "Tokyo",
+          "neighborhood": "Roppongi Hills",
+          "housingType": "apartment",
+          "developerOrOperator": "MORI LIVING / Mori Building",
+          "sourceUrl": "https://www.moriliving.com/en/residence/roppongihills/index.html",
+          "description": "Apartments within Roppongi Hills, a mixed-use neighborhood with the Mori Art Museum, shops, restaurants and landscaped walking routes."
+        },
+        {
+          "id": "ark-hills-sengokuyama",
+          "name": "ARK Hills Sengokuyama Residence",
+          "city": "Tokyo",
+          "neighborhood": "Between ARK Hills and Azabudai Hills",
+          "housingType": "apartment",
+          "developerOrOperator": "MORI LIVING / Mori Building",
+          "sourceUrl": "https://www.moriliving.com/en/residence/sengokuyama/index.html",
+          "description": "Apartments in a landscaped development between ARK Hills and Azabudai Hills, with varied layouts and shared lounge spaces."
+        }
+      ],
+      "furtherSearch": [
+        {
+          "name": "SUUMO",
+          "url": "https://suumo.jp/chintai/tokyo/",
+          "sourceUrl": "https://suumo.jp/chintai/tokyo/",
+          "language": "ja",
+          "instruction": "Browse Tokyo rental apartments and refine by station or district.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Seoul",
+      "countryCode": "KR",
+      "localLanguage": "ko",
+      "projects": [
+        {
+          "id": "somerset-palace-seoul",
+          "name": "Somerset Palace Seoul",
+          "city": "Seoul",
+          "neighborhood": "Jongno-gu, near Insa-dong",
+          "housingType": "serviced residence",
+          "developerOrOperator": "Somerset / The Ascott Limited",
+          "sourceUrl": "https://www.discoverasr.com/en/somerset-serviced-residence/korea-south/somerset-palace-seoul",
+          "description": "A serviced residence in Jongno-gu with furnished apartments, kitchens and separate living areas, near Insa-dong."
+        },
+        {
+          "id": "fraser-place-central-seoul",
+          "name": "Fraser Place Central Seoul",
+          "city": "Seoul",
+          "neighborhood": "Jung-gu",
+          "housingType": "serviced residence",
+          "developerOrOperator": "Frasers Hospitality",
+          "sourceUrl": "https://www.frasershospitality.com/en/south-korea/seoul/fraser-place-central-seoul/",
+          "description": "Furnished serviced apartments on Tongil-ro, with kitchenettes and living areas, ranging from studios to larger residences."
+        }
+      ],
+      "furtherSearch": [
+        {
+          "name": "Naver Pay Real Estate",
+          "url": "https://land.naver.com/",
+          "sourceUrl": "https://fin.land.naver.com/articles/2528016593",
+          "language": "ko",
+          "instruction": "Open the map and search Seoul (서울).",
+          "kind": "external-property-portal",
+          "verificationNote": "Official Naver portal opened successfully; the supporting property page establishes Seoul coverage. The portal is not a selected apartment listing."
+        }
+      ]
+    },
+    {
+      "city": "London",
+      "countryCode": "GB",
+      "localLanguage": "en",
+      "projects": [
+        {
+          "id": "10-george-street",
+          "name": "10 George Street",
+          "city": "London",
+          "neighborhood": "Wood Wharf, Canary Wharf",
+          "housingType": "apartment",
+          "developerOrOperator": "Vertus / Canary Wharf Group",
+          "sourceUrl": "https://thisisvertus.com/apartments-to-rent/10-george-street/",
+          "supportingSourceUrl": "https://cwg.com/portfolio-and-places/residential-leasing/",
+          "description": "A managed rental apartment building by the water in Wood Wharf, with studios through three-bedroom homes and resident lounge and fitness spaces."
+        }
+      ],
+      "furtherSearch": [
+        {
+          "name": "Rightmove",
+          "url": "https://www.rightmove.co.uk/property-for-sale/London.html",
+          "sourceUrl": "https://www.rightmove.co.uk/property-for-sale/London.html",
+          "language": "en",
+          "instruction": "Browse London homes for sale, or switch to rental search on Rightmove.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Paris",
+      "countryCode": "FR",
+      "localLanguage": "fr",
+      "projects": [
+        {
+          "id": "citadines-les-halles-paris",
+          "name": "Citadines Les Halles Paris",
+          "city": "Paris",
+          "neighborhood": "Les Halles, 1st arrondissement",
+          "housingType": "serviced residence",
+          "developerOrOperator": "Citadines / The Ascott Limited",
+          "sourceUrl": "https://www.discoverasr.com/en/citadines/france/citadines-les-halles-paris",
+          "description": "An aparthotel at 4 Rue des Innocents with studios and one-bedroom apartments, each with a kitchen, near Châtelet–Les Halles station.",
+          "typeNote": "Aparthotel / serviced apartments; not a condominium for purchase."
+        }
+      ],
+      "furtherSearch": [
+        {
+          "name": "SeLoger",
+          "url": "https://www.seloger.com/recherche/location/appartement/ile-de-france/paris-75000/ad08fr31096",
+          "sourceUrl": "https://www.seloger.com/recherche/location/appartement/ile-de-france/paris-75000/ad08fr31096",
+          "language": "fr",
+          "instruction": "Browse apartment rentals across Paris.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Singapore",
+      "countryCode": "SG",
+      "localLanguage": "en",
+      "projects": [
+        {
+          "id": "marina-one-residences",
+          "name": "Marina One Residences",
+          "city": "Singapore",
+          "neighborhood": "Marina Bay / Marina South",
+          "housingType": "apartment",
+          "developerOrOperator": "M+S",
+          "sourceUrl": "https://www.marinaone.com.sg/residence0.html",
+          "supportingSourceUrl": "https://www.marinaone.com.sg/",
+          "description": "The residential component of Marina One, an M+S mixed-use development in Marina Bay with homes, offices and retail spaces."
+        }
+      ],
+      "furtherSearch": [
+        {
+          "name": "PropertyGuru Singapore",
+          "url": "https://www.propertyguru.com.sg/condo-for-sale",
+          "sourceUrl": "https://www.propertyguru.com.sg/condo-for-sale",
+          "language": "en",
+          "instruction": "Browse condominium sale listings; rental search is also available on the portal.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Berlin",
+      "countryCode": "DE",
+      "localLanguage": "de",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "ImmoScout24",
+          "url": "https://www.immobilienscout24.de/Suche/de/berlin/berlin/wohnung-mieten",
+          "sourceUrl": "https://www.immobilienscout24.de/Suche/de/berlin/berlin/wohnung-mieten",
+          "language": "de",
+          "instruction": "Browse Berlin apartment rentals.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Madrid",
+      "countryCode": "ES",
+      "localLanguage": "es",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "idealista Spain",
+          "url": "https://www.idealista.com/alquiler-viviendas/madrid-madrid/",
+          "sourceUrl": "https://www.idealista.com/alquiler-viviendas/madrid-madrid/",
+          "language": "es",
+          "instruction": "Browse houses and apartments for rent in Madrid.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Lisbon",
+      "countryCode": "PT",
+      "localLanguage": "pt",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "idealista Portugal",
+          "url": "https://www.idealista.pt/arrendar-casas/lisboa/",
+          "sourceUrl": "https://www.idealista.pt/arrendar-casas/lisboa/",
+          "language": "pt",
+          "instruction": "Browse Lisbon homes for rent.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Rome",
+      "countryCode": "IT",
+      "localLanguage": "it",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "idealista Italy",
+          "url": "https://www.idealista.it/affitto-case/roma-roma/",
+          "sourceUrl": "https://www.idealista.it/affitto-case/roma-roma/",
+          "language": "it",
+          "instruction": "Browse Rome homes for rent.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Amsterdam",
+      "countryCode": "NL",
+      "localLanguage": "nl",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "Funda",
+          "url": "https://www.funda.nl/zoeken/huur/?selected_area=amsterdam",
+          "sourceUrl": "https://www.funda.nl/zoeken/huur/?selected_area=amsterdam",
+          "language": "nl",
+          "instruction": "Browse Amsterdam rental homes.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Washington, D.C.",
+      "countryCode": "US",
+      "localLanguage": "en",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "Zillow",
+          "url": "https://www.zillow.com/washington-dc/apartments/",
+          "sourceUrl": "https://www.zillow.com/washington-dc/apartments/",
+          "language": "en",
+          "instruction": "Browse apartment rentals in Washington, D.C.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Ottawa",
+      "countryCode": "CA",
+      "localLanguage": "en",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "REALTOR.ca",
+          "url": "https://www.realtor.ca/on/ottawa/appartement-a-louer",
+          "sourceUrl": "https://www.realtor.ca/on/ottawa/appartement-a-louer",
+          "language": "fr",
+          "instruction": "Browse Ottawa apartment rentals. Use the portal language switch for English.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Canberra",
+      "countryCode": "AU",
+      "localLanguage": "en",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "Allhomes",
+          "url": "https://www.allhomes.com.au/",
+          "sourceUrl": "https://help.allhomes.com.au/hc/en-us/articles/4402945532057-Search-for-property-on-Allhomes",
+          "language": "en",
+          "instruction": "Select Rent, then search Canberra or an ACT suburb.",
+          "kind": "external-property-portal",
+          "verificationNote": "Official help confirms ACT browsing and suburb search; use homepage instead of an unstable results URL."
+        }
+      ]
+    },
+    {
+      "city": "Kuala Lumpur",
+      "countryCode": "MY",
+      "localLanguage": "ms",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "PropertyGuru Malaysia",
+          "url": "https://www.propertyguru.com.my/apartment-for-rent/in-kuala-lumpur-58jok",
+          "sourceUrl": "https://www.propertyguru.com.my/apartment-for-rent/in-kuala-lumpur-58jok",
+          "language": "en",
+          "instruction": "Browse apartment rentals in Kuala Lumpur.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Mexico City",
+      "countryCode": "MX",
+      "localLanguage": "es",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "Inmuebles24",
+          "url": "https://www.inmuebles24.com/departamentos-en-renta-en-ciudad-de-mexico.html",
+          "sourceUrl": "https://www.inmuebles24.com/departamentos-en-renta-en-ciudad-de-mexico.html",
+          "language": "es",
+          "instruction": "Browse apartment rentals in Mexico City.",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Buenos Aires",
+      "countryCode": "AR",
+      "localLanguage": "es",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "Zonaprop",
+          "url": "https://www.zonaprop.com.ar/departamentos-alquiler-capital-federal.html",
+          "sourceUrl": "https://www.zonaprop.com.ar/departamentos-alquiler-capital-federal.html",
+          "language": "es",
+          "instruction": "Browse apartment rentals in the City of Buenos Aires (Capital Federal / CABA).",
+          "kind": "external-property-portal"
+        }
+      ]
+    },
+    {
+      "city": "Nairobi",
+      "countryCode": "KE",
+      "localLanguage": "en",
+      "projects": [],
+      "furtherSearch": [
+        {
+          "name": "Property24 Kenya",
+          "url": "https://www.property24.co.ke/apartments-flats-to-rent-in-nairobi-c1890",
+          "sourceUrl": "https://www.property24.co.ke/apartments-flats-to-rent-in-nairobi-c1890",
+          "language": "en",
+          "instruction": "Browse Nairobi apartment and flat rentals.",
+          "kind": "external-property-portal"
+        }
+      ]
+    }
+  ],
+  "implementationNotes": [
+    "Empty projects arrays mean no project example was researched for that city. Do not turn a portal into an apartment card or imply property inventory coverage there.",
+    "Project facts were checked against official developer/operator pages on 2026-09-10. No price, unit availability, purchase eligibility or investment performance is asserted.",
+    "Links to property portals are first-party pages operated by the named portals, and are distinct from official project websites.",
+    "localLanguage is a useful interface default, not a statement that a city has only one official or spoken language. Portal language is recorded separately.",
+    "Use browser language preferences to choose UI language; keep visible short labels such as TH, EN, JA, KO, FR. Country codes such as TH and SG are not language codes."
+  ],
+  "hero": {
+    "city": "Bangkok",
+    "title": "Bangkok skyline view from Mahanakhon Tower",
+    "imageUrl": "https://upload.wikimedia.org/wikipedia/commons/9/98/Bangkok_skyline_view_from_Mahanakhon_Tower.jpg",
+    "sourceUrl": "https://commons.wikimedia.org/wiki/File:Bangkok_skyline_view_from_Mahanakhon_Tower.jpg",
+    "localPath": "/tmp/lilithconnect-housing/bangkok-panorama.jpg",
+    "author": "Bigcitydata",
+    "authorUrl": "https://commons.wikimedia.org/wiki/User:Bigcitydata",
+    "license": "CC BY 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by/4.0/",
+    "photographDate": "2025-09-30",
+    "width": 16346,
+    "height": 3856,
+    "attribution": "Bangkok panorama © Bigcitydata / Wikimedia Commons, CC BY 4.0.",
+    "usageNote": "Attribute author, source and license. If cropped, resized or color-adjusted, state that change. This is a city photograph, not a project image."
+  }
+}

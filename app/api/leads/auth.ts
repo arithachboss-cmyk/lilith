@@ -1,9 +1,12 @@
 import { env } from "cloudflare:workers";
 
 export function isAuthenticated(request: Request) {
+  // Legacy name retained for API compatibility; this is operator authorization.
+  const manager = String(env.LILITH_ADMIN_EMAIL ?? "").trim().toLowerCase();
   return Boolean(
+    manager &&
     request.headers.get("oai-authenticated-user-id") &&
-      request.headers.get("oai-authenticated-user-email"),
+      request.headers.get("oai-authenticated-user-email")?.trim().toLowerCase() === manager,
   );
 }
 

@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import Link from "next/link";
 
 export const metadata: Metadata = {
   title: "Lilith Homes | Multilingual Thailand Real Estate Agent",
@@ -134,6 +135,7 @@ export default function Home() {
           <strong>Lilith Homes</strong>
         </a>
         <div className="public-nav-links" aria-label="Page sections">
+          <Link href="/connect">Lilithconnect ↗</Link>
           <a href="#languages" data-i18n="navLanguages">
             7 languages
           </a>
@@ -550,7 +552,7 @@ export default function Home() {
       <footer className="public-footer">
         <strong>Lilith Homes</strong>
         <span data-i18n="footerText">International Thailand real estate lead desk · Rent · Buy · List · Refer</span>
-        <a href="https://www.middleproperty.com/" target="_blank" rel="noopener">
+        <a href="https://www.middleproperty.com/" target="_blank" rel="noopener noreferrer">
           MiddleProperty.com
         </a>
       </footer>

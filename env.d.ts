@@ -1,3 +1,3 @@
 declare namespace Cloudflare {
- interface Env { LILITH_ADMIN_EMAIL?: string; LEAD_IMPORT_TOKEN?: string; }
+ interface Env { LILITH_ADMIN_EMAIL?: string; LEAD_IMPORT_TOKEN?: string; MATCH_WEIGHTS_JSON?: string; }
 }

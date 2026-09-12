@@ -1,0 +1,82 @@
+[
+  {
+    "name": "XT Ekkamai",
+    "city": "Bangkok",
+    "countryId": "th",
+    "neighborhood": "Ekkamai, Watthana",
+    "type": "condo",
+    "description": "A 38-storey condominium on Ekkamai Road, with one- and two-bedroom homes and shared work, garden and recreation spaces.",
+    "sourceUrl": "https://www.sansiri.com/en/condominium/xt-ekkamai/",
+    "checkedAt": "2026-09-10"
+  },
+  {
+    "name": "Roppongi Hills Residence",
+    "city": "Tokyo",
+    "countryId": "jp",
+    "neighborhood": "Roppongi Hills",
+    "type": "apartment",
+    "description": "Apartments within Roppongi Hills, a mixed-use neighborhood with the Mori Art Museum, shops, restaurants and landscaped walking routes.",
+    "sourceUrl": "https://www.moriliving.com/en/residence/roppongihills/index.html",
+    "checkedAt": "2026-09-10"
+  },
+  {
+    "name": "ARK Hills Sengokuyama Residence",
+    "city": "Tokyo",
+    "countryId": "jp",
+    "neighborhood": "Between ARK Hills and Azabudai Hills",
+    "type": "apartment",
+    "description": "Apartments in a landscaped development between ARK Hills and Azabudai Hills, with varied layouts and shared lounge spaces.",
+    "sourceUrl": "https://www.moriliving.com/en/residence/sengokuyama/index.html",
+    "checkedAt": "2026-09-10"
+  },
+  {
+    "name": "Somerset Palace Seoul",
+    "city": "Seoul",
+    "countryId": "kr",
+    "neighborhood": "Jongno-gu, near Insa-dong",
+    "type": "serviced residence",
+    "description": "A serviced residence in Jongno-gu with furnished apartments, kitchens and separate living areas, near Insa-dong.",
+    "sourceUrl": "https://www.discoverasr.com/en/somerset-serviced-residence/korea-south/somerset-palace-seoul",
+    "checkedAt": "2026-09-10"
+  },
+  {
+    "name": "Fraser Place Central Seoul",
+    "city": "Seoul",
+    "countryId": "kr",
+    "neighborhood": "Jung-gu",
+    "type": "serviced residence",
+    "description": "Furnished serviced apartments on Tongil-ro, with kitchenettes and living areas, ranging from studios to larger residences.",
+    "sourceUrl": "https://www.frasershospitality.com/en/south-korea/seoul/fraser-place-central-seoul/",
+    "checkedAt": "2026-09-10"
+  },
+  {
+    "name": "10 George Street",
+    "city": "London",
+    "countryId": "gb",
+    "neighborhood": "Wood Wharf, Canary Wharf",
+    "type": "apartment",
+    "description": "A managed rental apartment building by the water in Wood Wharf, with studios through three-bedroom homes and resident lounge and fitness spaces.",
+    "sourceUrl": "https://thisisvertus.com/apartments-to-rent/10-george-street/",
+    "checkedAt": "2026-09-10"
+  },
+  {
+    "name": "Citadines Les Halles Paris",
+    "city": "Paris",
+    "countryId": "fr",
+    "neighborhood": "Les Halles, 1st arrondissement",
+    "type": "serviced residence",
+    "description": "An aparthotel at 4 Rue des Innocents with studios and one-bedroom apartments, each with a kitchen, near Châtelet–Les Halles station.",
+    "sourceUrl": "https://www.discoverasr.com/en/citadines/france/citadines-les-halles-paris",
+    "checkedAt": "2026-09-10"
+  },
+  {
+    "name": "Marina One Residences",
+    "city": "Singapore",
+    "countryId": "sg",
+    "neighborhood": "Marina Bay / Marina South",
+    "type": "apartment",
+    "description": "The residential component of Marina One, an M+S mixed-use development in Marina Bay with homes, offices and retail spaces.",
+    "sourceUrl": "https://www.marinaone.com.sg/residence0.html",
+    "checkedAt": "2026-09-10"
+  }
+]
