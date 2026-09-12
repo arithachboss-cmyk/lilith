@@ -71,6 +71,8 @@ export function PilotJourney() {
   const [notice, setNotice] = useState("");
   const [busy, setBusy] = useState(false);
   const busyRef = useRef(false);
+  const restoringRef = useRef(true);
+  const [restoring, setRestoring] = useState(true);
   const imageProcessingRef = useRef(false);
   const [imageProcessing, setImageProcessing] = useState(false);
   const [pictures, setPictures] = useState<Picture[]>([]);
@@ -119,36 +121,46 @@ export function PilotJourney() {
     setPictures(next);
   }
   async function reopen(current: Credentials) {
-    const saved = await api("draft", current);
+    restoringRef.current = true;
+    setRestoring(true);
     const next: Picture[] = [];
-    for (const photo of saved.images) {
-      const response = await fetch(`/api/pilot/images/${photo.id}`, {
-        headers: { "x-pilot-token": current.token },
-      });
-      if (!response.ok)
-        throw new Error("An image could not be reopened. Retry reopening.");
-      next.push({
-        id: photo.id,
-        url: URL.createObjectURL(await response.blob()),
-        saved: true,
-      });
-    }
-    picturesRef.current.forEach((p) => URL.revokeObjectURL(p.url));
-    showPictures(next);
-    setConsent(true);
-    setStep("consent");
-    if (saved.lead) {
-      setLead({ id: saved.lead.id, status: saved.lead.status });
-      setLanguage(saved.lead.language);
-      Object.entries(saved.lead).forEach(([key, value]) => {
-        const control = form.current?.elements.namedItem(key);
-        if (
-          control instanceof HTMLInputElement ||
-          control instanceof HTMLSelectElement ||
-          control instanceof HTMLTextAreaElement
-        )
-          control.value = String(value ?? "");
-      });
+    try {
+      const saved = await api("draft", current);
+      for (const photo of saved.images) {
+        const response = await fetch(`/api/pilot/images/${photo.id}`, {
+          headers: { "x-pilot-token": current.token },
+        });
+        if (!response.ok)
+          throw new Error("An image could not be reopened. Retry reopening.");
+        next.push({
+          id: photo.id,
+          url: URL.createObjectURL(await response.blob()),
+          saved: true,
+        });
+      }
+      picturesRef.current.forEach((p) => URL.revokeObjectURL(p.url));
+      showPictures(next);
+      setConsent(true);
+      setStep("consent");
+      if (saved.lead) {
+        setLead({ id: saved.lead.id, status: saved.lead.status });
+        setLanguage(saved.lead.language);
+        Object.entries(saved.lead).forEach(([key, value]) => {
+          const control = form.current?.elements.namedItem(key);
+          if (
+            control instanceof HTMLInputElement ||
+            control instanceof HTMLSelectElement ||
+            control instanceof HTMLTextAreaElement
+          )
+            control.value = String(value ?? "");
+        });
+      }
+    } catch (error) {
+      next.forEach((p) => URL.revokeObjectURL(p.url));
+      throw error;
+    } finally {
+      restoringRef.current = false;
+      setRestoring(false);
     }
   }
   useEffect(() => {
@@ -187,6 +199,9 @@ export function PilotJourney() {
         reopen(current)
           .then(() => flush(current!))
           .catch((error) => setNotice(error.message));
+      } else {
+        restoringRef.current = false;
+        setRestoring(false);
       }
     });
     return () => {
@@ -197,7 +212,14 @@ export function PilotJourney() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
   async function addPictures(files: FileList | null) {
-    if (!files || imageProcessingRef.current || busyRef.current || lead) return;
+    if (
+      !files ||
+      imageProcessingRef.current ||
+      busyRef.current ||
+      restoringRef.current ||
+      lead
+    )
+      return;
     const selectedFiles = Array.from(files);
     imageProcessingRef.current = true;
     setImageProcessing(true);
@@ -242,7 +264,13 @@ export function PilotJourney() {
     }
   }
   async function rearrange(index: number, remove: boolean) {
-    if (busyRef.current || imageProcessingRef.current || lead) return;
+    if (
+      busyRef.current ||
+      imageProcessingRef.current ||
+      restoringRef.current ||
+      lead
+    )
+      return;
     imageProcessingRef.current = true;
     setImageProcessing(true);
     const next = [...picturesRef.current];
@@ -270,7 +298,13 @@ export function PilotJourney() {
   }
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
-    if (busyRef.current || imageProcessingRef.current || lead) return;
+    if (
+      busyRef.current ||
+      imageProcessingRef.current ||
+      restoringRef.current ||
+      lead
+    )
+      return;
     if (!form.current?.reportValidity()) return;
     if (step === "details") {
       setStep("consent");
@@ -402,6 +436,13 @@ export function PilotJourney() {
     }
   }
   function decline() {
+    if (
+      busyRef.current ||
+      imageProcessingRef.current ||
+      restoringRef.current ||
+      lead
+    )
+      return;
     if (session) {
       setNotice(
         "This session already recorded consent. Start a new test to decline without saving.",
@@ -478,7 +519,9 @@ export function PilotJourney() {
           }
         }}
       >
-        <fieldset disabled={busy || imageProcessing || Boolean(lead)}>
+        <fieldset
+          disabled={busy || imageProcessing || restoring || Boolean(lead)}
+        >
           <legend>1. Language / ภาษาและความต้องการ</legend>
           <label>
             Preferred reply language
@@ -621,21 +664,29 @@ export function PilotJourney() {
                 Next image
               </button>
             </div>
-            {!lead && (
+            {
               <ol>
                 {pictures.map((p, i) => (
                   <li key={p.id}>
                     Image {i + 1} · {p.saved ? "Uploaded" : "Preview only"}{" "}
                     <button
                       type="button"
-                      disabled={busy || imageProcessing}
+                      disabled={
+                        busy || imageProcessing || restoring || Boolean(lead)
+                      }
                       onClick={() => void rearrange(i, true)}
                     >
                       Remove image {i + 1}
                     </button>{" "}
                     <button
                       type="button"
-                      disabled={i === 0 || busy || imageProcessing}
+                      disabled={
+                        i === 0 ||
+                        busy ||
+                        imageProcessing ||
+                        restoring ||
+                        Boolean(lead)
+                      }
                       onClick={() => void rearrange(i, false)}
                     >
                       Move image {i + 1} left
@@ -643,7 +694,7 @@ export function PilotJourney() {
                   </li>
                 ))}
               </ol>
-            )}
+            }
           </section>
         )}
         {step === "consent" && (
@@ -695,39 +746,51 @@ export function PilotJourney() {
               <input
                 type="checkbox"
                 checked={consent}
-                disabled={busy || Boolean(lead) || Boolean(session)}
+                disabled={
+                  busy || restoring || Boolean(lead) || Boolean(session)
+                }
                 onChange={(e) => setConsent(e.target.checked)}
               />
               I accept / ฉันยินยอมให้บันทึกข้อมูลตามรายละเอียดข้างต้น
             </label>
-            {!session && !lead && (
+            {
               <button
                 type="button"
                 className="secondary"
-                disabled={busy || imageProcessing}
+                disabled={
+                  busy ||
+                  imageProcessing ||
+                  restoring ||
+                  Boolean(session) ||
+                  Boolean(lead)
+                }
                 onClick={decline}
               >
                 Decline / ไม่ยินยอม
               </button>
-            )}
+            }
           </section>
         )}
-        {!lead && (
+        {
           <button
             className="pilot-submit"
             type="submit"
-            disabled={busy || imageProcessing}
+            disabled={busy || imageProcessing || restoring || Boolean(lead)}
           >
-            {busy
-              ? "Saving… / กำลังบันทึก"
-              : step === "details"
-                ? "Review consent / อ่านข้อตกลง"
-                : "Save test request / บันทึกคำขอจำลอง"}
+            {lead
+              ? "Saved / บันทึกแล้ว"
+              : busy
+                ? "Saving… / กำลังบันทึก"
+                : step === "details"
+                  ? "Review consent / อ่านข้อตกลง"
+                  : "Save test request / บันทึกคำขอจำลอง"}
           </button>
-        )}
+        }
       </form>
       <p className="pilot-status" role="status" aria-live="polite">
-        {notice}
+        {restoring
+          ? "Restoring saved request and images… / กำลังเปิดข้อมูลและรูปที่บันทึก"
+          : notice}
       </p>
       {lead && (
         <section className="pilot-result">
@@ -742,16 +805,30 @@ export function PilotJourney() {
       {session && (
         <button
           className="secondary"
-          onClick={() =>
-            void reopen(session).catch((error) => setNotice(error.message))
-          }
+          disabled={busy || imageProcessing || restoring}
+          onClick={() => {
+            if (
+              busyRef.current ||
+              imageProcessingRef.current ||
+              restoringRef.current
+            )
+              return;
+            void reopen(session).catch((error) => setNotice(error.message));
+          }}
         >
           Reopen saved request
         </button>
       )}
       <button
         className="secondary"
+        disabled={busy || imageProcessing || restoring}
         onClick={() => {
+          if (
+            busyRef.current ||
+            imageProcessingRef.current ||
+            restoringRef.current
+          )
+            return;
           sessionStorage.removeItem(SESSION);
           location.reload();
         }}

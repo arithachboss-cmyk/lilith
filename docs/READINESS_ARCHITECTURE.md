@@ -41,6 +41,8 @@ Allowlisted events: page_view, form_start, form_submit, line_click, call_click, 
 
 Capability access expires in 24 hours. Same-tab refresh/reopen is supported; closing the browser/tab removes the session capability. Authorized Operations can reopen the persisted record separately. Local verification uses temporary SQLite files removed when the test server exits, including staged test images. Durable production retention, withdrawal/deletion workflow, rate limits, abuse protection and hosted storage controls require a separate approved release implementation.
 
+Saving, image processing and record restoration exclude competing Reopen/New actions with both immediate handler guards and disabled controls. Consent/image controls keep their layout during submission so a rapid second click cannot land on an action shifted into the Save button's position. Restoration has an explicit loading state until all image bodies and record fields are ready. This closes two independently reproduced races in source `8bd0e3d7`: a concurrent empty draft reopen could replace staged images before upload, or a delayed reopen response could hide images after a successful save. Previous evidence for that source remains historical; the fixed source requires its own exact-SHA verification.
+
 ## Reproduce
 
 Use Node 24 and the committed pnpm lockfile. On a clean checkout run `pnpm install --frozen-lockfile`, then `node scripts/verify-readiness.mjs`. Install Playwright Chromium first; on this Mac `PLAYWRIGHT_CHANNEL=chrome` selects installed Chrome. The script builds with the exact commit SHA and writes logs, screenshots and checksums under `output/readiness/<SHA>/`.

@@ -9,6 +9,13 @@ const images = (count: number) =>
   }));
 const output = "output/playwright/readiness";
 test.beforeAll(() => mkdirSync(output, { recursive: true }));
+function deferred() {
+  let resolve!: () => void;
+  const promise = new Promise<void>((done) => {
+    resolve = done;
+  });
+  return { promise, resolve };
+}
 async function details(page: Page) {
   await page.goto(
     "/pilot?utm_source=test_source&utm_medium=organic&utm_campaign=test_pilot&lang=en",
@@ -22,6 +29,148 @@ async function consent(page: Page) {
   await expect(page.getByRole("checkbox")).not.toBeChecked();
   await page.getByRole("checkbox").check();
 }
+test("P0 regression: save and restore exclude competing Reopen/New actions without losing images", async ({
+  page,
+}) => {
+  await page.setViewportSize({ width: 390, height: 844 });
+  await details(page);
+  await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+  await page
+    .getByLabel("Test images", { exact: true })
+    .setInputFiles(images(4));
+  await expect(page.getByText("4 / 4 images", { exact: true })).toBeVisible();
+  await consent(page);
+  const paused = deferred(),
+    release = deferred();
+  let hold = true,
+    puts = 0;
+  page.on("request", (request) => {
+    if (
+      request.method() === "PUT" &&
+      request.url().includes("/api/pilot/images/")
+    )
+      puts++;
+  });
+  await page.route("**/api/pilot/events", async (route) => {
+    if (hold) {
+      hold = false;
+      paused.resolve();
+      await release.promise;
+    }
+    await route.continue();
+  });
+  await page.getByRole("button", { name: /Save test request/ }).click();
+  await paused.promise;
+  try {
+    await expect(
+      page.getByRole("button", { name: "Reopen saved request", exact: true }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("button", {
+        name: "Start a new mock request",
+        exact: true,
+      }),
+    ).toBeDisabled();
+    await expect(page.getByRole("button", { name: /Decline/ })).toBeDisabled();
+    await expect(page.getByText("4 / 4 images", { exact: true })).toBeVisible();
+  } finally {
+    release.resolve();
+  }
+  await expect(page.getByTestId("lead-id")).toBeVisible();
+  const id = await page.getByTestId("lead-id").innerText();
+  expect(puts).toBe(4);
+  await page.reload();
+  await expect(page.getByTestId("lead-id")).toHaveText(id);
+  await expect(page.getByText("4 / 4 images", { exact: true })).toBeVisible();
+  const restoring = deferred(),
+    restoreRelease = deferred();
+  let holdImage = true;
+  await page.route("**/api/pilot/images/*", async (route) => {
+    if (holdImage && route.request().method() === "GET") {
+      holdImage = false;
+      restoring.resolve();
+      await restoreRelease.promise;
+    }
+    await route.continue();
+  });
+  await page
+    .getByRole("button", { name: "Reopen saved request", exact: true })
+    .click();
+  await restoring.promise;
+  try {
+    await expect(page.getByRole("status")).toContainText(
+      "Restoring saved request",
+    );
+    await expect(
+      page.getByRole("button", { name: "Reopen saved request", exact: true }),
+    ).toBeDisabled();
+    await expect(
+      page.getByRole("button", {
+        name: "Start a new mock request",
+        exact: true,
+      }),
+    ).toBeDisabled();
+  } finally {
+    restoreRelease.resolve();
+  }
+  await expect(
+    page.getByRole("button", { name: "Reopen saved request", exact: true }),
+  ).toBeEnabled();
+  await expect(page.getByTestId("lead-id")).toHaveText(id);
+  await expect(page.getByText("4 / 4 images", { exact: true })).toBeVisible();
+  await page.screenshot({
+    path: `${output}/reopen-race-fixed.png`,
+    fullPage: true,
+  });
+});
+test("P0 regression: immediate mobile double-click at 200% preserves four staged images", async ({
+  browser,
+}) => {
+  const context = await browser.newContext({
+    baseURL: "http://127.0.0.1:4199",
+    viewport: { width: 390, height: 844 },
+    hasTouch: true,
+  });
+  const page = await context.newPage();
+  let puts = 0;
+  page.on("request", (request) => {
+    if (
+      request.method() === "PUT" &&
+      request.url().includes("/api/pilot/images/")
+    )
+      puts++;
+  });
+  await details(page);
+  await page
+    .getByLabel("Test images", { exact: true })
+    .setInputFiles(images(4));
+  await expect(page.getByText("4 / 4 images", { exact: true })).toBeVisible();
+  await page
+    .getByRole("button", { name: "Move image 2 left", exact: true })
+    .click();
+  await page
+    .getByRole("button", { name: "Remove image 4", exact: true })
+    .click();
+  await expect(page.getByText("3 / 4 images", { exact: true })).toBeVisible();
+  await page
+    .getByLabel("Test images", { exact: true })
+    .setInputFiles(images(1));
+  await expect(page.getByText("4 / 4 images", { exact: true })).toBeVisible();
+  await consent(page);
+  await page.addStyleTag({ content: "html { font-size: 200% !important; }" });
+  await page.getByRole("button", { name: /Save test request/ }).dblclick();
+  await expect(page.getByTestId("lead-id")).toBeVisible();
+  const id = await page.getByTestId("lead-id").innerText();
+  expect(puts).toBe(4);
+  await page.reload();
+  await expect(page.getByTestId("lead-id")).toHaveText(id);
+  await expect(page.getByText("4 / 4 images", { exact: true })).toBeVisible();
+  await page.screenshot({
+    path: `${output}/mobile-200-double-click.png`,
+    fullPage: true,
+  });
+  await context.close();
+});
 for (const device of ["desktop", "mobile"] as const) {
   test(`P0 journey ${device}: consent, images, unique Lead ID, refresh and operations handoff`, async ({
     browser,
