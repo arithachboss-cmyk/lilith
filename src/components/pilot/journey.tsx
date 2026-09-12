@@ -201,8 +201,14 @@ export function PilotJourney() {
         sessionRef.current = current;
         setSession(current);
         reopen(current)
-          .then(() => flush(current!))
-          .catch((error) => setNotice(error.message));
+          .then(() => {
+            if (sessionRef.current === current && !busyRef.current)
+              return flush(current!);
+          })
+          .catch((error) => {
+            if (sessionRef.current === current && !busyRef.current)
+              setNotice(error.message);
+          });
       } else {
         restoringRef.current = false;
         setRestoring(false);
