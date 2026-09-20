@@ -1,0 +1,20 @@
+{
+  "package_id": "__fixture-violations__",
+  "title": "เครื่องอ่านบาร์โค้ดที่ดีที่สุด อันดับ 1 ราคาถูก",
+  "meta_description": "เครื่องอ่านบาร์โค้ดความแม่นยำ 95% ระยะอ่าน 3 เมตร ราคา 12,000 บาท ทนทุกสภาพแวดล้อม กันน้ำ 100% การันตีผล",
+  "canonical": "https://example.com/x",
+  "target_url": "https://example.com/x",
+  "page_type": "PRODUCT",
+  "canonical_intent": "fixture",
+  "primary_keyword": "เครื่องอ่านบาร์โค้ด",
+  "secondary_keywords": [],
+  "intent": "TRANSACTIONAL",
+  "action": "NEW",
+  "internal_links": [],
+  "robots": "index,follow",
+  "og": {
+    "title": "เครื่องอ่านบาร์โค้ดที่ดีที่สุด อันดับ 1 ราคาถูก",
+    "description": "เครื่องอ่านบาร์โค้ดความแม่นยำ 95% ระยะอ่าน 3 เมตร ราคา 12,000 บาท ทนทุกสภาพแวดล้อม กันน้ำ 100% การันตีผล",
+    "image": null
+  }
+}

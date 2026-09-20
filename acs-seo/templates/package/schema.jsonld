@@ -1,0 +1,14 @@
+{
+  "@context": "https://schema.org",
+  "@type": "{{Article|Product|Service|WebPage}}",
+  "name": "{{ตรงกับ meta.json.title}}",
+  "description": "{{ตรงกับ meta.json.meta_description}}",
+  "url": "{{ตรงกับ meta.json.canonical}}",
+  "inLanguage": "th-TH",
+  "publisher": {
+    "@type": "Organization",
+    "name": "{{ชื่อองค์กรตามเอกสาร ACS — ห้ามเดา}}",
+    "url": "https://www.asiancoding.com"
+  },
+  "_generation_note": "ไฟล์นี้ต้อง regenerate ได้จาก meta.json — ห้ามใส่ property ที่ไม่มีบนหน้าเว็บจริง (เช่น offers/price/aggregateRating) จนกว่าจะมีหลักฐานและ Owner อนุมัติ"
+}

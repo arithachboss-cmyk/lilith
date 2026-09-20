@@ -1,0 +1,72 @@
+{
+  "version": "1.0.0",
+  "as_of": "2026-09-20",
+  "source_id": "SRC-KW-001",
+  "status": "PARTIAL",
+  "completeness_note": "ยังไม่ได้รับ keyword queue ฉบับเต็มจาก Owner/SEO Lead — ที่บันทึกไว้คือ queue ที่ Owner ตัดสินใจแล้วเท่านั้น ช่องที่เป็น null คือ 'ยังไม่ได้รับข้อมูล' ไม่ใช่ 'ไม่มี'",
+  "required_fields_per_item": ["queue_id", "keyword", "intent", "target_url", "action"],
+  "intent_enum": ["INFORMATIONAL", "COMMERCIAL", "TRANSACTIONAL", "NAVIGATIONAL", "UNMAPPED"],
+  "action_enum": ["NEW", "ENRICH", "HOLD"],
+  "items": [
+    {
+      "queue_id": 3,
+      "keyword": null,
+      "intent": "UNMAPPED",
+      "target_url": null,
+      "action": "HOLD",
+      "owner_decision": "HOLD เพราะ cannibalization — ต้อง map intent ให้เสร็จก่อนกำหนด 24 ก.ย.",
+      "deadline": "2026-09-24",
+      "deadline_note": "Owner ระบุ '24 ก.ย.' ไม่ได้ระบุปี — สมมติเป็นรอบปัจจุบัน 2026 ต้องให้ Owner ยืนยัน"
+    },
+    {
+      "queue_id": 4,
+      "keyword": null,
+      "intent": "UNMAPPED",
+      "target_url": null,
+      "action": null,
+      "owner_decision": "REVISE wording เรื่องวัสดุและสภาพแวดล้อม ห้ามฟันธงถ้าไม่มี datasheet สินค้าจริง",
+      "deadline": null,
+      "deadline_note": null
+    },
+    {
+      "queue_id": 16,
+      "keyword": null,
+      "intent": "UNMAPPED",
+      "target_url": null,
+      "action": null,
+      "owner_decision": "ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
+      "deadline": null,
+      "deadline_note": null
+    },
+    {
+      "queue_id": 17,
+      "keyword": null,
+      "intent": "UNMAPPED",
+      "target_url": null,
+      "action": null,
+      "owner_decision": "ใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับว่ายี่ห้อไหนดีที่สุด",
+      "deadline": null,
+      "deadline_note": null
+    },
+    {
+      "queue_id": 18,
+      "keyword": null,
+      "intent": "UNMAPPED",
+      "target_url": null,
+      "action": null,
+      "owner_decision": "ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
+      "deadline": null,
+      "deadline_note": null
+    },
+    {
+      "queue_id": 21,
+      "keyword": null,
+      "intent": "UNMAPPED",
+      "target_url": null,
+      "action": null,
+      "owner_decision": "ลบตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ 65-70% → 95%+ จนกว่าจะมีหลักฐาน",
+      "deadline": null,
+      "deadline_note": null
+    }
+  ]
+}

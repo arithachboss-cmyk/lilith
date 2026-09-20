@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "as_of": "2026-09-20",
+  "source_id": "SRC-WEB-001",
+  "status": "NOT_SUPPLIED",
+  "site": "https://www.asiancoding.com",
+  "note": "ให้ export sitemap.xml ปัจจุบันแล้วเติม urls[] — ห้ามเดา URL",
+  "urls": []
+}

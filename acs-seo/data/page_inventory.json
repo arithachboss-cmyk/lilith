@@ -1,0 +1,11 @@
+{
+  "version": "1.0.0",
+  "as_of": "2026-09-20",
+  "source_id": "SRC-WEB-002",
+  "status": "NOT_SUPPLIED",
+  "site": "https://www.asiancoding.com",
+  "note": "โครงสร้างไฟล์พร้อมแล้ว รอข้อมูลจริง — validator จะรายงาน BLOCKED_ON_SOURCE ทุกครั้งที่ pages ว่าง ไม่ใช่ PASS",
+  "page_type_enum": ["PRODUCT", "SERVICE", "KNOWLEDGE", "LANDING"],
+  "required_fields_per_page": ["url", "page_type", "primary_intent", "title", "indexable", "last_seen_in_sitemap"],
+  "pages": []
+}

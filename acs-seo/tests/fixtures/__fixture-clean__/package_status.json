@@ -1,0 +1,27 @@
+{
+  "package_id": "__fixture-clean__",
+  "queue_id": null,
+  "title": "หลักการเลือกวัสดุฉลากให้เหมาะกับหน้างาน",
+  "target_url": "https://www.asiancoding.com/knowledge/label-material-selection",
+  "page_type": "KNOWLEDGE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "BLOCKED",
+  "board_reason": "fixture — รอ source pack",
+  "qa_tier": "WORDING_QA_OK",
+  "flagged_claims": [],
+  "blocked_on_sources": [
+    "SRC-WEB-001",
+    "SRC-WEB-002"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "NOT_RUN",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false
+}

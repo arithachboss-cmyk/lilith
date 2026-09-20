@@ -1,0 +1,507 @@
+{
+  "version": "1.0.0",
+  "as_of": "2026-09-20",
+  "total_packages_declared_by_owner": 19,
+  "global_rule": "ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic",
+  "board_status_enum": [
+    "PASS",
+    "REVISE",
+    "HOLD",
+    "BLOCKED"
+  ],
+  "open_question": "Owner แจ้ง 19 packages แต่หมายเลข queue ที่อ้างถึงสูงสุดคือ #21 — ต้องยืนยันว่า queue ID กับจำนวนแพ็กเกจ map กันอย่างไร ระหว่างที่ยังไม่ยืนยัน 13 รายการถูกตั้งเป็น PKG-UNMAPPED-XX",
+  "packages": [
+    {
+      "package_id": "PKG-Q03",
+      "queue_id": 3,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "HOLD",
+      "board_reason": "Cannibalization — ต้อง map intent ให้เสร็จก่อน 2026-09-24",
+      "owner_decision": "HOLD จนกว่าจะ map intent เสร็จ",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "GATE-CANNIBAL"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "FAIL_HOLD",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-Q04",
+      "queue_id": 4,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน",
+      "owner_decision": "REVISE wording ห้ามฟันธงถ้าไม่มี datasheet สินค้าจริง",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-B-002",
+        "CLM-E-004",
+        "CLM-E-005",
+        "CLM-S-002"
+      ],
+      "blocked_on_sources": [
+        "SRC-VEN-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-Q16",
+      "queue_id": 16,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date",
+      "owner_decision": "ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-001",
+        "CLM-B-003"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-002"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-Q17",
+      "queue_id": 17,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ",
+      "owner_decision": "ใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับว่ายี่ห้อไหนดีที่สุด",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-B-004",
+        "CLM-S-006"
+      ],
+      "blocked_on_sources": [],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-Q18",
+      "queue_id": 18,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date",
+      "owner_decision": "ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-001",
+        "CLM-B-003"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-002"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-Q21",
+      "queue_id": 21,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน",
+      "owner_decision": "ลบตัวเลข 65-70% → 95%+ จนกว่าจะมีหลักฐาน",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-B-001",
+        "CLM-E-001",
+        "CLM-E-002",
+        "CLM-E-003"
+      ],
+      "blocked_on_sources": [
+        "SRC-VEN-002"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-01",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-02",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-03",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-04",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-05",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-06",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-07",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-08",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-09",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-10",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-11",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-12",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    },
+    {
+      "package_id": "PKG-UNMAPPED-13",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "package_id": "__fixture-violations__",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [
+    {
+      "claim_id": "CLM-E-999",
+      "statement_in_article": "ระยะอ่าน 3 เมตร",
+      "source_id": "SRC-NOT-REAL",
+      "source_locator": "n/a",
+      "owner_confirmed": true,
+      "verified": true
+    }
+  ],
+  "forbidden_scan": {
+    "run_at": null,
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": []
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": []
+}

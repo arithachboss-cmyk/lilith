@@ -1,0 +1,23 @@
+{
+  "package_id": "__fixture-clean__",
+  "title": "หลักการเลือกวัสดุฉลากให้เหมาะกับหน้างาน",
+  "meta_description": "แนวทางพิจารณาวัสดุฉลากตามลักษณะหน้างาน ทั้งความชื้น ความร้อน และการเสียดสี พร้อมวิธีทดสอบก่อนใช้งานจริง",
+  "canonical": "https://www.asiancoding.com/knowledge/label-material-selection",
+  "target_url": "https://www.asiancoding.com/knowledge/label-material-selection",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "อธิบายกรอบการเลือกวัสดุฉลาก ไม่ครอบคลุมการเปรียบเทียบรุ่นสินค้า",
+  "primary_keyword": "เลือกวัสดุฉลาก",
+  "secondary_keywords": [],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/barcode-basics"
+  ],
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่าน",
+  "og": {
+    "title": "หลักการเลือกวัสดุฉลากให้เหมาะกับหน้างาน",
+    "description": "แนวทางพิจารณาวัสดุฉลากตามลักษณะหน้างาน ทั้งความชื้น ความร้อน และการเสียดสี พร้อมวิธีทดสอบก่อนใช้งานจริง",
+    "image": null
+  }
+}

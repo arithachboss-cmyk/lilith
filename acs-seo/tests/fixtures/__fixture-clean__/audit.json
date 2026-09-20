@@ -1,0 +1,22 @@
+{
+  "package_id": "__fixture-clean__",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [],
+  "forbidden_scan": {
+    "run_at": null,
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": []
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": [
+    "fixture สำหรับทดสอบ validator เท่านั้น"
+  ]
+}

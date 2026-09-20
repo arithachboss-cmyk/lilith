@@ -1,0 +1,133 @@
+{
+  "$schema": "./schemas/source_pack.schema.json",
+  "version": "1.0.0",
+  "generated_for": "ACS SEO Package Factory — Governance Scope",
+  "as_of": "2026-09-20",
+  "rule": "ทุก claim ที่ไม่ใช่ SAFE_WORDING ต้อง map กับ source_id ที่มีสถานะ SUPPLIED เท่านั้น ห้ามใช้ source ที่ยัง NOT_SUPPLIED เป็นหลักฐาน",
+  "authority_whitelist": [
+    "STANDARDS_BODY",
+    "OFFICIAL_VENDOR",
+    "ACS_INTERNAL",
+    "OWN_SITE"
+  ],
+  "sources": [
+    {
+      "id": "SRC-ACS-001",
+      "title": "ACS product/service list จริง (SKU / รุ่น / บริการที่ขายจริง)",
+      "authority": "ACS_INTERNAL",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "ACS Owner",
+      "required_for": ["CLM-O-002", "CLM-O-003"],
+      "note": "ไม่มีไฟล์นี้ = ห้ามระบุชื่อรุ่น/สินค้าเฉพาะเจาะจงในทุกแพ็กเกจ"
+    },
+    {
+      "id": "SRC-ACS-002",
+      "title": "ACS price list พร้อม effective date",
+      "authority": "ACS_INTERNAL",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "ACS Owner",
+      "required_for": ["CLM-O-001", "CLM-B-003"],
+      "note": "Owner decision Queue #16/#18: ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่"
+    },
+    {
+      "id": "SRC-ACS-003",
+      "title": "เอกสารเคสลูกค้า ACS + หนังสือยินยอมเผยแพร่",
+      "authority": "ACS_INTERNAL",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "ACS Owner",
+      "required_for": ["CLM-O-004"],
+      "note": "ต้องมีทั้งเอกสารและ consent จึงจะอ้างเคสได้"
+    },
+    {
+      "id": "SRC-ACS-004",
+      "title": "ACS company profile (ปีที่ก่อตั้ง, พื้นที่ให้บริการ, ทีมบริการ, SLA)",
+      "authority": "ACS_INTERNAL",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "ACS Owner",
+      "required_for": ["CLM-O-005", "CLM-O-006", "CLM-O-007"]
+    },
+    {
+      "id": "SRC-WEB-001",
+      "title": "sitemap.xml ปัจจุบันของ www.asiancoding.com",
+      "authority": "OWN_SITE",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "ACS Owner / Web",
+      "required_for": ["GATE-MECH-SITEMAP"],
+      "note": "ต้อง export เป็นไฟล์เข้ามาใน data/ เพื่อให้ validator เช็ก target_url ได้จริง"
+    },
+    {
+      "id": "SRC-WEB-002",
+      "title": "Page inventory ของหน้าเว็บเดิม + ประเภท Product / Service / Knowledge / Landing",
+      "authority": "OWN_SITE",
+      "status": "NOT_SUPPLIED",
+      "path": "data/page_inventory.json",
+      "owner": "SEO Lead",
+      "required_for": ["GATE-CANNIBAL", "GATE-MECH-INTERNAL-LINKS"],
+      "note": "ไฟล์ schema ถูกเตรียมไว้แล้วแต่ยังไม่มีข้อมูลจริง (pages: [])"
+    },
+    {
+      "id": "SRC-WEB-003",
+      "title": "รายงาน rendering mode ปัจจุบัน (CSR/SSR/prerender) โดย Manus",
+      "authority": "OWN_SITE",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "Manus",
+      "required_for": ["GATE-RENDER"],
+      "note": "เว็บยัง client-side rendered — ห้ามนับว่า 'พร้อม SEO' จนกว่า gate นี้ผ่าน"
+    },
+    {
+      "id": "SRC-KW-001",
+      "title": "Keyword queue ทั้งหมด (keyword, intent, target URL, NEW/ENRICH/HOLD)",
+      "authority": "ACS_INTERNAL",
+      "status": "PARTIAL",
+      "path": "data/keyword_queue.json",
+      "owner": "SEO Lead",
+      "required_for": ["GATE-CANNIBAL"],
+      "note": "มีเฉพาะ 6 queue ที่ Owner ตัดสินแล้ว (#3,#4,#16,#17,#18,#21) ที่เหลือยังไม่ถูกส่งมา"
+    },
+    {
+      "id": "SRC-VEN-001",
+      "title": "Brady material / label datasheets (ทางการเท่านั้น)",
+      "authority": "OFFICIAL_VENDOR",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "Content Lead",
+      "required_for": ["CLM-E-004", "CLM-E-005"],
+      "note": "Owner decision Queue #4: ห้ามฟันธงเรื่องวัสดุ/สภาพแวดล้อมถ้าไม่มี datasheet สินค้าจริง"
+    },
+    {
+      "id": "SRC-VEN-002",
+      "title": "Honeywell hardware datasheets (scanner / mobile computer / printer)",
+      "authority": "OFFICIAL_VENDOR",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "Content Lead",
+      "required_for": ["CLM-E-001", "CLM-E-002", "CLM-E-003", "CLM-E-007", "CLM-E-008"],
+      "note": "Owner decision Queue #21: ลบตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ จนกว่าจะมี datasheet"
+    },
+    {
+      "id": "SRC-VEN-003",
+      "title": "GS1 official specification (GTIN, GS1-128, Application Identifier, DataMatrix)",
+      "authority": "STANDARDS_BODY",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "Content Lead",
+      "required_for": ["CLM-E-006"]
+    },
+    {
+      "id": "SRC-VEN-004",
+      "title": "แหล่งทางการอื่นของผู้ผลิตที่ ACS เป็นตัวแทน (ต้องขึ้นทะเบียนก่อนใช้)",
+      "authority": "OFFICIAL_VENDOR",
+      "status": "NOT_SUPPLIED",
+      "path": null,
+      "owner": "Content Lead",
+      "required_for": [],
+      "note": "blog/ร้านค้า/marketplace/บทความ third-party ไม่นับเป็นหลักฐาน"
+    }
+  ]
+}

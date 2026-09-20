@@ -1,0 +1,29 @@
+{
+  "package_id": "{{PACKAGE_ID}}",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [
+    {
+      "claim_id": "{{CLM-XXX-000}}",
+      "statement_in_article": "{{ยกข้อความจาก article.md มาตรงตัว}}",
+      "source_id": "{{SRC-XXX-000}}",
+      "source_locator": "{{ชื่อไฟล์ + หน้า/หัวข้อ ที่ยืนยันข้อความนี้}}",
+      "owner_confirmed": false,
+      "verified": false
+    }
+  ],
+  "forbidden_scan": {
+    "run_at": null,
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": []
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": []
+}

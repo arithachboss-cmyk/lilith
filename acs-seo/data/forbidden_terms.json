@@ -1,0 +1,109 @@
+{
+  "version": "1.0.0",
+  "as_of": "2026-09-20",
+  "severity_meaning": {
+    "BLOCK": "ห้ามใช้เด็ดขาด พบแล้ว = FAIL ทันที ต้องลบหรือเขียนใหม่",
+    "EVIDENCE": "ใช้ได้เฉพาะเมื่อ audit.json อ้าง source ที่ authority เป็น OFFICIAL_VENDOR/STANDARDS_BODY และ status = SUPPLIED",
+    "OWNER": "ใช้ได้เฉพาะเมื่อ audit.json อ้าง source ACS_INTERNAL ที่ status = SUPPLIED และ owner_confirmed = true"
+  },
+  "rules": [
+    {
+      "id": "FW-B-001",
+      "severity": "BLOCK",
+      "pattern": "(ดีที่สุด|ที่สุดในไทย|ที่สุดในประเทศ|อันดับ\\s*(?:1|หนึ่ง)|เบอร์\\s*(?:1|หนึ่ง)|No\\.?\\s*1\\b|#1\\b|ผู้นำตลาด|เจ้าตลาด|ถูกที่สุด)",
+      "claim_ref": ["CLM-B-004", "CLM-B-005"],
+      "message": "ภาษาจัดอันดับ/ซูเปอร์ลาทีฟ — Owner Queue #17 สั่งใช้เกณฑ์ตัดสินใจแทน ห้ามฟันธงว่าดีที่สุด"
+    },
+    {
+      "id": "FW-B-002",
+      "severity": "BLOCK",
+      "pattern": "(ทนทุกสภาพ|ทุกสภาพแวดล้อม|ทนสารเคมีทุกชนิด|กันน้ำ\\s*100|กันน้ำได้\\s*100|ไม่มีวันหลุด|ไม่หลุดลอก|ตลอดอายุการใช้งาน|ทนได้ทุก)",
+      "claim_ref": ["CLM-B-002"],
+      "message": "ฟันธงเรื่องวัสดุ/สภาพแวดล้อม — Owner Queue #4 สั่ง REVISE ห้ามฟันธงถ้าไม่มี datasheet สินค้าจริง (SRC-VEN-001)"
+    },
+    {
+      "id": "FW-B-003",
+      "severity": "BLOCK",
+      "pattern": "(รับประกันผล|การันตีผล|การันตีว่า|คืนทุนภายใน|ROI\\s*ภายใน|ประหยัดต้นทุนได้ถึง|แน่นอน\\s*100)",
+      "claim_ref": ["CLM-B-006"],
+      "message": "รับประกันผลลัพธ์ — ต้องมีเคสลูกค้าที่ยืนยันได้และ Owner อนุมัติ"
+    },
+    {
+      "id": "FW-E-001",
+      "severity": "EVIDENCE",
+      "pattern": "\\d+(?:\\.\\d+)?\\s*%",
+      "claim_ref": ["CLM-E-002", "CLM-B-001"],
+      "message": "ตัวเลขเปอร์เซ็นต์ — Owner Queue #21 สั่งลบ 65-70% และ 95%+ จนกว่าจะมี datasheet (SRC-VEN-002)"
+    },
+    {
+      "id": "FW-E-002",
+      "severity": "EVIDENCE",
+      "pattern": "\\d+(?:\\.\\d+)?\\s*(?:เมตร|ม\\.|ซม\\.|มม\\.|cm|mm|inch|นิ้ว)\\b",
+      "claim_ref": ["CLM-E-001"],
+      "message": "ตัวเลขระยะ/ขนาด — ต้องอ้าง datasheet รุ่นจริง"
+    },
+    {
+      "id": "FW-E-003",
+      "severity": "EVIDENCE",
+      "pattern": "(ระยะอ่าน|ระยะการอ่าน|reading\\s*distance|ความเร็วในการสแกน|สแกนได้\\s*\\d|scan\\s*rate|throughput)",
+      "claim_ref": ["CLM-E-001", "CLM-E-003"],
+      "message": "สเปกการอ่าน/ความเร็ว — ต้องอ้าง Honeywell datasheet (SRC-VEN-002)"
+    },
+    {
+      "id": "FW-E-004",
+      "severity": "EVIDENCE",
+      "pattern": "(IP\\s?\\d{2}\\b|อุณหภูมิ[^\\n]{0,25}\\d|-?\\d+\\s*°\\s*C|องศาเซลเซียส)",
+      "claim_ref": ["CLM-E-004", "CLM-E-007"],
+      "message": "สเปกสภาพแวดล้อม/การป้องกัน — ต้องอ้าง datasheet (SRC-VEN-001 หรือ SRC-VEN-002)"
+    },
+    {
+      "id": "FW-E-005",
+      "severity": "EVIDENCE",
+      "pattern": "(GTIN|GS1-128|GS1\\s*128|Application\\s*Identifier|DataMatrix|Code\\s*128)",
+      "claim_ref": ["CLM-E-006"],
+      "message": "ข้อกำหนดมาตรฐาน GS1 — ต้องอ้างเอกสาร GS1 ทางการ (SRC-VEN-003)"
+    },
+    {
+      "id": "FW-O-001",
+      "severity": "OWNER",
+      "pattern": "(฿\\s*\\d|\\d[\\d,]*\\s*(?:บาท|THB)|ราคา\\s*(?:เริ่มต้น|เพียง|ที่)?\\s*\\d|เริ่มต้นที่\\s*\\d)",
+      "claim_ref": ["CLM-O-001", "CLM-B-003"],
+      "message": "ราคาเฉพาะเจาะจง — Owner Queue #16/#18 ห้ามใส่ถ้าไม่มีราคา ACS พร้อมวันที่ (SRC-ACS-002)"
+    },
+    {
+      "id": "FW-O-002",
+      "severity": "OWNER",
+      "pattern": "(ลูกค้าของเรา|เคสลูกค้า|กรณีศึกษา|ลูกค้ากว่า|ติดตั้งให้กับ|ผลงานที่ผ่านมา|ไว้วางใจโดย)",
+      "claim_ref": ["CLM-O-004"],
+      "message": "อ้างเคสลูกค้า — ต้องมีเอกสาร ACS และ consent (SRC-ACS-003)"
+    },
+    {
+      "id": "FW-O-003",
+      "severity": "OWNER",
+      "pattern": "(ตัวแทนจำหน่ายอย่างเป็นทางการ|ตัวแทนอย่างเป็นทางการ|authorized\\s+(?:distributor|dealer|partner)|พาร์ทเนอร์อย่างเป็นทางการ)",
+      "claim_ref": ["CLM-O-003"],
+      "message": "สถานะตัวแทนจำหน่าย — ต้องมีเอกสารแต่งตั้งจากแบรนด์"
+    },
+    {
+      "id": "FW-O-004",
+      "severity": "OWNER",
+      "pattern": "((?:ประสบการณ์|ดำเนินธุรกิจ|ก่อตั้งมา)[^\\n]{0,15}\\d+\\s*ปี|กว่า\\s*\\d+\\s*(?:ปี|ราย|บริษัท|โครงการ))",
+      "claim_ref": ["CLM-O-006"],
+      "message": "อ้างขนาด/อายุธุรกิจ — ต้องมี ACS company profile (SRC-ACS-004)"
+    },
+    {
+      "id": "FW-O-005",
+      "severity": "OWNER",
+      "pattern": "((?:ส่ง|จัดส่ง|ติดตั้ง|ตอบกลับ)(?:ได้)?ภายใน\\s*\\d+\\s*(?:ชั่วโมง|ชม\\.|วัน)|SLA\\s*\\d)",
+      "claim_ref": ["CLM-O-005"],
+      "message": "อ้าง SLA/ระยะเวลา — ต้องมีเอกสารยืนยันจาก ACS"
+    },
+    {
+      "id": "FW-O-006",
+      "severity": "OWNER",
+      "pattern": "(รุ่น\\s*[A-Z]{2,}[-\\s]?\\d{2,}|model\\s+[A-Z]{2,}[-\\s]?\\d{2,})",
+      "claim_ref": ["CLM-O-002"],
+      "message": "ระบุรุ่นสินค้าเฉพาะเจาะจง — ต้องยืนยันว่า ACS ขายจริง (SRC-ACS-001)"
+    }
+  ]
+}
