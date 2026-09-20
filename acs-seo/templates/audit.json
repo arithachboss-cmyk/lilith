@@ -1,0 +1,25 @@
+{
+  "queue_id": "",
+  "audited_on": "",
+  "auditor": "",
+  "mechanical": {
+    "M-1_files": null, "M-2_metadata": null, "M-3_internal_links": null, "M-4_sitemap": null,
+    "M-5_forbidden_words": null, "M-6_numbers_mapped": null, "M-7_schema": null, "M-8_status": null
+  },
+  "routing": { "tier": "WORDING_QA_OK | CLAIM_QA | FULL_QA", "reason": "" },
+  "claims": [
+    {
+      "claim_id": "CR-00",
+      "sentence": "",
+      "class": "SAFE_WORDING | EVIDENCE_REQUIRED | OWNER_REQUIRED | BLOCKED",
+      "source_uri": null,
+      "source_document": null,
+      "source_revision": null,
+      "date_checked": null,
+      "reviewer": null,
+      "verdict": "OPEN | CLEARED | REVISE | DELETE"
+    }
+  ],
+  "result": "PASS | REVISE | HOLD | BLOCKED",
+  "notes": ""
+}
