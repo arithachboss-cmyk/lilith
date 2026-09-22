@@ -8,6 +8,7 @@
  * still has to make the sentence read properly, which is a human job.
  *
  *   node claim-scan.mjs <file|dir> [...]        report only, exit 1 if anything BLOCKED
+ *   node claim-scan.mjs <path> --strict         also fail on EVIDENCE_REQUIRED
  *   node claim-scan.mjs <path> --fix            redact BLOCKED figures in place
  *   node claim-scan.mjs <path> --json           machine-readable output
  *
@@ -59,6 +60,24 @@ const RULES = [
     cr: "CR-09", cls: "BLOCKED", redact: true,
     why: "ตัวเลขประหยัดเวลา/ต้นทุน ต้องมีฐานการคำนวณที่อ้างอิงได้",
     re: /(?:ลดเวลา|ประหยัดเวลา|ประหยัด|ลดต้นทุน|ลดข้อผิดพลาด|save[sd]?|reduce[sd]?)[^\n.·]{0,24}?\d+(?:[.,]\d+)?\s*(?:%|เท่า|ชั่วโมง|วัน|นาที|(?:hours?|days?|minutes?)\b)/gi,
+  },
+  {
+    id: "material-certainty",
+    cr: "CR-01", cls: "EVIDENCE_REQUIRED", redact: false,
+    why: "ฟันธงความทนทานของวัสดุ ต้องมีดาต้าชีตของสินค้าจริง (Owner decision Queue #4)",
+    re: /(?:ทน(?:ต่อ)?\s*(?:ความร้อน|ความเย็น|สารเคมี|น้ำมัน|ตัวทำละลาย|การเสียดสี|รอยขีดข่วน|แสงแดด|UV|น้ำ|ความชื้น)[^\n.·]{0,12}?ได้|กัน(?:น้ำ|ฝุ่น|รอย|ความร้อน|สารเคมี|แดด|UV)(?!ได้หรือไม่)|ไม่(?:หลุด|ลอก|ซีด|จาง|เลือน|ละลาย)|resistant\s+to|withstands?|water\s*proof|weather\s*proof|chemical[-\s]resistant|scratch[-\s]resistant|fade[-\s]?proof|will\s+not\s+(?:fade|peel|smear|come\s+off))/gi,
+  },
+  {
+    id: "environment-certainty",
+    cr: "CR-01", cls: "EVIDENCE_REQUIRED", redact: false,
+    why: "ฟันธงว่าใช้ได้ในสภาพแวดล้อมหนึ่ง ต้องมีดาต้าชีตระบุเงื่อนไขการวัด",
+    re: /(?:ใช้(?:งาน)?(?:ได้)?\s*(?:กลางแจ้ง|ภายนอกอาคาร|ในห้องเย็น|ในห้องแช่แข็ง|ในที่เปียก|กับโลหะ|บนพื้นผิวมัน)[^\n.·]{0,10}?ได้|เหมาะ(?:สม)?(?:สำหรับ|กับ)\s*(?:ทุก|ทั้ง)|suitable\s+for\s+(?:outdoor|freezer|any|all)|works?\s+in\s+(?:any|all)\s+(?:environment|condition)|for\s+(?:any|all)\s+surfaces?)/gi,
+  },
+  {
+    id: "absolute-scope",
+    cr: "CR-01", cls: "EVIDENCE_REQUIRED", redact: false,
+    why: "ขอบเขตแบบเหมารวม (ทุก/ทั้งหมด/เสมอ) ต้องแคบลงให้ตรงกับที่ดาต้าชีตระบุ",
+    re: /(?:ทุกสภาพแวดล้อม|ทุกพื้นผิว|ทุกอุตสาหกรรม|ได้ทุกแบบ|ตลอดอายุการใช้งาน|ใช้ได้เสมอ|always\s+works|every\s+(?:surface|environment)|lifetime\s+durability)/gi,
   },
   {
     id: "price",
@@ -146,6 +165,10 @@ function redact(text) {
 const args = process.argv.slice(2);
 const fix = args.includes("--fix");
 const asJson = args.includes("--json");
+// Default CI gate is BLOCKED only. --strict also fails on EVIDENCE_REQUIRED, which is
+// what a package claiming material or environment performance needs once its datasheet
+// citations are supposed to be in place.
+const strict = args.includes("--strict");
 const targets = args.filter((a) => !a.startsWith("--"));
 
 if (!targets.length) {
@@ -171,12 +194,12 @@ for (const target of targets) {
 if (asJson) {
   console.log(JSON.stringify({ generatedAt: new Date().toISOString(), mode: fix ? "fix" : "report", files: report }, null, 2));
 } else {
-  let blocked = 0, owner = 0;
+  const tally = { BLOCKED: 0, EVIDENCE_REQUIRED: 0, OWNER_REQUIRED: 0 };
   for (const { file, findings, redacted } of report) {
     if (!findings.length) { console.log(`ok    ${file}`); continue; }
     console.log(`\n${file}${redacted ? `  (redacted ${redacted})` : ""}`);
     for (const f of findings) {
-      if (f.cls === "BLOCKED") blocked += 1; else owner += 1;
+      tally[f.cls] = (tally[f.cls] ?? 0) + 1;
       const extraCrs = (f.alsoMatches ?? []).map((x) => x.cr).filter((cr, i, a) => cr !== f.cr && a.indexOf(cr) === i);
       const also = extraCrs.length ? ` (+${extraCrs.join(", ")})` : "";
       console.log(`  ${String(f.line).padStart(4)}:${String(f.column).padEnd(4)} ${f.cls.padEnd(15)} ${f.cr}${also}  ${JSON.stringify(f.match)}`);
@@ -184,8 +207,13 @@ if (asJson) {
     }
   }
   console.log(`\n${"-".repeat(60)}`);
-  console.log(`BLOCKED ${blocked}   OWNER_REQUIRED ${owner}   files ${report.length}`);
+  console.log(
+    `BLOCKED ${tally.BLOCKED}   EVIDENCE_REQUIRED ${tally.EVIDENCE_REQUIRED}   ` +
+    `OWNER_REQUIRED ${tally.OWNER_REQUIRED}   files ${report.length}`,
+  );
   if (fix) console.log(`redacted ${report.reduce((a, r) => a + r.redacted, 0)} figure(s) — sentences still need a human rewrite`);
 }
 
-process.exit(report.some((r) => r.findings.some((f) => f.cls === "BLOCKED")) && !fix ? 1 : 0);
+const failOn = strict ? ["BLOCKED", "EVIDENCE_REQUIRED"] : ["BLOCKED"];
+const shouldFail = report.some((r) => r.findings.some((f) => failOn.includes(f.cls)));
+process.exit(shouldFail && !fix ? 1 : 0);

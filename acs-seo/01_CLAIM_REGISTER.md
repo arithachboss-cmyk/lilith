@@ -59,6 +59,23 @@ best, #1, number one, leading, cheapest, guaranteed, fastest, most accurate
 Plus, as a regex: any bare percentage, any currency amount, and any "X–Y%" range that is not
 tied to a CR row with an attached source.
 
+## 4b. Mechanical enforcement
+
+| Rows | Tool | Command |
+|---|---|---|
+| CR-02, CR-09 figures; CR-04 ranking; CR-03 price | `tools/claim-scan.mjs` | `node tools/claim-scan.mjs <pkg>` |
+| CR-01 material / environment certainty | same, with `--strict` | `node tools/claim-scan.mjs <pkg> --strict` |
+| Evidence actually attached for CR-01 / CR-07 | `tools/evidence-check.mjs` | `node tools/evidence-check.mjs <pkg>` |
+
+A row added here without a rule there is unenforced; a rule there without a row here is a
+bug. Keep them in step.
+
+**The measured-condition rule.** A CR-01 or CR-07 claim quoting a figure must carry the
+conditions the figure was measured under, in the visible copy — not only in the audit file.
+A value measured under dry heat does not license a claim about steam, and a value on flat
+anodised aluminium does not license one about textured painted steel. `evidence-check.mjs`
+fails any record that quotes a figure with no conditions recorded.
+
 ## 5. Register hygiene
 
 - A claim row is **closed** only when `audit.json` carries the source URI/document, the date

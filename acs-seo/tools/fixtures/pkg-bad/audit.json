@@ -1,0 +1,8 @@
+{
+  "queue_id": "4",
+  "claims": [
+    { "claim_id": "CR-01", "class": "EVIDENCE_REQUIRED", "verdict": "CLEARED",
+      "source_uri": "", "source_revision": "", "date_checked": "", "reviewer": "" },
+    { "claim_id": "CR-07", "class": "EVIDENCE_REQUIRED", "verdict": "OPEN" }
+  ]
+}

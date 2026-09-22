@@ -1,0 +1,24 @@
+{
+  "claim_id": "CR-01",
+  "sentence_verbatim": "ฉลากรุ่นนี้ทนอุณหภูมิได้ถึง 150 องศาเซลเซียส",
+  "product": { "vendor": "ExampleVendor", "product_line": "XX Series", "part_number": "XX-100" },
+  "source": {
+    "document_title": "XX-100 Material Datasheet",
+    "document_uri": "https://example-vendor.invalid/ds/XX-100.pdf",
+    "revision_or_date": "Rev C, 2026-03",
+    "page_or_section": "Table 2, Thermal",
+    "date_checked": "2026-09-22",
+    "checked_by": "ACS technical lead"
+  },
+  "measured_conditions": {
+    "temperature": "150 °C continuous",
+    "exposure": "dry heat, no chemical contact",
+    "substrate": "flat anodised aluminium",
+    "duration": "500 h",
+    "test_method": "vendor internal, per datasheet Table 2"
+  },
+  "what_the_source_actually_says": "Continuous service temperature 150 °C on flat anodised aluminium for 500 h under dry heat.",
+  "approved_wording_th": "บนพื้นผิวอะลูมิเนียมอโนไดซ์เรียบ ผู้ผลิตระบุอุณหภูมิใช้งานต่อเนื่อง 150 องศาเซลเซียส ทดสอบแบบความร้อนแห้ง 500 ชั่วโมง (ดาต้าชีต XX-100 Rev C)",
+  "approved_wording_en": "On flat anodised aluminium the vendor states a continuous service temperature of 150 °C, tested under dry heat for 500 h (XX-100 datasheet, Rev C).",
+  "verdict": "CLEARED", "reviewer": "ACS technical lead", "reviewed_on": "2026-09-22"
+}

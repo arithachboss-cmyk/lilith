@@ -6,6 +6,7 @@ Mechanical enforcement of the central Claim Register. Zero dependencies, Node �
 
 ```sh
 node claim-scan.mjs <file|dir> [...]     # report; exits 1 if anything is BLOCKED
+node claim-scan.mjs <path> --strict      # also fail on EVIDENCE_REQUIRED
 node claim-scan.mjs <path> --fix         # redact BLOCKED figures in place
 node claim-scan.mjs <path> --json        # machine-readable, for CI
 ```
@@ -18,6 +19,7 @@ claim row). Rules trace to `../01_CLAIM_REGISTER.md`:
 | `pct-range-improvement`, `pct-any` | CR-02 | BLOCKED | yes |
 | `read-range`, `speed`, `accuracy` | CR-02 | BLOCKED | yes |
 | `time-saving` | CR-09 | BLOCKED | yes |
+| `material-certainty`, `environment-certainty`, `absolute-scope` | CR-01 | EVIDENCE_REQUIRED | no — needs a datasheet or a rewrite |
 | `price` | CR-03 | OWNER_REQUIRED | no — needs the Owner's price list |
 | `ranking`, `guarantee` | CR-04 | BLOCKED | no — needs a rewrite, not a deletion |
 
@@ -28,12 +30,33 @@ idempotent: redacted lines are skipped.
 **Adding a rule here without adding its CR row to the register is a bug** — the register
 is the source of truth, this file is only its enforcement.
 
+## `evidence-check.mjs`
+
+```sh
+node evidence-check.mjs <package-dir> [...]   # exit 1 if any evidence record is incomplete
+```
+
+`claim-scan.mjs` finds claims that need evidence; this checks the evidence actually
+arrived. It reads a package's `audit.json` and any `*evidence*.json`, and fails when a
+claim is marked CLEARED without a source URI, revision, date checked and reviewer — or
+when a record quotes a figure with **no measured conditions**. That last rule is the one
+that matters: a value measured under dry heat at 150 °C is not a claim about steam, and
+quoting the number without its conditions turns evidence into a false claim while still
+looking sourced.
+
 ### Verified behaviour
 
 `fixtures/sample-draft.md` carries the figures named in the Owner decisions. Against it the
 scanner reports 10 BLOCKED and 1 OWNER_REQUIRED finding, `--fix` redacts 7 figures, and a
 re-scan leaves only the three findings that correctly require a human: the price, the brand
 ranking and the guarantee.
+
+`fixtures/sample-material-draft.md` carries Queue #4's definitive material and environment
+wording: 13 EVIDENCE_REQUIRED findings, 0 BLOCKED. The default gate passes it (exit 0) and
+`--strict` fails it (exit 1), which is the intended split.
+
+`fixtures/pkg-bad/` and `fixtures/pkg-good/` exercise `evidence-check.mjs`: the first
+raises 12 problems including the missing-conditions trap, the second passes clean.
 
 ### Known limits
 

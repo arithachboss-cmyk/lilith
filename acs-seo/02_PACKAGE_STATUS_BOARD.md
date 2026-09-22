@@ -22,7 +22,7 @@
 | Queue | State | Reason | Claim rows | Blocking dependency | Due |
 |---|---|---|---|---|---|
 | **#3** | `HOLD` | Cannibalisation — target intent collides with existing live URLs | CR-05 | Intent mapping for cluster C-1 (10 live URLs) | **24 Sep 2026** |
-| **#4** | `REVISE` | Material / environment wording states certainty without a datasheet | CR-01, CR-07 | SRC-03 vendor datasheets | on datasheet |
+| **#4** | `REVISE` | Material / environment wording states certainty without a datasheet | CR-01, CR-07 | SRC-03 datasheets **+** SRC-02 product list — **revision spec, detection and evidence intake all written**, `packages/queue-4/` | on datasheet, or take Form A now |
 | **#16** | `REVISE` | Specific price with no ACS price + effective date | CR-03 | SRC-06 ACS price list | on price list |
 | **#17** | `REVISE` | Ranks brands; must become decision criteria instead | CR-04 | none — **revision spec written**, `packages/queue-17/REVISION_SPEC.md` | awaiting the draft file |
 | **#18** | `REVISE` | Same as #16 | CR-03 | SRC-06 ACS price list | on price list |
@@ -34,6 +34,15 @@ mechanical: #17 has a criteria frame to replace the ranking, and #21's deletion 
 single command (`tools/claim-scan.mjs --fix`) that is verified against a fixture. The one
 remaining input is the draft article for each, which was never supplied to this session and
 was not reconstructed.
+
+**#4 is prepared but genuinely cannot reach PASS here.** Its blocker is a source that does
+not exist — vendor datasheets, paired with the ACS product list so a datasheet maps to
+something ACS actually sells. What is done: detection is automated
+(`claim-scan.mjs --strict`), the rewrite rule is written as three permitted forms, evidence
+intake has a template, and completeness is machine-checked (`evidence-check.mjs`).
+**There is a publishable outcome without any datasheet:** every flagged sentence takes
+Form A — state the mechanism, not the product's performance — or is deleted. Waiting is a
+choice, not a requirement.
 
 **Verified 22 Sep 2026 — the rendering gate is real, not theoretical.** Two live pages were
 fetched with a non-JS crawler (`/barcode-scanner-comparison`, `/knowledge/rfid-vs-barcode`)
