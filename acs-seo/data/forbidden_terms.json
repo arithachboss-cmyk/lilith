@@ -1,5 +1,5 @@
 {
-  "version": "2.1.0",
+  "version": "2.2.0",
   "as_of": "2026-09-22",
   "severity_meaning": {
     "BLOCK": "ห้ามใช้เด็ดขาด พบแล้ว = FAIL ทันที ต้องลบหรือเขียนใหม่",
@@ -327,6 +327,50 @@
         "ราคานี้ยังไม่รวม VAT",
         "ราคารวมภาษีมูลค่าเพิ่มแล้ว",
         "excluding VAT"
+      ]
+    },
+    {
+      "id": "FW-E-007",
+      "severity": "EVIDENCE",
+      "pattern": "(ESG|ความยั่งยืน|ยั่งยืน|คาร์บอน|carbon\\s*footprint|net\\s*zero|รีไซเคิล|เป็นมิตรกับสิ่งแวดล้อม|รักษ์โลก|sustainab(?:le|ility)|eco[-\\s]?friendly)",
+      "claim_ref": [
+        "CLM-E-009"
+      ],
+      "message": "ข้อความด้าน ESG/สิ่งแวดล้อม — ต้องมีใบรับรองหรือเอกสารโครงการที่ทำจริง ถ้าไม่มีให้ลบออก",
+      "must_match": [
+        "โซลูชัน ESG สำหรับโรงงาน",
+        "ฉลากที่เป็นมิตรกับสิ่งแวดล้อม",
+        "ลดคาร์บอนในกระบวนการ",
+        "sustainable packaging"
+      ]
+    },
+    {
+      "id": "FW-E-008",
+      "severity": "EVIDENCE",
+      "pattern": "(AI\\s*(?:consultant|advisor|assistant)|ที่ปรึกษา\\s*AI|ผู้ช่วย\\s*AI|ระบบ\\s*AI|ปัญญาประดิษฐ์|machine\\s*learning|แมชชีนเลิร์นนิง|AI\\s*(?:ช่วย|วิเคราะห์|แนะนำ))",
+      "claim_ref": [
+        "CLM-E-010"
+      ],
+      "message": "อ้างความสามารถของเครื่องมือ AI — ต้องมีคำอธิบายจาก ACS ว่าทำอะไรได้จริง (SRC-ACS-004)",
+      "must_match": [
+        "ที่ปรึกษา AI ของเรา",
+        "ระบบ AI วิเคราะห์หน้างาน",
+        "AI consultant",
+        "ใช้ปัญญาประดิษฐ์ช่วยเลือกรุ่น"
+      ]
+    },
+    {
+      "id": "FW-O-012",
+      "severity": "OWNER",
+      "pattern": "(ผู้บริหาร|ทีมผู้ก่อตั้ง|ประวัติบริษัท|ทีมวิศวกร|ทีมบริการของเรา|leadership\\s*team|our\\s*founders?)",
+      "claim_ref": [
+        "CLM-O-008"
+      ],
+      "message": "ประวัติผู้บริหาร/ทีมงาน — ต้องมี ACS company profile ยืนยัน (SRC-ACS-004)",
+      "must_match": [
+        "ผู้บริหารของบริษัท",
+        "ทีมวิศวกรของเรา",
+        "our leadership team"
       ]
     }
   ]
