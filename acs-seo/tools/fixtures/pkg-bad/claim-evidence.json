@@ -1,9 +1,0 @@
-{
-  "claim_id": "CR-01",
-  "sentence_verbatim": "ฉลากรุ่นนี้ทนความร้อนได้ถึง 150 องศา",
-  "product": { "vendor": "", "product_line": "", "part_number": "" },
-  "source": { "document_title": "", "document_uri": "", "revision_or_date": "", "date_checked": "", "checked_by": "" },
-  "measured_conditions": { "temperature": "", "exposure": "", "substrate": "", "duration": "", "test_method": "" },
-  "what_the_source_actually_says": "ทนอุณหภูมิ 150 องศาเซลเซียส",
-  "verdict": "CLEARED", "reviewer": "", "reviewed_on": ""
-}

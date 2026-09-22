@@ -1,8 +1,0 @@
-{
-  "queue_id": "4",
-  "claims": [
-    { "claim_id": "CR-01", "class": "EVIDENCE_REQUIRED", "verdict": "CLEARED",
-      "source_uri": "https://example-vendor.invalid/ds/XX-100.pdf",
-      "source_revision": "Rev C, 2026-03", "date_checked": "2026-09-22", "reviewer": "ACS technical lead" }
-  ]
-}
