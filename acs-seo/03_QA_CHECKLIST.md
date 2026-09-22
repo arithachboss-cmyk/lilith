@@ -15,10 +15,15 @@ Fail any item → return to writer. Do not proceed to Tier 1.
 | M-2 | Metadata | title ≤ 60 chars, meta description 120–160, exactly one `<h1>`, canonical set and absolute |
 | M-3 | Internal links | every internal link resolves to a URL in the 82-URL live inventory, or is marked `NEW` in `brief.md`. No orphan package: at least one inbound link named |
 | M-4 | Sitemap | target URL exists in the sitemap, or `brief.md` states it is a NEW URL to be added |
-| M-5 | Forbidden words | zero hits from the forbidden list in `01_CLAIM_REGISTER.md` §4 |
-| M-6 | Numbers | every number, %, range and currency amount in `article.md` maps to a CR row in the package's `claim_register.md` |
+| M-5 | Forbidden words | `node tools/claim-scan.mjs <package>` exits 0 — zero BLOCKED findings |
+| M-6 | Numbers | same scan: every number, %, range and currency amount maps to a CR row in the package's `claim_register.md` |
 | M-7 | Schema | `schema.jsonld` parses, `@type` matches page class, no field asserting a claim that has no CR row |
 | M-8 | Status | `package_status.json` = `DRAFT_PENDING_REVIEW` and no publish flag set |
+
+**M-5 and M-6 are one command.** `node tools/claim-scan.mjs <package-dir>` reports every
+figure and forbidden phrase against its CR row and exits non-zero if anything is BLOCKED —
+run it in CI, not by eye. It is regex, not comprehension: a figure written in words still
+needs Tier 2B.
 
 ## Tier 1 — Routing: how deep does this package go?
 
