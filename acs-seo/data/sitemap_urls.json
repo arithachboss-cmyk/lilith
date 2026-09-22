@@ -1,9 +1,508 @@
 {
-  "version": "1.0.0",
-  "as_of": "2026-09-20",
+  "version": "2.0.0",
+  "as_of": "2026-09-22",
   "source_id": "SRC-WEB-001",
-  "status": "NOT_SUPPLIED",
+  "status": "SUPPLIED",
   "site": "https://www.asiancoding.com",
-  "note": "ให้ export sitemap.xml ปัจจุบันแล้วเติม urls[] — ห้ามเดา URL",
-  "urls": []
+  "retrieved_at": "2026-09-22",
+  "retrieved_from": "https://www.asiancoding.com/sitemap.xml",
+  "verification": "ดึง sitemap จริงในรอบนี้และเทียบกับชุดที่ PR #1 บันทึกไว้เมื่อ 2026-09-20 ได้ 82 URL เท่ากัน ชุดเดียวกัน ลำดับเดียวกัน",
+  "observation_no_lastmod": "FACT — sitemap มีแค่ changefreq และ priority ไม่มี lastmod สักรายการ ทั้งสองอย่างแรก search engine แทบไม่ใช้ ส่วน lastmod ที่ใช้จริงกลับไม่มี จึงไม่มีสัญญาณความสดให้ crawler เลย แก้เรื่องนี้ตอนจัดการ rendering gate ไม่ใช่ก่อนหน้านั้น",
+  "count": 82,
+  "urls": [
+    "https://www.asiancoding.com",
+    "https://www.asiancoding.com/solutions",
+    "https://www.asiancoding.com/contact",
+    "https://www.asiancoding.com/select-solution",
+    "https://www.asiancoding.com/brady",
+    "https://www.asiancoding.com/brady/printers/m510",
+    "https://www.asiancoding.com/brady/labels",
+    "https://www.asiancoding.com/brady/scanners-rfid",
+    "https://www.asiancoding.com/brady/software",
+    "https://www.asiancoding.com/brady/solutions/manufacturing",
+    "https://www.asiancoding.com/brady/solutions/warehouse-logistics",
+    "https://www.asiancoding.com/pos-barcode-system",
+    "https://www.asiancoding.com/warehouse-data-capture",
+    "https://www.asiancoding.com/rfid-workflow-context",
+    "https://www.asiancoding.com/why-acs",
+    "https://www.asiancoding.com/why-acs/30-years",
+    "https://www.asiancoding.com/why-acs/service-capability",
+    "https://www.asiancoding.com/why-acs/partner-ecosystem",
+    "https://www.asiancoding.com/esg-solutions",
+    "https://www.asiancoding.com/retail",
+    "https://www.asiancoding.com/logistics",
+    "https://www.asiancoding.com/manufacturing",
+    "https://www.asiancoding.com/industry/manufacturing",
+    "https://www.asiancoding.com/industry/healthcare",
+    "https://www.asiancoding.com/ai-consultant",
+    "https://www.asiancoding.com/roi-calculator",
+    "https://www.asiancoding.com/roi-calculator/retail",
+    "https://www.asiancoding.com/roi-calculator/warehouse",
+    "https://www.asiancoding.com/roi-calculator/manufacturing",
+    "https://www.asiancoding.com/roi-calculator/mobility",
+    "https://www.asiancoding.com/case-studies",
+    "https://www.asiancoding.com/case-study/retail",
+    "https://www.asiancoding.com/case-study/warehouse",
+    "https://www.asiancoding.com/case-study/manufacturing",
+    "https://www.asiancoding.com/case-study/logistics",
+    "https://www.asiancoding.com/case-study/healthcare",
+    "https://www.asiancoding.com/insights",
+    "https://www.asiancoding.com/revenue-articles",
+    "https://www.asiancoding.com/leadership",
+    "https://www.asiancoding.com/partner-ecosystem-hub",
+    "https://www.asiancoding.com/barcode-scanner-thailand",
+    "https://www.asiancoding.com/barcode-printer-thailand",
+    "https://www.asiancoding.com/honeywell-barcode-scanner",
+    "https://www.asiancoding.com/tsc-barcode-printer",
+    "https://www.asiancoding.com/rfid-warehouse-system",
+    "https://www.asiancoding.com/เครื่องสแกนบาร์โค้ด",
+    "https://www.asiancoding.com/barcode-label-printer",
+    "https://www.asiancoding.com/wireless-barcode-scanner",
+    "https://www.asiancoding.com/industrial-barcode-scanner",
+    "https://www.asiancoding.com/rfid-reader",
+    "https://www.asiancoding.com/barcode-printers",
+    "https://www.asiancoding.com/rfid-systems",
+    "https://www.asiancoding.com/barcode-scanner-price-guide",
+    "https://www.asiancoding.com/barcode-scanners",
+    "https://www.asiancoding.com/barcode-ribbons",
+    "https://www.asiancoding.com/warehouse-barcode-scanner",
+    "https://www.asiancoding.com/retail-barcode-scanner",
+    "https://www.asiancoding.com/2d-barcode-scanner",
+    "https://www.asiancoding.com/long-range-barcode-scanner",
+    "https://www.asiancoding.com/barcode-scanner-comparison",
+    "https://www.asiancoding.com/barcode-printer-buying-guide",
+    "https://www.asiancoding.com/knowledge",
+    "https://www.asiancoding.com/knowledge/barcode-technology",
+    "https://www.asiancoding.com/knowledge/barcode-equipment",
+    "https://www.asiancoding.com/knowledge/rfid-technology",
+    "https://www.asiancoding.com/knowledge/industry-applications",
+    "https://www.asiancoding.com/knowledge/implementation-best-practices",
+    "https://www.asiancoding.com/knowledge/regional-solutions",
+    "https://www.asiancoding.com/knowledge/product-comparisons",
+    "https://www.asiancoding.com/knowledge/emerging-trends",
+    "https://www.asiancoding.com/knowledge/1d-vs-2d-barcode",
+    "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+    "https://www.asiancoding.com/knowledge/wired-vs-wireless-barcode-scanner",
+    "https://www.asiancoding.com/knowledge/barcode-printer-types",
+    "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+    "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+    "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+    "https://www.asiancoding.com/knowledge/barcode-system-implementation",
+    "https://www.asiancoding.com/knowledge/barcode-scanner-troubleshooting",
+    "https://www.asiancoding.com/knowledge/barcode-printer-calibration",
+    "https://www.asiancoding.com/knowledge/barcode-label-materials",
+    "https://www.asiancoding.com/knowledge/barcode-wms-integration"
+  ],
+  "entries": [
+    {
+      "url": "https://www.asiancoding.com",
+      "changefreq": "daily",
+      "priority": 1.0
+    },
+    {
+      "url": "https://www.asiancoding.com/solutions",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/contact",
+      "changefreq": "monthly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/select-solution",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/brady",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/printers/m510",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/labels",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/scanners-rfid",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/software",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/solutions/manufacturing",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/solutions/warehouse-logistics",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/pos-barcode-system",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/warehouse-data-capture",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/rfid-workflow-context",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/why-acs",
+      "changefreq": "monthly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/why-acs/30-years",
+      "changefreq": "monthly",
+      "priority": 0.6
+    },
+    {
+      "url": "https://www.asiancoding.com/why-acs/service-capability",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/why-acs/partner-ecosystem",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/esg-solutions",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/retail",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/logistics",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/manufacturing",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/industry/manufacturing",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/industry/healthcare",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/ai-consultant",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator/retail",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator/warehouse",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator/manufacturing",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator/mobility",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/case-studies",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/retail",
+      "changefreq": "monthly",
+      "priority": 0.6
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/warehouse",
+      "changefreq": "monthly",
+      "priority": 0.6
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/manufacturing",
+      "changefreq": "monthly",
+      "priority": 0.6
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/logistics",
+      "changefreq": "monthly",
+      "priority": 0.6
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/healthcare",
+      "changefreq": "monthly",
+      "priority": 0.6
+    },
+    {
+      "url": "https://www.asiancoding.com/insights",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/revenue-articles",
+      "changefreq": "weekly",
+      "priority": 0.6
+    },
+    {
+      "url": "https://www.asiancoding.com/leadership",
+      "changefreq": "monthly",
+      "priority": 0.5
+    },
+    {
+      "url": "https://www.asiancoding.com/partner-ecosystem-hub",
+      "changefreq": "monthly",
+      "priority": 0.5
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-scanner-thailand",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-printer-thailand",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/honeywell-barcode-scanner",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/tsc-barcode-printer",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/rfid-warehouse-system",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/เครื่องสแกนบาร์โค้ด",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-label-printer",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/wireless-barcode-scanner",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/industrial-barcode-scanner",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/rfid-reader",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-printers",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/rfid-systems",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-scanner-price-guide",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-scanners",
+      "changefreq": "weekly",
+      "priority": 0.9
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-ribbons",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/warehouse-barcode-scanner",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/retail-barcode-scanner",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/2d-barcode-scanner",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/long-range-barcode-scanner",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-scanner-comparison",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-printer-buying-guide",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge",
+      "changefreq": "weekly",
+      "priority": 0.8
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-technology",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-equipment",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/rfid-technology",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/industry-applications",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/implementation-best-practices",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/regional-solutions",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/product-comparisons",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/emerging-trends",
+      "changefreq": "weekly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/1d-vs-2d-barcode",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/wired-vs-wireless-barcode-scanner",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-printer-types",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-system-implementation",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-scanner-troubleshooting",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-printer-calibration",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-label-materials",
+      "changefreq": "monthly",
+      "priority": 0.7
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+      "changefreq": "monthly",
+      "priority": 0.7
+    }
+  ]
 }

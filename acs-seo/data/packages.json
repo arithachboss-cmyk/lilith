@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "as_of": "2026-09-20",
+  "version": "2.0.0",
+  "as_of": "2026-09-22",
   "total_packages_declared_by_owner": 19,
   "global_rule": "ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic",
   "board_status_enum": [
@@ -9,7 +9,7 @@
     "HOLD",
     "BLOCKED"
   ],
-  "open_question": "Owner แจ้ง 19 packages แต่หมายเลข queue ที่อ้างถึงสูงสุดคือ #21 — ต้องยืนยันว่า queue ID กับจำนวนแพ็กเกจ map กันอย่างไร ระหว่างที่ยังไม่ยืนยัน 13 รายการถูกตั้งเป็น PKG-UNMAPPED-XX",
+  "open_question": "Owner แจ้ง 19 packages แต่หมายเลข queue ที่อ้างถึงสูงสุดคือ #21 — ต้องยืนยันว่า queue ID กับจำนวนแพ็กเกจ map กันอย่างไร ระหว่างที่ยังไม่ยืนยัน 13 รายการถูกตั้งเป็น PKG-UNMAPPED-XX · ตอนนี้มี page inventory จริง 82 หน้าแล้ว การจับคู่ queue กับ target URL จึงทำได้ทันทีที่ได้ keyword queue ฉบับเต็ม",
   "packages": [
     {
       "package_id": "PKG-Q03",
@@ -19,12 +19,12 @@
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "HOLD",
-      "board_reason": "Cannibalization — ต้อง map intent ให้เสร็จก่อน 2026-09-24",
+      "board_reason": "Cannibalization — อยู่ใน cluster C-1 ซึ่งมี 10 URL เดิมยิง head term เชิงพาณิชย์เดียวกัน ต้อง map intent ให้เสร็จก่อน 2026-09-24",
       "owner_decision": "HOLD จนกว่าจะ map intent เสร็จ",
       "qa_tier": "T2_FULL",
       "flagged_claims": [],
       "blocked_on_sources": [
-        "GATE-CANNIBAL"
+        "SRC-WEB-004"
       ],
       "gates": {
         "mechanical": "NOT_RUN",
@@ -34,7 +34,26 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าที่ถือ flag CANNIBAL ใน cluster C-1",
+        "urls": [
+          "https://www.asiancoding.com/barcode-scanners",
+          "https://www.asiancoding.com/barcode-scanner-thailand",
+          "https://www.asiancoding.com/เครื่องสแกนบาร์โค้ด",
+          "https://www.asiancoding.com/industrial-barcode-scanner",
+          "https://www.asiancoding.com/wireless-barcode-scanner",
+          "https://www.asiancoding.com/2d-barcode-scanner",
+          "https://www.asiancoding.com/long-range-barcode-scanner",
+          "https://www.asiancoding.com/warehouse-barcode-scanner",
+          "https://www.asiancoding.com/retail-barcode-scanner",
+          "https://www.asiancoding.com/honeywell-barcode-scanner"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-1"
     },
     {
       "package_id": "PKG-Q04",
@@ -64,7 +83,20 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าที่ถือ flag SPEC เรื่องวัสดุฉลาก",
+        "urls": [
+          "https://www.asiancoding.com/knowledge/barcode-label-materials",
+          "https://www.asiancoding.com/brady/labels",
+          "https://www.asiancoding.com/barcode-ribbons"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-Q16",
@@ -92,7 +124,18 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าเดียวบนเว็บที่ถือ flag PRICE",
+        "urls": [
+          "https://www.asiancoding.com/barcode-scanner-price-guide"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-Q17",
@@ -102,7 +145,7 @@
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "REVISE",
-      "board_reason": "ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ",
+      "board_reason": "ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ — มี revision spec พร้อมใช้แล้ว",
       "owner_decision": "ใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับว่ายี่ห้อไหนดีที่สุด",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
@@ -118,7 +161,19 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "สองหน้าที่ถือ flag RANKING",
+        "urls": [
+          "https://www.asiancoding.com/barcode-scanner-comparison",
+          "https://www.asiancoding.com/knowledge/product-comparisons"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-7",
+      "revision_spec": "revision-specs/queue-17.md"
     },
     {
       "package_id": "PKG-Q18",
@@ -146,7 +201,18 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าเดียวบนเว็บที่ถือ flag PRICE",
+        "urls": [
+          "https://www.asiancoding.com/barcode-scanner-price-guide"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-Q21",
@@ -156,7 +222,7 @@
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "REVISE",
-      "board_reason": "ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน",
+      "board_reason": "ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน — มี revision spec พร้อมใช้แล้ว",
       "owner_decision": "ลบตัวเลข 65-70% → 95%+ จนกว่าจะมีหลักฐาน",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
@@ -176,7 +242,24 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าที่ถือ flag NUMBERS หรือ SPEC ซึ่งเป็นที่ที่ตัวเลขแบบนี้ปรากฏ",
+        "urls": [
+          "https://www.asiancoding.com/roi-calculator",
+          "https://www.asiancoding.com/roi-calculator/retail",
+          "https://www.asiancoding.com/roi-calculator/warehouse",
+          "https://www.asiancoding.com/roi-calculator/manufacturing",
+          "https://www.asiancoding.com/roi-calculator/mobility",
+          "https://www.asiancoding.com/industrial-barcode-scanner",
+          "https://www.asiancoding.com/long-range-barcode-scanner"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": "revision-specs/queue-21.md"
     },
     {
       "package_id": "PKG-UNMAPPED-01",
@@ -201,7 +284,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-02",
@@ -226,7 +318,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-03",
@@ -251,7 +352,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-04",
@@ -276,7 +386,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-05",
@@ -301,7 +420,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-06",
@@ -326,7 +454,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-07",
@@ -351,7 +488,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-08",
@@ -376,7 +522,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-09",
@@ -401,7 +556,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-10",
@@ -426,7 +590,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-11",
@@ -451,7 +624,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-12",
@@ -476,7 +658,16 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     },
     {
       "package_id": "PKG-UNMAPPED-13",
@@ -501,7 +692,23 @@
         "owner_approval": "NOT_GRANTED"
       },
       "package_path": null,
-      "intake_required": true
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
     }
-  ]
+  ],
+  "site_findings": {
+    "live_urls": 82,
+    "pages_with_risk_flag": 61,
+    "cannibalization_clusters": 8,
+    "urls_in_clusters": 45,
+    "note": "61 จาก 82 หน้าที่มีอยู่แล้วบนเว็บถือ risk flag อย่างน้อยหนึ่งอย่าง ปัญหาจึงไม่ได้อยู่แค่ 19 แพ็กเกจใหม่ แต่อยู่ที่หน้าเดิมด้วย"
+  }
 }

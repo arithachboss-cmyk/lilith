@@ -8,6 +8,8 @@ node acs-seo/tools/validate.mjs                 # ตรวจทุกแพ็
 node acs-seo/tools/validate.mjs --changed-only  # ข้ามแพ็กเกจที่ไม่เปลี่ยนและเคย PASS
 node acs-seo/tools/validate.mjs --json          # ให้เครื่องอื่นอ่านต่อ
 node acs-seo/tools/validate.mjs --board         # ดู status board
+node acs-seo/tools/redact.mjs <ดราฟต์>          # รายงานข้อความที่ Claim Register ห้าม
+node acs-seo/tools/redact.mjs <ดราฟต์> --fix    # ปิดข้อความ BLOCK โดยทิ้ง marker ไว้ให้เห็น
 node acs-seo/tools/selftest.mjs                 # ตรวจว่า validator ยังจับกติกาได้ครบ
 ```
 
@@ -21,7 +23,8 @@ node acs-seo/tools/selftest.mjs                 # ตรวจว่า validato
 - [ ] ไม่มี `{{placeholder}}` ค้าง
 - [ ] **Metadata** — title 30–60 ตัวอักษร, meta_description 70–160 ตัวอักษร, มี canonical / target_url / page_type / canonical_intent / primary_keyword / intent / action, URL ขึ้นต้นด้วย `https://www.asiancoding.com`
 - [ ] **Internal links** — ทุกลิงก์ต้องมีอยู่จริงใน page inventory
-- [ ] **Sitemap** — `target_url` ต้องอยู่ใน sitemap ปัจจุบัน
+- [ ] **Sitemap** — `target_url` ต้องอยู่ใน sitemap ปัจจุบัน (82 URL ที่ดึงจริงแล้ว)
+- [ ] **Cannibalization** — `target_url` ต้องไม่ตกอยู่ใน cluster ที่ยังไม่มี `canonical_owner`
 - [ ] **Schema** — JSON ถูกต้อง, มี `@context`/`@type`, `name` และ `url` ตรงกับ `meta.json`, ไม่มี `offers`/`price`/`aggregateRating`/`review` ถ้าไม่มีหลักฐาน ACS
 - [ ] **Forbidden words** — ไม่มีคำ BLOCK, คำ EVIDENCE/OWNER ต้องมีหลักฐานรองรับใน `audit.json`
 - [ ] **ความสอดคล้องสถานะ** — `package_status = DRAFT_PENDING_REVIEW`, `publish_allowed = false`, `robots` มี `noindex` ตราบที่ rendering gate ยังไม่ผ่าน
@@ -38,6 +41,8 @@ node acs-seo/tools/selftest.mjs                 # ตรวจว่า validato
 - [ ] ทุก `EVIDENCE_MISSING` มี source จริงแล้วหรือยัง — ถ้ามี ให้ลง `audit.json` พร้อม `source_locator` ระบุหน้า/หัวข้อ
 - [ ] ทุก `OWNER_CONFIRM_MISSING` ได้รับการยืนยันจาก ACS แล้วหรือยัง — ต้อง `owner_confirmed: true`
 - [ ] ทุก `FORBIDDEN_BLOCK` ถูกลบหรือลดระดับคำแล้ว และบันทึกการลบใน `claim_register.md`
+      — ใช้ `tools/redact.mjs --fix` ปิดให้ก่อน แล้วคนเขียนเรียบเรียงประโยคที่มี marker `⟦ลบ …⟧` ใหม่
+      — ห้ามแทนตัวเลขด้วยคำคลุมเครือ ("ดีขึ้นมาก" คือ claim เดิมที่ลบหลักฐานทิ้ง) ให้แทนด้วย **กลไก** ตาม `revision-specs/`
 - [ ] ข้อความที่เหลือไม่ได้ "เลี่ยงคำ" แต่ยังสื่อความหมายเดิม (เช่น เปลี่ยนจาก "ทนทุกสภาพแวดล้อม" เป็น "ทนได้ตามเงื่อนไขที่ระบุในเอกสารผู้ผลิต")
 
 ---
@@ -48,7 +53,9 @@ node acs-seo/tools/selftest.mjs                 # ตรวจว่า validato
 
 - หน้า **P0** (`p0: true` ใน `package_status.json`)
 - **หน้าใหม่** (`action = NEW`)
-- มี **ตัวเลข / ราคา / performance / customer claim** (มี EVIDENCE หรือ OWNER flag ≥ 1)
+- มี **ตัวเลข / ราคา / performance / customer claim** ในเนื้อหา (มี EVIDENCE หรือ OWNER flag ≥ 1)
+- **หน้าปลายทางถือ risk flag** อย่างใดอย่างหนึ่งใน page inventory: `SPEC` `NUMBERS` `PRICE` `CUSTOMER` `RANKING` `PARTNER` `OWNER` `EVIDENCE`
+  — ข้อนี้ทำให้หน้าเดิมที่มีความเสี่ยงอยู่แล้วถูกยกระดับ QA อัตโนมัติ โดยไม่ต้องรอให้คนสังเกตเอง
 
 รายการตรวจ:
 - [ ] ผ่าน T0 และ T1 ครบ

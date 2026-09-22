@@ -17,6 +17,8 @@ const claims = readJson('data/claims.json');
 const board = readJson('data/packages.json');
 const gates = readJson('data/gates.json');
 const queue = readJson('data/keyword_queue.json');
+const inventory = readJson('data/page_inventory.json');
+const clusters = readJson('data/cannibalization_clusters.json');
 
 /* ---------- 00 Source Pack Index ---------- */
 {
@@ -131,4 +133,54 @@ const queue = readJson('data/keyword_queue.json');
   writeFileSync(join(ROOT, 'governance/02-PACKAGE-STATUS-BOARD.md'), lines.join('\n'));
 }
 
-console.log('rendered: governance/00-SOURCE-PACK-INDEX.md, 01-CLAIM-REGISTER.md, 02-PACKAGE-STATUS-BOARD.md');
+/* ---------- 07 Site Inventory ---------- */
+{
+  const pages = inventory.pages;
+  const tallyType = {};
+  const tallyFlag = {};
+  for (const p of pages) {
+    tallyType[p.page_type] = (tallyType[p.page_type] ?? 0) + 1;
+    for (const f of p.risk_flags) tallyFlag[f] = (tallyFlag[f] ?? 0) + 1;
+  }
+  const flagged = pages.filter((p) => p.risk_flags.length > 0).length;
+  const lines = [
+    BANNER('data/page_inventory.json + data/cannibalization_clusters.json'),
+    '# Site Inventory — หน้าเว็บเดิมของ www.asiancoding.com',
+    '',
+    `ณ วันที่ **${inventory.as_of}** — ${pages.length} URL จาก sitemap จริง`,
+    '',
+    '| ชั้นข้อมูล | สถานะ |',
+    '|---|---|',
+    `| รายชื่อ URL | ${cell(inventory.provenance.urls)} |`,
+    `| ประเภทหน้า + risk flag | ${cell(inventory.provenance.page_type_and_risk_flags)} |`,
+    `| primary intent | ${cell(inventory.provenance.primary_intent)} |`,
+    '',
+    `**แยกตามประเภท:** ${Object.entries(tallyType).sort((a, b) => b[1] - a[1]).map(([k, v]) => `${k} ${v}`).join(' · ')}`,
+    '',
+    `**${flagged} จาก ${pages.length} หน้า (${Math.round((flagged / pages.length) * 100)}%) ถือ risk flag อย่างน้อยหนึ่งอย่าง**`,
+    '',
+    `${Object.entries(tallyFlag).sort((a, b) => b[1] - a[1]).map(([k, v]) => `\`${k}\` ${v}`).join(' · ')}`,
+    '',
+    '## Cannibalization clusters',
+    '',
+    `> ${clusters.rule}`,
+    '',
+    `**${clusters.totals.clusters} cluster · ${clusters.totals.urls_in_clusters} URL · มี canonical owner แล้ว 0**`,
+    '',
+    '| Cluster | หน้าที่ชนกัน | จำนวน | canonical owner | คำตัดสิน |',
+    '|---|---|---|---|---|',
+    ...clusters.clusters.map((c) => `| \`${c.cluster_id}\` ${cell(c.label)} | ${c.competing_urls.map((u) => `\`${u}\``).join(' ')} | **${c.count}** | ${cell(c.canonical_owner)} | ${cell(c.decision)} |`),
+    '',
+    ...clusters.notes.map((n) => `- ${n}`),
+    '',
+    '## หน้าทั้งหมด',
+    '',
+    '| # | Path | ประเภท | รูปแบบ | risk flags | changefreq | priority |',
+    '|---|---|---|---|---|---|---|',
+    ...pages.map((p, i) => `| ${i + 1} | \`${p.path}\` | ${p.page_type} | ${cell(p.page_subtype)} | ${p.risk_flags.length ? p.risk_flags.map((f) => `\`${f}\``).join(' ') : '—'} | ${p.changefreq} | ${p.priority} |`),
+    '',
+  ];
+  writeFileSync(join(ROOT, 'governance/07-SITE-INVENTORY.md'), lines.join('\n'));
+}
+
+console.log('rendered: governance/00-SOURCE-PACK-INDEX.md, 01-CLAIM-REGISTER.md, 02-PACKAGE-STATUS-BOARD.md, 07-SITE-INVENTORY.md');

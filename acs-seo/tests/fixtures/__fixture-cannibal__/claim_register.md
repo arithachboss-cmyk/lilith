@@ -1,4 +1,4 @@
-# Claim Register — __fixture-clean__
+# Claim Register — __fixture-cannibal__
 
 | # | ข้อความในบทความ | claim_id | ประเภท | source_id | สถานะหลักฐาน | การตัดสินใจ |
 |---|---|---|---|---|---|---|

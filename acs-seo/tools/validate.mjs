@@ -44,6 +44,8 @@ const SITE_ORIGIN = 'https://www.asiancoding.com';
 const EVIDENCE_AUTHORITIES = new Set(['OFFICIAL_VENDOR', 'STANDARDS_BODY']);
 const OWNER_AUTHORITIES = new Set(['ACS_INTERNAL']);
 const SCHEMA_COMMERCIAL_KEYS = ['offers', 'price', 'priceSpecification', 'aggregateRating', 'review'];
+/** risk flag ของหน้าที่บังคับให้ต้อง QA เต็ม — ตรงกับกติกา "หน้าที่มีตัวเลข/ราคา/performance/customer claim" */
+const FULL_QA_FLAGS = new Set(['SPEC', 'NUMBERS', 'PRICE', 'CUSTOMER', 'RANKING', 'PARTNER', 'OWNER', 'EVIDENCE']);
 
 const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
@@ -53,11 +55,18 @@ const forbidden = readJson(join(DATA_DIR, 'forbidden_terms.json'));
 const inventory = readJson(join(DATA_DIR, 'page_inventory.json'));
 const sitemap = readJson(join(DATA_DIR, 'sitemap_urls.json'));
 const gates = readJson(join(DATA_DIR, 'gates.json'));
+const clusterDoc = readJson(join(DATA_DIR, 'cannibalization_clusters.json'));
 
 const sourceById = new Map(sources.sources.map((s) => [s.id, s]));
 const claimById = new Map(claimsDoc.claims.map((c) => [c.id, c]));
 const rules = forbidden.rules.map((r) => ({ ...r, re: new RegExp(r.pattern, 'giu') }));
 const inventoryUrls = new Set((inventory.pages ?? []).map((p) => p.url));
+const inventoryByUrl = new Map((inventory.pages ?? []).map((p) => [p.url, p]));
+/** path -> cluster ที่ยังไม่มี canonical owner */
+const clusterByPath = new Map();
+for (const c of clusterDoc.clusters ?? []) {
+  for (const path of c.competing_urls) clusterByPath.set(path, c);
+}
 const sitemapUrls = new Set(sitemap.urls ?? []);
 
 const CACHE_PATH = opt('cache', join(ROOT, 'tools/.qa-cache.json'));
@@ -185,6 +194,15 @@ function checkPackage(dir) {
     }
   }
 
+  // --- cannibalization: ห้ามยิง intent ของ cluster ที่ยังไม่มีเจ้าของ canonical
+  const targetPath = meta.target_url ? String(meta.target_url).replace(SITE_ORIGIN, '') || '/' : null;
+  const cluster = targetPath ? clusterByPath.get(targetPath) : null;
+  if (cluster && !cluster.canonical_owner) {
+    const detail = `${cluster.cluster_id} ${cluster.label} — ${cluster.count} URL เดิมชน intent เดียวกัน และยังไม่มี canonical_owner`;
+    if (meta.action === 'NEW') add('FAIL', 'CANNIBAL_UNRESOLVED', `ห้ามสร้างหน้าใหม่ใน cluster นี้: ${detail}`);
+    else add('FAIL', 'CANNIBAL_NO_OWNER', `target_url อยู่ใน cluster ที่ยังไม่ตัดสิน: ${detail}`);
+  }
+
   // --- schema
   if (!schema['@context'] || !schema['@type']) add('FAIL', 'SCHEMA_SHAPE', 'schema.jsonld ต้องมี @context และ @type');
   if (schema.url && meta.canonical && schema.url !== meta.canonical) add('FAIL', 'SCHEMA_URL_MISMATCH', 'schema.url ไม่ตรงกับ meta.canonical');
@@ -236,8 +254,10 @@ function checkPackage(dir) {
   // --- ระดับ QA ที่ต้องใช้
   const isP0 = status.p0 === true;
   const isNew = meta.action === 'NEW';
+  const targetPage = meta.target_url ? inventoryByUrl.get(meta.target_url) : null;
+  const pageRiskFlags = (targetPage?.risk_flags ?? []).filter((f) => FULL_QA_FLAGS.has(f));
   let tier;
-  if (isP0 || isNew || evidenceFlags > 0 || ownerFlags > 0) tier = 'T2_FULL';
+  if (isP0 || isNew || evidenceFlags > 0 || ownerFlags > 0 || pageRiskFlags.length > 0) tier = 'T2_FULL';
   else if ((status.flagged_claims ?? []).length > 0) tier = 'T1_CLAIM';
   else tier = 'WORDING_QA_OK';
 
@@ -248,6 +268,7 @@ function checkPackage(dir) {
     tier,
     evidence_flags: evidenceFlags,
     owner_flags: ownerFlags,
+    page_risk_flags: pageRiskFlags,
     findings,
     status: hasFail ? 'FAIL' : blocked ? 'BLOCKED_ON_SOURCE' : 'PASS',
   };

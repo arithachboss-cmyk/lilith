@@ -1,6 +1,6 @@
 {
-  "version": "1.0.0",
-  "as_of": "2026-09-20",
+  "version": "2.0.0",
+  "as_of": "2026-09-22",
   "gates": {
     "GATE-RENDER": {
       "name": "Rendering Gate (SSR / prerender)",
@@ -8,15 +8,22 @@
       "owner": "Manus",
       "evidence_source": "SRC-WEB-003",
       "rule": "www.asiancoding.com ยังเป็น client-side rendered — ห้ามนับว่าแพ็กเกจใด 'พร้อม SEO' หรือคาดหวัง index จนกว่า SSR/prerender path จะผ่านและมีหลักฐาน",
-      "unblocks": "ทุกแพ็กเกจ (global gate)"
+      "unblocks": "ทุกแพ็กเกจ (global gate)",
+      "note": "PR #1 รายงานว่าทดสอบเมื่อ 2026-09-22 แล้วพบว่า crawler ที่ไม่รัน JavaScript ได้รับกลับมาแค่ <title> ไม่มีเนื้อหาใน body — บันทึกไว้เป็นข้อสังเกตจาก session นั้น session นี้ยืนยันซ้ำไม่ได้เพราะ egress ไปยังโดเมนถูกบล็อก สถานะจึงคง FAIL ซึ่งเป็นค่าที่ปลอดภัยอยู่แล้ว"
     },
     "GATE-CANNIBAL": {
       "name": "Cannibalization Gate",
-      "status": "BLOCKED_ON_SOURCE",
+      "status": "OPEN_WITH_FINDINGS",
       "owner": "SEO Lead",
-      "evidence_source": "SRC-WEB-002",
-      "rule": "ต้องมี page inventory จริงก่อน จึงจะตัดสิน ENRICH / NEW+canonical intent / HOLD ได้ — ห้ามเขียนแพ็กเกจใหม่ก่อนผ่าน gate นี้",
-      "unblocks": "ต่อแพ็กเกจ"
+      "evidence_source": "SRC-WEB-004",
+      "rule": "page inventory และ cluster map พร้อมแล้ว — พบ 8 cluster ที่หน้าเดิมชนกันเอง 45 URL ห้ามเขียนแพ็กเกจใหม่ที่ยิง intent ของ cluster ใด จนกว่า cluster นั้นจะมี canonical owner ที่ Owner ระบุชื่อ",
+      "unblocks": "ต่อแพ็กเกจ",
+      "findings": {
+        "clusters": 8,
+        "urls_in_clusters": 45,
+        "largest_cluster": "C-1 (10 URL บน head term เชิงพาณิชย์เดียว)",
+        "clusters_with_canonical_owner": 0
+      }
     },
     "GATE-OWNER-APPROVAL": {
       "name": "Owner QA Approval",

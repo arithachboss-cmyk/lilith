@@ -2,7 +2,7 @@
 
 # Package Status Board
 
-ณ วันที่ **2026-09-20** — 19 รายการ (Owner แจ้งไว้ 19)
+ณ วันที่ **2026-09-22** — 19 รายการ (Owner แจ้งไว้ 19)
 
 > ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic
 
@@ -12,12 +12,12 @@
 
 | Package | Queue | Board | Package status | QA tier | Flagged claims | ติดที่ source | เหตุผล |
 |---|---|---|---|---|---|---|---|
-| `PKG-Q03` | #3 | **HOLD** | DRAFT_PENDING_REVIEW | T2_FULL | — | `GATE-CANNIBAL` | Cannibalization — ต้อง map intent ให้เสร็จก่อน 2026-09-24 |
+| `PKG-Q03` | #3 | **HOLD** | DRAFT_PENDING_REVIEW | T2_FULL | — | `SRC-WEB-004` | Cannibalization — อยู่ใน cluster C-1 ซึ่งมี 10 URL เดิมยิง head term เชิงพาณิชย์เดียวกัน ต้อง map intent ให้เสร็จก่อน 2026-09-24 |
 | `PKG-Q04` | #4 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-002`, `CLM-E-004`, `CLM-E-005`, `CLM-S-002` | `SRC-VEN-001` | wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน |
 | `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date |
-| `PKG-Q17` | #17 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | — | ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ |
+| `PKG-Q17` | #17 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | — | ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q18` | #18 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date |
-| `PKG-Q21` | #21 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-001`, `CLM-E-001`, `CLM-E-002`, `CLM-E-003` | `SRC-VEN-002` | ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน |
+| `PKG-Q21` | #21 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-001`, `CLM-E-001`, `CLM-E-002`, `CLM-E-003` | `SRC-VEN-002` | ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน — มี revision spec พร้อมใช้แล้ว |
 | `PKG-UNMAPPED-01` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-UNMAPPED-02` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-UNMAPPED-03` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
@@ -45,14 +45,14 @@
 
 ## คำถามค้าง
 
-- Owner แจ้ง 19 packages แต่หมายเลข queue ที่อ้างถึงสูงสุดคือ #21 — ต้องยืนยันว่า queue ID กับจำนวนแพ็กเกจ map กันอย่างไร ระหว่างที่ยังไม่ยืนยัน 13 รายการถูกตั้งเป็น PKG-UNMAPPED-XX
+- Owner แจ้ง 19 packages แต่หมายเลข queue ที่อ้างถึงสูงสุดคือ #21 — ต้องยืนยันว่า queue ID กับจำนวนแพ็กเกจ map กันอย่างไร ระหว่างที่ยังไม่ยืนยัน 13 รายการถูกตั้งเป็น PKG-UNMAPPED-XX · ตอนนี้มี page inventory จริง 82 หน้าแล้ว การจับคู่ queue กับ target URL จึงทำได้ทันทีที่ได้ keyword queue ฉบับเต็ม
 
 ## สถานะ gate ส่วนกลาง
 
 | Gate | สถานะ | ผู้รับผิดชอบ | หลักฐานที่ต้องมี |
 |---|---|---|---|
 | `GATE-RENDER` Rendering Gate (SSR / prerender) | **FAIL** | Manus | `SRC-WEB-003` |
-| `GATE-CANNIBAL` Cannibalization Gate | **BLOCKED_ON_SOURCE** | SEO Lead | `SRC-WEB-002` |
+| `GATE-CANNIBAL` Cannibalization Gate | **OPEN_WITH_FINDINGS** | SEO Lead | `SRC-WEB-004` |
 | `GATE-OWNER-APPROVAL` Owner QA Approval | **NOT_GRANTED** | ACS Owner | — |
 
 ## เงื่อนไขก่อน publish (ต้องครบทุกข้อ)

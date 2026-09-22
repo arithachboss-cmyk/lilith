@@ -1,4 +1,4 @@
-# Brief — __fixture-clean__
+# Brief — __fixture-cannibal__
 
 - **Queue ID:** fixture
 - **Keyword หลัก:** บาร์โค้ด 1d 2d

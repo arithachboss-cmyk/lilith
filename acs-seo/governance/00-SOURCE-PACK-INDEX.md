@@ -2,11 +2,11 @@
 
 # ACS SEO Source Pack Index
 
-ณ วันที่ **2026-09-20** — แหล่งข้อมูลกลางที่ทุก claim ต้อง map กลับมาได้
+ณ วันที่ **2026-09-22** — แหล่งข้อมูลกลางที่ทุก claim ต้อง map กลับมาได้
 
 > ทุก claim ที่ไม่ใช่ SAFE_WORDING ต้อง map กับ source_id ที่มีสถานะ SUPPLIED เท่านั้น ห้ามใช้ source ที่ยัง NOT_SUPPLIED เป็นหลักฐาน
 
-**สถานะรวม:** SUPPLIED 0 / PARTIAL 1 / NOT_SUPPLIED 11 จากทั้งหมด 12
+**สถานะรวม:** SUPPLIED 1 / PARTIAL 3 / NOT_SUPPLIED 10 จากทั้งหมด 14
 
 | ID | แหล่ง | ระดับความน่าเชื่อถือ | สถานะ | ผู้รับผิดชอบ | ปลดล็อก claim | หมายเหตุ |
 |---|---|---|---|---|---|---|
@@ -14,14 +14,16 @@
 | `SRC-ACS-002` | ACS price list พร้อม effective date | ACS_INTERNAL | **NOT_SUPPLIED** | ACS Owner | `CLM-O-001`, `CLM-B-003` | Owner decision Queue #16/#18: ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่ |
 | `SRC-ACS-003` | เอกสารเคสลูกค้า ACS + หนังสือยินยอมเผยแพร่ | ACS_INTERNAL | **NOT_SUPPLIED** | ACS Owner | `CLM-O-004` | ต้องมีทั้งเอกสารและ consent จึงจะอ้างเคสได้ |
 | `SRC-ACS-004` | ACS company profile (ปีที่ก่อตั้ง, พื้นที่ให้บริการ, ทีมบริการ, SLA) | ACS_INTERNAL | **NOT_SUPPLIED** | ACS Owner | `CLM-O-005`, `CLM-O-006`, `CLM-O-007` | — |
-| `SRC-WEB-001` | sitemap.xml ปัจจุบันของ www.asiancoding.com | OWN_SITE | **NOT_SUPPLIED** | ACS Owner / Web | `GATE-MECH-SITEMAP` | ต้อง export เป็นไฟล์เข้ามาใน data/ เพื่อให้ validator เช็ก target_url ได้จริง |
-| `SRC-WEB-002` | Page inventory ของหน้าเว็บเดิม + ประเภท Product / Service / Knowledge / Landing | OWN_SITE | **NOT_SUPPLIED** | SEO Lead | `GATE-CANNIBAL`, `GATE-MECH-INTERNAL-LINKS` | ไฟล์ schema ถูกเตรียมไว้แล้วแต่ยังไม่มีข้อมูลจริง (pages: []) |
+| `SRC-WEB-001` | sitemap.xml ปัจจุบันของ www.asiancoding.com | OWN_SITE | **SUPPLIED** | ACS Owner / Web | `GATE-MECH-SITEMAP` | ดึงจริงเมื่อ 2026-09-22 ได้ 82 URL ตรงกับชุดที่ PR #1 เก็บไว้ 2026-09-20 ทุกเส้น · sitemap ไม่มี lastmod เลย มีแค่ changefreq/priority |
+| `SRC-WEB-002` | Page inventory ของหน้าเว็บเดิม + ประเภท Product / Service / Knowledge / Landing | OWN_SITE | **PARTIAL** | SEO Lead | `GATE-CANNIBAL`, `GATE-MECH-INTERNAL-LINKS` | URL ทั้ง 82 เป็นข้อเท็จจริงแล้ว แต่ page_type และ risk flag เป็นการอนุมานจากโครงสร้าง URL ยังรอ Owner ยืนยัน · primary_intent ยังว่างทุกหน้า |
 | `SRC-WEB-003` | รายงาน rendering mode ปัจจุบัน (CSR/SSR/prerender) โดย Manus | OWN_SITE | **NOT_SUPPLIED** | Manus | `GATE-RENDER` | เว็บยัง client-side rendered — ห้ามนับว่า 'พร้อม SEO' จนกว่า gate นี้ผ่าน |
-| `SRC-KW-001` | Keyword queue ทั้งหมด (keyword, intent, target URL, NEW/ENRICH/HOLD) | ACS_INTERNAL | **PARTIAL** | SEO Lead | `GATE-CANNIBAL` | มีเฉพาะ 6 queue ที่ Owner ตัดสินแล้ว (#3,#4,#16,#17,#18,#21) ที่เหลือยังไม่ถูกส่งมา |
+| `SRC-KW-001` | Keyword queue ทั้งหมด (keyword, intent, target URL, NEW/ENRICH/HOLD) | ACS_INTERNAL | **PARTIAL** | SEO Lead | `GATE-CANNIBAL` | มีเฉพาะ 6 queue ที่ Owner ตัดสินแล้ว (#3,#4,#16,#17,#18,#21) ที่เหลือยังไม่ถูกส่งมา — ตอนนี้มี target URL ที่เป็นไปได้จาก page inventory แล้ว แต่ยังต้องให้ Owner จับคู่ |
 | `SRC-VEN-001` | Brady material / label datasheets (ทางการเท่านั้น) | OFFICIAL_VENDOR | **NOT_SUPPLIED** | Content Lead | `CLM-E-004`, `CLM-E-005` | Owner decision Queue #4: ห้ามฟันธงเรื่องวัสดุ/สภาพแวดล้อมถ้าไม่มี datasheet สินค้าจริง |
 | `SRC-VEN-002` | Honeywell hardware datasheets (scanner / mobile computer / printer) | OFFICIAL_VENDOR | **NOT_SUPPLIED** | Content Lead | `CLM-E-001`, `CLM-E-002`, `CLM-E-003`, `CLM-E-007`, `CLM-E-008` | Owner decision Queue #21: ลบตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ จนกว่าจะมี datasheet |
 | `SRC-VEN-003` | GS1 official specification (GTIN, GS1-128, Application Identifier, DataMatrix) | STANDARDS_BODY | **NOT_SUPPLIED** | Content Lead | `CLM-E-006` | — |
 | `SRC-VEN-004` | แหล่งทางการอื่นของผู้ผลิตที่ ACS เป็นตัวแทน (ต้องขึ้นทะเบียนก่อนใช้) | OFFICIAL_VENDOR | **NOT_SUPPLIED** | Content Lead | — | blog/ร้านค้า/marketplace/บทความ third-party ไม่นับเป็นหลักฐาน |
+| `SRC-VEN-005` | TSC printer datasheets (ทางการเท่านั้น) | OFFICIAL_VENDOR | **NOT_SUPPLIED** | Content Lead | `CLM-E-003`, `CLM-E-008` | เว็บมีหน้า /tsc-barcode-printer อยู่จริง TSC จึงเป็นแบรนด์ที่ต้องมีแหล่งอ้างอิงเช่นเดียวกับ Brady และ Honeywell |
+| `SRC-WEB-004` | Cannibalization cluster map ของหน้าเว็บเดิม | OWN_SITE | **PARTIAL** | SEO Lead | `GATE-CANNIBAL` | รายชื่อ URL ในแต่ละ cluster ตรวจกับ sitemap จริงแล้วทุกเส้น · การจัดกลุ่ม intent ยังรอ Owner ยืนยัน และยังไม่มี cluster ใดมี canonical owner |
 
 ## แหล่งที่ยอมรับเป็นหลักฐานได้
 

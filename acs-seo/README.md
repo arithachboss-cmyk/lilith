@@ -19,6 +19,8 @@
 | คนเขียน/คน QA | [`governance/03-QA-CHECKLIST.md`](governance/03-QA-CHECKLIST.md) |
 | ก่อนเขียนทุกแพ็กเกจ | [`governance/05-CANNIBALIZATION-GATE.md`](governance/05-CANNIBALIZATION-GATE.md) |
 | ก่อนคาดหวัง index | [`governance/06-RENDERING-GATE.md`](governance/06-RENDERING-GATE.md) |
+| หน้าเว็บเดิม 82 หน้า + cluster ที่ชนกัน | [`governance/07-SITE-INVENTORY.md`](governance/07-SITE-INVENTORY.md) |
+| วิธีแก้ Q17 / Q21 แบบลงมือได้เลย | [`revision-specs/`](revision-specs/) |
 
 ## คำสั่ง
 
@@ -27,7 +29,8 @@ node acs-seo/tools/validate.mjs                  # mechanical check ทุกแ
 node acs-seo/tools/validate.mjs --changed-only   # ข้ามแพ็กเกจที่ไม่เปลี่ยนและเคย PASS
 node acs-seo/tools/validate.mjs --fixtures       # รวม fixture ทดสอบ (ต้องได้ FAIL 1, BLOCKED 1)
 node acs-seo/tools/validate.mjs --board          # พิมพ์ status board
-node acs-seo/tools/selftest.mjs                  # ตรวจว่า validator ยังจับกติกาได้ครบ (22 ข้อ)
+node acs-seo/tools/redact.mjs <ดราฟต์> --fix     # ปิดข้อความที่ Claim Register ห้าม (ทิ้ง marker ไว้)
+node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (59 ข้อ)
 node acs-seo/tools/render-docs.mjs               # สร้างเอกสาร 00/01/02 ใหม่จาก data/
 ```
 
@@ -44,13 +47,14 @@ acs-seo/
 │   ├── forbidden_terms.json  กฎคำต้องห้าม 14 ข้อ ผูกกับคำตัดสินของ Owner
 │   ├── packages.json         status board 19 แพ็กเกจ
 │   ├── keyword_queue.json    keyword queue (PARTIAL)
-│   ├── page_inventory.json   inventory หน้าเว็บเดิม (ว่าง รอข้อมูล)
-│   ├── sitemap_urls.json     sitemap ปัจจุบัน (ว่าง รอข้อมูล)
+│   ├── page_inventory.json   inventory 82 หน้า + ประเภท + risk flag
+│   ├── sitemap_urls.json     sitemap จริง 82 URL (ดึงแล้ว)
+│   ├── cannibalization_clusters.json  8 cluster ที่หน้าเดิมชนกัน
 │   └── gates.json            สถานะ gate ส่วนกลาง
 ├── templates/package/ เทมเพลต 7 ไฟล์มาตรฐานของหนึ่งแพ็กเกจ
 ├── content-packages/  แพ็กเกจจริง (ยังว่าง)
 ├── tests/fixtures/    fixture ทดสอบ validator (ไม่ใช่เนื้อหาเผยแพร่)
-└── tools/             validate.mjs, render-docs.mjs
+└── tools/             validate.mjs, redact.mjs, render-docs.mjs, selftest.mjs
 ```
 
 ## วิธีสร้างแพ็กเกจใหม่
@@ -75,6 +79,8 @@ node acs-seo/tools/validate.mjs
 - `robots` ที่เปิด index ทั้งที่ rendering gate ยังไม่ผ่าน
 - `publish_allowed: true` หรือสถานะที่หลุดจาก `DRAFT_PENDING_REVIEW` โดยไม่มีลายเซ็น Owner
 - claim ID หรือ source ID ที่ไม่มีอยู่จริงในทะเบียนกลาง
+- `target_url` ที่ไม่มีอยู่จริงใน sitemap ของเว็บ
+- หน้าใหม่ที่ยิง intent ของ cluster ที่ยังไม่มีหน้าหลัก — *8 cluster, 45 URL*
 
 สิ่งที่ตรวจไม่ได้เพราะยังไม่มีข้อมูล จะถูกรายงานเป็น `BLOCKED_ON_SOURCE` — **ไม่ใช่ PASS**
 
