@@ -1,5 +1,5 @@
 {
-  "version": "1.0.0",
+  "version": "3.0.0",
   "as_of": "2026-09-22",
   "derived_from": "SRC-WEB-001",
   "provenance": "FACT สำหรับรายชื่อ URL (ยืนยันกับ sitemap จริงแล้วทุกเส้น) · RECOMMENDATION สำหรับการจัดกลุ่ม intent — มาจาก PR #1 ยังไม่ได้รับการยืนยันจาก Owner",
@@ -30,7 +30,88 @@
       "canonical_owner": null,
       "decision": null,
       "decided_by": null,
-      "decided_on": null
+      "decided_on": null,
+      "page_roles_source": "FACT — title ของแต่ละหน้าดึงมาแบบ verbatim เมื่อ 2026-09-22 ด้วย crawler ที่ไม่รัน JavaScript บางรายการจึงถูกตัดสั้น เพราะเว็บส่งกลับมาแค่ <title> ไม่มี body",
+      "pages": [
+        {
+          "url": "/barcode-scanners",
+          "title": "Barcode Scanner Categories | เครื่องส…",
+          "sitemap_priority": 0.9,
+          "modifier_in_title": null,
+          "role": "GENERIC"
+        },
+        {
+          "url": "/barcode-scanner-thailand",
+          "title": "Barcode Scanner | เครื่องสแกนบา…",
+          "sitemap_priority": 0.9,
+          "modifier_in_title": null,
+          "role": "GENERIC"
+        },
+        {
+          "url": "/เครื่องสแกนบาร์โค้ด",
+          "title": "เครื่องสแกนบาร์โค้ด | …",
+          "sitemap_priority": 0.9,
+          "modifier_in_title": null,
+          "role": "GENERIC"
+        },
+        {
+          "url": "/industrial-barcode-scanner",
+          "title": "Industrial Barcode Scanner | โรงง…",
+          "sitemap_priority": 0.9,
+          "modifier_in_title": "environment: industrial",
+          "role": "MODIFIER"
+        },
+        {
+          "url": "/wireless-barcode-scanner",
+          "title": "Wireless Barcode Scanner | เครื่องสแก…",
+          "sitemap_priority": 0.9,
+          "modifier_in_title": "connectivity: wireless",
+          "role": "MODIFIER"
+        },
+        {
+          "url": "/2d-barcode-scanner",
+          "title": "2D Barcode Scanner | เครื่องสแกน…",
+          "sitemap_priority": 0.8,
+          "modifier_in_title": "symbology: 2D",
+          "role": "MODIFIER"
+        },
+        {
+          "url": "/long-range-barcode-scanner",
+          "title": "Long Range Barcode Scanner | ACS",
+          "sitemap_priority": 0.8,
+          "modifier_in_title": "range: long range",
+          "role": "MODIFIER"
+        },
+        {
+          "url": "/warehouse-barcode-scanner",
+          "title": "Warehouse Barcode Scanner | คลังส…",
+          "sitemap_priority": 0.8,
+          "modifier_in_title": "use case: warehouse",
+          "role": "MODIFIER"
+        },
+        {
+          "url": "/retail-barcode-scanner",
+          "title": "Retail Barcode Scanner | ร้านค…",
+          "sitemap_priority": 0.8,
+          "modifier_in_title": "use case: retail",
+          "role": "MODIFIER"
+        },
+        {
+          "url": "/honeywell-barcode-scanner",
+          "title": "Honeywell Barcode Scanner Reference | ACS",
+          "sitemap_priority": 0.9,
+          "modifier_in_title": "brand: Honeywell",
+          "role": "MODIFIER"
+        }
+      ],
+      "finding": "ไม่ใช่ 10 หน้าแย่ง intent เดียวกันอย่างที่บันทึกไว้ตอนแรก — 7 หน้าถือ modifier จริงใน title ของตัวเอง (แบรนด์ สภาพแวดล้อม การเชื่อมต่อ use case symbology ระยะ) เหลือ 3 หน้าที่ไม่มี modifier เลย ซึ่งคือการชนกันจริง การตัดสินจึงเป็นการเลือก 1 ใน 3 ไม่ใช่ 1 ใน 10",
+      "generic_urls": [
+        "/barcode-scanners",
+        "/barcode-scanner-thailand",
+        "/เครื่องสแกนบาร์โค้ด"
+      ],
+      "decision_document": "revision-specs/queue-3-intent-map.md",
+      "decision_due": "2026-09-24"
     },
     {
       "cluster_id": "C-2",
@@ -150,7 +231,10 @@
     "urls_in_clusters": 45
   },
   "notes": [
-    "C-1 หนักที่สุด: 10 URL ยิง head term เชิงพาณิชย์เดียวกัน — Queue #3 ที่ Owner สั่ง HOLD อยู่ใน cluster นี้",
-    "C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว"
+    "C-1 ถูกวิเคราะห์ละเอียดแล้วใน revision-specs/queue-3-intent-map.md — เหลือการตัดสินใจเดียวคือ /barcode-scanner-thailand จะ redirect, re-scope เป็นหน้า geo จริง หรือปลดระวาง",
+    "/barcode-scanner-thailand มี URL ของหน้า geo แต่ title เป็นหน้า generic — เป็นหน้าที่แย่ง head term อยู่จริงทั้งที่ URL บอกว่าแคบกว่านั้น",
+    "/barcode-scanners กับ /เครื่องสแกนบาร์โค้ด คือ intent เดียวกันคนละภาษา และ sitemap ไม่มี hreflang ผูกไว้ สองภาษาที่ไม่มี hreflang จะถูกอ่านเป็นหน้าซ้ำ ไม่ใช่หน้าคู่กัน",
+    "C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว",
+    "ยังไม่มีข้อมูลอันดับหรือ traffic ของหน้าใดเลย (Ahrefs และ OpenRush ตอบว่าแผนไม่พอ) ข้อเสนอทั้งหมดจึงอยู่บน intent ที่ประกาศไว้ ไม่ใช่ผลที่วัดได้"
   ]
 }

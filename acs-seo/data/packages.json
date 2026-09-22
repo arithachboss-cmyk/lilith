@@ -19,7 +19,7 @@
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "HOLD",
-      "board_reason": "Cannibalization — อยู่ใน cluster C-1 ซึ่งมี 10 URL เดิมยิง head term เชิงพาณิชย์เดียวกัน ต้อง map intent ให้เสร็จก่อน 2026-09-24",
+      "board_reason": "Cannibalization — intent map เสร็จแล้ว เหลือคำตัดสินเดียว: /barcode-scanner-thailand จะ redirect, re-scope เป็นหน้า geo จริง หรือปลดระวาง กำหนด 2026-09-24",
       "owner_decision": "HOLD จนกว่าจะ map intent เสร็จ",
       "qa_tier": "T2_FULL",
       "flagged_claims": [],
@@ -53,7 +53,8 @@
         ],
         "owner_confirmed": false
       },
-      "cannibalization_cluster": "C-1"
+      "cannibalization_cluster": "C-1",
+      "revision_spec": "revision-specs/queue-3-intent-map.md"
     },
     {
       "package_id": "PKG-Q04",

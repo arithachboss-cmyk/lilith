@@ -91,6 +91,14 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   check('ทุก URL ใน cannibalization cluster มีอยู่จริงในเว็บ', orphan.length === 0, orphan.join(', '));
   check('นับ cluster ได้ตรงกับที่ประกาศไว้',
     clusters.clusters.every((c) => c.competing_urls.length === c.count));
+  const c1 = clusters.clusters.find((c) => c.cluster_id === 'C-1');
+  check('C-1 มีข้อมูล role ของทุกหน้าครบ', (c1.pages ?? []).length === c1.count);
+  check('C-1 แยก generic ออกจาก modifier ได้ 3 ต่อ 7',
+    c1.generic_urls.length === 3 && c1.pages.filter((p) => p.role === 'MODIFIER').length === 7);
+  check('ทุกหน้าใน C-1 ที่เป็น GENERIC อยู่ใน generic_urls',
+    c1.pages.filter((p) => p.role === 'GENERIC').every((p) => c1.generic_urls.includes(p.url)));
+  check('C-1 ชี้ไปยังเอกสารตัดสินใจและกำหนดเวลา',
+    c1.decision_document === 'revision-specs/queue-3-intent-map.md' && c1.decision_due === '2026-09-24');
   check('page_type ของทุกหน้าอยู่ใน enum',
     inv.pages.every((p) => inv.page_type_enum.includes(p.page_type)));
   check('risk flag ของทุกหน้าอยู่ใน enum',

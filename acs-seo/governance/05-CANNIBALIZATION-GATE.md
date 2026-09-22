@@ -35,7 +35,7 @@
 | C-6 | Retail | 4 |
 | C-8 | Partner ecosystem | 2 |
 
-- **C-1 หนักที่สุด** — 10 URL ยิง head term เดียวกัน Queue #3 ที่ Owner สั่ง HOLD อยู่ใน cluster นี้
+- **C-1 วิเคราะห์ละเอียดแล้ว** — จาก 10 URL มี 7 หน้าที่ถือ modifier จริงใน title ของตัวเอง เหลือ 3 หน้าที่ชนกันจริง และในสามนั้นสองหน้าคือภาษาไทยกับอังกฤษของ intent เดียวกันที่ควรผูก hreflang เหลือคำตัดสินเดียวคือ `/barcode-scanner-thailand` — ครบกำหนด **2026-09-24** ดู [`../revision-specs/queue-3-intent-map.md`](../revision-specs/queue-3-intent-map.md)
 - **C-8 ถูกที่สุด** — 2 URL ที่ดูจะพูดเรื่องเดียวกัน แก้ด้วย redirect เส้นเดียว
 
 ## กติกาที่ห้ามละเมิด

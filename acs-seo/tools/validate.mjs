@@ -208,7 +208,13 @@ function checkPackage(dir) {
   const targetPath = meta.target_url ? String(meta.target_url).replace(SITE_ORIGIN, '') || '/' : null;
   const cluster = targetPath ? clusterByPath.get(targetPath) : null;
   if (cluster && !cluster.canonical_owner) {
-    const detail = `${cluster.cluster_id} ${cluster.label} — ${cluster.count} URL เดิมชน intent เดียวกัน และยังไม่มี canonical_owner`;
+    const generic = cluster.generic_urls;
+    const scope = generic
+      ? `${cluster.count} URL ในกลุ่ม แต่ที่ชนกันจริงคือ ${generic.length} หน้าที่ไม่มี modifier (${generic.join(', ')})`
+      : `${cluster.count} URL เดิมชน intent เดียวกัน`;
+    const due = cluster.decision_due ? ` · กำหนดตัดสิน ${cluster.decision_due}` : '';
+    const doc = cluster.decision_document ? ` · ดู ${cluster.decision_document}` : '';
+    const detail = `${cluster.cluster_id} ${cluster.label} — ${scope} และยังไม่มี canonical_owner${due}${doc}`;
     if (meta.action === 'NEW') add('FAIL', 'CANNIBAL_UNRESOLVED', `ห้ามสร้างหน้าใหม่ใน cluster นี้: ${detail}`);
     else add('FAIL', 'CANNIBAL_NO_OWNER', `target_url อยู่ใน cluster ที่ยังไม่ตัดสิน: ${detail}`);
   }

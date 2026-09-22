@@ -33,8 +33,11 @@
 | `C-7` Scanner selection / comparison | `/barcode-scanner-comparison` `/knowledge/product-comparisons` `/knowledge/how-to-choose-barcode-scanner` `/knowledge/wired-vs-wireless-barcode-scanner` `/select-solution` | **5** | — | — |
 | `C-8` Partner ecosystem | `/partner-ecosystem-hub` `/why-acs/partner-ecosystem` | **2** | — | — |
 
-- C-1 หนักที่สุด: 10 URL ยิง head term เชิงพาณิชย์เดียวกัน — Queue #3 ที่ Owner สั่ง HOLD อยู่ใน cluster นี้
+- C-1 ถูกวิเคราะห์ละเอียดแล้วใน revision-specs/queue-3-intent-map.md — เหลือการตัดสินใจเดียวคือ /barcode-scanner-thailand จะ redirect, re-scope เป็นหน้า geo จริง หรือปลดระวาง
+- /barcode-scanner-thailand มี URL ของหน้า geo แต่ title เป็นหน้า generic — เป็นหน้าที่แย่ง head term อยู่จริงทั้งที่ URL บอกว่าแคบกว่านั้น
+- /barcode-scanners กับ /เครื่องสแกนบาร์โค้ด คือ intent เดียวกันคนละภาษา และ sitemap ไม่มี hreflang ผูกไว้ สองภาษาที่ไม่มี hreflang จะถูกอ่านเป็นหน้าซ้ำ ไม่ใช่หน้าคู่กัน
 - C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว
+- ยังไม่มีข้อมูลอันดับหรือ traffic ของหน้าใดเลย (Ahrefs และ OpenRush ตอบว่าแผนไม่พอ) ข้อเสนอทั้งหมดจึงอยู่บน intent ที่ประกาศไว้ ไม่ใช่ผลที่วัดได้
 
 ## หน้าทั้งหมด
 
