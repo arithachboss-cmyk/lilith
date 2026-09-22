@@ -15,6 +15,7 @@
  */
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
+import { checkPackageEvidence } from './evidence-check.mjs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -24,6 +25,10 @@ const argv = new Set(rawArgs.filter((a) => !a.includes('=')));
 const opt = (name, fallback) => {
   const hit = rawArgs.find((a) => a.startsWith(`--${name}=`));
   return hit ? resolve(hit.slice(name.length + 3)) : fallback;
+};
+const opt2 = (name) => {
+  const hit = rawArgs.find((a) => a.startsWith(`--${name}=`));
+  return hit ? hit.slice(name.length + 3) : undefined;
 };
 /** --data-dir= และ --cache= ใช้สำหรับ selftest เท่านั้น การใช้งานปกติไม่ต้องส่ง */
 const DATA_DIR = opt('data-dir', join(ROOT, 'data'));
@@ -56,6 +61,11 @@ const inventory = readJson(join(DATA_DIR, 'page_inventory.json'));
 const sitemap = readJson(join(DATA_DIR, 'sitemap_urls.json'));
 const gates = readJson(join(DATA_DIR, 'gates.json'));
 const clusterDoc = readJson(join(DATA_DIR, 'cannibalization_clusters.json'));
+const evidenceCtx = {
+  claimById: new Map(claimsDoc.claims.map((c) => [c.id, c])),
+  sourceById: new Map(sources.sources.map((s) => [s.id, s])),
+};
+const AS_OF = opt2('as-of') ?? new Date().toISOString().slice(0, 10);
 
 const sourceById = new Map(sources.sources.map((s) => [s.id, s]));
 const claimById = new Map(claimsDoc.claims.map((c) => [c.id, c]));
@@ -232,6 +242,11 @@ function checkPackage(dir) {
       }
     }
   }
+
+  // --- หลักฐานครบไหม และราคายังไม่หมดอายุไหม
+  const ev = checkPackageEvidence(dir, AS_OF, evidenceCtx);
+  for (const problem of ev.problems) add('FAIL', 'EVIDENCE_INCOMPLETE', problem.replace(dir + '/', ''));
+  for (const warning of ev.warnings) add('WARN', 'EVIDENCE_EXPIRING', warning.replace(dir + '/', ''));
 
   // --- claim id ที่อ้างถึงต้องมีจริงในทะเบียนกลาง
   const referenced = new Set([

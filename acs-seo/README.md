@@ -30,7 +30,9 @@ node acs-seo/tools/validate.mjs --changed-only   # ข้ามแพ็กเ�
 node acs-seo/tools/validate.mjs --fixtures       # รวม fixture ทดสอบ (ต้องได้ FAIL 1, BLOCKED 1)
 node acs-seo/tools/validate.mjs --board          # พิมพ์ status board
 node acs-seo/tools/redact.mjs <ดราฟต์> --fix     # ปิดข้อความที่ Claim Register ห้าม (ทิ้ง marker ไว้)
-node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (59 ข้อ)
+node acs-seo/tools/evidence-check.mjs <แพ็กเกจ>   # หลักฐานครบไหม ราคาหมดอายุหรือยัง
+node acs-seo/tools/evidence-check.mjs <แพ็กเกจ> --as-of 2027-01-01   # ประเมินล่วงหน้า
+node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (70 ข้อ)
 node acs-seo/tools/render-docs.mjs               # สร้างเอกสาร 00/01/02 ใหม่จาก data/
 ```
 
@@ -54,7 +56,7 @@ acs-seo/
 ├── templates/package/ เทมเพลต 7 ไฟล์มาตรฐานของหนึ่งแพ็กเกจ
 ├── content-packages/  แพ็กเกจจริง (ยังว่าง)
 ├── tests/fixtures/    fixture ทดสอบ validator (ไม่ใช่เนื้อหาเผยแพร่)
-└── tools/             validate.mjs, redact.mjs, render-docs.mjs, selftest.mjs
+└── tools/             validate.mjs, redact.mjs, evidence-check.mjs, render-docs.mjs, selftest.mjs
 ```
 
 ## วิธีสร้างแพ็กเกจใหม่
@@ -81,6 +83,9 @@ node acs-seo/tools/validate.mjs
 - claim ID หรือ source ID ที่ไม่มีอยู่จริงในทะเบียนกลาง
 - `target_url` ที่ไม่มีอยู่จริงใน sitemap ของเว็บ
 - หน้าใหม่ที่ยิง intent ของ cluster ที่ยังไม่มีหน้าหลัก — *8 cluster, 45 URL*
+- **ราคาที่หมดอายุแล้ว** — ราคาทุกรายการต้องมี `valid_until` และ validator จะ FAIL เมื่อเลยวันนั้น
+  เพราะราคาที่ไม่มีวันหมดอายุจะค้างบนหน้าเว็บโดยยังดูเหมือนมีแหล่งอ้างอิง
+- **ตัวเลขจาก datasheet ที่ไม่มีเงื่อนไขการวัด** — ค่าที่วัดที่ 23 °C ไม่ได้อนุญาตให้พูดถึงห้องแช่แข็ง
 
 สิ่งที่ตรวจไม่ได้เพราะยังไม่มีข้อมูล จะถูกรายงานเป็น `BLOCKED_ON_SOURCE` — **ไม่ใช่ PASS**
 

@@ -10,6 +10,7 @@ node acs-seo/tools/validate.mjs --json          # ให้เครื่อง
 node acs-seo/tools/validate.mjs --board         # ดู status board
 node acs-seo/tools/redact.mjs <ดราฟต์>          # รายงานข้อความที่ Claim Register ห้าม
 node acs-seo/tools/redact.mjs <ดราฟต์> --fix    # ปิดข้อความ BLOCK โดยทิ้ง marker ไว้ให้เห็น
+node acs-seo/tools/evidence-check.mjs <แพ็กเกจ>  # หลักฐานครบไหม ราคาหมดอายุหรือยัง
 node acs-seo/tools/selftest.mjs                 # ตรวจว่า validator ยังจับกติกาได้ครบ
 ```
 
@@ -29,8 +30,16 @@ node acs-seo/tools/selftest.mjs                 # ตรวจว่า validato
 - [ ] **Forbidden words** — ไม่มีคำ BLOCK, คำ EVIDENCE/OWNER ต้องมีหลักฐานรองรับใน `audit.json`
 - [ ] **ความสอดคล้องสถานะ** — `package_status = DRAFT_PENDING_REVIEW`, `publish_allowed = false`, `robots` มี `noindex` ตราบที่ rendering gate ยังไม่ผ่าน
 - [ ] **claim ID** — ทุก ID ที่อ้างถึงมีอยู่จริงใน `data/claims.json`
+- [ ] **หลักฐานครบ** — ทุก claim ที่เป็น EVIDENCE_REQUIRED / OWNER_REQUIRED ต้องมี `source_locator` และ source ที่ `SUPPLIED`
+- [ ] **ราคายังไม่หมดอายุ** — `price_evidence.json` ทุกรายการต้องมี `valid_until` ที่ยังไม่ผ่าน และข้อความที่ผู้อ่านเห็นต้องพา `effective_date` ไปด้วย
 
 ถ้า source ที่ใช้ตรวจยังไม่มา validator จะรายงาน `BLOCKED_ON_SOURCE` — **ห้ามตีความว่าผ่าน**
+
+### ต้องรันตามกำหนดเวลา ไม่ใช่แค่ตอนแก้ไฟล์
+
+`evidence-check.mjs` ต้องรันเป็นรอบ (เช่นสัปดาห์ละครั้ง) แม้ไม่มีใครแตะไฟล์เลย
+เพราะราคาหมดอายุด้วยตัวมันเองตามเวลา ไม่ได้หมดอายุเพราะมีคนแก้ไฟล์
+ระบบจะเตือนล่วงหน้า 30 วันก่อนถึงวันหมดอายุ
 
 ---
 

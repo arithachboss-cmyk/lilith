@@ -176,6 +176,43 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   check('หลัง --fix ไม่เหลือข้อความ BLOCK', after.blocked === 0, String(after.blocked));
 }
 
+/* ── 6. หลักฐานครบจริงไหม และราคาหมดอายุหรือยัง ──────────────────
+   ราคาที่ไม่มีวันหมดอายุจะค้างบนหน้าเว็บโดยยังดูเหมือนมีแหล่งอ้างอิง
+   ซึ่งเป็นความเสียหายที่คำตัดสิน Queue #16/#18 ต้องการกันไว้ */
+{
+  const EV = join(ROOT, 'tools/evidence-check.mjs');
+  const F = (name) => join(ROOT, 'tests/fixtures-evidence', name);
+  const runEv = (args) => {
+    try { return { out: execFileSync(process.execPath, [EV, ...args], { encoding: 'utf8' }), code: 0 }; }
+    catch (err) { return { out: String(err.stdout ?? ''), code: err.status }; }
+  };
+
+  const good = runEv([F('price-good')]);
+  check('ราคาที่มีวันที่ครบและยังไม่หมดอายุ ผ่าน', good.code === 0, good.out.trim());
+
+  const stale = runEv([F('price-stale')]);
+  check('ราคาที่หมดอายุแล้วถูก FAIL', stale.code === 1);
+  check('และบอกว่าหมดอายุมากี่วัน', /หมดอายุแล้ว/.test(stale.out));
+
+  const future = runEv([F('price-good'), '--as-of', '2027-01-15']);
+  check('ราคาเดิมกลายเป็น FAIL เมื่อประเมินหลังวันหมดอายุ', future.code === 1);
+
+  const soon = runEv([F('price-good'), '--as-of', '2026-12-10']);
+  check('เตือนล่วงหน้าเมื่อใกล้หมดอายุภายใน 30 วัน โดยยังไม่ FAIL',
+    soon.code === 0 && /จะหมดอายุในอีก/.test(soon.out));
+
+  const noCond = runEv([F('datasheet-no-conditions')]);
+  check('ตัวเลขจาก datasheet ที่ไม่มีเงื่อนไขการวัดถูก FAIL', noCond.code === 1);
+  check('และอธิบายว่าทำไมถึงอันตราย', /เงื่อนไขที่วัดมา/.test(noCond.out));
+
+  // --as-of ต้องไม่กลืน argument ที่เป็นเป้าหมาย (บั๊กที่ PR #1 เจอจาก regression suite ของตัวเอง)
+  const argOrder = runEv([F('price-good'), '--as-of', '2026-10-01']);
+  check('ส่ง --as-of แล้วยังตรวจ target ที่ระบุจริง ไม่ถูกตัดทิ้ง',
+    argOrder.code === 0 && /ตรวจ 1 รายการ/.test(argOrder.out), argOrder.out.trim());
+  const noFlag = runEv([F('price-good')]);
+  check('ไม่ส่ง --as-of ก็ยังตรวจ target ตัวแรกได้', /ตรวจ 1 รายการ/.test(noFlag.out));
+}
+
 rmSync(tmp, { recursive: true, force: true });
 console.log(`\n${failures.length ? `FAILED ${failures.length} ข้อ: ${failures.join(' | ')}` : 'selftest ผ่านทั้งหมด'}`);
 process.exit(failures.length ? 1 : 0);

@@ -1,0 +1,41 @@
+{
+  "_readme": [
+    "หนึ่งรายการต่อหนึ่ง claim ที่ต้องใช้หลักฐานจากผู้ผลิต (CLM-E-xxx)",
+    "",
+    "เงื่อนไขที่วัดมาเป็นฟิลด์บังคับ ค่าที่วัดที่ 23 °C ไม่ได้อนุญาตให้พูดถึงห้องแช่แข็ง",
+    "และค่าที่วัดบนอะลูมิเนียมเรียบไม่ได้อนุญาตให้พูดถึงผิวพ่นสีที่มีลาย",
+    "การลอกตัวเลขมาโดยไม่เอาเงื่อนไขมาด้วย คือวิธีที่ claim ซึ่งมีหลักฐานกลายเป็น claim เท็จ"
+  ],
+  "claim_id": "{{CLM-E-000}}",
+  "package_id": "{{PACKAGE_ID}}",
+  "sentence_verbatim": "",
+  "product": {
+    "vendor": "",
+    "product_line": "",
+    "part_number": "",
+    "_note": "ต้องเป็นสินค้าที่ ACS ขายจริง ซึ่งต้องรอ SRC-ACS-001"
+  },
+  "source": {
+    "document_title": "",
+    "document_uri": "",
+    "revision_or_date": "",
+    "page_or_section": "",
+    "date_checked": "",
+    "checked_by": ""
+  },
+  "measured_conditions": {
+    "temperature": "",
+    "exposure": "",
+    "substrate": "",
+    "duration": "",
+    "test_method": "",
+    "_note": "เว้นว่างได้เฉพาะเมื่อ datasheet เองไม่ได้ระบุ — และเมื่อนั้นข้อความต้องไม่พูดเป็นนัยถึงสิ่งนั้น"
+  },
+  "what_the_source_actually_says": "",
+  "approved_wording_th": "",
+  "approved_wording_en": "",
+  "verdict": "OPEN",
+  "_verdict_values": ["OPEN", "CLEARED", "REVISE", "DELETE"],
+  "reviewer": "",
+  "reviewed_on": ""
+}

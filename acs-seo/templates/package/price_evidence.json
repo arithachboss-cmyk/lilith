@@ -1,0 +1,46 @@
+{
+  "_readme": [
+    "หนึ่งรายการต่อหนึ่งราคา ช่วงราคา ส่วนลด หรือการเปรียบเทียบราคาที่จะเผยแพร่",
+    "",
+    "คำตัดสินของ Owner ไม่ใช่ 'ห้ามใส่ราคาตลอดไป' แต่คือ ห้ามใส่ราคาถ้าไม่มีราคา ACS",
+    "พร้อมวันที่ และ 'วันที่' คือหัวใจ — ราคาที่เผยแพร่โดยไม่มีวันหมดอายุไม่ได้ถูกต้องตลอดไป",
+    "มันจะค้างอยู่บนหน้าเว็บโดยยังดูเหมือนมีแหล่งอ้างอิง valid_until จึงเป็นฟิลด์บังคับ",
+    "และ evidence-check.mjs จะ FAIL รายการที่ valid_until ผ่านไปแล้ว",
+    "",
+    "ขอบเขตเป็นส่วนหนึ่งของราคา '18,500 บาท' ไม่มีความหมายจนกว่าจะบอกว่าต่อเครื่องหรือต่อชุด",
+    "รวม VAT หรือไม่ รวมติดตั้งหรือไม่ และมีขั้นต่ำเท่าไร"
+  ],
+  "claim_id": "CLM-O-001",
+  "package_id": "{{PACKAGE_ID}}",
+  "sentence_verbatim": "",
+  "price": {
+    "amount": null,
+    "amount_max": null,
+    "currency": "THB",
+    "unit": "",
+    "includes_vat": null,
+    "includes_installation": null,
+    "minimum_quantity": null,
+    "other_conditions": ""
+  },
+  "validity": {
+    "effective_date": "",
+    "valid_until": "",
+    "_note": "ทั้งคู่เป็น YYYY-MM-DD · valid_until บังคับ: ราคาที่ไม่มีวันหมดอายุคือราคาที่จะไม่มีใครกลับมาตรวจ"
+  },
+  "source": {
+    "document_title": "",
+    "document_uri_or_location": "",
+    "revision_or_date": "",
+    "issued_by": "",
+    "date_checked": "",
+    "checked_by": ""
+  },
+  "approved_wording_th": "",
+  "approved_wording_en": "",
+  "_wording_rule": "ข้อความที่ผู้อ่านเห็นต้องพา effective_date และขอบเขตไปด้วย เช่น 'ราคา X บาท (ราคา ณ วันที่ YYYY-MM-DD ต่อเครื่อง ยังไม่รวม VAT)'",
+  "verdict": "OPEN",
+  "_verdict_values": ["OPEN", "CLEARED", "REVISE", "DELETE"],
+  "reviewer": "",
+  "reviewed_on": ""
+}

@@ -1,0 +1,31 @@
+{
+  "claim_id": "CLM-E-004",
+  "package_id": "__fixture__",
+  "sentence_verbatim": "วัสดุนี้ใช้งานได้ถึง 80 องศาเซลเซียส",
+  "product": {
+    "vendor": "Brady",
+    "product_line": "fixture",
+    "part_number": "FIXTURE-000"
+  },
+  "source": {
+    "document_title": "fixture datasheet",
+    "document_uri": "https://example.invalid/ds.pdf",
+    "revision_or_date": "Rev A",
+    "page_or_section": "p.2",
+    "date_checked": "2026-09-20",
+    "checked_by": "fixture"
+  },
+  "measured_conditions": {
+    "temperature": "",
+    "exposure": "",
+    "substrate": "",
+    "duration": "",
+    "test_method": ""
+  },
+  "what_the_source_actually_says": "continuous service temperature up to 80 C",
+  "approved_wording_th": "",
+  "approved_wording_en": "",
+  "verdict": "OPEN",
+  "reviewer": "",
+  "reviewed_on": ""
+}

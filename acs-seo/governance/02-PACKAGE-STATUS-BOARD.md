@@ -13,10 +13,10 @@
 | Package | Queue | Board | Package status | QA tier | Flagged claims | ติดที่ source | เหตุผล |
 |---|---|---|---|---|---|---|---|
 | `PKG-Q03` | #3 | **HOLD** | DRAFT_PENDING_REVIEW | T2_FULL | — | `SRC-WEB-004` | Cannibalization — อยู่ใน cluster C-1 ซึ่งมี 10 URL เดิมยิง head term เชิงพาณิชย์เดียวกัน ต้อง map intent ให้เสร็จก่อน 2026-09-24 |
-| `PKG-Q04` | #4 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-002`, `CLM-E-004`, `CLM-E-005`, `CLM-S-002` | `SRC-VEN-001` | wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน |
-| `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date |
+| `PKG-Q04` | #4 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-002`, `CLM-E-004`, `CLM-E-005`, `CLM-S-002` | `SRC-VEN-001` | wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน — มี revision spec พร้อมใช้แล้ว |
+| `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q17` | #17 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | — | ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ — มี revision spec พร้อมใช้แล้ว |
-| `PKG-Q18` | #18 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date |
+| `PKG-Q18` | #18 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q21` | #21 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-001`, `CLM-E-001`, `CLM-E-002`, `CLM-E-003` | `SRC-VEN-002` | ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน — มี revision spec พร้อมใช้แล้ว |
 | `PKG-UNMAPPED-01` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-UNMAPPED-02` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
