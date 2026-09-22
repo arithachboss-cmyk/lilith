@@ -19,18 +19,15 @@
  */
 import { readFileSync, readdirSync, existsSync, statSync } from "node:fs";
 import { join, basename } from "node:path";
+import { parseArgs } from "./argv.mjs";
 
 const REQUIRED_SOURCE = ["document_uri", "revision_or_date", "date_checked", "checked_by"];
 const NEEDS_CONDITIONS = /\d/; // a quoted figure must carry its measured conditions
 
-const argv = process.argv.slice(2);
-const asOfIndex = argv.indexOf("--as-of");
-const asOf = asOfIndex >= 0 && argv[asOfIndex + 1] ? argv[asOfIndex + 1] : new Date().toISOString().slice(0, 10);
+const { values, positional } = parseArgs(process.argv.slice(2), ["as-of"]);
+const asOf = values["as-of"] ?? new Date().toISOString().slice(0, 10);
 const warnWithinDays = 30;
-// asOfIndex is -1 when --as-of is absent, so the value index must only be excluded when
-// the flag is actually present — otherwise argv[0], the target, is filtered out.
-const asOfValueIndex = asOfIndex >= 0 ? asOfIndex + 1 : -1;
-const targets = argv.filter((a, i) => !a.startsWith("--") && i !== asOfValueIndex);
+const targets = positional;
 if (!targets.length) {
   console.error("usage: node evidence-check.mjs <package-dir> [...]");
   process.exit(2);

@@ -73,17 +73,41 @@ also a time-travel test: it passes at `--as-of 2026-09-22`, warns at `2026-12-10
 fails at `2027-01-15` — the same record, three answers, which is the behaviour a price
 gate has to have.
 
+## `cannibalisation-check.mjs`
+
+```sh
+node cannibalisation-check.mjs "<target intent>" [--url /proposed-path] [--json]
+```
+
+Tier 3 of the checklist as a command. **Run it before writing a package, never after** —
+writing the article first and finding the collision afterwards produces work that may have
+to be thrown away.
+
+| Verdict | Exit | Meaning |
+|---|---|---|
+| `PROCEED` | 0 | No cluster, no overlapping live URL |
+| `PROCEED_WITH_CANONICAL` | 0 | In a cluster that has an owner — write it as a modifier page |
+| `REVIEW` | 0 | No cluster, but live URLs overlap the intent |
+| `HOLD` | 1 | The URL already exists, or the cluster has no canonical owner yet |
+
+Data lives in `../data/clusters.json` and `../data/live-inventory.json`. The inventory is
+generated from `00_SOURCE_PACK_INDEX.md` §S-2 rather than maintained separately, so the two
+cannot drift. **Setting `canonical_owner` on a cluster is an Owner decision**, not a code
+change — every cluster is null today, which is why every in-cluster intent currently holds.
+
 ## `regression.sh`
 
 ```sh
 ./regression.sh          # 13 checks across both tools; exit 1 on any failure
 ```
 
-Run it after any rule change. It has already caught three real bugs — an ASCII-only word
-boundary that silently dropped every Thai unit, a class tally that folded
-EVIDENCE_REQUIRED into OWNER_REQUIRED, and an argument filter that discarded the target
-directory whenever `--as-of` was absent. Each would have shipped as a tool that quietly
-under-reports, which is worse than having no tool at all.
+Run it after any rule change. It has caught four real bugs — an ASCII-only word boundary
+that silently dropped every Thai unit, a class tally that folded EVIDENCE_REQUIRED into
+OWNER_REQUIRED, and an argument filter that discarded the target directory whenever the
+flag was absent. That last one was then written a second time in a new tool, which is why
+flag parsing now lives in `argv.mjs` and the suite tests both tools with and without their
+flags. Each of these would have shipped as a tool that quietly under-reports, which is
+worse than having no tool at all.
 
 ### Known limits
 

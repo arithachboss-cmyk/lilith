@@ -1,0 +1,29 @@
+{
+  "_source": "00_SOURCE_PACK_INDEX.md §S-3. `canonical_owner` is null until the Owner decides; a null owner makes the cluster a HOLD for any new package.",
+  "clusters": [
+    { "id": "C-1", "label": "Barcode scanner (generic commercial)", "canonical_owner": null,
+      "terms": ["barcode scanner", "barcode scanners", "เครื่องสแกนบาร์โค้ด", "สแกนบาร์โค้ด", "เครื่องอ่านบาร์โค้ด", "scanner บาร์โค้ด"],
+      "urls": ["/barcode-scanners","/barcode-scanner-thailand","/เครื่องสแกนบาร์โค้ด","/industrial-barcode-scanner","/wireless-barcode-scanner","/2d-barcode-scanner","/long-range-barcode-scanner","/warehouse-barcode-scanner","/retail-barcode-scanner","/honeywell-barcode-scanner"] },
+    { "id": "C-2", "label": "Barcode printer", "canonical_owner": null,
+      "terms": ["barcode printer", "label printer", "เครื่องพิมพ์บาร์โค้ด", "เครื่องพิมพ์ฉลาก", "printer บาร์โค้ด"],
+      "urls": ["/barcode-printers","/barcode-printer-thailand","/barcode-label-printer","/tsc-barcode-printer","/barcode-printer-buying-guide","/knowledge/barcode-printer-types"] },
+    { "id": "C-3", "label": "RFID", "canonical_owner": null,
+      "terms": ["rfid", "อาร์เอฟไอดี", "rfid reader", "rfid system", "rfid คลังสินค้า"],
+      "urls": ["/rfid-systems","/rfid-reader","/rfid-warehouse-system","/rfid-workflow-context","/brady/scanners-rfid","/knowledge/rfid-warehouse-implementation","/knowledge/rfid-technology"] },
+    { "id": "C-4", "label": "Manufacturing", "canonical_owner": null,
+      "terms": ["manufacturing", "โรงงาน", "สายการผลิต", "การผลิต", "traceability การผลิต"],
+      "urls": ["/manufacturing","/industry/manufacturing","/brady/solutions/manufacturing","/case-study/manufacturing","/roi-calculator/manufacturing"] },
+    { "id": "C-5", "label": "Warehouse / logistics", "canonical_owner": null,
+      "terms": ["warehouse", "logistics", "คลังสินค้า", "โลจิสติกส์", "ศูนย์กระจายสินค้า"],
+      "urls": ["/logistics","/warehouse-data-capture","/brady/solutions/warehouse-logistics","/case-study/logistics","/case-study/warehouse","/roi-calculator/warehouse"] },
+    { "id": "C-6", "label": "Retail", "canonical_owner": null,
+      "terms": ["retail", "ร้านค้า", "ค้าปลีก", "pos"],
+      "urls": ["/retail","/retail-barcode-scanner","/case-study/retail","/roi-calculator/retail"] },
+    { "id": "C-7", "label": "Scanner selection / comparison", "canonical_owner": null,
+      "terms": ["เลือกเครื่องสแกน", "เปรียบเทียบ", "comparison", "how to choose", "buying guide", "ยี่ห้อไหนดี"],
+      "urls": ["/barcode-scanner-comparison","/knowledge/product-comparisons","/knowledge/how-to-choose-barcode-scanner","/knowledge/wired-vs-wireless-barcode-scanner","/select-solution"] },
+    { "id": "C-8", "label": "Partner ecosystem", "canonical_owner": null,
+      "terms": ["partner", "ecosystem", "พาร์ทเนอร์", "ตัวแทนจำหน่าย"],
+      "urls": ["/partner-ecosystem-hub","/why-acs/partner-ecosystem"] }
+  ]
+}

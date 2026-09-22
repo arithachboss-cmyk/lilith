@@ -65,14 +65,21 @@ whole article for claims the writer did not flag.
 
 ## Tier 3 — Cannibalisation Gate (before writing, not after)
 
-Run against the 82-URL live inventory in `00_SOURCE_PACK_INDEX.md`.
+```sh
+node tools/cannibalisation-check.mjs "<target intent>" [--url /proposed-path]
+```
+
+Exit 1 means HOLD. Run against the 82-URL live inventory in `00_SOURCE_PACK_INDEX.md`.
 
 - No collision → proceed.
 - Collision → choose one and record it in `brief.md`: **ENRICH** the existing URL ·
   **NEW** URL with a written canonical-intent statement saying what it owns and what the
   existing page keeps · **HOLD** for Owner.
-- Cluster C-1 (10 live URLs on one head term) is **HOLD by default** until the Owner names a
-  canonical owner. Due 24 Sep 2026.
+- **Every cluster is HOLD by default** until the Owner records a `canonical_owner` in
+  `data/clusters.json`. All eight are null today.
+- For C-1 the intent map is done — `packages/queue-3/INTENT_MAP.md`. It found that only
+  three of the ten URLs actually collide; the other seven carry a real differentiator in
+  their own title and are legitimate modifier pages.
 
 ## Tier 3b — Price expiry (recurring, not one-off)
 

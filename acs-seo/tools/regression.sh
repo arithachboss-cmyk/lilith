@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 # Regression for the ACS claim tooling.
 #
-# Run it after any rule change. It has already caught three real bugs: an ASCII-only word
+# Run it after any rule change. It has already caught four real bugs: an ASCII-only word
 # boundary that silently dropped every Thai unit, a class tally that folded
 # EVIDENCE_REQUIRED into OWNER_REQUIRED, and an argument filter that discarded the target
-# directory whenever --as-of was absent. Every one of those would have shipped as a tool
-# that quietly under-reports, which is worse than no tool.
+# directory whenever --as-of was absent — which was then written a second time in
+# cannibalisation-check.mjs, so flag parsing now lives in argv.mjs. Every one of those
+# would have shipped as a tool that quietly under-reports, which is worse than no tool.
 set -u
 cd "$(dirname "$0")"
 
@@ -49,6 +50,20 @@ chk "node evidence-check.mjs fixtures/pkg-price-stale"                    1 "sta
 chk "node evidence-check.mjs fixtures/pkg-price-good --as-of 2026-09-22"  0 "price valid on its effective date"
 chk "node evidence-check.mjs fixtures/pkg-price-good --as-of 2027-01-15"  1 "same price rejected after expiry"
 chk "node evidence-check.mjs fixtures"                                    1 "whole fixtures tree is rejected"
+
+echo
+echo "cannibalisation-check"
+chk "node cannibalisation-check.mjs 'เครื่องสแกนบาร์โค้ด ราคา'"                        1 "head term holds while C-1 has no owner"
+chk "node cannibalisation-check.mjs 'label materials' --url /knowledge/barcode-label-materials" 1 "an existing URL holds"
+chk "node cannibalisation-check.mjs 'GS1 barcode symbology standards explained'"      0 "an unrelated intent proceeds"
+chk "node cannibalisation-check.mjs"                                                  2 "no intent is a usage error"
+
+echo
+echo "argument parsing (this off-by-one was written twice)"
+chk "node evidence-check.mjs fixtures/pkg-good"                        0 "evidence-check works with no flags"
+chk "node evidence-check.mjs fixtures/pkg-good --as-of 2026-09-22"     0 "evidence-check works with --as-of"
+chk "node cannibalisation-check.mjs 'GS1 standards'"                   0 "cannibalisation-check works with no flags"
+chk "node cannibalisation-check.mjs 'GS1 standards' --url /new-page"   0 "cannibalisation-check works with --url"
 
 echo
 [ "$fail" = 0 ] && { echo "all regression checks passed"; exit 0; } || { echo "REGRESSION FAILED"; exit 1; }

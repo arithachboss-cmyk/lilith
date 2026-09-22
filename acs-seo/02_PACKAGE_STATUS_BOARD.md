@@ -21,7 +21,7 @@
 
 | Queue | State | Reason | Claim rows | Blocking dependency | Due |
 |---|---|---|---|---|---|
-| **#3** | `HOLD` | Cannibalisation — target intent collides with existing live URLs | CR-05 | Intent mapping for cluster C-1 (10 live URLs) | **24 Sep 2026** |
+| **#3** | `HOLD` | Cannibalisation in C-1 | CR-05 | **Intent map delivered** (`packages/queue-3/INTENT_MAP.md`). Lifts on one Owner decision: what happens to `/barcode-scanner-thailand` | **24 Sep 2026** |
 | **#4** | `REVISE` | Material / environment wording states certainty without a datasheet | CR-01, CR-07 | SRC-03 datasheets **+** SRC-02 product list — **revision spec, detection and evidence intake all written**, `packages/queue-4/` | on datasheet, or take Form A now |
 | **#16** | `REVISE` | Specific price with no ACS price + effective date | CR-03 | SRC-06 price list — **shared spec, 6 detection rules and an expiry gate written**, `packages/PRICE_CLAIM_SPEC.md` | on price list, or take Form A now |
 | **#17** | `REVISE` | Ranks brands; must become decision criteria instead | CR-04 | none — **revision spec written**, `packages/queue-17/REVISION_SPEC.md` | awaiting the draft file |
@@ -34,6 +34,18 @@ mechanical: #17 has a criteria frame to replace the ranking, and #21's deletion 
 single command (`tools/claim-scan.mjs --fix`) that is verified against a fixture. The one
 remaining input is the draft article for each, which was never supplied to this session and
 was not reconstructed.
+
+**#3's intent map is done, and it shrank the problem.** C-1 was recorded as ten URLs
+fighting over one intent. Their titles, fetched live, say otherwise: **seven carry a real
+differentiator in their own title** — brand, environment, connectivity, use case, symbology,
+range — and are legitimate modifier pages. **Only three are generic**, and one of those,
+`/barcode-scanner-thailand`, has the URL of a geo page and the title "Barcode Scanner" with
+no geo modifier at all. The other two are the same intent in Thai and English with **no
+hreflang pairing**, which is what turns a reasonable structure into a collision. So the
+decision due 24 Sep is not "pick one of ten" but "decide what happens to one URL" —
+recommendation and the evidence that would overturn it are in the intent map. No ranking
+data was obtainable (Ahrefs: insufficient plan; OpenRush: insufficient credits), so the
+recommendation rests on declared intent, and the map says so.
 
 **#16 and #18 are prepared, and carry a decision for the Owner.** The decision is not
 "never publish a price" — it is no price without an ACS price *and a date*. The second half
