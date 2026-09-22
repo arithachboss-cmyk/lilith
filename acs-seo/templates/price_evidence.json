@@ -1,0 +1,47 @@
+{
+  "_readme": [
+    "One record per published price, price range, discount, or comparative price claim.",
+    "",
+    "The Owner decision is not 'never publish a price'. It is: no price without an ACS",
+    "price AND an effective date. The date is the whole point — a price published with no",
+    "expiry does not stay correct, it rots silently on a live page while still looking",
+    "sourced. So valid_until is mandatory, and evidence-check.mjs fails a record whose",
+    "valid_until has passed.",
+    "",
+    "Scope is part of the price. '18,500 บาท' means nothing until it says whether that is",
+    "per unit, includes VAT, includes installation, or assumes a minimum quantity."
+  ],
+  "claim_id": "CR-03",
+  "package_queue_id": "",
+  "sentence_verbatim": "",
+  "price": {
+    "amount": null,
+    "amount_max": null,
+    "currency": "THB",
+    "unit": "",
+    "includes_vat": null,
+    "includes_installation": null,
+    "minimum_quantity": null,
+    "other_conditions": ""
+  },
+  "validity": {
+    "effective_date": "",
+    "valid_until": "",
+    "_note": "Both YYYY-MM-DD. valid_until is mandatory: a price with no expiry is a price nobody will ever re-check."
+  },
+  "source": {
+    "document_title": "",
+    "document_uri_or_location": "",
+    "revision_or_date": "",
+    "issued_by": "",
+    "date_checked": "",
+    "checked_by": ""
+  },
+  "approved_wording_th": "",
+  "approved_wording_en": "",
+  "_wording_rule": "The visible copy must carry the effective date and the scope. 'ราคา X บาท (ราคา ณ วันที่ YYYY-MM-DD, ต่อเครื่อง, ยังไม่รวม VAT)'.",
+  "verdict": "OPEN",
+  "_verdict_values": ["OPEN", "CLEARED", "REVISE", "DELETE"],
+  "reviewer": "",
+  "reviewed_on": ""
+}

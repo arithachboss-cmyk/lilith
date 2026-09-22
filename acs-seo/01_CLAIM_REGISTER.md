@@ -63,12 +63,23 @@ tied to a CR row with an attached source.
 
 | Rows | Tool | Command |
 |---|---|---|
-| CR-02, CR-09 figures; CR-04 ranking; CR-03 price | `tools/claim-scan.mjs` | `node tools/claim-scan.mjs <pkg>` |
+| CR-02, CR-09 figures; CR-04 ranking | `tools/claim-scan.mjs` | `node tools/claim-scan.mjs <pkg>` |
+| CR-03 prices, ranges, comparatives, promos, VAT scope | same, six rules | `node tools/claim-scan.mjs <pkg>` |
 | CR-01 material / environment certainty | same, with `--strict` | `node tools/claim-scan.mjs <pkg> --strict` |
 | Evidence actually attached for CR-01 / CR-07 | `tools/evidence-check.mjs` | `node tools/evidence-check.mjs <pkg>` |
+| CR-03 price still in date | same, on a schedule | `node tools/evidence-check.mjs <pkg> --as-of <date>` |
 
 A row added here without a rule there is unenforced; a rule there without a row here is a
 bug. Keep them in step.
+
+**The price-expiry rule.** A CR-03 claim needs an ACS price, an effective date visible in
+the reader's copy, and a `valid_until`. A price with no expiry rots on a live page while
+still looking sourced, so the check fails an expired record and warns 30 days ahead. It has
+to run on a schedule: a price that passes at authoring time fails months later, and only a
+recurring run catches that.
+
+**A comparative price claim is a price claim.** "ถูกกว่าคู่แข่ง" needs both sides priced and
+dated. Softening it to "คุ้มค่า" does not make it evidenced.
 
 **The measured-condition rule.** A CR-01 or CR-07 claim quoting a figure must carry the
 conditions the figure was measured under, in the visible copy — not only in the audit file.

@@ -20,7 +20,7 @@ claim row). Rules trace to `../01_CLAIM_REGISTER.md`:
 | `read-range`, `speed`, `accuracy` | CR-02 | BLOCKED | yes |
 | `time-saving` | CR-09 | BLOCKED | yes |
 | `material-certainty`, `environment-certainty`, `absolute-scope` | CR-01 | EVIDENCE_REQUIRED | no — needs a datasheet or a rewrite |
-| `price` | CR-03 | OWNER_REQUIRED | no — needs the Owner's price list |
+| `price`, `price-range`, `price-in-words`, `price-relative`, `price-promo`, `price-scope` | CR-03 | OWNER_REQUIRED | no — needs the ACS price list with dates |
 | `ranking`, `guarantee` | CR-04 | BLOCKED | no — needs a rewrite, not a deletion |
 
 `--fix` replaces a figure with `⟦ลบตัวเลข CR-02 — รอหลักฐาน⟧` rather than deleting it
@@ -33,7 +33,8 @@ is the source of truth, this file is only its enforcement.
 ## `evidence-check.mjs`
 
 ```sh
-node evidence-check.mjs <package-dir> [...]   # exit 1 if any evidence record is incomplete
+node evidence-check.mjs <package-dir> [...]          # exit 1 if any record is incomplete
+node evidence-check.mjs <dir> --as-of 2027-01-15     # evaluate price validity at a date
 ```
 
 `claim-scan.mjs` finds claims that need evidence; this checks the evidence actually
@@ -43,6 +44,14 @@ when a record quotes a figure with **no measured conditions**. That last rule is
 that matters: a value measured under dry heat at 150 °C is not a claim about steam, and
 quoting the number without its conditions turns evidence into a false claim while still
 looking sourced.
+
+### Price records have an expiry
+
+A price record must carry `effective_date` **and** `valid_until`, and the check fails once
+`valid_until` has passed, warns inside 30 days, and fails if the effective date never
+reaches the reader's copy. A price with no expiry does not stay correct — it rots on a live
+page while still looking sourced. **Run this on a schedule, not only at authoring time:** a
+record that passes in September fails in January, and only the scheduled run catches it.
 
 ### Verified behaviour
 
@@ -57,6 +66,24 @@ wording: 13 EVIDENCE_REQUIRED findings, 0 BLOCKED. The default gate passes it (e
 
 `fixtures/pkg-bad/` and `fixtures/pkg-good/` exercise `evidence-check.mjs`: the first
 raises 12 problems including the missing-conditions trap, the second passes clean.
+
+`fixtures/pkg-price-good/` and `fixtures/pkg-price-stale/` exercise the price rules. The
+stale one raises 5 problems including an expiry that passed 84 days ago. The good one is
+also a time-travel test: it passes at `--as-of 2026-09-22`, warns at `2026-12-10`, and
+fails at `2027-01-15` — the same record, three answers, which is the behaviour a price
+gate has to have.
+
+## `regression.sh`
+
+```sh
+./regression.sh          # 13 checks across both tools; exit 1 on any failure
+```
+
+Run it after any rule change. It has already caught three real bugs — an ASCII-only word
+boundary that silently dropped every Thai unit, a class tally that folded
+EVIDENCE_REQUIRED into OWNER_REQUIRED, and an argument filter that discarded the target
+directory whenever `--as-of` was absent. Each would have shipped as a tool that quietly
+under-reports, which is worse than having no tool at all.
 
 ### Known limits
 

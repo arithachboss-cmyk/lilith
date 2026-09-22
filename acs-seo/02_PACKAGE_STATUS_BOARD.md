@@ -23,9 +23,9 @@
 |---|---|---|---|---|---|
 | **#3** | `HOLD` | Cannibalisation — target intent collides with existing live URLs | CR-05 | Intent mapping for cluster C-1 (10 live URLs) | **24 Sep 2026** |
 | **#4** | `REVISE` | Material / environment wording states certainty without a datasheet | CR-01, CR-07 | SRC-03 datasheets **+** SRC-02 product list — **revision spec, detection and evidence intake all written**, `packages/queue-4/` | on datasheet, or take Form A now |
-| **#16** | `REVISE` | Specific price with no ACS price + effective date | CR-03 | SRC-06 ACS price list | on price list |
+| **#16** | `REVISE` | Specific price with no ACS price + effective date | CR-03 | SRC-06 price list — **shared spec, 6 detection rules and an expiry gate written**, `packages/PRICE_CLAIM_SPEC.md` | on price list, or take Form A now |
 | **#17** | `REVISE` | Ranks brands; must become decision criteria instead | CR-04 | none — **revision spec written**, `packages/queue-17/REVISION_SPEC.md` | awaiting the draft file |
-| **#18** | `REVISE` | Same as #16 | CR-03 | SRC-06 ACS price list | on price list |
+| **#18** | `REVISE` | Same decision as #16 — one shared spec, no difference between them assumed | CR-03 | same as #16 | same as #16 |
 | **#21** | `REVISE` | Performance figures "65–70% → 95%+" must be deleted | CR-02, CR-09 | none — **revision spec written and the deletion is automated**, `packages/queue-21/` + `tools/claim-scan.mjs --fix` | awaiting the draft file |
 
 **#17 and #21 are prepared as far as they can go without the draft files.** Neither needs a
@@ -34,6 +34,14 @@ mechanical: #17 has a criteria frame to replace the ranking, and #21's deletion 
 single command (`tools/claim-scan.mjs --fix`) that is verified against a fixture. The one
 remaining input is the draft article for each, which was never supplied to this session and
 was not reconstructed.
+
+**#16 and #18 are prepared, and carry a decision for the Owner.** The decision is not
+"never publish a price" — it is no price without an ACS price *and a date*. The second half
+is what rots: a figure with no expiry stays on a live page looking sourced long after it is
+wrong, which is what `/barcode-scanner-price-guide` is doing now. Detection covers six
+kinds of price claim including comparatives and promos, and the expiry gate fails a stale
+record and warns 30 days ahead — **but only if it runs on a schedule.** Form A (what drives
+cost, plus a quote request) is publishable today with no price list at all.
 
 **#4 is prepared but genuinely cannot reach PASS here.** Its blocker is a source that does
 not exist — vendor datasheets, paired with the ACS product list so a datasheet maps to

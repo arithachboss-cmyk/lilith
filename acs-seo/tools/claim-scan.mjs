@@ -80,10 +80,40 @@ const RULES = [
     re: /(?:ทุกสภาพแวดล้อม|ทุกพื้นผิว|ทุกอุตสาหกรรม|ได้ทุกแบบ|ตลอดอายุการใช้งาน|ใช้ได้เสมอ|always\s+works|every\s+(?:surface|environment)|lifetime\s+durability)/gi,
   },
   {
+    id: "price-range",
+    cr: "CR-03", cls: "OWNER_REQUIRED", redact: false,
+    why: "ช่วงราคา ต้องมาจากราคา ACS พร้อมวันที่มีผล (Owner decision Queue #16/#18)",
+    re: /(?:฿\s*)?\d[\d,]*\s*[-–—]\s*(?:฿\s*)?\d[\d,]*\s*(?:บาท|THB|baht|฿)?/gi,
+  },
+  {
     id: "price",
     cr: "CR-03", cls: "OWNER_REQUIRED", redact: false,
     why: "ราคาต้องมาจากราคา ACS พร้อมวันที่มีผล (Owner decision Queue #16/#18)",
-    re: /(?:฿\s*\d[\d,]*|\d[\d,]*\s*(?:บาท|THB|baht)|เริ่มต้นที่\s*\d[\d,]*|starting\s*(?:from|at)\s*[\d,]+)/gi,
+    re: /(?:฿\s*\d[\d,]*|\d[\d,]*\s*(?:บาท|THB|baht)|(?:ราคา)?เริ่มต้นที่\s*\d[\d,]*|starting\s*(?:from|at)\s*[\d,]+|prices?\s+from\s*(?:฿\s*)?[\d,]+)/gi,
+  },
+  {
+    id: "price-relative",
+    cr: "CR-03", cls: "OWNER_REQUIRED", redact: false,
+    why: "ข้ออ้างราคาเชิงเปรียบเทียบ ต้องมีราคาทั้งสองฝั่งพร้อมวันที่ จึงจะพูดได้",
+    re: /(?:ราคา(?:ถูก|ดี|ประหยัด)(?:กว่า)?|ถูกกว่า(?:คู่แข่ง|ท้องตลาด)?|คุ้มค่า(?:กว่า)?|ประหยัดกว่า|ราคาย่อมเยา|affordable|budget[-\s]friendly|cost[-\s]effective|value\s+for\s+money|competitive\s+pric(?:ing|es?)|pric(?:ing|es?)\s+(?:is|are)\s+competitive|cheaper\s+than)/gi,
+  },
+  {
+    id: "price-in-words",
+    cr: "CR-03", cls: "OWNER_REQUIRED", redact: false,
+    why: "จำนวนเงินที่เขียนเป็นตัวหนังสือก็คือราคา ต้องมาจากราคา ACS พร้อมวันที่มีผล",
+    re: /(?:หนึ่ง|สอง|สาม|สี่|ห้า|หก|เจ็ด|แปด|เก้า|สิบ|ยี่|ร้อย|พัน|หมื่น|แสน|ล้าน)+\s*บาท/g,
+  },
+  {
+    id: "price-promo",
+    cr: "CR-03", cls: "OWNER_REQUIRED", redact: false,
+    why: "ราคาโปรโมชัน/ส่วนลด/เงื่อนไขผ่อน ต้องมีเอกสารยืนยันพร้อมช่วงเวลาที่มีผล",
+    re: /(?:ราคาพิเศษ|ลดราคา|ลดทันที|ส่วนลด|โปรโมชั่?น|ฟรีดาวน์|ผ่อน\s*\d+\s*%?[^\n.·]{0,16}|discount|special\s+offer|promotion|instal?lment)/gi,
+  },
+  {
+    id: "price-scope",
+    cr: "CR-03", cls: "OWNER_REQUIRED", redact: false,
+    why: "ขอบเขตราคา (VAT / ค่าติดตั้ง / ค่าขนส่ง) เป็นส่วนหนึ่งของราคา ต้องมาจากเอกสารเดียวกัน",
+    re: /(?:(?:ไม่)?รวม\s*(?:VAT|ภาษี|ค่าติดตั้ง|ค่าขนส่ง|ค่าจัดส่ง)|ex(?:cl)?\.?\s*VAT|incl?\.?\s*VAT|plus\s+VAT)/gi,
   },
   {
     id: "ranking",

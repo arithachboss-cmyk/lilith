@@ -20,6 +20,10 @@ Fail any item → return to writer. Do not proceed to Tier 1.
 | M-7 | Schema | `schema.jsonld` parses, `@type` matches page class, no field asserting a claim that has no CR row |
 | M-8 | Status | `package_status.json` = `DRAFT_PENDING_REVIEW` and no publish flag set |
 
+**Run `tools/regression.sh` after changing any rule** — the tooling has shipped
+under-reporting bugs before, and a scanner that silently misses claims is worse than no
+scanner, because it manufactures confidence.
+
 **M-5 and M-6 are one command.** `node tools/claim-scan.mjs <package-dir>` reports every
 figure and forbidden phrase against its CR row and exits non-zero if anything is BLOCKED —
 run it in CI, not by eye. It is regex, not comprehension: a figure written in words still
@@ -69,6 +73,13 @@ Run against the 82-URL live inventory in `00_SOURCE_PACK_INDEX.md`.
   existing page keeps · **HOLD** for Owner.
 - Cluster C-1 (10 live URLs on one head term) is **HOLD by default** until the Owner names a
   canonical owner. Due 24 Sep 2026.
+
+## Tier 3b — Price expiry (recurring, not one-off)
+
+A price passes at authoring time and fails months later. Schedule
+`node tools/evidence-check.mjs packages --as-of <today>` to run regularly: it fails an
+expired price and warns 30 days ahead. Without the schedule the gate runs once and the
+figure rots on a live page while still looking sourced.
 
 ## Tier 4 — Rendering Gate (site-wide, not per package)
 
