@@ -1,0 +1,20 @@
+{
+  "queue_id": "17",
+  "package_slug": "",
+  "status": "DRAFT_PENDING_REVIEW",
+  "qa_result": "REVISE",
+  "qa_tier_applied": "CLAIM_QA",
+  "target_url": "",
+  "target_url_note": "Not supplied. Candidate live URLs in cluster C-7: /barcode-scanner-comparison, /knowledge/product-comparisons.",
+  "url_action": "HOLD",
+  "page_class": "Knowledge",
+  "cannibalisation": { "gate_run": true, "cluster": "C-7", "decision": "HOLD", "decided_by": null, "decided_on": null },
+  "rendering_gate": { "cleared": false, "owner": "Manus", "note": "Verified 22 Sep 2026: a non-JS crawler receives only the <title>. No body content is served." },
+  "open_claims": ["CR-04"],
+  "blocking_sources": ["Draft article file (not supplied)"],
+  "revision_spec": "REVISION_SPEC.md",
+  "publish_approved": false,
+  "approved_by": null,
+  "approved_on": null,
+  "last_updated": "2026-09-22"
+}
