@@ -6,17 +6,75 @@
   "requested_on": "2026-09-23",
   "request": "Praise ACS; mention Honeywell, 7-Eleven, 30 years of serving customers; commit to continuing honestly and steadily.",
   "drafts": {
-    "publishable_now": { "file": "draft-v1-publishable.md", "findings": 0, "blocked_claims": [], "note": "Zero gated claims. Can go live today." },
-    "as_requested": { "file": "draft-v2-full.md", "findings": 7, "blocked_claims": ["CR-04", "CR-06", "CR-08", "CR-10"], "note": "Cannot publish until the rows close." }
+    "publishable_now": {
+      "file": "draft-v1-publishable.md",
+      "findings": 0,
+      "blocked_claims": [],
+      "note": "Zero gated claims. Can go live today."
+    },
+    "as_requested": {
+      "file": "draft-v2-full.md",
+      "findings": 7,
+      "blocked_claims": [
+        "CR-04",
+        "CR-06",
+        "CR-08",
+        "CR-10"
+      ],
+      "note": "Cannot publish until the rows close."
+    }
   },
-  "open_claims": ["CR-04", "CR-06", "CR-08", "CR-10"],
+  "open_claims": [
+    "CR-04",
+    "CR-06",
+    "CR-08",
+    "CR-10"
+  ],
   "closure_owner": {
     "CR-10": "ACS — company registration or founding-year document",
     "CR-06": "Honeywell — written authorisation, not ACS",
     "CR-08": "The named customer — their consent, not ACS's approval",
     "CR-04": "nothing closes it; the superlative is removed"
   },
-  "rendering_gate": { "cleared": false, "owner": "Manus" },
+  "rendering_gate": {
+    "cleared": false,
+    "owner": "Manus"
+  },
   "publish_approved": false,
-  "last_updated": "2026-09-23"
+  "last_updated": "2026-09-23",
+  "evidence_requests": [
+    {
+      "sent_on": "2026-09-23",
+      "channel": "email",
+      "to": "Chutima@asiancoding.com",
+      "message_id": "1a0cdf029c10023b",
+      "subject": "ขอเอกสารยืนยัน 3 ข้อ สำหรับหน้าแนะนำบริษัทบนเว็บไซต์",
+      "requested": [
+        {
+          "row": "CR-10",
+          "ask": "Company registration / founding year",
+          "expected_difficulty": "low"
+        },
+        {
+          "row": "CR-06",
+          "ask": "Honeywell authorisation document, and what it permits ACS to call itself",
+          "expected_difficulty": "medium — depends on Honeywell, not ACS"
+        },
+        {
+          "row": "CR-08",
+          "ask": "Whether any contract grants the right to name the customer publicly",
+          "expected_difficulty": "high — needs the customer's consent, which ACS cannot grant"
+        }
+      ],
+      "also_requested": [
+        "SRC-02 product list",
+        "SRC-03 vendor datasheets",
+        "SRC-06 price list with effective dates",
+        "SRC-07 stock and lead time",
+        "SRC-08 support coverage"
+      ],
+      "response_received": false,
+      "note": "The email states that draft v1 is publishable without any of these, so the request does not block the page."
+    }
+  ]
 }
