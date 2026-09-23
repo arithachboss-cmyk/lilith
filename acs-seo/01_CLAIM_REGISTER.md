@@ -68,6 +68,9 @@ tied to a CR row with an attached source.
 | CR-02, CR-09 figures; CR-04 ranking | `tools/claim-scan.mjs` | `node tools/claim-scan.mjs <pkg>` |
 | CR-03 prices, ranges, comparatives, promos, VAT scope | same, six rules | `node tools/claim-scan.mjs <pkg>` |
 | CR-15 availability, stock, lead time, delivery | same | `node tools/claim-scan.mjs <pkg>` |
+| CR-06 partner claims and vendor names | same | `node tools/claim-scan.mjs <pkg>` |
+| CR-08 customer names, and implied customers | same | `node tools/claim-scan.mjs <pkg>` |
+| CR-10 company tenure and founding year | same | `node tools/claim-scan.mjs <pkg>` |
 | CR-16 local presence and support claims | same | `node tools/claim-scan.mjs <pkg>` |
 | CR-01 material / environment certainty | same, with `--strict` | `node tools/claim-scan.mjs <pkg> --strict` |
 | Evidence actually attached for CR-01 / CR-07 | `tools/evidence-check.mjs` | `node tools/evidence-check.mjs <pkg>` |
@@ -81,6 +84,14 @@ the reader's copy, and a `valid_until`. A price with no expiry rots on a live pa
 still looking sourced, so the check fails an expired record and warns 30 days ahead. It has
 to run on a schedule: a price that passes at authoring time fails months later, and only a
 recurring run catches that.
+
+**A customer claim is not the Owner's to clear.** Every other OWNER_REQUIRED row closes
+when ACS produces a document. CR-08 closes when *the customer* consents to be named.
+ACS approving the sentence does not clear it.
+
+**Anonymising an unconsented customer makes it worse, not better.** "the largest
+convenience store chain in the country" identifies the same company as naming it, and adds
+a superlative that CR-04 blocks outright.
 
 **An availability claim expires faster than a price.** "มีสต็อก" is true for as long as the
 stock lasts, which may be hours. CR-15 therefore does not get a published figure at all

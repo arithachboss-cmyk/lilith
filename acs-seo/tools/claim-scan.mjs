@@ -11,12 +11,13 @@
  *   node claim-scan.mjs <path> --strict         also fail on EVIDENCE_REQUIRED
  *   node claim-scan.mjs <path> --fix            redact BLOCKED figures in place
  *   node claim-scan.mjs <path> --json           machine-readable output
+ *   node claim-scan.mjs <dir> --all             include governance files (normally skipped)
  *
  * Rules come from ../01_CLAIM_REGISTER.md. Adding a rule here without adding the CR row
  * there is a bug: the register is the source of truth.
  */
 import { readFileSync, writeFileSync, statSync, readdirSync } from "node:fs";
-import { join, extname } from "node:path";
+import { join, extname, basename } from "node:path";
 
 const MARKER = (cr) => `⟦ลบตัวเลข ${cr} — รอหลักฐาน⟧`;
 
@@ -80,6 +81,36 @@ const RULES = [
     re: /(?:ทุกสภาพแวดล้อม|ทุกพื้นผิว|ทุกอุตสาหกรรม|ได้ทุกแบบ|ตลอดอายุการใช้งาน|ใช้ได้เสมอ|always\s+works|every\s+(?:surface|environment)|lifetime\s+durability)/gi,
   },
   {
+    id: "partner-claim",
+    cr: "CR-06", cls: "EVIDENCE_REQUIRED", redact: false,
+    why: "อ้างความสัมพันธ์กับผู้ผลิต ต้องมีหนังสือรับรองจาก vendor พร้อมวันที่",
+    re: /(?:เป็น)?(?:พาร์ท?เนอร์|ตัวแทน(?:จำหน่าย)?(?:อย่างเป็นทางการ)?|ผู้แทนจำหน่าย|distributor|authoris?ed\s+(?:dealer|distributor|reseller|partner)|official\s+partner|certified\s+partner|partner\s+of)/gi,
+  },
+  {
+    id: "vendor-name",
+    cr: "CR-06", cls: "EVIDENCE_REQUIRED", redact: false,
+    why: "เอ่ยชื่อผู้ผลิต ต้องตรวจว่าบริบทเป็นการอ้างอิงสเปก ไม่ใช่การอ้างความสัมพันธ์",
+    re: /\b(?:Honeywell|Brady|TSC|Zebra|Datalogic|SATO|GS1|Intermec|Godex)\b/gi,
+  },
+  {
+    id: "customer-name",
+    cr: "CR-08", cls: "OWNER_REQUIRED", redact: false,
+    why: "เอ่ยชื่อลูกค้า ต้องมีความยินยอมเป็นลายลักษณ์อักษรจากลูกค้ารายนั้น ไม่ใช่แค่ ACS อนุมัติ",
+    re: /\b(?:7-?\s?Eleven|เซเว่น|CP\s*All|ซีพี|Central|เซ็นทรัล|Lotus'?s?|โลตัส|Big\s*C|บิ๊กซี|Makro|แม็คโคร|ThaiBev|ไทยเบฟ|SCG|เอสซีจี|PTT|ปตท|Tesco)\b/gi,
+  },
+  {
+    id: "customer-implied",
+    cr: "CR-08", cls: "OWNER_REQUIRED", redact: false,
+    why: "อ้างว่าดูแล/ให้บริการลูกค้ารายใด แม้ไม่เอ่ยชื่อ ก็ยังเป็นข้ออ้างเรื่องลูกค้า",
+    re: /(?:ดูแล(?:ระบบ)?ให้(?:กับ)?|ให้บริการ(?:แก่|กับ)|ลูกค้าของเรา(?:ได้แก่|เช่น)?|เป็นผู้ดูแลระบบให้|ไว้วางใจโดย|trusted\s+by|clients?\s+include|serving)\s*[^\n.·]{0,40}/gi,
+  },
+  {
+    id: "company-tenure",
+    cr: "CR-10", cls: "OWNER_REQUIRED", redact: false,
+    why: "อายุบริษัท/ประสบการณ์เป็นตัวเลข ต้องยืนยันด้วยหนังสือรับรองบริษัทหรือเอกสาร ACS",
+    re: /(?:\d{1,3}\s*ปี(?:\s*(?:ใน|ที่|ของ)?\s*(?:วงการ|ประสบการณ์|ธุรกิจ|ตลาด|อุตสาหกรรม|ที่ผ่านมา|แล้ว))?|ก่อตั้ง(?:เมื่อ|ปี)?\s*(?:พ\.ศ\.|ค\.ศ\.)?\s*\d{4}|since\s+(?:19|20)\d{2}|\d{1,3}\+?\s*years?\s+(?:of\s+)?(?:experience|in\s+business)?)/gi,
+  },
+  {
     id: "availability",
     cr: "CR-15", cls: "OWNER_REQUIRED", redact: false,
     why: "สถานะสต็อก/ความพร้อมส่ง ต้องมาจากข้อมูลจริงของ ACS พร้อมวันที่ (Owner decision D-08)",
@@ -137,7 +168,7 @@ const RULES = [
     id: "ranking",
     cr: "CR-04", cls: "BLOCKED", redact: false,
     why: "ห้ามจัดอันดับยี่ห้อ ให้ใช้เกณฑ์ตัดสินใจแทน (Owner decision Queue #17)",
-    re: /(?:ดีที่สุด|อันดับ\s*(?:1|หนึ่ง)|เบอร์หนึ่ง|ชั้นนำ|ถูกที่สุด|คุ้มที่สุด|แนะนำที่สุด|ยี่ห้อไหนดี|\bbest\b|\b#1\b|number\s+one|\bleading\b|\bcheapest\b|top\s*pick)/gi,
+    re: /(?:(?:ดี|ใหญ่|เร็ว|แรง|ถูก|ครบ|คุ้ม|แนะนำ|เยอะ|มาก)ที่สุด|อันดับ\s*(?:1|หนึ่ง)|เบอร์หนึ่ง|ชั้นนำ|รายใหญ่(?:ที่สุด)?|ยี่ห้อไหนดี|\bbest\b|\b#1\b|number\s+one|\bleading\b|\blargest\b|\bcheapest\b|top\s*pick)/gi,
   },
   {
     id: "guarantee",
@@ -147,13 +178,31 @@ const RULES = [
   },
 ];
 
-function collect(target, out = []) {
+/**
+ * Governance files quote the claims they govern, so scanning them reports the register
+ * against itself. They are skipped by name when a directory is scanned; pass a file
+ * explicitly, or --all, to scan one anyway.
+ */
+const GOVERNANCE_FILES = new Set([
+  "claim_register.md", "package_status.json", "audit.json", "brief.md",
+  "REVISION_SPEC.md", "EXECUTION_RUNBOOK.md", "INTENT_MAP.md", "README.md",
+]);
+const GOVERNANCE_PATTERNS = [/evidence.*\.json$/i, /^\d\d_.*\.md$/];
+
+function isGovernance(file) {
+  const name = basename(file);
+  return GOVERNANCE_FILES.has(name) || GOVERNANCE_PATTERNS.some((re) => re.test(name));
+}
+
+function collect(target, out = [], { explicit = false, all = false } = {}) {
   const st = statSync(target);
   if (st.isDirectory()) {
-    for (const entry of readdirSync(target)) collect(join(target, entry), out);
-  } else if ([".md", ".markdown", ".txt", ".json", ".jsonld"].includes(extname(target))) {
-    out.push(target);
+    for (const entry of readdirSync(target)) collect(join(target, entry), out, { all });
+    return out;
   }
+  if (![".md", ".markdown", ".txt", ".json", ".jsonld"].includes(extname(target))) return out;
+  if (!explicit && !all && isGovernance(target)) return out;
+  out.push(target);
   return out;
 }
 
@@ -217,6 +266,8 @@ const asJson = args.includes("--json");
 // what a package claiming material or environment performance needs once its datasheet
 // citations are supposed to be in place.
 const strict = args.includes("--strict");
+// Governance files are skipped when a directory is scanned; --all includes them.
+const scanAll = args.includes("--all");
 const targets = args.filter((a) => !a.startsWith("--"));
 
 if (!targets.length) {
@@ -226,7 +277,8 @@ if (!targets.length) {
 
 const report = [];
 for (const target of targets) {
-  for (const file of collect(target)) {
+  const explicit = statSync(target).isFile();
+  for (const file of collect(target, [], { explicit, all: scanAll })) {
     const original = readFileSync(file, "utf8");
     const findings = scanText(original);
     if (fix) {

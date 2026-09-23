@@ -9,6 +9,7 @@ node claim-scan.mjs <file|dir> [...]     # report; exits 1 if anything is BLOCKE
 node claim-scan.mjs <path> --strict      # also fail on EVIDENCE_REQUIRED
 node claim-scan.mjs <path> --fix         # redact BLOCKED figures in place
 node claim-scan.mjs <path> --json        # machine-readable, for CI
+node claim-scan.mjs <dir>  --all         # include governance files (normally skipped)
 ```
 
 It covers checklist steps **M-5** (forbidden words) and **M-6** (every number maps to a
@@ -20,6 +21,11 @@ claim row). Rules trace to `../01_CLAIM_REGISTER.md`:
 | `read-range`, `speed`, `accuracy` | CR-02 | BLOCKED | yes |
 | `time-saving` | CR-09 | BLOCKED | yes |
 | `material-certainty`, `environment-certainty`, `absolute-scope` | CR-01 | EVIDENCE_REQUIRED | no — needs a datasheet or a rewrite |
+| `partner-claim`, `vendor-name` | CR-06 | EVIDENCE_REQUIRED | no — needs vendor authorisation |
+| `customer-name`, `customer-implied` | CR-08 | OWNER_REQUIRED | no — needs the *customer's* consent |
+| `company-tenure` | CR-10 | OWNER_REQUIRED | no — needs an ACS document |
+| `availability`, `lead-time` | CR-15 | OWNER_REQUIRED | no — needs ACS stock and lead-time data |
+| `local-support` | CR-16 | OWNER_REQUIRED | no — needs ACS confirmation of coverage |
 | `price`, `price-range`, `price-in-words`, `price-relative`, `price-promo`, `price-scope` | CR-03 | OWNER_REQUIRED | no — needs the ACS price list with dates |
 | `ranking`, `guarantee` | CR-04 | BLOCKED | no — needs a rewrite, not a deletion |
 
@@ -101,13 +107,22 @@ change — every cluster is null today, which is why every in-cluster intent cur
 ./regression.sh          # 13 checks across both tools; exit 1 on any failure
 ```
 
-Run it after any rule change. It has caught four real bugs — an ASCII-only word boundary
+Run it after any rule change. It has caught five real bugs — an ASCII-only word boundary
 that silently dropped every Thai unit, a class tally that folded EVIDENCE_REQUIRED into
 OWNER_REQUIRED, and an argument filter that discarded the target directory whenever the
 flag was absent. That last one was then written a second time in a new tool, which is why
 flag parsing now lives in `argv.mjs` and the suite tests both tools with and without their
-flags. Each of these would have shipped as a tool that quietly under-reports, which is
-worse than having no tool at all.
+flags. The fifth was the largest: **CR-06, CR-08 and CR-10 were rows in the register with
+no rule enforcing them**, so a draft naming a vendor as a partner, naming a customer, and
+claiming a company age passed a clean scan. Each of these would have shipped as a tool that
+quietly under-reports, which is worse than having no tool at all.
+
+### Governance files are skipped
+
+Scanning a directory skips `claim_register.md`, `package_status.json`, `audit.json`,
+`brief.md`, the numbered pack documents and the spec/runbook files, because they quote the
+claims they govern and would otherwise report the register against itself. Pass a file
+path directly, or `--all`, to scan one anyway.
 
 ### Known limits
 

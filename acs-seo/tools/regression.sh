@@ -30,6 +30,9 @@ chk "node claim-scan.mjs fixtures/clean-draft.md"                     0 "a clean
 chk "node claim-scan.mjs fixtures/price-draft.md"                     1 "price draft is caught"
 chk "node claim-scan.mjs fixtures/geo-page-draft.md"                  0 "geo draft: CR-15/CR-16 are owner-required, not blocked"
 chk "node claim-scan.mjs fixtures/geo-page-draft.md --strict"         0 "geo draft: strict still passes — no evidence-required findings"
+chk "node claim-scan.mjs ../packages/about-acs/draft-v2-full.md"      1 "partner, customer and tenure claims are caught"
+chk "node claim-scan.mjs ../packages/about-acs/draft-v1-publishable.md" 0 "the publishable version is clean"
+chk "node claim-scan.mjs ../packages/about-acs"                       1 "directory scan skips governance files but still finds the draft"
 
 echo
 echo "claim-scan --fix"
