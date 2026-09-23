@@ -32,7 +32,7 @@ node acs-seo/tools/validate.mjs --board          # พิมพ์ status board
 node acs-seo/tools/redact.mjs <ดราฟต์> --fix     # ปิดข้อความที่ Claim Register ห้าม (ทิ้ง marker ไว้)
 node acs-seo/tools/evidence-check.mjs <แพ็กเกจ>   # หลักฐานครบไหม ราคาหมดอายุหรือยัง
 node acs-seo/tools/evidence-check.mjs <แพ็กเกจ> --as-of 2027-01-01   # ประเมินล่วงหน้า
-node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (99 ข้อ)
+node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (108 ข้อ)
 node acs-seo/tools/render-docs.mjs               # สร้างเอกสาร 00/01/02 ใหม่จาก data/
 ```
 

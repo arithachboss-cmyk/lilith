@@ -1,5 +1,5 @@
 {
-  "version": "4.1.0",
+  "version": "5.0.0",
   "as_of": "2026-09-23",
   "derived_from": "SRC-WEB-001",
   "provenance": "FACT สำหรับรายชื่อ URL (ยืนยันกับ sitemap จริงแล้วทุกเส้น) · RECOMMENDATION สำหรับการจัดกลุ่ม intent — มาจาก PR #1 ยังไม่ได้รับการยืนยันจาก Owner",
@@ -249,11 +249,29 @@
       "decision": null,
       "decided_by": null,
       "decided_on": null
+    },
+    {
+      "cluster_id": "C-9",
+      "label": "Company / เกี่ยวกับองค์กร",
+      "competing_urls": [
+        "/why-acs",
+        "/why-acs/30-years",
+        "/why-acs/service-capability",
+        "/leadership"
+      ],
+      "count": 4,
+      "canonical_owner": null,
+      "decision": null,
+      "decided_by": null,
+      "decided_on": null,
+      "found_by": "พบตอนเตรียมแพ็กเกจหน้าแนะนำ ACS — รายการ cluster เดิมไม่มีหมวดหน้าองค์กรเลย การซ้อนทับของหน้ากลุ่มนี้จึงมองไม่เห็น และ gate ตอบ proceed ทั้งที่หน้าองค์กรมีอยู่แล้วสี่หน้า",
+      "provenance": "RECOMMENDATION — อนุมานจาก page_subtype = Company ใน page inventory ยังไม่ได้รับการยืนยันจาก Owner",
+      "note": "สามในสี่หน้าถือ flag OWNER อยู่แล้ว การเพิ่มหน้าแนะนำองค์กรใหม่จะทำซ้ำรูปแบบเดียวกับที่ C-1 เพิ่งตัดสินให้แก้ จึงตั้ง canonical_owner เป็น null ไว้ก่อน ซึ่งทำให้ gate กั้นไว้จนกว่า Owner จะระบุหน้าหลัก"
     }
   ],
   "totals": {
-    "clusters": 8,
-    "urls_in_clusters": 45,
+    "clusters": 9,
+    "urls_in_clusters": 49,
     "clusters_with_canonical_owner": 1
   },
   "notes": [
@@ -261,6 +279,7 @@
     "/barcode-scanner-thailand มี URL ของหน้า geo แต่ title เป็นหน้า generic — เป็นหน้าที่แย่ง head term อยู่จริงทั้งที่ URL บอกว่าแคบกว่านั้น",
     "/barcode-scanners กับ /เครื่องสแกนบาร์โค้ด คือ intent เดียวกันคนละภาษา และ sitemap ไม่มี hreflang ผูกไว้ สองภาษาที่ไม่มี hreflang จะถูกอ่านเป็นหน้าซ้ำ ไม่ใช่หน้าคู่กัน",
     "C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว",
-    "ยังไม่มีข้อมูลอันดับหรือ traffic ของหน้าใดเลย (Ahrefs และ OpenRush ตอบว่าแผนไม่พอ) ข้อเสนอทั้งหมดจึงอยู่บน intent ที่ประกาศไว้ ไม่ใช่ผลที่วัดได้"
+    "ยังไม่มีข้อมูลอันดับหรือ traffic ของหน้าใดเลย (Ahrefs และ OpenRush ตอบว่าแผนไม่พอ) ข้อเสนอทั้งหมดจึงอยู่บน intent ที่ประกาศไว้ ไม่ใช่ผลที่วัดได้",
+    "C-9 ถูกเพิ่มเมื่อ 2026-09-23 หลังพบว่ารายการเดิมไม่มีหมวดหน้าองค์กร ทำให้การซ้อนทับของหน้ากลุ่มนั้นมองไม่เห็น"
   ]
 }

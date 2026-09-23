@@ -19,8 +19,8 @@
       "rule": "C-1 ตัดสินแล้วด้วย D-08 อีก 7 cluster ยังไม่มี canonical owner และยังห้ามเขียนแพ็กเกจใหม่ที่ยิง intent ของกลุ่มเหล่านั้น",
       "unblocks": "ต่อแพ็กเกจ",
       "findings": {
-        "clusters": 8,
-        "urls_in_clusters": 45,
+        "clusters": 9,
+        "urls_in_clusters": 49,
         "largest_cluster": "C-1 (10 URL แต่ที่ชนกันจริง 3)",
         "clusters_with_canonical_owner": 1
       }

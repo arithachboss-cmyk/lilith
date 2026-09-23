@@ -230,7 +230,10 @@ function checkPackage(dir) {
   }
 
   // --- forbidden words
-  const scanText = [raw['article.md'], meta.title, meta.meta_description, JSON.stringify(schema)].filter(Boolean).join('\n');
+  // ไฟล์ .html ในแพ็กเกจคือสิ่งที่ขึ้นเว็บจริง จึงต้องถูกสแกนเท่ากับ article.md
+  const htmlFiles = readdirSync(dir).filter((f) => /\.html?$/i.test(f));
+  const htmlText = htmlFiles.map((f) => readFileSync(join(dir, f), 'utf8'));
+  const scanText = [raw['article.md'], ...htmlText, meta.title, meta.meta_description, JSON.stringify(schema)].filter(Boolean).join('\n');
   const hits = scanForbidden(scanText);
   let evidenceFlags = 0, ownerFlags = 0;
   for (const h of hits) {

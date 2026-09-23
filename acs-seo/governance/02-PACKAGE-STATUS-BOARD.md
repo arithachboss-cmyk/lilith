@@ -6,7 +6,7 @@
 
 > ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic
 
-**สรุป:** PASS = 0 · REVISE = 7 · HOLD = 0 · BLOCKED = 13
+**สรุป:** PASS = 0 · REVISE = 6 · HOLD = 1 · BLOCKED = 13
 
 **PASS = 0** — ยังไม่มีแพ็กเกจใดผ่านได้ เพราะ rendering gate อยู่ที่ `FAIL` และ Source Pack ยังไม่ครบ
 
@@ -31,7 +31,7 @@
 | `PKG-UNMAPPED-11` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-UNMAPPED-12` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-UNMAPPED-13` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
-| `PKG-ABOUT-ACS` | — | **REVISE** | DRAFT_PENDING_REVIEW | T1_CLAIM | `CLM-B-004`, `CLM-O-003`, `CLM-O-004`, `CLM-O-006`, `CLM-E-011` | `SRC-ACS-003`, `SRC-ACS-004` | มีสองดราฟต์ — v1 ไม่มี claim ที่ถูก gate เลย เผยแพร่ได้ทันทีเมื่อ rendering gate ผ่าน · v2 มีสิ่งที่ Owner ขอครบแต่ติด 4 claim |
+| `PKG-ABOUT-ACS` | — | **HOLD** | DRAFT_PENDING_REVIEW | T1_CLAIM | `CLM-B-004`, `CLM-O-003`, `CLM-O-004`, `CLM-O-006`, `CLM-E-011` | `SRC-ACS-003`, `SRC-ACS-004`, `SRC-WEB-004` | ติด C-9 — /why-acs อยู่ในกลุ่มหน้าองค์กร 4 หน้าที่ยังไม่มีหน้าหลัก การเพิ่มหน้าแนะนำองค์กรโดยไม่ตัดสินกลุ่มนี้ก่อน จะทำซ้ำรูปแบบเดียวกับที่ C-1 เพิ่งตัดสินให้แก้ · ดราฟต์ v1 พร้อมอยู่แล้ว ไม่มี claim ที่ถูก gate รอแค่คำตัดสินว่าหน้าไหนคือหน้าหลักของกลุ่ม |
 
 ## คำตัดสินของ Owner ที่บันทึกไว้
 

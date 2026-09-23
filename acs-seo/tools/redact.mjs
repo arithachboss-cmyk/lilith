@@ -21,7 +21,8 @@ const ROOT = resolve(dirname(fileURLToPath(import.meta.url)), '..');
 const args = process.argv.slice(2);
 const flags = new Set(args.filter((a) => a.startsWith('--')));
 const targets = args.filter((a) => !a.startsWith('--'));
-const SCANNABLE = ['.md', '.markdown', '.txt', '.json', '.jsonld'];
+// .html และ .htm อยู่ในนี้เพราะเป็นไฟล์ที่ขึ้นเว็บจริง — ถ้าไม่สแกน ไฟล์ที่สำคัญที่สุดจะเป็นไฟล์เดียวที่ไม่มีใครตรวจ
+const SCANNABLE = ['.md', '.markdown', '.txt', '.json', '.jsonld', '.html', '.htm'];
 
 if (targets.length === 0) {
   console.error('ใช้: node tools/redact.mjs <file|dir> [...] [--fix] [--json]');

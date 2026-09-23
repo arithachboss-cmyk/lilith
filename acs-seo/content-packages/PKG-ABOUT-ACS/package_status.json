@@ -5,8 +5,8 @@
   "target_url": "https://www.asiancoding.com/why-acs",
   "page_type": "LANDING",
   "package_status": "DRAFT_PENDING_REVIEW",
-  "board_status": "REVISE",
-  "board_reason": "v1 เผยแพร่ได้เมื่อ rendering gate ผ่าน · v2 ติด 5 claim ที่ ACS ปิดเองไม่ได้ทั้งหมด",
+  "board_status": "HOLD",
+  "board_reason": "ติด C-9 — กลุ่มหน้าองค์กรยังไม่มีหน้าหลัก",
   "qa_tier": "T1_CLAIM",
   "flagged_claims": [
     "CLM-B-004",
@@ -22,7 +22,7 @@
   "gates": {
     "mechanical": "NOT_RUN",
     "claim_qa": "NOT_RUN",
-    "cannibalization": "PASS",
+    "cannibalization": "FAIL_HOLD",
     "rendering": "FAIL",
     "owner_approval": "NOT_GRANTED"
   },

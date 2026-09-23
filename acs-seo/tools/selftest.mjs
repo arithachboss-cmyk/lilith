@@ -111,8 +111,11 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
     Date.parse(c1.interim_checkpoint.date) < Date.parse(c1.review_date));
   check('C-1 ยังไม่ถูกลงมือทำ และมี runbook กำกับ',
     c1.executed === false && typeof c1.execution_runbook === 'string');
-  check('อีก 7 cluster ยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง',
-    clusters.clusters.filter((c) => !c.canonical_owner).length === 7);
+  check('cluster ที่เหลือยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง',
+    clusters.clusters.filter((c) => !c.canonical_owner).length === clusters.clusters.length - 1);
+  const c9 = clusters.clusters.find((c) => c.cluster_id === 'C-9');
+  check('C-9 หมวดหน้าองค์กรถูกเพิ่มแล้ว และยังกั้นอยู่',
+    c9?.competing_urls.includes('/why-acs') && c9.canonical_owner === null);
   check('page_type ของทุกหน้าอยู่ใน enum',
     inv.pages.every((p) => inv.page_type_enum.includes(p.page_type)));
   check('risk flag ของทุกหน้าอยู่ใน enum',
@@ -223,6 +226,28 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   check('— จับชื่อลูกค้า', rules.has('FW-O-016'));
   check('— จับการอ้างว่าดูแลลูกค้า แม้ไม่เอ่ยชื่อ', rules.has('FW-O-017'));
   check('— จับชื่อผู้ผลิต', rules.has('FW-E-009'));
+}
+
+/* ── 5c. ไฟล์ HTML ต้องถูกสแกนเท่ากับ markdown ───────────────────
+   ไฟล์ .html คือไฟล์ที่ขึ้นเว็บจริง ถ้า scanner ไม่อ่านนามสกุลนี้
+   ไฟล์ที่สำคัญที่สุดจะเป็นไฟล์เดียวที่ไม่มีใครตรวจ */
+{
+  const html = join(ROOT, 'tests/fixtures-redact/page.html');
+  let out = '', code = 0;
+  try { out = execFileSync(process.execPath, [REDACT, html, '--json'], { encoding: 'utf8' }); }
+  catch (err) { out = String(err.stdout ?? ''); code = err.status; }
+  const res = JSON.parse(out);
+  const rules = new Set(res.results.flatMap((r) => r.findings.map((f) => f.rule_id)));
+  check('scanner อ่านไฟล์ .html และรายงานสิ่งที่พบ', res.results.length > 0 && code === 1);
+  check('— จับซูเปอร์ลาทีฟใน HTML', rules.has('FW-B-001'));
+  check('— จับราคาใน HTML', rules.has('FW-O-001'));
+  check('— จับชื่อลูกค้าใน HTML', rules.has('FW-O-016'));
+  const { rules: ruleDefs } = readJson('data/forbidden_terms.json');
+  void ruleDefs;
+  check('วันที่แบบ ISO ไม่ถูกอ่านเป็นราคา',
+    !readJson('data/forbidden_terms.json').rules
+      .filter((r) => r.claim_ref.includes('CLM-O-001'))
+      .some((r) => new RegExp(r.pattern, 'giu').test('สร้างเมื่อ 2026-09-23')));
 }
 
 /* ── 6. หลักฐานครบจริงไหม และราคาหมดอายุหรือยัง ──────────────────

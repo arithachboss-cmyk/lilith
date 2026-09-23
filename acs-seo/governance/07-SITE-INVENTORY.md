@@ -20,7 +20,7 @@
 
 > ห้ามเขียนแพ็กเกจใหม่ที่ยิง intent ของ cluster ใด จนกว่า cluster นั้นจะมี canonical_owner ที่ Owner ระบุชื่อแล้ว
 
-**8 cluster · 45 URL · มี canonical owner แล้ว 0**
+**9 cluster · 49 URL · มี canonical owner แล้ว 0**
 
 | Cluster | หน้าที่ชนกัน | จำนวน | canonical owner | คำตัดสิน |
 |---|---|---|---|---|
@@ -32,12 +32,14 @@
 | `C-6` Retail | `/retail` `/retail-barcode-scanner` `/case-study/retail` `/roi-calculator/retail` | **4** | — | — |
 | `C-7` Scanner selection / comparison | `/barcode-scanner-comparison` `/knowledge/product-comparisons` `/knowledge/how-to-choose-barcode-scanner` `/knowledge/wired-vs-wireless-barcode-scanner` `/select-solution` | **5** | — | — |
 | `C-8` Partner ecosystem | `/partner-ecosystem-hub` `/why-acs/partner-ecosystem` | **2** | — | — |
+| `C-9` Company / เกี่ยวกับองค์กร | `/why-acs` `/why-acs/30-years` `/why-acs/service-capability` `/leadership` | **4** | — | — |
 
 - C-1 ตัดสินแล้วด้วย D-08 (option B) เหลืออีก 7 cluster ที่ยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง ไม่ใช่การตกหล่น
 - /barcode-scanner-thailand มี URL ของหน้า geo แต่ title เป็นหน้า generic — เป็นหน้าที่แย่ง head term อยู่จริงทั้งที่ URL บอกว่าแคบกว่านั้น
 - /barcode-scanners กับ /เครื่องสแกนบาร์โค้ด คือ intent เดียวกันคนละภาษา และ sitemap ไม่มี hreflang ผูกไว้ สองภาษาที่ไม่มี hreflang จะถูกอ่านเป็นหน้าซ้ำ ไม่ใช่หน้าคู่กัน
 - C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว
 - ยังไม่มีข้อมูลอันดับหรือ traffic ของหน้าใดเลย (Ahrefs และ OpenRush ตอบว่าแผนไม่พอ) ข้อเสนอทั้งหมดจึงอยู่บน intent ที่ประกาศไว้ ไม่ใช่ผลที่วัดได้
+- C-9 ถูกเพิ่มเมื่อ 2026-09-23 หลังพบว่ารายการเดิมไม่มีหมวดหน้าองค์กร ทำให้การซ้อนทับของหน้ากลุ่มนั้นมองไม่เห็น
 
 ## หน้าทั้งหมด
 

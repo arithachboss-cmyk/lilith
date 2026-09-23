@@ -724,8 +724,8 @@
       "target_url": null,
       "page_type": "LANDING",
       "package_status": "DRAFT_PENDING_REVIEW",
-      "board_status": "REVISE",
-      "board_reason": "มีสองดราฟต์ — v1 ไม่มี claim ที่ถูก gate เลย เผยแพร่ได้ทันทีเมื่อ rendering gate ผ่าน · v2 มีสิ่งที่ Owner ขอครบแต่ติด 4 claim",
+      "board_status": "HOLD",
+      "board_reason": "ติด C-9 — /why-acs อยู่ในกลุ่มหน้าองค์กร 4 หน้าที่ยังไม่มีหน้าหลัก การเพิ่มหน้าแนะนำองค์กรโดยไม่ตัดสินกลุ่มนี้ก่อน จะทำซ้ำรูปแบบเดียวกับที่ C-1 เพิ่งตัดสินให้แก้ · ดราฟต์ v1 พร้อมอยู่แล้ว ไม่มี claim ที่ถูก gate รอแค่คำตัดสินว่าหน้าไหนคือหน้าหลักของกลุ่ม",
       "owner_decision": "Owner ขอเมื่อ 2026-09-23: ชมเชย ACS, เอ่ย Honeywell, 7-Eleven, 30 ปี, และคำมั่นว่าจะซื่อสัตย์และมั่นคงต่อไป",
       "qa_tier": "T1_CLAIM",
       "flagged_claims": [
@@ -737,12 +737,13 @@
       ],
       "blocked_on_sources": [
         "SRC-ACS-003",
-        "SRC-ACS-004"
+        "SRC-ACS-004",
+        "SRC-WEB-004"
       ],
       "gates": {
         "mechanical": "NOT_RUN",
         "claim_qa": "NOT_RUN",
-        "cannibalization": "NOT_RUN",
+        "cannibalization": "FAIL_HOLD",
         "rendering": "FAIL",
         "owner_approval": "NOT_GRANTED"
       },
@@ -757,7 +758,7 @@
         ],
         "owner_confirmed": false
       },
-      "cannibalization_cluster": null,
+      "cannibalization_cluster": "C-9",
       "revision_spec": null,
       "closure_owner": {
         "CLM-O-006": "ACS — หนังสือรับรองบริษัทหรือเอกสารปีก่อตั้ง",
