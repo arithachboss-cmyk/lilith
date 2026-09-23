@@ -70,7 +70,15 @@ The two head-term pages become **hreflang alternates of each other, not competit
 Each modifier page links up to the head term in its own language, and none of them targets
 the bare head term in its title or H1.
 
-## 5. The one Owner decision — due 24 Sep
+## 5. The one Owner decision — DECIDED 23 Sep 2026
+
+> **D-07 — the Owner chose Option A.** 301 `/barcode-scanner-thailand` →
+> `/เครื่องสแกนบาร์โค้ด`; the two head-term pages become hreflang alternates.
+> Canonical owner recorded in `data/clusters.json`. Execution sequence:
+> `EXECUTION_RUNBOOK.md`. **Not executed** — it waits on the rendering gate, for the
+> reason in §6.
+
+The options as they were put:
 
 **What happens to `/barcode-scanner-thailand`?** Three options, and only ACS can choose:
 
@@ -80,7 +88,7 @@ the bare head term in its title or H1.
 | **B — Re-scope to geo** | Keep it, rewrite title/H1 as a genuine Thailand buying page (availability, local support, lead times) and canonical the generic intent to the head-term page | Needs real local content | ACS has something market-specific to say |
 | **C — Retire** | 410 or remove | Simplest, loses any existing equity | It is thin and duplicative |
 
-**Recommendation: A**, unless ACS can commit to B's content. Reason: its title already
+**Recommendation was A**, unless ACS could commit to B's content. This is what was chosen. Reason: its title already
 concedes it is not a geo page, and two generic pages plus a third undeclared one is the
 configuration that produces the collision. Redirecting resolves it today; B resolves it only
 if the content is actually written.
@@ -102,9 +110,11 @@ their `<title>` — no body. A page that serves no content to a crawler cannot r
 anything, which means today's collision may be theoretical and tomorrow's, once SSR ships,
 will be real. Deciding the map now is still correct; executing redirects before SSR is not.
 
-## 7. After the decision
+## 7. After the decision — done
 
-1. Record the choice in the Decision Log (D-05 area) with date and owner.
-2. Add the canonical owner of each cluster to `00_SOURCE_PACK_INDEX.md` §S-3.
-3. New packages run the gate: `node acs-seo/tools/cannibalisation-check.mjs "<target intent>"`.
-4. Queue #3 moves from `HOLD` to `REVISE` and re-enters the normal flow.
+1. ~~Record the choice~~ → **D-07**, recorded in `data/clusters.json` and `package_status.json`, 23 Sep 2026.
+2. ~~Add the canonical owner~~ → `canonical_owner` set for C-1; the other seven clusters remain null by design.
+3. ~~New packages run the gate~~ → C-1 intents now return `PROCEED_WITH_CANONICAL` instead of `HOLD`.
+4. ~~Queue #3 moves to REVISE~~ → done. It re-enters the normal flow.
+
+Remaining: execute `EXECUTION_RUNBOOK.md`, **after** the rendering gate clears.

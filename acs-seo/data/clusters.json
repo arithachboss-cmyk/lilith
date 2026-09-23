@@ -1,7 +1,11 @@
 {
-  "_source": "00_SOURCE_PACK_INDEX.md §S-3. `canonical_owner` is null until the Owner decides; a null owner makes the cluster a HOLD for any new package.",
+  "_source": "00_SOURCE_PACK_INDEX.md §S-3. `canonical_owner` is null until the Owner decides; a null owner makes the cluster a HOLD for any new package. Setting one is an Owner decision, never a code change.",
   "clusters": [
-    { "id": "C-1", "label": "Barcode scanner (generic commercial)", "canonical_owner": null,
+    { "id": "C-1", "label": "Barcode scanner (generic commercial)",
+      "canonical_owner": "/เครื่องสแกนบาร์โค้ด",
+      "canonical_owner_by_lang": { "th": "/เครื่องสแกนบาร์โค้ด", "en": "/barcode-scanners" },
+      "decision": { "id": "D-07", "option": "A", "summary": "301 /barcode-scanner-thailand to the Thai head-term page; pair the two head-term pages with hreflang instead of letting them compete.", "decided_by": "ACS Owner", "decided_on": "2026-09-23", "record": "../packages/queue-3/INTENT_MAP.md §5", "executed": false, "execution_blocked_by": "Rendering gate — SSR/prerender undecided" },
+      "retiring_urls": ["/barcode-scanner-thailand"],
       "terms": ["barcode scanner", "barcode scanners", "เครื่องสแกนบาร์โค้ด", "สแกนบาร์โค้ด", "เครื่องอ่านบาร์โค้ด", "scanner บาร์โค้ด"],
       "urls": ["/barcode-scanners","/barcode-scanner-thailand","/เครื่องสแกนบาร์โค้ด","/industrial-barcode-scanner","/wireless-barcode-scanner","/2d-barcode-scanner","/long-range-barcode-scanner","/warehouse-barcode-scanner","/retail-barcode-scanner","/honeywell-barcode-scanner"] },
     { "id": "C-2", "label": "Barcode printer", "canonical_owner": null,

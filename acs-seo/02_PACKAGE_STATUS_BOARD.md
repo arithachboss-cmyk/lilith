@@ -1,6 +1,6 @@
 # ACS SEO — Package Status Board
 
-**As of:** 22 September 2026
+**As of:** 23 September 2026
 **Global state:** all 19 packages are `DRAFT_PENDING_REVIEW`. **Nothing is published. Nothing is approved to publish.**
 
 ---
@@ -21,7 +21,7 @@
 
 | Queue | State | Reason | Claim rows | Blocking dependency | Due |
 |---|---|---|---|---|---|
-| **#3** | `HOLD` | Cannibalisation in C-1 | CR-05 | **Intent map delivered** (`packages/queue-3/INTENT_MAP.md`). Lifts on one Owner decision: what happens to `/barcode-scanner-thailand` | **24 Sep 2026** |
+| **#3** | `REVISE` | Cannibalisation in C-1 — **HOLD lifted 23 Sep by decision D-07** | CR-05 | none for authoring. Executing the redirect waits on the rendering gate (`packages/queue-3/EXECUTION_RUNBOOK.md`) | met, 1 day early |
 | **#4** | `REVISE` | Material / environment wording states certainty without a datasheet | CR-01, CR-07 | SRC-03 datasheets **+** SRC-02 product list — **revision spec, detection and evidence intake all written**, `packages/queue-4/` | on datasheet, or take Form A now |
 | **#16** | `REVISE` | Specific price with no ACS price + effective date | CR-03 | SRC-06 price list — **shared spec, 6 detection rules and an expiry gate written**, `packages/PRICE_CLAIM_SPEC.md` | on price list, or take Form A now |
 | **#17** | `REVISE` | Ranks brands; must become decision criteria instead | CR-04 | none — **revision spec written**, `packages/queue-17/REVISION_SPEC.md` | awaiting the draft file |
@@ -35,7 +35,22 @@ single command (`tools/claim-scan.mjs --fix`) that is verified against a fixture
 remaining input is the draft article for each, which was never supplied to this session and
 was not reconstructed.
 
-**#3's intent map is done, and it shrank the problem.** C-1 was recorded as ten URLs
+**#3 is decided — D-07, 23 Sep, one day inside the deadline.** The Owner chose Option A:
+301 `/barcode-scanner-thailand` to the Thai head-term page, and pair the two surviving
+head-term pages with hreflang so they stop reading as duplicates. `canonical_owner` for
+C-1 is now recorded, so the gate returns `PROCEED_WITH_CANONICAL` for C-1 intents instead
+of `HOLD`, and #3 re-enters the normal flow.
+
+**The redirect itself is not executed, deliberately.** It consolidates signals that do not
+currently exist: pages in this cluster serve only their `<title>` to a crawler. A 301 run
+before SSR buys nothing and destroys a URL that would have to be re-verified afterwards
+anyway. `EXECUTION_RUNBOOK.md` sequences it, with that precondition first.
+
+**The remaining seven clusters still have no canonical owner**, which is the correct
+default — the gate holds any new package targeting them. C-2, C-3 and C-5 are next in
+severity.
+
+**#3's intent map is what shrank the problem.** C-1 was recorded as ten URLs
 fighting over one intent. Their titles, fetched live, say otherwise: **seven carry a real
 differentiator in their own title** — brand, environment, connectivity, use case, symbology,
 range — and are legitimate modifier pages. **Only three are generic**, and one of those,
@@ -84,15 +99,15 @@ cannot be inferred. Supply the keyword queue (SRC-05) and these 13 rows fill in 
 | State | Count | Packages |
 |---|---|---|
 | `PASS` | **0** | — |
-| `REVISE` | 5 | #4, #16, #17, #18, #21 |
-| `HOLD` | 14 | #3, plus 13 whose identity was not supplied |
+| `REVISE` | 6 | #3, #4, #16, #17, #18, #21 |
+| `HOLD` | 13 | the 13 whose identity was not supplied |
 | `BLOCKED` | 0 | none recorded — but #4, #16 and #18 become `BLOCKED` if their source never arrives |
 | **Total** | **19** | |
 
 ## 5. Critical path
 
-1. **By 24 Sep** — Owner names the canonical owner for cluster C-1. Unblocks #3 and stops the
-   next packages from inheriting the same collision.
+1. ~~**By 24 Sep** — Owner names the canonical owner for cluster C-1.~~ **Done 23 Sep (D-07).**
+   Next in severity: C-2 (barcode printer, 6 URLs), C-3 (RFID, 7), C-5 (warehouse/logistics, 6).
 2. **Now** — writer clears #17 and #21. No dependency.
 3. **On SRC-06 (price list)** — #16 and #18.
 4. **On SRC-03 (vendor datasheets)** — #4.

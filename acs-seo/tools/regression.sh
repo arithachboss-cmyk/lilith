@@ -53,7 +53,8 @@ chk "node evidence-check.mjs fixtures"                                    1 "who
 
 echo
 echo "cannibalisation-check"
-chk "node cannibalisation-check.mjs 'เครื่องสแกนบาร์โค้ด ราคา'"                        1 "head term holds while C-1 has no owner"
+chk "node cannibalisation-check.mjs 'เครื่องสแกนบาร์โค้ด ราคา'"                        0 "C-1 proceeds now that D-07 named its owner"
+chk "node cannibalisation-check.mjs 'rfid คลังสินค้า'"                                 1 "a cluster with no owner still holds"
 chk "node cannibalisation-check.mjs 'label materials' --url /knowledge/barcode-label-materials" 1 "an existing URL holds"
 chk "node cannibalisation-check.mjs 'GS1 barcode symbology standards explained'"      0 "an unrelated intent proceeds"
 chk "node cannibalisation-check.mjs"                                                  2 "no intent is a usage error"

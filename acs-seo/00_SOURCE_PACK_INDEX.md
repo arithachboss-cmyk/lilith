@@ -142,8 +142,12 @@ these intents until its cluster has a named canonical owner.**
 | C-7 Scanner selection / comparison | `/barcode-scanner-comparison`, `/knowledge/product-comparisons`, `/knowledge/how-to-choose-barcode-scanner`, `/knowledge/wired-vs-wireless-barcode-scanner`, `/select-solution` | 5 |
 | C-8 Partner ecosystem | `/partner-ecosystem-hub`, `/why-acs/partner-ecosystem` | 2 |
 
-**C-1 is the most severe: ten live URLs on one commercial head term.** Queue #3's HOLD
-(Owner decision) sits here. C-8 is two URLs that appear to say the same thing and is the
+**C-1 is the most severe: ten live URLs on one commercial head term.** **Decided 23 Sep
+2026 (D-07):** canonical owner is `/เครื่องสแกนบาร์โค้ด` (th) paired with `/barcode-scanners`
+(en) by hreflang; `/barcode-scanner-thailand` retires by 301. Seven of the ten carry a real
+differentiator in their own title and stay as modifier pages. Not yet executed — see
+`packages/queue-3/EXECUTION_RUNBOOK.md`. **The other seven clusters have no canonical owner
+and hold by default.** C-8 is two URLs that appear to say the same thing and is the
 cheapest fix on the board — one redirect.
 
 ## S-4. What this pack does NOT contain
