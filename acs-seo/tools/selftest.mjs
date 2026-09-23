@@ -250,6 +250,31 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
       .some((r) => new RegExp(r.pattern, 'giu').test('สร้างเมื่อ 2026-09-23')));
 }
 
+/* ── 5d. คำบอกเล่าของ Owner ไม่ใช่หลักฐาน ─────────────────────────
+   Owner ยืนยันด้วยวาจาว่า claim หลายข้อเป็นความจริง ซึ่งบันทึกไว้แล้ว
+   แต่การบันทึกนั้นต้องไม่ทำให้ validator ปล่อยผ่าน */
+{
+  const os = readJson('data/owner_statements.json');
+  const claims = readJson('data/claims.json');
+  const sources = readJson('data/source_pack.json');
+  const claimIds = new Set(claims.claims.map((c) => c.id));
+
+  check('ทุก owner statement อ้าง claim ที่มีอยู่จริง',
+    os.statements.every((st) => st.claim_ref.every((c) => claimIds.has(c))));
+  check('ทุก owner statement ระบุว่าใครเป็นคนปิด',
+    os.statements.every((st) => typeof st.closure_owner === 'string' && st.closure_owner.length > 0));
+  check('การบันทึกคำบอกเล่าไม่ได้เปลี่ยน source ใดให้เป็น SUPPLIED',
+    sources.sources.filter((x) => x.status === 'SUPPLIED').every((x) => x.id === 'SRC-WEB-001'));
+  check('claim ที่ Owner ยืนยันด้วยวาจา ยังคงสถานะเดิมในทะเบียนกลาง',
+    os.statements.flatMap((st) => st.claim_ref).every((id) => {
+      const c = claims.claims.find((x) => x.id === id);
+      return c.class === 'OWNER_REQUIRED' || c.class === 'BLOCKED';
+    }));
+  const declined = os.statements.filter((st) => st.status === 'DECLINED_BY_SYSTEM');
+  check('ข้อที่ปฏิเสธไว้ระบุว่าไม่มีอะไรปิดได้ และเสนอทางเลือกที่เผยแพร่ได้',
+    declined.length > 0 && declined.every((st) => st.closure_owner === 'ไม่มี' && st.publishable_alternative));
+}
+
 /* ── 6. หลักฐานครบจริงไหม และราคาหมดอายุหรือยัง ──────────────────
    ราคาที่ไม่มีวันหมดอายุจะค้างบนหน้าเว็บโดยยังดูเหมือนมีแหล่งอ้างอิง
    ซึ่งเป็นความเสียหายที่คำตัดสิน Queue #16/#18 ต้องการกันไว้ */
