@@ -110,7 +110,14 @@ real Thailand buying page, publishable without one new document.
 distinct content is still a duplicate; it just has a better title. Option A resolved on
 deploy; B resolves on delivery.
 
-Set a review date. At that date, one question: **does this page say anything the head-term
+**วันที่ตั้งไว้แล้ว (Owner สั่ง "เร็วที่สุด" เมื่อ 2026-09-23):**
+
+| วัน | คำถาม | ทำไมวันนี้ |
+|---|---|---|
+| **2026-09-26** | เปลี่ยน title/H1 ให้เลิกอ้าง head term เปล่า ๆ และเขียนเนื้อหาแบบกระบวนการแล้วหรือยัง | งานสองอย่างนี้ไม่ต้องใช้ source ใหม่เลย จึงเป็นวันที่เร็วที่สุดที่ตอบได้จริง |
+| **2026-10-23** | **หน้านี้พูดอะไรที่หน้าหลักไม่พูดหรือเปล่า** | เร็วกว่านี้ไม่ได้ เพราะเนื้อหาที่ทำให้ต่างทั้งหมดรอข้อมูล ACS ที่ยังไม่มีกำหนดส่ง — ถ้าข้อมูลมาก่อน เลื่อนขึ้นได้ทันที |
+
+At that date, one question: **does this page say anything the head-term
 page does not?**
 
 - Yes → B worked. Keep it.

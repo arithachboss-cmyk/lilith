@@ -19,7 +19,7 @@
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "REVISE",
-      "board_reason": "HOLD ถูกปลดด้วย D-08 (option B) — เก็บ /barcode-scanner-thailand ไว้แล้วเขียนใหม่เป็นหน้าซื้อของตลาดไทยจริง ทำได้ทันทีสองอย่างคือเปลี่ยน title/H1 ให้เลิกยิง head term และเขียนเนื้อหาแบบกระบวนการ ที่เหลือรอข้อมูล ACS",
+      "board_reason": "HOLD ถูกปลดด้วย D-08 (option B) — เปลี่ยน title/H1 และเขียนเนื้อหาแบบกระบวนการได้ทันที ตรวจความคืบหน้า 2026-09-26 และตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23",
       "owner_decision": "D-08 (ทับ D-07) — option B ตัดสินโดย ACS Owner 2026-09-23 ทันกำหนด 2026-09-24",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
@@ -65,7 +65,9 @@
       "unblocked_now": [
         "เปลี่ยน title และ H1 ให้เลิกอ้าง head term เปล่า ๆ — ไม่ต้องใช้ source ใหม่และแก้การชนระดับ title ได้ด้วยตัวเอง",
         "เขียนเนื้อหาแบบกระบวนการ ไม่ใช่สถานะ — ดู revision-specs/queue-3-execution-runbook.md"
-      ]
+      ],
+      "interim_checkpoint": "2026-09-26",
+      "review_date": "2026-10-23"
     },
     {
       "package_id": "PKG-Q04",

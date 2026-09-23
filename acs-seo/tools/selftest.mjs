@@ -103,6 +103,12 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
     c1.canonical_owner?.th === '/เครื่องสแกนบาร์โค้ด' && c1.canonical_owner?.en === '/barcode-scanners');
   check('C-1 บันทึกว่าใครตัดสินและเมื่อไร',
     c1.decided_by === 'ACS Owner' && c1.decided_on === '2026-09-23' && c1.decision_id === 'D-08');
+  check('C-1 มีวันนัดตรวจแล้ว ไม่ปล่อยให้ค่าโดยปริยายเป็นความเงียบ',
+    typeof c1.review_date === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(c1.review_date), String(c1.review_date));
+  check('C-1 มี checkpoint กลางทางสำหรับงานที่ไม่ติดอะไรเลย',
+    c1.interim_checkpoint?.date === '2026-09-26' && c1.interim_checkpoint?.blocks_nothing === true);
+  check('checkpoint มาก่อนวันตรวจจริง',
+    Date.parse(c1.interim_checkpoint.date) < Date.parse(c1.review_date));
   check('C-1 ยังไม่ถูกลงมือทำ และมี runbook กำกับ',
     c1.executed === false && typeof c1.execution_runbook === 'string');
   check('อีก 7 cluster ยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง',

@@ -12,7 +12,7 @@
 
 | Package | Queue | Board | Package status | QA tier | Flagged claims | ติดที่ source | เหตุผล |
 |---|---|---|---|---|---|---|---|
-| `PKG-Q03` | #3 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-O-002`, `CLM-O-009`, `CLM-O-010` | `SRC-ACS-001`, `SRC-ACS-002`, `SRC-ACS-004` | HOLD ถูกปลดด้วย D-08 (option B) — เก็บ /barcode-scanner-thailand ไว้แล้วเขียนใหม่เป็นหน้าซื้อของตลาดไทยจริง ทำได้ทันทีสองอย่างคือเปลี่ยน title/H1 ให้เลิกยิง head term และเขียนเนื้อหาแบบกระบวนการ ที่เหลือรอข้อมูล ACS |
+| `PKG-Q03` | #3 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-O-002`, `CLM-O-009`, `CLM-O-010` | `SRC-ACS-001`, `SRC-ACS-002`, `SRC-ACS-004` | HOLD ถูกปลดด้วย D-08 (option B) — เปลี่ยน title/H1 และเขียนเนื้อหาแบบกระบวนการได้ทันที ตรวจความคืบหน้า 2026-09-26 และตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23 |
 | `PKG-Q04` | #4 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-002`, `CLM-E-004`, `CLM-E-005`, `CLM-S-002` | `SRC-VEN-001` | wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q17` | #17 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | — | ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ — มี revision spec พร้อมใช้แล้ว |
