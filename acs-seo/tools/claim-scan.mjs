@@ -132,7 +132,9 @@ const RULES = [
     id: "price-range",
     cr: "CR-03", cls: "OWNER_REQUIRED", redact: false,
     why: "ช่วงราคา ต้องมาจากราคา ACS พร้อมวันที่มีผล (Owner decision Queue #16/#18)",
-    re: /(?:฿\s*)?\d[\d,]*\s*[-–—]\s*(?:฿\s*)?\d[\d,]*\s*(?:บาท|THB|baht|฿)?/gi,
+    // An ISO date is shaped like a numeric range, so a bare "2026-09-23" was being
+    // reported as a price. Require a currency marker on one side or the other.
+    re: /(?:฿\s*\d[\d,]*\s*[-–—]\s*(?:฿\s*)?\d[\d,]*|\d[\d,]*\s*[-–—]\s*\d[\d,]*\s*(?:บาท|THB|baht|฿))/gi,
   },
   {
     id: "price",
@@ -200,7 +202,7 @@ function collect(target, out = [], { explicit = false, all = false } = {}) {
     for (const entry of readdirSync(target)) collect(join(target, entry), out, { all });
     return out;
   }
-  if (![".md", ".markdown", ".txt", ".json", ".jsonld"].includes(extname(target))) return out;
+  if (![".md", ".markdown", ".txt", ".json", ".jsonld", ".html", ".htm"].includes(extname(target))) return out;
   if (!explicit && !all && isGovernance(target)) return out;
   out.push(target);
   return out;

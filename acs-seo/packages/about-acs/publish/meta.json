@@ -1,0 +1,16 @@
+{
+  "target_url": "https://www.asiancoding.com/why-acs",
+  "url_action": "ENRICH",
+  "url_action_reason": "C-9 canonical owner is /why-acs. Creating a second company page would repeat the cannibalisation pattern C-1 was just decided to fix.",
+  "title": "เกี่ยวกับเรา | Asian Coding Systems",
+  "meta_description": "Asian Coding Systems ทำงานด้านบาร์โค้ดและระบบระบุตัวตนให้กับธุรกิจไทย ครอบคลุมคลังสินค้า สายการผลิต ค้าปลีก และร้านสะดวกซื้อ",
+  "canonical": "https://www.asiancoding.com/why-acs",
+  "h1": "อยู่ข้างหน้างานจริง",
+  "locale": "th",
+  "robots": "index, follow",
+  "internal_links_in": ["/", "/solutions"],
+  "internal_links_out": [],
+  "og_image": null,
+  "og_image_note": "None set deliberately — no manufacturer or customer imagery may be used (CR-06, CR-08).",
+  "claims": "zero gated claims — verified with tools/claim-scan.mjs"
+}

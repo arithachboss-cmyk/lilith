@@ -28,6 +28,10 @@
     { "id": "C-7", "label": "Scanner selection / comparison", "canonical_owner": null,
       "terms": ["เลือกเครื่องสแกน", "เปรียบเทียบ", "comparison", "how to choose", "buying guide", "ยี่ห้อไหนดี"],
       "urls": ["/barcode-scanner-comparison","/knowledge/product-comparisons","/knowledge/how-to-choose-barcode-scanner","/knowledge/wired-vs-wireless-barcode-scanner","/select-solution"] },
+    { "id": "C-9", "label": "Company / about ACS", "canonical_owner": "/why-acs",
+      "decision": { "id": "D-09", "summary": "/why-acs is the company page. New about-ACS copy enriches it rather than creating a second one.", "decided_by": "ACS Owner", "decided_on": "2026-09-23", "executed": false },
+      "terms": ["เกี่ยวกับเรา", "แนะนำบริษัท", "เกี่ยวกับ acs", "about acs", "about us", "who we are", "บริษัทของเรา", "ประวัติบริษัท", "ทำไมต้อง acs", "why acs"],
+      "urls": ["/why-acs","/why-acs/30-years","/why-acs/service-capability","/why-acs/partner-ecosystem","/leadership"] },
     { "id": "C-8", "label": "Partner ecosystem", "canonical_owner": null,
       "terms": ["partner", "ecosystem", "พาร์ทเนอร์", "ตัวแทนจำหน่าย"],
       "urls": ["/partner-ecosystem-hub","/why-acs/partner-ecosystem"] }

@@ -33,6 +33,8 @@ chk "node claim-scan.mjs fixtures/geo-page-draft.md --strict"         0 "geo dra
 chk "node claim-scan.mjs ../packages/about-acs/draft-v2-full.md"      1 "partner, customer and tenure claims are caught"
 chk "node claim-scan.mjs ../packages/about-acs/draft-v1-publishable.md" 0 "the publishable version is clean"
 chk "node claim-scan.mjs ../packages/about-acs"                       1 "directory scan skips governance files but still finds the draft"
+chk "node claim-scan.mjs ../packages/about-acs/publish"               0 "the publish-ready HTML is clean"
+chk "node claim-scan.mjs fixtures/date-not-a-price.md"                0 "an ISO date is not read as a price range"
 
 echo
 echo "claim-scan --fix"

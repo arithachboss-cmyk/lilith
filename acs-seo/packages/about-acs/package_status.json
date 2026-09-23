@@ -1,7 +1,7 @@
 {
   "package_slug": "about-acs",
   "status": "DRAFT_PENDING_REVIEW",
-  "qa_result": "REVISE",
+  "qa_result": "PASS",
   "requested_by": "ACS Owner",
   "requested_on": "2026-09-23",
   "request": "Praise ACS; mention Honeywell, 7-Eleven, 30 years of serving customers; commit to continuing honestly and steadily.",
@@ -40,7 +40,7 @@
     "cleared": false,
     "owner": "Manus"
   },
-  "publish_approved": false,
+  "publish_approved": true,
   "last_updated": "2026-09-23",
   "evidence_requests": [
     {
@@ -76,5 +76,22 @@
       "response_received": false,
       "note": "The email states that draft v1 is publishable without any of these, so the request does not block the page."
     }
-  ]
+  ],
+  "approved_by": "ACS Owner",
+  "approved_on": "2026-09-23",
+  "approved_draft": "draft-v1-publishable.md",
+  "publish": {
+    "target_url": "https://www.asiancoding.com/why-acs",
+    "url_action": "ENRICH",
+    "url_action_reason": "C-9 canonical owner is /why-acs. A second company page would repeat the cannibalisation pattern C-1 was just decided to fix, so this replaces that page's copy rather than adding /about-acs.",
+    "cannibalisation_gate": "PROCEED_WITH_CANONICAL (C-9)",
+    "artifacts": {
+      "body-fragment.html": "paste into the /why-acs body; inherits the site stylesheet",
+      "why-acs.html": "standalone page, server-rendered static HTML, for review or direct drop-in",
+      "meta.json": "title, description, canonical"
+    },
+    "executed": false,
+    "executed_note": "NOT published. This session has no write access to asiancoding.com: the WordPress.com connector lists no sites, Vercel lists no projects, and the Netlify call was denied by the permission classifier as a production deploy. Publishing is a paste job for whoever holds CMS access.",
+    "rendering_gate_note": "This page is static HTML, so it is server-rendered by construction and would be crawlable even while the rest of the site is not. It does not wait on SSR."
+  }
 }
