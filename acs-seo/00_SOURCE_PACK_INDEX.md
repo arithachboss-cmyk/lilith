@@ -20,6 +20,8 @@ Nothing in this pack is invented.
 | SRC-04 | Page inventory with Product/Service/Knowledge/Landing class | **RECOMMENDATION** | Derived from SRC-01 URL structure. Classes need Owner confirmation. |
 | SRC-05 | Keyword queue (intent, target URL, NEW/ENRICH/HOLD) | **MISSING** | Only 6 of 19 queue items are known, via Owner decisions. |
 | SRC-06 | ACS price list with effective date | **MISSING** | Blocks Queue #16 / #18 and `/barcode-scanner-price-guide`. |
+| SRC-07 | ACS stock and lead-time data, with the date each figure was true | **MISSING** | Introduced by D-08. Blocks CR-15 on the re-scoped Thailand buying page. |
+| SRC-08 | What local support actually exists, and where | **MISSING** | Introduced by D-08. Blocks CR-16 on the same page. |
 
 **Acquisition rule.** A package may not leave DRAFT_PENDING_REVIEW while it depends on a
 MISSING stream. It goes to BLOCKED and names the stream it waits on.
@@ -143,8 +145,9 @@ these intents until its cluster has a named canonical owner.**
 | C-8 Partner ecosystem | `/partner-ecosystem-hub`, `/why-acs/partner-ecosystem` | 2 |
 
 **C-1 is the most severe: ten live URLs on one commercial head term.** **Decided 23 Sep
-2026 (D-07):** canonical owner is `/เครื่องสแกนบาร์โค้ด` (th) paired with `/barcode-scanners`
-(en) by hreflang; `/barcode-scanner-thailand` retires by 301. Seven of the ten carry a real
+2026 (D-08, superseding D-07):** canonical owner is `/เครื่องสแกนบาร์โค้ด` (th) paired with
+`/barcode-scanners` (en) by hreflang; `/barcode-scanner-thailand` is **kept and re-scoped**
+into a Thailand buying page rather than redirected. Seven of the ten carry a real
 differentiator in their own title and stay as modifier pages. Not yet executed — see
 `packages/queue-3/EXECUTION_RUNBOOK.md`. **The other seven clusters have no canonical owner
 and hold by default.** C-8 is two URLs that appear to say the same thing and is the

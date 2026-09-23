@@ -57,7 +57,7 @@ into a collision.
 |---|---|---|
 | `/เครื่องสแกนบาร์โค้ด` | **Head term, Thai** | เครื่องสแกนบาร์โค้ด — generic, Thai market |
 | `/barcode-scanners` | **Head term, English** | barcode scanner — generic, English |
-| `/barcode-scanner-thailand` | **Resolve — see §5** | currently duplicates both |
+| `/barcode-scanner-thailand` | **Thailand buying page** (D-08) | sourcing, support and delivery in Thailand — not the generic head term |
 | `/industrial-barcode-scanner` | Modifier — environment | industrial / โรงงาน |
 | `/wireless-barcode-scanner` | Modifier — connectivity | wireless / ไร้สาย |
 | `/2d-barcode-scanner` | Modifier — symbology | 2D / QR / DataMatrix |
@@ -72,11 +72,16 @@ the bare head term in its title or H1.
 
 ## 5. The one Owner decision — DECIDED 23 Sep 2026
 
-> **D-07 — the Owner chose Option A.** 301 `/barcode-scanner-thailand` →
-> `/เครื่องสแกนบาร์โค้ด`; the two head-term pages become hreflang alternates.
-> Canonical owner recorded in `data/clusters.json`. Execution sequence:
-> `EXECUTION_RUNBOOK.md`. **Not executed** — it waits on the rendering gate, for the
-> reason in §6.
+> **D-08 — the Owner chose Option B**, superseding D-07 (Option A) the same day.
+> `/barcode-scanner-thailand` is **kept** and re-scoped into a genuine Thailand buying
+> page: it stops targeting the bare head term, self-canonicals, and links up. **No
+> redirect.** D-07 was never executed, so nothing had to be rolled back.
+>
+> Canonical owners are unchanged: `/เครื่องสแกนบาร์โค้ด` (th) and `/barcode-scanners` (en).
+> Execution sequence: `EXECUTION_RUNBOOK.md`. **Not executed.**
+>
+> **B resolves the collision on delivery, not on deploy.** A retitled page with no distinct
+> content is still a duplicate. The runbook §6 sets the test and requires a review date.
 
 The options as they were put:
 
@@ -88,7 +93,9 @@ The options as they were put:
 | **B — Re-scope to geo** | Keep it, rewrite title/H1 as a genuine Thailand buying page (availability, local support, lead times) and canonical the generic intent to the head-term page | Needs real local content | ACS has something market-specific to say |
 | **C — Retire** | 410 or remove | Simplest, loses any existing equity | It is thin and duplicative |
 
-**Recommendation was A**, unless ACS could commit to B's content. This is what was chosen. Reason: its title already
+**Recommendation was A**, unless ACS could commit to B's content. **The Owner chose B**, so
+that commitment is now the critical path — see `EXECUTION_RUNBOOK.md` §4 and §6 for what
+that content requires and how to tell whether it arrived. Reason: its title already
 concedes it is not a geo page, and two generic pages plus a third undeclared one is the
 configuration that produces the collision. Redirecting resolves it today; B resolves it only
 if the content is actually written.
@@ -112,9 +119,13 @@ will be real. Deciding the map now is still correct; executing redirects before 
 
 ## 7. After the decision — done
 
-1. ~~Record the choice~~ → **D-07**, recorded in `data/clusters.json` and `package_status.json`, 23 Sep 2026.
+1. ~~Record the choice~~ → **D-08** (Option B), superseding D-07, recorded in `data/clusters.json` and `package_status.json`, 23 Sep 2026.
 2. ~~Add the canonical owner~~ → `canonical_owner` set for C-1; the other seven clusters remain null by design.
 3. ~~New packages run the gate~~ → C-1 intents now return `PROCEED_WITH_CANONICAL` instead of `HOLD`.
 4. ~~Queue #3 moves to REVISE~~ → done. It re-enters the normal flow.
 
-Remaining: execute `EXECUTION_RUNBOOK.md`, **after** the rendering gate clears.
+Remaining, in order:
+- **Retitle the geo page** — needs no new source, resolves the title-level collision today.
+- **Write the process-not-state copy** — `EXECUTION_RUNBOOK.md` §5, passes the scanner clean.
+- **Set the §6 review date.** Without it B has no failure signal.
+- hreflang and sitemap `lastmod` wait on the rendering gate. The two steps above do not.

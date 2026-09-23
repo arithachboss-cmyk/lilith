@@ -21,7 +21,7 @@
 
 | Queue | State | Reason | Claim rows | Blocking dependency | Due |
 |---|---|---|---|---|---|
-| **#3** | `REVISE` | Cannibalisation in C-1 — **HOLD lifted 23 Sep by decision D-07** | CR-05 | none for authoring. Executing the redirect waits on the rendering gate (`packages/queue-3/EXECUTION_RUNBOOK.md`) | met, 1 day early |
+| **#3** | `REVISE` | Cannibalisation in C-1 — **HOLD lifted 23 Sep, decision D-08 (Option B), superseding D-07** | CR-05, CR-15, CR-16 | retitle and safe copy need nothing; the buying-page content needs ACS stock, lead-time and support facts (`packages/queue-3/EXECUTION_RUNBOOK.md`) | met, 1 day early |
 | **#4** | `REVISE` | Material / environment wording states certainty without a datasheet | CR-01, CR-07 | SRC-03 datasheets **+** SRC-02 product list — **revision spec, detection and evidence intake all written**, `packages/queue-4/` | on datasheet, or take Form A now |
 | **#16** | `REVISE` | Specific price with no ACS price + effective date | CR-03 | SRC-06 price list — **shared spec, 6 detection rules and an expiry gate written**, `packages/PRICE_CLAIM_SPEC.md` | on price list, or take Form A now |
 | **#17** | `REVISE` | Ranks brands; must become decision criteria instead | CR-04 | none — **revision spec written**, `packages/queue-17/REVISION_SPEC.md` | awaiting the draft file |
@@ -35,16 +35,25 @@ single command (`tools/claim-scan.mjs --fix`) that is verified against a fixture
 remaining input is the draft article for each, which was never supplied to this session and
 was not reconstructed.
 
-**#3 is decided — D-07, 23 Sep, one day inside the deadline.** The Owner chose Option A:
-301 `/barcode-scanner-thailand` to the Thai head-term page, and pair the two surviving
-head-term pages with hreflang so they stop reading as duplicates. `canonical_owner` for
-C-1 is now recorded, so the gate returns `PROCEED_WITH_CANONICAL` for C-1 intents instead
-of `HOLD`, and #3 re-enters the normal flow.
+**#3 is decided — D-08, 23 Sep, one day inside the deadline.** The Owner first chose
+Option A, then changed to **Option B** the same day: `/barcode-scanner-thailand` is kept
+and re-scoped into a genuine Thailand buying page rather than redirected. `canonical_owner`
+for C-1 is recorded either way, so the gate returns `PROCEED_WITH_CANONICAL` for C-1
+intents instead of `HOLD`, and #3 re-enters the normal flow.
 
-**The redirect itself is not executed, deliberately.** It consolidates signals that do not
-currently exist: pages in this cluster serve only their `<title>` to a crawler. A 301 run
-before SSR buys nothing and destroys a URL that would have to be re-verified afterwards
-anyway. `EXECUTION_RUNBOOK.md` sequences it, with that precondition first.
+**D-07 was never executed, so the change cost nothing.** Had the 301 shipped, switching to
+B would now mean restoring a retired URL and undoing a consolidation. That is the payoff
+from holding execution behind the rendering gate.
+
+**B changes the shape of the work, and one thing about it needs watching.** A resolved the
+collision on deploy; **B resolves it on delivery.** A retitled page with no distinct content
+is still a duplicate with a better title. Two steps need no new source and should happen
+now — retitling so the page stops claiming the bare head term, and writing copy that states
+the *process* rather than a *state* ("we check real stock before confirming", not "in
+stock"). The rest — availability, lead times, local support — are new claim rows **CR-15**
+and **CR-16**, and they are blocked on ACS facts that do not exist yet. **The runbook
+requires a review date; it is not set.** Without one, the default outcome is silence: the
+page stays generic and a decision on record hides it.
 
 **The remaining seven clusters still have no canonical owner**, which is the correct
 default — the gate holds any new package targeting them. C-2, C-3 and C-5 are next in

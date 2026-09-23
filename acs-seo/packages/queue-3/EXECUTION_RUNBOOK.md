@@ -1,121 +1,153 @@
-# Queue #3 — Execution Runbook: Option A
+# Queue #3 — Execution Runbook: Option B
 
-**Decision D-07 · 23 September 2026 · ACS Owner chose Option A**
-301 `/barcode-scanner-thailand` → `/เครื่องสแกนบาร์โค้ด`, and pair the two head-term pages
-with hreflang instead of letting them compete.
+**Decision D-08 · 23 September 2026 · supersedes D-07 (Option A)**
+Keep `/barcode-scanner-thailand` and re-scope it into a genuine Thailand buying page.
+It stops targeting the bare head term, self-canonicals, and links up to the head-term page.
+**No redirect.**
 
-**Nothing in this runbook has been executed.** No production site, DNS, CMS or sitemap was
-touched by this session, and none can be from here. This is the sequence for whoever holds
-the deploy.
+**D-07 was never executed, so nothing had to be rolled back.** That is the payoff from the
+precondition in the previous runbook: had the 301 shipped on the 23rd, changing to B would
+now mean restoring a retired URL and undoing a consolidation.
 
 ---
 
-## 0. Do not start yet — one blocking precondition
+## 0. What changes, and what does not
 
-**The rendering gate must clear first.** Two C-1 pages were fetched without JavaScript and
-returned only their `<title>` — no body. Until SSR/prerender ships:
+| | Option A (superseded) | **Option B (chosen)** |
+|---|---|---|
+| `/barcode-scanner-thailand` | retired by 301 | **kept**, re-scoped |
+| Pages surviving in C-1 | 9 | **10** |
+| Work required | one redirect + link repointing | **new content that does not exist yet** |
+| Resolves the collision | on deploy | **only when the content is written** |
 
-- A 301 consolidates signals that **do not currently exist**, so it buys nothing.
-- hreflang tags that only appear after client-side hydration are not read.
-- If the redirect lands first and SSR lands later, the consolidation has to be re-verified
-  anyway, with a URL already destroyed.
+The head-term owners are unchanged: `/เครื่องสแกนบาร์โค้ด` (th) and `/barcode-scanners` (en),
+paired by hreflang. The seven modifier pages are unchanged.
 
-Waiting costs nothing here: the collision is between pages that cannot currently rank.
-**Execute steps 1–5 only after Manus confirms SSR/prerender is live.**
+## 1. A correction to how B was written
 
-## 1. hreflang pairing — do this before the redirect
+The option said "canonical the generic intent to the head-term page". A canonical tag
+points at a **URL**, not an intent. If `/barcode-scanner-thailand` canonicals to the
+head-term page, the whole page leaves the index — which is Option A with extra steps, and
+throws away the content B exists to create.
 
-The two surviving head-term pages stop being duplicates the moment they declare each other.
+**What B actually requires:**
+
+- `/barcode-scanner-thailand` **self-canonicals**. Its content is unique, so it is its own canonical.
+- It **stops competing** through its `<title>`, `<h1>` and body copy — not through a tag.
+- It **links up** to the head-term page in its language.
+
+If its content ends up substantially duplicating the head-term page anyway, then it has no
+independent reason to exist and the correct answer was A. **That is the test in §6.**
+
+## 2. hreflang — the geo page is not an alternate
+
+Only the two head-term pages are alternates of each other. Unchanged from D-07:
 
 | Page | Declares |
 |---|---|
-| `/เครื่องสแกนบาร์โค้ด` | `hreflang="th"` self · `hreflang="en"` → `/barcode-scanners` · `hreflang="x-default"` → itself |
-| `/barcode-scanners` | `hreflang="en"` self · `hreflang="th"` → `/เครื่องสแกนบาร์โค้ด` · `hreflang="x-default"` → `/เครื่องสแกนบาร์โค้ด` |
+| `/เครื่องสแกนบาร์โค้ด` | `th` self · `en` → `/barcode-scanners` · `x-default` → itself |
+| `/barcode-scanners` | `en` self · `th` → `/เครื่องสแกนบาร์โค้ด` · `x-default` → `/เครื่องสแกนบาร์โค้ด` |
 
-Rules that decide whether this works:
-- **Absolute URLs.** Relative hreflang is ignored. (Same defect was found in the Lili
-  prototype's SEO scaffolding — it is a common one.)
-- **Reciprocal.** An unreciprocated hreflang is discarded.
-- **Server-rendered.** See step 0.
-- `x-default` points at Thai because the market is Thailand.
+`/barcode-scanner-thailand` is **not** in that set. An hreflang alternate is the same
+content for a different audience; a buying page with availability and lead times is
+different content. Adding it as an `en-TH` alternate would reassert the duplication that B
+is meant to end.
 
-Verify before moving on: fetch both pages **without JavaScript** and confirm both sets of
-tags are in the served HTML.
+Absolute URLs, reciprocal, server-rendered — same three rules as before.
 
-## 2. The redirect
+## 3. The title and H1 rewrite — the one change that resolves the collision today
 
-```
-301  /barcode-scanner-thailand  →  /เครื่องสแกนบาร์โค้ด
-```
+Current title, fetched live: **`Barcode Scanner | เครื่องสแกนบา…`** — the URL promises a
+geo page, the title claims the bare head term.
 
-- **301, not 302.** A temporary redirect does not consolidate.
-- **One hop.** Not via `/barcode-scanners` and then on; a chain leaks.
-- The Thai URL is percent-encoded in transit
-  (`/%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87...`). Configure the
-  rule so it emits exactly the encoded form the sitemap already uses, or the redirect
-  target and the canonical URL will differ by encoding and be treated as two URLs.
+| | Banned | Required |
+|---|---|---|
+| `<title>` | `Barcode Scanner`, `เครื่องสแกนบาร์โค้ด` alone | must carry the buying angle — sourcing, support, delivery in Thailand |
+| `<h1>` | any bare head term | same |
+| First paragraph | restating what a barcode scanner is | why buying **here** differs |
 
-## 3. Internal links — the step that gets skipped
+This step needs **no new source** and resolves the title-level collision on its own. Do it
+first, even if §4 takes weeks.
 
-Every internal link still pointing at `/barcode-scanner-thailand` must be repointed at the
-destination. Leaving them means every internal click takes a redirect hop, and the retiring
-URL keeps being re-discovered.
+## 4. The content B requires — and what currently blocks it
 
-**The audit cannot be done by crawling the live site** — the body is not served to a
-crawler (step 0). Run it against **the CMS or the source repository**, not the rendered HTML.
+B's value is "availability, local support, lead times". Every one of those is a claim the
+register gates:
 
-Search for: `barcode-scanner-thailand` in page content, navigation, footers, and any
-hard-coded link maps.
+| Claim | Row | Blocked by |
+|---|---|---|
+| Stock / "พร้อมส่ง" / in stock | **CR-15** | ACS stock data, with the date it was true |
+| Lead time / "ส่งภายใน X วัน" | **CR-15** | ACS lead-time data, dated |
+| "ทีมงานในไทย", nationwide service, on-site response | **CR-16** | ACS confirmation of what support exists and where |
+| Any price | CR-03 | SRC-06 price list |
+| Which products | CR-07 / SRC-02 | ACS product list |
 
-## 4. Sitemap
+Detect them: `node acs-seo/tools/claim-scan.mjs <draft>` — rules `availability`,
+`lead-time`, `local-support`, plus the six price rules.
 
-- Remove `/barcode-scanner-thailand`.
-- While in there: the sitemap carries `changefreq` and `priority` on all 82 URLs but
-  **no `lastmod` on any of them**. Search engines largely ignore the first two and use the
-  third, so the sitemap currently gives no freshness signal at all. Adding `lastmod` is
-  worth doing in the same change — but only after SSR, per step 0.
-- Do **not** submit the sitemap while `robots.txt` or the pages are still non-indexable.
+**An availability claim expires faster than a price.** "มีสต็อก" is true only while the
+stock lasts. A published stock state is wrong by default unless it is wired to live data.
 
-## 5. The seven modifier pages
+## 5. What B can publish today, with zero new sources
 
-They keep their URLs. Two rules apply to each:
+This is the point people miss: B is not blocked, it is *narrowed*. Publishable now —
+**process, not state**:
 
-1. **None may target the bare head term** in its `<title>` or `<h1>`. Each keeps its own
-   differentiator — industrial, wireless, warehouse, retail, 2D, long range, Honeywell.
-2. **Each links up to the canonical owner in its own language** — Thai pages to
-   `/เครื่องสแกนบาร์โค้ด`, English to `/barcode-scanners`.
+| Instead of (blocked) | Publish (safe) |
+|---|---|
+| "มีสต็อกพร้อมส่ง" | "ความพร้อมของแต่ละรุ่นเปลี่ยนตลอดเวลา เราตรวจสอบสต็อกจริงก่อนยืนยันทุกครั้ง" |
+| "ส่งได้ภายใน 3 วัน" | "ระยะเวลาส่งมอบขึ้นกับรุ่นและจำนวน — แจ้งกำหนดจริงพร้อมการยืนยันคำสั่งซื้อ" |
+| "ช่างถึงหน้างานภายใน 24 ชม." | "ขอบเขตการเข้าหน้างานขึ้นกับพื้นที่และข้อตกลงบริการ — ระบุได้ตอนกำหนดขอบเขตงาน" |
+| "ราคาเริ่มต้นที่ X บาท" | "ต้นทุนรวมขึ้นกับรุ่น จำนวนจุดใช้งาน และงานติดตั้ง — ขอใบเสนอราคาตามขอบเขตจริงได้" |
 
-One of them needs a separate check: `/honeywell-barcode-scanner` names a vendor, so it sits
-under **CR-06 (partner claim, EVIDENCE_REQUIRED)**. Its title currently reads
-"Honeywell Barcode Scanner Reference | ACS" — the word *Reference* is doing useful work
-there and should stay until the vendor authorisation documents exist.
+The last fixture paragraph in `tools/fixtures/geo-page-draft.md` is written this way and
+returns **zero findings**. A page built entirely from that column plus §3's retitle is a
+real Thailand buying page, publishable without one new document.
 
-## 6. Verification after execution
+## 6. The test B has to pass — set a date now
+
+**B only resolves the collision when the content is written.** A retitled page with no
+distinct content is still a duplicate; it just has a better title. Option A resolved on
+deploy; B resolves on delivery.
+
+Set a review date. At that date, one question: **does this page say anything the head-term
+page does not?**
+
+- Yes → B worked. Keep it.
+- No → B did not happen. Revert to A and redirect.
+
+Without that date the default outcome is silence: the page stays generic, the collision
+persists, and nobody notices because a decision was recorded.
+
+## 7. Sequencing against the rendering gate
+
+Less blocking than under A. The gate matters for what search engines see, not for whether
+the work is sound.
+
+| Step | Wait for SSR? |
+|---|---|
+| §3 retitle | **No.** Do it now. |
+| §5 safe content | **No.** Do it now. |
+| §2 hreflang | **Yes** — tags that appear only after hydration are not read. |
+| Sitemap `lastmod` | **Yes** |
+| §4 gated content | No — blocked by sources, not by rendering |
+
+## 8. Verification
 
 | Check | Pass condition |
 |---|---|
-| `curl -I /barcode-scanner-thailand` | single `301`, `Location` = the encoded Thai URL |
-| Redirect chain | exactly one hop, no `302`, no loop |
-| Both head-term pages, JS disabled | reciprocal hreflang present in the served HTML |
-| Canonical tags | each head-term page self-canonicals; neither canonicals to the other |
-| Internal links | zero remaining references to the retired path in the source |
-| Sitemap | retired URL absent; no new 404 introduced |
-| `node acs-seo/tools/cannibalisation-check.mjs "เครื่องสแกนบาร์โค้ด"` | `PROCEED_WITH_CANONICAL` |
+| `<title>` and `<h1>` | carry the buying angle; no bare head term |
+| Canonical | self-canonical, **not** pointing at the head-term page |
+| hreflang | only the two head-term pages pair; the geo page is absent from that set |
+| Link up | geo page links to the head-term page in its language |
+| `claim-scan.mjs <draft>` | zero CR-15 / CR-16 / CR-03 findings without an evidence record |
+| `cannibalisation-check.mjs "เครื่องสแกนบาร์โค้ด"` | `PROCEED_WITH_CANONICAL` |
+| §6 distinctness test | the page says something the head-term page does not |
 
-Then update `data/live-inventory.json` by regenerating it from the source pack index, and
-set `decision.executed = true` in `data/clusters.json`.
+Then set `decision.executed = true` in `data/clusters.json`.
 
-## 7. Rollback
+## 9. Out of scope
 
-Remove the 301 and restore the page. The cost of rollback rises the longer the redirect has
-been live and the more the old URL has been dropped from the index, which is the other
-reason not to execute before step 0 clears — a redirect executed against pages that cannot
-rank is all cost and no benefit.
-
-## 8. Out of scope for this decision
-
-- The other seven clusters still have **no canonical owner**. C-2, C-3 and C-5 are the next
-  most severe. The gate holds any new package targeting them, which is the correct default.
-- `C-8` — `/partner-ecosystem-hub` and `/why-acs/partner-ecosystem` appear to say the same
-  thing and are one redirect apart. Cheapest remaining item on the board, but it is a
-  separate Owner decision, not part of D-07.
+Unchanged from D-07: the other seven clusters have no canonical owner and hold by default;
+C-2, C-3 and C-5 are next in severity. `/honeywell-barcode-scanner` still sits under CR-06
+and keeps the word *Reference* in its title until vendor authorisation exists.

@@ -80,6 +80,24 @@ const RULES = [
     re: /(?:ทุกสภาพแวดล้อม|ทุกพื้นผิว|ทุกอุตสาหกรรม|ได้ทุกแบบ|ตลอดอายุการใช้งาน|ใช้ได้เสมอ|always\s+works|every\s+(?:surface|environment)|lifetime\s+durability)/gi,
   },
   {
+    id: "availability",
+    cr: "CR-15", cls: "OWNER_REQUIRED", redact: false,
+    why: "สถานะสต็อก/ความพร้อมส่ง ต้องมาจากข้อมูลจริงของ ACS พร้อมวันที่ (Owner decision D-08)",
+    re: /(?:มี(?:ของ|สต็อก|สินค้า)(?:พร้อม(?:ส่ง|จำหน่าย))?|พร้อมส่ง(?:ทันที)?|สต็อก(?:พร้อม|เหลือ)|สินค้าพร้อมจำหน่าย|หมดสต็อก|in\s*stock|ready\s+to\s+ship|available\s+now|out\s+of\s+stock)/gi,
+  },
+  {
+    id: "lead-time",
+    cr: "CR-15", cls: "OWNER_REQUIRED", redact: false,
+    why: "ระยะเวลาส่งมอบ ต้องมาจาก ACS พร้อมวันที่ที่ข้อมูลนั้นเป็นจริง",
+    re: /(?:ส่ง(?:ได้|ของ|มอบ)?\s*(?:ภายใน|ใน)\s*\d+\s*(?:วัน|ชั่วโมง|สัปดาห์)|ได้รับของ(?:ภายใน|ใน)\s*\d+|จัดส่ง(?:ภายใน|ใน)\s*\d+|lead\s*time[^\n.·]{0,16}?\d+|ships?\s+(?:in|within)\s+\d+|delivery\s+(?:in|within)\s+\d+|same[-\s]day\s+(?:delivery|dispatch)|next[-\s]day)/gi,
+  },
+  {
+    id: "local-support",
+    cr: "CR-16", cls: "OWNER_REQUIRED", redact: false,
+    why: "ข้ออ้างเรื่องทีมงาน/บริการในพื้นที่ ต้องให้ ACS ยืนยันว่ามีจริงและครอบคลุมแค่ไหน",
+    re: /(?:ทีม(?:งาน|ช่าง|ซัพพอร์ต)(?:ใน|ที่)?ไทย|บริการ(?:หลังการขาย)?ทั่วประเทศ|ศูนย์บริการ(?:ทั่วไทย|ทุกจังหวัด)?|ช่างถึงหน้างาน(?:ภายใน)?|on[-\s]site\s+(?:support|service|within)|local\s+(?:team|support|service)|nationwide\s+(?:service|support|coverage))/gi,
+  },
+  {
     id: "price-range",
     cr: "CR-03", cls: "OWNER_REQUIRED", redact: false,
     why: "ช่วงราคา ต้องมาจากราคา ACS พร้อมวันที่มีผล (Owner decision Queue #16/#18)",

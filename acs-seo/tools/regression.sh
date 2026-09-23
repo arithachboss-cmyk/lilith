@@ -28,6 +28,8 @@ chk "node claim-scan.mjs fixtures/sample-material-draft.md"           0 "materia
 chk "node claim-scan.mjs fixtures/sample-material-draft.md --strict"  1 "material draft fails the strict gate"
 chk "node claim-scan.mjs fixtures/clean-draft.md"                     0 "a clean draft passes"
 chk "node claim-scan.mjs fixtures/price-draft.md"                     1 "price draft is caught"
+chk "node claim-scan.mjs fixtures/geo-page-draft.md"                  0 "geo draft: CR-15/CR-16 are owner-required, not blocked"
+chk "node claim-scan.mjs fixtures/geo-page-draft.md --strict"         0 "geo draft: strict still passes — no evidence-required findings"
 
 echo
 echo "claim-scan --fix"

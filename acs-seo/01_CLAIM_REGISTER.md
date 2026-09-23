@@ -45,6 +45,8 @@ Fail any one → it is at least EVIDENCE_REQUIRED.
 | CR-11 | ESG claims | **EVIDENCE_REQUIRED** | Certification or a documented programme; otherwise remove | `/esg-solutions` |
 | CR-12 | "AI consultant" capability | **EVIDENCE_REQUIRED** | A description of what the tool actually does, from ACS | `/ai-consultant` |
 | CR-13 | Barcode symbology / GS1 standards statements | **SAFE_WORDING** if stated as the standard; **EVIDENCE_REQUIRED** if a specific clause or number is cited | GS1 General Specifications, cited by section and release | `/knowledge/1d-vs-2d-barcode`, `/knowledge/barcode-wms-integration` |
+| CR-15 | Availability, stock, lead time, delivery, "in stock", "ready to ship", "ส่งได้ภายใน X วัน" | **OWNER_REQUIRED** | ACS stock and lead-time data, with the date it was true | Introduced by decision D-08: a Thailand buying page is built out of exactly these claims |
+| CR-16 | Local presence and support claims — "ทีมงานในไทย", "บริการหลังการขายทั่วประเทศ", on-site response | **OWNER_REQUIRED** | ACS confirmation of what support actually exists and where | Same page. Related to CR-10 (service capability) |
 | CR-14 | How a technology works in general (thermal transfer vs direct thermal, 1D vs 2D, RFID vs barcode trade-offs) | **SAFE_WORDING** | — | most `/knowledge/*` articles |
 
 ## 4. Forbidden-words list (mechanical check, `03_QA_CHECKLIST.md` step M-5)
@@ -65,6 +67,8 @@ tied to a CR row with an attached source.
 |---|---|---|
 | CR-02, CR-09 figures; CR-04 ranking | `tools/claim-scan.mjs` | `node tools/claim-scan.mjs <pkg>` |
 | CR-03 prices, ranges, comparatives, promos, VAT scope | same, six rules | `node tools/claim-scan.mjs <pkg>` |
+| CR-15 availability, stock, lead time, delivery | same | `node tools/claim-scan.mjs <pkg>` |
+| CR-16 local presence and support claims | same | `node tools/claim-scan.mjs <pkg>` |
 | CR-01 material / environment certainty | same, with `--strict` | `node tools/claim-scan.mjs <pkg> --strict` |
 | Evidence actually attached for CR-01 / CR-07 | `tools/evidence-check.mjs` | `node tools/evidence-check.mjs <pkg>` |
 | CR-03 price still in date | same, on a schedule | `node tools/evidence-check.mjs <pkg> --as-of <date>` |
@@ -77,6 +81,12 @@ the reader's copy, and a `valid_until`. A price with no expiry rots on a live pa
 still looking sourced, so the check fails an expired record and warns 30 days ahead. It has
 to run on a schedule: a price that passes at authoring time fails months later, and only a
 recurring run catches that.
+
+**An availability claim expires faster than a price.** "มีสต็อก" is true for as long as the
+stock lasts, which may be hours. CR-15 therefore does not get a published figure at all
+unless it is wired to live stock data: the publishable form is the process
+("ตรวจสอบสต็อกจริงก่อนยืนยันทุกครั้ง"), not a state. A lead time may be published when ACS
+states it, with the date it was true, and it follows the same expiry rule as a price.
 
 **A comparative price claim is a price claim.** "ถูกกว่าคู่แข่ง" needs both sides priced and
 dated. Softening it to "คุ้มค่า" does not make it evidenced.
