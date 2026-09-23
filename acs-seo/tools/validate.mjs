@@ -282,6 +282,10 @@ function checkPackage(dir) {
   else if ((status.flagged_claims ?? []).length > 0) tier = 'T1_CLAIM';
   else tier = 'WORDING_QA_OK';
 
+  if (status.qa_tier && status.qa_tier !== tier) {
+    add('WARN', 'QA_TIER_MISMATCH', `package_status.qa_tier = ${status.qa_tier} แต่กฎคำนวณได้ ${tier} — ให้แก้ไฟล์ให้ตรงกับที่กฎบอก หรืออธิบายว่าทำไมถึงต้องสูงกว่า`);
+  }
+
   const hasFail = findings.some((f) => f.level === 'FAIL');
   const blocked = findings.some((f) => f.level === 'BLOCKED_ON_SOURCE');
   return {

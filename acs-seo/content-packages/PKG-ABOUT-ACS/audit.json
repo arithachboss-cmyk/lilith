@@ -1,0 +1,32 @@
+{
+  "package_id": "PKG-ABOUT-ACS",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [],
+  "forbidden_scan": {
+    "run_at": "2026-09-23",
+    "block_hits": [
+      "draft-v2-full.md: FW-B-001 รายใหญ่ที่สุด"
+    ],
+    "evidence_hits": [
+      "draft-v2-full.md: FW-E-009 Honeywell"
+    ],
+    "owner_hits": [
+      "draft-v2-full.md: FW-O-003 เป็นพาร์ทเนอร์",
+      "draft-v2-full.md: FW-O-004 30 ปี",
+      "draft-v2-full.md: FW-O-016 7-Eleven",
+      "draft-v2-full.md: FW-O-017 ดูแลระบบให้กับ"
+    ],
+    "note": "article.md (= draft v1) สแกนแล้วไม่พบข้อความที่ต้องจัดการเลย"
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": [
+    "สองดราฟต์: article.md เผยแพร่ได้เมื่อ rendering gate ผ่าน · draft-v2-full.md คือสิ่งที่ Owner ขอครบ และติด 5 claim"
+  ]
+}

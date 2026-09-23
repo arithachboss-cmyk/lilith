@@ -1,0 +1,24 @@
+{
+  "package_id": "PKG-ABOUT-ACS",
+  "title": "Asian Coding Systems — งานบาร์โค้ดที่อยู่ข้างหน้างานจริง",
+  "meta_description": "ACS ทำงานด้านบาร์โค้ดและระบบระบุตัวตนให้ธุรกิจไทย ทั้งคลังสินค้า สายการผลิต ค้าปลีก และร้านสะดวกซื้อ พร้อมแนวทางทำงานที่ยึดความซื่อสัตย์และความมั่นคง",
+  "canonical": "https://www.asiancoding.com/why-acs",
+  "target_url": "https://www.asiancoding.com/why-acs",
+  "page_type": "LANDING",
+  "canonical_intent": "บอกว่า ACS ทำงานอะไรและทำงานอย่างไร ไม่ครอบคลุมการเปรียบเทียบสินค้าหรือราคา",
+  "primary_keyword": "asian coding systems",
+  "secondary_keywords": [],
+  "intent": "NAVIGATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/solutions",
+    "https://www.asiancoding.com/why-acs/service-capability"
+  ],
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่าน",
+  "og": {
+    "title": "Asian Coding Systems — งานบาร์โค้ดที่อยู่ข้างหน้างานจริง",
+    "description": "ACS ทำงานด้านบาร์โค้ดและระบบระบุตัวตนให้ธุรกิจไทย ทั้งคลังสินค้า สายการผลิต ค้าปลีก และร้านสะดวกซื้อ พร้อมแนวทางทำงานที่ยึดความซื่อสัตย์และความมั่นคง",
+    "image": null
+  }
+}

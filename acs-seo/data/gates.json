@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "as_of": "2026-09-22",
+  "version": "3.0.0",
+  "as_of": "2026-09-23",
   "gates": {
     "GATE-RENDER": {
       "name": "Rendering Gate (SSR / prerender)",
@@ -16,13 +16,13 @@
       "status": "OPEN_WITH_FINDINGS",
       "owner": "SEO Lead",
       "evidence_source": "SRC-WEB-004",
-      "rule": "page inventory และ cluster map พร้อมแล้ว — พบ 8 cluster ที่หน้าเดิมชนกันเอง 45 URL ห้ามเขียนแพ็กเกจใหม่ที่ยิง intent ของ cluster ใด จนกว่า cluster นั้นจะมี canonical owner ที่ Owner ระบุชื่อ",
+      "rule": "C-1 ตัดสินแล้วด้วย D-08 อีก 7 cluster ยังไม่มี canonical owner และยังห้ามเขียนแพ็กเกจใหม่ที่ยิง intent ของกลุ่มเหล่านั้น",
       "unblocks": "ต่อแพ็กเกจ",
       "findings": {
         "clusters": 8,
         "urls_in_clusters": 45,
-        "largest_cluster": "C-1 (10 URL บน head term เชิงพาณิชย์เดียว)",
-        "clusters_with_canonical_owner": 0
+        "largest_cluster": "C-1 (10 URL แต่ที่ชนกันจริง 3)",
+        "clusters_with_canonical_owner": 1
       }
     },
     "GATE-OWNER-APPROVAL": {

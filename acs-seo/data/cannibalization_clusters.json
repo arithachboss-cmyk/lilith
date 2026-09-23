@@ -1,6 +1,6 @@
 {
-  "version": "3.0.0",
-  "as_of": "2026-09-22",
+  "version": "4.0.0",
+  "as_of": "2026-09-23",
   "derived_from": "SRC-WEB-001",
   "provenance": "FACT สำหรับรายชื่อ URL (ยืนยันกับ sitemap จริงแล้วทุกเส้น) · RECOMMENDATION สำหรับการจัดกลุ่ม intent — มาจาก PR #1 ยังไม่ได้รับการยืนยันจาก Owner",
   "rule": "ห้ามเขียนแพ็กเกจใหม่ที่ยิง intent ของ cluster ใด จนกว่า cluster นั้นจะมี canonical_owner ที่ Owner ระบุชื่อแล้ว",
@@ -27,10 +27,13 @@
         "/honeywell-barcode-scanner"
       ],
       "count": 10,
-      "canonical_owner": null,
-      "decision": null,
-      "decided_by": null,
-      "decided_on": null,
+      "canonical_owner": {
+        "th": "/เครื่องสแกนบาร์โค้ด",
+        "en": "/barcode-scanners"
+      },
+      "decision": "NEW_WITH_DISTINCT_INTENT",
+      "decided_by": "ACS Owner",
+      "decided_on": "2026-09-23",
       "page_roles_source": "FACT — title ของแต่ละหน้าดึงมาแบบ verbatim เมื่อ 2026-09-22 ด้วย crawler ที่ไม่รัน JavaScript บางรายการจึงถูกตัดสั้น เพราะเว็บส่งกลับมาแค่ <title> ไม่มี body",
       "pages": [
         {
@@ -111,7 +114,21 @@
         "/เครื่องสแกนบาร์โค้ด"
       ],
       "decision_document": "revision-specs/queue-3-intent-map.md",
-      "decision_due": "2026-09-24"
+      "decision_due": "2026-09-24",
+      "decision_id": "D-08",
+      "supersedes": "D-07",
+      "decision_detail": "option B — เก็บ /barcode-scanner-thailand ไว้แล้วเขียนใหม่เป็นหน้าซื้อของตลาดไทยจริง เลิกยิง head term เปล่า ๆ ตั้ง canonical ของตัวเอง และลิงก์ขึ้นหาหน้าหลัก ไม่ redirect D-07 เลือก option A ไว้ก่อนหน้าและถูกทับในวันเดียวกัน",
+      "rescoping_urls": [
+        "/barcode-scanner-thailand"
+      ],
+      "retiring_urls": [],
+      "executed": false,
+      "execution_runbook": "revision-specs/queue-3-execution-runbook.md",
+      "resolves_on": "การส่งมอบเนื้อหาที่ต่างจริง ไม่ใช่การ deploy",
+      "review_question": "หน้า /barcode-scanner-thailand พูดอะไรที่หน้าหลักไม่ได้พูดหรือเปล่า ถ้าไม่ แปลว่า option B ไม่ได้เกิดขึ้นจริง ให้กลับไป option A แล้ว redirect",
+      "review_date": null,
+      "review_date_note": "ยังไม่ได้ตั้ง — ถ้าไม่มีวันนัดตรวจ ผลลัพธ์โดยปริยายคือความเงียบ: หน้าเดิมยังเป็นหน้า generic การชนกันยังอยู่ และคำตัดสินที่บันทึกไว้จะกลายเป็นสิ่งที่บังหน้าปัญหานั้น",
+      "not_executed_reason": "ยังไม่ลงมือเพราะ rendering gate ยังไม่ผ่าน — หน้าใน cluster นี้ส่งกลับมาแค่ <title> การ redirect หรือผูก hreflang ก่อน SSR จึงยังไม่ได้อะไร และ hreflang ที่ฝั่งตรงข้ามไม่ตอบรับหรือถูก render ฝั่ง client จะถูกทิ้ง"
     },
     {
       "cluster_id": "C-2",
@@ -228,10 +245,11 @@
   ],
   "totals": {
     "clusters": 8,
-    "urls_in_clusters": 45
+    "urls_in_clusters": 45,
+    "clusters_with_canonical_owner": 1
   },
   "notes": [
-    "C-1 ถูกวิเคราะห์ละเอียดแล้วใน revision-specs/queue-3-intent-map.md — เหลือการตัดสินใจเดียวคือ /barcode-scanner-thailand จะ redirect, re-scope เป็นหน้า geo จริง หรือปลดระวาง",
+    "C-1 ตัดสินแล้วด้วย D-08 (option B) เหลืออีก 7 cluster ที่ยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง ไม่ใช่การตกหล่น",
     "/barcode-scanner-thailand มี URL ของหน้า geo แต่ title เป็นหน้า generic — เป็นหน้าที่แย่ง head term อยู่จริงทั้งที่ URL บอกว่าแคบกว่านั้น",
     "/barcode-scanners กับ /เครื่องสแกนบาร์โค้ด คือ intent เดียวกันคนละภาษา และ sitemap ไม่มี hreflang ผูกไว้ สองภาษาที่ไม่มี hreflang จะถูกอ่านเป็นหน้าซ้ำ ไม่ใช่หน้าคู่กัน",
     "C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว",

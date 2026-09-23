@@ -1,0 +1,35 @@
+{
+  "package_id": "PKG-ABOUT-ACS",
+  "queue_id": null,
+  "title": "Asian Coding Systems — งานบาร์โค้ดที่อยู่ข้างหน้างานจริง",
+  "target_url": "https://www.asiancoding.com/why-acs",
+  "page_type": "LANDING",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "v1 เผยแพร่ได้เมื่อ rendering gate ผ่าน · v2 ติด 5 claim ที่ ACS ปิดเองไม่ได้ทั้งหมด",
+  "qa_tier": "T1_CLAIM",
+  "flagged_claims": [
+    "CLM-B-004",
+    "CLM-O-003",
+    "CLM-O-004",
+    "CLM-O-006",
+    "CLM-E-011"
+  ],
+  "blocked_on_sources": [
+    "SRC-ACS-003",
+    "SRC-ACS-004"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "requested_by": "ACS Owner",
+  "requested_on": "2026-09-23"
+}

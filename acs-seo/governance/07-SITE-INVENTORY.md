@@ -24,7 +24,7 @@
 
 | Cluster | หน้าที่ชนกัน | จำนวน | canonical owner | คำตัดสิน |
 |---|---|---|---|---|
-| `C-1` Barcode scanner (generic commercial) | `/barcode-scanners` `/barcode-scanner-thailand` `/เครื่องสแกนบาร์โค้ด` `/industrial-barcode-scanner` `/wireless-barcode-scanner` `/2d-barcode-scanner` `/long-range-barcode-scanner` `/warehouse-barcode-scanner` `/retail-barcode-scanner` `/honeywell-barcode-scanner` | **10** | — | — |
+| `C-1` Barcode scanner (generic commercial) | `/barcode-scanners` `/barcode-scanner-thailand` `/เครื่องสแกนบาร์โค้ด` `/industrial-barcode-scanner` `/wireless-barcode-scanner` `/2d-barcode-scanner` `/long-range-barcode-scanner` `/warehouse-barcode-scanner` `/retail-barcode-scanner` `/honeywell-barcode-scanner` | **10** | [object Object] | NEW_WITH_DISTINCT_INTENT |
 | `C-2` Barcode printer | `/barcode-printers` `/barcode-printer-thailand` `/barcode-label-printer` `/tsc-barcode-printer` `/barcode-printer-buying-guide` `/knowledge/barcode-printer-types` | **6** | — | — |
 | `C-3` RFID | `/rfid-systems` `/rfid-reader` `/rfid-warehouse-system` `/rfid-workflow-context` `/brady/scanners-rfid` `/knowledge/rfid-warehouse-implementation` `/knowledge/rfid-technology` | **7** | — | — |
 | `C-4` Manufacturing | `/manufacturing` `/industry/manufacturing` `/brady/solutions/manufacturing` `/case-study/manufacturing` `/roi-calculator/manufacturing` | **5** | — | — |
@@ -33,7 +33,7 @@
 | `C-7` Scanner selection / comparison | `/barcode-scanner-comparison` `/knowledge/product-comparisons` `/knowledge/how-to-choose-barcode-scanner` `/knowledge/wired-vs-wireless-barcode-scanner` `/select-solution` | **5** | — | — |
 | `C-8` Partner ecosystem | `/partner-ecosystem-hub` `/why-acs/partner-ecosystem` | **2** | — | — |
 
-- C-1 ถูกวิเคราะห์ละเอียดแล้วใน revision-specs/queue-3-intent-map.md — เหลือการตัดสินใจเดียวคือ /barcode-scanner-thailand จะ redirect, re-scope เป็นหน้า geo จริง หรือปลดระวาง
+- C-1 ตัดสินแล้วด้วย D-08 (option B) เหลืออีก 7 cluster ที่ยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง ไม่ใช่การตกหล่น
 - /barcode-scanner-thailand มี URL ของหน้า geo แต่ title เป็นหน้า generic — เป็นหน้าที่แย่ง head term อยู่จริงทั้งที่ URL บอกว่าแคบกว่านั้น
 - /barcode-scanners กับ /เครื่องสแกนบาร์โค้ด คือ intent เดียวกันคนละภาษา และ sitemap ไม่มี hreflang ผูกไว้ สองภาษาที่ไม่มี hreflang จะถูกอ่านเป็นหน้าซ้ำ ไม่ใช่หน้าคู่กัน
 - C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว

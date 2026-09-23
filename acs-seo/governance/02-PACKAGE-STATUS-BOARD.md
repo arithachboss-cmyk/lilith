@@ -2,17 +2,17 @@
 
 # Package Status Board
 
-ณ วันที่ **2026-09-22** — 19 รายการ (Owner แจ้งไว้ 19)
+ณ วันที่ **2026-09-23** — 20 รายการ (Owner แจ้งไว้ 19)
 
 > ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic
 
-**สรุป:** PASS = 0 · REVISE = 5 · HOLD = 1 · BLOCKED = 13
+**สรุป:** PASS = 0 · REVISE = 7 · HOLD = 0 · BLOCKED = 13
 
 **PASS = 0** — ยังไม่มีแพ็กเกจใดผ่านได้ เพราะ rendering gate อยู่ที่ `FAIL` และ Source Pack ยังไม่ครบ
 
 | Package | Queue | Board | Package status | QA tier | Flagged claims | ติดที่ source | เหตุผล |
 |---|---|---|---|---|---|---|---|
-| `PKG-Q03` | #3 | **HOLD** | DRAFT_PENDING_REVIEW | T2_FULL | — | `SRC-WEB-004` | Cannibalization — intent map เสร็จแล้ว เหลือคำตัดสินเดียว: /barcode-scanner-thailand จะ redirect, re-scope เป็นหน้า geo จริง หรือปลดระวาง กำหนด 2026-09-24 |
+| `PKG-Q03` | #3 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-O-002`, `CLM-O-009`, `CLM-O-010` | `SRC-ACS-001`, `SRC-ACS-002`, `SRC-ACS-004` | HOLD ถูกปลดด้วย D-08 (option B) — เก็บ /barcode-scanner-thailand ไว้แล้วเขียนใหม่เป็นหน้าซื้อของตลาดไทยจริง ทำได้ทันทีสองอย่างคือเปลี่ยน title/H1 ให้เลิกยิง head term และเขียนเนื้อหาแบบกระบวนการ ที่เหลือรอข้อมูล ACS |
 | `PKG-Q04` | #4 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-002`, `CLM-E-004`, `CLM-E-005`, `CLM-S-002` | `SRC-VEN-001` | wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q17` | #17 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | — | ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ — มี revision spec พร้อมใช้แล้ว |
@@ -31,17 +31,19 @@
 | `PKG-UNMAPPED-11` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-UNMAPPED-12` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-UNMAPPED-13` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
+| `PKG-ABOUT-ACS` | — | **REVISE** | DRAFT_PENDING_REVIEW | T1_CLAIM | `CLM-B-004`, `CLM-O-003`, `CLM-O-004`, `CLM-O-006`, `CLM-E-011` | `SRC-ACS-003`, `SRC-ACS-004` | มีสองดราฟต์ — v1 ไม่มี claim ที่ถูก gate เลย เผยแพร่ได้ทันทีเมื่อ rendering gate ผ่าน · v2 มีสิ่งที่ Owner ขอครบแต่ติด 4 claim |
 
 ## คำตัดสินของ Owner ที่บันทึกไว้
 
 | Package | คำตัดสิน |
 |---|---|
-| `PKG-Q03` | HOLD จนกว่าจะ map intent เสร็จ |
+| `PKG-Q03` | D-08 (ทับ D-07) — option B ตัดสินโดย ACS Owner 2026-09-23 ทันกำหนด 2026-09-24 |
 | `PKG-Q04` | REVISE wording ห้ามฟันธงถ้าไม่มี datasheet สินค้าจริง |
 | `PKG-Q16` | ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่ |
 | `PKG-Q17` | ใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับว่ายี่ห้อไหนดีที่สุด |
 | `PKG-Q18` | ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่ |
 | `PKG-Q21` | ลบตัวเลข 65-70% → 95%+ จนกว่าจะมีหลักฐาน |
+| `PKG-ABOUT-ACS` | Owner ขอเมื่อ 2026-09-23: ชมเชย ACS, เอ่ย Honeywell, 7-Eleven, 30 ปี, และคำมั่นว่าจะซื่อสัตย์และมั่นคงต่อไป |
 
 ## คำถามค้าง
 

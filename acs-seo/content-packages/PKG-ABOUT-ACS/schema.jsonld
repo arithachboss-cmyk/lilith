@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "Asian Coding Systems — งานบาร์โค้ดที่อยู่ข้างหน้างานจริง",
+  "description": "ACS ทำงานด้านบาร์โค้ดและระบบระบุตัวตนให้ธุรกิจไทย ทั้งคลังสินค้า สายการผลิต ค้าปลีก และร้านสะดวกซื้อ พร้อมแนวทางทำงานที่ยึดความซื่อสัตย์และความมั่นคง",
+  "url": "https://www.asiancoding.com/why-acs",
+  "inLanguage": "th-TH",
+  "_generation_note": "regenerate ได้จาก meta.json — ยังไม่ใส่ publisher ที่มีชื่อองค์กรเต็มจนกว่าจะมี SRC-ACS-004"
+}

@@ -1,15 +1,15 @@
 {
-  "package_id": "__fixture-cannibal__",
+  "package_id": "__fixture-cluster-resolved__",
   "title": "หลักการเลือกระหว่างบาร์โค้ด 1D และ 2D ให้เหมาะกับงาน",
   "meta_description": "อธิบายความต่างของบาร์โค้ด 1D และ 2D ในเชิงหลักการ พร้อมแนวทางพิจารณาก่อนเลือกใช้ และเหตุผลที่ควรทดสอบกับหน้างานจริง",
-  "canonical": "https://www.asiancoding.com/rfid-systems",
-  "target_url": "https://www.asiancoding.com/rfid-systems",
+  "canonical": "https://www.asiancoding.com/barcode-scanners",
+  "target_url": "https://www.asiancoding.com/barcode-scanners",
   "page_type": "PRODUCT",
   "canonical_intent": "อธิบายความต่างเชิงหลักการของ 1D กับ 2D ไม่ครอบคลุมการเปรียบเทียบรุ่นหรือยี่ห้อ",
   "primary_keyword": "บาร์โค้ด 1d 2d",
   "secondary_keywords": [],
   "intent": "INFORMATIONAL",
-  "action": "NEW",
+  "action": "ENRICH",
   "internal_links": [
     "https://www.asiancoding.com/knowledge/barcode-technology"
   ],

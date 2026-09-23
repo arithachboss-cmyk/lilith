@@ -32,7 +32,7 @@ node acs-seo/tools/validate.mjs --board          # พิมพ์ status board
 node acs-seo/tools/redact.mjs <ดราฟต์> --fix     # ปิดข้อความที่ Claim Register ห้าม (ทิ้ง marker ไว้)
 node acs-seo/tools/evidence-check.mjs <แพ็กเกจ>   # หลักฐานครบไหม ราคาหมดอายุหรือยัง
 node acs-seo/tools/evidence-check.mjs <แพ็กเกจ> --as-of 2027-01-01   # ประเมินล่วงหน้า
-node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (70 ข้อ)
+node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (99 ข้อ)
 node acs-seo/tools/render-docs.mjs               # สร้างเอกสาร 00/01/02 ใหม่จาก data/
 ```
 
@@ -54,7 +54,7 @@ acs-seo/
 │   ├── cannibalization_clusters.json  8 cluster ที่หน้าเดิมชนกัน
 │   └── gates.json            สถานะ gate ส่วนกลาง
 ├── templates/package/ เทมเพลต 7 ไฟล์มาตรฐานของหนึ่งแพ็กเกจ
-├── content-packages/  แพ็กเกจจริง (ยังว่าง)
+├── content-packages/  แพ็กเกจจริง (PKG-ABOUT-ACS)
 ├── tests/fixtures/    fixture ทดสอบ validator (ไม่ใช่เนื้อหาเผยแพร่)
 └── tools/             validate.mjs, redact.mjs, evidence-check.mjs, render-docs.mjs, selftest.mjs
 ```
@@ -86,6 +86,9 @@ node acs-seo/tools/validate.mjs
 - **ราคาที่หมดอายุแล้ว** — ราคาทุกรายการต้องมี `valid_until` และ validator จะ FAIL เมื่อเลยวันนั้น
   เพราะราคาที่ไม่มีวันหมดอายุจะค้างบนหน้าเว็บโดยยังดูเหมือนมีแหล่งอ้างอิง
 - **ตัวเลขจาก datasheet ที่ไม่มีเงื่อนไขการวัด** — ค่าที่วัดที่ 23 °C ไม่ได้อนุญาตให้พูดถึงห้องแช่แข็ง
+- **ชื่อลูกค้า** และการอ้างว่าดูแลลูกค้ารายใดแม้ไม่เอ่ยชื่อ — ความยินยอมเป็นของลูกค้า ไม่ใช่ของ ACS
+- **สถานะสต็อกและระยะเวลาส่งมอบ** — หมดอายุเร็วกว่าราคา เผยแพร่เป็นสถานะไม่ได้ ต้องเขียนเป็นกระบวนการ
+- **การอ้างอายุบริษัทและความเป็นพาร์ทเนอร์** — ผู้ปิด claim คือเอกสารบริษัทและหนังสือรับรองจากแบรนด์
 
 สิ่งที่ตรวจไม่ได้เพราะยังไม่มีข้อมูล จะถูกรายงานเป็น `BLOCKED_ON_SOURCE` — **ไม่ใช่ PASS**
 

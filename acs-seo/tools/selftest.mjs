@@ -99,6 +99,14 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
     c1.pages.filter((p) => p.role === 'GENERIC').every((p) => c1.generic_urls.includes(p.url)));
   check('C-1 ชี้ไปยังเอกสารตัดสินใจและกำหนดเวลา',
     c1.decision_document === 'revision-specs/queue-3-intent-map.md' && c1.decision_due === '2026-09-24');
+  check('C-1 มีหน้าหลักแยกตามภาษาแล้ว (คำตัดสิน D-08)',
+    c1.canonical_owner?.th === '/เครื่องสแกนบาร์โค้ด' && c1.canonical_owner?.en === '/barcode-scanners');
+  check('C-1 บันทึกว่าใครตัดสินและเมื่อไร',
+    c1.decided_by === 'ACS Owner' && c1.decided_on === '2026-09-23' && c1.decision_id === 'D-08');
+  check('C-1 ยังไม่ถูกลงมือทำ และมี runbook กำกับ',
+    c1.executed === false && typeof c1.execution_runbook === 'string');
+  check('อีก 7 cluster ยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง',
+    clusters.clusters.filter((c) => !c.canonical_owner).length === 7);
   check('page_type ของทุกหน้าอยู่ใน enum',
     inv.pages.every((p) => inv.page_type_enum.includes(p.page_type)));
   check('risk flag ของทุกหน้าอยู่ใน enum',
@@ -137,6 +145,10 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   check('หน้าใหม่ที่ยิง intent ของ cluster ที่ยังไม่มีเจ้าของถูก FAIL', can.status === 'FAIL');
   check('และระบุว่าเป็น cluster ไหน', codes(can).has('CANNIBAL_UNRESOLVED'));
   check('หน้าที่อยู่ใน cluster ถูกยกเป็น T2_FULL อัตโนมัติ', can.tier === 'T2_FULL', can.tier);
+
+  const resolved = find('__fixture-cluster-resolved__');
+  check('cluster ที่มีหน้าหลักแล้วไม่ถูกกั้นอีก', resolved.status === 'PASS',
+    resolved.findings.map((f) => f.code).join(','));
 
   const c = codes(bad);
   check('แพ็กเกจละเมิดถูกตัดสิน FAIL', bad.status === 'FAIL');
@@ -182,6 +194,29 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   check('รัน --fix ซ้ำแล้วผลไม่เปลี่ยน (idempotent)', readFileSync(draft, 'utf8') === snapshot);
   const after = run(REDACT, [draft, '--json']);
   check('หลัง --fix ไม่เหลือข้อความ BLOCK', after.blocked === 0, String(after.blocked));
+}
+
+/* ── 5b. แพ็กเกจ about-acs: สองดราฟต์ต้องให้ผลต่างกัน ────────────
+   v1 พูดเรื่องเดียวกันในเชิงเจตนาโดยไม่มี claim ที่ถูก gate
+   v2 มีสิ่งที่ Owner ขอครบ และติด claim ที่ ACS ปิดเองไม่ได้ทั้งหมด */
+{
+  const P = join(ROOT, 'content-packages/PKG-ABOUT-ACS');
+  const runRedact = (file) => {
+    try { return { out: execFileSync(process.execPath, [REDACT, join(P, file), '--json'], { encoding: 'utf8' }), code: 0 }; }
+    catch (err) { return { out: String(err.stdout ?? ''), code: err.status }; }
+  };
+  const v1 = JSON.parse(runRedact('draft-v1-publishable.md').out);
+  check('ดราฟต์ที่เผยแพร่ได้ไม่มี claim ที่ถูก gate เลย', v1.results.length === 0 && v1.blocked === 0,
+    JSON.stringify(v1.results.flatMap((r) => r.findings.map((f) => f.rule_id))));
+
+  const v2 = JSON.parse(runRedact('draft-v2-full.md').out);
+  const rules = new Set(v2.results.flatMap((r) => r.findings.map((f) => f.rule_id)));
+  check('ดราฟต์ตามที่ Owner ขอ ถูกจับซูเปอร์ลาทีฟ', rules.has('FW-B-001'));
+  check('— จับการอ้างความเป็นพาร์ทเนอร์', rules.has('FW-O-003'));
+  check('— จับอายุบริษัท 30 ปี', rules.has('FW-O-004'));
+  check('— จับชื่อลูกค้า', rules.has('FW-O-016'));
+  check('— จับการอ้างว่าดูแลลูกค้า แม้ไม่เอ่ยชื่อ', rules.has('FW-O-017'));
+  check('— จับชื่อผู้ผลิต', rules.has('FW-E-009'));
 }
 
 /* ── 6. หลักฐานครบจริงไหม และราคาหมดอายุหรือยัง ──────────────────

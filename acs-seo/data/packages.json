@@ -1,6 +1,6 @@
 {
-  "version": "2.0.0",
-  "as_of": "2026-09-22",
+  "version": "4.0.0",
+  "as_of": "2026-09-23",
   "total_packages_declared_by_owner": 19,
   "global_rule": "ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic",
   "board_status_enum": [
@@ -18,18 +18,25 @@
       "target_url": null,
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
-      "board_status": "HOLD",
-      "board_reason": "Cannibalization — intent map เสร็จแล้ว เหลือคำตัดสินเดียว: /barcode-scanner-thailand จะ redirect, re-scope เป็นหน้า geo จริง หรือปลดระวาง กำหนด 2026-09-24",
-      "owner_decision": "HOLD จนกว่าจะ map intent เสร็จ",
+      "board_status": "REVISE",
+      "board_reason": "HOLD ถูกปลดด้วย D-08 (option B) — เก็บ /barcode-scanner-thailand ไว้แล้วเขียนใหม่เป็นหน้าซื้อของตลาดไทยจริง ทำได้ทันทีสองอย่างคือเปลี่ยน title/H1 ให้เลิกยิง head term และเขียนเนื้อหาแบบกระบวนการ ที่เหลือรอข้อมูล ACS",
+      "owner_decision": "D-08 (ทับ D-07) — option B ตัดสินโดย ACS Owner 2026-09-23 ทันกำหนด 2026-09-24",
       "qa_tier": "T2_FULL",
-      "flagged_claims": [],
+      "flagged_claims": [
+        "CLM-O-001",
+        "CLM-O-002",
+        "CLM-O-009",
+        "CLM-O-010"
+      ],
       "blocked_on_sources": [
-        "SRC-WEB-004"
+        "SRC-ACS-001",
+        "SRC-ACS-002",
+        "SRC-ACS-004"
       ],
       "gates": {
         "mechanical": "NOT_RUN",
         "claim_qa": "NOT_RUN",
-        "cannibalization": "FAIL_HOLD",
+        "cannibalization": "PASS",
         "rendering": "FAIL",
         "owner_approval": "NOT_GRANTED"
       },
@@ -54,7 +61,11 @@
         "owner_confirmed": false
       },
       "cannibalization_cluster": "C-1",
-      "revision_spec": "revision-specs/queue-3-intent-map.md"
+      "revision_spec": "revision-specs/queue-3-execution-runbook.md",
+      "unblocked_now": [
+        "เปลี่ยน title และ H1 ให้เลิกอ้าง head term เปล่า ๆ — ไม่ต้องใช้ source ใหม่และแก้การชนระดับ title ได้ด้วยตัวเอง",
+        "เขียนเนื้อหาแบบกระบวนการ ไม่ใช่สถานะ — ดู revision-specs/queue-3-execution-runbook.md"
+      ]
     },
     {
       "package_id": "PKG-Q04",
@@ -703,6 +714,55 @@
       },
       "cannibalization_cluster": null,
       "revision_spec": null
+    },
+    {
+      "package_id": "PKG-ABOUT-ACS",
+      "queue_id": null,
+      "title": "หน้าแนะนำ ACS",
+      "target_url": null,
+      "page_type": "LANDING",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "มีสองดราฟต์ — v1 ไม่มี claim ที่ถูก gate เลย เผยแพร่ได้ทันทีเมื่อ rendering gate ผ่าน · v2 มีสิ่งที่ Owner ขอครบแต่ติด 4 claim",
+      "owner_decision": "Owner ขอเมื่อ 2026-09-23: ชมเชย ACS, เอ่ย Honeywell, 7-Eleven, 30 ปี, และคำมั่นว่าจะซื่อสัตย์และมั่นคงต่อไป",
+      "qa_tier": "T1_CLAIM",
+      "flagged_claims": [
+        "CLM-B-004",
+        "CLM-O-003",
+        "CLM-O-004",
+        "CLM-O-006",
+        "CLM-E-011"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-003",
+        "SRC-ACS-004"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-ABOUT-ACS",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002",
+        "why": "หน้า /why-acs ถือ flag OWNER อยู่แล้ว",
+        "urls": [
+          "https://www.asiancoding.com/why-acs"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null,
+      "closure_owner": {
+        "CLM-O-006": "ACS — หนังสือรับรองบริษัทหรือเอกสารปีก่อตั้ง",
+        "CLM-O-003": "Honeywell — หนังสือรับรองจากแบรนด์ ไม่ใช่ ACS",
+        "CLM-O-004": "ลูกค้ารายนั้น — ความยินยอมของเขา ไม่ใช่การอนุมัติของ ACS",
+        "CLM-B-004": "ไม่มีอะไรปิดได้ ต้องลบซูเปอร์ลาทีฟออก"
+      }
     }
   ],
   "site_findings": {
@@ -711,5 +771,6 @@
     "cannibalization_clusters": 8,
     "urls_in_clusters": 45,
     "note": "61 จาก 82 หน้าที่มีอยู่แล้วบนเว็บถือ risk flag อย่างน้อยหนึ่งอย่าง ปัญหาจึงไม่ได้อยู่แค่ 19 แพ็กเกจใหม่ แต่อยู่ที่หน้าเดิมด้วย"
-  }
+  },
+  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 จึงไม่ถูกนับรวมในจำนวนนั้น"
 }

@@ -1,13 +1,13 @@
 {
-  "package_id": "__fixture-cannibal__",
+  "package_id": "__fixture-cluster-resolved__",
   "queue_id": null,
   "title": "หลักการเลือกระหว่างบาร์โค้ด 1D และ 2D ให้เหมาะกับงาน",
-  "target_url": "https://www.asiancoding.com/rfid-systems",
+  "target_url": "https://www.asiancoding.com/barcode-scanners",
   "page_type": "PRODUCT",
   "package_status": "DRAFT_PENDING_REVIEW",
   "board_status": "BLOCKED",
-  "board_reason": "fixture — ทดสอบ cannibalization gate บน cluster ที่ยังไม่มีหน้าหลัก",
-  "qa_tier": "WORDING_QA_OK",
+  "board_reason": "fixture — cluster ที่มีหน้าหลักแล้วต้องผ่าน",
+  "qa_tier": "T2_FULL",
   "flagged_claims": [],
   "blocked_on_sources": [],
   "gates": {
