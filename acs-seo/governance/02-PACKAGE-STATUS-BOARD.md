@@ -2,11 +2,11 @@
 
 # Package Status Board
 
-ณ วันที่ **2026-09-24** — 21 รายการ (Owner แจ้งไว้ 19)
+ณ วันที่ **2026-09-24** — 22 รายการ (Owner แจ้งไว้ 19)
 
 > ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic
 
-**สรุป:** PASS = 0 · REVISE = 5 · HOLD = 1 · BLOCKED = 15
+**สรุป:** PASS = 0 · REVISE = 6 · HOLD = 1 · BLOCKED = 15
 
 **PASS = 0** — ยังไม่มีแพ็กเกจใดผ่านได้ เพราะ rendering gate อยู่ที่ `FAIL` และ Source Pack ยังไม่ครบ
 
@@ -33,6 +33,7 @@
 | `PKG-UNMAPPED-13` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-ABOUT-ACS` | — | **HOLD** | DRAFT_PENDING_REVIEW | T1_CLAIM | `CLM-B-004`, `CLM-O-003`, `CLM-O-004`, `CLM-O-006`, `CLM-E-011` | `SRC-ACS-003`, `SRC-ACS-004`, `SRC-WEB-004` | ติด C-9 — /why-acs อยู่ในกลุ่มหน้าองค์กร 4 หน้าที่ยังไม่มีหน้าหลัก การเพิ่มหน้าแนะนำองค์กรโดยไม่ตัดสินกลุ่มนี้ก่อน จะทำซ้ำรูปแบบเดียวกับที่ C-1 เพิ่งตัดสินให้แก้ · ดราฟต์ v1 พร้อมอยู่แล้ว ไม่มี claim ที่ถูก gate รอแค่คำตัดสินว่าหน้าไหนคือหน้าหลักของกลุ่ม |
 | `PKG-RFID-VS-BARCODE` | — | **REVISE** | DRAFT_PENDING_REVIEW | WORDING_QA_OK | — | `SRC-VEN-002`, `SRC-KW-001` | แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (RFID) · เป็นหน้า RFID เพียงหน้าเดียวจากแปดหน้าที่ไม่อยู่ใน C-3 ซึ่งยังไม่มี canonical owner จึงเป็นหน้า RFID หน้าเดียวที่เขียนได้ตอนนี้ · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่ |
+| `PKG-WMS-INTEGRATION` | — | **REVISE** | DRAFT_PENDING_REVIEW | WORDING_QA_OK | — | `SRC-ACS-001`, `SRC-KW-001` | แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · หน้าคลังสินค้าที่เกี่ยวข้องมีเก้าหน้า เจ็ดหน้าอยู่ใน C-5 หรือ C-3 ซึ่งยังไม่มี canonical owner เหลือสองหน้าที่เขียนได้ · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่ |
 
 ## คำตัดสินของ Owner ที่บันทึกไว้
 
@@ -46,6 +47,7 @@
 | `PKG-Q21` | ลบตัวเลข 65-70% → 95%+ จนกว่าจะมีหลักฐาน |
 | `PKG-ABOUT-ACS` | Owner ขอเมื่อ 2026-09-23: ชมเชย ACS, เอ่ย Honeywell, 7-Eleven, 30 ปี, และคำมั่นว่าจะซื่อสัตย์และมั่นคงต่อไป |
 | `PKG-RFID-VS-BARCODE` | ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ |
+| `PKG-WMS-INTEGRATION` | ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ |
 
 ## คำถามค้าง
 

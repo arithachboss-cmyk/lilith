@@ -1,0 +1,37 @@
+{
+  "package_id": "PKG-WMS-INTEGRATION",
+  "queue_id": null,
+  "title": "เชื่อมบาร์โค้ดเข้ากับ WMS: สี่จุดที่ต้องตกลงก่อน",
+  "target_url": "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+  "page_type": "KNOWLEDGE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · หน้าคลังสินค้า 9 หน้าเกือบทั้งหมดอยู่ใน C-5 หรือ C-3 ซึ่งยังไม่มี canonical owner เหลือสองหน้าที่เขียนได้ และเลือกหน้านี้ก่อนเพราะเป็นมุมที่หน้าอื่นในเว็บไม่ได้ตอบ · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+  "qa_tier": "WORDING_QA_OK",
+  "qa_tier_note": "หน้าปลายทางไม่ถือ risk flag ใด ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต ไม่มีชื่อซอฟต์แวร์ และไม่มี flagged_claims",
+  "flagged_claims": [],
+  "blocked_on_sources": [
+    "SRC-ACS-001",
+    "SRC-KW-001"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "out_of_queue": true,
+  "requested_by": "ACS Owner — หัวข้อที่กำหนดให้เน้น: Warehouse Automation",
+  "requested_on": "2026-09-24",
+  "cannibalization_cluster": null,
+  "open_question": {
+    "question": "แพ็กเกจนอกคิวนี้ซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+    "why_cannot_answer_now": "ยังไม่มี SRC-KW-001 ฉบับเต็ม · action เป็น ENRICH บนหน้าที่มีอยู่แล้ว ไม่ได้สร้างหน้าใหม่ ถ้าซ้ำให้รวมเข้ากับรายการนั้นได้",
+    "raised_on": "2026-09-24"
+  }
+}
