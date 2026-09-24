@@ -1,0 +1,37 @@
+{
+  "package_id": "PKG-Q04",
+  "queue_id": 4,
+  "title": "เลือกวัสดุฉลากบาร์โค้ด: กลไกที่ตัดสินว่าฉลากอยู่หรือหลุด",
+  "target_url": "https://www.asiancoding.com/knowledge/barcode-label-materials",
+  "page_type": "KNOWLEDGE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "ดราฟต์ Form A ส่งแล้ว — ทุกประโยคเป็นกลไก ไม่มีค่าความทนทานของวัสดุใดเลย spec §7 ระบุเองว่านี่คือผลลัพธ์ที่เผยแพร่ได้ ไม่ใช่เหตุผลที่ต้องรอ · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และประโยค Form B ที่จะให้ค่าจริงยังรอ SRC-VEN-001 คู่กับ SRC-ACS-001",
+  "qa_tier": "T2_FULL",
+  "qa_tier_note": "T2_FULL เพราะหน้าปลายทางถือ risk flag SPEC ไม่ใช่เพราะดราฟต์มีตัวเลข — ดราฟต์นี้ไม่มีตัวเลขเลย",
+  "flagged_claims": [
+    "CLM-E-001",
+    "CLM-E-004",
+    "CLM-E-005",
+    "CLM-O-002"
+  ],
+  "blocked_on_sources": [
+    "SRC-VEN-001",
+    "SRC-ACS-001"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "queue_decision": "Owner Queue #4 — REVISE wording เรื่องวัสดุและสภาพแวดล้อม ห้ามฟันธงถ้าไม่มี datasheet สินค้าจริง",
+  "revision_spec": "revision-specs/queue-4.md",
+  "cannibalization_cluster": null,
+  "cluster_note": "/knowledge/barcode-label-materials ไม่อยู่ใน cluster ใด และไม่ถือ flag CANNIBAL — ต่างจากสามหน้าที่บันทึกไว้ใน open_question ของ PKG-Q17"
+}

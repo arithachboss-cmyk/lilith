@@ -81,32 +81,33 @@
     {
       "package_id": "PKG-Q04",
       "queue_id": 4,
-      "title": null,
-      "target_url": null,
-      "page_type": null,
+      "title": "เลือกวัสดุฉลากบาร์โค้ด: กลไกที่ตัดสินว่าฉลากอยู่หรือหลุด",
+      "target_url": "https://www.asiancoding.com/knowledge/barcode-label-materials",
+      "page_type": "KNOWLEDGE",
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "REVISE",
-      "board_reason": "wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน — มี revision spec พร้อมใช้แล้ว",
+      "board_reason": "ดราฟต์ Form A ส่งแล้ว ทุกประโยคเป็นกลไก ไม่มีค่าความทนทานของวัสดุใดเลย · spec §7 ระบุเองว่า ถ้าไม่มี SRC-VEN-001 คู่กับ SRC-ACS-001 ทุกประโยคต้องเป็น Form A หรือถูกลบ และนั่นคือผลลัพธ์ที่เผยแพร่ได้ ไม่ใช่เหตุผลที่ต้องรอ · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag SPEC ของหน้าปลายทาง ไม่ใช่เพราะดราฟต์มีตัวเลข) ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และประโยค Form B ที่จะให้ค่าจริงยังรอดาต้าชีต",
       "owner_decision": "REVISE wording ห้ามฟันธงถ้าไม่มี datasheet สินค้าจริง",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
-        "CLM-B-002",
+        "CLM-E-001",
         "CLM-E-004",
         "CLM-E-005",
-        "CLM-S-002"
+        "CLM-O-002"
       ],
       "blocked_on_sources": [
-        "SRC-VEN-001"
+        "SRC-VEN-001",
+        "SRC-ACS-001"
       ],
       "gates": {
-        "mechanical": "NOT_RUN",
+        "mechanical": "PASS",
         "claim_qa": "NOT_RUN",
-        "cannibalization": "NOT_RUN",
+        "cannibalization": "PASS",
         "rendering": "FAIL",
         "owner_approval": "NOT_GRANTED"
       },
-      "package_path": null,
-      "intake_required": true,
+      "package_path": "content-packages/PKG-Q04",
+      "intake_required": false,
       "target_url_candidates": {
         "status": "RECOMMENDATION",
         "derived_from": "SRC-WEB-002 risk flags",
