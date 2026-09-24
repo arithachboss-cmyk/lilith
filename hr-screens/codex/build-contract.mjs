@@ -7,7 +7,7 @@
  * check-contract.mjs จะ fail ถ้าไฟล์ที่ commit ไว้ไม่ตรงกับ data.js
  */
 
-import { writeFileSync } from 'node:fs';
+import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ROLES, SPECIALISTS, FUNNEL, PRINCIPLES } from '../data.js';
@@ -82,8 +82,85 @@ export function buildScreenIndex() {
 const writeJson = (name, value) =>
   writeFileSync(join(OUT, name), `${JSON.stringify(value, null, 2)}\n`, 'utf8');
 
+/*
+ * ทะเบียนบทบาทฝั่ง TypeScript — generate จาก data.js เหมือนกับไฟล์ JSON
+ * เพื่อไม่ให้มีสำเนาที่หลุดเวอร์ชันกัน · AMI-001
+ */
+const TS_OUT = join(here, '..', '..', 'packages', 'contracts', 'src', 'ami');
+
+const quote = (value) => `'${String(value).replace(/\\/g, '\\\\').replace(/'/g, "\\'")}'`;
+
+export function buildRolesTs() {
+  const registry = buildRoleRegistry();
+  const role = (r) => `  {
+    screen: ${quote(r.screen)},
+    roleId: ${quote(r.role_id)},
+    slug: ${quote(r.slug)},
+    title: ${quote(r.title)},
+    grokId: ${quote(r.grok_id)},
+    callSign: ${quote(r.call_sign)},
+    space: ${quote(r.space)},
+    accent: ${quote(r.accent)},
+    panelKind: ${quote(r.panel_kind)},
+  },`;
+  const specialist = (s) => `  {
+    grokId: ${quote(s.grok_id)},
+    callSign: ${quote(s.call_sign)},
+  },`;
+
+  return `/*
+ * AMI — HUMAN + AI COMMAND · ทะเบียนบทบาท
+ *
+ * GENERATED จาก hr-screens/data.js โดย hr-screens/codex/build-contract.mjs
+ * ห้ามแก้ไฟล์นี้ด้วยมือ · แก้ที่ data.js แล้วรัน build-contract.mjs
+ * hr-screens/codex/check-contract.mjs จะ fail ถ้าไฟล์นี้หลุดจากต้นทาง
+ */
+
+export const AMI_ROLES = [
+${registry.roles.map(role).join('\n')}
+] as const;
+
+export const AMI_SHARED_SPECIALISTS = [
+${registry.shared_specialists.map(specialist).join('\n')}
+] as const;
+
+export type AmiRole = (typeof AMI_ROLES)[number];
+
+/** role_id ที่มีอยู่จริงเท่านั้น · บทบาทที่ไม่อยู่ในทะเบียนเป็น type error */
+export type AmiRoleId = AmiRole['roleId'];
+export type AmiCallSign = AmiRole['callSign'];
+export type AmiPanelKind = AmiRole['panelKind'];
+export type AmiAccent = AmiRole['accent'];
+export type AmiSpecialistCallSign = (typeof AMI_SHARED_SPECIALISTS)[number]['callSign'];
+
+/** Grok ทุกตัวในระบบ ทั้งที่ประจำตำแหน่งและที่อยู่ใน shared pool */
+export type AmiGrokId =
+  | AmiRole['grokId']
+  | (typeof AMI_SHARED_SPECIALISTS)[number]['grokId'];
+
+const BY_ROLE_ID = new Map<AmiRoleId, AmiRole>(
+  AMI_ROLES.map((role) => [role.roleId, role]),
+);
+
+/** คืนบทบาทจาก role_id · undefined เมื่อไม่รู้จัก ผู้เรียกต้องจัดการเอง */
+export function findAmiRole(roleId: string): AmiRole | undefined {
+  return BY_ROLE_ID.get(roleId as AmiRoleId);
+}
+
+export function isAmiRoleId(value: string): value is AmiRoleId {
+  return BY_ROLE_ID.has(value as AmiRoleId);
+}
+`;
+}
+
 if (import.meta.url === `file://${process.argv[1]}`) {
   writeJson('role-registry.json', buildRoleRegistry());
   writeJson('screens.json', buildScreenIndex());
-  process.stdout.write('เขียน contract/role-registry.json และ contract/screens.json แล้ว\n');
+  mkdirSync(TS_OUT, { recursive: true });
+  writeFileSync(join(TS_OUT, 'roles.ts'), buildRolesTs(), 'utf8');
+  process.stdout.write(
+    'เขียน contract/role-registry.json, contract/screens.json และ packages/contracts/src/ami/roles.ts แล้ว\n',
+  );
 }
+
+export { TS_OUT };
