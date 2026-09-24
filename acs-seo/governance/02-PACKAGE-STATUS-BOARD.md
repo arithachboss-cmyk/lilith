@@ -6,7 +6,7 @@
 
 > ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic
 
-**สรุป:** PASS = 0 · REVISE = 5 · HOLD = 1 · BLOCKED = 14
+**สรุป:** PASS = 0 · REVISE = 4 · HOLD = 1 · BLOCKED = 15
 
 **PASS = 0** — ยังไม่มีแพ็กเกจใดผ่านได้ เพราะ rendering gate อยู่ที่ `FAIL` และ Source Pack ยังไม่ครบ
 
@@ -14,9 +14,9 @@
 |---|---|---|---|---|---|---|---|
 | `PKG-Q03` | #3 | **REVISE** | DRAFT_PENDING_REVIEW | T1_CLAIM | `CLM-O-001`, `CLM-O-002`, `CLM-O-007`, `CLM-O-009`, `CLM-O-010`, `CLM-E-011` | `SRC-ACS-001`, `SRC-ACS-002`, `SRC-ACS-004`, `SRC-VEN-002` | ดราฟต์ตาม runbook §3 และ §5 ส่งแล้ว — title/H1 เลิกอ้าง head term เปล่า ๆ และเนื้อหาเขียนแบบกระบวนการ mechanical QA ผ่าน (PASS, tier T1_CLAIM) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL และหัวข้อที่ทำให้หน้านี้ต่างจริง (สต็อก กำหนดส่ง บริการพื้นที่ ราคา รุ่นสินค้า) ยังรอข้อมูล ACS · ตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23 |
 | `PKG-Q04` | #4 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-E-001`, `CLM-E-004`, `CLM-E-005`, `CLM-O-002` | `SRC-VEN-001`, `SRC-ACS-001` | ดราฟต์ Form A ส่งแล้ว ทุกประโยคเป็นกลไก ไม่มีค่าความทนทานของวัสดุใดเลย · spec §7 ระบุเองว่า ถ้าไม่มี SRC-VEN-001 คู่กับ SRC-ACS-001 ทุกประโยคต้องเป็น Form A หรือถูกลบ และนั่นคือผลลัพธ์ที่เผยแพร่ได้ ไม่ใช่เหตุผลที่ต้องรอ · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag SPEC ของหน้าปลายทาง ไม่ใช่เพราะดราฟต์มีตัวเลข) ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และประโยค Form B ที่จะให้ค่าจริงยังรอดาต้าชีต |
-| `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
+| `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-O-002`, `CLM-O-005` | `SRC-ACS-002`, `SRC-ACS-001` | ดราฟต์ Form A ส่งแล้ว ไม่มีตัวเลขเงินแม้แต่ตัวเดียว · spec §7 ระบุเองว่าถ้าไม่มี SRC-ACS-002 ทุกประโยคต้องเป็น Form A หรือถูกลบ ซึ่งเผยแพร่ได้ทันที และ §3 ว่า Form A เป็นหน้าที่ดีกว่าในเชิงธุรกิจด้วย · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag PRICE ของหน้าปลายทาง ไม่ใช่เพราะดราฟต์มีราคา) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และคำถามของ Owner ว่าหน้านี้ควรมีตัวเลขหรือควรเป็นหน้าขอใบเสนอราคาถาวร ยังไม่ได้ตอบ |
 | `PKG-Q17` | #17 | **BLOCKED** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | `SRC-WEB-002`, `SRC-WEB-004` | เนื้อหาเขียนได้ทันที (revision spec พร้อม ไม่ติด source) แต่ยังเลือก target URL ไม่ได้ สามหน้าที่เข้าข่ายเป็นบ้านของเนื้อหานี้ถือ flag CANNIBAL แต่ไม่ปรากฏใน cluster ใดเลย cannibalization gate จึงไม่ครอบคลุม การเขียนลงไปโดยไม่รู้ว่าชนกับอะไร คือการทำซ้ำรูปแบบเดียวกับ C-1 เปลี่ยนจาก REVISE เป็น BLOCKED เพราะอุปสรรคจริงถูกระบุแล้วและเป็นคำถามที่ตอบได้ ไม่ใช่เพราะงานถอยหลัง |
-| `PKG-Q18` | #18 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
+| `PKG-Q18` | #18 | **BLOCKED** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002`, `SRC-KW-001` | ใช้คำตัดสินเดียวกับ #16 และ spec เดียวกัน แต่ยังไม่รู้ว่าหมายถึงหน้าใด page inventory มีหน้าที่ถือ flag PRICE เพียงหน้าเดียวคือ /barcode-scanner-price-guide ซึ่ง PKG-Q16 ใช้ไปแล้ว spec เองก็ระบุว่าไม่มีดราฟต์ของทั้งสองคิวมาถึง จึงไม่สมมติความต่าง · เปลี่ยนจาก REVISE เป็น BLOCKED เพราะอุปสรรคจริงถูกระบุแล้วและเป็นคำถามที่ตอบได้ ไม่ใช่เพราะงานถอยหลัง |
 | `PKG-Q21` | #21 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-001`, `CLM-E-001`, `CLM-E-002`, `CLM-E-003` | `SRC-VEN-002` | ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน — มี revision spec พร้อมใช้แล้ว |
 | `PKG-UNMAPPED-01` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
 | `PKG-UNMAPPED-02` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |

@@ -1,0 +1,29 @@
+{
+  "package_id": "PKG-Q16",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [],
+  "evidence_note": "ว่างโดยตั้งใจ — ดราฟต์เป็น Form A ล้วน ไม่มีตัวเลขเงินให้รองรับ · เมื่อ SRC-ACS-002 มาถึง ให้ทำตาม price-claim-spec §4 ทีละตัวเลข และต้องแสดง effective date ในเนื้อหาที่ผู้อ่านเห็น ไม่ใช่เก็บไว้ในไฟล์ JSON อย่างเดียว",
+  "forbidden_scan": {
+    "run_at": "2026-09-24",
+    "tool": "node tools/redact.mjs content-packages/PKG-Q16/article.md",
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": [],
+    "first_run_findings": [
+      "article.md: FW-B-001 มากที่สุด — ร่างแรกเขียน 'ทำให้สองใบต่างกันมากที่สุด' แก้เป็น 'ต่างกันชัดเจนกว่าชั้นอื่น'"
+    ],
+    "note": "รอบล่าสุดได้ 'ไม่พบข้อความที่ต้องจัดการ' exit 0 · กฎราคาทั้งหกข้อไม่ยิงเลย เพราะดราฟต์ไม่มีตัวเลขเงิน ไม่มีการเปรียบเทียบราคา และไม่มีข้อความส่งเสริมการขาย"
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": [
+    "spec §7 ระบุว่าการรอ SRC-ACS-002 เป็นทางเลือก ไม่ใช่ข้อบังคับ — Form A เผยแพร่ได้ทันทีและเป็นหน้าที่ดีกว่าในเชิงธุรกิจ เพราะคำขอใบเสนอราคาให้ผลลัพธ์ ส่วนตัวเลขที่เก่าแล้วไม่ให้",
+    "PKG-Q18 ใช้คำตัดสินเดียวกับ #16 แต่ยังไม่มี target URL — inventory มีหน้าที่ถือ flag PRICE เพียงหน้าเดียวคือหน้านี้ จึงไม่เดาว่า #18 หมายถึงหน้าใด บันทึกเป็นคำถามค้างในบอร์ด"
+  ]
+}

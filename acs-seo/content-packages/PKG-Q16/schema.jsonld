@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "ต้นทุนระบบบาร์โค้ด: สิ่งที่ทำให้ใบเสนอราคาต่างกัน",
+  "description": "แนวทางอ่านต้นทุนระบบบาร์โค้ดให้ครบ ทั้งตัวอุปกรณ์ จำนวนจุดใช้งาน งานติดตั้ง และการดูแลระยะยาว พร้อมสิ่งที่ควรถามก่อนเทียบใบเสนอราคาจากผู้ขายหลายราย",
+  "url": "https://www.asiancoding.com/barcode-scanner-price-guide",
+  "inLanguage": "th-TH",
+  "_generation_note": "ห้ามใส่ offers, price, priceSpecification, aggregateRating หรือ review — validate.mjs จะ FAIL ทันทีถ้าไม่มีหลักฐาน ACS ที่ยืนยันแล้ว (CLM-O-001 / CLM-B-003) ซึ่งเป็นพฤติกรรมที่ถูกต้อง หน้าราคาที่ไม่มีราคาจริงไม่ควรประกาศ schema ว่ามี"
+}

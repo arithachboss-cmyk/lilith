@@ -125,30 +125,32 @@
     {
       "package_id": "PKG-Q16",
       "queue_id": 16,
-      "title": null,
-      "target_url": null,
-      "page_type": null,
+      "title": "ต้นทุนระบบบาร์โค้ด: สิ่งที่ทำให้ใบเสนอราคาต่างกัน",
+      "target_url": "https://www.asiancoding.com/barcode-scanner-price-guide",
+      "page_type": "KNOWLEDGE",
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "REVISE",
-      "board_reason": "มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว",
+      "board_reason": "ดราฟต์ Form A ส่งแล้ว ไม่มีตัวเลขเงินแม้แต่ตัวเดียว · spec §7 ระบุเองว่าถ้าไม่มี SRC-ACS-002 ทุกประโยคต้องเป็น Form A หรือถูกลบ ซึ่งเผยแพร่ได้ทันที และ §3 ว่า Form A เป็นหน้าที่ดีกว่าในเชิงธุรกิจด้วย · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag PRICE ของหน้าปลายทาง ไม่ใช่เพราะดราฟต์มีราคา) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และคำถามของ Owner ว่าหน้านี้ควรมีตัวเลขหรือควรเป็นหน้าขอใบเสนอราคาถาวร ยังไม่ได้ตอบ",
       "owner_decision": "ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
         "CLM-O-001",
-        "CLM-B-003"
+        "CLM-O-002",
+        "CLM-O-005"
       ],
       "blocked_on_sources": [
-        "SRC-ACS-002"
+        "SRC-ACS-002",
+        "SRC-ACS-001"
       ],
       "gates": {
-        "mechanical": "NOT_RUN",
+        "mechanical": "PASS",
         "claim_qa": "NOT_RUN",
-        "cannibalization": "NOT_RUN",
+        "cannibalization": "PASS",
         "rendering": "FAIL",
         "owner_approval": "NOT_GRANTED"
       },
-      "package_path": null,
-      "intake_required": true,
+      "package_path": "content-packages/PKG-Q16",
+      "intake_required": false,
       "target_url_candidates": {
         "status": "RECOMMENDATION",
         "derived_from": "SRC-WEB-002 risk flags",
@@ -159,7 +161,13 @@
         "owner_confirmed": false
       },
       "cannibalization_cluster": null,
-      "revision_spec": "revision-specs/price-claim-spec.md"
+      "revision_spec": "revision-specs/price-claim-spec.md",
+      "open_question": {
+        "question": "หน้า /barcode-scanner-price-guide ควรมีตัวเลขราคาหรือไม่ หรือควรเป็นหน้าขอใบเสนอราคาถาวร",
+        "raised_by": "revision-specs/price-claim-spec.md §7 — ระบุเองว่าเป็นคำถามของ Owner ไม่ใช่ของ QA",
+        "does_form_a_foreclose_it": false,
+        "raised_on": "2026-09-24"
+      }
     },
     {
       "package_id": "PKG-Q17",
@@ -219,8 +227,8 @@
       "target_url": null,
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
-      "board_status": "REVISE",
-      "board_reason": "มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว",
+      "board_status": "BLOCKED",
+      "board_reason": "ใช้คำตัดสินเดียวกับ #16 และ spec เดียวกัน แต่ยังไม่รู้ว่าหมายถึงหน้าใด page inventory มีหน้าที่ถือ flag PRICE เพียงหน้าเดียวคือ /barcode-scanner-price-guide ซึ่ง PKG-Q16 ใช้ไปแล้ว spec เองก็ระบุว่าไม่มีดราฟต์ของทั้งสองคิวมาถึง จึงไม่สมมติความต่าง · เปลี่ยนจาก REVISE เป็น BLOCKED เพราะอุปสรรคจริงถูกระบุแล้วและเป็นคำถามที่ตอบได้ ไม่ใช่เพราะงานถอยหลัง",
       "owner_decision": "ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
@@ -228,7 +236,8 @@
         "CLM-B-003"
       ],
       "blocked_on_sources": [
-        "SRC-ACS-002"
+        "SRC-ACS-002",
+        "SRC-KW-001"
       ],
       "gates": {
         "mechanical": "NOT_RUN",
@@ -249,7 +258,13 @@
         "owner_confirmed": false
       },
       "cannibalization_cluster": null,
-      "revision_spec": "revision-specs/price-claim-spec.md"
+      "revision_spec": "revision-specs/price-claim-spec.md",
+      "open_question": {
+        "question": "Queue #18 หมายถึงหน้าใด และต่างจาก Queue #16 อย่างไร",
+        "why_cannot_guess": "inventory 82 หน้ามีหน้าที่ถือ flag PRICE เพียงหน้าเดียว และ price-claim-spec.md ระบุเองว่าไม่มีดราฟต์ของทั้งสองคิวมาถึง จึงไม่สมมติความต่าง",
+        "unblocks_with": "SRC-KW-001 ฉบับเต็ม หรือคำตอบตรงจาก Owner",
+        "raised_on": "2026-09-24"
+      }
     },
     {
       "package_id": "PKG-Q21",

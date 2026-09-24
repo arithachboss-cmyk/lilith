@@ -1,0 +1,43 @@
+{
+  "package_id": "PKG-Q16",
+  "queue_id": 16,
+  "title": "ต้นทุนระบบบาร์โค้ด: สิ่งที่ทำให้ใบเสนอราคาต่างกัน",
+  "target_url": "https://www.asiancoding.com/barcode-scanner-price-guide",
+  "page_type": "KNOWLEDGE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "ดราฟต์ Form A ส่งแล้ว ไม่มีตัวเลขเงินแม้แต่ตัวเดียว · spec §7 ระบุเองว่าถ้าไม่มี SRC-ACS-002 ทุกประโยคต้องเป็น Form A หรือถูกลบ ซึ่งเผยแพร่ได้ทันที · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag PRICE ของหน้าปลายทาง) ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และคำถามของ Owner ว่าหน้านี้ควรมีตัวเลขหรือควรเป็นหน้าขอใบเสนอราคาถาวร ยังไม่ได้ตอบ",
+  "qa_tier": "T2_FULL",
+  "qa_tier_note": "T2_FULL เพราะหน้าปลายทางถือ risk flag PRICE ไม่ใช่เพราะดราฟต์มีราคา — ดราฟต์นี้ไม่มีตัวเลขเงินเลย",
+  "flagged_claims": [
+    "CLM-O-001",
+    "CLM-O-002",
+    "CLM-O-005"
+  ],
+  "blocked_on_sources": [
+    "SRC-ACS-002",
+    "SRC-ACS-001"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "queue_decision": "Owner Queue #16 — ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
+  "revision_spec": "revision-specs/price-claim-spec.md",
+  "cannibalization_cluster": null,
+  "open_question": {
+    "question": "หน้า /barcode-scanner-price-guide ควรมีตัวเลขราคาหรือไม่ หรือควรเป็นหน้าขอใบเสนอราคาถาวร",
+    "raised_by": "revision-specs/price-claim-spec.md §7 — ระบุเองว่าเป็นคำถามของ Owner ไม่ใช่ของ QA",
+    "why_it_matters": "หน้าราคาเป็นหน้าที่ต้องดูแลถี่กว่าหน้าประเภทอื่น sitemap ตั้ง changefreq เป็น weekly และ priority 0.8 ไว้แล้ว ซึ่งสอดคล้องกับข้อสังเกตนั้น",
+    "does_form_a_foreclose_it": false,
+    "note": "Form A ไม่ได้ปิดทางเลือกใด ถ้า SRC-ACS-002 มาถึงและ Owner ต้องการตัวเลข ให้เพิ่มประโยค Form B ทับได้ทันที",
+    "raised_on": "2026-09-24"
+  }
+}
