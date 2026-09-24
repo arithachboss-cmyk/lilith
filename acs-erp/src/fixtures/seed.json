@@ -1,0 +1,76 @@
+{
+  "fixture_version": "1.0.0",
+  "data_class": "DETERMINISTIC_SYNTHETIC_FIXTURE",
+  "notice": "Every value below is invented for this prototype. No ACS customer, staff, supplier, product, SKU, price, stock, warranty, payment, delivery, contract, partner or sales data is present. Amounts are expressed in mock_units, which is not a currency.",
+  "epoch": "2026-01-01T00:00:00.000Z",
+  "actors": [
+    { "actor_id": "ACTOR-0001", "display_name": "Synthetic Actor 0001", "role": "CHAIRMAN", "console_access": true, "mock_token": "mock-token-chairman" },
+    { "actor_id": "ACTOR-0002", "display_name": "Synthetic Actor 0002", "role": "MANAGER", "console_access": true, "mock_token": "mock-token-manager" },
+    { "actor_id": "ACTOR-0003", "display_name": "Synthetic Actor 0003", "role": "ACCOUNT", "console_access": true, "mock_token": "mock-token-account" },
+    { "actor_id": "ACTOR-0004", "display_name": "Synthetic Actor 0004", "role": "STOCK", "console_access": true, "mock_token": "mock-token-stock" },
+    { "actor_id": "ACTOR-0005", "display_name": "Synthetic Actor 0005", "role": "SALES", "console_access": true, "mock_token": "mock-token-sales" },
+    { "actor_id": "ACTOR-0006", "display_name": "Synthetic Actor 0006", "role": "TECHNIC", "console_access": true, "mock_token": "mock-token-technic" },
+    { "actor_id": "ACTOR-0007", "display_name": "Synthetic Actor 0007", "role": "SALES", "console_access": false, "mock_token": "mock-token-no-console" }
+  ],
+  "suppliers": [
+    { "supplier_id": "MOCK-SUP-01", "name": "Mock Supplier Alpha", "lead_time_days_mock": 7, "authorization_on_file": false },
+    { "supplier_id": "MOCK-SUP-02", "name": "Mock Supplier Beta", "lead_time_days_mock": 21, "authorization_on_file": false }
+  ],
+  "skus": [
+    {
+      "sku_id": "MOCK-SKU-1001",
+      "name": "Mock Handheld Device A",
+      "category": "MOCK_CATEGORY_HANDHELD",
+      "supplier_id": "MOCK-SUP-01",
+      "evidence_records": [
+        { "kind": "TECHNICAL_DATASHEET", "evidence_ref": "MOCK-EV-DS-1001" },
+        { "kind": "SALE_AUTHORIZATION", "evidence_ref": "MOCK-EV-SA-1001" },
+        { "kind": "PRICE_RECORD", "evidence_ref": "MOCK-EV-PR-1001" },
+        { "kind": "STOCK_COUNT", "evidence_ref": "MOCK-EV-ST-1001" },
+        { "kind": "WARRANTY_TERMS", "evidence_ref": "MOCK-EV-WT-1001" }
+      ],
+      "mock_cost_units": 1200,
+      "mock_list_units": 1800,
+      "mock_on_hand": 12
+    },
+    {
+      "sku_id": "MOCK-SKU-1002",
+      "name": "Mock Label Media B",
+      "category": "MOCK_CATEGORY_MEDIA",
+      "supplier_id": "MOCK-SUP-02",
+      "evidence_records": [
+        { "kind": "TECHNICAL_DATASHEET", "evidence_ref": "MOCK-EV-DS-1002" }
+      ],
+      "mock_cost_units": null,
+      "mock_list_units": null,
+      "mock_on_hand": null
+    },
+    {
+      "sku_id": "MOCK-SKU-1003",
+      "name": "Mock Accessory C",
+      "category": "MOCK_CATEGORY_ACCESSORY",
+      "supplier_id": "MOCK-SUP-01",
+      "evidence_records": [
+        { "kind": "TECHNICAL_DATASHEET", "evidence_ref": "MOCK-EV-DS-1003" },
+        { "kind": "STOCK_COUNT", "evidence_ref": "MOCK-EV-ST-1003" }
+      ],
+      "mock_cost_units": null,
+      "mock_list_units": null,
+      "mock_on_hand": 4
+    }
+  ],
+  "customers": [
+    { "customer_id": "MOCK-CUST-01", "name": "Mock Account One", "segment": "MOCK_SEGMENT_A" },
+    { "customer_id": "MOCK-CUST-02", "name": "Mock Account Two", "segment": "MOCK_SEGMENT_B" }
+  ],
+  "purchase_orders": [
+    { "po_id": "MOCK-PO-01", "supplier_id": "MOCK-SUP-01", "sku_id": "MOCK-SKU-1001", "qty_mock": 20, "state": "MOCK_RECEIVED" },
+    { "po_id": "MOCK-PO-02", "supplier_id": "MOCK-SUP-02", "sku_id": "MOCK-SKU-1002", "qty_mock": 50, "state": "MOCK_DRAFT" }
+  ],
+  "providers": [
+    { "provider_id": "LOCAL_MOCK", "mode": "LOCAL_MOCK", "enabled": true, "adapter_approved": true },
+    { "provider_id": "MOCK_MARKETPLACE_ADAPTER", "mode": "DISABLED_INTERFACE_ONLY", "enabled": false, "adapter_approved": false },
+    { "provider_id": "MOCK_ACCOUNTING_ADAPTER", "mode": "DISABLED_INTERFACE_ONLY", "enabled": false, "adapter_approved": false },
+    { "provider_id": "MOCK_LOGISTICS_ADAPTER", "mode": "DISABLED_INTERFACE_ONLY", "enabled": false, "adapter_approved": false }
+  ]
+}

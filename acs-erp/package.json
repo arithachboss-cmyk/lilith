@@ -1,0 +1,12 @@
+{
+  "name": "acs-erp-mock",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "ACS Online Business ERP — internal mock-data prototype. Not for production use.",
+  "scripts": {
+    "start": "node src/server/server.mjs",
+    "test": "node tests/run.mjs",
+    "workflow": "node tools/run-workflow.mjs"
+  }
+}
