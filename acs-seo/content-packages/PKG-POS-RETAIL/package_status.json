@@ -1,0 +1,33 @@
+{
+  "package_id": "PKG-POS-RETAIL",
+  "queue_id": null,
+  "title": "ระบบบาร์โค้ดหน้าร้าน — เริ่มที่รหัสสินค้า ไม่ใช่เครื่อง",
+  "target_url": "https://www.asiancoding.com/pos-barcode-system",
+  "page_type": "SERVICE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Retail Automation) · เป็นหน้า Retail หน้าเดียวจากห้าหน้าที่เขียนได้ตอนนี้ ที่เหลืออยู่ใน C-6 ซึ่งยังไม่มี canonical owner · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+  "qa_tier": "WORDING_QA_OK",
+  "qa_tier_note": "หน้าปลายทางไม่ถือ risk flag ใด ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต ไม่มีราคา และไม่มี flagged_claims",
+  "flagged_claims": [],
+  "blocked_on_sources": [
+    "SRC-ACS-004",
+    "SRC-KW-001"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "out_of_queue": true,
+  "requested_by": "ACS Owner — หัวข้อที่กำหนดให้เน้น: Retail Automation",
+  "requested_on": "2026-09-24",
+  "cannibalization_cluster": null,
+  "note_on_service_type": "หน้านี้เป็น SERVICE แต่ยังประกาศขอบเขตบริการไม่ได้จนกว่า SRC-ACS-004 จะมา (CLM-O-007, CLM-O-010) · เมื่อมาถึงแล้ว ให้เพิ่มส่วนขอบเขตบริการและพิจารณาเปลี่ยน schema จาก WebPage เป็น Service พร้อม areaServed และ provider ที่มีหลักฐานรองรับ"
+}

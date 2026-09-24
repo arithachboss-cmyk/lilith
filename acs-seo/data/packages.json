@@ -869,6 +869,36 @@
       "out_of_queue": true,
       "cannibalization_cluster": null,
       "cluster_note": "การตัดสินหน้าหลักของ C-5 จะปลดหกหน้าคลังสินค้าพร้อมกัน · เหลือ /knowledge/barcode-inventory-management อีกหนึ่งหน้าที่เขียนได้โดยไม่ต้องรอคำตัดสิน"
+    },
+    {
+      "package_id": "PKG-POS-RETAIL",
+      "queue_id": null,
+      "title": "ระบบบาร์โค้ดหน้าร้าน — เริ่มที่รหัสสินค้า ไม่ใช่เครื่อง",
+      "target_url": "https://www.asiancoding.com/pos-barcode-system",
+      "page_type": "SERVICE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Retail Automation) · เป็นหน้า Retail หน้าเดียวจากห้าหน้าที่เขียนได้ตอนนี้ ที่เหลืออยู่ใน C-6 ซึ่งยังไม่มี canonical owner · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และหน้านี้เป็น SERVICE ที่ยังประกาศขอบเขตบริการไม่ได้จนกว่า SRC-ACS-004 จะมา",
+      "owner_decision": "ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-004",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-POS-RETAIL",
+      "intake_required": false,
+      "out_of_queue": true,
+      "cannibalization_cluster": null,
+      "cluster_note": "การตัดสินหน้าหลักของ C-6 จะปลดสี่หน้า Retail พร้อมกัน",
+      "note_on_service_type": "เป็นหน้า SERVICE ที่ยังไม่ได้ทำหน้าที่ของหน้าบริการ เพราะ CLM-O-007 และ CLM-O-010 ยังไม่ปลด · schema ใช้ WebPage ไม่ใช่ Service โดยตั้งใจ เมื่อ SRC-ACS-004 มาถึงให้เพิ่มส่วนขอบเขตบริการและตรวจซ้ำทั้งแพ็กเกจ เพราะ qa_tier จะขยับขึ้น"
     }
   ],
   "site_findings": {
@@ -878,5 +908,5 @@
     "urls_in_clusters": 45,
     "note": "61 จาก 82 หน้าที่มีอยู่แล้วบนเว็บถือ risk flag อย่างน้อยหนึ่งอย่าง ปัญหาจึงไม่ได้อยู่แค่ 19 แพ็กเกจใหม่ แต่อยู่ที่หน้าเดิมด้วย"
   },
-  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม · PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 ส่วน PKG-RFID-VS-BARCODE และ PKG-WMS-INTEGRATION เป็นแพ็กเกจนอกคิวที่ทำตามหัวข้อที่ Owner กำหนดให้เน้น ทั้งสามรายการจึงไม่ถูกนับรวมในจำนวนนั้น บอร์ดจึงแสดง 22 จาก 19 ซึ่งถูกต้อง ไม่ใช่การนับเกิน"
+  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม · PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 ส่วน PKG-RFID-VS-BARCODE, PKG-WMS-INTEGRATION และ PKG-POS-RETAIL เป็นแพ็กเกจนอกคิวที่ทำตามหัวข้อที่ Owner กำหนดให้เน้น ทั้งสี่รายการจึงไม่ถูกนับรวมในจำนวนนั้น บอร์ดจึงแสดง 23 จาก 19 ซึ่งถูกต้อง ไม่ใช่การนับเกิน"
 }

@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": "ระบบบาร์โค้ดหน้าร้าน — เริ่มที่รหัสสินค้า ไม่ใช่เครื่อง",
+  "description": "ระบบบาร์โค้ดหน้าร้านเริ่มที่โครงสร้างรหัสสินค้า ไม่ใช่ที่เครื่องอ่าน บทความนี้อธิบายสิ่งที่หน้าร้านต่างจากคลัง และลำดับการตัดสินใจที่ทำให้ไม่ต้องรื้อทีหลัง",
+  "url": "https://www.asiancoding.com/pos-barcode-system",
+  "inLanguage": "th-TH",
+  "_generation_note": "ใช้ WebPage ไม่ใช่ Service โดยตั้งใจ — ประเภท Service ชวนให้ต้องประกาศ areaServed, provider และ offers ซึ่งทั้งสามข้อต้องมีหลักฐาน ACS ที่ยังไม่มี (CLM-O-001, CLM-O-007, CLM-O-010)"
+}
