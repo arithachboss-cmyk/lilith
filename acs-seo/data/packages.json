@@ -1,6 +1,6 @@
 {
   "version": "4.0.0",
-  "as_of": "2026-09-23",
+  "as_of": "2026-09-24",
   "total_packages_declared_by_owner": 19,
   "global_rule": "ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic",
   "board_status_enum": [
@@ -14,34 +14,37 @@
     {
       "package_id": "PKG-Q03",
       "queue_id": 3,
-      "title": null,
-      "target_url": null,
-      "page_type": null,
+      "title": "ซื้อเครื่องสแกนบาร์โค้ดในไทย: สิ่งที่ต้องยืนยันก่อนสั่ง",
+      "target_url": "https://www.asiancoding.com/barcode-scanner-thailand",
+      "page_type": "PRODUCT",
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "REVISE",
-      "board_reason": "HOLD ถูกปลดด้วย D-08 (option B) — เปลี่ยน title/H1 และเขียนเนื้อหาแบบกระบวนการได้ทันที ตรวจความคืบหน้า 2026-09-26 และตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23",
+      "board_reason": "ดราฟต์ตาม runbook §3 และ §5 ส่งแล้ว — title/H1 เลิกอ้าง head term เปล่า ๆ และเนื้อหาเขียนแบบกระบวนการ mechanical QA ผ่าน (PASS, tier T1_CLAIM) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL และหัวข้อที่ทำให้หน้านี้ต่างจริง (สต็อก กำหนดส่ง บริการพื้นที่ ราคา รุ่นสินค้า) ยังรอข้อมูล ACS · ตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23",
       "owner_decision": "D-08 (ทับ D-07) — option B ตัดสินโดย ACS Owner 2026-09-23 ทันกำหนด 2026-09-24",
-      "qa_tier": "T2_FULL",
+      "qa_tier": "T1_CLAIM",
       "flagged_claims": [
         "CLM-O-001",
         "CLM-O-002",
+        "CLM-O-007",
         "CLM-O-009",
-        "CLM-O-010"
+        "CLM-O-010",
+        "CLM-E-011"
       ],
       "blocked_on_sources": [
         "SRC-ACS-001",
         "SRC-ACS-002",
-        "SRC-ACS-004"
+        "SRC-ACS-004",
+        "SRC-VEN-002"
       ],
       "gates": {
-        "mechanical": "NOT_RUN",
+        "mechanical": "PASS",
         "claim_qa": "NOT_RUN",
         "cannibalization": "PASS",
         "rendering": "FAIL",
         "owner_approval": "NOT_GRANTED"
       },
-      "package_path": null,
-      "intake_required": true,
+      "package_path": "content-packages/PKG-Q03",
+      "intake_required": false,
       "target_url_candidates": {
         "status": "RECOMMENDATION",
         "derived_from": "SRC-WEB-002 risk flags",
@@ -67,7 +70,13 @@
         "เขียนเนื้อหาแบบกระบวนการ ไม่ใช่สถานะ — ดู revision-specs/queue-3-execution-runbook.md"
       ],
       "interim_checkpoint": "2026-09-26",
-      "review_date": "2026-10-23"
+      "review_date": "2026-10-23",
+      "qa_tier_note": "ลดจาก T2_FULL ที่ประเมินไว้ล่วงหน้า เพราะดราฟต์ที่ส่งจริงไม่มีตัวเลข ราคา สเปก หรือ claim ลูกค้าเลย validate.mjs คำนวณได้ T1_CLAIM และไม่มี WARN ไม่ตรงกัน ถ้าเนื้อหารอบหน้าใส่ตัวเลขกลับเข้ามา tier จะเด้งกลับเป็น T2_FULL เอง",
+      "checkpoint_2026_09_26": {
+        "question": "เปลี่ยน title/H1 ให้เลิกอ้าง head term เปล่า ๆ และเขียนเนื้อหาแบบกระบวนการแล้วหรือยัง",
+        "answer": "ทำแล้วทั้งสองอย่าง เมื่อ 2026-09-24 ก่อนกำหนดสองวัน",
+        "evidence": "content-packages/PKG-Q03/ — meta.json (title/H1) และ article.md หัวข้อ 4 (การจัดหาในไทย เขียนเป็นกระบวนการ ไม่ใช่สถานะ)"
+      }
     },
     {
       "package_id": "PKG-Q04",

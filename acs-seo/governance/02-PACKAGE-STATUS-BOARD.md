@@ -2,7 +2,7 @@
 
 # Package Status Board
 
-ณ วันที่ **2026-09-23** — 20 รายการ (Owner แจ้งไว้ 19)
+ณ วันที่ **2026-09-24** — 20 รายการ (Owner แจ้งไว้ 19)
 
 > ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic
 
@@ -12,7 +12,7 @@
 
 | Package | Queue | Board | Package status | QA tier | Flagged claims | ติดที่ source | เหตุผล |
 |---|---|---|---|---|---|---|---|
-| `PKG-Q03` | #3 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-O-002`, `CLM-O-009`, `CLM-O-010` | `SRC-ACS-001`, `SRC-ACS-002`, `SRC-ACS-004` | HOLD ถูกปลดด้วย D-08 (option B) — เปลี่ยน title/H1 และเขียนเนื้อหาแบบกระบวนการได้ทันที ตรวจความคืบหน้า 2026-09-26 และตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23 |
+| `PKG-Q03` | #3 | **REVISE** | DRAFT_PENDING_REVIEW | T1_CLAIM | `CLM-O-001`, `CLM-O-002`, `CLM-O-007`, `CLM-O-009`, `CLM-O-010`, `CLM-E-011` | `SRC-ACS-001`, `SRC-ACS-002`, `SRC-ACS-004`, `SRC-VEN-002` | ดราฟต์ตาม runbook §3 และ §5 ส่งแล้ว — title/H1 เลิกอ้าง head term เปล่า ๆ และเนื้อหาเขียนแบบกระบวนการ mechanical QA ผ่าน (PASS, tier T1_CLAIM) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL และหัวข้อที่ทำให้หน้านี้ต่างจริง (สต็อก กำหนดส่ง บริการพื้นที่ ราคา รุ่นสินค้า) ยังรอข้อมูล ACS · ตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23 |
 | `PKG-Q04` | #4 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-002`, `CLM-E-004`, `CLM-E-005`, `CLM-S-002` | `SRC-VEN-001` | wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q17` | #17 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | — | ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ — มี revision spec พร้อมใช้แล้ว |

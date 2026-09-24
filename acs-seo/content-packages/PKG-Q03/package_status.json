@@ -1,0 +1,43 @@
+{
+  "package_id": "PKG-Q03",
+  "queue_id": 3,
+  "title": "ซื้อเครื่องสแกนบาร์โค้ดในไทย: สิ่งที่ต้องยืนยันก่อนสั่ง",
+  "target_url": "https://www.asiancoding.com/barcode-scanner-thailand",
+  "page_type": "PRODUCT",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "ดราฟต์ตาม runbook §3 และ §5 พร้อมแล้ว — title/H1 เลิกอ้าง head term เปล่า ๆ และเนื้อหาเขียนแบบกระบวนการ ยังเป็น REVISE เพราะหัวข้อที่ทำให้หน้านี้ต่างจริง (สต็อก กำหนดส่ง บริการพื้นที่ ราคา รุ่นสินค้า) ยังรอข้อมูล ACS และ rendering gate ยัง FAIL",
+  "qa_tier": "T1_CLAIM",
+  "flagged_claims": [
+    "CLM-O-001",
+    "CLM-O-002",
+    "CLM-O-007",
+    "CLM-O-009",
+    "CLM-O-010",
+    "CLM-E-011"
+  ],
+  "flagged_claims_note": "ทั้งหกข้อถูกกันออกจากดราฟต์แล้ว ไม่ได้ปรากฏในเนื้อหา — บันทึกไว้เพราะเป็นสิ่งที่หน้านี้ต้องการเพื่อให้ผ่านการตรวจ §6 ในวันที่ 2026-10-23 ไม่ใช่เพราะยังค้างอยู่ในข้อความ",
+  "blocked_on_sources": [
+    "SRC-ACS-001",
+    "SRC-ACS-002",
+    "SRC-ACS-004",
+    "SRC-VEN-002"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "queue_decision": "D-08 option B โดย ACS Owner 2026-09-23 (ทับ D-07)",
+  "interim_checkpoint": "2026-09-26",
+  "review_date": "2026-10-23",
+  "checkpoint_answer": "ทำแล้วทั้งสองอย่าง — title/H1 เลิกอ้าง head term เปล่า ๆ และเนื้อหากระบวนการเขียนลงแล้ว ดูหัวข้อ 4 ของ article.md ซึ่งเป็นหัวข้อที่หน้าหลักตอบไม่ได้",
+  "cannibalization_cluster": "C-1",
+  "revision_spec": "revision-specs/queue-3-execution-runbook.md"
+}
