@@ -12,6 +12,13 @@ node hr-screens/serve.mjs        # เปิดที่ http://127.0.0.1:4300
 
 เปิดหน้าจอเฉพาะบทบาทได้ด้วย hash เช่น `#role=HR-05`
 
+รวมเป็นไฟล์เดียวสำหรับแชร์หรือฝัง (อ่านจากไฟล์ต้นทางเสมอ ไม่มีสำเนาที่หลุดเวอร์ชัน):
+
+```bash
+node hr-screens/build-single.mjs                          # dist/prototype.html
+node hr-screens/build-single.mjs --fragment --out=<path>  # ไม่มี doctype/head/body
+```
+
 HTML/CSS/JavaScript ล้วน ไม่มี framework ไม่มี dependency ไม่แตะ lockfile
 และอยู่นอก glob `apps/*` กับ `packages/*` จึงไม่กระทบ build ของ LILITH
 
