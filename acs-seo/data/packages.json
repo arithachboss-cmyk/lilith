@@ -167,15 +167,18 @@
       "target_url": null,
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
-      "board_status": "REVISE",
-      "board_reason": "ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ — มี revision spec พร้อมใช้แล้ว",
+      "board_status": "BLOCKED",
+      "board_reason": "เนื้อหาเขียนได้ทันที (revision spec พร้อม ไม่ติด source) แต่ยังเลือก target URL ไม่ได้ สามหน้าที่เข้าข่ายเป็นบ้านของเนื้อหานี้ถือ flag CANNIBAL แต่ไม่ปรากฏใน cluster ใดเลย cannibalization gate จึงไม่ครอบคลุม การเขียนลงไปโดยไม่รู้ว่าชนกับอะไร คือการทำซ้ำรูปแบบเดียวกับ C-1 เปลี่ยนจาก REVISE เป็น BLOCKED เพราะอุปสรรคจริงถูกระบุแล้วและเป็นคำถามที่ตอบได้ ไม่ใช่เพราะงานถอยหลัง",
       "owner_decision": "ใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับว่ายี่ห้อไหนดีที่สุด",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
         "CLM-B-004",
         "CLM-S-006"
       ],
-      "blocked_on_sources": [],
+      "blocked_on_sources": [
+        "SRC-WEB-002",
+        "SRC-WEB-004"
+      ],
       "gates": {
         "mechanical": "NOT_RUN",
         "claim_qa": "NOT_RUN",
@@ -196,7 +199,17 @@
         "owner_confirmed": false
       },
       "cannibalization_cluster": "C-7",
-      "revision_spec": "revision-specs/queue-17.md"
+      "revision_spec": "revision-specs/queue-17.md",
+      "open_question": {
+        "question": "หน้าใดคือบ้านของเนื้อหาเกณฑ์ตัดสินใจของ Queue #17 และหน้านั้นชนกับหน้าใดบ้าง",
+        "why_cannot_guess": "ทั้งสามหน้าถือ flag CANNIBAL จาก SRC-WEB-002 แต่ไม่อยู่ใน cluster ใดตาม SRC-WEB-004 สองแหล่งนี้เป็น PARTIAL ทั้งคู่และไม่ตรงกัน",
+        "candidates": [
+          "https://www.asiancoding.com/knowledge/barcode-equipment",
+          "https://www.asiancoding.com/knowledge/industry-applications",
+          "https://www.asiancoding.com/knowledge/regional-solutions"
+        ],
+        "raised_on": "2026-09-24"
+      }
     },
     {
       "package_id": "PKG-Q18",

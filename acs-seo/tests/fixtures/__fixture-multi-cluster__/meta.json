@@ -1,0 +1,23 @@
+{
+  "package_id": "__fixture-multi-cluster__",
+  "title": "หน้าที่อยู่ในสองกลุ่มพร้อมกัน — fixture ทดสอบลำดับ",
+  "meta_description": "fixture สำหรับทดสอบว่าหน้าที่ปรากฏในสอง cluster ยังถูกกั้นเมื่อกลุ่มใดกลุ่มหนึ่งยังไม่มีหน้าหลัก ไม่ว่าไฟล์จะเรียงกลุ่มอย่างไร",
+  "canonical": "https://www.asiancoding.com/retail-barcode-scanner",
+  "target_url": "https://www.asiancoding.com/retail-barcode-scanner",
+  "page_type": "PRODUCT",
+  "canonical_intent": "fixture — ไม่ใช่เนื้อหาจริง ใช้ทดสอบ cannibalization gate เมื่อ URL อยู่ในหลายกลุ่ม",
+  "primary_keyword": "บาร์โค้ด 1d 2d",
+  "secondary_keywords": [],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/barcode-technology"
+  ],
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่าน",
+  "og": {
+    "title": "หน้าที่อยู่ในสองกลุ่มพร้อมกัน — fixture ทดสอบลำดับ",
+    "description": "fixture สำหรับทดสอบว่าหน้าที่ปรากฏในสอง cluster ยังถูกกั้นเมื่อกลุ่มใดกลุ่มหนึ่งยังไม่มีหน้าหลัก ไม่ว่าไฟล์จะเรียงกลุ่มอย่างไร",
+    "image": null
+  }
+}

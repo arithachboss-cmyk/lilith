@@ -8,7 +8,7 @@
  * ไม่เคย match อะไรเลยทั้งที่ดูเหมือนถูกต้อง
  */
 import { execFileSync } from 'node:child_process';
-import { mkdtempSync, writeFileSync, readFileSync, copyFileSync, rmSync } from 'node:fs';
+import { mkdtempSync, mkdirSync, readdirSync, writeFileSync, readFileSync, copyFileSync, rmSync } from 'node:fs';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -158,6 +158,40 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   const resolved = find('__fixture-cluster-resolved__');
   check('cluster ที่มีหน้าหลักแล้วไม่ถูกกั้นอีก', resolved.status === 'PASS',
     resolved.findings.map((f) => f.code).join(','));
+
+  /*
+   * URL ที่อยู่หลายกลุ่มพร้อมกันต้องถูกกั้นเสมอ ไม่ว่าไฟล์จะเรียงกลุ่มอย่างไร
+   *
+   * เดิม validator เก็บ path -> cluster เป็นค่าเดียว กลุ่มที่เขียนทีหลังจึงทับกลุ่มก่อนหน้า
+   * ทดสอบด้วยการคัดลอก data/ แล้วสลับให้กลุ่มที่ "มีหน้าหลัก" ไปอยู่ท้ายไฟล์ ซึ่งเป็นลำดับ
+   * ที่ทำให้บั๊กเดิมปล่อยผ่าน · เนื้อหาข้อมูลไม่เปลี่ยน เปลี่ยนแค่ลำดับ ผลจึงต้องเหมือนเดิม
+   */
+  const multi = find('__fixture-multi-cluster__');
+  check('URL ที่อยู่สองกลุ่มและมีกลุ่มหนึ่งยังไม่มีหน้าหลัก ถูกกั้น', multi.status === 'FAIL',
+    multi.findings.map((f) => f.code).join(','));
+  check('และข้อความบอกว่าอยู่กี่กลุ่ม ไม่ได้รายงานแค่กลุ่มเดียว',
+    multi.findings.some((f) => f.code.startsWith('CANNIBAL') && f.detail.includes('C-1') && f.detail.includes('C-6')),
+    multi.findings.filter((f) => f.code.startsWith('CANNIBAL')).map((f) => f.detail).join(' | '));
+
+  {
+    const shuffledDir = join(tmp, 'data-shuffled');
+    mkdirSync(shuffledDir, { recursive: true });
+    for (const f of readdirSync(join(ROOT, 'data'))) {
+      copyFileSync(join(ROOT, 'data', f), join(shuffledDir, f));
+    }
+    const cPath = join(shuffledDir, 'cannibalization_clusters.json');
+    const doc = JSON.parse(readFileSync(cPath, 'utf8'));
+    const owned = doc.clusters.filter((c) => c.canonical_owner);
+    doc.clusters = [...doc.clusters.filter((c) => !c.canonical_owner), ...owned];
+    writeFileSync(cPath, JSON.stringify(doc, null, 2));
+    check('การทดสอบนี้มีความหมาย — มีกลุ่มที่มีหน้าหลักให้ย้ายไปท้ายไฟล์จริง', owned.length > 0);
+
+    const shuffled = run(VALIDATE, ['--fixtures', '--json',
+      `--data-dir=${shuffledDir}`, `--cache=${join(tmp, 'c-shuffled.json')}`]);
+    const multiShuffled = shuffled.results.find((r) => r.package.includes('__fixture-multi-cluster__'));
+    check('สลับลำดับกลุ่มในไฟล์แล้วผลของ gate ไม่เปลี่ยน', multiShuffled.status === 'FAIL',
+      `ลำดับเปลี่ยนแล้วได้ ${multiShuffled.status} — ผลของ gate ห้ามขึ้นกับลำดับบรรทัดใน JSON`);
+  }
 
   const c = codes(bad);
   check('แพ็กเกจละเมิดถูกตัดสิน FAIL', bad.status === 'FAIL');

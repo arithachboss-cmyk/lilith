@@ -72,10 +72,21 @@ const claimById = new Map(claimsDoc.claims.map((c) => [c.id, c]));
 const rules = forbidden.rules.map((r) => ({ ...r, re: new RegExp(r.pattern, 'giu') }));
 const inventoryUrls = new Set((inventory.pages ?? []).map((p) => p.url));
 const inventoryByUrl = new Map((inventory.pages ?? []).map((p) => [p.url, p]));
-/** path -> cluster ที่ยังไม่มี canonical owner */
-const clusterByPath = new Map();
+/*
+ * path -> cluster ทุกกลุ่มที่ path นั้นอยู่
+ *
+ * ต้องเป็นรายการ ไม่ใช่ค่าเดียว — URL หนึ่งอยู่ได้หลายกลุ่มพร้อมกัน (ตอนนี้
+ * /retail-barcode-scanner อยู่ทั้ง C-1 และ C-6) ถ้าเก็บค่าเดียว กลุ่มที่เขียนทีหลัง
+ * ในไฟล์จะทับกลุ่มก่อนหน้า แล้วผลของ gate จะขึ้นกับลำดับบรรทัดใน JSON
+ * ซึ่งไม่ใช่คุณสมบัติด้านความปลอดภัย · ถ้ากลุ่มที่มีหน้าหลักบังเอิญอยู่ทีหลัง
+ * หน้าที่ยังชนกับกลุ่มที่ไม่มีหน้าหลักจะผ่าน gate ไปเงียบ ๆ
+ */
+const clustersByPath = new Map();
 for (const c of clusterDoc.clusters ?? []) {
-  for (const path of c.competing_urls) clusterByPath.set(path, c);
+  for (const path of c.competing_urls) {
+    if (!clustersByPath.has(path)) clustersByPath.set(path, []);
+    clustersByPath.get(path).push(c);
+  }
 }
 const sitemapUrls = new Set(sitemap.urls ?? []);
 
@@ -222,15 +233,21 @@ function checkPackage(dir) {
 
   // --- cannibalization: ห้ามยิง intent ของ cluster ที่ยังไม่มีเจ้าของ canonical
   const targetPath = meta.target_url ? String(meta.target_url).replace(SITE_ORIGIN, '') || '/' : null;
-  const cluster = targetPath ? clusterByPath.get(targetPath) : null;
-  if (cluster && !cluster.canonical_owner && !isPrivate) {
+  /* กั้นถ้ามีกลุ่มใดก็ตามที่ยังไม่มีหน้าหลัก — ไม่ใช่แค่กลุ่มสุดท้ายที่เจอ */
+  const memberOf = targetPath ? (clustersByPath.get(targetPath) ?? []) : [];
+  const unowned = memberOf.filter((c) => !c.canonical_owner);
+  const cluster = unowned[0] ?? null;
+  if (cluster && !isPrivate) {
     const generic = cluster.generic_urls;
     const scope = generic
       ? `${cluster.count} URL ในกลุ่ม แต่ที่ชนกันจริงคือ ${generic.length} หน้าที่ไม่มี modifier (${generic.join(', ')})`
       : `${cluster.count} URL เดิมชน intent เดียวกัน`;
     const due = cluster.decision_due ? ` · กำหนดตัดสิน ${cluster.decision_due}` : '';
     const doc = cluster.decision_document ? ` · ดู ${cluster.decision_document}` : '';
-    const detail = `${cluster.cluster_id} ${cluster.label} — ${scope} และยังไม่มี canonical_owner${due}${doc}`;
+    const alsoIn = memberOf.length > 1
+      ? ` · URL นี้อยู่ ${memberOf.length} กลุ่มพร้อมกัน (${memberOf.map((c) => c.cluster_id).join(', ')}) ยังไม่มีหน้าหลัก ${unowned.length} กลุ่ม`
+      : '';
+    const detail = `${cluster.cluster_id} ${cluster.label} — ${scope} และยังไม่มี canonical_owner${due}${doc}${alsoIn}`;
     if (meta.action === 'NEW') add('FAIL', 'CANNIBAL_UNRESOLVED', `ห้ามสร้างหน้าใหม่ใน cluster นี้: ${detail}`);
     else add('FAIL', 'CANNIBAL_NO_OWNER', `target_url อยู่ใน cluster ที่ยังไม่ตัดสิน: ${detail}`);
   }

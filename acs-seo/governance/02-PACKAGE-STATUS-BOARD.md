@@ -6,7 +6,7 @@
 
 > ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic
 
-**สรุป:** PASS = 0 · REVISE = 6 · HOLD = 1 · BLOCKED = 13
+**สรุป:** PASS = 0 · REVISE = 5 · HOLD = 1 · BLOCKED = 14
 
 **PASS = 0** — ยังไม่มีแพ็กเกจใดผ่านได้ เพราะ rendering gate อยู่ที่ `FAIL` และ Source Pack ยังไม่ครบ
 
@@ -15,7 +15,7 @@
 | `PKG-Q03` | #3 | **REVISE** | DRAFT_PENDING_REVIEW | T1_CLAIM | `CLM-O-001`, `CLM-O-002`, `CLM-O-007`, `CLM-O-009`, `CLM-O-010`, `CLM-E-011` | `SRC-ACS-001`, `SRC-ACS-002`, `SRC-ACS-004`, `SRC-VEN-002` | ดราฟต์ตาม runbook §3 และ §5 ส่งแล้ว — title/H1 เลิกอ้าง head term เปล่า ๆ และเนื้อหาเขียนแบบกระบวนการ mechanical QA ผ่าน (PASS, tier T1_CLAIM) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL และหัวข้อที่ทำให้หน้านี้ต่างจริง (สต็อก กำหนดส่ง บริการพื้นที่ ราคา รุ่นสินค้า) ยังรอข้อมูล ACS · ตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23 |
 | `PKG-Q04` | #4 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-002`, `CLM-E-004`, `CLM-E-005`, `CLM-S-002` | `SRC-VEN-001` | wording วัสดุ/สภาพแวดล้อมฟันธงเกินหลักฐาน — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q16` | #16 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
-| `PKG-Q17` | #17 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | — | ต้องเปลี่ยนจากจัดอันดับยี่ห้อเป็นเกณฑ์ตัดสินใจ — มี revision spec พร้อมใช้แล้ว |
+| `PKG-Q17` | #17 | **BLOCKED** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-004`, `CLM-S-006` | `SRC-WEB-002`, `SRC-WEB-004` | เนื้อหาเขียนได้ทันที (revision spec พร้อม ไม่ติด source) แต่ยังเลือก target URL ไม่ได้ สามหน้าที่เข้าข่ายเป็นบ้านของเนื้อหานี้ถือ flag CANNIBAL แต่ไม่ปรากฏใน cluster ใดเลย cannibalization gate จึงไม่ครอบคลุม การเขียนลงไปโดยไม่รู้ว่าชนกับอะไร คือการทำซ้ำรูปแบบเดียวกับ C-1 เปลี่ยนจาก REVISE เป็น BLOCKED เพราะอุปสรรคจริงถูกระบุแล้วและเป็นคำถามที่ตอบได้ ไม่ใช่เพราะงานถอยหลัง |
 | `PKG-Q18` | #18 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-O-001`, `CLM-B-003` | `SRC-ACS-002` | มีความเสี่ยงราคาเฉพาะเจาะจงโดยไม่มี effective date — มี revision spec พร้อมใช้แล้ว |
 | `PKG-Q21` | #21 | **REVISE** | DRAFT_PENDING_REVIEW | T2_FULL | `CLM-B-001`, `CLM-E-001`, `CLM-E-002`, `CLM-E-003` | `SRC-VEN-002` | ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน — มี revision spec พร้อมใช้แล้ว |
 | `PKG-UNMAPPED-01` | — | **BLOCKED** | DRAFT_PENDING_REVIEW | UNDETERMINED | — | `SRC-KW-001` | ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย |
