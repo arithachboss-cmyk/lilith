@@ -177,7 +177,7 @@
       "page_type": null,
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "BLOCKED",
-      "board_reason": "เนื้อหาเขียนได้ทันที (revision spec พร้อม ไม่ติด source) แต่ยังเลือก target URL ไม่ได้ สามหน้าที่เข้าข่ายเป็นบ้านของเนื้อหานี้ถือ flag CANNIBAL แต่ไม่ปรากฏใน cluster ใดเลย cannibalization gate จึงไม่ครอบคลุม การเขียนลงไปโดยไม่รู้ว่าชนกับอะไร คือการทำซ้ำรูปแบบเดียวกับ C-1 เปลี่ยนจาก REVISE เป็น BLOCKED เพราะอุปสรรคจริงถูกระบุแล้วและเป็นคำถามที่ตอบได้ ไม่ใช่เพราะงานถอยหลัง",
+      "board_reason": "เนื้อหาเขียนได้ทันที (revision spec พร้อม ไม่ติด source) แต่หน้าปลายทางอยู่ใน C-7 \"Scanner selection / comparison\" ซึ่งยังไม่มี canonical owner · ในเว็บมีหน้าที่ถือ flag RANKING อยู่สองหน้า คือ /barcode-scanner-comparison และ /knowledge/product-comparisons ทั้งคู่อยู่ใน C-7 และ RANKING เป็น flag ที่ตรงกับคำตัดสิน Queue #17 โดยตรง · การตัดสินหน้าหลักของ C-7 จะปลดแพ็กเกจนี้ทันที",
       "owner_decision": "ใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับว่ายี่ห้อไหนดีที่สุด",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
@@ -185,7 +185,6 @@
         "CLM-S-006"
       ],
       "blocked_on_sources": [
-        "SRC-WEB-002",
         "SRC-WEB-004"
       ],
       "gates": {
@@ -210,13 +209,18 @@
       "cannibalization_cluster": "C-7",
       "revision_spec": "revision-specs/queue-17.md",
       "open_question": {
-        "question": "หน้าใดคือบ้านของเนื้อหาเกณฑ์ตัดสินใจของ Queue #17 และหน้านั้นชนกับหน้าใดบ้าง",
-        "why_cannot_guess": "ทั้งสามหน้าถือ flag CANNIBAL จาก SRC-WEB-002 แต่ไม่อยู่ใน cluster ใดตาม SRC-WEB-004 สองแหล่งนี้เป็น PARTIAL ทั้งคู่และไม่ตรงกัน",
-        "candidates": [
-          "https://www.asiancoding.com/knowledge/barcode-equipment",
-          "https://www.asiancoding.com/knowledge/industry-applications",
-          "https://www.asiancoding.com/knowledge/regional-solutions"
+        "question": "หน้าหลักของ C-7 (Scanner selection / comparison) คือหน้าใด",
+        "unblocks": "PKG-Q17 ทันที เพราะเนื้อหาเกณฑ์ตัดสินใจเขียนรอได้อยู่แล้ว",
+        "candidates_in_cluster": [
+          "/barcode-scanner-comparison  (ถือ flag RANKING)",
+          "/knowledge/product-comparisons  (ถือ flag RANKING)",
+          "/knowledge/how-to-choose-barcode-scanner",
+          "/knowledge/wired-vs-wireless-barcode-scanner",
+          "/select-solution"
         ],
+        "note": "สองหน้าแรกถือ flag RANKING ซึ่งเป็น flag ที่มีอยู่เพียงสองหน้าในทั้งเว็บ และตรงกับคำตัดสิน Queue #17 โดยตรง จึงเป็นบ้านที่น่าจะใช่ที่สุดของเนื้อหานี้ แต่การเลือกหน้าหลักของ cluster เป็นคำตัดสินของ Owner ไม่ใช่การอนุมานจาก flag",
+        "supersedes": "คำถามฉบับก่อนหน้า (2026-09-24 รอบที่ 2) ที่ตั้งไว้ว่าเป็นหนึ่งในสามหน้าที่ถือ flag CANNIBAL แต่ไม่มี cluster — ฉบับนั้นตั้งคำถามผิดจุด เพราะมองเฉพาะหน้าที่ไม่มี cluster แล้วพลาด C-7 ซึ่งเป็นกลุ่มที่มีอยู่จริงและตรงเรื่องกว่า",
+        "still_true_from_before": "สามหน้าที่ถือ flag CANNIBAL แต่ไม่อยู่ใน cluster ใดยังเป็นช่องโหว่ของ gate จริง และยังเป็นคำถามค้างแยกต่างหาก แต่ไม่ใช่อุปสรรคของ PKG-Q17",
         "raised_on": "2026-09-24"
       }
     },
@@ -807,6 +811,35 @@
         "CLM-O-004": "ลูกค้ารายนั้น — ความยินยอมของเขา ไม่ใช่การอนุมัติของ ACS",
         "CLM-B-004": "ไม่มีอะไรปิดได้ ต้องลบซูเปอร์ลาทีฟออก"
       }
+    },
+    {
+      "package_id": "PKG-RFID-VS-BARCODE",
+      "queue_id": null,
+      "title": "RFID กับบาร์โค้ด: เลือกจากลักษณะงาน ไม่ใช่จากรุ่น",
+      "target_url": "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (RFID) · เป็นหน้า RFID เพียงหน้าเดียวจากแปดหน้าที่ไม่อยู่ใน C-3 ซึ่งยังไม่มี canonical owner จึงเป็นหน้า RFID หน้าเดียวที่เขียนได้ตอนนี้ · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+      "owner_decision": "ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-VEN-002",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RFID-VS-BARCODE",
+      "intake_required": false,
+      "out_of_queue": true,
+      "cannibalization_cluster": null,
+      "cluster_note": "หน้า RFID แปดหน้า เจ็ดหน้าอยู่ใน C-3 ซึ่งยังไม่มี canonical owner · การตัดสินหน้าหลักของ C-3 จะปลดอีกเจ็ดหน้าพร้อมกัน"
     }
   ],
   "site_findings": {
@@ -816,5 +849,5 @@
     "urls_in_clusters": 45,
     "note": "61 จาก 82 หน้าที่มีอยู่แล้วบนเว็บถือ risk flag อย่างน้อยหนึ่งอย่าง ปัญหาจึงไม่ได้อยู่แค่ 19 แพ็กเกจใหม่ แต่อยู่ที่หน้าเดิมด้วย"
   },
-  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 จึงไม่ถูกนับรวมในจำนวนนั้น"
+  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม · PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 และ PKG-RFID-VS-BARCODE เป็นแพ็กเกจนอกคิวที่ทำตามหัวข้อที่ Owner กำหนดให้เน้น ทั้งสองรายการจึงไม่ถูกนับรวมในจำนวนนั้น บอร์ดจึงแสดง 21 จาก 19 ซึ่งถูกต้อง ไม่ใช่การนับเกิน"
 }
