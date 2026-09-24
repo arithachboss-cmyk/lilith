@@ -1,0 +1,117 @@
+{
+  "$generated_from": "hr-screens/data.js",
+  "$do_not_edit_by_hand": true,
+  "version": "1.0.0",
+  "route_base": "/ami",
+  "note_th": "route_base เป็นข้อเสนอ ยังไม่ใช่การตัดสิน เจ้าของระบบเป็นผู้กำหนดเส้นทางจริง",
+  "screens": [
+    {
+      "screen": "01",
+      "role_id": "HR-01",
+      "route": "/ami/hr-01",
+      "prototype_anchor": "#role=HR-01",
+      "panel_kind": "director",
+      "required_blocks": [
+        "welcome",
+        "mission_passport",
+        "mission_today",
+        "next_actions",
+        "primary_action",
+        "role_panel",
+        "copilot",
+        "specialist_request",
+        "authority"
+      ]
+    },
+    {
+      "screen": "02",
+      "role_id": "HR-02",
+      "route": "/ami/hr-02",
+      "prototype_anchor": "#role=HR-02",
+      "panel_kind": "hr",
+      "required_blocks": [
+        "welcome",
+        "mission_passport",
+        "mission_today",
+        "next_actions",
+        "primary_action",
+        "role_panel",
+        "copilot",
+        "specialist_request",
+        "authority"
+      ]
+    },
+    {
+      "screen": "03",
+      "role_id": "HR-03",
+      "route": "/ami/hr-03",
+      "prototype_anchor": "#role=HR-03",
+      "panel_kind": "ops",
+      "required_blocks": [
+        "welcome",
+        "mission_passport",
+        "mission_today",
+        "next_actions",
+        "primary_action",
+        "role_panel",
+        "copilot",
+        "specialist_request",
+        "authority"
+      ]
+    },
+    {
+      "screen": "04",
+      "role_id": "HR-04",
+      "route": "/ami/hr-04",
+      "prototype_anchor": "#role=HR-04",
+      "panel_kind": "intel",
+      "required_blocks": [
+        "welcome",
+        "mission_passport",
+        "mission_today",
+        "next_actions",
+        "primary_action",
+        "role_panel",
+        "copilot",
+        "specialist_request",
+        "authority"
+      ]
+    },
+    {
+      "screen": "05",
+      "role_id": "HR-05",
+      "route": "/ami/hr-05",
+      "prototype_anchor": "#role=HR-05",
+      "panel_kind": "match",
+      "required_blocks": [
+        "welcome",
+        "mission_passport",
+        "mission_today",
+        "next_actions",
+        "primary_action",
+        "role_panel",
+        "copilot",
+        "specialist_request",
+        "authority"
+      ]
+    },
+    {
+      "screen": "06",
+      "role_id": "HR-06",
+      "route": "/ami/hr-06",
+      "prototype_anchor": "#role=HR-06",
+      "panel_kind": "ai",
+      "required_blocks": [
+        "welcome",
+        "mission_passport",
+        "mission_today",
+        "next_actions",
+        "primary_action",
+        "role_panel",
+        "copilot",
+        "specialist_request",
+        "authority"
+      ]
+    }
+  ]
+}

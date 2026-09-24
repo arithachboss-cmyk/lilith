@@ -1,0 +1,90 @@
+{
+  "version": "1.0.0",
+  "note_th": "เกณฑ์รับงานที่ตรวจได้จริง แต่ละข้อผูกกับ task ใน codex/TASKS.md · ข้อที่ automated=true ต้องมีเทสต์ ไม่ใช่การอ่านด้วยตา",
+
+  "criteria": [
+    {
+      "id": "AC-01", "task": "AMI-001", "automated": true,
+      "th": "role_id, grok_id และ call sign ของทั้ง 6 ตำแหน่งตรงกับตารางในบรีฟทุกช่อง",
+      "how": "node hr-screens/codex/check-contract.mjs — เทียบกับตารางที่ฝังไว้ในตัว checker"
+    },
+    {
+      "id": "AC-02", "task": "AMI-001", "automated": true,
+      "th": "ไฟล์ contract ที่ generate ตรงกับ data.js ไม่มีการแก้ด้วยมือจนหลุดจากกัน",
+      "how": "check-contract.mjs สร้างใหม่ในหน่วยความจำแล้วเทียบกับไฟล์ที่ commit"
+    },
+    {
+      "id": "AC-03", "task": "AMI-002", "automated": true,
+      "th": "ทุกข้อความที่ผู้ใช้เห็นมีทั้ง th และ en ไม่มีค่าว่าง",
+      "how": "check-contract.mjs ตรวจ ui-strings.json ทุก key"
+    },
+    {
+      "id": "AC-04", "task": "AMI-003", "automated": false,
+      "th": "ผู้ใช้ที่ไม่ได้ลงชื่อเข้าใช้เรียก route ของ AMI แล้วไม่ได้รับเนื้อหาหรือชื่อแผงใด ๆ",
+      "how": "integration test ยิง request โดยไม่มี session แล้วยืนยันว่า body ไม่มีชื่อแผงและไม่มีค่าจาก fixture"
+    },
+    {
+      "id": "AC-05", "task": "AMI-003", "automated": false,
+      "th": "การเปลี่ยน active_role ฝั่ง client ไม่ทำให้เห็นข้อมูลของบทบาทอื่น",
+      "how": "integration test ตั้ง active_role เป็นบทบาทที่ผู้ใช้ไม่ได้ถือ แล้วยืนยันว่า server ตอบตาม user_roles จริง ไม่ใช่ตามค่าที่ส่งมา"
+    },
+    {
+      "id": "AC-06", "task": "AMI-003", "automated": false,
+      "th": "เมื่อสิทธิ์ยังไม่ทราบ หน้าจอแสดงกล่องรอตรวจสิทธิ์ ไม่แสดงเนื้อหาบางส่วนและไม่บอกจำนวนรายการที่ถูกกั้น",
+      "how": "unit test ของ component ด้วย access=PENDING_CHECK"
+    },
+    {
+      "id": "AC-07", "task": "AMI-004", "automated": false,
+      "th": "payload ของทุก panel_kind ผ่าน panel-payloads.schema.json",
+      "how": "contract test ตรวจ response ของ EP-03 ทั้งหกแบบกับ JSON Schema"
+    },
+    {
+      "id": "AC-08", "task": "AMI-004", "automated": false,
+      "th": "lanes ของ panel ops ส่งมาครบห้าขั้นเสมอ ขั้นที่ว่างเป็นอาร์เรย์ว่าง ไม่ใช่ถูกตัดออก",
+      "how": "contract test กับกรณีที่บางขั้นไม่มีงาน"
+    },
+    {
+      "id": "AC-09", "task": "AMI-004", "automated": false,
+      "th": "statement ที่ไม่มี source_ref ต้องไม่ถูกส่งเป็น FACT",
+      "how": "contract test กับ payload ของ panel intel"
+    },
+    {
+      "id": "AC-10", "task": "AMI-005", "automated": false,
+      "th": "หน้าจอ 05 ไม่มีทางแก้คะแนนการจับคู่ และไม่มี endpoint ที่รับค่าคะแนนจาก client",
+      "how": "AST check ว่า route ของ AMI ไม่มี handler ที่เขียนคะแนน + unit test ว่า component ไม่มี control ที่แก้ score"
+    },
+    {
+      "id": "AC-11", "task": "AMI-005", "automated": false,
+      "th": "ไม่มีหน้าจอใดมีปุ่มหรือเส้นทางที่ override Keeper หรือเลือกเปิดข้อมูลลับทั้งหมด",
+      "how": "AST/HTML check หา control ที่ชื่อหรือ action สื่อถึงการ override แล้ว fail ถ้าพบ"
+    },
+    {
+      "id": "AC-12", "task": "AMI-005", "automated": false,
+      "th": "response ของทุก endpoint ใน AMI ไม่มีช่องที่มีคำว่า key, token, secret หรือ credential",
+      "how": "contract test สแกน response ทุกแบบ"
+    },
+    {
+      "id": "AC-13", "task": "AMI-006", "automated": false,
+      "th": "แถบบทบาทใช้คีย์บอร์ดได้ครบ ลูกศรสี่ทิศ Home และ End และโฟกัสเห็นชัดทุกองค์ประกอบ",
+      "how": "a11y test ด้วยคีย์บอร์ด + ตรวจว่ามี :focus-visible style"
+    },
+    {
+      "id": "AC-14", "task": "AMI-006", "automated": false,
+      "th": "หน้าไม่ล้นแนวนอนที่ความกว้าง 360 ถึง 1440 px",
+      "how": "visual test ยืนยัน scrollWidth เท่ากับ clientWidth ทุก breakpoint"
+    },
+    {
+      "id": "AC-15", "task": "AMI-006", "automated": false,
+      "th": "เคารพ prefers-reduced-motion และไม่มีเสียงหรือแอนิเมชันที่เล่นเอง",
+      "how": "ตรวจ CSS และตรวจว่าไม่มี autoplay ใด ๆ"
+    }
+  ],
+
+  "out_of_scope_th": [
+    "การเชื่อมต่อ xAI, AMI Core หรือ THE KEEPER จริง",
+    "การส่งคำขอผู้เชี่ยวชาญจริง",
+    "การสร้าง แก้ไข หรือรีเซ็ตบัญชี",
+    "การแก้ระบบ matching หรือ permission ที่มีอยู่",
+    "การ deploy"
+  ]
+}
