@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-INVENTORY-COUNT",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [],
+  "evidence_note": "ว่างโดยตั้งใจ — ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่อ้างสเปกใด",
+  "forbidden_scan": {
+    "run_at": "2026-09-24",
+    "tool": "node tools/redact.mjs content-packages/PKG-INVENTORY-COUNT/article.md",
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": [],
+    "first_run_findings": [
+      "article.md: FW-B-001 มากที่สุด — ร่างแรกเขียน 'ข้อแรกเป็นข้อที่บอกได้มากที่สุด' แก้เป็น 'ข้อแรกคือข้อที่ให้คำตอบชัดกว่าข้ออื่น'"
+    ],
+    "note": "รอบล่าสุดได้ 'ไม่พบข้อความที่ต้องจัดการ' exit 0 · กฎ FW-O-013 ไม่ยิงในรอบแรกเลย เพราะเลี่ยงคำว่ามีของ มีสินค้า มีสต็อก และสต็อกเหลือ ไว้ตั้งแต่ตอนเขียน ใช้คำว่ายอดคงเหลือและจำนวนที่นับได้แทน"
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": [
+    "แพ็กเกจนอกคิว ทำตามหัวข้อ Warehouse Automation ที่ Owner กำหนดให้เน้น",
+    "เป็นหน้าสุดท้ายที่เขียนได้โดยไม่ต้องรอคำตัดสินเรื่อง cluster หรือเอกสารจาก ACS หรือผู้ผลิต",
+    "ขอบเขตแยกกับ PKG-WMS-INTEGRATION ชัดเจน หน้านี้เรื่องความหมายของผลการนับ หน้านั้นเรื่องการเดินทางของข้อมูล",
+    "บทเรียนจากสี่ false positive ก่อนหน้าถูกใช้ตั้งแต่ตอนเขียน จึงเหลือ finding เดียวในรอบแรก แทนที่จะเป็นสองหรือสามแบบรอบก่อน ๆ"
+  ]
+}

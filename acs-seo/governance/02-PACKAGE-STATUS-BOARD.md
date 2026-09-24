@@ -2,11 +2,11 @@
 
 # Package Status Board
 
-ณ วันที่ **2026-09-24** — 23 รายการ (Owner แจ้งไว้ 19)
+ณ วันที่ **2026-09-24** — 24 รายการ (Owner แจ้งไว้ 19)
 
 > ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic
 
-**สรุป:** PASS = 0 · REVISE = 7 · HOLD = 1 · BLOCKED = 15
+**สรุป:** PASS = 0 · REVISE = 8 · HOLD = 1 · BLOCKED = 15
 
 **PASS = 0** — ยังไม่มีแพ็กเกจใดผ่านได้ เพราะ rendering gate อยู่ที่ `FAIL` และ Source Pack ยังไม่ครบ
 
@@ -35,6 +35,7 @@
 | `PKG-RFID-VS-BARCODE` | — | **REVISE** | DRAFT_PENDING_REVIEW | WORDING_QA_OK | — | `SRC-VEN-002`, `SRC-KW-001` | แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (RFID) · เป็นหน้า RFID เพียงหน้าเดียวจากแปดหน้าที่ไม่อยู่ใน C-3 ซึ่งยังไม่มี canonical owner จึงเป็นหน้า RFID หน้าเดียวที่เขียนได้ตอนนี้ · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่ |
 | `PKG-WMS-INTEGRATION` | — | **REVISE** | DRAFT_PENDING_REVIEW | WORDING_QA_OK | — | `SRC-ACS-001`, `SRC-KW-001` | แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · หน้าคลังสินค้าที่เกี่ยวข้องมีเก้าหน้า เจ็ดหน้าอยู่ใน C-5 หรือ C-3 ซึ่งยังไม่มี canonical owner เหลือสองหน้าที่เขียนได้ · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่ |
 | `PKG-POS-RETAIL` | — | **REVISE** | DRAFT_PENDING_REVIEW | WORDING_QA_OK | — | `SRC-ACS-004`, `SRC-KW-001` | แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Retail Automation) · เป็นหน้า Retail หน้าเดียวจากห้าหน้าที่เขียนได้ตอนนี้ ที่เหลืออยู่ใน C-6 ซึ่งยังไม่มี canonical owner · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และหน้านี้เป็น SERVICE ที่ยังประกาศขอบเขตบริการไม่ได้จนกว่า SRC-ACS-004 จะมา |
+| `PKG-INVENTORY-COUNT` | — | **REVISE** | DRAFT_PENDING_REVIEW | WORDING_QA_OK | — | `SRC-ACS-001`, `SRC-KW-001` | แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · เป็นหน้าสุดท้ายที่เขียนได้โดยไม่ต้องรอคำตัดสินเรื่อง cluster หรือเอกสารจาก ACS หรือผู้ผลิต · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL |
 
 ## คำตัดสินของ Owner ที่บันทึกไว้
 
@@ -50,6 +51,7 @@
 | `PKG-RFID-VS-BARCODE` | ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ |
 | `PKG-WMS-INTEGRATION` | ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ |
 | `PKG-POS-RETAIL` | ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ |
+| `PKG-INVENTORY-COUNT` | ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ |
 
 ## คำถามค้าง
 

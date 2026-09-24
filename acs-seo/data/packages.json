@@ -899,6 +899,36 @@
       "cannibalization_cluster": null,
       "cluster_note": "การตัดสินหน้าหลักของ C-6 จะปลดสี่หน้า Retail พร้อมกัน",
       "note_on_service_type": "เป็นหน้า SERVICE ที่ยังไม่ได้ทำหน้าที่ของหน้าบริการ เพราะ CLM-O-007 และ CLM-O-010 ยังไม่ปลด · schema ใช้ WebPage ไม่ใช่ Service โดยตั้งใจ เมื่อ SRC-ACS-004 มาถึงให้เพิ่มส่วนขอบเขตบริการและตรวจซ้ำทั้งแพ็กเกจ เพราะ qa_tier จะขยับขึ้น"
+    },
+    {
+      "package_id": "PKG-INVENTORY-COUNT",
+      "queue_id": null,
+      "title": "นับสต็อกด้วยบาร์โค้ด: ตัวเลขบอกอะไรและไม่บอกอะไร",
+      "target_url": "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · เป็นหน้าสุดท้ายที่เขียนได้โดยไม่ต้องรอคำตัดสินเรื่อง cluster หรือเอกสารจาก ACS หรือผู้ผลิต · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL",
+      "owner_decision": "ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-INVENTORY-COUNT",
+      "intake_required": false,
+      "out_of_queue": true,
+      "cannibalization_cluster": null,
+      "boundary_note": "หน้านี้ตอบว่าผลการนับหมายถึงอะไรและส่วนต่างมาจากขั้นตอนไหน ส่วน PKG-WMS-INTEGRATION ตอบว่าข้อมูลเดินทางจากฉลากถึงระบบอย่างไร สองหน้าลิงก์หากันและไม่เขียนทับกัน ซึ่งสำคัญเพราะทั้งคู่เป็นหน้า KNOWLEDGE ที่อยู่นอก cluster",
+      "milestone_note": "หลังแพ็กเกจนี้ หน้าที่เขียนได้โดยไม่ต้องรอคำตอบของ Owner หมดแล้ว งานเขียนที่เหลือทุกหน้าติด cluster ที่ยังไม่มีหน้าหลัก หรือรอเอกสารจาก ACS หรือผู้ผลิต หรือรอคำตัดสินว่าจะสร้างหน้าใหม่สำหรับ Industrial Mobile Computing ไหม"
     }
   ],
   "site_findings": {
@@ -908,5 +938,5 @@
     "urls_in_clusters": 45,
     "note": "61 จาก 82 หน้าที่มีอยู่แล้วบนเว็บถือ risk flag อย่างน้อยหนึ่งอย่าง ปัญหาจึงไม่ได้อยู่แค่ 19 แพ็กเกจใหม่ แต่อยู่ที่หน้าเดิมด้วย"
   },
-  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม · PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 ส่วน PKG-RFID-VS-BARCODE, PKG-WMS-INTEGRATION และ PKG-POS-RETAIL เป็นแพ็กเกจนอกคิวที่ทำตามหัวข้อที่ Owner กำหนดให้เน้น ทั้งสี่รายการจึงไม่ถูกนับรวมในจำนวนนั้น บอร์ดจึงแสดง 23 จาก 19 ซึ่งถูกต้อง ไม่ใช่การนับเกิน"
+  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม · PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 ส่วน PKG-RFID-VS-BARCODE, PKG-WMS-INTEGRATION, PKG-POS-RETAIL และ PKG-INVENTORY-COUNT เป็นแพ็กเกจนอกคิว ที่ทำตามหัวข้อที่ Owner กำหนดให้เน้น ทั้งห้ารายการจึงไม่ถูกนับรวมในจำนวนนั้น บอร์ดจึงแสดง 24 จาก 19 ซึ่งถูกต้อง"
 }

@@ -1,0 +1,34 @@
+{
+  "package_id": "PKG-INVENTORY-COUNT",
+  "queue_id": null,
+  "title": "นับสต็อกด้วยบาร์โค้ด: ตัวเลขบอกอะไรและไม่บอกอะไร",
+  "target_url": "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+  "page_type": "KNOWLEDGE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · เป็นหน้าสุดท้ายที่เขียนได้โดยไม่ต้องรอคำตัดสินเรื่อง cluster หรือเอกสารจาก ACS · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+  "qa_tier": "WORDING_QA_OK",
+  "qa_tier_note": "หน้าปลายทางไม่ถือ risk flag ใด ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต ไม่มีชื่อซอฟต์แวร์ และไม่มี flagged_claims",
+  "flagged_claims": [],
+  "blocked_on_sources": [
+    "SRC-ACS-001",
+    "SRC-KW-001"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "out_of_queue": true,
+  "requested_by": "ACS Owner — หัวข้อที่กำหนดให้เน้น: Warehouse Automation",
+  "requested_on": "2026-09-24",
+  "cannibalization_cluster": null,
+  "boundary_note": "หน้านี้ตอบว่าผลการนับหมายถึงอะไรและส่วนต่างมาจากไหน ส่วน PKG-WMS-INTEGRATION ตอบว่าข้อมูลเดินทางจากฉลากถึงระบบอย่างไร สองหน้าลิงก์หากันและไม่เขียนทับกัน",
+  "milestone_note": "หลังแพ็กเกจนี้ หน้าที่เขียนได้โดยไม่ต้องรอคำตอบของ Owner หมดแล้ว งานเขียนที่เหลือทุกหน้าติด cluster ที่ยังไม่มีหน้าหลัก หรือรอเอกสารจาก ACS หรือผู้ผลิต"
+}
