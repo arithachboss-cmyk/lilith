@@ -163,13 +163,25 @@ function checkPackage(dir) {
   if (status.package_status !== 'DRAFT_PENDING_REVIEW' && status.gates?.owner_approval !== 'GRANTED') {
     add('FAIL', 'STATUS_ESCAPED_DRAFT', `package_status = ${status.package_status} แต่ owner_approval = ${status.gates?.owner_approval}`);
   }
+  /* หน้าที่ไม่เผยแพร่สาธารณะ: gate ที่เป็นเรื่อง SEO ล้วน ๆ ไม่มีผล เพราะไม่มีการ index
+     แต่ gate เรื่อง claim ยังบังคับครบทุกข้อ — การจำกัดผู้เข้าถึงไม่ได้ทำให้ข้อความเป็นจริงขึ้น
+     และในบริบทการขาย ข้อความที่ผิดยิ่งมีน้ำหนักมากขึ้น ไม่ใช่น้อยลง */
+  const isPrivate = meta.visibility === 'PRIVATE';
   const renderPass = gates.gates['GATE-RENDER'].status === 'PASS';
   const allGatesPass = status.gates && ['mechanical', 'claim_qa', 'cannibalization'].every((g) => status.gates[g] === 'PASS')
     && status.gates.owner_approval === 'GRANTED' && renderPass;
   if (status.publish_allowed === true && !allGatesPass) {
     add('FAIL', 'PUBLISH_NOT_ALLOWED', 'publish_allowed = true แต่ยังผ่าน gate ไม่ครบ (รวม rendering gate และ owner approval)');
   }
-  if (!renderPass && meta.robots && !/noindex/i.test(meta.robots)) {
+  if (isPrivate) {
+    for (const field of ['access_control', 'audience']) {
+      if (!meta[field]) add('FAIL', 'PRIVATE_META_MISSING', `หน้า PRIVATE ต้องระบุ ${field} ว่าใครเข้าถึงได้และบังคับด้วยอะไร`);
+    }
+    if (meta.robots && !/noindex/i.test(meta.robots)) {
+      add('FAIL', 'PRIVATE_MUST_NOINDEX', 'หน้า PRIVATE ต้องคง noindex — ถ้า index ได้ก็ไม่ใช่หน้าส่วนตัวอีกต่อไป');
+    }
+  }
+  if (!isPrivate && !renderPass && meta.robots && !/noindex/i.test(meta.robots)) {
     add('FAIL', 'ROBOTS_TOO_OPEN', `rendering gate ยัง ${gates.gates['GATE-RENDER'].status} แต่ meta.robots = "${meta.robots}" — ต้องคง noindex`);
   }
 
@@ -188,13 +200,17 @@ function checkPackage(dir) {
   }
 
   // --- sitemap / internal links (ถ้า source ยังไม่มา = ตรวจไม่ได้ ห้ามนับเป็นผ่าน)
-  if (sitemapUrls.size === 0) {
+  if (isPrivate) {
+    add('INFO', 'PRIVATE_SEO_CHECKS_SKIPPED', 'ข้ามการตรวจ sitemap, internal links และ cannibalization เพราะหน้านี้ไม่เผยแพร่สาธารณะ — การตรวจ claim ยังบังคับครบ');
+  } else if (sitemapUrls.size === 0) {
     add('BLOCKED_ON_SOURCE', 'SITEMAP_UNAVAILABLE', 'data/sitemap_urls.json ว่าง (SRC-WEB-001 ยังไม่ส่ง) — ตรวจ sitemap ไม่ได้');
   } else if (meta.target_url && !sitemapUrls.has(meta.target_url)) {
     add('FAIL', 'SITEMAP_MISS', `target_url ไม่อยู่ใน sitemap ปัจจุบัน: ${meta.target_url}`);
   }
   const links = Array.isArray(meta.internal_links) ? meta.internal_links : [];
-  if (inventoryUrls.size === 0) {
+  if (isPrivate) {
+    // ไม่ตรวจ internal links ของหน้าที่ไม่อยู่ในโครงสร้างเว็บสาธารณะ
+  } else if (inventoryUrls.size === 0) {
     add('BLOCKED_ON_SOURCE', 'INVENTORY_UNAVAILABLE', 'data/page_inventory.json ว่าง (SRC-WEB-002 ยังไม่ส่ง) — ตรวจ internal links ไม่ได้');
   } else {
     if (links.length === 0) add('FAIL', 'INTERNAL_LINKS_EMPTY', 'ไม่มี internal_links เลย');
@@ -207,7 +223,7 @@ function checkPackage(dir) {
   // --- cannibalization: ห้ามยิง intent ของ cluster ที่ยังไม่มีเจ้าของ canonical
   const targetPath = meta.target_url ? String(meta.target_url).replace(SITE_ORIGIN, '') || '/' : null;
   const cluster = targetPath ? clusterByPath.get(targetPath) : null;
-  if (cluster && !cluster.canonical_owner) {
+  if (cluster && !cluster.canonical_owner && !isPrivate) {
     const generic = cluster.generic_urls;
     const scope = generic
       ? `${cluster.count} URL ในกลุ่ม แต่ที่ชนกันจริงคือ ${generic.length} หน้าที่ไม่มี modifier (${generic.join(', ')})`

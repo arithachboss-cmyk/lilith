@@ -32,7 +32,7 @@ node acs-seo/tools/validate.mjs --board          # พิมพ์ status board
 node acs-seo/tools/redact.mjs <ดราฟต์> --fix     # ปิดข้อความที่ Claim Register ห้าม (ทิ้ง marker ไว้)
 node acs-seo/tools/evidence-check.mjs <แพ็กเกจ>   # หลักฐานครบไหม ราคาหมดอายุหรือยัง
 node acs-seo/tools/evidence-check.mjs <แพ็กเกจ> --as-of 2027-01-01   # ประเมินล่วงหน้า
-node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (108 ข้อ)
+node acs-seo/tools/selftest.mjs                  # ตรวจว่าระบบยังทำงานจริง (120 ข้อ)
 node acs-seo/tools/render-docs.mjs               # สร้างเอกสาร 00/01/02 ใหม่จาก data/
 ```
 
@@ -89,6 +89,8 @@ node acs-seo/tools/validate.mjs
 - **ชื่อลูกค้า** และการอ้างว่าดูแลลูกค้ารายใดแม้ไม่เอ่ยชื่อ — ความยินยอมเป็นของลูกค้า ไม่ใช่ของ ACS
 - **สถานะสต็อกและระยะเวลาส่งมอบ** — หมดอายุเร็วกว่าราคา เผยแพร่เป็นสถานะไม่ได้ ต้องเขียนเป็นกระบวนการ
 - **การอ้างอายุบริษัทและความเป็นพาร์ทเนอร์** — ผู้ปิด claim คือเอกสารบริษัทและหนังสือรับรองจากแบรนด์
+
+หน้าที่ตั้ง `visibility: PRIVATE` จะข้าม gate ที่เป็นเรื่อง SEO (sitemap, internal links, cannibalization, rendering) แต่ **การตรวจ claim ยังบังคับครบทุกข้อ**
 
 สิ่งที่ตรวจไม่ได้เพราะยังไม่มีข้อมูล จะถูกรายงานเป็น `BLOCKED_ON_SOURCE` — **ไม่ใช่ PASS**
 

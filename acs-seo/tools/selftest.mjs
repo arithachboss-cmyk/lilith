@@ -205,6 +205,29 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   check('หลัง --fix ไม่เหลือข้อความ BLOCK', after.blocked === 0, String(after.blocked));
 }
 
+/* ── 5a2. หน้าที่ไม่เผยแพร่สาธารณะ ───────────────────────────────
+   การจำกัดผู้เข้าถึงยกเว้นได้เฉพาะ gate ที่เป็นเรื่อง SEO ล้วน ๆ
+   ไม่ได้ทำให้ข้อความที่ไม่มีหลักฐานกลายเป็นข้อความที่มีหลักฐาน */
+{
+  const cache = join(tmp, 'c-priv.json');
+  const res = run(VALIDATE, ['--fixtures', '--json', `--cache=${cache}`]);
+  const find = (n) => res.results.find((r) => r.package.includes(n));
+  const codes = (r) => new Set(r.findings.map((f) => f.code));
+
+  const priv = find('__fixture-private__');
+  check('หน้า PRIVATE ที่สะอาดผ่านได้ โดยข้าม gate ที่เป็นเรื่อง SEO', priv.status === 'PASS',
+    priv.findings.map((f) => f.code).join(','));
+  check('— และบันทึกไว้ว่าข้ามอะไรไปบ้าง', codes(priv).has('PRIVATE_SEO_CHECKS_SKIPPED'));
+
+  const pc = find('__fixture-private-claims__');
+  const c = codes(pc);
+  check('หน้า PRIVATE ที่มี claim ต้องห้าม ยังถูก FAIL', pc.status === 'FAIL');
+  check('— ซูเปอร์ลาทีฟยังถูกจับ', c.has('FORBIDDEN_BLOCK'));
+  check('— ชื่อลูกค้ายังถูกจับ แม้หน้าจะไม่เผยแพร่สาธารณะ', c.has('OWNER_CONFIRM_MISSING'));
+  check('— ชื่อผู้ผลิตยังถูกจับ', c.has('EVIDENCE_MISSING'));
+  check('— และยังข้าม gate ที่เป็นเรื่อง SEO เหมือนกัน', c.has('PRIVATE_SEO_CHECKS_SKIPPED'));
+}
+
 /* ── 5b. แพ็กเกจ about-acs: สองดราฟต์ต้องให้ผลต่างกัน ────────────
    v1 พูดเรื่องเดียวกันในเชิงเจตนาโดยไม่มี claim ที่ถูก gate
    v2 มีสิ่งที่ Owner ขอครบ และติด claim ที่ ACS ปิดเองไม่ได้ทั้งหมด */
