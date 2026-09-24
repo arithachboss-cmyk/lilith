@@ -1,0 +1,57 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>AMI — HUMAN + AI COMMAND · prototype หน้าจอส่วนบุคคล</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<a class="skip" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<div class="demo-strip" role="note">
+  <span class="pill-demo">DEMO</span>
+  <span><b>ตัวอย่างการออกแบบ</b> · ข้อมูลทั้งหมดเป็นข้อมูลสังเคราะห์ ไม่ใช่ตัวตนหรือสิทธิ์ของผู้ใช้จริง · ยังไม่มีการเชื่อมต่อ xAI, AMI Core หรือ THE KEEPER</span>
+</div>
+
+<div class="shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="sys">AMI</span>
+      <span class="org">HR + AI</span>
+      <span class="sub">HUMAN + AI COMMAND · Middle Property</span>
+    </div>
+    <div class="account">
+      <button class="btn btn-ghost" type="button" id="accountBtn" aria-haspopup="dialog">บัญชีของฉัน</button>
+      <button class="btn btn-ghost" type="button" id="signoutBtn">ออกจากระบบ</button>
+    </div>
+  </header>
+
+  <!-- ตัวสลับ “ดูตัวอย่างบทบาท” — เป็นเครื่องมือออกแบบ ไม่ใช่ทางเข้าใช้จริง -->
+  <section class="switcher" aria-labelledby="switcherTitle">
+    <div class="switcher-head">
+      <span class="pill-demo">DEMO</span>
+      <h2 id="switcherTitle">ดูตัวอย่างบทบาท</h2>
+      <p>สลับเพื่อดูการออกแบบของแต่ละตำแหน่ง ตัวสลับนี้ไม่เปลี่ยนสิทธิ์บัญชีจริง และไม่ใช่ส่วนหนึ่งของการเข้าใช้งานจริง</p>
+    </div>
+    <div class="rolebar" role="tablist" aria-label="เลือกบทบาทที่ต้องการดูตัวอย่าง" id="roleBar"></div>
+  </section>
+
+  <main id="main" tabindex="-1">
+    <div id="screen" role="tabpanel" aria-live="polite"></div>
+  </main>
+
+  <footer class="legal">
+    AMI — HUMAN + AI COMMAND · prototype สำหรับการออกแบบภายใน<br>
+    ข้อมูลบุคลากร ทรัพย์ ความต้องการ และตัวเลขทั้งหมดเป็นข้อมูลสังเคราะห์ · ไม่มีการเชื่อมต่อบริการภายนอก ไม่มีการส่งคำขอจริง ไม่มีการอนุมัติสิทธิ์จริง<br>
+    บทบาท Grok ถูกกำหนดไว้แล้ว แต่ยังไม่มีการเชื่อมต่อ xAI, AMI Core หรือ THE KEEPER
+  </footer>
+
+</div>
+
+<script type="module" src="app.js"></script>
+</body>
+</html>
