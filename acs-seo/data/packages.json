@@ -269,32 +269,34 @@
     {
       "package_id": "PKG-Q21",
       "queue_id": 21,
-      "title": null,
-      "target_url": null,
-      "page_type": null,
+      "title": "ผลตอบแทนของระบบบาร์โค้ด: ตัวเลขต้องมาจากไซต์จริง",
+      "target_url": "https://www.asiancoding.com/roi-calculator",
+      "page_type": "LANDING",
       "package_status": "DRAFT_PENDING_REVIEW",
       "board_status": "REVISE",
-      "board_reason": "ตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ ไม่มีหลักฐาน — มี revision spec พร้อมใช้แล้ว",
+      "board_reason": "ดราฟต์ส่งแล้ว ไม่มีตัวเลขผลลัพธ์ใด และไม่แทนด้วยคำคลุมเครืออย่าง \"ดีขึ้นมาก\" ซึ่ง spec §3 ระบุว่า เป็น claim เดิมที่ถอดหลักฐานออก · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag NUMBERS ของหน้าปลายทาง) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และคิวนี้ยังไม่จบ ตัวเลขระยะอ่านบน /long-range-barcode-scanner กับความเร็วพิมพ์บน /tsc-barcode-printer เป็นการใช้คำตัดสินเดียวกันคนละจุด ยังไม่ได้ทำ",
       "owner_decision": "ลบตัวเลข 65-70% → 95%+ จนกว่าจะมีหลักฐาน",
       "qa_tier": "T2_FULL",
       "flagged_claims": [
         "CLM-B-001",
+        "CLM-B-006",
         "CLM-E-001",
         "CLM-E-002",
         "CLM-E-003"
       ],
       "blocked_on_sources": [
-        "SRC-VEN-002"
+        "SRC-VEN-002",
+        "SRC-ACS-003"
       ],
       "gates": {
-        "mechanical": "NOT_RUN",
+        "mechanical": "PASS",
         "claim_qa": "NOT_RUN",
-        "cannibalization": "NOT_RUN",
+        "cannibalization": "PASS",
         "rendering": "FAIL",
         "owner_approval": "NOT_GRANTED"
       },
-      "package_path": null,
-      "intake_required": true,
+      "package_path": "content-packages/PKG-Q21",
+      "intake_required": false,
       "target_url_candidates": {
         "status": "RECOMMENDATION",
         "derived_from": "SRC-WEB-002 risk flags",
@@ -311,7 +313,8 @@
         "owner_confirmed": false
       },
       "cannibalization_cluster": null,
-      "revision_spec": "revision-specs/queue-21.md"
+      "revision_spec": "revision-specs/queue-21.md",
+      "coverage_note": "ใช้คำตัดสิน Queue #21 กับ /roi-calculator เท่านั้น · ตัวเลขระยะการอ่านบน /long-range-barcode-scanner (อยู่ใน C-1 ซึ่งมีหน้าหลักแล้ว ทำได้แต่ต้องมีดราฟต์เดิม) และความเร็วพิมพ์บน /tsc-barcode-printer (อยู่ใน C-2 ซึ่งยังไม่มีหน้าหลัก ติด gate) ยังไม่ได้ทำ"
     },
     {
       "package_id": "PKG-UNMAPPED-01",

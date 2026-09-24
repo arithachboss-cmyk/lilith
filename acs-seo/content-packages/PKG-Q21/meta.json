@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-Q21",
+  "title": "ผลตอบแทนของระบบบาร์โค้ด: ตัวเลขต้องมาจากไซต์จริง",
+  "meta_description": "อธิบายว่าอะไรเป็นตัวกำหนดผลตอบแทนของระบบบาร์โค้ด และทำไมตัวเลขที่ใช้ตัดสินใจต้องวัดจากกระบวนการของไซต์นั้นเอง ไม่ใช่ยกค่าเฉลี่ยจากที่อื่นมาใช้แทน",
+  "canonical": "https://www.asiancoding.com/roi-calculator",
+  "target_url": "https://www.asiancoding.com/roi-calculator",
+  "page_type": "LANDING",
+  "canonical_intent": "อธิบายตัวแปรที่ตัดสินผลตอบแทน และวิธีวัดตัวแปรเหล่านั้นจากไซต์จริง จงใจไม่ให้ตัวเลขผลลัพธ์ใด และจงใจไม่แทนตัวเลขด้วยคำคลุมเครืออย่าง ดีขึ้นมาก ซึ่งเป็นข้ออ้างเดิมที่ถอดหลักฐานออก",
+  "primary_keyword": "roi ระบบบาร์โค้ด",
+  "secondary_keywords": [
+    "คำนวณผลตอบแทนระบบบาร์โค้ด",
+    "คุ้มไหม ระบบบาร์โค้ด",
+    "ประเมินผลก่อนลงทุนระบบบาร์โค้ด"
+  ],
+  "intent": "COMMERCIAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/select-solution",
+    "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+    "https://www.asiancoding.com/contact"
+  ],
+  "form_note": "ทุกตัวเลขเชิงผลลัพธ์ถูกแทนด้วยกลไกตาม revision-specs/queue-21.md §3 ไม่ใช่แทนด้วยตัวเลขที่คลุมเครือกว่า · spec ระบุชัดว่า 'ดีขึ้นมาก' คือ claim เดิมที่ถอดหลักฐานออก และไม่ใช่การปรับปรุง",
+  "coverage_note": "แพ็กเกจนี้ใช้คำตัดสิน Queue #21 กับหน้า /roi-calculator เท่านั้น · ตัวเลขระยะการอ่านและความเร็วพิมพ์บนหน้าสินค้า เช่น /long-range-barcode-scanner และ /tsc-barcode-printer เป็นการใช้คำตัดสินเดียวกันคนละจุด และยังไม่ได้ทำในแพ็กเกจนี้",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "ผลตอบแทนของระบบบาร์โค้ด: ตัวเลขต้องมาจากไซต์จริง",
+    "description": "อธิบายว่าอะไรเป็นตัวกำหนดผลตอบแทนของระบบบาร์โค้ด และทำไมตัวเลขที่ใช้ตัดสินใจต้องวัดจากกระบวนการของไซต์นั้นเอง ไม่ใช่ยกค่าเฉลี่ยจากที่อื่นมาใช้แทน",
+    "image": null
+  }
+}
