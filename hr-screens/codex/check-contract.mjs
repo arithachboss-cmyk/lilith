@@ -215,7 +215,64 @@ if (existsSync(join(PKG, 'node_modules', 'typescript'))) {
     ok(`type ปฏิเสธ${label}`, output.includes(needle), 'ไม่พบ error ที่คาดไว้');
   }
 } else {
-  ok('ข้ามการตรวจ type เพราะยังไม่ได้ pnpm install', true);
+  /*
+   * ใน CI การข้ามคือการปล่อยผ่านเงียบ ๆ ซึ่งทำให้ด่านนี้ไร้ความหมาย
+   * นอกเครื่อง CI ยอมให้ข้ามได้ เพื่อให้ clone มาแล้วรันได้ทันทีก่อน install
+   */
+  ok('ตรวจ type ได้จริง ไม่ถูกข้ามใน CI', !process.env.CI,
+    'ไม่พบ typescript ใน packages/contracts — รัน pnpm install --frozen-lockfile ก่อน');
+  if (!process.env.CI) ok('ข้ามการตรวจ type เพราะยังไม่ได้ pnpm install', true);
+}
+
+/*
+ * 12 — enum ต้อง round-trip ระหว่าง enums.json กับ enums.ts
+ *
+ * ตารางชื่อเขียนไว้ตรงนี้โดยตั้งใจ ไม่ได้ derive จากไฟล์ใดไฟล์หนึ่ง · ถ้ามีคน
+ * เพิ่ม enum ใน enums.json โดยไม่มีฝั่ง TypeScript ข้อนี้จะฟ้อง ไม่ใช่เงียบ
+ */
+const ENUM_PAIRS = [
+  ['panel_state', 'AMI_PANEL_STATES'],
+  ['access_verdict', 'AMI_ACCESS_VERDICTS'],
+  ['ai_connection_state', 'AMI_AI_CONNECTION_STATES'],
+  ['specialist_request_state', 'AMI_SPECIALIST_REQUEST_STATES'],
+  ['mission_health', 'AMI_MISSION_HEALTH'],
+  ['evidence_kind', 'AMI_EVIDENCE_KINDS'],
+  ['integration_readiness', 'AMI_INTEGRATION_READINESS'],
+  ['action_verdict', 'AMI_ACTION_VERDICTS'],
+];
+
+const TS_ENUMS = join(here, '..', '..', 'packages', 'contracts', 'src', 'ami', 'enums.ts');
+ok('มีไฟล์ค่าคงที่ฝั่ง TypeScript', existsSync(TS_ENUMS));
+if (existsSync(TS_ENUMS)) {
+  const enumsTs = readFileSync(TS_ENUMS, 'utf8');
+  const tsArray = (name) => {
+    const match = enumsTs.match(new RegExp(`export const ${name} = \\[([^\\]]*)\\] as const;`));
+    if (!match) return null;
+    return [...match[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+  };
+
+  const jsonEnumKeys = Object.keys(enums)
+    .filter((key) => enums[key] && typeof enums[key] === 'object' && enums[key].values);
+  ok('ทุก enum ใน enums.json มีคู่ฝั่ง TypeScript',
+    jsonEnumKeys.every((key) => ENUM_PAIRS.some(([jsonKey]) => jsonKey === key)),
+    `ไม่มีคู่: ${jsonEnumKeys.filter((key) => !ENUM_PAIRS.some(([j]) => j === key)).join(', ')}`);
+
+  for (const [jsonKey, tsName] of ENUM_PAIRS) {
+    const fromJson = Object.keys(enums[jsonKey]?.values ?? {});
+    const fromTs = tsArray(tsName);
+    ok(`enums.ts มี ${tsName}`, fromTs !== null);
+    if (fromTs !== null) {
+      ok(`${tsName} ตรงกับ enums.json#${jsonKey} ทุกค่าและเรียงเหมือนกัน`,
+        JSON.stringify(fromTs) === JSON.stringify(fromJson),
+        `json=${fromJson.join('|')} ts=${fromTs.join('|')}`);
+    }
+  }
+
+  ok('ค่าปัจจุบันของ ai_connection_state ตรงกันทั้งสองฝั่ง',
+    enumsTs.includes(`AMI_AI_CONNECTION_STATE_NOW: AmiAiConnectionState = '${enums.ai_connection_state.current_value_for_all_roles}'`));
+  ok('สถานะคำขอที่อนุญาตในเฟสนี้ตรงกันทั้งสองฝั่ง',
+    JSON.stringify(tsArray('AMI_SPECIALIST_REQUEST_STATES_ALLOWED_NOW')) ===
+    JSON.stringify(enums.specialist_request_state.allowed_in_prototype));
 }
 
 /* รายงาน */
