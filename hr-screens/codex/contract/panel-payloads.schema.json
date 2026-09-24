@@ -1,0 +1,272 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "ami/panel-payloads.schema.json",
+  "title": "AMI panel payloads",
+  "description": "รูปร่างของ payload ต่อ panel_kind หนึ่งค่า ใช้กับ EP-03 ทุกแผงส่งมาเมื่อ state=READY และ access=GRANTED เท่านั้น",
+  "oneOf": [
+    { "$ref": "#/$defs/director" },
+    { "$ref": "#/$defs/hr" },
+    { "$ref": "#/$defs/ops" },
+    { "$ref": "#/$defs/intel" },
+    { "$ref": "#/$defs/match" },
+    { "$ref": "#/$defs/ai" }
+  ],
+  "$defs": {
+    "stage": { "enum": ["demand", "qualification", "matching", "viewing", "closed"] },
+    "health": { "enum": ["ON_TRACK", "ATTENTION", "BLOCKED"] },
+
+    "director": {
+      "type": "object",
+      "required": ["panel_kind", "mission_map", "decisions", "escalations"],
+      "properties": {
+        "panel_kind": { "const": "director" },
+        "mission_map": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["id", "name", "stage", "owner_role_id", "health"],
+            "properties": {
+              "id": { "type": "string" },
+              "name": { "type": "string" },
+              "stage": { "$ref": "#/$defs/stage" },
+              "owner_role_id": { "type": "string" },
+              "health": { "$ref": "#/$defs/health" },
+              "note": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "decisions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "from_role_id", "age_label"],
+            "properties": {
+              "title": { "type": "string" },
+              "from_role_id": { "type": "string" },
+              "age_label": { "type": "string" },
+              "waiting_on": { "type": "string" }
+            }
+          }
+        },
+        "escalations": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["title", "level", "route"],
+            "properties": {
+              "title": { "type": "string" },
+              "level": { "enum": ["HIGH", "MEDIUM", "LOW"] },
+              "route": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "hr": {
+      "type": "object",
+      "required": ["panel_kind", "journey", "people", "registry"],
+      "properties": {
+        "panel_kind": { "const": "hr" },
+        "journey": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["step", "state"],
+            "properties": {
+              "step": { "type": "string" },
+              "state": { "enum": ["done", "active", "todo"] },
+              "note": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "people": {
+          "type": "array",
+          "description": "ต้องไม่มีข้อมูล HR ที่เป็นความลับ ส่งเฉพาะความคืบหน้าของการต้อนรับ",
+          "items": {
+            "type": "object",
+            "required": ["person_ref", "role_id", "stage", "status"],
+            "properties": {
+              "person_ref": { "type": "string", "description": "ตัวอ้างอิง ไม่ใช่ชื่อจริงเว้นแต่ผู้เรียกมีสิทธิ์เห็น" },
+              "role_id": { "type": "string" },
+              "stage": { "type": "string" },
+              "status": { "type": "string" }
+            }
+          }
+        },
+        "registry": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["role_id", "role", "clarity"],
+            "properties": {
+              "role_id": { "type": "string" },
+              "role": { "type": "string" },
+              "clarity": { "enum": ["CONFIRMED", "PENDING_REVIEW"] }
+            }
+          }
+        }
+      }
+    },
+
+    "ops": {
+      "type": "object",
+      "required": ["panel_kind", "lanes", "handoffs"],
+      "properties": {
+        "panel_kind": { "const": "ops" },
+        "lanes": {
+          "type": "array",
+          "minItems": 5,
+          "maxItems": 5,
+          "description": "ต้องมีครบทั้งห้าขั้นเสมอ ขั้นที่ว่างส่ง items เป็นอาร์เรย์ว่าง ไม่ใช่ตัดออก",
+          "items": {
+            "type": "object",
+            "required": ["stage", "items"],
+            "properties": {
+              "stage": { "$ref": "#/$defs/stage" },
+              "items": {
+                "type": "array",
+                "items": {
+                  "type": "object",
+                  "required": ["id", "title", "owner_role_id", "age_label"],
+                  "properties": {
+                    "id": { "type": "string" },
+                    "title": { "type": "string" },
+                    "owner_role_id": { "type": "string" },
+                    "age_label": { "type": "string" },
+                    "flag": { "enum": ["bottleneck", "handoff", null] }
+                  }
+                }
+              }
+            }
+          }
+        },
+        "handoffs": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["item_id", "from_role_id", "to_role_id", "waiting_label", "state"],
+            "properties": {
+              "item_id": { "type": "string" },
+              "from_role_id": { "type": "string" },
+              "to_role_id": { "type": "string" },
+              "waiting_label": { "type": "string" },
+              "state": { "type": "string" }
+            }
+          }
+        }
+      }
+    },
+
+    "intel": {
+      "type": "object",
+      "required": ["panel_kind", "evidence", "statements"],
+      "properties": {
+        "panel_kind": { "const": "intel" },
+        "evidence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["ref", "title", "source", "date", "has_evidence"],
+            "properties": {
+              "ref": { "type": "string" },
+              "title": { "type": "string" },
+              "source": { "type": ["string", "null"], "description": "null แปลว่ายังไม่มีแหล่ง ห้ามเติมค่าแทน" },
+              "date": { "type": ["string", "null"], "description": "null แปลว่ายังไม่ระบุวันที่ ห้ามเดา" },
+              "has_evidence": { "type": "boolean" }
+            }
+          }
+        },
+        "statements": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["kind", "text", "source_ref"],
+            "properties": {
+              "kind": { "enum": ["FACT", "HYPOTHESIS", "NEEDS_CHECK"] },
+              "text": { "type": "string" },
+              "source_ref": { "type": ["string", "null"] }
+            },
+            "allOf": [
+              {
+                "if": { "properties": { "kind": { "const": "FACT" } } },
+                "then": { "properties": { "source_ref": { "type": "string" } } }
+              }
+            ]
+          }
+        }
+      }
+    },
+
+    "match": {
+      "type": "object",
+      "required": ["panel_kind", "brief", "candidates", "receiver"],
+      "properties": {
+        "panel_kind": { "const": "match" },
+        "brief": {
+          "type": "object",
+          "required": ["ref", "need", "qualified", "constraints"],
+          "properties": {
+            "ref": { "type": "string" },
+            "need": { "type": "string" },
+            "qualified": { "type": "boolean" },
+            "constraints": { "type": "array", "items": { "type": "string" } }
+          }
+        },
+        "candidates": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["ref", "score", "score_is_read_only", "reasons"],
+            "properties": {
+              "ref": { "type": "string" },
+              "score": { "type": "integer", "minimum": 0, "maximum": 100, "description": "มาจาก deterministic matching เท่านั้น" },
+              "score_is_read_only": { "const": true, "description": "หน้าจอห้ามมีทางแก้ค่านี้ และ AI ห้ามเปลี่ยน" },
+              "reasons": { "type": "array", "items": { "type": "string" } },
+              "conflict": { "type": ["string", "null"] }
+            }
+          }
+        },
+        "receiver": {
+          "type": "object",
+          "required": ["role_id", "note"],
+          "properties": { "role_id": { "type": "string" }, "note": { "type": "string" } }
+        }
+      }
+    },
+
+    "ai": {
+      "type": "object",
+      "required": ["panel_kind", "agents", "readiness"],
+      "properties": {
+        "panel_kind": { "const": "ai" },
+        "agents": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["grok_id", "call_sign", "owner", "designed", "connected"],
+            "properties": {
+              "grok_id": { "type": "string" },
+              "call_sign": { "type": "string" },
+              "owner": { "type": "string", "description": "role_id หรือ 'shared'" },
+              "designed": { "type": "boolean" },
+              "connected": { "type": "boolean" }
+            }
+          }
+        },
+        "readiness": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "required": ["item", "state"],
+            "properties": {
+              "item": { "type": "string" },
+              "state": { "enum": ["DESIGNED", "NOT_CONNECTED"] }
+            }
+          }
+        }
+      },
+      "description": "ห้ามมีช่องใดที่บรรจุ key, token หรือ secret แม้จะไม่ถูกแสดงผล"
+    }
+  }
+}

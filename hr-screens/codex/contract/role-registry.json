@@ -1,0 +1,176 @@
+{
+  "$generated_from": "hr-screens/data.js",
+  "$do_not_edit_by_hand": true,
+  "version": "1.0.0",
+  "roles": [
+    {
+      "screen": "01",
+      "role_id": "HR-01",
+      "slug": "hr-01",
+      "title": "Director",
+      "title_note_th": "ผู้เชื่อมภารกิจข้ามตำแหน่ง",
+      "grok_id": "GROK-10",
+      "call_sign": "ORCHESTRATOR",
+      "space": "THE COMMAND BRIDGE",
+      "welcome_th": "คุณคือผู้เชื่อมทุกภารกิจ ให้ทีมเดินหน้าไปในทิศทางเดียวกัน",
+      "accent": "gold",
+      "accent_name": "champagne gold",
+      "primary_action_th": "เตรียมบรีฟทีม",
+      "panel_kind": "director",
+      "ai_scope_th": "สรุปสถานะภารกิจข้ามตำแหน่งที่คุณมีสิทธิ์เห็น และช่วยร่างบรีฟ",
+      "boundary_th": "Director เห็นสรุปเท่าที่ได้รับอนุญาต ไม่ได้เห็นข้อมูลลับของทุกคน และไม่ข้าม Keeper ด้วยตำแหน่ง"
+    },
+    {
+      "screen": "02",
+      "role_id": "HR-02",
+      "slug": "hr-02",
+      "title": "Human Resources",
+      "title_note_th": "ดูแลการเริ่มงานและความชัดเจนของบทบาท",
+      "grok_id": "GROK-01",
+      "call_sign": "PEOPLE",
+      "space": "THE PEOPLE CONSTELLATION",
+      "welcome_th": "คุณทำให้ทุกคนค้นพบบทบาท และเติบโตไปพร้อมกับทีม",
+      "accent": "violet",
+      "accent_name": "soft violet",
+      "primary_action_th": "เตรียมแผนต้อนรับสมาชิก",
+      "panel_kind": "hr",
+      "ai_scope_th": "ช่วยร่างแผนต้อนรับและตรวจความชัดเจนของคำอธิบายบทบาท",
+      "boundary_th": "การแก้ทะเบียนบทบาทไม่ใช่การให้สิทธิ์ข้อมูลโดยอัตโนมัติ และ prototype นี้ไม่แสดงข้อมูล HR ที่เป็นความลับ"
+    },
+    {
+      "screen": "03",
+      "role_id": "HR-03",
+      "slug": "hr-03",
+      "title": "Operations",
+      "title_note_th": "ทำให้แผนเดินหน้าและการส่งต่อถึงเป้าหมาย",
+      "grok_id": "GROK-08",
+      "call_sign": "WATCHTOWER",
+      "space": "THE MISSION WATCH",
+      "welcome_th": "คุณทำให้ทุกแผนเดินหน้า และทุกการส่งต่อไปถึงเป้าหมาย",
+      "accent": "cyan",
+      "accent_name": "electric cyan",
+      "primary_action_th": "ทบทวนงานที่ติดขัด",
+      "panel_kind": "ops",
+      "ai_scope_th": "สรุปจุดติดขัดและลำดับงานที่ควรทำก่อน จากสถานะงานที่คุณมีสิทธิ์เห็น",
+      "boundary_th": "การเห็นสถานะงานไม่ให้สิทธิ์เปิดรายละเอียดลูกค้าหรือข้อมูลลับทั้งหมด"
+    },
+    {
+      "screen": "04",
+      "role_id": "HR-04",
+      "slug": "hr-04",
+      "title": "Intelligence / Research",
+      "title_note_th": "เปลี่ยนข้อมูลให้เป็นความเข้าใจที่ตรวจย้อนกลับได้",
+      "grok_id": "GROK-02",
+      "call_sign": "ANALYST",
+      "space": "THE INTELLIGENCE OBSERVATORY",
+      "welcome_th": "คุณเปลี่ยนข้อมูลให้เป็นความเข้าใจ และให้ทีมเห็นไกลขึ้น",
+      "accent": "indigo",
+      "accent_name": "indigo blue",
+      "primary_action_th": "จัดทำบรีฟจากหลักฐาน",
+      "panel_kind": "intel",
+      "ai_scope_th": "ช่วยจัดเรียงหลักฐานและร่างบรีฟ โดยไม่เติมตัวเลขหรือแหล่งอ้างอิงเอง",
+      "boundary_th": "ไม่สร้างตัวเลขตลาด แหล่งอ้างอิง หรือระดับความมั่นใจที่ดูเป็นข้อมูลจริงขึ้นเอง ช่องที่ไม่มีหลักฐานจะแสดงว่ายังไม่มี"
+    },
+    {
+      "screen": "05",
+      "role_id": "HR-05",
+      "slug": "hr-05",
+      "title": "Matchmaker",
+      "title_note_th": "เชื่อมความต้องการกับโอกาสและส่งต่อให้ถึงมือ",
+      "grok_id": "GROK-04",
+      "call_sign": "CONNECTOR",
+      "space": "THE CONNECTION NEXUS",
+      "welcome_th": "คุณเชื่อมความต้องการกับโอกาส และพาความสัมพันธ์ไปต่อ",
+      "accent": "coral",
+      "accent_name": "coral amber",
+      "primary_action_th": "เตรียมการส่งต่อโอกาส",
+      "panel_kind": "match",
+      "ai_scope_th": "ช่วยเรียบเรียงเหตุผลและร่างสรุปการส่งต่อ โดยไม่แตะคะแนนการจับคู่",
+      "boundary_th": "Matchmaker / GROK-04 ไม่ใช่ MATCHMAKER-1 / THE KEEPER · AI เปลี่ยนคะแนน deterministic matching ไม่ได้ และเปิดข้อมูลผู้เกี่ยวข้องเองไม่ได้"
+    },
+    {
+      "screen": "06",
+      "role_id": "HR-06",
+      "slug": "hr-06",
+      "title": "AI Coordinator",
+      "title_note_th": "ประสานคน AI และระบบให้ทำงานร่วมกัน",
+      "grok_id": "GROK-07",
+      "call_sign": "ECOSYSTEM",
+      "space": "THE ECOSYSTEM DOCK",
+      "welcome_th": "คุณทำให้คน AI และระบบ ทำงานร่วมกันอย่างมีทิศทาง",
+      "accent": "mint",
+      "accent_name": "mint teal",
+      "primary_action_th": "เตรียมแผนเชื่อมต่อ",
+      "panel_kind": "ai",
+      "ai_scope_th": "ช่วยจัดลำดับแผนเชื่อมต่อและสรุปความพร้อม โดยไม่สร้างสิทธิ์หรือคีย์ใด ๆ",
+      "boundary_th": "การเป็น AI Coordinator ไม่ให้อำนาจสร้าง credentials อนุมัติ integration หรือเปิดข้อมูลลับโดยอัตโนมัติ · หน้าจอนี้ไม่แสดง key token หรือ secret ใด ๆ"
+    }
+  ],
+  "shared_specialists": [
+    {
+      "grok_id": "GROK-03",
+      "call_sign": "VERIFIER",
+      "purpose_th": "ตรวจสอบข้อเท็จจริงและหลักฐาน"
+    },
+    {
+      "grok_id": "GROK-05",
+      "call_sign": "NEGOTIATION",
+      "purpose_th": "เตรียมทางเลือกและร่างการเจรจา"
+    },
+    {
+      "grok_id": "GROK-06",
+      "call_sign": "RISK",
+      "purpose_th": "ประเมินความเสี่ยงและข้อควบคุม"
+    },
+    {
+      "grok_id": "GROK-09",
+      "call_sign": "GOVERNANCE",
+      "purpose_th": "ทบทวนแนวปฏิบัติและบันทึกการตัดสินใจ"
+    }
+  ],
+  "funnel": [
+    {
+      "id": "demand",
+      "label": "Demand",
+      "label_th": "ความต้องการเข้ามา"
+    },
+    {
+      "id": "qualification",
+      "label": "Qualification",
+      "label_th": "คัดกรอง"
+    },
+    {
+      "id": "matching",
+      "label": "Property Matching",
+      "label_th": "จับคู่ทรัพย์"
+    },
+    {
+      "id": "viewing",
+      "label": "Viewing",
+      "label_th": "เข้าชม"
+    },
+    {
+      "id": "closed",
+      "label": "Closed Deal",
+      "label_th": "ปิดดีล"
+    }
+  ],
+  "principles": [
+    {
+      "en": "Human owns accountability.",
+      "th": "คนเป็นเจ้าของความรับผิดชอบ"
+    },
+    {
+      "en": "Grok supplies intelligence.",
+      "th": "Grok ให้ข้อมูลและความเข้าใจ"
+    },
+    {
+      "en": "AMI controls authority.",
+      "th": "AMI คุมสิทธิ์"
+    },
+    {
+      "en": "The Keeper controls disclosure.",
+      "th": "The Keeper คุมการเปิดเผย"
+    }
+  ]
+}

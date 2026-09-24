@@ -1,0 +1,105 @@
+{
+  "version": "1.0.0",
+  "note_th": "ค่าคงที่ทุกตัวที่หน้าจอใช้ ห้าม client คิดค่าใหม่เอง ทุกค่ามาจาก server หรือจาก registry",
+
+  "panel_state": {
+    "note_th": "สถานะของแผงข้อมูลหนึ่งแผง server เป็นผู้บอก ไม่ใช่ client เดาจากข้อมูลว่าง",
+    "values": {
+      "READY": { "th": "พร้อมใช้งาน", "en": "Ready" },
+      "LOADING": { "th": "กำลังโหลด", "en": "Loading" },
+      "EMPTY": { "th": "ยังไม่มีข้อมูล", "en": "No data yet" },
+      "ERROR": { "th": "เกิดข้อผิดพลาด", "en": "Error" },
+      "ACCESS_PENDING_CHECK": { "th": "ยังไม่ทราบสิทธิ์", "en": "Access not yet determined" }
+    }
+  },
+
+  "access_verdict": {
+    "note_th": "ผลการตรวจสิทธิ์ต่อแผงหนึ่ง ๆ ต้องผ่านทั้ง AMI permission และ Keeper disclosure",
+    "values": {
+      "GRANTED": {
+        "th": "เข้าถึงได้",
+        "en": "Granted",
+        "ui": "แสดงเนื้อหาตามปกติ"
+      },
+      "PENDING_CHECK": {
+        "th": "ยังไม่ทราบสิทธิ์",
+        "en": "Pending check",
+        "ui": "แสดงกล่องรอตรวจสิทธิ์ ห้ามแสดงเนื้อหาบางส่วน และห้ามเดาว่าเข้าถึงได้"
+      },
+      "DENIED_BY_AMI": {
+        "th": "AMI ไม่อนุญาต",
+        "en": "Denied by AMI",
+        "ui": "แสดงว่าไม่มีสิทธิ์ ห้ามบอกจำนวนหรือลักษณะของข้อมูลที่ถูกกั้น"
+      },
+      "WITHHELD_BY_KEEPER": {
+        "th": "Keeper ยังไม่เปิดเผย",
+        "en": "Withheld by Keeper",
+        "ui": "แสดงว่ายังไม่เปิดเผย ห้ามมีปุ่มขอเปิดข้อมูลทั้งหมดในหน้าจอ"
+      }
+    }
+  },
+
+  "ai_connection_state": {
+    "note_th": "สถานะการเชื่อมต่อ Grok ปัจจุบันทุกบทบาทอยู่ที่ DEFINED_NOT_CONNECTED",
+    "values": {
+      "DEFINED_NOT_CONNECTED": {
+        "th": "กำหนดบทบาทแล้ว · รอเชื่อมต่อ",
+        "en": "Role defined, not connected"
+      },
+      "CONNECTED": { "th": "เชื่อมต่อแล้ว", "en": "Connected" },
+      "DEGRADED": { "th": "เชื่อมต่อได้บางส่วน", "en": "Degraded" },
+      "UNAVAILABLE": { "th": "เรียกใช้ไม่ได้ขณะนี้", "en": "Unavailable" }
+    },
+    "current_value_for_all_roles": "DEFINED_NOT_CONNECTED"
+  },
+
+  "specialist_request_state": {
+    "note_th": "prototype เตรียมได้เฉพาะ DRAFT เท่านั้น ห้ามหน้าจอแสดงสถานะที่ไกลกว่านี้ก่อนมีระบบจริง",
+    "values": {
+      "DRAFT": { "th": "ร่างคำขอ ยังไม่ส่ง", "en": "Draft, not sent" },
+      "AWAITING_AMI_PERMISSION": { "th": "รอสิทธิ์จาก AMI", "en": "Awaiting AMI permission" },
+      "AWAITING_KEEPER_DISCLOSURE": { "th": "รอการเปิดเผยจาก Keeper", "en": "Awaiting Keeper disclosure" },
+      "READY_TO_SEND": { "th": "พร้อมส่ง", "en": "Ready to send" }
+    },
+    "allowed_in_prototype": ["DRAFT"]
+  },
+
+  "mission_health": {
+    "values": {
+      "ON_TRACK": { "th": "เดินตามแผน", "en": "On track", "tone": "ok" },
+      "ATTENTION": { "th": "ต้องติดตาม", "en": "Needs attention", "tone": "warn" },
+      "BLOCKED": { "th": "ติดขัด", "en": "Blocked", "tone": "stop" }
+    }
+  },
+
+  "evidence_kind": {
+    "note_th": "ใช้ในหน้าจอ 04 เพื่อแยกสิ่งที่พิสูจน์ได้ออกจากสิ่งที่ยังพิสูจน์ไม่ได้",
+    "values": {
+      "FACT": { "th": "ข้อเท็จจริง", "en": "Fact", "requires_source_ref": true },
+      "HYPOTHESIS": { "th": "สมมติฐาน", "en": "Hypothesis", "requires_source_ref": false },
+      "NEEDS_CHECK": { "th": "ต้องตรวจเพิ่ม", "en": "Needs check", "requires_source_ref": false }
+    },
+    "rule_th": "ข้อความที่ไม่มี source_ref ห้ามแสดงเป็น FACT และห้ามระบบเติมแหล่งอ้างอิงหรือระดับความมั่นใจเอง"
+  },
+
+  "integration_readiness": {
+    "values": {
+      "DESIGNED": { "th": "ออกแบบแล้ว", "en": "Designed" },
+      "NOT_CONNECTED": { "th": "ยังไม่เชื่อมต่อ", "en": "Not connected" }
+    },
+    "rule_th": "สองค่านี้ต้องแยกกันเสมอ ห้ามรวมเป็นสถานะเดียวที่อ่านได้ว่าพร้อมใช้งาน"
+  },
+
+  "action_verdict": {
+    "note_th": "ผลของการกดปุ่มใน prototype ทุกปุ่มจบที่ DRAFT_PREPARED เท่านั้น",
+    "values": {
+      "DRAFT_PREPARED": { "th": "เตรียมร่างแล้ว ยังไม่ส่ง", "en": "Draft prepared, not sent" }
+    },
+    "forbidden_in_prototype_th": [
+      "แสดงว่าส่งคำขอสำเร็จ",
+      "แสดงว่าเรียก AI สำเร็จ",
+      "แสดงว่าอนุมัติสิทธิ์แล้ว",
+      "แสดงว่าเปลี่ยนสถานะงานจริงแล้ว"
+    ]
+  }
+}

@@ -1,0 +1,135 @@
+{
+  "version": "1.0.0",
+  "note_th": "Definition of done ของรีโปกำหนดว่าข้อความที่ผู้ใช้เห็นต้องมีทั้ง th และ en · prototype เป็นภาษาไทยเป็นหลักตามบรีฟ ส่วน en ผ่านการรีวิวความหมายแล้ว ดู decisions.json#D-AMI-04",
+  "en_status": "REVIEWED_MEANING_OK",
+  "rules_th": [
+    "call sign และชื่อ mission คงเป็นภาษาอังกฤษทั้งสองภาษา ไม่แปล",
+    "role_id, grok_id และรหัสอ้างอิงไม่แปลและไม่จัดรูปแบบใหม่",
+    "ข้อความผิดพลาดบอกว่าเกิดอะไรและทำอะไรต่อได้ ไม่ขอโทษลอย ๆ",
+    "ข้อความเรื่องสิทธิ์ห้ามบอกลักษณะหรือจำนวนของข้อมูลที่ถูกกั้น"
+  ],
+
+  "strings": {
+    "brand.system": { "th": "AMI", "en": "AMI" },
+    "brand.system_full": { "th": "AMI — HUMAN + AI COMMAND", "en": "AMI — HUMAN + AI COMMAND" },
+    "brand.org": { "th": "HR + AI", "en": "HR + AI" },
+
+    "nav.account": { "th": "บัญชีของฉัน", "en": "My account" },
+    "nav.signout": { "th": "ออกจากระบบ", "en": "Sign out" },
+    "nav.skip_to_main": { "th": "ข้ามไปยังเนื้อหาหลัก", "en": "Skip to main content" },
+
+    "passport.welcome": { "th": "ยินดีต้อนรับ คุณ {display_name}", "en": "Welcome, {display_name}" },
+    "passport.position": { "th": "ตำแหน่ง", "en": "Position" },
+    "passport.role_id": { "th": "role_id", "en": "role_id" },
+    "passport.call_sign": { "th": "call sign", "en": "Call sign" },
+    "passport.grok": { "th": "GROK ประจำตำแหน่ง", "en": "Assigned Grok" },
+    "passport.identity_note": {
+      "th": "ตัวตนและ role_id ต้องมาจาก session ฝั่ง server เสมอ",
+      "en": "Identity and role_id always come from the server session."
+    },
+
+    "mission.today": { "th": "ภารกิจสำคัญวันนี้", "en": "Today's mission" },
+    "mission.next_action": { "th": "NEXT ACTION", "en": "NEXT ACTION" },
+
+    "copilot.title": { "th": "AI คู่คิดประจำตำแหน่ง", "en": "Your role's AI partner" },
+    "copilot.status_defined_not_connected": {
+      "th": "กำหนดบทบาทแล้ว · รอเชื่อมต่อ",
+      "en": "Role defined · awaiting connection"
+    },
+    "copilot.not_connected_note": {
+      "th": "ยังไม่มีการเชื่อมต่อ xAI, AMI Core หรือ THE KEEPER · ยังเรียกใช้งานจริงไม่ได้",
+      "en": "Not connected to xAI, AMI Core or THE KEEPER. It cannot be used yet."
+    },
+
+    "specialist.title": { "th": "ขอผู้เชี่ยวชาญร่วม (Shared Specialist)", "en": "Request a shared specialist" },
+    "specialist.pool_note": {
+      "th": "pool นี้ไม่ผูกกับพนักงานคนใดคนหนึ่ง และการขอไม่ได้ทำให้เห็นข้อมูลเพิ่มโดยอัตโนมัติ",
+      "en": "This pool is not tied to one employee, and requesting does not by itself reveal more data."
+    },
+    "specialist.data_scope": { "th": "ขอบเขตข้อมูลที่จะใช้", "en": "Data scope for this request" },
+    "specialist.prepare_draft": { "th": "เตรียมร่างคำขอ", "en": "Prepare draft request" },
+    "specialist.draft_only": {
+      "th": "ยังส่งคำขอจริงไม่ได้ · prototype เตรียมได้เฉพาะร่าง",
+      "en": "Sending is not available yet. This prototype only prepares drafts."
+    },
+    "specialist.none_selected": {
+      "th": "ยังไม่ได้เลือกผู้เชี่ยวชาญ — เลือกหนึ่งรายการก่อน จึงจะเตรียมร่างคำขอได้",
+      "en": "No specialist selected. Choose one to prepare a draft."
+    },
+    "specialist.draft_prepared": { "th": "ร่างคำขอ (ยังไม่ส่ง)", "en": "Draft request (not sent)" },
+    "specialist.awaiting_gates": {
+      "th": "รอสิทธิ์จาก AMI และการเปิดเผยจาก Keeper",
+      "en": "Awaiting AMI permission and Keeper disclosure"
+    },
+
+    "authority.title": { "th": "ขอบเขตอำนาจของหน้าจอนี้", "en": "What this screen may and may not do" },
+    "authority.keeper_note": {
+      "th": "MATCHMAKER-1 / THE KEEPER เป็น Confidentiality Gate อิสระ ไม่มีหน้าจอใดมีปุ่ม override หรือเลือกเปิดข้อมูลลับทั้งหมดได้",
+      "en": "MATCHMAKER-1 / THE KEEPER is an independent confidentiality gate. No screen can override it or choose to reveal all restricted data."
+    },
+
+    "state.loading.title": { "th": "กำลังโหลดข้อมูล", "en": "Loading" },
+    "state.loading.body": { "th": "กำลังดึงข้อมูลที่คุณมีสิทธิ์เห็น", "en": "Fetching the data you have access to." },
+    "state.empty.title": { "th": "ยังไม่มีข้อมูลในช่วงนี้", "en": "Nothing here yet" },
+    "state.empty.body": {
+      "th": "เมื่อมีงานเข้ามา รายการจะขึ้นที่นี่ ยังไม่ต้องทำอะไรตอนนี้",
+      "en": "Items will appear here as work arrives. Nothing to do right now."
+    },
+    "state.error.title": { "th": "โหลดข้อมูลไม่สำเร็จ", "en": "Could not load data" },
+    "state.error.body": {
+      "th": "ยังไม่ได้รับข้อมูลจากระบบ ข้อมูลที่เห็นก่อนหน้านี้อาจไม่ใช่สถานะล่าสุด",
+      "en": "No data received. What you saw before may not be current."
+    },
+    "state.error.retry": { "th": "ลองอีกครั้ง", "en": "Try again" },
+    "state.access_pending.title": {
+      "th": "ยังไม่ทราบสิทธิ์ของคุณสำหรับข้อมูลชุดนี้",
+      "en": "Your access to this data has not been determined"
+    },
+    "state.access_pending.body": {
+      "th": "ข้อมูลส่วนนี้ต้องผ่านทั้งสิทธิ์จาก AMI และการเปิดเผยโดย The Keeper ระบบจะไม่เดาว่าคุณเข้าถึงได้ จึงแสดงว่ารอตรวจสิทธิ์แทน",
+      "en": "This data requires both AMI permission and Keeper disclosure. The system will not assume you have access, so it shows a pending check instead."
+    },
+    "state.access_pending.chip": { "th": "รอตรวจสิทธิ์", "en": "Pending check" },
+
+    "demo.badge": { "th": "DEMO", "en": "DEMO" },
+    "demo.strip": {
+      "th": "ตัวอย่างการออกแบบ · ข้อมูลทั้งหมดเป็นข้อมูลสังเคราะห์ ไม่ใช่ตัวตนหรือสิทธิ์ของผู้ใช้จริง · ยังไม่มีการเชื่อมต่อ xAI, AMI Core หรือ THE KEEPER",
+      "en": "Design preview. All data is synthetic and is not a real identity or permission. Not connected to xAI, AMI Core or THE KEEPER."
+    },
+    "demo.switcher_title": { "th": "ดูตัวอย่างบทบาท", "en": "Preview a role" },
+    "demo.switcher_note": {
+      "th": "สลับเพื่อดูการออกแบบของแต่ละตำแหน่ง ตัวสลับนี้ไม่เปลี่ยนสิทธิ์บัญชีจริง และไม่ใช่ส่วนหนึ่งของการเข้าใช้งานจริง",
+      "en": "Switch to see each position's design. This control does not change any real account permission and is not part of real sign-in."
+    },
+
+    "panel.mission_map": { "th": "Mission map · ภารกิจของทีม", "en": "Mission map" },
+    "panel.briefing": { "th": "Briefing · เรื่องรอการตัดสินใจ", "en": "Briefing · decisions waiting" },
+    "panel.escalation": { "th": "Escalation · เรื่องที่ถูกยกระดับ", "en": "Escalations" },
+    "panel.journey": { "th": "Onboarding journey · เส้นทางการเริ่มงาน", "en": "Onboarding journey" },
+    "panel.registry": { "th": "Role registry · ทะเบียนบทบาท", "en": "Role registry" },
+    "panel.workflow": { "th": "Workflow board · ลำดับงาน", "en": "Workflow board" },
+    "panel.handoff": { "th": "Handoff queue · คิวส่งต่อ", "en": "Handoff queue" },
+    "panel.research": { "th": "Research desk · โต๊ะวิจัย", "en": "Research desk" },
+    "panel.evidence": { "th": "Evidence library · คลังหลักฐาน", "en": "Evidence library" },
+    "panel.brief": { "th": "Brief · ร่างบรีฟ", "en": "Brief" },
+    "panel.nexus": { "th": "Connection nexus · จับคู่และส่งต่อ", "en": "Connection nexus" },
+    "panel.candidates": { "th": "Candidates · ตัวเลือกที่เหมาะสม", "en": "Candidates" },
+    "panel.agents": { "th": "Agent registry · ทะเบียนบทบาท AI", "en": "Agent registry" },
+    "panel.readiness": { "th": "Integration readiness · ความพร้อมในการเชื่อมต่อ", "en": "Integration readiness" },
+
+    "match.not_the_keeper": {
+      "th": "Matchmaker / GROK-04 ไม่ใช่ MATCHMAKER-1 / THE KEEPER",
+      "en": "Matchmaker / GROK-04 is not MATCHMAKER-1 / THE KEEPER"
+    },
+    "match.score_read_only": {
+      "th": "คะแนนมาจากการจับคู่แบบ deterministic อ่านได้อย่างเดียว · AI อธิบายเหตุผลได้ แต่เปลี่ยนคะแนนไม่ได้ และเปิดข้อมูลผู้เกี่ยวข้องเองไม่ได้",
+      "en": "Scores come from deterministic matching and are read-only. AI can explain the reasoning but cannot change the number or reveal participant data."
+    },
+    "ai.no_secrets": {
+      "th": "หน้าจอนี้ไม่แสดง key, token หรือ secret ใด ๆ และการเป็น AI Coordinator ไม่ให้อำนาจสร้าง credentials หรืออนุมัติ integration",
+      "en": "This screen shows no key, token or secret, and being AI Coordinator grants no power to create credentials or approve an integration."
+    },
+
+    "state_switch.label": { "th": "สถานะตัวอย่าง", "en": "Preview state" }
+  }
+}
