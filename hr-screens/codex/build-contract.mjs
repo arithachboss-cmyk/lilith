@@ -56,7 +56,8 @@ export function buildScreenIndex() {
     version: '1.0.0',
     route_base: '/ami',
     note_th:
-      'route_base เป็นข้อเสนอ ยังไม่ใช่การตัดสิน เจ้าของระบบเป็นผู้กำหนดเส้นทางจริง',
+      'ตัดสินแล้วตาม decisions.json#D-AMI-03 · noindex,nofollow ทั้ง robots และ googlebot ' +
+      'และไม่อยู่ใน sitemap · ไม่วางไว้ใต้ /admin/ เพราะทั้ง 6 ตำแหน่งนี้ไม่ใช่ admin',
     screens: ROLES.map((role) => ({
       screen: role.screen,
       role_id: role.roleId,

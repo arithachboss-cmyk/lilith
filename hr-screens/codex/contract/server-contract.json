@@ -1,7 +1,6 @@
 {
   "version": "1.0.0",
   "note_th": "ช่องที่หน้าจอต้องรับจาก server ทุกช่องต้องมาจาก session ฝั่ง server และตรวจสิทธิ์ใหม่ทุกคำขอ",
-
   "hard_rules": [
     {
       "id": "SR-01",
@@ -27,25 +26,69 @@
       "id": "SR-05",
       "rule_th": "ห้ามส่ง key, token, secret หรือ credential ใด ๆ มาถึง client แม้ในช่องที่ไม่ได้แสดงผล",
       "anchor_in_repo": "บรีฟหน้าจอ 06"
+    },
+    {
+      "id": "SR-06",
+      "rule_th": "AMI ต้องไม่มี endpoint ที่สร้าง ยืนยัน เปลี่ยน หรือรีเซ็ตรหัสผ่าน OTP หรือ credential ใด ๆ · AMI อ่าน session ที่แพลตฟอร์มให้มาเท่านั้น และคาดหวังแค่ identity ที่ยืนยันแล้วกับ role_id",
+      "anchor_in_repo": "decisions.json#D-AMI-01 · บรีฟระบุว่า AMI คือหน้าจอหลังเข้าสู่ระบบ ไม่ต้องสร้างระบบบัญชีใหม่"
     }
   ],
-
   "endpoints": [
     {
       "id": "EP-01",
       "method": "GET",
       "path": "/api/ami/me",
       "purpose_th": "ตัวตนและบทบาทที่ยืนยันแล้ว ใช้สร้าง mission passport",
-      "auth_th": "ต้องมี session ที่ยืนยันแล้ว ถ้าไม่มีให้ตอบ 401 และห้ามคืนช่องใดเลย",
+      "auth_th": "ต้องมี session ที่ยืนยันแล้วจากแพลตฟอร์ม ถ้าไม่มีให้ตอบ 401 และห้ามคืนช่องใดเลย · AMI ไม่สร้างและไม่ตรวจ credential เอง ดู SR-06",
       "response": {
-        "display_name": { "type": "string", "source": "session → user profile", "required": true },
-        "role_id": { "type": "enum", "enum_ref": "role-registry.json#roles[].role_id", "source": "session → user_roles", "required": true },
-        "title": { "type": "string", "source": "role registry", "required": true },
-        "grok_id": { "type": "string", "source": "role registry", "required": true },
-        "call_sign": { "type": "string", "source": "role registry", "required": true },
-        "space": { "type": "string", "source": "role registry", "required": true },
-        "accent": { "type": "enum", "values": ["gold", "violet", "cyan", "indigo", "coral", "mint"], "required": true },
-        "ai_connection_state": { "type": "enum", "enum_ref": "enums.json#ai_connection_state", "required": true }
+        "display_name": {
+          "type": "string",
+          "source": "session → user profile",
+          "required": true
+        },
+        "role_id": {
+          "type": "enum",
+          "enum_ref": "role-registry.json#roles[].role_id",
+          "source": "session → user_roles",
+          "required": true
+        },
+        "title": {
+          "type": "string",
+          "source": "role registry",
+          "required": true
+        },
+        "grok_id": {
+          "type": "string",
+          "source": "role registry",
+          "required": true
+        },
+        "call_sign": {
+          "type": "string",
+          "source": "role registry",
+          "required": true
+        },
+        "space": {
+          "type": "string",
+          "source": "role registry",
+          "required": true
+        },
+        "accent": {
+          "type": "enum",
+          "values": [
+            "gold",
+            "violet",
+            "cyan",
+            "indigo",
+            "coral",
+            "mint"
+          ],
+          "required": true
+        },
+        "ai_connection_state": {
+          "type": "enum",
+          "enum_ref": "enums.json#ai_connection_state",
+          "required": true
+        }
       }
     },
     {
@@ -55,15 +98,37 @@
       "purpose_th": "ภารกิจสำคัญวันนี้และ next action ของบทบาทที่ลงชื่อเข้าใช้",
       "auth_th": "กรองตามสิทธิ์ฝั่ง server แล้วก่อนส่ง ห้ามส่งของที่ต้องซ่อนมาให้ client ซ่อนเอง",
       "response": {
-        "state": { "type": "enum", "enum_ref": "enums.json#panel_state", "required": true },
-        "headline": { "type": "string", "required": false, "required_when": "state=READY" },
-        "detail": { "type": "string", "required": false },
-        "next_actions": {
-          "type": "array",
-          "items": { "text": "string", "meta": "string", "deep_link": "string|null" },
+        "state": {
+          "type": "enum",
+          "enum_ref": "enums.json#panel_state",
+          "required": true
+        },
+        "headline": {
+          "type": "string",
+          "required": false,
+          "required_when": "state=READY"
+        },
+        "detail": {
+          "type": "string",
           "required": false
         },
-        "primary_action": { "type": "object", "shape": { "label": "string", "action_id": "string" }, "required": false }
+        "next_actions": {
+          "type": "array",
+          "items": {
+            "text": "string",
+            "meta": "string",
+            "deep_link": "string|null"
+          },
+          "required": false
+        },
+        "primary_action": {
+          "type": "object",
+          "shape": {
+            "label": "string",
+            "action_id": "string"
+          },
+          "required": false
+        }
       }
     },
     {
@@ -73,9 +138,22 @@
       "purpose_th": "ข้อมูลของแผงเฉพาะบทบาท รูปร่างต่างกันตาม panel_kind",
       "auth_th": "ต้องตรวจว่า panel_kind ที่ขอเป็นของบทบาทผู้เรียกจริง ไม่ใช่เชื่อค่าที่ client ส่งมา",
       "response": {
-        "state": { "type": "enum", "enum_ref": "enums.json#panel_state", "required": true },
-        "access": { "type": "enum", "enum_ref": "enums.json#access_verdict", "required": true },
-        "payload": { "type": "object", "schema_ref": "panel-payloads.schema.json", "required": false, "required_when": "state=READY และ access=GRANTED" }
+        "state": {
+          "type": "enum",
+          "enum_ref": "enums.json#panel_state",
+          "required": true
+        },
+        "access": {
+          "type": "enum",
+          "enum_ref": "enums.json#access_verdict",
+          "required": true
+        },
+        "payload": {
+          "type": "object",
+          "schema_ref": "panel-payloads.schema.json",
+          "required": false,
+          "required_when": "state=READY และ access=GRANTED"
+        }
       }
     },
     {
@@ -85,8 +163,20 @@
       "purpose_th": "รายการผู้เชี่ยวชาญที่บทบาทนี้ขอได้",
       "auth_th": "รายการต้องถูกกรองตามสิทธิ์ ไม่ใช่ส่งทั้ง pool มาแล้วให้ client กรอง",
       "response": {
-        "available": { "type": "array", "items": { "grok_id": "string", "call_sign": "string", "purpose_th": "string" }, "required": true },
-        "data_scope_statement": { "type": "string", "required": true, "note_th": "ข้อความบอกขอบเขตข้อมูลที่จะถูกใช้ ต้องมาจาก server ไม่ใช่ประกอบขึ้นที่ client" }
+        "available": {
+          "type": "array",
+          "items": {
+            "grok_id": "string",
+            "call_sign": "string",
+            "purpose_th": "string"
+          },
+          "required": true
+        },
+        "data_scope_statement": {
+          "type": "string",
+          "required": true,
+          "note_th": "ข้อความบอกขอบเขตข้อมูลที่จะถูกใช้ ต้องมาจาก server ไม่ใช่ประกอบขึ้นที่ client"
+        }
       }
     },
     {
@@ -95,21 +185,47 @@
       "path": "/api/ami/specialist-request/draft",
       "purpose_th": "บันทึกร่างคำขอผู้เชี่ยวชาญ",
       "auth_th": "ต้องตรวจสิทธิ์ก่อนบันทึกร่าง และร่างต้องไม่เปิดเผยข้อมูลเพิ่มด้วยตัวมันเอง",
-      "request": { "grok_id": "string", "context_ref": "string|null" },
+      "request": {
+        "grok_id": "string",
+        "context_ref": "string|null"
+      },
       "response": {
-        "request_id": { "type": "string", "required": true },
-        "state": { "type": "enum", "enum_ref": "enums.json#specialist_request_state", "required": true, "note_th": "ค่าที่อนุญาตในเฟสนี้คือ DRAFT เท่านั้น" }
+        "request_id": {
+          "type": "string",
+          "required": true
+        },
+        "state": {
+          "type": "enum",
+          "enum_ref": "enums.json#specialist_request_state",
+          "required": true,
+          "note_th": "ค่าที่อนุญาตในเฟสนี้คือ DRAFT เท่านั้น"
+        }
       }
     }
   ],
-
   "error_contract": {
     "note_th": "ข้อความผิดพลาดที่ผู้ใช้เห็นต้องบอกว่าเกิดอะไรและทำอะไรต่อได้ ห้ามขอโทษลอย ๆ และห้ามบอกลักษณะของข้อมูลที่ถูกกั้น",
     "codes": {
-      "AMI_UNAUTHENTICATED": { "http": 401, "th": "เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง", "en": "Session expired. Please sign in again." },
-      "AMI_FORBIDDEN": { "http": 403, "th": "บทบาทของคุณไม่มีสิทธิ์ในส่วนนี้", "en": "Your role does not have access to this area." },
-      "AMI_ACCESS_PENDING": { "http": 200, "th": "ยังไม่ทราบสิทธิ์ของคุณสำหรับข้อมูลชุดนี้", "en": "Your access to this data has not been determined yet." },
-      "AMI_UPSTREAM_UNAVAILABLE": { "http": 503, "th": "โหลดข้อมูลไม่สำเร็จ ข้อมูลที่เห็นอาจไม่ใช่สถานะล่าสุด", "en": "Could not load data. What you see may not be current." }
+      "AMI_UNAUTHENTICATED": {
+        "http": 401,
+        "th": "เซสชันหมดอายุ กรุณาเข้าสู่ระบบอีกครั้ง",
+        "en": "Session expired. Please sign in again."
+      },
+      "AMI_FORBIDDEN": {
+        "http": 403,
+        "th": "บทบาทของคุณไม่มีสิทธิ์ในส่วนนี้",
+        "en": "Your role does not have access to this area."
+      },
+      "AMI_ACCESS_PENDING": {
+        "http": 200,
+        "th": "ยังไม่ทราบสิทธิ์ของคุณสำหรับข้อมูลชุดนี้",
+        "en": "Your access to this data has not been determined yet."
+      },
+      "AMI_UPSTREAM_UNAVAILABLE": {
+        "http": 503,
+        "th": "โหลดข้อมูลไม่สำเร็จ ข้อมูลที่เห็นอาจไม่ใช่สถานะล่าสุด",
+        "en": "Could not load data. What you see may not be current."
+      }
     }
   }
 }

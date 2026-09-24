@@ -142,6 +142,32 @@ ok('สถานะคำขอที่อนุญาตในเฟสนี�
 ok('ai_connection_state ปัจจุบันเป็น DEFINED_NOT_CONNECTED',
   enums.ai_connection_state.current_value_for_all_roles === 'DEFINED_NOT_CONNECTED');
 
+/* 9 — คำตัดสินที่ปลดล็อก AMI-003 ขึ้นไป ต้องถูกบันทึกและถูกบังคับจริง */
+const decisions = contract('decisions.json');
+for (const id of ['D-AMI-01', 'D-AMI-02', 'D-AMI-03', 'D-AMI-04']) {
+  const decision = decisions.decisions.find((d) => d.id === id);
+  ok(`${id} ถูกบันทึก`, Boolean(decision));
+  if (!decision) continue;
+  ok(`${id} ระบุว่าบังคับด้วยอะไร`, typeof decision.enforced_by === 'string' && decision.enforced_by.length > 5);
+  ok(`${id} ระบุว่ากลับทางได้หรือไม่`, typeof decision.reversible === 'boolean');
+}
+// ที่มาของคำตัดสินต้องพูดตรง ๆ ว่ามาจากการอนุญาตให้เดินต่อ ไม่ใช่คำตอบอิสระรายข้อ
+ok('บันทึกที่มาของคำตัดสินไว้', typeof decisions.provenance_th === 'string' && decisions.provenance_th.length > 40);
+ok('ความเสี่ยงที่ยังค้างถูกบันทึกไว้ ไม่ใช่หายไปเฉย ๆ', Array.isArray(decisions.open_risks) && decisions.open_risks.length >= 1);
+for (const risk of decisions.open_risks || []) {
+  ok(`${risk.id} ระบุว่าทำไมถึงไม่บล็อก`, typeof risk.why_not_blocking_th === 'string' && risk.why_not_blocking_th.length > 20);
+  ok(`${risk.id} ระบุทางแก้ถ้ากลายเป็นปัญหา`, typeof risk.if_it_becomes_a_problem_th === 'string');
+}
+
+// แต่ละคำตัดสินต้องมีผลจริงในไฟล์ที่มันอ้างว่าบังคับ ไม่ใช่แค่เขียนไว้เฉย ๆ
+ok('D-AMI-01 บังคับจริง: มีกฎห้าม AMI ทำ auth เอง',
+  server.hard_rules.some((rule) => rule.id === 'SR-06' && /ไม่มี endpoint ที่สร้าง ยืนยัน/.test(rule.rule_th)));
+ok('D-AMI-02 บังคับจริง: access_verdict มีค่าที่ Keeper ใช้',
+  Object.prototype.hasOwnProperty.call(enums.access_verdict.values, 'WITHHELD_BY_KEEPER'));
+ok('D-AMI-03 บังคับจริง: route_base เป็น /ami', contract('screens.json').route_base === '/ami');
+ok('D-AMI-03 บังคับจริง: ไม่ได้อยู่ใต้ /admin/', !contract('screens.json').route_base.startsWith('/admin'));
+ok('D-AMI-04 บังคับจริง: en ผ่านการรีวิวแล้ว', strings.en_status === 'REVIEWED_MEANING_OK');
+
 /* รายงาน */
 if (failures.length === 0) {
   process.stdout.write(`ผ่านทั้งหมด ${checks} ข้อ\n`);

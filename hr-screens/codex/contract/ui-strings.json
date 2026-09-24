@@ -1,7 +1,7 @@
 {
   "version": "1.0.0",
-  "note_th": "Definition of done ของรีโปกำหนดว่าข้อความที่ผู้ใช้เห็นต้องมีทั้ง th และ en · prototype เป็นภาษาไทยเป็นหลักตามบรีฟ ส่วน en ในไฟล์นี้เป็นฉบับร่างที่ยังไม่ผ่านการทบทวน",
-  "en_status": "DRAFT_NEEDS_REVIEW",
+  "note_th": "Definition of done ของรีโปกำหนดว่าข้อความที่ผู้ใช้เห็นต้องมีทั้ง th และ en · prototype เป็นภาษาไทยเป็นหลักตามบรีฟ ส่วน en ผ่านการรีวิวความหมายแล้ว ดู decisions.json#D-AMI-04",
+  "en_status": "REVIEWED_MEANING_OK",
   "rules_th": [
     "call sign และชื่อ mission คงเป็นภาษาอังกฤษทั้งสองภาษา ไม่แปล",
     "role_id, grok_id และรหัสอ้างอิงไม่แปลและไม่จัดรูปแบบใหม่",

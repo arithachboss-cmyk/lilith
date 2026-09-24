@@ -1,0 +1,60 @@
+{
+  "version": "1.0.0",
+  "note_th": "คำตัดสินที่ปลดล็อก AMI-003 ถึง AMI-007 · ทุกข้อบันทึกที่มาไว้ตรงไปตรงมา เพื่อให้คนอ่านทีหลังรู้ว่าอะไรมาจากหลักฐานและอะไรมาจากการอนุญาตให้เดินต่อ",
+
+  "provenance_th": "เจ้าของระบบสั่งเมื่อ 2026-09-24 ว่าไม่ต้องรอคำตัดสินรายข้อ ให้ใช้ข้อเสนอของฝั่งรีวิวสถาปัตยกรรมแล้วเดินงานต่อ · นี่คือการอนุญาตให้เดินต่อ ไม่ใช่การส่งคำตอบอิสระมาแต่ละข้อ ข้อที่ยังมีความเสี่ยงค้างอยู่ระบุไว้ใน open_risks",
+
+  "decisions": [
+    {
+      "id": "D-AMI-01",
+      "topic_th": "AMI ต่อกับระบบเข้าสู่ระบบอย่างไร",
+      "decision_th": "AMI ไม่ผูกกับวิธี auth ใดเลย มันอ่าน session ที่แพลตฟอร์มให้มาและคาดหวังแค่ identity ที่ยืนยันแล้วกับ role_id · จะมาจาก OTP หรือรหัสผ่าน AMI ไม่รู้และไม่ควรรู้",
+      "why_th": "บรีฟระบุเองว่า AMI คือหน้าจอหลังเข้าสู่ระบบ ไม่ต้องสร้างระบบบัญชีใหม่ · ความขัดแย้งระหว่างบรีฟ (อีเมล + รหัสเริ่มต้น) กับ docs/03-security-events-admin.md (No passwords in V1 ใช้ OTP) เป็นเรื่องของชั้นที่อยู่เหนือ AMI จึงไม่บล็อกงานนี้",
+      "enforced_by": "server-contract.json#hard_rules SR-06",
+      "reversible": true,
+      "still_open_th": "การเลือก session provider จริงเป็นงาน integration หนึ่งบรรทัด ไม่ใช่การออกแบบ AMI ใหม่"
+    },
+    {
+      "id": "D-AMI-02",
+      "topic_th": "Keeper อยู่ชั้นไหนในสถาปัตยกรรม",
+      "decision_th": "Keeper เป็นชั้นฝั่ง server ที่ประเมินหลัง authorize() ผ่านแล้ว อยู่ใน packages/core และมี Row Level Security เป็น defence in depth · ไม่ใช่แนวคิดฝั่ง UI และไม่มี control ใดใน client ที่แตะมันได้",
+      "order_th": "authorize() ผ่าน → Keeper ตัดสินการเปิดเผย → จึงส่งข้อมูล",
+      "why_th": "docs/03 มีโครงนี้อยู่แล้วคือ L1 ROLE / L2 OWNERSHIP / L3 TIER และ documentVisibilityAllows ซึ่งรูปร่างตรงกับ Keeper · ถ้า Keeper อยู่ฝั่ง UI มันคือการซ่อนไม่ใช่การกั้น เปิด DevTools หรือยิง API ตรงก็ข้ามได้ และหลักข้อสี่ The Keeper controls disclosure จะเหลือแค่คำโฆษณา",
+      "enforced_by": "server-contract.json#hard_rules SR-03 · enums.json#access_verdict",
+      "reversible": false
+    },
+    {
+      "id": "D-AMI-03",
+      "topic_th": "เส้นทางจริงของหน้าจอ",
+      "decision_th": "/ami/<slug> · noindex,nofollow ทั้ง robots และ googlebot · ไม่อยู่ใน sitemap",
+      "not_under_admin_th": "ไม่วางไว้ใต้ /admin/ เพราะ docs/03 กำหนดว่า Admin เป็นบทบาทแยกที่มี audit stream แยก และทั้ง 6 ตำแหน่งนี้ไม่ใช่ admin การวางใต้ /admin/ จะสื่อถึงสิทธิ์ที่พวกเขาไม่มีและทำให้ audit stream ปนกัน",
+      "enforced_by": "screens.json#route_base",
+      "reversible": true
+    },
+    {
+      "id": "D-AMI-04",
+      "topic_th": "ฉบับภาษาอังกฤษของข้อความ UI",
+      "decision_th": "ผ่านการรีวิวความหมายแล้ว ใช้ได้ · เปลี่ยน en_status จาก DRAFT_NEEDS_REVIEW เป็น REVIEWED_MEANING_OK",
+      "reviewed_th": "ไล่ตรวจข้อความที่ความหมายหนักทุกตัว จุดที่พลาดง่ายที่สุดถูกรักษาไว้ถูกต้อง เช่น สถานะสิทธิ์อ่านว่ายังไม่ทราบไม่ใช่ถูกปฏิเสธ และคำว่า by itself ในข้อความ specialist pool ที่กันไม่ให้อ่านเป็นการปฏิเสธเด็ดขาด",
+      "enforced_by": "ui-strings.json#en_status",
+      "reversible": true
+    }
+  ],
+
+  "open_risks": [
+    {
+      "id": "R-AMI-01",
+      "risk_th": "ข้อความ UI เอ่ยชื่อระบบภายในตรง ๆ ได้แก่ THE KEEPER, MATCHMAKER-1, AMI Core, xAI และ GROK-xx ถ้าหน้าจอถูก screenshot ออกนอกองค์กร โครงสร้าง AI ภายในจะติดไปด้วย",
+      "why_not_blocking_th": "บรีฟกำหนดเองว่าทุกหน้าจอต้องแสดง call sign และ Grok ประจำตำแหน่ง การถอดออกจึงขัดกับข้อกำหนดของงาน และหน้าจอชุดนี้เห็นเฉพาะคนในอยู่แล้ว",
+      "if_it_becomes_a_problem_th": "แก้ที่ ui-strings.json ได้ทันที เป็นข้อความอย่างเดียว ไม่กระทบสัญญาหรือโครงสร้าง",
+      "owner_may_still_decide": true
+    },
+    {
+      "id": "R-AMI-02",
+      "risk_th": "คำตัดสินทั้งสี่มาจากการอนุญาตให้เดินต่อ ไม่ใช่คำตอบอิสระรายข้อจากเจ้าของระบบ",
+      "why_not_blocking_th": "สามในสี่ข้อกลับทางได้ และข้อที่กลับไม่ได้คือตำแหน่งของ Keeper ซึ่งอิงโครงที่ docs/03 มีอยู่แล้ว ไม่ใช่การประดิษฐ์ใหม่",
+      "if_it_becomes_a_problem_th": "แต่ละข้อระบุ reversible ไว้ และ enforced_by ชี้ว่าต้องแก้ไฟล์ไหน",
+      "owner_may_still_decide": true
+    }
+  ]
+}
