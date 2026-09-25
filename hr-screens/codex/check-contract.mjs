@@ -8,10 +8,11 @@
  * และช่องที่ไม่ควรมีอยู่ในสัญญาเลย
  */
 
-import { readFileSync } from 'node:fs';
+import { copyFileSync, existsSync, readFileSync, rmSync } from 'node:fs';
+import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildRoleRegistry, buildScreenIndex } from './build-contract.mjs';
+import { buildRoleRegistry, buildRolesTs, buildScreenIndex } from './build-contract.mjs';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const contract = (name) => JSON.parse(readFileSync(join(here, 'contract', name), 'utf8'));
@@ -167,6 +168,112 @@ ok('D-AMI-02 บังคับจริง: access_verdict มีค่าท�
 ok('D-AMI-03 บังคับจริง: route_base เป็น /ami', contract('screens.json').route_base === '/ami');
 ok('D-AMI-03 บังคับจริง: ไม่ได้อยู่ใต้ /admin/', !contract('screens.json').route_base.startsWith('/admin'));
 ok('D-AMI-04 บังคับจริง: en ผ่านการรีวิวแล้ว', strings.en_status === 'REVIEWED_MEANING_OK');
+
+/* 10 — ทะเบียนฝั่ง TypeScript ต้องไม่หลุดจาก data.js */
+const TS_ROLES = join(here, '..', '..', 'packages', 'contracts', 'src', 'ami', 'roles.ts');
+ok('มีทะเบียนบทบาทฝั่ง TypeScript', existsSync(TS_ROLES));
+if (existsSync(TS_ROLES)) {
+  ok('roles.ts ตรงกับ data.js', readFileSync(TS_ROLES, 'utf8') === buildRolesTs(),
+    'รัน node hr-screens/codex/build-contract.mjs แล้ว commit ใหม่');
+  const tsText = readFileSync(TS_ROLES, 'utf8');
+  for (const expected of BRIEF_TABLE) {
+    ok(`roles.ts มี ${expected.role_id} พร้อม call sign ที่ตรงบรีฟ`,
+      tsText.includes(`roleId: '${expected.role_id}'`) &&
+      tsText.includes(`callSign: '${expected.call_sign}'`));
+  }
+}
+
+/*
+ * 11 — ค่าที่สัญญาบอกว่าห้าม ต้องคอมไพล์ไม่ผ่านจริง
+ *
+ * ตรวจโดยวางไฟล์ fixture เข้าไปในแพ็กเกจชั่วคราวแล้วเรียก tsc · ถ้ามันคอมไพล์
+ * ผ่าน แปลว่าสัญญาฝั่ง type หลวมลง ซึ่งเป็นความล้มเหลวที่ต้องรู้
+ */
+const PKG = join(here, '..', '..', 'packages', 'contracts');
+const fixtureSrc = join(here, 'fixtures', 'rejected-by-types.ts');
+const fixtureDst = join(PKG, 'src', 'ami', '__contract_negative__.ts');
+if (existsSync(join(PKG, 'node_modules', 'typescript'))) {
+  let output = '';
+  let compiled = false;
+  try {
+    copyFileSync(fixtureSrc, fixtureDst);
+    execFileSync('node', ['node_modules/typescript/bin/tsc', '--noEmit'], { cwd: PKG });
+    compiled = true;
+  } catch (error) {
+    output = `${error.stdout || ''}${error.stderr || ''}`;
+  } finally {
+    rmSync(fixtureDst, { force: true });
+  }
+  ok('ค่าที่ห้ามต้องคอมไพล์ไม่ผ่าน', compiled === false,
+    'fixture คอมไพล์ผ่าน แปลว่าสัญญาฝั่ง type หลวมลง');
+  for (const [label, needle] of [
+    ['บทบาทนอกทะเบียน', '"HR-99"'],
+    ['panel kind ที่ไม่มีอยู่', '"accounting"'],
+    ['FACT ที่ไม่มีแหล่งอ้างอิง', 'AmiStatement'],
+    ['คะแนนที่อ้างว่าแก้ได้', "Type 'false' is not assignable"],
+  ]) {
+    ok(`type ปฏิเสธ${label}`, output.includes(needle), 'ไม่พบ error ที่คาดไว้');
+  }
+} else {
+  /*
+   * ใน CI การข้ามคือการปล่อยผ่านเงียบ ๆ ซึ่งทำให้ด่านนี้ไร้ความหมาย
+   * นอกเครื่อง CI ยอมให้ข้ามได้ เพื่อให้ clone มาแล้วรันได้ทันทีก่อน install
+   */
+  ok('ตรวจ type ได้จริง ไม่ถูกข้ามใน CI', !process.env.CI,
+    'ไม่พบ typescript ใน packages/contracts — รัน pnpm install --frozen-lockfile ก่อน');
+  if (!process.env.CI) ok('ข้ามการตรวจ type เพราะยังไม่ได้ pnpm install', true);
+}
+
+/*
+ * 12 — enum ต้อง round-trip ระหว่าง enums.json กับ enums.ts
+ *
+ * ตารางชื่อเขียนไว้ตรงนี้โดยตั้งใจ ไม่ได้ derive จากไฟล์ใดไฟล์หนึ่ง · ถ้ามีคน
+ * เพิ่ม enum ใน enums.json โดยไม่มีฝั่ง TypeScript ข้อนี้จะฟ้อง ไม่ใช่เงียบ
+ */
+const ENUM_PAIRS = [
+  ['panel_state', 'AMI_PANEL_STATES'],
+  ['access_verdict', 'AMI_ACCESS_VERDICTS'],
+  ['ai_connection_state', 'AMI_AI_CONNECTION_STATES'],
+  ['specialist_request_state', 'AMI_SPECIALIST_REQUEST_STATES'],
+  ['mission_health', 'AMI_MISSION_HEALTH'],
+  ['evidence_kind', 'AMI_EVIDENCE_KINDS'],
+  ['integration_readiness', 'AMI_INTEGRATION_READINESS'],
+  ['action_verdict', 'AMI_ACTION_VERDICTS'],
+];
+
+const TS_ENUMS = join(here, '..', '..', 'packages', 'contracts', 'src', 'ami', 'enums.ts');
+ok('มีไฟล์ค่าคงที่ฝั่ง TypeScript', existsSync(TS_ENUMS));
+if (existsSync(TS_ENUMS)) {
+  const enumsTs = readFileSync(TS_ENUMS, 'utf8');
+  const tsArray = (name) => {
+    const match = enumsTs.match(new RegExp(`export const ${name} = \\[([^\\]]*)\\] as const;`));
+    if (!match) return null;
+    return [...match[1].matchAll(/'([^']+)'/g)].map((m) => m[1]);
+  };
+
+  const jsonEnumKeys = Object.keys(enums)
+    .filter((key) => enums[key] && typeof enums[key] === 'object' && enums[key].values);
+  ok('ทุก enum ใน enums.json มีคู่ฝั่ง TypeScript',
+    jsonEnumKeys.every((key) => ENUM_PAIRS.some(([jsonKey]) => jsonKey === key)),
+    `ไม่มีคู่: ${jsonEnumKeys.filter((key) => !ENUM_PAIRS.some(([j]) => j === key)).join(', ')}`);
+
+  for (const [jsonKey, tsName] of ENUM_PAIRS) {
+    const fromJson = Object.keys(enums[jsonKey]?.values ?? {});
+    const fromTs = tsArray(tsName);
+    ok(`enums.ts มี ${tsName}`, fromTs !== null);
+    if (fromTs !== null) {
+      ok(`${tsName} ตรงกับ enums.json#${jsonKey} ทุกค่าและเรียงเหมือนกัน`,
+        JSON.stringify(fromTs) === JSON.stringify(fromJson),
+        `json=${fromJson.join('|')} ts=${fromTs.join('|')}`);
+    }
+  }
+
+  ok('ค่าปัจจุบันของ ai_connection_state ตรงกันทั้งสองฝั่ง',
+    enumsTs.includes(`AMI_AI_CONNECTION_STATE_NOW: AmiAiConnectionState = '${enums.ai_connection_state.current_value_for_all_roles}'`));
+  ok('สถานะคำขอที่อนุญาตในเฟสนี้ตรงกันทั้งสองฝั่ง',
+    JSON.stringify(tsArray('AMI_SPECIALIST_REQUEST_STATES_ALLOWED_NOW')) ===
+    JSON.stringify(enums.specialist_request_state.allowed_in_prototype));
+}
 
 /* รายงาน */
 if (failures.length === 0) {
