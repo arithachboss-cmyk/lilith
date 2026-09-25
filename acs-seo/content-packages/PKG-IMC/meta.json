@@ -1,0 +1,33 @@
+{
+  "package_id": "PKG-IMC",
+  "title": "คอมพิวเตอร์พกพาสำหรับงานอุตสาหกรรม: ต่างจากสมาร์ตโฟนตรงไหน",
+  "meta_description": "ต่างจากสมาร์ตโฟนที่การอ่านรหัส การถือทั้งกะ พลังงาน และการดูแลเครื่องทั้งฝูง อธิบายว่าต่างด้วยกลไกอะไร และเมื่อไรมือถือธรรมดาก็พอ",
+  "canonical": "https://www.asiancoding.com/knowledge/industrial-mobile-computing",
+  "target_url": "https://www.asiancoding.com/knowledge/industrial-mobile-computing",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "อธิบายว่าคอมพิวเตอร์พกพาสำหรับงานอุตสาหกรรมต่างจากสมาร์ตโฟนทั่วไปด้วยกลไกอะไร และให้คำถามที่ผู้อ่านตอบได้จากหน้างานของตัวเองว่าความต่างนั้นสำคัญกับงานของเขาหรือไม่ จงใจไม่ระบุรุ่น ไม่ระบุสเปกตัวเลข ไม่คำนวณผลตอบแทน ซึ่งเป็นเรื่องของ /roi-calculator/mobility",
+  "primary_keyword": "คอมพิวเตอร์พกพาอุตสาหกรรม",
+  "secondary_keywords": [
+    "industrial mobile computing คือ",
+    "เครื่องยิงบาร์โค้ดพกพา",
+    "มือถือสำหรับงานคลังสินค้า",
+    "rugged handheld ต่างจากสมาร์ตโฟน"
+  ],
+  "intent": "INFORMATIONAL",
+  "action": "NEW",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+    "https://www.asiancoding.com/warehouse-data-capture",
+    "https://www.asiancoding.com/contact"
+  ],
+  "scope_note": "แพ็กเกจนอกคิวหมายเลข — Industrial Mobile Computing เป็นหนึ่งในหกหัวข้อที่ Owner กำหนดให้เน้น และเป็นหัวข้อเดียวที่เว็บไม่มีหน้าเนื้อหาเลย มีเพียง /roi-calculator/mobility ซึ่งเป็นหน้าคำนวณ ไม่ใช่หน้าเนื้อหา",
+  "cluster_note": "หน้านี้ไม่อยู่ใน cluster ใด และเป็นหน้าใหม่ จึงไม่ขัดกติกาที่ห้ามผลิตแพ็กเกจที่ยิง intent ของ cluster ที่ยังไม่มีหน้าหลัก",
+  "new_page_note": "action = NEW · target_url ยังไม่อยู่ใน sitemap ปัจจุบันตามที่ควรจะเป็น และห้ามเติมลง data/sitemap_urls.json ซึ่งเป็นข้อมูล FACT ของเว็บจริง จะเติมได้ต่อเมื่อหน้าถูกสร้างขึ้นจริงแล้ว",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "คอมพิวเตอร์พกพาสำหรับงานอุตสาหกรรม: ต่างจากสมาร์ตโฟนตรงไหน",
+    "description": "ต่างจากสมาร์ตโฟนที่การอ่านรหัส การถือทั้งกะ พลังงาน และการดูแลเครื่องทั้งฝูง อธิบายว่าต่างด้วยกลไกอะไร และเมื่อไรมือถือธรรมดาก็พอ",
+    "image": null
+  }
+}

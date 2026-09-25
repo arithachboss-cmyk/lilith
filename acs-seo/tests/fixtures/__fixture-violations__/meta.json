@@ -9,7 +9,7 @@
   "primary_keyword": "เครื่องอ่านบาร์โค้ด",
   "secondary_keywords": [],
   "intent": "TRANSACTIONAL",
-  "action": "NEW",
+  "action": "ENRICH",
   "internal_links": [],
   "robots": "index,follow",
   "og": {

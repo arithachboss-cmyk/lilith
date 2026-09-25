@@ -1,0 +1,50 @@
+{
+  "package_id": "PKG-IMC",
+  "queue_id": null,
+  "title": "คอมพิวเตอร์พกพาสำหรับงานอุตสาหกรรม: ต่างจากสมาร์ตโฟนตรงไหน",
+  "target_url": "https://www.asiancoding.com/knowledge/industrial-mobile-computing",
+  "page_type": "KNOWLEDGE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามคำตอบของคำถามข้อ 7 (2026-09-25) ที่ตัดสินว่า Industrial Mobile Computing ควรมีหน้าเนื้อหาของตัวเอง · เป็นหน้าใหม่ที่ไม่อยู่ใน cluster ใด จึงไม่ติดกติกา cannibalization และเขียนได้ทันที · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ และหน้ายังไม่ถูกสร้างขึ้นจริง",
+  "qa_tier": "T2_FULL",
+  "qa_tier_note": "action = NEW ทำให้ validate.mjs ยกเป็น T2_FULL อัตโนมัติ ซึ่งถูกต้อง — หน้าใหม่ไม่มีประวัติให้ตรวจย้อน และเป็นการเพิ่มพื้นที่ใหม่ให้เว็บ จึงควรถูกตรวจเต็มระดับแม้เนื้อหาจะไม่มีตัวเลขเลย",
+  "flagged_claims": [],
+  "blocked_on_sources": [
+    "SRC-ACS-001",
+    "SRC-ACS-004",
+    "SRC-KW-001"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "out_of_queue": true,
+  "requested_by": "ACS Owner — หัวข้อที่กำหนดให้เน้น: Barcode, RFID, Industrial Labels, Warehouse Automation, Retail Automation, Industrial Mobile Computing",
+  "requested_on": "2026-09-25",
+  "creates_new_page": {
+    "url": "https://www.asiancoding.com/knowledge/industrial-mobile-computing",
+    "exists_today": false,
+    "sitemap_rule": "target_url ยังไม่อยู่ใน data/sitemap_urls.json ตามที่ควรจะเป็นสำหรับ action = NEW · ห้ามเติมลงไฟล์นั้นเพื่อให้ด่านผ่าน เพราะเป็นรายการ URL จริงของเว็บ สถานะ FACT (SRC-WEB-001) จะเติมได้ต่อเมื่อหน้าถูกสร้างขึ้นจริงแล้ว",
+    "why_new_page_is_unavoidable": "ค้นทั้ง 82 URL แล้ว หัวข้อนี้มีเพียง /roi-calculator/mobility ซึ่งเป็นหน้า LANDING ถือ flag NUMBERS และทำหน้าที่คำนวณผลตอบแทน ไม่ใช่อธิบายหัวข้อ จึงไม่มีหน้าเดิมให้ปรับปรุง"
+  },
+  "open_question": {
+    "question": "แพ็กเกจนอกคิวนี้ซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+    "why_cannot_answer_now": "ยังไม่มี SRC-KW-001 ฉบับเต็ม",
+    "if_duplicate": "รวมเข้ากับรายการนั้นได้ ไม่ต้องทิ้งงาน",
+    "note": "ต่างจากแพ็กเกจนอกคิวสี่ชุดก่อนหน้าตรงที่ชุดนี้เป็น action NEW ไม่ใช่ ENRICH ถ้าซ้ำกับรายการในคิวที่สั่งให้ปรับปรุงหน้าเดิม ต้องทบทวนว่ารายการนั้นหมายถึงหน้าใด",
+    "raised_on": "2026-09-25"
+  },
+  "not_covered": [
+    "การคำนวณผลตอบแทนของการเปลี่ยนมาใช้อุปกรณ์กลุ่มนี้ — เป็นของ /roi-calculator/mobility และหน้านั้นถือ flag NUMBERS ที่ยังไม่ผ่านการตรวจหลักฐาน",
+    "การระบุรุ่นหรือสเปก — ต้องรอ SRC-VEN-001 / SRC-VEN-002",
+    "ACS ขายหรือดูแลอะไรในหัวข้อนี้ — ต้องรอ SRC-ACS-001 และ SRC-ACS-004"
+  ]
+}

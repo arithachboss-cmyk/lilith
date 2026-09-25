@@ -1,6 +1,6 @@
 {
   "version": "4.0.0",
-  "as_of": "2026-09-24",
+  "as_of": "2026-09-25",
   "total_packages_declared_by_owner": 19,
   "global_rule": "ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic",
   "board_status_enum": [
@@ -172,56 +172,39 @@
     {
       "package_id": "PKG-Q17",
       "queue_id": 17,
-      "title": null,
-      "target_url": null,
-      "page_type": null,
+      "title": "เลือกเครื่องอ่านบาร์โค้ดจากหน้างาน: เกณฑ์แปดข้อที่ตอบเองได้",
+      "target_url": "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+      "page_type": "KNOWLEDGE",
       "package_status": "DRAFT_PENDING_REVIEW",
-      "board_status": "BLOCKED",
-      "board_reason": "เนื้อหาเขียนได้ทันที (revision spec พร้อม ไม่ติด source) แต่หน้าปลายทางอยู่ใน C-7 \"Scanner selection / comparison\" ซึ่งยังไม่มี canonical owner · ในเว็บมีหน้าที่ถือ flag RANKING อยู่สองหน้า คือ /barcode-scanner-comparison และ /knowledge/product-comparisons ทั้งคู่อยู่ใน C-7 และ RANKING เป็น flag ที่ตรงกับคำตัดสิน Queue #17 โดยตรง · การตัดสินหน้าหลักของ C-7 จะปลดแพ็กเกจนี้ทันที",
+      "board_status": "REVISE",
+      "board_reason": "ปลดแล้วด้วยคำตัดสิน D-12 (2026-09-25) ที่ตั้ง /knowledge/how-to-choose-barcode-scanner เป็นหน้าหลักของ C-7 · เนื้อหาไม่เคยติด source ใด สิ่งที่ติดคือไม่รู้ว่าจะลงหน้าไหน · ดราฟต์ส่งแล้วตาม revision-specs/queue-17.md ครบทุกข้อ mechanical QA ผ่าน (PASS) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ",
       "owner_decision": "ใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับว่ายี่ห้อไหนดีที่สุด",
-      "qa_tier": "T2_FULL",
-      "flagged_claims": [
-        "CLM-B-004",
-        "CLM-S-006"
-      ],
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
       "blocked_on_sources": [
-        "SRC-WEB-004"
+        "SRC-VEN-002",
+        "SRC-ACS-004"
       ],
       "gates": {
-        "mechanical": "NOT_RUN",
+        "mechanical": "PASS",
         "claim_qa": "NOT_RUN",
-        "cannibalization": "NOT_RUN",
+        "cannibalization": "PASS",
         "rendering": "FAIL",
         "owner_approval": "NOT_GRANTED"
       },
-      "package_path": null,
-      "intake_required": true,
-      "target_url_candidates": {
-        "status": "RECOMMENDATION",
-        "derived_from": "SRC-WEB-002 risk flags",
-        "why": "สองหน้าที่ถือ flag RANKING",
-        "urls": [
-          "https://www.asiancoding.com/barcode-scanner-comparison",
-          "https://www.asiancoding.com/knowledge/product-comparisons"
-        ],
-        "owner_confirmed": false
-      },
+      "package_path": "content-packages/PKG-Q17",
+      "intake_required": false,
       "cannibalization_cluster": "C-7",
       "revision_spec": "revision-specs/queue-17.md",
-      "open_question": {
+      "qa_tier_note": "ลดจาก T2_FULL ที่ประเมินไว้ล่วงหน้า เพราะหน้าปลายทางถือเฉพาะ flag CANNIBAL ซึ่งจงใจไม่อยู่ใน FULL_QA_FLAGS (cannibalization มีด่านของตัวเองแยกต่างหาก) และดราฟต์ไม่มีตัวเลข ไม่มีชื่อยี่ห้อ ไม่มี flagged_claims",
+      "resolved_question": {
         "question": "หน้าหลักของ C-7 (Scanner selection / comparison) คือหน้าใด",
-        "unblocks": "PKG-Q17 ทันที เพราะเนื้อหาเกณฑ์ตัดสินใจเขียนรอได้อยู่แล้ว",
-        "candidates_in_cluster": [
-          "/barcode-scanner-comparison  (ถือ flag RANKING)",
-          "/knowledge/product-comparisons  (ถือ flag RANKING)",
-          "/knowledge/how-to-choose-barcode-scanner",
-          "/knowledge/wired-vs-wireless-barcode-scanner",
-          "/select-solution"
-        ],
-        "note": "สองหน้าแรกถือ flag RANKING ซึ่งเป็น flag ที่มีอยู่เพียงสองหน้าในทั้งเว็บ และตรงกับคำตัดสิน Queue #17 โดยตรง จึงเป็นบ้านที่น่าจะใช่ที่สุดของเนื้อหานี้ แต่การเลือกหน้าหลักของ cluster เป็นคำตัดสินของ Owner ไม่ใช่การอนุมานจาก flag",
-        "supersedes": "คำถามฉบับก่อนหน้า (2026-09-24 รอบที่ 2) ที่ตั้งไว้ว่าเป็นหนึ่งในสามหน้าที่ถือ flag CANNIBAL แต่ไม่มี cluster — ฉบับนั้นตั้งคำถามผิดจุด เพราะมองเฉพาะหน้าที่ไม่มี cluster แล้วพลาด C-7 ซึ่งเป็นกลุ่มที่มีอยู่จริงและตรงเรื่องกว่า",
-        "still_true_from_before": "สามหน้าที่ถือ flag CANNIBAL แต่ไม่อยู่ใน cluster ใดยังเป็นช่องโหว่ของ gate จริง และยังเป็นคำถามค้างแยกต่างหาก แต่ไม่ใช่อุปสรรคของ PKG-Q17",
-        "raised_on": "2026-09-24"
+        "answer": "/knowledge/how-to-choose-barcode-scanner",
+        "decision_id": "D-12",
+        "decided_by": "Claude · delegated by ACS Owner 2026-09-25",
+        "decided_on": "2026-09-25",
+        "why_not_the_ranking_pages": "/barcode-scanner-comparison และ /knowledge/product-comparisons ถือ flag RANKING ทั้งคู่ และเป็นสองหน้าเดียวในเว็บที่ถือ flag นี้ · การตั้งหน้าใดหน้าหนึ่งเป็นหน้าหลัก เท่ากับทำให้การจัดอันดับยี่ห้อ เป็นศูนย์กลางของกลุ่ม ซึ่งคำตัดสิน Queue #17 ห้ามไว้ · selftest มีข้อตรวจกันไว้แล้ว",
+        "note_on_earlier_reading": "บันทึกฉบับ 2026-09-24 เคยเสนอว่าสองหน้าที่ถือ flag RANKING คือ \"บ้านที่น่าจะใช่ที่สุด\" ของเนื้อหานี้ — การอ่านนั้นกลับด้าน flag RANKING บอกว่าหน้านั้นมีปัญหาที่ต้องแก้ ไม่ได้บอกว่าหน้านั้นควรเป็นหน้าหลัก"
       }
     },
     {
@@ -929,6 +912,49 @@
       "cannibalization_cluster": null,
       "boundary_note": "หน้านี้ตอบว่าผลการนับหมายถึงอะไรและส่วนต่างมาจากขั้นตอนไหน ส่วน PKG-WMS-INTEGRATION ตอบว่าข้อมูลเดินทางจากฉลากถึงระบบอย่างไร สองหน้าลิงก์หากันและไม่เขียนทับกัน ซึ่งสำคัญเพราะทั้งคู่เป็นหน้า KNOWLEDGE ที่อยู่นอก cluster",
       "milestone_note": "หลังแพ็กเกจนี้ หน้าที่เขียนได้โดยไม่ต้องรอคำตอบของ Owner หมดแล้ว งานเขียนที่เหลือทุกหน้าติด cluster ที่ยังไม่มีหน้าหลัก หรือรอเอกสารจาก ACS หรือผู้ผลิต หรือรอคำตัดสินว่าจะสร้างหน้าใหม่สำหรับ Industrial Mobile Computing ไหม"
+    },
+    {
+      "package_id": "PKG-IMC",
+      "queue_id": null,
+      "title": "คอมพิวเตอร์พกพาสำหรับงานอุตสาหกรรม: ต่างจากสมาร์ตโฟนตรงไหน",
+      "target_url": "https://www.asiancoding.com/knowledge/industrial-mobile-computing",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิว ทำตามคำตอบของคำถามข้อ 7 (2026-09-25) ที่ตัดสินว่า Industrial Mobile Computing ควรมีหน้าเนื้อหาของตัวเอง · เป็นหัวข้อเดียวในหกหัวข้อที่ Owner กำหนดให้เน้น ที่เว็บไม่มีหน้าเนื้อหาเลย มีเพียง /roi-calculator/mobility ซึ่งเป็นหน้าคำนวณ · เป็นหน้าใหม่ที่ไม่อยู่ใน cluster ใด จึงไม่ติดกติกา cannibalization และเขียนได้ทันทีโดยไม่ต้องรอคำตัดสินใด · mechanical QA ผ่าน (PASS) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และหน้ายังไม่ถูกสร้างขึ้นจริง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "qa_tier_note": "action = NEW ทำให้ validate.mjs ยกเป็น T2_FULL อัตโนมัติ ซึ่งถูกต้อง — หน้าใหม่ไม่มีประวัติให้ตรวจย้อน และเป็นการเพิ่มพื้นที่ใหม่ให้เว็บ",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-004",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-IMC",
+      "intake_required": false,
+      "cannibalization_cluster": null,
+      "revision_spec": null,
+      "out_of_queue": true,
+      "creates_new_page": {
+        "url": "https://www.asiancoding.com/knowledge/industrial-mobile-computing",
+        "exists_today": false,
+        "sitemap_rule": "ห้ามเติม URL นี้ลง data/sitemap_urls.json เพื่อให้ด่านผ่าน — ไฟล์นั้นเป็นรายการ URL จริงของเว็บ สถานะ FACT (SRC-WEB-001) · validate.mjs ถูกแก้ให้เมื่อ action = NEW ข้อตรวจกลับด้านเป็น target_url ต้องยังไม่อยู่ใน sitemap และจะ FAIL ด้วย NEW_PAGE_EXISTS ถ้าอยู่แล้ว"
+      },
+      "open_question": {
+        "question": "แพ็กเกจนอกคิวนี้ซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+        "why_cannot_answer_now": "ยังไม่มี SRC-KW-001 ฉบับเต็ม",
+        "if_duplicate": "รวมเข้ากับรายการนั้นได้ ไม่ต้องทิ้งงาน",
+        "note": "ต่างจากแพ็กเกจนอกคิวสี่ชุดก่อนหน้าตรงที่ชุดนี้เป็น action NEW ไม่ใช่ ENRICH",
+        "raised_on": "2026-09-25"
+      }
     }
   ],
   "site_findings": {
@@ -938,5 +964,11 @@
     "urls_in_clusters": 45,
     "note": "61 จาก 82 หน้าที่มีอยู่แล้วบนเว็บถือ risk flag อย่างน้อยหนึ่งอย่าง ปัญหาจึงไม่ได้อยู่แค่ 19 แพ็กเกจใหม่ แต่อยู่ที่หน้าเดิมด้วย"
   },
-  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม · PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 ส่วน PKG-RFID-VS-BARCODE, PKG-WMS-INTEGRATION, PKG-POS-RETAIL และ PKG-INVENTORY-COUNT เป็นแพ็กเกจนอกคิว ที่ทำตามหัวข้อที่ Owner กำหนดให้เน้น ทั้งห้ารายการจึงไม่ถูกนับรวมในจำนวนนั้น บอร์ดจึงแสดง 24 จาก 19 ซึ่งถูกต้อง"
+  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม · PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 ส่วน PKG-RFID-VS-BARCODE, PKG-WMS-INTEGRATION, PKG-POS-RETAIL และ PKG-INVENTORY-COUNT เป็นแพ็กเกจนอกคิว ที่ทำตามหัวข้อที่ Owner กำหนดให้เน้น ทั้งห้ารายการจึงไม่ถูกนับรวมในจำนวนนั้น บอร์ดจึงแสดง 24 จาก 19 ซึ่งถูกต้อง",
+  "board_totals": {
+    "total": 25,
+    "BLOCKED": 14,
+    "HOLD": 1,
+    "REVISE": 10
+  }
 }

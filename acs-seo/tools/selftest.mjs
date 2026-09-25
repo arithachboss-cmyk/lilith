@@ -196,6 +196,14 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   check('และระบุว่าเป็น cluster ไหน', codes(can).has('CANNIBAL_UNRESOLVED'));
   check('หน้าที่อยู่ใน cluster ถูกยกเป็น T2_FULL อัตโนมัติ', can.tier === 'T2_FULL', can.tier);
 
+  // action = NEW แปลว่าหน้ายังไม่มี ถ้า URL อยู่ใน sitemap แล้วแปลว่าเป็นการปรับปรุงหน้าเดิม
+  // ข้อตรวจเดิมบังคับให้ทุก target อยู่ใน sitemap ซึ่งทำให้หน้าใหม่ผ่านไม่ได้เลย
+  // และไม่เคยตรวจด้านกลับว่าแพ็กเกจที่อ้างว่าสร้างหน้าใหม่ กำลังทับหน้าที่มีอยู่แล้วหรือไม่
+  check('หน้าใหม่ที่ URL มีอยู่ใน sitemap แล้ว ถูกจับว่าควรเป็น ENRICH',
+    codes(can).has('NEW_PAGE_EXISTS'), [...codes(can)].join(','));
+  check('หน้าใหม่ไม่ถูกจับด้วย SITEMAP_MISS เพราะหน้าใหม่ย่อมยังไม่อยู่ใน sitemap',
+    !codes(can).has('SITEMAP_MISS'));
+
   const resolved = find('__fixture-cluster-resolved__');
   check('cluster ที่มีหน้าหลักแล้วไม่ถูกกั้นอีก', resolved.status === 'PASS',
     resolved.findings.map((f) => f.code).join(','));

@@ -215,6 +215,13 @@ function checkPackage(dir) {
     add('INFO', 'PRIVATE_SEO_CHECKS_SKIPPED', 'ข้ามการตรวจ sitemap, internal links และ cannibalization เพราะหน้านี้ไม่เผยแพร่สาธารณะ — การตรวจ claim ยังบังคับครบ');
   } else if (sitemapUrls.size === 0) {
     add('BLOCKED_ON_SOURCE', 'SITEMAP_UNAVAILABLE', 'data/sitemap_urls.json ว่าง (SRC-WEB-001 ยังไม่ส่ง) — ตรวจ sitemap ไม่ได้');
+  } else if (meta.action === 'NEW') {
+    // หน้าใหม่ย่อมไม่อยู่ใน sitemap ปัจจุบัน — การบังคับให้อยู่คือการบังคับให้เติม URL
+    // ที่ยังไม่มีจริงลงในไฟล์ FACT ของเว็บ ข้อตรวจจึงกลับด้าน: ต้องยืนยันว่ายังไม่มี
+    if (meta.target_url && sitemapUrls.has(meta.target_url)) {
+      add('FAIL', 'NEW_PAGE_EXISTS',
+        `action = NEW แต่ target_url อยู่ใน sitemap แล้ว จึงเป็นการปรับปรุงหน้าเดิม ให้ใช้ action = ENRICH: ${meta.target_url}`);
+    }
   } else if (meta.target_url && !sitemapUrls.has(meta.target_url)) {
     add('FAIL', 'SITEMAP_MISS', `target_url ไม่อยู่ใน sitemap ปัจจุบัน: ${meta.target_url}`);
   }
