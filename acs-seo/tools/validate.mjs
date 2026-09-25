@@ -108,9 +108,36 @@ function listPackageDirs() {
   return dirs.sort();
 }
 
+/*
+ * ลายนิ้วมือของ "กติกา" คือตัวเครื่องมือกับไฟล์ข้อมูลทั้งหมด ไม่ใช่แค่ไฟล์ในแพ็กเกจ
+ *
+ * ก่อนหน้านี้ hashPackage() แฮชเฉพาะ REQUIRED_FILES แปลว่าเมื่อแก้กฎใน forbidden_terms.json
+ * หรือแก้ validate.mjs เอง แพ็กเกจที่ไฟล์ไม่เปลี่ยนจะถูกคืนจากแคชเป็น SKIPPED_UNCHANGED
+ * แล้ว --changed-only จะให้ไฟเขียวจากกติกาที่ไม่เคยถูกประเมินเลย
+ *
+ * ครอบคลุมเกินจริงโดยตั้งใจ (เช่น packages.json ไม่มีผลต่อคำตัดสินรายแพ็กเกจ) เพราะการ
+ * ตรวจซ้ำเกินจำเป็นเสียแค่เวลา ส่วนการข้ามการตรวจทำให้ด่านหายไปเงียบ ๆ
+ */
+const TOOLCHAIN_FINGERPRINT = (() => {
+  const h = createHash('sha256');
+  const add = (dir, filter) => {
+    if (!existsSync(dir)) return;
+    for (const f of readdirSync(dir).sort()) {
+      if (!filter(f)) continue;
+      h.update(f).update(readFileSync(join(dir, f)));
+    }
+  };
+  add(join(ROOT, 'tools'), (f) => f.endsWith('.mjs'));
+  add(DATA_DIR, (f) => f.endsWith('.json'));
+  return h.digest('hex');
+})();
+
 function hashPackage(dir) {
   const h = createHash('sha256');
-  for (const f of REQUIRED_FILES) {
+  h.update(TOOLCHAIN_FINGERPRINT);
+  // ไฟล์ .html ถูกสแกนคำต้องห้ามเหมือน article.md จึงต้องอยู่ในกุญแจแคชด้วย
+  const extra = readdirSync(dir).filter((f) => /\.html?$/i.test(f)).sort();
+  for (const f of [...REQUIRED_FILES, ...extra]) {
     const p = join(dir, f);
     h.update(f).update(existsSync(p) ? readFileSync(p) : Buffer.from('<missing>'));
   }
