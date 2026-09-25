@@ -16,7 +16,7 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { checkPackageEvidence } from './evidence-check.mjs';
-import { loadRules, scanForbidden } from './forbidden-scan.mjs';
+import { loadRules, scanForbidden, exemptSpans, findLinks, canonicalizeTarget } from './forbidden-scan.mjs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -157,9 +157,15 @@ function evidenceSatisfies(audit, severity) {
   });
 }
 
-/** ตัดจำนวน matches ที่ 8 เพื่อไม่ให้ข้อความ finding ยาวเกินอ่าน — การสแกนอยู่ใน forbidden-scan.mjs */
+/**
+ * ตัดจำนวน matches ที่ 8 เพื่อไม่ให้ข้อความ finding ยาวเกินอ่าน — การสแกนอยู่ใน forbidden-scan.mjs
+ *
+ * ยกเว้นช่วงที่เป็นที่อยู่ของหน้าที่มีอยู่จริงใน inventory ถ้า inventory ว่าง (SRC-WEB-002 ยังไม่ส่ง)
+ * จะไม่มีอะไรถูกยกเว้นเลย ซึ่งเป็นค่าตั้งต้นที่เข้มกว่า ไม่ใช่หลวมกว่า
+ */
 const scanPackageText = (text) =>
-  scanForbidden(text, rules).map((h) => ({ ...h, matches: h.matches.slice(0, 8) }));
+  scanForbidden(text, rules, exemptSpans(text, inventoryUrls))
+    .map((h) => ({ ...h, matches: h.matches.slice(0, 8) }));
 
 function checkPackage(dir) {
   const name = dir.replace(ROOT + '/', '');
@@ -247,6 +253,10 @@ function checkPackage(dir) {
     add('FAIL', 'SITEMAP_MISS', `target_url ไม่อยู่ใน sitemap ปัจจุบัน: ${meta.target_url}`);
   }
   const links = Array.isArray(meta.internal_links) ? meta.internal_links : [];
+  /* ลิงก์ที่อยู่ในเนื้อบทความจริง ๆ — เดิมไม่มีอะไรตรวจเลย validate ดูแต่รายการที่ประกาศไว้ใน meta
+     ทั้งที่สิ่งที่ผู้อ่านคลิกคือลิงก์ในเนื้อ ไม่ใช่รายการใน meta */
+  const declared = new Set(links.map((l) => canonicalizeTarget(typeof l === 'string' ? l : l?.url)).filter(Boolean));
+  const bodyTargets = findLinks(raw['article.md']).targets;
   if (isPrivate) {
     // ไม่ตรวจ internal links ของหน้าที่ไม่อยู่ในโครงสร้างเว็บสาธารณะ
   } else if (inventoryUrls.size === 0) {
@@ -256,6 +266,14 @@ function checkPackage(dir) {
     for (const l of links) {
       const url = typeof l === 'string' ? l : l?.url;
       if (!url || !inventoryUrls.has(url)) add('FAIL', 'INTERNAL_LINK_UNKNOWN', `internal link ไม่อยู่ใน page inventory: ${url ?? JSON.stringify(l)}`);
+    }
+    for (const t of bodyTargets) {
+      if (!inventoryUrls.has(t.url)) {
+        add('FAIL', 'BODY_LINK_UNKNOWN', `บทความลิงก์ไปหน้าที่ไม่มีใน page inventory: ${t.raw}`);
+      } else if (!declared.has(t.url)) {
+        add('FAIL', 'BODY_LINK_UNDECLARED',
+          `บทความลิงก์ไป ${t.url} แต่ไม่ได้ประกาศไว้ใน meta.internal_links — รายการที่ประกาศคือสิ่งที่ถูกตรวจ ถ้าเนื้อบทความลิงก์เกินจากนั้น ส่วนที่เกินจะไม่เคยถูกตรวจเลย`);
+      }
     }
   }
 
@@ -341,8 +359,25 @@ function checkPackage(dir) {
   const isNew = meta.action === 'NEW';
   const targetPage = meta.target_url ? inventoryByUrl.get(meta.target_url) : null;
   const pageRiskFlags = (targetPage?.risk_flags ?? []).filter((f) => FULL_QA_FLAGS.has(f));
+  /*
+   * ลิงก์ไปหน้าที่ถือ flag เสี่ยง ต้องคง T2_FULL ไว้
+   *
+   * เดิมข้อนี้เกิดขึ้นเองโดยบังเอิญ — ลิงก์ไป /brady ทำให้ FW-E-009 จับชื่อผู้ผลิตใน URL
+   * evidenceFlags จึงเป็นบวกและดัน tier ขึ้น T2 พอยกเว้น URL ออกจากการสแกนแล้ว
+   * tier จะตกลงมาเงียบ ๆ และเพราะ QA_TIER_MISMATCH เป็นแค่ WARN คนจะ "แก้" ด้วยการ
+   * ลด qa_tier ในไฟล์ตาม
+   *
+   * นับเฉพาะลิงก์ใน **เนื้อบทความ** ไม่นับ meta.internal_links เพราะตัวสแกนเดิมอ่านแค่
+   * article.md / .html / title / meta description / schema — ไม่เคยอ่าน internal_links เลย
+   * ขอบเขตนี้จึงเท่ากับพฤติกรรมเดิมพอดี ถ้านับ meta ด้วยจะกลายเป็นนโยบายใหม่
+   * (PKG-ABOUT-ACS จะถูกดันจาก T1_CLAIM เป็น T2_FULL ทั้งที่ไม่เกี่ยวกับการยกเว้น URL)
+   * ซึ่งเป็นคำถามที่ต้องออกแบบ ไม่ใช่แถมมากับการแก้บั๊ก
+   */
+  const linkedFlagged = [...new Set(bodyTargets.map((t) => t.url))]
+    .map((u) => inventoryByUrl.get(u))
+    .filter((p) => (p?.risk_flags ?? []).some((f) => FULL_QA_FLAGS.has(f)));
   let tier;
-  if (isP0 || isNew || evidenceFlags > 0 || ownerFlags > 0 || pageRiskFlags.length > 0) tier = 'T2_FULL';
+  if (isP0 || isNew || evidenceFlags > 0 || ownerFlags > 0 || pageRiskFlags.length > 0 || linkedFlagged.length > 0) tier = 'T2_FULL';
   else if ((status.flagged_claims ?? []).length > 0) tier = 'T1_CLAIM';
   else tier = 'WORDING_QA_OK';
 

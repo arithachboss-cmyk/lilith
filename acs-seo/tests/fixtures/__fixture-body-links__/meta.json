@@ -1,0 +1,25 @@
+{
+  "package_id": "__fixture-body-links__",
+  "title": "หลักการเลือกระหว่างบาร์โค้ด 1D และ 2D ให้เหมาะกับงาน",
+  "meta_description": "อธิบายความต่างของบาร์โค้ด 1D และ 2D ในเชิงหลักการ พร้อมแนวทางพิจารณาก่อนเลือกใช้ และเหตุผลที่ควรทดสอบกับหน้างานจริง",
+  "canonical": "https://www.asiancoding.com/knowledge/1d-vs-2d-barcode",
+  "target_url": "https://www.asiancoding.com/knowledge/1d-vs-2d-barcode",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "fixture — ทดสอบด่านลิงก์ในเนื้อบทความ ไม่ใช่เนื้อหาเผยแพร่",
+  "primary_keyword": "บาร์โค้ด 1d 2d",
+  "secondary_keywords": [],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/barcode-technology",
+    "https://www.asiancoding.com/barcode-ribbons",
+    "https://www.asiancoding.com/knowledge/implementation-best-practices"
+  ],
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่าน",
+  "og": {
+    "title": "หลักการเลือกระหว่างบาร์โค้ด 1D และ 2D ให้เหมาะกับงาน",
+    "description": "อธิบายความต่างของบาร์โค้ด 1D และ 2D ในเชิงหลักการ พร้อมแนวทางพิจารณาก่อนเลือกใช้ และเหตุผลที่ควรทดสอบกับหน้างานจริง",
+    "image": null
+  }
+}

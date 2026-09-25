@@ -14,7 +14,7 @@
  * ไม่ได้แก้ด้วยการลบตัวเลข
  */
 import { readFileSync, writeFileSync, statSync, readdirSync } from 'node:fs';
-import { loadRules, scanForbidden } from './forbidden-scan.mjs';
+import { loadRules, scanForbidden, exemptSpans } from './forbidden-scan.mjs';
 import { join, extname, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -31,8 +31,23 @@ if (targets.length === 0) {
 }
 
 const rules = loadRules(join(ROOT, 'data/forbidden_terms.json'));
-const marker = (rule) => `⟦ลบ ${rule.claim_ref[0]} — รอหลักฐาน⟧`;
+const marker = (claimRef) => `⟦ลบ ${claimRef[0]} — รอหลักฐาน⟧`;
 const MARKER_RE = /⟦ลบ [^⟧]*⟧/g;
+
+/* หน้าที่มีอยู่จริงบนเว็บ — ใช้ตัดสินว่าที่อยู่ไหนเป็นที่อยู่จริง จึงยกเว้นจากการสแกนถ้อยคำได้
+   ถ้าไฟล์ยังไม่มีหรืออ่านไม่ได้ ให้ถือว่าไม่รู้จัก URL ใดเลย ซึ่งเข้มกว่า ไม่ใช่หลวมกว่า */
+const knownUrls = (() => {
+  try {
+    const inv = JSON.parse(readFileSync(join(ROOT, 'data/page_inventory.json'), 'utf8'));
+    return new Set((inv.pages ?? []).map((p) => p.url));
+  } catch { return new Set(); }
+})();
+
+/** ช่วงที่ห้ามแตะ = ที่อยู่ของหน้าจริง + marker ที่เคยใส่ไว้แล้ว (เพื่อให้ --fix รันซ้ำได้ผลเท่าเดิม) */
+const protectedSpans = (text) => [
+  ...exemptSpans(text, knownUrls),
+  ...[...text.matchAll(MARKER_RE)].map((m) => [m.index, m.index + m[0].length]),
+];
 
 function collect(target, out = []) {
   const st = statSync(target);
@@ -50,25 +65,25 @@ for (const target of targets) {
     let text = original;
     const findings = [];
 
-    for (const hit of scanForbidden(text, rules)) {
+    /* รายงานกับการแก้ต้องใช้ผลสแกนชุดเดียวกัน ถ้ายกเว้นเฉพาะตอน --fix แต่ยังนับตอนรายงาน
+       blockedTotal จะค้างเป็นบวกตลอดไป แล้ว redact ธรรมดาจะ exit 1 ไม่มีวันจบ */
+    const hits = scanForbidden(text, rules, protectedSpans(text));
+    for (const hit of hits) {
       findings.push(hit);
       if (hit.severity === 'BLOCK') blockedTotal += hit.matches.length;
     }
 
     if (flags.has('--fix')) {
-      // ข้ามข้อความที่ถูก redact ไปแล้ว เพื่อให้รันซ้ำได้โดยผลไม่เปลี่ยน
-      const guarded = text.split(MARKER_RE);
-      const markers = text.match(MARKER_RE) ?? [];
-      const fixedParts = guarded.map((part) => {
-        let p = part;
-        for (const rule of rules) {
-          if (rule.severity !== 'BLOCK') continue;
-          rule.re.lastIndex = 0;
-          p = p.replace(rule.re, () => { redactedTotal++; return marker(rule); });
-        }
-        return p;
-      });
-      text = fixedParts.reduce((acc, part, i) => acc + part + (markers[i] ?? ''), '');
+      /* เขียนทับจากท้ายไปหน้า เพื่อให้ตำแหน่งที่ยังไม่ถึงไม่ขยับ
+         วิธีนี้แทนการ split/rejoin เดิม ซึ่งพึ่งพาว่าจำนวน marker ตรงกับจำนวนท่อนพอดี */
+      const edits = hits
+        .filter((h) => h.severity === 'BLOCK')
+        .flatMap((h) => h.spans.map(([s, e]) => ({ s, e, claim_ref: h.claim_ref })))
+        .sort((a, b) => b.s - a.s);
+      for (const ed of edits) {
+        text = text.slice(0, ed.s) + marker(ed.claim_ref) + text.slice(ed.e);
+        redactedTotal++;
+      }
       if (text !== original) writeFileSync(file, text);
     }
 

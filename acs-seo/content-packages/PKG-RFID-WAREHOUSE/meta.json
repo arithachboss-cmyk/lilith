@@ -18,6 +18,7 @@
     "https://www.asiancoding.com/rfid-systems",
     "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
     "https://www.asiancoding.com/warehouse-data-capture",
+    "https://www.asiancoding.com/knowledge/barcode-wms-integration",
     "https://www.asiancoding.com/contact"
   ],
   "cluster_note": "หน้านี้อยู่ใน C-3 แต่ไม่ใช่หน้าหลัก — คำตัดสิน D-09 (2026-09-25) ตั้ง /rfid-systems เป็นหน้าหลักของ C-3 และกำหนด decision = ENRICH_CANONICAL แพ็กเกจนี้จึงบีบขอบเขตของหน้าให้ไม่ทับหน้าหลัก และลิงก์ขึ้นหาหน้าหลักแทนการแข่ง",

@@ -9,6 +9,7 @@
  */
 import { execFileSync } from 'node:child_process';
 import { mkdtempSync, mkdirSync, readdirSync, writeFileSync, readFileSync, copyFileSync, rmSync } from 'node:fs';
+import { loadRules, scanForbidden, exemptSpans, findLinks, canonicalizeTarget, maskSpans } from './forbidden-scan.mjs';
 import { tmpdir } from 'node:os';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -474,6 +475,115 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
     unownedCol.length === 0, unownedCol.map((c) => c.cluster_id).join(','));
   check('ทุก cluster มีแถวของตัวเองในเอกสาร',
     clusters.clusters.every((c) => rowOf(c.cluster_id) !== undefined));
+}
+
+/* ── ที่อยู่ของหน้า ไม่ใช่ถ้อยคำ ────────────────────────────────────
+ *
+ * URL ของเว็บเราเองสิบเส้นมีสตริงที่ตรงกฎอยู่ข้างใน — /knowledge/implementation-best-practices
+ * ชน \bbest\b (BLOCK) · /esg-solutions ชน esg · /brady/* + /honeywell-* + /tsc-* ชนชื่อผู้ผลิต
+ * ผลคือเนื้อบทความลิงก์ไปสิบหน้านี้ไม่ได้เลย และ redact --fix ยังเขียนทับข้างใน URL จนลิงก์พัง
+ * โดยรายงานว่าสำเร็จ
+ *
+ * การยกเว้นจึงต้องแคบพอดี — กว้างไปจะเปิดรูให้ FW-E-009 เพราะ /brady คือชื่อแบรนด์ที่มีสแลชนำหน้า
+ * ชุดนี้ตรวจทั้งสองทิศ: ที่ต้องยกเว้นได้ยกเว้นจริง และที่ต้องไม่ยกเว้นยังถูกจับจริง
+ */
+{
+  const rules = loadRules(join(ROOT, 'data/forbidden_terms.json'));
+  const inv = readJson('data/page_inventory.json');
+  const known = new Set(inv.pages.map((p) => p.url));
+  const O = 'https://www.asiancoding.com';
+  const scan = (t, k = known) => scanForbidden(t, rules, exemptSpans(t, k));
+  const hitIds = (t, k) => new Set(scan(t, k).map((h) => h.rule_id));
+
+  check('canonicalizeTarget ตัด fragment และ query ทิ้ง',
+    canonicalizeTarget(`${O}/esg-solutions?utm=best#best-practices`) === `${O}/esg-solutions`);
+  check('canonicalizeTarget ตัดสแลชท้าย และรับ path ล้วน',
+    canonicalizeTarget('/brady/') === `${O}/brady` && canonicalizeTarget('/brady') === `${O}/brady`);
+  check('canonicalizeTarget ถอด percent-encoding ให้ตรงกับ slug ไทยใน inventory',
+    canonicalizeTarget('/%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B9%81%E0%B8%81%E0%B8%99%E0%B8%9A%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B9%82%E0%B8%84%E0%B9%89%E0%B8%94') === `${O}/เครื่องสแกนบาร์โค้ด`);
+  check('canonicalizeTarget ไม่สนใจลิงก์นอกเว็บและ mailto',
+    canonicalizeTarget('https://example.com/best') === null && canonicalizeTarget('mailto:a@b.c') === null);
+
+  const links = findLinks(`[ก](${O}/brady) ![ข](${O}/esg-solutions) <${O}/logistics> [ค](${O}/retail "ชื่อ")`);
+  check('findLinks ไม่นับรูปภาพเป็นลิงก์ แต่ยังยกเว้นการสแกนให้',
+    !links.targets.some((t) => t.url === `${O}/esg-solutions`) && links.spans.length === 4);
+  check('findLinks รับ autolink และรูปแบบที่มีชื่อกำกับ',
+    links.targets.map((t) => t.url).includes(`${O}/logistics`) &&
+    links.targets.map((t) => t.url).includes(`${O}/retail`));
+
+  // ── ทิศที่ต้องยกเว้น
+  check('URL ของหน้าที่มีอยู่จริงไม่ถูกอ่านเป็นถ้อยคำ',
+    hitIds(`อ่านต่อที่ [แนวทาง](${O}/knowledge/implementation-best-practices) ได้เลย`).size === 0);
+  check('— ยืนยันที่ระดับช่วง ไม่ใช่แค่ผลลัพธ์: ข้อความที่เหลือไม่มีชื่อแบรนด์อยู่เลย',
+    !maskSpans(`[ก](${O}/brady/labels)`, exemptSpans(`[ก](${O}/brady/labels)`, known)).toLowerCase().includes('brady'));
+  check('URL ใน JSON ของ schema ก็ถูกยกเว้นเหมือนกัน',
+    hitIds(JSON.stringify({ url: `${O}/esg-solutions` })).size === 0);
+
+  // ── ทิศที่ต้องไม่ยกเว้น — นี่คือรูที่การยกเว้นแบบกว้างจะเปิดไว้
+  check('path ที่เป็นชื่อแบรนด์ลอย ๆ ในร้อยแก้ว ยังถูกจับ (ไม่ใช่เป้าลิงก์)',
+    hitIds('เครื่องพิมพ์ /brady รุ่นนี้เหมาะกับงานคลัง').has('FW-E-009'));
+  check('slug ที่ไม่มีอยู่จริงในเว็บ ยังถูกจับ',
+    hitIds(`[x](${O}/brady-best-printers)`).has('FW-B-001'));
+  check('คำต้องห้ามที่อยู่ติดกับ URL ยังถูกจับ (ช่วงยกเว้นไม่กินเกิน)',
+    hitIds(`[ก](${O}/brady) ดีที่สุด`).has('FW-B-001'));
+  check('anchor text ยังถูกสแกนตามปกติ แม้เป้าหมายจะถูกยกเว้น',
+    hitIds(`[Brady](${O}/brady/labels)`).has('FW-E-009'));
+  check('ถ้ายังไม่มี page inventory จะไม่ยกเว้นอะไรเลย (ค่าตั้งต้นเข้มกว่า ไม่ใช่หลวมกว่า)',
+    hitIds(`[ก](${O}/knowledge/implementation-best-practices)`, new Set()).has('FW-B-001'));
+
+  /* กฎที่มีตัวคั่น [^\n.·]{0,24} ต้องยังจับข้ามช่วง URL ได้ — เหตุผลที่ mask ด้วย NUL
+     ที่ยาวเท่าเดิม แทนการตัดข้อความเป็นท่อน ถ้าตัดเป็นท่อน การจับข้ามช่วงจะหายไปเงียบ ๆ */
+  const crossSpan = 'ประหยัด [ก](/brady) ได้ 30%';
+  check('กฎที่จับข้ามช่วงยังทำงาน แม้มีที่อยู่คั่นกลาง',
+    hitIds(crossSpan).has('FW-B-005'));
+  check('— และผลตรงกับตอนที่ยังไม่ยกเว้นเลย (การ mask ไม่ได้ทำให้เสียการจับ)',
+    scanForbidden(crossSpan, rules).some((h) => h.rule_id === 'FW-B-005'));
+}
+
+/* ── redact กับที่อยู่: ห้ามเขียนทับข้างใน URL ───────────────────── */
+{
+  const O = 'https://www.asiancoding.com';
+  const f = join(tmp, 'urls.md');
+  const URL_LINE = `อ่านต่อที่ [แนวทาง](${O}/knowledge/implementation-best-practices) ได้เลย`;
+  writeFileSync(f, `${URL_LINE}\nเครื่องอ่านรุ่นนี้ดีที่สุด\n`);
+
+  run(REDACT, [f, '--fix', '--json']);
+  const fixed = readFileSync(f, 'utf8');
+  check('--fix ไม่เขียนทับข้างใน URL ของหน้าที่มีอยู่จริง', fixed.includes(URL_LINE),
+    fixed.split('\n')[0]);
+  check('— แต่ยังปิดคำต้องห้ามในร้อยแก้วบรรทัดถัดไป', fixed.includes('⟦ลบ '));
+
+  const snap = fixed;
+  run(REDACT, [f, '--fix', '--json']);
+  check('--fix รันซ้ำแล้วผลไม่เปลี่ยน แม้ในไฟล์ที่มี URL', readFileSync(f, 'utf8') === snap);
+
+  /* ถ้ายกเว้นเฉพาะตอน --fix แต่ยังนับตอนรายงาน blockedTotal จะค้างเป็นบวกตลอดไป
+     แล้ว redact ธรรมดาจะ exit 1 ไม่มีวันจบ — ข้อนี้จับกรณีนั้นโดยเฉพาะ */
+  const after = run(REDACT, [f, '--json']);
+  check('หลัง --fix แล้ว รายงานกับการแก้ใช้ผลสแกนชุดเดียวกัน (blocked = 0)',
+    after.blocked === 0, String(after.blocked));
+}
+
+/* ── ลิงก์ในเนื้อบทความ ต้องถูกตรวจเท่ากับที่ประกาศไว้ ──────────── */
+{
+  const cache = join(tmp, 'c-bodylinks.json');
+  const res = run(VALIDATE, ['--fixtures', '--json', `--cache=${cache}`]);
+  const fx = res.results.find((r) => r.package.includes('__fixture-body-links__'));
+  const codes = new Set(fx.findings.map((f) => f.code));
+
+  check('ลิงก์ในเนื้อบทความที่ไม่ได้ประกาศใน meta ถูก FAIL', codes.has('BODY_LINK_UNDECLARED'));
+  check('ลิงก์ในเนื้อบทความที่ไม่มีในเว็บ ถูก FAIL', codes.has('BODY_LINK_UNKNOWN'));
+  /* ข้อนี้ตรวจ "การต่อสาย" ใน validate.mjs ไม่ใช่ตัวโมดูล — ถ้าใครถอด exemptSpans ออกจาก
+     scanPackageText เทสต์ระดับหน่วยจะยังเขียวหมด เพราะมันเรียกโมดูลตรง ๆ ข้อนี้คือข้อเดียวที่จับได้
+     บทความในฟิกซ์เจอร์ลิงก์ไป /knowledge/implementation-best-practices ซึ่งมี best อยู่ใน URL */
+  check('validate ต่อสายการยกเว้นไว้จริง — URL ที่มีคำต้องห้ามอยู่ข้างในไม่ทำให้ FORBIDDEN_BLOCK',
+    !codes.has('FORBIDDEN_BLOCK'), [...codes].join(','));
+  check('รูปภาพในบทความไม่ถูกบังคับให้ประกาศเป็น internal link',
+    !fx.findings.some((f) => f.detail.includes('regional-solutions')));
+  /* ก่อนหน้านี้ลิงก์ไปหน้าที่ถือ flag ดัน tier ขึ้น T2 โดยบังเอิญ เพราะกฎจับชื่อแบรนด์ใน URL
+     พอยกเว้น URL แล้วต้องคง T2 ไว้ด้วยเหตุผลที่ตั้งใจ ไม่ใช่ปล่อยให้ตกลงมาเงียบ ๆ */
+  check('ลิงก์ในเนื้อบทความไปหน้าที่ถือ flag เสี่ยง ยังคงดัน tier เป็น T2_FULL',
+    fx.tier === 'T2_FULL', fx.tier);
 }
 
 rmSync(tmp, { recursive: true, force: true });
