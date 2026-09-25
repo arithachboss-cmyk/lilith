@@ -1,0 +1,131 @@
+:root {
+  --cream: #f7f3ea;
+  --cream-2: #efe9dc;
+  --card: #fffdf8;
+  --green-900: #12302620;
+  --green-800: #143529;
+  --green-700: #1c4a39;
+  --green-600: #2a6450;
+  --brass: #b8922f;
+  --ink: #1b2420;
+  --muted: #6b7a72;
+  --line: #ddd5c4;
+  --warn-bg: #fdf4e3;
+  --warn-line: #e3c98a;
+  --stop-bg: #fbeeee;
+  --stop-line: #e0b0b0;
+  --radius: 10px;
+}
+
+* { box-sizing: border-box; }
+
+/* Thai has no inter-word spaces, so a long Thai run will not break on its own and
+   pushes the layout wider than the viewport. Allow a break anywhere as the default. */
+body, .msg, .notice, .panel, dl.summary dd, table.queue td { overflow-wrap: anywhere; }
+html, body { max-width: 100%; overflow-x: hidden; }
+
+body {
+  margin: 0;
+  background: var(--cream);
+  color: var(--ink);
+  font-family: "IBM Plex Sans Thai", "Noto Sans Thai", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+header.top {
+  background: var(--green-800);
+  color: var(--cream);
+  padding: 14px 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  align-items: center;
+  justify-content: space-between;
+}
+.brand { display: flex; align-items: baseline; gap: 10px; }
+.brand b { font-size: 1.05rem; letter-spacing: .02em; white-space: nowrap; overflow-wrap: normal; }
+.brand span { color: #cfe0d6; font-size: .82rem; }
+
+.badges { display: flex; gap: 8px; flex-wrap: wrap; align-items: center; }
+.badge {
+  font-size: .74rem; padding: 3px 9px; border-radius: 999px;
+  border: 1px solid rgba(255,255,255,.35); color: var(--cream);
+  max-width: 100%;
+}
+@media (max-width: 560px) {
+  header.top { gap: 6px; }
+  .badges { width: 100%; }
+  .badge { font-size: .7rem; }
+}
+/* A <button> keeps the UA's own background, which left cream text on white. */
+button.badge { background: transparent; cursor: pointer; font: inherit; font-size: .74rem; }
+button.badge:hover { background: rgba(255,255,255,.12); }
+
+.badge.mode-demo { background: #6b5a1f; border-color: var(--brass); }
+.badge.mode-model { background: var(--green-600); border-color: #7fbfa3; }
+
+main { max-width: 1120px; margin: 0 auto; padding: 16px; }
+
+.tabs { display: flex; gap: 6px; margin-bottom: 14px; flex-wrap: wrap; }
+.tabs button {
+  border: 1px solid var(--line); background: var(--cream-2); color: var(--ink);
+  padding: 8px 14px; border-radius: 999px; cursor: pointer; font-size: .9rem; font-family: inherit;
+}
+.tabs button[aria-selected="true"] { background: var(--green-700); color: var(--cream); border-color: var(--green-700); }
+.tabs button:focus-visible, button:focus-visible, input:focus-visible, select:focus-visible, textarea:focus-visible {
+  outline: 3px solid var(--brass); outline-offset: 2px;
+}
+
+.layout { display: grid; grid-template-columns: 1fr; gap: 16px; }
+@media (min-width: 900px) { .layout { grid-template-columns: 1.3fr 1fr; align-items: start; } }
+
+.panel { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: 14px; }
+.panel h2 { margin: 0 0 4px; font-size: 1rem; }
+.panel .sub { margin: 0 0 12px; color: var(--muted); font-size: .84rem; }
+
+#chatLog { height: 46vh; min-height: 280px; overflow-y: auto; display: flex; flex-direction: column; gap: 10px; padding-right: 4px; }
+.msg { max-width: 88%; padding: 9px 12px; border-radius: var(--radius); white-space: pre-wrap; font-size: .94rem; }
+.msg.lili { background: var(--cream-2); border: 1px solid var(--line); align-self: flex-start; }
+.msg.user { background: var(--green-700); color: var(--cream); align-self: flex-end; }
+.msg .who { display: block; font-size: .7rem; opacity: .75; margin-bottom: 2px; }
+
+form.composer { display: flex; gap: 8px; margin-top: 12px; }
+form.composer input { flex: 1; min-width: 0; padding: 11px; border: 1px solid var(--line); border-radius: var(--radius); font: inherit; background: #fff; }
+
+button.primary {
+  background: var(--green-700); color: var(--cream); border: 1px solid var(--green-700);
+  padding: 11px 16px; border-radius: var(--radius); cursor: pointer; font: inherit; font-weight: 600;
+}
+button.primary:disabled { opacity: .45; cursor: not-allowed; }
+button.ghost { background: transparent; border: 1px solid var(--line); color: var(--ink); padding: 8px 12px; border-radius: var(--radius); cursor: pointer; font: inherit; }
+
+.state { font-size: .78rem; padding: 3px 9px; border-radius: 999px; border: 1px solid var(--line); background: var(--cream-2); }
+.state.INCOMPLETE { background: var(--warn-bg); border-color: var(--warn-line); }
+.state.NEEDS_TEAM_HELP { background: var(--warn-bg); border-color: var(--brass); }
+.state.READY_FOR_TEAM_REVIEW { background: #eaf3ee; border-color: #8fbca6; }
+
+dl.summary { display: grid; grid-template-columns: auto 1fr; gap: 6px 12px; margin: 10px 0; font-size: .9rem; }
+dl.summary dt { color: var(--muted); }
+dl.summary dd { margin: 0; }
+dl.summary dd input, dl.summary dd select { width: 100%; padding: 5px 7px; border: 1px solid var(--line); border-radius: 6px; font: inherit; background: #fff; }
+.inferred { font-size: .72rem; color: var(--brass); margin-left: 6px; }
+
+.notice { border-radius: var(--radius); padding: 10px 12px; font-size: .86rem; margin: 10px 0; }
+.notice.warn { background: var(--warn-bg); border: 1px solid var(--warn-line); }
+.notice.stop { background: var(--stop-bg); border: 1px solid var(--stop-line); }
+.notice.info { background: var(--cream-2); border: 1px solid var(--line); }
+.notice ul { margin: 6px 0 0; padding-left: 18px; }
+
+label.check { display: flex; gap: 9px; align-items: flex-start; font-size: .87rem; margin: 10px 0; }
+label.check input { margin-top: 4px; width: 18px; height: 18px; flex-shrink: 0; }
+
+.panel { overflow-x: auto; }
+table.queue { width: 100%; border-collapse: collapse; font-size: .86rem; }
+table.queue th, table.queue td { text-align: left; padding: 8px 6px; border-bottom: 1px solid var(--line); vertical-align: top; }
+table.queue th { color: var(--muted); font-weight: 600; }
+code.ref { font-family: ui-monospace, SFMono-Regular, Menlo, monospace; font-size: .82rem; }
+
+pre.draft { background: var(--cream-2); border: 1px solid var(--line); border-radius: var(--radius); padding: 12px; white-space: pre-wrap; font-size: .84rem; font-family: inherit; }
+footer.foot { color: var(--muted); font-size: .78rem; padding: 18px 16px 40px; max-width: 1120px; margin: 0 auto; }
+.hidden { display: none !important; }

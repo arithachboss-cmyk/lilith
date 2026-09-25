@@ -1,0 +1,81 @@
+<!doctype html>
+<html lang="th">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Lili — The Middle Property</title>
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="top">
+      <div class="brand">
+        <b>Lili</b>
+        <span>The Middle Property · <span data-i18n="tagline">ผู้ช่วย AI สำหรับผู้เช่าและโคเอเจนต์</span></span>
+      </div>
+      <div class="badges">
+        <span class="badge" id="modeBadge">…</span>
+        <span class="badge" id="disclosureBadge">…</span>
+        <button class="badge" id="langToggle" type="button">EN</button>
+      </div>
+    </header>
+
+    <main>
+      <div class="tabs" role="tablist">
+        <button role="tab" id="tab-tenant" aria-selected="true" data-i18n="tabTenant">ผู้เช่า</button>
+        <button role="tab" id="tab-coagent" aria-selected="false" data-i18n="tabCoagent">โคเอเจนต์</button>
+        <button role="tab" id="tab-team" aria-selected="false" data-i18n="tabTeam">คิวทีม</button>
+      </div>
+
+      <div class="notice info" id="demoNotice"></div>
+
+      <section id="view-chat" class="layout">
+        <div class="panel">
+          <h2 data-i18n="chatTitle">คุยกับ Lili</h2>
+          <p class="sub" id="chatSub"></p>
+          <div id="chatLog" role="log" aria-live="polite"></div>
+          <form class="composer" id="composer">
+            <input id="chatInput" autocomplete="off" />
+            <button class="primary" type="submit" data-i18n="send">ส่ง</button>
+          </form>
+        </div>
+
+        <div class="panel">
+          <h2 data-i18n="summaryTitle">ใบสรุปความต้องการ</h2>
+          <p class="sub"><span data-i18n="statusLabel">สถานะ</span>: <span class="state" id="stateChip">—</span></p>
+          <div id="consentBlock" class="hidden"></div>
+          <dl class="summary" id="summaryList"></dl>
+          <div id="gapBlock"></div>
+          <label class="check" id="reviewBlock">
+            <input type="checkbox" id="reviewedBox" />
+            <span data-i18n="reviewLabel">ยืนยันว่าข้อมูลถูกต้องแล้ว</span>
+          </label>
+          <button class="primary" id="submitBtn" disabled data-i18n="submit">ส่งให้ทีม</button>
+          <div id="submitResult"></div>
+        </div>
+      </section>
+
+      <section id="view-team" class="panel hidden">
+        <h2 data-i18n="queueTitle">คิวทีมประสานงาน</h2>
+        <p class="sub" data-i18n="queueSub">ทุกแถวคือ “คำขอ” ที่รอทีมตรวจ ไม่ใช่การนัดหมายที่ยืนยันแล้ว</p>
+        <table class="queue">
+          <thead>
+            <tr>
+              <th data-i18n="thRef">อ้างอิง</th>
+              <th data-i18n="thFlow">ที่มา</th>
+              <th data-i18n="thSummary">สรุป</th>
+              <th data-i18n="thStatus">สถานะ</th>
+              <th data-i18n="thAction">การทำงาน</th>
+            </tr>
+          </thead>
+          <tbody id="queueBody"></tbody>
+        </table>
+        <div id="followupBlock"></div>
+      </section>
+    </main>
+
+    <footer class="foot" id="footNote"></footer>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>

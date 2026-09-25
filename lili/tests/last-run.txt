@@ -1,0 +1,85 @@
+
+1. Mode reporting is honest
+  ok   reports demo mode when no API key is configured
+  ok   states plainly that Lili is an AI
+  ok   names what is not live
+
+2. Tenant journey
+  ok   conversation opens with an AI disclosure
+  ok   extracts area, type, bedrooms and budget from one sentence
+  ok   infers the city and marks it as inferred
+  ok   asks for something still missing, not something already answered
+  ok   state is INCOMPLETE until the user confirms the summary
+  ok   submission is refused before review
+  ok   state becomes READY_FOR_TEAM_REVIEW after confirmation
+
+3. Editing an answered requirement
+  ok   applies the edit
+  ok   an edit withdraws the earlier confirmation
+  ok   manual edit applies a valid field
+  ok   a field outside the schema is dropped, not stored
+  ok   out-of-range value is rejected
+  ok   a rejected edit leaves the previous value intact
+
+4. Questions inside and outside the knowledge base
+  ok   answers the success-fee question without quoting a rate
+  ok   refuses to invent availability
+  ok   says it does not know rather than improvising
+  ok   an unanswered question is recorded for the team
+  ok   an unanswered question routes the record to NEEDS_TEAM_HELP
+
+5. Submission and duplicate protection
+  ok   submission is created
+  ok   it is a REQUEST, never a confirmed appointment
+  ok   an identical resubmission is suppressed
+  ok   the duplicate returns the original reference
+  ok   only one record exists
+
+6. Co-agent journey
+  ok   explains the co-agent flow up front
+  ok   does not quote a success-fee rate in the greeting
+  ok   captures the agent profile
+  ok   asks for the client-permission confirmation before client details
+  ok   an email address does not flip the conversation language
+  ok   missing consent is an explicit blocker
+  ok   agent data and client data are kept in separate objects
+
+7. Account status gates submission
+  ok   pending co-agent may submit
+  ok   suspended co-agent is refused server-side
+  ok   rejected co-agent is refused server-side
+
+8. Data separation and permissions
+  ok   a co-agent sees only their own records
+  ok   a co-agent does not see the tenant's record
+  ok   reading another user's conversation is forbidden
+  ok   the team sees every record
+  ok   a non-team caller cannot confirm a request
+  ok   only the team can move a request to CONFIRMED
+  ok   the status change is recorded in history
+  ok   an unauthenticated call is rejected
+  ok   the event log is team-only
+
+9. Follow-up drafting
+  ok   drafts in Thai and English
+  ok   the draft is marked manual-only
+  ok   the draft claims no confirmed appointment
+  ok   the draft quotes no price or availability
+
+10. Model failure does not lose data
+  ok   mode switches to `model` once a key is configured
+  ok   the turn still succeeds when the model call fails
+  ok   the failure is reported, not hidden
+  ok   rule extraction still captured the new values
+  ok   previously captured data survives the failure
+  ok   the failure is in the event log
+  ok   no secret is written to the event log
+
+11. Input hygiene
+  ok   an oversized body is rejected with 413, not a dropped connection
+  ok   malformed JSON is rejected cleanly
+  ok   instruction-shaped user text cannot change role or fees
+
+====================================================
+passed 59   failed 0
+all scenario checks passed
