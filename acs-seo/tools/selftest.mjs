@@ -111,11 +111,52 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
     Date.parse(c1.interim_checkpoint.date) < Date.parse(c1.review_date));
   check('C-1 ยังไม่ถูกลงมือทำ และมี runbook กำกับ',
     c1.executed === false && typeof c1.execution_runbook === 'string');
-  check('cluster ที่เหลือยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง',
-    clusters.clusters.filter((c) => !c.canonical_owner).length === clusters.clusters.length - 1);
+  // หน้าหลักที่ตัดสินแล้วถูกระบุเป็นรายชื่อโดยเจตนา ไม่ใช่นับจาก totals ในไฟล์เดียวกัน
+  // เพราะการนับจากข้อมูลที่กำลังตรวจ ทำให้เทสต์รับรองตัวเองและมองไม่เห็นความเปลี่ยนแปลง
+  const OWNED = ['C-1', 'C-3', 'C-5', 'C-6', 'C-7', 'C-9'];
+  check('เฉพาะ cluster ที่ตัดสินแล้วเท่านั้นที่มีหน้าหลัก',
+    clusters.clusters.filter((c) => c.canonical_owner).map((c) => c.cluster_id).join(',') === OWNED.join(','));
+  check('cluster ที่ยังไม่ตัดสินยังกั้นอยู่ ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง',
+    clusters.clusters.filter((c) => !c.canonical_owner).map((c) => c.cluster_id).join(',') === 'C-2,C-4,C-8,C-10');
   const c9 = clusters.clusters.find((c) => c.cluster_id === 'C-9');
-  check('C-9 หมวดหน้าองค์กรถูกเพิ่มแล้ว และยังกั้นอยู่',
-    c9?.competing_urls.includes('/why-acs') && c9.canonical_owner === null);
+  check('C-9 หมวดหน้าองค์กรมีหน้าหลักแล้ว คือ /why-acs',
+    c9?.competing_urls.includes('/why-acs') && c9.canonical_owner?.en === '/why-acs');
+  check('ทุก cluster ที่มีหน้าหลัก บันทึกว่าใครตัดสินและเมื่อไร',
+    clusters.clusters.filter((c) => c.canonical_owner).every((c) => c.decided_by && c.decided_on && c.decision_id));
+  check('หน้าหลักทุกอันเป็น URL ที่อยู่ในกลุ่มนั้นจริง',
+    clusters.clusters.filter((c) => c.canonical_owner).every((c) =>
+      Object.values(c.canonical_owner).every((u) => c.competing_urls.includes(u))));
+  // C-7: คำตัดสิน Queue #17 ห้ามจัดอันดับยี่ห้อ หน้าหลักของกลุ่มจึงต้องไม่ใช่หน้าที่ถือ flag RANKING
+  const RANKING_PAGES = ['/barcode-scanner-comparison', '/knowledge/product-comparisons'];
+  const c7 = clusters.clusters.find((c) => c.cluster_id === 'C-7');
+  check('หน้าหลักของ C-7 ไม่ใช่หน้าที่ถือ flag RANKING',
+    Object.values(c7.canonical_owner).every((u) => !RANKING_PAGES.includes(u)));
+  // URL เดียวอยู่ได้กลุ่มเดียว มิฉะนั้นผลของด่านขึ้นกับว่าอ่านกลุ่มไหนก่อน
+  const allClusterUrls = clusters.clusters.flatMap((c) => c.competing_urls);
+  check('ไม่มี URL ใดอยู่มากกว่าหนึ่ง cluster',
+    new Set(allClusterUrls).size === allClusterUrls.length,
+    allClusterUrls.filter((u, i) => allClusterUrls.indexOf(u) !== i).join(','));
+  check('totals ตรงกับข้อมูลจริงในไฟล์',
+    clusters.totals.clusters === clusters.clusters.length &&
+    clusters.totals.urls_in_clusters === allClusterUrls.length &&
+    clusters.totals.unique_urls_in_clusters === new Set(allClusterUrls).size &&
+    clusters.totals.clusters_with_canonical_owner === OWNED.length);
+  // page_inventory เก็บ URL เต็ม แต่ cluster เก็บ path — ต้องเทียบบนรูปเดียวกัน
+  const toPath = (u) => u.replace(/^https?:\/\/[^/]+/, '');
+  const clusterPaths = new Set(allClusterUrls.map(toPath));
+  const cannibalPaths = inv.pages
+    .filter((p) => p.risk_flags.includes('CANNIBAL'))
+    .map((p) => toPath(p.url));
+  const unseen = cannibalPaths.filter((u) => !clusterPaths.has(u));
+  // สามหน้า /knowledge/* ที่เคยอยู่นอกทุก cluster ถูกเก็บเข้า C-10 แล้ว
+  check('สามหน้า knowledge ที่เคยอยู่นอกทุก cluster ถูกด่านมองเห็นแล้ว',
+    ['/knowledge/barcode-equipment', '/knowledge/industry-applications', '/knowledge/regional-solutions']
+      .every((u) => clusterPaths.has(u)));
+  // หลังตั้ง C-10 ไม่มีหน้า CANNIBAL หน้าใดอยู่นอก cluster อีก
+  // นี่คือคุณสมบัติที่ต้องคงไว้ ไม่ใช่ตัวเลขที่บังเอิญเป็นศูนย์วันนี้:
+  // หน้าที่ถือ flag นี้แต่ไม่อยู่ในกลุ่มใด คือหน้าที่ด่านมองไม่เห็นและปล่อยผ่านเงียบ ๆ
+  check('ไม่มีหน้า CANNIBAL หน้าใดอยู่นอกทุก cluster — ด่านมองเห็นครบทุกหน้า',
+    unseen.length === 0, `มองไม่เห็น ${unseen.length} หน้า — ${unseen.join(',')}`);
   check('page_type ของทุกหน้าอยู่ใน enum',
     inv.pages.every((p) => inv.page_type_enum.includes(p.page_type)));
   check('risk flag ของทุกหน้าอยู่ใน enum',
@@ -166,29 +207,52 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
    * ทดสอบด้วยการคัดลอก data/ แล้วสลับให้กลุ่มที่ "มีหน้าหลัก" ไปอยู่ท้ายไฟล์ ซึ่งเป็นลำดับ
    * ที่ทำให้บั๊กเดิมปล่อยผ่าน · เนื้อหาข้อมูลไม่เปลี่ยน เปลี่ยนแค่ลำดับ ผลจึงต้องเหมือนเดิม
    */
-  const multi = find('__fixture-multi-cluster__');
-  check('URL ที่อยู่สองกลุ่มและมีกลุ่มหนึ่งยังไม่มีหน้าหลัก ถูกกั้น', multi.status === 'FAIL',
-    multi.findings.map((f) => f.code).join(','));
-  check('และข้อความบอกว่าอยู่กี่กลุ่ม ไม่ได้รายงานแค่กลุ่มเดียว',
-    multi.findings.some((f) => f.code.startsWith('CANNIBAL') && f.detail.includes('C-1') && f.detail.includes('C-6')),
-    multi.findings.filter((f) => f.code.startsWith('CANNIBAL')).map((f) => f.detail).join(' | '));
-
+  /*
+   * URL ที่อยู่หลายกลุ่มพร้อมกันต้องถูกกั้นเสมอ ไม่ว่าไฟล์จะเรียงกลุ่มอย่างไร
+   *
+   * เดิม validator เก็บ path -> cluster เป็นค่าเดียว กลุ่มที่เขียนทีหลังจึงทับกลุ่มก่อนหน้า
+   * เทสต์นี้สร้างข้อมูลของตัวเอง ไม่พึ่งพาว่าข้อมูลจริงยังมี URL ที่อยู่สองกลุ่มอยู่หรือไม่
+   * เพราะความบกพร่องในข้อมูลจริงถูกแก้ไปแล้ว (D-14) และเทสต์ที่พึ่งพาความบกพร่องจะตายไปพร้อมกับมัน
+   */
   {
-    const shuffledDir = join(tmp, 'data-shuffled');
-    mkdirSync(shuffledDir, { recursive: true });
-    for (const f of readdirSync(join(ROOT, 'data'))) {
-      copyFileSync(join(ROOT, 'data', f), join(shuffledDir, f));
-    }
-    const cPath = join(shuffledDir, 'cannibalization_clusters.json');
-    const doc = JSON.parse(readFileSync(cPath, 'utf8'));
-    const owned = doc.clusters.filter((c) => c.canonical_owner);
-    doc.clusters = [...doc.clusters.filter((c) => !c.canonical_owner), ...owned];
-    writeFileSync(cPath, JSON.stringify(doc, null, 2));
-    check('การทดสอบนี้มีความหมาย — มีกลุ่มที่มีหน้าหลักให้ย้ายไปท้ายไฟล์จริง', owned.length > 0);
+    const mkData = (shuffle) => {
+      const dir = join(tmp, shuffle ? 'data-multi-shuffled' : 'data-multi');
+      mkdirSync(dir, { recursive: true });
+      for (const f of readdirSync(join(ROOT, 'data'))) {
+        copyFileSync(join(ROOT, 'data', f), join(dir, f));
+      }
+      const cPath = join(dir, 'cannibalization_clusters.json');
+      const doc = JSON.parse(readFileSync(cPath, 'utf8'));
+      // ใส่ /retail-barcode-scanner กลับเข้า C-6 (ยังไม่มีหน้าหลักในสถานการณ์นี้)
+      // ให้ URL เดียวอยู่ทั้ง C-1 ที่มีหน้าหลัก และ C-6 ที่ไม่มี
+      const c6 = doc.clusters.find((c) => c.cluster_id === 'C-6');
+      c6.canonical_owner = null;
+      if (!c6.competing_urls.includes('/retail-barcode-scanner')) {
+        c6.competing_urls.push('/retail-barcode-scanner');
+        c6.count = c6.competing_urls.length;
+      }
+      if (shuffle) {
+        const owned = doc.clusters.filter((c) => c.canonical_owner);
+        doc.clusters = [...doc.clusters.filter((c) => !c.canonical_owner), ...owned];
+      }
+      writeFileSync(cPath, JSON.stringify(doc, null, 2));
+      return dir;
+    };
 
-    const shuffled = run(VALIDATE, ['--fixtures', '--json',
-      `--data-dir=${shuffledDir}`, `--cache=${join(tmp, 'c-shuffled.json')}`]);
-    const multiShuffled = shuffled.results.find((r) => r.package.includes('__fixture-multi-cluster__'));
+    const runOn = (dir, tag) => {
+      const out = run(VALIDATE, ['--fixtures', '--json',
+        `--data-dir=${dir}`, `--cache=${join(tmp, `c-${tag}.json`)}`]);
+      return out.results.find((r) => r.package.includes('__fixture-multi-cluster__'));
+    };
+
+    const multi = runOn(mkData(false), 'multi');
+    check('URL ที่อยู่สองกลุ่มและมีกลุ่มหนึ่งยังไม่มีหน้าหลัก ถูกกั้น', multi.status === 'FAIL',
+      multi.findings.map((f) => f.code).join(','));
+    check('และข้อความบอกว่าอยู่กี่กลุ่ม ไม่ได้รายงานแค่กลุ่มเดียว',
+      multi.findings.some((f) => f.code.startsWith('CANNIBAL') && f.detail.includes('C-1') && f.detail.includes('C-6')),
+      multi.findings.filter((f) => f.code.startsWith('CANNIBAL')).map((f) => f.detail).join(' | '));
+
+    const multiShuffled = runOn(mkData(true), 'multi-shuffled');
     check('สลับลำดับกลุ่มในไฟล์แล้วผลของ gate ไม่เปลี่ยน', multiShuffled.status === 'FAIL',
       `ลำดับเปลี่ยนแล้วได้ ${multiShuffled.status} — ผลของ gate ห้ามขึ้นกับลำดับบรรทัดใน JSON`);
   }

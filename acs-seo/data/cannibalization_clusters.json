@@ -168,10 +168,14 @@
         "/knowledge/rfid-technology"
       ],
       "count": 7,
-      "canonical_owner": null,
-      "decision": null,
-      "decided_by": null,
-      "decided_on": null
+      "canonical_owner": {
+        "en": "/rfid-systems"
+      },
+      "decision": "ENRICH_CANONICAL",
+      "decided_by": "Claude · delegated by ACS Owner 2026-09-25",
+      "decided_on": "2026-09-25",
+      "decision_id": "D-09",
+      "decision_rationale": "หน้าเชิงพาณิชย์กลางของหัวข้อ RFID · /knowledge/rfid-technology เป็นคู่เชิงความรู้ ไม่ใช่หน้าหลัก · /brady/* เป็นโฟลเดอร์ผู้ผลิต ห้ามเป็นหน้าหลักของหัวข้อทั่วไป"
     },
     {
       "cluster_id": "C-4",
@@ -201,25 +205,32 @@
         "/roi-calculator/warehouse"
       ],
       "count": 6,
-      "canonical_owner": null,
-      "decision": null,
-      "decided_by": null,
-      "decided_on": null
+      "canonical_owner": {
+        "en": "/warehouse-data-capture"
+      },
+      "decision": "ENRICH_CANONICAL",
+      "decided_by": "Claude · delegated by ACS Owner 2026-09-25",
+      "decided_on": "2026-09-25",
+      "decision_id": "D-10",
+      "decision_rationale": "ระบุสิ่งที่ ACS ทำจริง (data capture ในคลัง) ตรงกับหัวข้อ Warehouse Automation ที่ Owner กำหนด · /logistics เป็นหน้าหมวดคำเดียวกว้างเกินไป · /case-study/* กับ /roi-calculator/* เป็นคนละ intent ไม่ได้แย่งกันจริง"
     },
     {
       "cluster_id": "C-6",
       "label": "Retail",
       "competing_urls": [
         "/retail",
-        "/retail-barcode-scanner",
         "/case-study/retail",
         "/roi-calculator/retail"
       ],
-      "count": 4,
-      "canonical_owner": null,
-      "decision": null,
-      "decided_by": null,
-      "decided_on": null
+      "count": 3,
+      "canonical_owner": {
+        "en": "/retail"
+      },
+      "decision": "ENRICH_CANONICAL",
+      "decided_by": "Claude · delegated by ACS Owner 2026-09-25",
+      "decided_on": "2026-09-25",
+      "decision_id": "D-11",
+      "decision_rationale": "หน้าหมวดค้าปลีก · /retail-barcode-scanner ถูกย้ายออกจากกลุ่มนี้ (ดู D-14)"
     },
     {
       "cluster_id": "C-7",
@@ -232,10 +243,14 @@
         "/select-solution"
       ],
       "count": 5,
-      "canonical_owner": null,
-      "decision": null,
-      "decided_by": null,
-      "decided_on": null
+      "canonical_owner": {
+        "en": "/knowledge/how-to-choose-barcode-scanner"
+      },
+      "decision": "ENRICH_CANONICAL",
+      "decided_by": "Claude · delegated by ACS Owner 2026-09-25",
+      "decided_on": "2026-09-25",
+      "decision_id": "D-12",
+      "decision_rationale": "หน้าเกณฑ์การตัดสินใจ ไม่ใช่หน้าจัดอันดับ · /barcode-scanner-comparison และ /knowledge/product-comparisons ถือ flag RANKING ทั้งคู่ การตั้งหน้าใดหน้าหนึ่งเป็นหน้าหลักเท่ากับทำให้การจัดอันดับยี่ห้อเป็นศูนย์กลางของกลุ่ม ซึ่งคำตัดสิน Queue #17 ห้ามไว้"
     },
     {
       "cluster_id": "C-8",
@@ -260,19 +275,40 @@
         "/leadership"
       ],
       "count": 4,
-      "canonical_owner": null,
-      "decision": null,
-      "decided_by": null,
-      "decided_on": null,
+      "canonical_owner": {
+        "en": "/why-acs"
+      },
+      "decision": "ENRICH_CANONICAL",
+      "decided_by": "Claude · delegated by ACS Owner 2026-09-25",
+      "decided_on": "2026-09-25",
       "found_by": "พบตอนเตรียมแพ็กเกจหน้าแนะนำ ACS — รายการ cluster เดิมไม่มีหมวดหน้าองค์กรเลย การซ้อนทับของหน้ากลุ่มนี้จึงมองไม่เห็น และ gate ตอบ proceed ทั้งที่หน้าองค์กรมีอยู่แล้วสี่หน้า",
       "provenance": "RECOMMENDATION — อนุมานจาก page_subtype = Company ใน page inventory ยังไม่ได้รับการยืนยันจาก Owner",
-      "note": "สามในสี่หน้าถือ flag OWNER อยู่แล้ว การเพิ่มหน้าแนะนำองค์กรใหม่จะทำซ้ำรูปแบบเดียวกับที่ C-1 เพิ่งตัดสินให้แก้ จึงตั้ง canonical_owner เป็น null ไว้ก่อน ซึ่งทำให้ gate กั้นไว้จนกว่า Owner จะระบุหน้าหลัก"
+      "note": "สามในสี่หน้าถือ flag OWNER อยู่แล้ว การเพิ่มหน้าแนะนำองค์กรใหม่จะทำซ้ำรูปแบบเดียวกับที่ C-1 เพิ่งตัดสินให้แก้ จึงตั้ง canonical_owner เป็น null ไว้ก่อน ซึ่งทำให้ gate กั้นไว้จนกว่า Owner จะระบุหน้าหลัก",
+      "decision_id": "D-13",
+      "decision_rationale": "หน้าแม่ของหมวดองค์กร · /why-acs/30-years ยังต้องรอเอกสารปีก่อตั้ง จึงเป็นหน้าลูกไม่ใช่หน้าหลัก"
+    },
+    {
+      "cluster_id": "C-10",
+      "label": "Knowledge hub (generic, un-scoped)",
+      "competing_urls": [
+        "/knowledge/barcode-equipment",
+        "/knowledge/industry-applications",
+        "/knowledge/regional-solutions"
+      ],
+      "count": 3,
+      "canonical_owner": null,
+      "decision": "HOLD",
+      "decision_id": "D-15",
+      "decided_by": "Claude · delegated by ACS Owner 2026-09-25",
+      "decided_on": "2026-09-25",
+      "decision_rationale": "สามหน้านี้ถือ flag CANNIBAL แต่ไม่เคยอยู่ใน cluster ใด ด่านจึงมองไม่เห็นเลย การตั้งกลุ่มนี้ทำให้ด่านเห็น ส่วนการจัด intent ว่าแต่ละหน้าควรไปรวมกับกลุ่มใด ต้องอ่านเนื้อหาหน้าจริง จึงคง canonical_owner เป็น null และ decision เป็น HOLD ไว้ — ทำให้เห็นคือหน้าที่ของระบบ ตัดสิน intent ต้องมีหลักฐาน"
     }
   ],
   "totals": {
-    "clusters": 9,
-    "urls_in_clusters": 49,
-    "clusters_with_canonical_owner": 1
+    "clusters": 10,
+    "urls_in_clusters": 51,
+    "unique_urls_in_clusters": 51,
+    "clusters_with_canonical_owner": 6
   },
   "notes": [
     "C-1 ตัดสินแล้วด้วย D-08 (option B) เหลืออีก 7 cluster ที่ยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง ไม่ใช่การตกหล่น",
@@ -280,6 +316,9 @@
     "/barcode-scanners กับ /เครื่องสแกนบาร์โค้ด คือ intent เดียวกันคนละภาษา และ sitemap ไม่มี hreflang ผูกไว้ สองภาษาที่ไม่มี hreflang จะถูกอ่านเป็นหน้าซ้ำ ไม่ใช่หน้าคู่กัน",
     "C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว",
     "ยังไม่มีข้อมูลอันดับหรือ traffic ของหน้าใดเลย (Ahrefs และ OpenRush ตอบว่าแผนไม่พอ) ข้อเสนอทั้งหมดจึงอยู่บน intent ที่ประกาศไว้ ไม่ใช่ผลที่วัดได้",
-    "C-9 ถูกเพิ่มเมื่อ 2026-09-23 หลังพบว่ารายการเดิมไม่มีหมวดหน้าองค์กร ทำให้การซ้อนทับของหน้ากลุ่มนั้นมองไม่เห็น"
+    "C-9 ถูกเพิ่มเมื่อ 2026-09-23 หลังพบว่ารายการเดิมไม่มีหมวดหน้าองค์กร ทำให้การซ้อนทับของหน้ากลุ่มนั้นมองไม่เห็น",
+    "2026-09-25 · Owner มอบให้ Claude ตัดสินแทน (ตามอัธยาศัย) จึงตั้งหน้าหลักของ C-3/C-5/C-6/C-7/C-9 · decided_by บันทึกเป็น Claude ไม่ใช่ ACS Owner เพื่อให้ร่องรอยการตัดสินตรงกับความจริง",
+    "2026-09-25 · /retail-barcode-scanner ถูกนำออกจาก C-6 และคงไว้ใน C-1 เท่านั้น (D-14) เหตุผล: หน้าตระกูล X-barcode-scanner ทั้งเจ็ดอยู่ใน C-1 อยู่แล้ว รวมถึง /warehouse-barcode-scanner ที่ไม่ได้ถูกใส่ใน C-5 การคง /retail-barcode-scanner ไว้สองกลุ่มจึงเป็นความไม่สม่ำเสมอ ไม่ใช่เจตนา · หลังแก้ urls_in_clusters เท่ากับจำนวน URL ไม่ซ้ำ",
+    "2026-09-25 · C-10 ถูกตั้งขึ้นเพื่อให้ด่านมองเห็นสามหน้าที่ถือ flag CANNIBAL แต่ไม่เคยอยู่ใน cluster ใด · ยังไม่มีหน้าหลักโดยเจตนา"
   ]
 }
