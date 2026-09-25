@@ -1,0 +1,974 @@
+{
+  "version": "4.0.0",
+  "as_of": "2026-09-25",
+  "total_packages_declared_by_owner": 19,
+  "global_rule": "ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic",
+  "board_status_enum": [
+    "PASS",
+    "REVISE",
+    "HOLD",
+    "BLOCKED"
+  ],
+  "open_question": "Owner แจ้ง 19 packages แต่หมายเลข queue ที่อ้างถึงสูงสุดคือ #21 — ต้องยืนยันว่า queue ID กับจำนวนแพ็กเกจ map กันอย่างไร ระหว่างที่ยังไม่ยืนยัน 13 รายการถูกตั้งเป็น PKG-UNMAPPED-XX · ตอนนี้มี page inventory จริง 82 หน้าแล้ว การจับคู่ queue กับ target URL จึงทำได้ทันทีที่ได้ keyword queue ฉบับเต็ม",
+  "packages": [
+    {
+      "package_id": "PKG-Q03",
+      "queue_id": 3,
+      "title": "ซื้อเครื่องสแกนบาร์โค้ดในไทย: สิ่งที่ต้องยืนยันก่อนสั่ง",
+      "target_url": "https://www.asiancoding.com/barcode-scanner-thailand",
+      "page_type": "PRODUCT",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "ดราฟต์ตาม runbook §3 และ §5 ส่งแล้ว — title/H1 เลิกอ้าง head term เปล่า ๆ และเนื้อหาเขียนแบบกระบวนการ mechanical QA ผ่าน (PASS, tier T1_CLAIM) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL และหัวข้อที่ทำให้หน้านี้ต่างจริง (สต็อก กำหนดส่ง บริการพื้นที่ ราคา รุ่นสินค้า) ยังรอข้อมูล ACS · ตรวจว่าหน้าต่างจากหน้าหลักจริงไหม 2026-10-23",
+      "owner_decision": "D-08 (ทับ D-07) — option B ตัดสินโดย ACS Owner 2026-09-23 ทันกำหนด 2026-09-24",
+      "qa_tier": "T1_CLAIM",
+      "flagged_claims": [
+        "CLM-O-001",
+        "CLM-O-002",
+        "CLM-O-007",
+        "CLM-O-009",
+        "CLM-O-010",
+        "CLM-E-011"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-002",
+        "SRC-ACS-004",
+        "SRC-VEN-002"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-Q03",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าที่ถือ flag CANNIBAL ใน cluster C-1",
+        "urls": [
+          "https://www.asiancoding.com/barcode-scanners",
+          "https://www.asiancoding.com/barcode-scanner-thailand",
+          "https://www.asiancoding.com/เครื่องสแกนบาร์โค้ด",
+          "https://www.asiancoding.com/industrial-barcode-scanner",
+          "https://www.asiancoding.com/wireless-barcode-scanner",
+          "https://www.asiancoding.com/2d-barcode-scanner",
+          "https://www.asiancoding.com/long-range-barcode-scanner",
+          "https://www.asiancoding.com/warehouse-barcode-scanner",
+          "https://www.asiancoding.com/retail-barcode-scanner",
+          "https://www.asiancoding.com/honeywell-barcode-scanner"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-1",
+      "revision_spec": "revision-specs/queue-3-execution-runbook.md",
+      "unblocked_now": [
+        "เปลี่ยน title และ H1 ให้เลิกอ้าง head term เปล่า ๆ — ไม่ต้องใช้ source ใหม่และแก้การชนระดับ title ได้ด้วยตัวเอง",
+        "เขียนเนื้อหาแบบกระบวนการ ไม่ใช่สถานะ — ดู revision-specs/queue-3-execution-runbook.md"
+      ],
+      "interim_checkpoint": "2026-09-26",
+      "review_date": "2026-10-23",
+      "qa_tier_note": "ลดจาก T2_FULL ที่ประเมินไว้ล่วงหน้า เพราะดราฟต์ที่ส่งจริงไม่มีตัวเลข ราคา สเปก หรือ claim ลูกค้าเลย validate.mjs คำนวณได้ T1_CLAIM และไม่มี WARN ไม่ตรงกัน ถ้าเนื้อหารอบหน้าใส่ตัวเลขกลับเข้ามา tier จะเด้งกลับเป็น T2_FULL เอง",
+      "checkpoint_2026_09_26": {
+        "question": "เปลี่ยน title/H1 ให้เลิกอ้าง head term เปล่า ๆ และเขียนเนื้อหาแบบกระบวนการแล้วหรือยัง",
+        "answer": "ทำแล้วทั้งสองอย่าง เมื่อ 2026-09-24 ก่อนกำหนดสองวัน",
+        "evidence": "content-packages/PKG-Q03/ — meta.json (title/H1) และ article.md หัวข้อ 4 (การจัดหาในไทย เขียนเป็นกระบวนการ ไม่ใช่สถานะ)"
+      }
+    },
+    {
+      "package_id": "PKG-Q04",
+      "queue_id": 4,
+      "title": "เลือกวัสดุฉลากบาร์โค้ด: กลไกที่ตัดสินว่าฉลากอยู่หรือหลุด",
+      "target_url": "https://www.asiancoding.com/knowledge/barcode-label-materials",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "ดราฟต์ Form A ส่งแล้ว ทุกประโยคเป็นกลไก ไม่มีค่าความทนทานของวัสดุใดเลย · spec §7 ระบุเองว่า ถ้าไม่มี SRC-VEN-001 คู่กับ SRC-ACS-001 ทุกประโยคต้องเป็น Form A หรือถูกลบ และนั่นคือผลลัพธ์ที่เผยแพร่ได้ ไม่ใช่เหตุผลที่ต้องรอ · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag SPEC ของหน้าปลายทาง ไม่ใช่เพราะดราฟต์มีตัวเลข) ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และประโยค Form B ที่จะให้ค่าจริงยังรอดาต้าชีต",
+      "owner_decision": "REVISE wording ห้ามฟันธงถ้าไม่มี datasheet สินค้าจริง",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-E-001",
+        "CLM-E-004",
+        "CLM-E-005",
+        "CLM-O-002"
+      ],
+      "blocked_on_sources": [
+        "SRC-VEN-001",
+        "SRC-ACS-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-Q04",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าที่ถือ flag SPEC เรื่องวัสดุฉลาก",
+        "urls": [
+          "https://www.asiancoding.com/knowledge/barcode-label-materials",
+          "https://www.asiancoding.com/brady/labels",
+          "https://www.asiancoding.com/barcode-ribbons"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": "revision-specs/queue-4.md"
+    },
+    {
+      "package_id": "PKG-Q16",
+      "queue_id": 16,
+      "title": "ต้นทุนระบบบาร์โค้ด: สิ่งที่ทำให้ใบเสนอราคาต่างกัน",
+      "target_url": "https://www.asiancoding.com/barcode-scanner-price-guide",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "ดราฟต์ Form A ส่งแล้ว ไม่มีตัวเลขเงินแม้แต่ตัวเดียว · spec §7 ระบุเองว่าถ้าไม่มี SRC-ACS-002 ทุกประโยคต้องเป็น Form A หรือถูกลบ ซึ่งเผยแพร่ได้ทันที และ §3 ว่า Form A เป็นหน้าที่ดีกว่าในเชิงธุรกิจด้วย · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag PRICE ของหน้าปลายทาง ไม่ใช่เพราะดราฟต์มีราคา) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และคำถามของ Owner ว่าหน้านี้ควรมีตัวเลขหรือควรเป็นหน้าขอใบเสนอราคาถาวร ยังไม่ได้ตอบ",
+      "owner_decision": "ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-001",
+        "CLM-O-002",
+        "CLM-O-005"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-002",
+        "SRC-ACS-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-Q16",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าเดียวบนเว็บที่ถือ flag PRICE",
+        "urls": [
+          "https://www.asiancoding.com/barcode-scanner-price-guide"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": "revision-specs/price-claim-spec.md",
+      "open_question": {
+        "question": "หน้า /barcode-scanner-price-guide ควรมีตัวเลขราคาหรือไม่ หรือควรเป็นหน้าขอใบเสนอราคาถาวร",
+        "raised_by": "revision-specs/price-claim-spec.md §7 — ระบุเองว่าเป็นคำถามของ Owner ไม่ใช่ของ QA",
+        "does_form_a_foreclose_it": false,
+        "raised_on": "2026-09-24"
+      }
+    },
+    {
+      "package_id": "PKG-Q17",
+      "queue_id": 17,
+      "title": "เลือกเครื่องอ่านบาร์โค้ดจากหน้างาน: เกณฑ์แปดข้อที่ตอบเองได้",
+      "target_url": "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "ปลดแล้วด้วยคำตัดสิน D-12 (2026-09-25) ที่ตั้ง /knowledge/how-to-choose-barcode-scanner เป็นหน้าหลักของ C-7 · เนื้อหาไม่เคยติด source ใด สิ่งที่ติดคือไม่รู้ว่าจะลงหน้าไหน · ดราฟต์ส่งแล้วตาม revision-specs/queue-17.md ครบทุกข้อ mechanical QA ผ่าน (PASS) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ",
+      "owner_decision": "ใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับว่ายี่ห้อไหนดีที่สุด",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-VEN-002",
+        "SRC-ACS-004"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-Q17",
+      "intake_required": false,
+      "cannibalization_cluster": "C-7",
+      "revision_spec": "revision-specs/queue-17.md",
+      "qa_tier_note": "ลดจาก T2_FULL ที่ประเมินไว้ล่วงหน้า เพราะหน้าปลายทางถือเฉพาะ flag CANNIBAL ซึ่งจงใจไม่อยู่ใน FULL_QA_FLAGS (cannibalization มีด่านของตัวเองแยกต่างหาก) และดราฟต์ไม่มีตัวเลข ไม่มีชื่อยี่ห้อ ไม่มี flagged_claims",
+      "resolved_question": {
+        "question": "หน้าหลักของ C-7 (Scanner selection / comparison) คือหน้าใด",
+        "answer": "/knowledge/how-to-choose-barcode-scanner",
+        "decision_id": "D-12",
+        "decided_by": "Claude · delegated by ACS Owner 2026-09-25",
+        "decided_on": "2026-09-25",
+        "why_not_the_ranking_pages": "/barcode-scanner-comparison และ /knowledge/product-comparisons ถือ flag RANKING ทั้งคู่ และเป็นสองหน้าเดียวในเว็บที่ถือ flag นี้ · การตั้งหน้าใดหน้าหนึ่งเป็นหน้าหลัก เท่ากับทำให้การจัดอันดับยี่ห้อ เป็นศูนย์กลางของกลุ่ม ซึ่งคำตัดสิน Queue #17 ห้ามไว้ · selftest มีข้อตรวจกันไว้แล้ว",
+        "note_on_earlier_reading": "บันทึกฉบับ 2026-09-24 เคยเสนอว่าสองหน้าที่ถือ flag RANKING คือ \"บ้านที่น่าจะใช่ที่สุด\" ของเนื้อหานี้ — การอ่านนั้นกลับด้าน flag RANKING บอกว่าหน้านั้นมีปัญหาที่ต้องแก้ ไม่ได้บอกว่าหน้านั้นควรเป็นหน้าหลัก"
+      }
+    },
+    {
+      "package_id": "PKG-Q18",
+      "queue_id": 18,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ใช้คำตัดสินเดียวกับ #16 และ spec เดียวกัน แต่ยังไม่รู้ว่าหมายถึงหน้าใด page inventory มีหน้าที่ถือ flag PRICE เพียงหน้าเดียวคือ /barcode-scanner-price-guide ซึ่ง PKG-Q16 ใช้ไปแล้ว spec เองก็ระบุว่าไม่มีดราฟต์ของทั้งสองคิวมาถึง จึงไม่สมมติความต่าง · เปลี่ยนจาก REVISE เป็น BLOCKED เพราะอุปสรรคจริงถูกระบุแล้วและเป็นคำถามที่ตอบได้ ไม่ใช่เพราะงานถอยหลัง",
+      "owner_decision": "ห้ามใส่ราคาเฉพาะเจาะจงถ้าไม่มีราคา ACS พร้อมวันที่",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-001",
+        "CLM-B-003"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-002",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าเดียวบนเว็บที่ถือ flag PRICE",
+        "urls": [
+          "https://www.asiancoding.com/barcode-scanner-price-guide"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": "revision-specs/price-claim-spec.md",
+      "open_question": {
+        "question": "Queue #18 หมายถึงหน้าใด และต่างจาก Queue #16 อย่างไร",
+        "why_cannot_guess": "inventory 82 หน้ามีหน้าที่ถือ flag PRICE เพียงหน้าเดียว และ price-claim-spec.md ระบุเองว่าไม่มีดราฟต์ของทั้งสองคิวมาถึง จึงไม่สมมติความต่าง",
+        "unblocks_with": "SRC-KW-001 ฉบับเต็ม หรือคำตอบตรงจาก Owner",
+        "raised_on": "2026-09-24"
+      }
+    },
+    {
+      "package_id": "PKG-Q21",
+      "queue_id": 21,
+      "title": "ผลตอบแทนของระบบบาร์โค้ด: ตัวเลขต้องมาจากไซต์จริง",
+      "target_url": "https://www.asiancoding.com/roi-calculator",
+      "page_type": "LANDING",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "ดราฟต์ส่งแล้ว ไม่มีตัวเลขผลลัพธ์ใด และไม่แทนด้วยคำคลุมเครืออย่าง \"ดีขึ้นมาก\" ซึ่ง spec §3 ระบุว่า เป็น claim เดิมที่ถอดหลักฐานออก · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag NUMBERS ของหน้าปลายทาง) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และคิวนี้ยังไม่จบ ตัวเลขระยะอ่านบน /long-range-barcode-scanner กับความเร็วพิมพ์บน /tsc-barcode-printer เป็นการใช้คำตัดสินเดียวกันคนละจุด ยังไม่ได้ทำ",
+      "owner_decision": "ลบตัวเลข 65-70% → 95%+ จนกว่าจะมีหลักฐาน",
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-B-001",
+        "CLM-B-006",
+        "CLM-E-001",
+        "CLM-E-002",
+        "CLM-E-003"
+      ],
+      "blocked_on_sources": [
+        "SRC-VEN-002",
+        "SRC-ACS-003"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-Q21",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002 risk flags",
+        "why": "หน้าที่ถือ flag NUMBERS หรือ SPEC ซึ่งเป็นที่ที่ตัวเลขแบบนี้ปรากฏ",
+        "urls": [
+          "https://www.asiancoding.com/roi-calculator",
+          "https://www.asiancoding.com/roi-calculator/retail",
+          "https://www.asiancoding.com/roi-calculator/warehouse",
+          "https://www.asiancoding.com/roi-calculator/manufacturing",
+          "https://www.asiancoding.com/roi-calculator/mobility",
+          "https://www.asiancoding.com/industrial-barcode-scanner",
+          "https://www.asiancoding.com/long-range-barcode-scanner"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": "revision-specs/queue-21.md",
+      "coverage_note": "ใช้คำตัดสิน Queue #21 กับ /roi-calculator เท่านั้น · ตัวเลขระยะการอ่านบน /long-range-barcode-scanner (อยู่ใน C-1 ซึ่งมีหน้าหลักแล้ว ทำได้แต่ต้องมีดราฟต์เดิม) และความเร็วพิมพ์บน /tsc-barcode-printer (อยู่ใน C-2 ซึ่งยังไม่มีหน้าหลัก ติด gate) ยังไม่ได้ทำ"
+    },
+    {
+      "package_id": "PKG-UNMAPPED-01",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-02",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-03",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-04",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-05",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-06",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-07",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-08",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-09",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-10",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-11",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-12",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-UNMAPPED-13",
+      "queue_id": null,
+      "title": null,
+      "target_url": null,
+      "page_type": null,
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "ยังไม่ได้รับไฟล์แพ็กเกจและ queue ID mapping — ตรวจอะไรไม่ได้เลย",
+      "owner_decision": null,
+      "qa_tier": "UNDETERMINED",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "NOT_RUN",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "NOT_SUPPLIED",
+        "derived_from": null,
+        "why": "ยังไม่ทราบว่าแพ็กเกจนี้คือ queue ใด",
+        "urls": [],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": null,
+      "revision_spec": null
+    },
+    {
+      "package_id": "PKG-ABOUT-ACS",
+      "queue_id": null,
+      "title": "หน้าแนะนำ ACS",
+      "target_url": null,
+      "page_type": "LANDING",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "HOLD",
+      "board_reason": "ติด C-9 — /why-acs อยู่ในกลุ่มหน้าองค์กร 4 หน้าที่ยังไม่มีหน้าหลัก การเพิ่มหน้าแนะนำองค์กรโดยไม่ตัดสินกลุ่มนี้ก่อน จะทำซ้ำรูปแบบเดียวกับที่ C-1 เพิ่งตัดสินให้แก้ · ดราฟต์ v1 พร้อมอยู่แล้ว ไม่มี claim ที่ถูก gate รอแค่คำตัดสินว่าหน้าไหนคือหน้าหลักของกลุ่ม",
+      "owner_decision": "Owner ขอเมื่อ 2026-09-23: ชมเชย ACS, เอ่ย Honeywell, 7-Eleven, 30 ปี, และคำมั่นว่าจะซื่อสัตย์และมั่นคงต่อไป",
+      "qa_tier": "T1_CLAIM",
+      "flagged_claims": [
+        "CLM-B-004",
+        "CLM-O-003",
+        "CLM-O-004",
+        "CLM-O-006",
+        "CLM-E-011"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-003",
+        "SRC-ACS-004",
+        "SRC-WEB-004"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "FAIL_HOLD",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-ABOUT-ACS",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "RECOMMENDATION",
+        "derived_from": "SRC-WEB-002",
+        "why": "หน้า /why-acs ถือ flag OWNER อยู่แล้ว",
+        "urls": [
+          "https://www.asiancoding.com/why-acs"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-9",
+      "revision_spec": null,
+      "closure_owner": {
+        "CLM-O-006": "ACS — หนังสือรับรองบริษัทหรือเอกสารปีก่อตั้ง",
+        "CLM-O-003": "Honeywell — หนังสือรับรองจากแบรนด์ ไม่ใช่ ACS",
+        "CLM-O-004": "ลูกค้ารายนั้น — ความยินยอมของเขา ไม่ใช่การอนุมัติของ ACS",
+        "CLM-B-004": "ไม่มีอะไรปิดได้ ต้องลบซูเปอร์ลาทีฟออก"
+      }
+    },
+    {
+      "package_id": "PKG-RFID-VS-BARCODE",
+      "queue_id": null,
+      "title": "RFID กับบาร์โค้ด: เลือกจากลักษณะงาน ไม่ใช่จากรุ่น",
+      "target_url": "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (RFID) · เป็นหน้า RFID เพียงหน้าเดียวจากแปดหน้าที่ไม่อยู่ใน C-3 ซึ่งยังไม่มี canonical owner จึงเป็นหน้า RFID หน้าเดียวที่เขียนได้ตอนนี้ · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+      "owner_decision": "ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-VEN-002",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RFID-VS-BARCODE",
+      "intake_required": false,
+      "out_of_queue": true,
+      "cannibalization_cluster": null,
+      "cluster_note": "หน้า RFID แปดหน้า เจ็ดหน้าอยู่ใน C-3 ซึ่งยังไม่มี canonical owner · การตัดสินหน้าหลักของ C-3 จะปลดอีกเจ็ดหน้าพร้อมกัน"
+    },
+    {
+      "package_id": "PKG-WMS-INTEGRATION",
+      "queue_id": null,
+      "title": "เชื่อมบาร์โค้ดเข้ากับ WMS: สี่จุดที่ต้องตกลงก่อน",
+      "target_url": "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · หน้าคลังสินค้าที่เกี่ยวข้องมีเก้าหน้า เจ็ดหน้าอยู่ใน C-5 หรือ C-3 ซึ่งยังไม่มี canonical owner เหลือสองหน้าที่เขียนได้ · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ยืนยันว่าซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+      "owner_decision": "ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-WMS-INTEGRATION",
+      "intake_required": false,
+      "out_of_queue": true,
+      "cannibalization_cluster": null,
+      "cluster_note": "การตัดสินหน้าหลักของ C-5 จะปลดหกหน้าคลังสินค้าพร้อมกัน · เหลือ /knowledge/barcode-inventory-management อีกหนึ่งหน้าที่เขียนได้โดยไม่ต้องรอคำตัดสิน"
+    },
+    {
+      "package_id": "PKG-POS-RETAIL",
+      "queue_id": null,
+      "title": "ระบบบาร์โค้ดหน้าร้าน — เริ่มที่รหัสสินค้า ไม่ใช่เครื่อง",
+      "target_url": "https://www.asiancoding.com/pos-barcode-system",
+      "page_type": "SERVICE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Retail Automation) · เป็นหน้า Retail หน้าเดียวจากห้าหน้าที่เขียนได้ตอนนี้ ที่เหลืออยู่ใน C-6 ซึ่งยังไม่มี canonical owner · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และหน้านี้เป็น SERVICE ที่ยังประกาศขอบเขตบริการไม่ได้จนกว่า SRC-ACS-004 จะมา",
+      "owner_decision": "ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-004",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-POS-RETAIL",
+      "intake_required": false,
+      "out_of_queue": true,
+      "cannibalization_cluster": null,
+      "cluster_note": "การตัดสินหน้าหลักของ C-6 จะปลดสี่หน้า Retail พร้อมกัน",
+      "note_on_service_type": "เป็นหน้า SERVICE ที่ยังไม่ได้ทำหน้าที่ของหน้าบริการ เพราะ CLM-O-007 และ CLM-O-010 ยังไม่ปลด · schema ใช้ WebPage ไม่ใช่ Service โดยตั้งใจ เมื่อ SRC-ACS-004 มาถึงให้เพิ่มส่วนขอบเขตบริการและตรวจซ้ำทั้งแพ็กเกจ เพราะ qa_tier จะขยับขึ้น"
+    },
+    {
+      "package_id": "PKG-INVENTORY-COUNT",
+      "queue_id": null,
+      "title": "นับสต็อกด้วยบาร์โค้ด: ตัวเลขบอกอะไรและไม่บอกอะไร",
+      "target_url": "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · เป็นหน้าสุดท้ายที่เขียนได้โดยไม่ต้องรอคำตัดสินเรื่อง cluster หรือเอกสารจาก ACS หรือผู้ผลิต · mechanical QA ผ่าน (PASS, tier WORDING_QA_OK) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL",
+      "owner_decision": "ไม่มีคำตัดสินรายข้อ — ทำตามหัวข้อที่ Owner กำหนดให้เน้นหกหัวข้อ",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-INVENTORY-COUNT",
+      "intake_required": false,
+      "out_of_queue": true,
+      "cannibalization_cluster": null,
+      "boundary_note": "หน้านี้ตอบว่าผลการนับหมายถึงอะไรและส่วนต่างมาจากขั้นตอนไหน ส่วน PKG-WMS-INTEGRATION ตอบว่าข้อมูลเดินทางจากฉลากถึงระบบอย่างไร สองหน้าลิงก์หากันและไม่เขียนทับกัน ซึ่งสำคัญเพราะทั้งคู่เป็นหน้า KNOWLEDGE ที่อยู่นอก cluster",
+      "milestone_note": "หลังแพ็กเกจนี้ หน้าที่เขียนได้โดยไม่ต้องรอคำตอบของ Owner หมดแล้ว งานเขียนที่เหลือทุกหน้าติด cluster ที่ยังไม่มีหน้าหลัก หรือรอเอกสารจาก ACS หรือผู้ผลิต หรือรอคำตัดสินว่าจะสร้างหน้าใหม่สำหรับ Industrial Mobile Computing ไหม"
+    },
+    {
+      "package_id": "PKG-IMC",
+      "queue_id": null,
+      "title": "คอมพิวเตอร์พกพาสำหรับงานอุตสาหกรรม: ต่างจากสมาร์ตโฟนตรงไหน",
+      "target_url": "https://www.asiancoding.com/knowledge/industrial-mobile-computing",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "แพ็กเกจนอกคิว ทำตามคำตอบของคำถามข้อ 7 (2026-09-25) ที่ตัดสินว่า Industrial Mobile Computing ควรมีหน้าเนื้อหาของตัวเอง · เป็นหัวข้อเดียวในหกหัวข้อที่ Owner กำหนดให้เน้น ที่เว็บไม่มีหน้าเนื้อหาเลย มีเพียง /roi-calculator/mobility ซึ่งเป็นหน้าคำนวณ · เป็นหน้าใหม่ที่ไม่อยู่ใน cluster ใด จึงไม่ติดกติกา cannibalization และเขียนได้ทันทีโดยไม่ต้องรอคำตัดสินใด · mechanical QA ผ่าน (PASS) และ redact.mjs ได้ศูนย์ finding · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และหน้ายังไม่ถูกสร้างขึ้นจริง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "qa_tier_note": "action = NEW ทำให้ validate.mjs ยกเป็น T2_FULL อัตโนมัติ ซึ่งถูกต้อง — หน้าใหม่ไม่มีประวัติให้ตรวจย้อน และเป็นการเพิ่มพื้นที่ใหม่ให้เว็บ",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-004",
+        "SRC-KW-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-IMC",
+      "intake_required": false,
+      "cannibalization_cluster": null,
+      "revision_spec": null,
+      "out_of_queue": true,
+      "creates_new_page": {
+        "url": "https://www.asiancoding.com/knowledge/industrial-mobile-computing",
+        "exists_today": false,
+        "sitemap_rule": "ห้ามเติม URL นี้ลง data/sitemap_urls.json เพื่อให้ด่านผ่าน — ไฟล์นั้นเป็นรายการ URL จริงของเว็บ สถานะ FACT (SRC-WEB-001) · validate.mjs ถูกแก้ให้เมื่อ action = NEW ข้อตรวจกลับด้านเป็น target_url ต้องยังไม่อยู่ใน sitemap และจะ FAIL ด้วย NEW_PAGE_EXISTS ถ้าอยู่แล้ว"
+      },
+      "open_question": {
+        "question": "แพ็กเกจนอกคิวนี้ซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+        "why_cannot_answer_now": "ยังไม่มี SRC-KW-001 ฉบับเต็ม",
+        "if_duplicate": "รวมเข้ากับรายการนั้นได้ ไม่ต้องทิ้งงาน",
+        "note": "ต่างจากแพ็กเกจนอกคิวสี่ชุดก่อนหน้าตรงที่ชุดนี้เป็น action NEW ไม่ใช่ ENRICH",
+        "raised_on": "2026-09-25"
+      }
+    }
+  ],
+  "site_findings": {
+    "live_urls": 82,
+    "pages_with_risk_flag": 61,
+    "cannibalization_clusters": 8,
+    "urls_in_clusters": 45,
+    "note": "61 จาก 82 หน้าที่มีอยู่แล้วบนเว็บถือ risk flag อย่างน้อยหนึ่งอย่าง ปัญหาจึงไม่ได้อยู่แค่ 19 แพ็กเกจใหม่ แต่อยู่ที่หน้าเดิมด้วย"
+  },
+  "note_on_count": "19 คือจำนวนที่ Owner แจ้งไว้สำหรับ queue เดิม · PKG-ABOUT-ACS เป็นงานที่ Owner ขอเพิ่มเมื่อ 2026-09-23 ส่วน PKG-RFID-VS-BARCODE, PKG-WMS-INTEGRATION, PKG-POS-RETAIL และ PKG-INVENTORY-COUNT เป็นแพ็กเกจนอกคิว ที่ทำตามหัวข้อที่ Owner กำหนดให้เน้น ทั้งห้ารายการจึงไม่ถูกนับรวมในจำนวนนั้น บอร์ดจึงแสดง 24 จาก 19 ซึ่งถูกต้อง",
+  "board_totals": {
+    "total": 25,
+    "BLOCKED": 14,
+    "HOLD": 1,
+    "REVISE": 10
+  }
+}

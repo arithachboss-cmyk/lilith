@@ -1,0 +1,325 @@
+{
+  "version": "3.0.0",
+  "as_of": "2026-09-23",
+  "classes": {
+    "SAFE_WORDING": "พูดได้ทันที เป็นหลักการทั่วไป ไม่อ้างตัวเลข ไม่อ้าง ACS performance",
+    "EVIDENCE_REQUIRED": "ต้องมี datasheet / vendor source / GS1 / เอกสาร ACS ที่สถานะ SUPPLIED",
+    "OWNER_REQUIRED": "ต้องให้ ACS ยืนยัน เช่น ราคา สินค้าที่ขายจริง เคสลูกค้า",
+    "BLOCKED": "ห้ามใช้จนกว่าจะมีหลักฐาน — ถ้าพบในดราฟต์ต้องลบหรือแทนที่"
+  },
+  "claims": [
+    {
+      "id": "CLM-S-001",
+      "class": "SAFE_WORDING",
+      "statement": "การใช้บาร์โค้ดแทนการคีย์ข้อมูลด้วยมือช่วยลดโอกาสเกิดความผิดพลาดจากการพิมพ์",
+      "evidence": [],
+      "constraint": "ห้ามระบุเปอร์เซ็นต์หรือจำนวนครั้งที่ลดลง",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-S-002",
+      "class": "SAFE_WORDING",
+      "statement": "การเลือกวัสดุฉลากควรพิจารณาสภาพแวดล้อมการใช้งาน เช่น ความชื้น ความร้อน การเสียดสี สารเคมี",
+      "evidence": [],
+      "constraint": "พูดได้เฉพาะระดับ 'ควรพิจารณา' ห้ามฟันธงว่าวัสดุใดทนอะไรได้ (ดู CLM-B-002)",
+      "owner_decision": "QUEUE-4"
+    },
+    {
+      "id": "CLM-S-003",
+      "class": "SAFE_WORDING",
+      "statement": "บาร์โค้ด 1D และ 2D ต่างกันที่รูปแบบการเก็บข้อมูลและความจุข้อมูลที่รองรับ",
+      "evidence": [],
+      "constraint": "ห้ามระบุจำนวนอักขระที่รองรับถ้าไม่มี GS1 spec (ดู CLM-E-006)",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-S-004",
+      "class": "SAFE_WORDING",
+      "statement": "การกำหนดรหัสสินค้าที่ไม่ซ้ำกันเป็นพื้นฐานของการตรวจสอบย้อนกลับ (traceability)",
+      "evidence": [],
+      "constraint": "ห้ามอ้างว่าเป็นข้อบังคับทางกฎหมายถ้าไม่มีแหล่งอ้างอิง",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-S-005",
+      "class": "SAFE_WORDING",
+      "statement": "ควรทดสอบการอ่านฉลากในสภาพแวดล้อมจริงก่อนนำไปใช้งานเต็มรูปแบบ",
+      "evidence": [],
+      "constraint": null,
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-S-006",
+      "class": "SAFE_WORDING",
+      "statement": "การเลือกอุปกรณ์ควรพิจารณาจากเกณฑ์การใช้งาน เช่น สภาพแวดล้อม ระยะการอ่าน ปริมาณงาน และการเชื่อมต่อระบบ",
+      "evidence": [],
+      "constraint": "เป็นกรอบเกณฑ์ตัดสินใจเท่านั้น ห้ามสรุปว่ายี่ห้อใดดีที่สุด (ดู CLM-B-004)",
+      "owner_decision": "QUEUE-17"
+    },
+    {
+      "id": "CLM-E-001",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "ระยะการอ่าน (reading distance) ของเครื่องอ่านรุ่นใดรุ่นหนึ่ง",
+      "evidence": [
+        "SRC-VEN-002"
+      ],
+      "constraint": "ต้องอ้างรุ่นและหน้า datasheet ที่แน่นอน",
+      "owner_decision": "QUEUE-21"
+    },
+    {
+      "id": "CLM-E-002",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "อัตราการอ่านสำเร็จ / ความแม่นยำในการอ่าน",
+      "evidence": [
+        "SRC-VEN-002"
+      ],
+      "constraint": "ตัวเลข 65-70% และ 95%+ ถูกสั่งลบแล้ว ดู CLM-B-001",
+      "owner_decision": "QUEUE-21"
+    },
+    {
+      "id": "CLM-E-003",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "ความเร็วในการสแกน / throughput ของอุปกรณ์",
+      "evidence": [
+        "SRC-VEN-002"
+      ],
+      "constraint": null,
+      "owner_decision": "QUEUE-21"
+    },
+    {
+      "id": "CLM-E-004",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "ช่วงอุณหภูมิใช้งานและความทนสารเคมีของวัสดุฉลาก",
+      "evidence": [
+        "SRC-VEN-001"
+      ],
+      "constraint": "ต้องระบุรหัสวัสดุจริงที่ ACS ขาย ไม่ใช่วัสดุทั่วไป",
+      "owner_decision": "QUEUE-4"
+    },
+    {
+      "id": "CLM-E-005",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "ความทนต่อ UV น้ำ น้ำมัน หรือการเสียดสี ของวัสดุฉลาก",
+      "evidence": [
+        "SRC-VEN-001"
+      ],
+      "constraint": "ต้องมี datasheet ของสินค้าจริง มิฉะนั้นใช้ CLM-S-002 แทน",
+      "owner_decision": "QUEUE-4"
+    },
+    {
+      "id": "CLM-E-006",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "โครงสร้าง GTIN, รูปแบบ GS1-128 และ Application Identifier",
+      "evidence": [
+        "SRC-VEN-003"
+      ],
+      "constraint": "ต้องอ้าง GS1 General Specifications ฉบับและหัวข้อ",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-E-007",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "ระดับการป้องกัน IP / มาตรฐานการตกกระแทกของอุปกรณ์",
+      "evidence": [
+        "SRC-VEN-002"
+      ],
+      "constraint": null,
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-E-008",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "ความเข้ากันได้ของรุ่นอุปกรณ์กับระบบปฏิบัติการหรือซอฟต์แวร์",
+      "evidence": [
+        "SRC-VEN-002",
+        "SRC-VEN-004"
+      ],
+      "constraint": null,
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-O-001",
+      "class": "OWNER_REQUIRED",
+      "statement": "ราคาสินค้าหรือบริการของ ACS",
+      "evidence": [
+        "SRC-ACS-002"
+      ],
+      "constraint": "ต้องมีราคา + effective date จึงจะเผยแพร่ได้ มิฉะนั้นใช้ CTA ขอใบเสนอราคา",
+      "owner_decision": "QUEUE-16, QUEUE-18"
+    },
+    {
+      "id": "CLM-O-002",
+      "class": "OWNER_REQUIRED",
+      "statement": "รายการสินค้า/รุ่นที่ ACS จำหน่ายจริง",
+      "evidence": [
+        "SRC-ACS-001"
+      ],
+      "constraint": "ห้ามระบุรุ่นที่ยังไม่ยืนยันว่ามีขาย",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-O-003",
+      "class": "OWNER_REQUIRED",
+      "statement": "สถานะตัวแทนจำหน่าย/พาร์ทเนอร์อย่างเป็นทางการของแบรนด์ใด ๆ",
+      "evidence": [
+        "SRC-ACS-001",
+        "SRC-ACS-004"
+      ],
+      "constraint": "ต้องมีหนังสือรับรองจากแบรนด์นั้นพร้อมวันที่ — ผู้ปิด claim นี้คือ vendor ไม่ใช่ ACS",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-O-004",
+      "class": "OWNER_REQUIRED",
+      "statement": "เคสลูกค้า อุตสาหกรรมที่เคยติดตั้ง หรือผลลัพธ์ที่ลูกค้าได้รับ",
+      "evidence": [
+        "SRC-ACS-003"
+      ],
+      "constraint": "ความยินยอมเป็นของลูกค้า ไม่ใช่ของ ACS — ACS อนุมัติประโยคไม่ได้ทำให้ claim นี้ผ่าน และการปิดชื่อไม่ได้ช่วย 'ร้านสะดวกซื้อรายใหญ่ที่สุดในประเทศ' ระบุตัวบริษัทเดียวกันกับการเอ่ยชื่อ และยังเพิ่มซูเปอร์ลาทีฟที่ CLM-B-004 ห้ามอยู่แล้ว",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-O-005",
+      "class": "OWNER_REQUIRED",
+      "statement": "SLA ระยะเวลาส่งมอบ หรือขอบเขตบริการหลังการขาย",
+      "evidence": [
+        "SRC-ACS-004"
+      ],
+      "constraint": null,
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-O-006",
+      "class": "OWNER_REQUIRED",
+      "statement": "จำนวนปีที่ดำเนินธุรกิจ / จำนวนลูกค้า / ขนาดทีม",
+      "evidence": [
+        "SRC-ACS-004"
+      ],
+      "constraint": null,
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-O-007",
+      "class": "OWNER_REQUIRED",
+      "statement": "พื้นที่ให้บริการและขอบเขตการติดตั้งหน้างาน",
+      "evidence": [
+        "SRC-ACS-004"
+      ],
+      "constraint": null,
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-B-001",
+      "class": "BLOCKED",
+      "statement": "ตัวเลขระยะอ่าน / ความเร็ว / ความแม่นยำ ในช่วง 65-70% ยกระดับเป็น 95%+",
+      "evidence": [],
+      "constraint": "Owner สั่งลบออกทั้งหมดจนกว่าจะมีหลักฐาน ปลดล็อกด้วย SRC-VEN-002 เท่านั้น",
+      "owner_decision": "QUEUE-21"
+    },
+    {
+      "id": "CLM-B-002",
+      "class": "BLOCKED",
+      "statement": "การฟันธงว่าวัสดุทนทุกสภาพแวดล้อม / กันน้ำ 100% / ทนสารเคมีทุกชนิด",
+      "evidence": [],
+      "constraint": "ปลดล็อกด้วย SRC-VEN-001 และต้องลดระดับเป็นเงื่อนไขเฉพาะที่ datasheet ระบุ",
+      "owner_decision": "QUEUE-4"
+    },
+    {
+      "id": "CLM-B-003",
+      "class": "BLOCKED",
+      "statement": "ราคาเฉพาะเจาะจงโดยไม่มีราคา ACS พร้อมวันที่",
+      "evidence": [],
+      "constraint": "ปลดล็อกด้วย SRC-ACS-002 เท่านั้น",
+      "owner_decision": "QUEUE-16, QUEUE-18"
+    },
+    {
+      "id": "CLM-B-004",
+      "class": "BLOCKED",
+      "statement": "การจัดอันดับว่ายี่ห้อใดดีที่สุด / เหนือกว่าคู่แข่ง",
+      "evidence": [],
+      "constraint": "ไม่ปลดล็อก ให้ใช้เกณฑ์ตัดสินใจ (CLM-S-006) แทนถาวร",
+      "owner_decision": "QUEUE-17"
+    },
+    {
+      "id": "CLM-B-005",
+      "class": "BLOCKED",
+      "statement": "ACS เป็นผู้นำ / อันดับ 1 / รายใหญ่ที่สุด ในตลาด",
+      "evidence": [],
+      "constraint": "ไม่มีแหล่งอ้างอิงที่ตรวจสอบได้ ห้ามใช้",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-B-006",
+      "class": "BLOCKED",
+      "statement": "การรับประกันผลลัพธ์เป็นตัวเลข เช่น ROI ภายใน X เดือน หรือประหยัดต้นทุน X%",
+      "evidence": [],
+      "constraint": "ต้องมีเคสลูกค้าที่ยืนยันได้ (SRC-ACS-003) และ Owner อนุมัติ",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-E-009",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "ข้อความด้าน ESG / ความยั่งยืน / ผลกระทบสิ่งแวดล้อมของสินค้าหรือบริการ",
+      "evidence": [
+        "SRC-VEN-001",
+        "SRC-ACS-004"
+      ],
+      "constraint": "ต้องมีใบรับรองหรือเอกสารโครงการที่ทำจริง ถ้าไม่มีให้ลบออก ห้ามพูดกว้าง ๆ ว่าเป็นมิตรกับสิ่งแวดล้อม",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-E-010",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "ความสามารถของเครื่องมือ AI ที่ ACS ให้บริการ",
+      "evidence": [
+        "SRC-ACS-004"
+      ],
+      "constraint": "ต้องมีคำอธิบายจาก ACS ว่าเครื่องมือทำอะไรได้จริง ห้ามบรรยายความสามารถที่ยังไม่ได้ยืนยัน",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-O-008",
+      "class": "OWNER_REQUIRED",
+      "statement": "ประวัติผู้บริหาร ทีมงาน และความสามารถในการให้บริการขององค์กร",
+      "evidence": [
+        "SRC-ACS-004"
+      ],
+      "constraint": "ต้องมี ACS ยืนยัน รวมถึงการอ้างจำนวนปีที่ดำเนินธุรกิจบนหน้า /why-acs/30-years",
+      "owner_decision": null
+    },
+    {
+      "id": "CLM-O-009",
+      "class": "OWNER_REQUIRED",
+      "statement": "ความพร้อมของสินค้า สต็อก ระยะเวลาส่งมอบ และการจัดส่ง",
+      "evidence": [
+        "SRC-ACS-001",
+        "SRC-ACS-004"
+      ],
+      "constraint": "ข้ออ้างเรื่องสต็อกหมดอายุเร็วกว่าราคา — 'มีสต็อก' จริงแค่เท่าที่ของยังอยู่ ซึ่งอาจเป็นหลักชั่วโมง จึงห้ามเผยแพร่เป็นตัวเลขหรือสถานะเลย เว้นแต่ต่อกับข้อมูลสต็อกสด รูปแบบที่เผยแพร่ได้คือกระบวนการ ('ตรวจสอบสต็อกจริงก่อนยืนยันทุกครั้ง') ไม่ใช่สถานะ · ระยะเวลาส่งมอบเผยแพร่ได้เมื่อ ACS ระบุพร้อมวันที่ที่ข้อมูลนั้นเป็นจริง และใช้กฎหมดอายุเดียวกับราคา",
+      "owner_decision": "D-08"
+    },
+    {
+      "id": "CLM-O-010",
+      "class": "OWNER_REQUIRED",
+      "statement": "การมีทีมงานในพื้นที่และขอบเขตบริการหลังการขาย",
+      "evidence": [
+        "SRC-ACS-004"
+      ],
+      "constraint": "ต้องให้ ACS ยืนยันว่ามีบริการอะไรอยู่จริงและครอบคลุมพื้นที่ไหน — เกี่ยวข้องกับ CLM-O-005 และ CLM-O-007",
+      "owner_decision": "D-08"
+    },
+    {
+      "id": "CLM-E-011",
+      "class": "EVIDENCE_REQUIRED",
+      "statement": "การเอ่ยชื่อผู้ผลิตในเนื้อหา",
+      "evidence": [
+        "SRC-VEN-001",
+        "SRC-VEN-002",
+        "SRC-VEN-003",
+        "SRC-VEN-005"
+      ],
+      "constraint": "ชื่อผู้ผลิตใช้ได้เมื่อเป็นการอ้างอิงสเปกจากเอกสารทางการเท่านั้น ห้ามใช้ในบริบทที่สื่อถึงความสัมพันธ์ทางธุรกิจ ซึ่งเป็น CLM-O-003",
+      "owner_decision": null
+    }
+  ]
+}

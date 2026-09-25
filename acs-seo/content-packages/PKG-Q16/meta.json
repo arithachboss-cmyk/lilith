@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-Q16",
+  "title": "ต้นทุนระบบบาร์โค้ด: สิ่งที่ทำให้ใบเสนอราคาต่างกัน",
+  "meta_description": "แนวทางอ่านต้นทุนระบบบาร์โค้ดให้ครบ ทั้งตัวอุปกรณ์ จำนวนจุดใช้งาน งานติดตั้ง และการดูแลระยะยาว พร้อมสิ่งที่ควรถามก่อนเทียบใบเสนอราคาจากผู้ขายหลายราย",
+  "canonical": "https://www.asiancoding.com/barcode-scanner-price-guide",
+  "target_url": "https://www.asiancoding.com/barcode-scanner-price-guide",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "อธิบายโครงของต้นทุนและวิธีอ่านใบเสนอราคา เพื่อให้เทียบข้อเสนอจากผู้ขายรายใดก็ได้อย่างเข้าใจ จงใจไม่ระบุตัวเลขเงินใด เพราะตัวเลขที่ไม่มีวันที่กำกับจะผิดเองเมื่อเวลาผ่านไป",
+  "primary_keyword": "ราคาเครื่องสแกนบาร์โค้ด",
+  "secondary_keywords": [
+    "ต้นทุนระบบบาร์โค้ด",
+    "ใบเสนอราคาเครื่องสแกนบาร์โค้ด",
+    "ค่าติดตั้งระบบบาร์โค้ด"
+  ],
+  "intent": "COMMERCIAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/select-solution",
+    "https://www.asiancoding.com/knowledge/barcode-technology",
+    "https://www.asiancoding.com/contact"
+  ],
+  "form_note": "Form A ล้วนตาม revision-specs/price-claim-spec.md §3 · ไม่มีตัวเลขเงินแม้แต่ตัวเดียว Form B ต้องมี SRC-ACS-002 พร้อม effective_date และ valid_until และต้องแสดง effective date ให้ผู้อ่านเห็นในเนื้อหา ไม่ใช่เก็บไว้ในไฟล์ JSON",
+  "owner_decision_pending": "spec §7 ระบุคำถามที่เป็นของ Owner ไม่ใช่ของ QA — หน้านี้ควรมีตัวเลขหรือไม่ หรือควรเป็นหน้าขอใบเสนอราคาถาวร · Form A ไม่ได้ปิดทางเลือกใด ถ้า SRC-ACS-002 มาถึงและ Owner ต้องการตัวเลข ให้เพิ่มประโยค Form B ทับได้",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "ต้นทุนระบบบาร์โค้ด: สิ่งที่ทำให้ใบเสนอราคาต่างกัน",
+    "description": "แนวทางอ่านต้นทุนระบบบาร์โค้ดให้ครบ ทั้งตัวอุปกรณ์ จำนวนจุดใช้งาน งานติดตั้ง และการดูแลระยะยาว พร้อมสิ่งที่ควรถามก่อนเทียบใบเสนอราคาจากผู้ขายหลายราย",
+    "image": null
+  }
+}

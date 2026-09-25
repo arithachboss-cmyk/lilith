@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-Q17",
+  "title": "เลือกเครื่องอ่านบาร์โค้ดจากหน้างาน: เกณฑ์แปดข้อที่ตอบเองได้",
+  "meta_description": "เกณฑ์แปดข้อที่ตอบได้จากหน้างานของคุณเอง ตั้งแต่ชนิดรหัส พื้นผิว ระยะ สภาพแวดล้อม ไปจนถึงการต่อระบบ แล้วเกณฑ์จะชี้ว่าควรเป็นเครื่องกลุ่มไหน",
+  "canonical": "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+  "target_url": "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "ให้กรอบการตัดสินใจเลือกเครื่องอ่านบาร์โค้ดโดยผู้อ่านเป็นคนจัดอันดับเอง จงใจไม่ตัดสินว่ายี่ห้อหรือรุ่นใดดีกว่า ไม่มีตารางคะแนน ไม่มีสเปกตัวเลข และไม่ครอบคลุมการเปรียบเทียบรุ่นต่อรุ่นซึ่งเป็นเรื่องของหน้าอื่นใน C-7",
+  "primary_keyword": "เลือกเครื่องอ่านบาร์โค้ด",
+  "secondary_keywords": [
+    "เครื่องสแกนบาร์โค้ดเลือกอย่างไร",
+    "เกณฑ์เลือกเครื่องอ่านบาร์โค้ด",
+    "เครื่องอ่านบาร์โค้ดแบบไหนเหมาะกับงาน"
+  ],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/wired-vs-wireless-barcode-scanner",
+    "https://www.asiancoding.com/knowledge/barcode-technology",
+    "https://www.asiancoding.com/contact"
+  ],
+  "queue_note": "Queue #17 — คำตัดสินของ Owner คือใช้เกณฑ์ตัดสินใจ ห้ามจัดอันดับยี่ห้อ สเปกอยู่ที่ revision-specs/queue-17.md",
+  "cluster_note": "หน้านี้เป็น canonical owner ของ C-7 ตามคำตัดสิน D-12 (2026-09-25) จึงเป็นการเสริมหน้าหลักของกลุ่มโดยตรง ไม่ใช่การเพิ่มหน้าที่แย่ง intent",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "เลือกเครื่องอ่านบาร์โค้ดจากหน้างาน: เกณฑ์แปดข้อที่ตอบเองได้",
+    "description": "เกณฑ์แปดข้อที่ตอบได้จากหน้างานของคุณเอง ตั้งแต่ชนิดรหัส พื้นผิว ระยะ สภาพแวดล้อม ไปจนถึงการต่อระบบ แล้วเกณฑ์จะชี้ว่าควรเป็นเครื่องกลุ่มไหน",
+    "image": null
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "claim_id": "CLM-O-001",
+  "package_id": "__fixture__",
+  "sentence_verbatim": "ราคา 18,500 บาท (ราคา ณ วันที่ 2025-01-01 ต่อเครื่อง ยังไม่รวม VAT)",
+  "price": {
+    "amount": 18500,
+    "amount_max": null,
+    "currency": "THB",
+    "unit": "ต่อเครื่อง",
+    "includes_vat": false,
+    "includes_installation": false,
+    "minimum_quantity": 1,
+    "other_conditions": ""
+  },
+  "source": {
+    "document_title": "ACS price list 2026 Q3",
+    "document_uri_or_location": "internal://acs/pricelist-2026q3.xlsx",
+    "revision_or_date": "2025-01-01",
+    "issued_by": "ACS",
+    "date_checked": "2026-09-20",
+    "checked_by": "fixture"
+  },
+  "approved_wording_th": "ราคา 18,500 บาท (ราคา ณ วันที่ 2025-01-01 ต่อเครื่อง ยังไม่รวม VAT)",
+  "approved_wording_en": "",
+  "verdict": "CLEARED",
+  "reviewer": "fixture",
+  "reviewed_on": "2026-09-20",
+  "validity": {
+    "effective_date": "2025-01-01",
+    "valid_until": "2025-06-30"
+  }
+}

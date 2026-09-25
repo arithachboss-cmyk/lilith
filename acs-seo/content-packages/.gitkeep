@@ -1,0 +1,2 @@
+แพ็กเกจจริงวางที่นี่ หนึ่งโฟลเดอร์ต่อหนึ่งแพ็กเกจ เช่น content-packages/PKG-Q04/
+คัดลอกจาก templates/package/ แล้วรัน node tools/validate.mjs

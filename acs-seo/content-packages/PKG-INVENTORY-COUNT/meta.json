@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-INVENTORY-COUNT",
+  "title": "นับสต็อกด้วยบาร์โค้ด: ตัวเลขบอกอะไรและไม่บอกอะไร",
+  "meta_description": "การนับด้วยบาร์โค้ดทำให้รู้ยอดคงเหลือเร็วขึ้น แต่ไม่ได้บอกว่าส่วนต่างมาจากไหน บทความนี้อธิบายสาเหตุของส่วนต่าง วิธีเลือกจังหวะการนับ และสิ่งที่ต้องแก้ที่ต้นทาง",
+  "canonical": "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+  "target_url": "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "อธิบายว่าผลการนับตอบคำถามอะไรได้และตอบไม่ได้ สาเหตุของส่วนต่าง และสิ่งที่ต้องตกลงก่อนเริ่มนับ จงใจไม่ครอบคลุมการเชื่อมระบบซึ่งเป็นเรื่องของ /knowledge/barcode-wms-integration และไม่ครอบคลุมการเลือกอุปกรณ์ซึ่งเป็นเรื่องของ C-1 และ C-7",
+  "primary_keyword": "นับสต็อกด้วยบาร์โค้ด",
+  "secondary_keywords": [
+    "cycle count บาร์โค้ด",
+    "ส่วนต่างสต็อก สาเหตุ",
+    "ตรวจนับสินค้าคงคลัง ระบบบาร์โค้ด"
+  ],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+    "https://www.asiancoding.com/knowledge/implementation-best-practices",
+    "https://www.asiancoding.com/contact"
+  ],
+  "scope_note": "แพ็กเกจนอกคิวหมายเลข — ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) · เป็นหน้าสุดท้ายที่เขียนได้โดยไม่ต้องรอคำตัดสินเรื่อง cluster หรือเอกสารจาก ACS",
+  "boundary_with_wms_package": "หน้านี้ตอบว่าผลการนับหมายถึงอะไรและส่วนต่างมาจากไหน ส่วน /knowledge/barcode-wms-integration ตอบว่าข้อมูลเดินทางจากฉลากถึงระบบอย่างไร สองหน้าลิงก์หากันและไม่เขียนทับกัน",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "นับสต็อกด้วยบาร์โค้ด: ตัวเลขบอกอะไรและไม่บอกอะไร",
+    "description": "การนับด้วยบาร์โค้ดทำให้รู้ยอดคงเหลือเร็วขึ้น แต่ไม่ได้บอกว่าส่วนต่างมาจากไหน บทความนี้อธิบายสาเหตุของส่วนต่าง วิธีเลือกจังหวะการนับ และสิ่งที่ต้องแก้ที่ต้นทาง",
+    "image": null
+  }
+}

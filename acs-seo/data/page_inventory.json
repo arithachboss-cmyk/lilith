@@ -1,0 +1,1232 @@
+{
+  "version": "2.0.0",
+  "as_of": "2026-09-22",
+  "source_id": "SRC-WEB-002",
+  "status": "PARTIAL",
+  "site": "https://www.asiancoding.com",
+  "provenance": {
+    "urls": "FACT — ดึงจาก sitemap.xml จริงเมื่อ 2026-09-22 ตรงกับชุดที่ PR #1 เก็บไว้เมื่อ 2026-09-20 ทั้ง 82 URL ไม่มีขาดไม่มีเกิน",
+    "page_type_and_risk_flags": "RECOMMENDATION — อนุมานจากโครงสร้าง URL โดย PR #1 ยังไม่ได้รับการยืนยันจาก Owner",
+    "primary_intent": "NOT_SUPPLIED — ต้องให้ SEO Lead/Owner กำหนดต่อหน้า จึงยังเป็น null ทุกหน้า"
+  },
+  "owner_confirmed": false,
+  "why_partial": "URL เป็นข้อเท็จจริงแล้ว แต่การจัดประเภทหน้าและ primary_intent ยังไม่ได้รับการยืนยัน — cannibalization gate จึงตัดสินได้เฉพาะระดับ cluster ยังปิดเคสรายหน้าไม่ได้",
+  "page_type_enum": [
+    "PRODUCT",
+    "SERVICE",
+    "KNOWLEDGE",
+    "LANDING"
+  ],
+  "risk_flag_enum": [
+    "CANNIBAL",
+    "PARTNER",
+    "SPEC",
+    "CUSTOMER",
+    "NUMBERS",
+    "OWNER",
+    "RANKING",
+    "EVIDENCE",
+    "PRICE"
+  ],
+  "pages": [
+    {
+      "url": "https://www.asiancoding.com",
+      "path": "/",
+      "path_in_sitemap": "https://www.asiancoding.com",
+      "page_type": "LANDING",
+      "page_subtype": "Home",
+      "risk_flags": [],
+      "changefreq": "daily",
+      "priority": 1.0,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/solutions",
+      "path": "/solutions",
+      "path_in_sitemap": "https://www.asiancoding.com/solutions",
+      "page_type": "SERVICE",
+      "page_subtype": "Hub",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/contact",
+      "path": "/contact",
+      "path_in_sitemap": "https://www.asiancoding.com/contact",
+      "page_type": "LANDING",
+      "page_subtype": "Conversion",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/select-solution",
+      "path": "/select-solution",
+      "path_in_sitemap": "https://www.asiancoding.com/select-solution",
+      "page_type": "LANDING",
+      "page_subtype": "Tool",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/brady",
+      "path": "/brady",
+      "path_in_sitemap": "https://www.asiancoding.com/brady",
+      "page_type": "PRODUCT",
+      "page_subtype": "Brand hub",
+      "risk_flags": [
+        "PARTNER"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/printers/m510",
+      "path": "/brady/printers/m510",
+      "path_in_sitemap": "https://www.asiancoding.com/brady/printers/m510",
+      "page_type": "PRODUCT",
+      "page_subtype": "Model page",
+      "risk_flags": [
+        "PARTNER",
+        "SPEC"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/labels",
+      "path": "/brady/labels",
+      "path_in_sitemap": "https://www.asiancoding.com/brady/labels",
+      "page_type": "PRODUCT",
+      "page_subtype": "Category",
+      "risk_flags": [
+        "PARTNER",
+        "SPEC"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/scanners-rfid",
+      "path": "/brady/scanners-rfid",
+      "path_in_sitemap": "https://www.asiancoding.com/brady/scanners-rfid",
+      "page_type": "PRODUCT",
+      "page_subtype": "Category",
+      "risk_flags": [
+        "PARTNER",
+        "SPEC"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/software",
+      "path": "/brady/software",
+      "path_in_sitemap": "https://www.asiancoding.com/brady/software",
+      "page_type": "PRODUCT",
+      "page_subtype": "Category",
+      "risk_flags": [
+        "PARTNER"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/solutions/manufacturing",
+      "path": "/brady/solutions/manufacturing",
+      "path_in_sitemap": "https://www.asiancoding.com/brady/solutions/manufacturing",
+      "page_type": "SERVICE",
+      "page_subtype": "Solution",
+      "risk_flags": [
+        "PARTNER",
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/brady/solutions/warehouse-logistics",
+      "path": "/brady/solutions/warehouse-logistics",
+      "path_in_sitemap": "https://www.asiancoding.com/brady/solutions/warehouse-logistics",
+      "page_type": "SERVICE",
+      "page_subtype": "Solution",
+      "risk_flags": [
+        "PARTNER",
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/pos-barcode-system",
+      "path": "/pos-barcode-system",
+      "path_in_sitemap": "https://www.asiancoding.com/pos-barcode-system",
+      "page_type": "SERVICE",
+      "page_subtype": "Solution",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/warehouse-data-capture",
+      "path": "/warehouse-data-capture",
+      "path_in_sitemap": "https://www.asiancoding.com/warehouse-data-capture",
+      "page_type": "SERVICE",
+      "page_subtype": "Solution",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/rfid-workflow-context",
+      "path": "/rfid-workflow-context",
+      "path_in_sitemap": "https://www.asiancoding.com/rfid-workflow-context",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Explainer",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/why-acs",
+      "path": "/why-acs",
+      "path_in_sitemap": "https://www.asiancoding.com/why-acs",
+      "page_type": "LANDING",
+      "page_subtype": "Company",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/why-acs/30-years",
+      "path": "/why-acs/30-years",
+      "path_in_sitemap": "https://www.asiancoding.com/why-acs/30-years",
+      "page_type": "LANDING",
+      "page_subtype": "Company",
+      "risk_flags": [
+        "OWNER"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.6,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/why-acs/service-capability",
+      "path": "/why-acs/service-capability",
+      "path_in_sitemap": "https://www.asiancoding.com/why-acs/service-capability",
+      "page_type": "SERVICE",
+      "page_subtype": "Company",
+      "risk_flags": [
+        "OWNER"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/why-acs/partner-ecosystem",
+      "path": "/why-acs/partner-ecosystem",
+      "path_in_sitemap": "https://www.asiancoding.com/why-acs/partner-ecosystem",
+      "page_type": "LANDING",
+      "page_subtype": "Company",
+      "risk_flags": [
+        "PARTNER",
+        "CANNIBAL"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/esg-solutions",
+      "path": "/esg-solutions",
+      "path_in_sitemap": "https://www.asiancoding.com/esg-solutions",
+      "page_type": "SERVICE",
+      "page_subtype": "Solution",
+      "risk_flags": [
+        "EVIDENCE"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/retail",
+      "path": "/retail",
+      "path_in_sitemap": "https://www.asiancoding.com/retail",
+      "page_type": "SERVICE",
+      "page_subtype": "Industry",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/logistics",
+      "path": "/logistics",
+      "path_in_sitemap": "https://www.asiancoding.com/logistics",
+      "page_type": "SERVICE",
+      "page_subtype": "Industry",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/manufacturing",
+      "path": "/manufacturing",
+      "path_in_sitemap": "https://www.asiancoding.com/manufacturing",
+      "page_type": "SERVICE",
+      "page_subtype": "Industry",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/industry/manufacturing",
+      "path": "/industry/manufacturing",
+      "path_in_sitemap": "https://www.asiancoding.com/industry/manufacturing",
+      "page_type": "SERVICE",
+      "page_subtype": "Industry",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/industry/healthcare",
+      "path": "/industry/healthcare",
+      "path_in_sitemap": "https://www.asiancoding.com/industry/healthcare",
+      "page_type": "SERVICE",
+      "page_subtype": "Industry",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/ai-consultant",
+      "path": "/ai-consultant",
+      "path_in_sitemap": "https://www.asiancoding.com/ai-consultant",
+      "page_type": "SERVICE",
+      "page_subtype": "Tool",
+      "risk_flags": [
+        "EVIDENCE"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator",
+      "path": "/roi-calculator",
+      "path_in_sitemap": "https://www.asiancoding.com/roi-calculator",
+      "page_type": "LANDING",
+      "page_subtype": "Tool",
+      "risk_flags": [
+        "NUMBERS"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator/retail",
+      "path": "/roi-calculator/retail",
+      "path_in_sitemap": "https://www.asiancoding.com/roi-calculator/retail",
+      "page_type": "LANDING",
+      "page_subtype": "Tool",
+      "risk_flags": [
+        "NUMBERS"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator/warehouse",
+      "path": "/roi-calculator/warehouse",
+      "path_in_sitemap": "https://www.asiancoding.com/roi-calculator/warehouse",
+      "page_type": "LANDING",
+      "page_subtype": "Tool",
+      "risk_flags": [
+        "NUMBERS"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator/manufacturing",
+      "path": "/roi-calculator/manufacturing",
+      "path_in_sitemap": "https://www.asiancoding.com/roi-calculator/manufacturing",
+      "page_type": "LANDING",
+      "page_subtype": "Tool",
+      "risk_flags": [
+        "NUMBERS"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/roi-calculator/mobility",
+      "path": "/roi-calculator/mobility",
+      "path_in_sitemap": "https://www.asiancoding.com/roi-calculator/mobility",
+      "page_type": "LANDING",
+      "page_subtype": "Tool",
+      "risk_flags": [
+        "NUMBERS"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/case-studies",
+      "path": "/case-studies",
+      "path_in_sitemap": "https://www.asiancoding.com/case-studies",
+      "page_type": "LANDING",
+      "page_subtype": "Hub",
+      "risk_flags": [
+        "CUSTOMER"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/retail",
+      "path": "/case-study/retail",
+      "path_in_sitemap": "https://www.asiancoding.com/case-study/retail",
+      "page_type": "LANDING",
+      "page_subtype": "Case",
+      "risk_flags": [
+        "CUSTOMER"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.6,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/warehouse",
+      "path": "/case-study/warehouse",
+      "path_in_sitemap": "https://www.asiancoding.com/case-study/warehouse",
+      "page_type": "LANDING",
+      "page_subtype": "Case",
+      "risk_flags": [
+        "CUSTOMER"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.6,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/manufacturing",
+      "path": "/case-study/manufacturing",
+      "path_in_sitemap": "https://www.asiancoding.com/case-study/manufacturing",
+      "page_type": "LANDING",
+      "page_subtype": "Case",
+      "risk_flags": [
+        "CUSTOMER"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.6,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/logistics",
+      "path": "/case-study/logistics",
+      "path_in_sitemap": "https://www.asiancoding.com/case-study/logistics",
+      "page_type": "LANDING",
+      "page_subtype": "Case",
+      "risk_flags": [
+        "CUSTOMER"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.6,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/case-study/healthcare",
+      "path": "/case-study/healthcare",
+      "path_in_sitemap": "https://www.asiancoding.com/case-study/healthcare",
+      "page_type": "LANDING",
+      "page_subtype": "Case",
+      "risk_flags": [
+        "CUSTOMER"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.6,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/insights",
+      "path": "/insights",
+      "path_in_sitemap": "https://www.asiancoding.com/insights",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Hub",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/revenue-articles",
+      "path": "/revenue-articles",
+      "path_in_sitemap": "https://www.asiancoding.com/revenue-articles",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Hub",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.6,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/leadership",
+      "path": "/leadership",
+      "path_in_sitemap": "https://www.asiancoding.com/leadership",
+      "page_type": "LANDING",
+      "page_subtype": "Company",
+      "risk_flags": [
+        "OWNER"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.5,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/partner-ecosystem-hub",
+      "path": "/partner-ecosystem-hub",
+      "path_in_sitemap": "https://www.asiancoding.com/partner-ecosystem-hub",
+      "page_type": "LANDING",
+      "page_subtype": "Company",
+      "risk_flags": [
+        "PARTNER",
+        "CANNIBAL"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.5,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-scanner-thailand",
+      "path": "/barcode-scanner-thailand",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-scanner-thailand",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-printer-thailand",
+      "path": "/barcode-printer-thailand",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-printer-thailand",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/honeywell-barcode-scanner",
+      "path": "/honeywell-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/honeywell-barcode-scanner",
+      "page_type": "PRODUCT",
+      "page_subtype": "Brand",
+      "risk_flags": [
+        "PARTNER",
+        "SPEC"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/tsc-barcode-printer",
+      "path": "/tsc-barcode-printer",
+      "path_in_sitemap": "https://www.asiancoding.com/tsc-barcode-printer",
+      "page_type": "PRODUCT",
+      "page_subtype": "Brand",
+      "risk_flags": [
+        "PARTNER",
+        "SPEC"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/rfid-warehouse-system",
+      "path": "/rfid-warehouse-system",
+      "path_in_sitemap": "https://www.asiancoding.com/rfid-warehouse-system",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/เครื่องสแกนบาร์โค้ด",
+      "path": "/เครื่องสแกนบาร์โค้ด",
+      "path_in_sitemap": "https://www.asiancoding.com/%E0%B9%80%E0%B8%84%E0%B8%A3%E0%B8%B7%E0%B9%88%E0%B8%AD%E0%B8%87%E0%B8%AA%E0%B9%81%E0%B8%81%E0%B8%99%E0%B8%9A%E0%B8%B2%E0%B8%A3%E0%B9%8C%E0%B9%82%E0%B8%84%E0%B9%89%E0%B8%94",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial TH",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-label-printer",
+      "path": "/barcode-label-printer",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-label-printer",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/wireless-barcode-scanner",
+      "path": "/wireless-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/wireless-barcode-scanner",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/industrial-barcode-scanner",
+      "path": "/industrial-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/industrial-barcode-scanner",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/rfid-reader",
+      "path": "/rfid-reader",
+      "path_in_sitemap": "https://www.asiancoding.com/rfid-reader",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-printers",
+      "path": "/barcode-printers",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-printers",
+      "page_type": "PRODUCT",
+      "page_subtype": "Category",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/rfid-systems",
+      "path": "/rfid-systems",
+      "path_in_sitemap": "https://www.asiancoding.com/rfid-systems",
+      "page_type": "PRODUCT",
+      "page_subtype": "Category",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-scanner-price-guide",
+      "path": "/barcode-scanner-price-guide",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-scanner-price-guide",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "PRICE"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-scanners",
+      "path": "/barcode-scanners",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-scanners",
+      "page_type": "PRODUCT",
+      "page_subtype": "Category",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.9,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-ribbons",
+      "path": "/barcode-ribbons",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-ribbons",
+      "page_type": "PRODUCT",
+      "page_subtype": "Category",
+      "risk_flags": [
+        "SPEC"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/warehouse-barcode-scanner",
+      "path": "/warehouse-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/warehouse-barcode-scanner",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/retail-barcode-scanner",
+      "path": "/retail-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/retail-barcode-scanner",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/2d-barcode-scanner",
+      "path": "/2d-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/2d-barcode-scanner",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/long-range-barcode-scanner",
+      "path": "/long-range-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/long-range-barcode-scanner",
+      "page_type": "PRODUCT",
+      "page_subtype": "Commercial",
+      "risk_flags": [
+        "CANNIBAL",
+        "SPEC"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-scanner-comparison",
+      "path": "/barcode-scanner-comparison",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-scanner-comparison",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Comparison",
+      "risk_flags": [
+        "RANKING"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/barcode-printer-buying-guide",
+      "path": "/barcode-printer-buying-guide",
+      "path_in_sitemap": "https://www.asiancoding.com/barcode-printer-buying-guide",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Guide",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge",
+      "path": "/knowledge",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Hub",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.8,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-technology",
+      "path": "/knowledge/barcode-technology",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-technology",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Cluster hub",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-equipment",
+      "path": "/knowledge/barcode-equipment",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-equipment",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Cluster hub",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/rfid-technology",
+      "path": "/knowledge/rfid-technology",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/rfid-technology",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Cluster hub",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/industry-applications",
+      "path": "/knowledge/industry-applications",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/industry-applications",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Cluster hub",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/implementation-best-practices",
+      "path": "/knowledge/implementation-best-practices",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/implementation-best-practices",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Cluster hub",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/regional-solutions",
+      "path": "/knowledge/regional-solutions",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/regional-solutions",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Cluster hub",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/product-comparisons",
+      "path": "/knowledge/product-comparisons",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/product-comparisons",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Cluster hub",
+      "risk_flags": [
+        "RANKING",
+        "CANNIBAL"
+      ],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/emerging-trends",
+      "path": "/knowledge/emerging-trends",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/emerging-trends",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Cluster hub",
+      "risk_flags": [],
+      "changefreq": "weekly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/1d-vs-2d-barcode",
+      "path": "/knowledge/1d-vs-2d-barcode",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/1d-vs-2d-barcode",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+      "path": "/knowledge/how-to-choose-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/wired-vs-wireless-barcode-scanner",
+      "path": "/knowledge/wired-vs-wireless-barcode-scanner",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/wired-vs-wireless-barcode-scanner",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-printer-types",
+      "path": "/knowledge/barcode-printer-types",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-printer-types",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+      "path": "/knowledge/rfid-vs-barcode",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+      "path": "/knowledge/rfid-warehouse-implementation",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [
+        "CANNIBAL"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+      "path": "/knowledge/barcode-inventory-management",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-system-implementation",
+      "path": "/knowledge/barcode-system-implementation",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-system-implementation",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-scanner-troubleshooting",
+      "path": "/knowledge/barcode-scanner-troubleshooting",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-scanner-troubleshooting",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-printer-calibration",
+      "path": "/knowledge/barcode-printer-calibration",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-printer-calibration",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-label-materials",
+      "path": "/knowledge/barcode-label-materials",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-label-materials",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [
+        "SPEC"
+      ],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    },
+    {
+      "url": "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+      "path": "/knowledge/barcode-wms-integration",
+      "path_in_sitemap": "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+      "page_type": "KNOWLEDGE",
+      "page_subtype": "Article",
+      "risk_flags": [],
+      "changefreq": "monthly",
+      "priority": 0.7,
+      "primary_intent": null,
+      "indexable": false,
+      "last_seen_in_sitemap": "2026-09-22"
+    }
+  ]
+}

@@ -1,0 +1,40 @@
+{
+  "package_id": "PKG-Q17",
+  "queue_id": 17,
+  "title": "เลือกเครื่องอ่านบาร์โค้ดจากหน้างาน: เกณฑ์แปดข้อที่ตอบเองได้",
+  "target_url": "https://www.asiancoding.com/knowledge/how-to-choose-barcode-scanner",
+  "page_type": "KNOWLEDGE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "เนื้อหาทำตาม revision-specs/queue-17.md ครบทุกข้อ · เคยเป็น BLOCKED เพราะไม่รู้ว่าจะลงหน้าไหน คำตัดสิน D-12 (2026-09-25) ตั้ง /knowledge/how-to-choose-barcode-scanner เป็นหน้าหลักของ C-7 จึงปลด · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ",
+  "qa_tier": "WORDING_QA_OK",
+  "qa_tier_note": "หน้าปลายทางถือเฉพาะ flag CANNIBAL ซึ่งจงใจไม่อยู่ใน FULL_QA_FLAGS เพราะ cannibalization มีด่านของตัวเองแยกต่างหาก · ดราฟต์ไม่มีตัวเลข ไม่มีชื่อยี่ห้อ และไม่มี flagged_claims กฎจึงคำนวณได้ WORDING_QA_OK ซึ่งตรงกับความจริงว่าหน้านี้เป็นกรอบการตัดสินใจล้วน",
+  "flagged_claims": [],
+  "blocked_on_sources": [
+    "SRC-VEN-002",
+    "SRC-ACS-004"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "out_of_queue": false,
+  "unblocked_by": {
+    "decision_id": "D-12",
+    "decided_on": "2026-09-25",
+    "what_it_decided": "หน้าหลักของ C-7 คือ /knowledge/how-to-choose-barcode-scanner",
+    "why_that_page": "อีกสองหน้าที่ดูควรเป็นหน้าหลัก (/barcode-scanner-comparison, /knowledge/product-comparisons) เป็นสองหน้าเดียวในเว็บที่ถือ flag RANKING การตั้งหน้าใดหน้าหนึ่งเป็นหน้าหลักเท่ากับทำให้การจัดอันดับยี่ห้อเป็นศูนย์กลางของกลุ่ม ซึ่งคำตัดสิน Queue #17 ห้ามไว้",
+    "decided_by": "Claude · delegated by ACS Owner 2026-09-25"
+  },
+  "not_covered": [
+    "ตารางเทียบรุ่นต่อรุ่นที่มีตัวเลขจริง — ต้องรอ SRC-VEN-002 และแม้ได้มาแล้วยังห้ามจัดอันดับ เพราะ CLM-B-004 ไม่มีเงื่อนไขปลดล็อก",
+    "การชี้ไปที่สินค้าที่ ACS ขาย — ต้องรอ SRC-ACS-001"
+  ]
+}

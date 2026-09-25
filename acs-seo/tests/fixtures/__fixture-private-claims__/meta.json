@@ -1,0 +1,23 @@
+{
+  "package_id": "__fixture-private-claims__",
+  "title": "บริการเฉพาะลูกค้าโครงการ — เอกสารภายในสำหรับผู้ซื้อ",
+  "meta_description": "เอกสารประกอบการขายสำหรับลูกค้าโครงการที่เข้าถึงได้เฉพาะผู้ที่ลงทะเบียนแล้ว ไม่เผยแพร่สาธารณะและไม่ถูกจัดทำดัชนีโดย search engine",
+  "canonical": "https://www.asiancoding.com/private/project-brief",
+  "target_url": "https://www.asiancoding.com/private/project-brief",
+  "page_type": "LANDING",
+  "visibility": "PRIVATE",
+  "access_control": "ต้องเข้าสู่ระบบและอยู่ในรายชื่อลูกค้าโครงการที่ฝ่ายขายกำหนด บังคับที่ระดับ server ไม่ใช่การซ่อนลิงก์",
+  "audience": "ลูกค้าที่มียอดสั่งซื้อขั้นต่ำตามเกณฑ์ที่ ACS กำหนด",
+  "canonical_intent": "เอกสารประกอบการขายสำหรับลูกค้าเฉพาะราย",
+  "primary_keyword": "—",
+  "secondary_keywords": [],
+  "intent": "NAVIGATIONAL",
+  "action": "NEW",
+  "internal_links": [],
+  "robots": "noindex,nofollow",
+  "og": {
+    "title": "บริการเฉพาะลูกค้าโครงการ — เอกสารภายในสำหรับผู้ซื้อ",
+    "description": "เอกสารประกอบการขายสำหรับลูกค้าโครงการที่เข้าถึงได้เฉพาะผู้ที่ลงทะเบียนแล้ว ไม่เผยแพร่สาธารณะและไม่ถูกจัดทำดัชนีโดย search engine",
+    "image": null
+  }
+}

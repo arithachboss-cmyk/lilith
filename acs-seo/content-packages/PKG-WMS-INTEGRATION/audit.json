@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-WMS-INTEGRATION",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [],
+  "evidence_note": "ว่างโดยตั้งใจ — ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต ไม่มีชื่อซอฟต์แวร์ และไม่อ้างสเปกใด",
+  "forbidden_scan": {
+    "run_at": "2026-09-24",
+    "tool": "node tools/redact.mjs content-packages/PKG-WMS-INTEGRATION/article.md",
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": [],
+    "first_run_findings": [
+      "article.md: FW-B-001 มากที่สุด — ร่างแรกเขียน 'ช่วงที่คนลงทุนมากที่สุด' แก้เป็น 'ช่วงที่คนลงแรงกับมันมากกว่าช่วงอื่น'",
+      "article.md: FW-O-002 เคสลูกค้า — อยู่ใน comment ส่วนหัวของไฟล์ ซึ่งเขียนไว้ว่า 'ไม่มีการอ้างเคสลูกค้า' คือประกาศว่าไม่ได้ทำ แต่ validate.mjs สแกนทั้งไฟล์รวม comment และ severity OWNER ทำให้ FAIL จริง เรียบเรียงเป็น 'ไม่อ้างถึงงานที่เคยทำให้ผู้ใด'"
+    ],
+    "note": "รอบล่าสุดได้ 'ไม่พบข้อความที่ต้องจัดการ' exit 0 · ข้อที่สองเป็นบทเรียนใหม่ — comment ในไฟล์ที่ขึ้นเว็บก็ถูกสแกน และการเขียนว่า 'ไม่มี X' ก็เข้ากฎของ X ได้ ต่อไปจะเขียน comment โดยเลี่ยงคำที่เป็นตัวกฎเอง"
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": [
+    "แพ็กเกจนอกคิว ทำตามหัวข้อ Warehouse Automation ที่ Owner กำหนดให้เน้น",
+    "หน้าคลังสินค้าในเว็บมี 9 หน้าที่เกี่ยวข้อง เจ็ดหน้าอยู่ใน C-5 หรือ C-3 ซึ่งยังไม่มี canonical owner เหลือ /knowledge/barcode-wms-integration กับ /knowledge/barcode-inventory-management ที่เขียนได้",
+    "จงใจไม่ครอบคลุมการเลือกอุปกรณ์ ซึ่งเป็นเรื่องของ C-1 และ C-7"
+  ]
+}

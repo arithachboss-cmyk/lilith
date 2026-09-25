@@ -1,0 +1,44 @@
+{
+  "version": "3.0.0",
+  "as_of": "2026-09-23",
+  "gates": {
+    "GATE-RENDER": {
+      "name": "Rendering Gate (SSR / prerender)",
+      "status": "FAIL",
+      "owner": "Manus",
+      "evidence_source": "SRC-WEB-003",
+      "rule": "www.asiancoding.com ยังเป็น client-side rendered — ห้ามนับว่าแพ็กเกจใด 'พร้อม SEO' หรือคาดหวัง index จนกว่า SSR/prerender path จะผ่านและมีหลักฐาน",
+      "unblocks": "ทุกแพ็กเกจ (global gate)",
+      "note": "PR #1 รายงานว่าทดสอบเมื่อ 2026-09-22 แล้วพบว่า crawler ที่ไม่รัน JavaScript ได้รับกลับมาแค่ <title> ไม่มีเนื้อหาใน body — บันทึกไว้เป็นข้อสังเกตจาก session นั้น session นี้ยืนยันซ้ำไม่ได้เพราะ egress ไปยังโดเมนถูกบล็อก สถานะจึงคง FAIL ซึ่งเป็นค่าที่ปลอดภัยอยู่แล้ว"
+    },
+    "GATE-CANNIBAL": {
+      "name": "Cannibalization Gate",
+      "status": "OPEN_WITH_FINDINGS",
+      "owner": "SEO Lead",
+      "evidence_source": "SRC-WEB-004",
+      "rule": "C-1 ตัดสินแล้วด้วย D-08 อีก 7 cluster ยังไม่มี canonical owner และยังห้ามเขียนแพ็กเกจใหม่ที่ยิง intent ของกลุ่มเหล่านั้น",
+      "unblocks": "ต่อแพ็กเกจ",
+      "findings": {
+        "clusters": 9,
+        "urls_in_clusters": 49,
+        "largest_cluster": "C-1 (10 URL แต่ที่ชนกันจริง 3)",
+        "clusters_with_canonical_owner": 1
+      }
+    },
+    "GATE-OWNER-APPROVAL": {
+      "name": "Owner QA Approval",
+      "status": "NOT_GRANTED",
+      "owner": "ACS Owner",
+      "evidence_source": null,
+      "rule": "ไม่มีแพ็กเกจใดออกจาก DRAFT_PENDING_REVIEW ได้ถ้าไม่มีลายเซ็น Owner บันทึกใน package_status.json",
+      "unblocks": "ต่อแพ็กเกจ"
+    }
+  },
+  "publish_preconditions": [
+    "gates.mechanical = PASS",
+    "gates.claim_qa = PASS",
+    "gates.cannibalization = PASS",
+    "GATE-RENDER = PASS",
+    "gates.owner_approval = GRANTED"
+  ]
+}

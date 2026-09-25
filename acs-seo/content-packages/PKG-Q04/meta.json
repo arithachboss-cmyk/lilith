@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-Q04",
+  "title": "เลือกวัสดุฉลากบาร์โค้ด: กลไกที่ตัดสินว่าฉลากอยู่หรือหลุด",
+  "meta_description": "วัสดุหน้าฉลาก กาว และริบบอนทำงานร่วมกัน การซีดกับการหลุดลอกเป็นคนละกลไก บทความนี้อธิบายสิ่งที่ตัดสินผลจริง และเหตุผลที่ต้องอ่านเงื่อนไขการวัดควบคู่กับตัวเลขเสมอ",
+  "canonical": "https://www.asiancoding.com/knowledge/barcode-label-materials",
+  "target_url": "https://www.asiancoding.com/knowledge/barcode-label-materials",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "อธิบายกลไกที่ทำให้ฉลากอยู่หรือหลุดในเชิงหลักการ เพื่อให้อ่านดาต้าชีตของผู้ผลิตรายใดก็ได้อย่างเข้าใจ จงใจไม่ระบุค่าความทนทานของวัสดุใด และไม่เปรียบเทียบรุ่นหรือยี่ห้อ",
+  "primary_keyword": "วัสดุฉลากบาร์โค้ด",
+  "secondary_keywords": [
+    "เลือกฉลากบาร์โค้ด สภาพแวดล้อม",
+    "ฉลากหลุดลอก สาเหตุ",
+    "กาวฉลาก พื้นผิว"
+  ],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/barcode-technology",
+    "https://www.asiancoding.com/barcode-ribbons",
+    "https://www.asiancoding.com/knowledge/implementation-best-practices",
+    "https://www.asiancoding.com/contact"
+  ],
+  "form_note": "ทุกประโยคเป็น Form A (กลไก) ตาม revision-specs/queue-4.md §3 · ไม่มีประโยค Form B เลย เพราะ Form B ต้องมีดาต้าชีตของสินค้าที่ ACS ขายจริง ซึ่งต้องใช้ทั้ง SRC-VEN-001 และ SRC-ACS-001 คู่กัน",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "เลือกวัสดุฉลากบาร์โค้ด: กลไกที่ตัดสินว่าฉลากอยู่หรือหลุด",
+    "description": "วัสดุหน้าฉลาก กาว และริบบอนทำงานร่วมกัน การซีดกับการหลุดลอกเป็นคนละกลไก บทความนี้อธิบายสิ่งที่ตัดสินผลจริง และเหตุผลที่ต้องอ่านเงื่อนไขการวัดควบคู่กับตัวเลขเสมอ",
+    "image": null
+  }
+}

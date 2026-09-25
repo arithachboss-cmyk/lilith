@@ -1,0 +1,21 @@
+{
+  "package_id": "{{PACKAGE_ID}}",
+  "title": "{{SEO title 30-60 ตัวอักษร}}",
+  "meta_description": "{{meta description 70-160 ตัวอักษร ห้ามใส่ตัวเลข/ราคาที่ยังไม่มีหลักฐาน}}",
+  "canonical": "{{https://www.asiancoding.com/...}}",
+  "target_url": "{{https://www.asiancoding.com/...}}",
+  "page_type": "{{PRODUCT|SERVICE|KNOWLEDGE|LANDING}}",
+  "canonical_intent": "{{หนึ่งประโยค: หน้านี้ตอบ intent อะไร และไม่ตอบอะไร}}",
+  "primary_keyword": "{{keyword หลัก}}",
+  "secondary_keywords": [],
+  "intent": "{{INFORMATIONAL|COMMERCIAL|TRANSACTIONAL|NAVIGATIONAL}}",
+  "action": "{{NEW|ENRICH|HOLD}}",
+  "internal_links": [],
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex ไว้จนกว่า Owner อนุมัติและ rendering gate ผ่าน",
+  "og": {
+    "title": "{{og title}}",
+    "description": "{{og description}}",
+    "image": null
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-WMS-INTEGRATION",
+  "title": "เชื่อมบาร์โค้ดเข้ากับ WMS: สี่จุดที่ต้องตกลงก่อน",
+  "meta_description": "การอ่านบาร์โค้ดได้ไม่เท่ากับข้อมูลเข้าระบบครบและตรง บทความนี้อธิบายสี่จุดที่ต้องตกลงก่อนเชื่อมกับระบบคลัง สิ่งที่มักพังหลังเปิดใช้งานจริง และสิ่งที่ควรทดสอบก่อน",
+  "canonical": "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+  "target_url": "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "อธิบายว่าการเชื่อมบาร์โค้ดเข้ากับระบบคลังพังตรงไหนและต้องตกลงอะไรก่อน จงใจไม่แนะนำซอฟต์แวร์ ไม่ระบุรุ่นอุปกรณ์ ไม่ให้ตัวเลข และไม่ครอบคลุมการเลือกอุปกรณ์ซึ่งเป็นเรื่องของหน้าในกลุ่ม C-1 และ C-7",
+  "primary_keyword": "เชื่อมบาร์โค้ดกับ wms",
+  "secondary_keywords": [
+    "ระบบบาร์โค้ดคลังสินค้า เชื่อมระบบ",
+    "barcode wms integration",
+    "สแกนแล้วข้อมูลไม่เข้าระบบ"
+  ],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+    "https://www.asiancoding.com/knowledge/implementation-best-practices",
+    "https://www.asiancoding.com/contact"
+  ],
+  "scope_note": "แพ็กเกจนอกคิวหมายเลข — ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Warehouse Automation) ไม่ได้อ้างว่าเป็นหนึ่งใน 13 รายการ PKG-UNMAPPED",
+  "cluster_note": "/knowledge/barcode-wms-integration ไม่อยู่ใน cluster ใดและไม่ถือ risk flag ใด · หน้าคลังสินค้าอื่นเกือบทั้งหมดอยู่ใน C-5 ซึ่งยังไม่มี canonical owner",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "เชื่อมบาร์โค้ดเข้ากับ WMS: สี่จุดที่ต้องตกลงก่อน",
+    "description": "การอ่านบาร์โค้ดได้ไม่เท่ากับข้อมูลเข้าระบบครบและตรง บทความนี้อธิบายสี่จุดที่ต้องตกลงก่อนเชื่อมกับระบบคลัง สิ่งที่มักพังหลังเปิดใช้งานจริง และสิ่งที่ควรทดสอบก่อน",
+    "image": null
+  }
+}

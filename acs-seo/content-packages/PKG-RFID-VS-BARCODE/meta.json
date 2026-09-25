@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-RFID-VS-BARCODE",
+  "title": "RFID กับบาร์โค้ด: เลือกจากลักษณะงาน ไม่ใช่จากรุ่น",
+  "meta_description": "RFID กับบาร์โค้ดต่างกันที่วิธีอ่านข้อมูลและสิ่งที่ต้องทำเพื่อให้อ่านได้ บทความนี้อธิบายกลไกของทั้งสอง และคำถามที่ควรตอบเกี่ยวกับหน้างานก่อนตัดสินใจเลือก",
+  "canonical": "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+  "target_url": "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "อธิบายกลไกที่ทำให้ RFID กับบาร์โค้ดต่างกัน และให้ชุดคำถามที่ผู้อ่านตอบได้จากหน้างานของตัวเอง จงใจไม่ตอบว่าอันไหนดีกว่า ไม่ระบุรุ่น ไม่ระบุสเปก และไม่ครอบคลุมการออกแบบระบบ RFID ซึ่งเป็นเรื่องของหน้าในกลุ่ม C-3",
+  "primary_keyword": "rfid กับ barcode ต่างกันอย่างไร",
+  "secondary_keywords": [
+    "เลือก rfid หรือบาร์โค้ด",
+    "rfid vs barcode",
+    "ติดตามสินค้า rfid บาร์โค้ด"
+  ],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/knowledge/rfid-technology",
+    "https://www.asiancoding.com/knowledge/barcode-technology",
+    "https://www.asiancoding.com/contact"
+  ],
+  "scope_note": "แพ็กเกจนอกคิวหมายเลข — ทำตามหัวข้อที่ Owner กำหนดให้เน้น (RFID) ไม่ได้อ้างว่าเป็นหนึ่งใน 13 รายการ PKG-UNMAPPED ซึ่งยังไม่รู้ว่าคืออะไรจนกว่าจะได้ SRC-KW-001 ฉบับเต็ม",
+  "cluster_note": "/knowledge/rfid-vs-barcode เป็นหน้า RFID เพียงหน้าเดียวจากแปดหน้าที่ไม่อยู่ใน C-3 · C-3 ยังไม่มี canonical owner หน้าอื่นทั้งหมดจึงเขียนไม่ได้ตอนนี้",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "RFID กับบาร์โค้ด: เลือกจากลักษณะงาน ไม่ใช่จากรุ่น",
+    "description": "RFID กับบาร์โค้ดต่างกันที่วิธีอ่านข้อมูลและสิ่งที่ต้องทำเพื่อให้อ่านได้ บทความนี้อธิบายกลไกของทั้งสอง และคำถามที่ควรตอบเกี่ยวกับหน้างานก่อนตัดสินใจเลือก",
+    "image": null
+  }
+}

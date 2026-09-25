@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "หน้าที่อยู่ในสองกลุ่มพร้อมกัน — fixture ทดสอบลำดับ",
+  "description": "fixture สำหรับทดสอบว่าหน้าที่ปรากฏในสอง cluster ยังถูกกั้นเมื่อกลุ่มใดกลุ่มหนึ่งยังไม่มีหน้าหลัก ไม่ว่าไฟล์จะเรียงกลุ่มอย่างไร",
+  "url": "https://www.asiancoding.com/retail-barcode-scanner",
+  "inLanguage": "th-TH",
+  "_generation_note": "regenerate ได้จาก meta.json"
+}

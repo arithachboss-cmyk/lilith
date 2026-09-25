@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "หลักการเลือกระหว่างบาร์โค้ด 1D และ 2D ให้เหมาะกับงาน",
+  "description": "อธิบายความต่างของบาร์โค้ด 1D และ 2D ในเชิงหลักการ พร้อมแนวทางพิจารณาก่อนเลือกใช้ และเหตุผลที่ควรทดสอบกับหน้างานจริง",
+  "url": "https://www.asiancoding.com/barcode-scanners",
+  "inLanguage": "th-TH",
+  "_generation_note": "regenerate ได้จาก meta.json"
+}

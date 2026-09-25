@@ -1,0 +1,37 @@
+{
+  "package_id": "PKG-RFID-VS-BARCODE",
+  "queue_id": null,
+  "title": "RFID กับบาร์โค้ด: เลือกจากลักษณะงาน ไม่ใช่จากรุ่น",
+  "target_url": "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+  "page_type": "KNOWLEDGE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "แพ็กเกจนอกคิวหมายเลข ทำตามหัวข้อที่ Owner กำหนดให้เน้น (RFID) · /knowledge/rfid-vs-barcode เป็นหน้า RFID เพียงหน้าเดียวจากแปดหน้าที่ไม่อยู่ใน C-3 ซึ่งยังไม่มี canonical owner จึงเป็นหน้า RFID หน้าเดียวที่เขียนได้ตอนนี้ · mechanical QA ผ่าน (PASS) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และยังไม่ได้ยืนยันว่าแพ็กเกจนี้ซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+  "qa_tier": "WORDING_QA_OK",
+  "qa_tier_note": "หน้าปลายทางไม่ถือ risk flag ใด ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่มี flagged_claims — validate.mjs จึงคำนวณได้ WORDING_QA_OK ซึ่งเป็นระดับที่ต่ำที่สุด และสะท้อนความจริงว่าหน้านี้เป็นหลักการล้วน",
+  "flagged_claims": [],
+  "blocked_on_sources": [
+    "SRC-VEN-002",
+    "SRC-KW-001"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "out_of_queue": true,
+  "requested_by": "ACS Owner — หัวข้อที่กำหนดให้เน้น: Barcode, RFID, Industrial Labels, Warehouse Automation, Retail Automation, Industrial Mobile Computing",
+  "requested_on": "2026-09-24",
+  "open_question": {
+    "question": "แพ็กเกจนอกคิวนี้ซ้ำกับหนึ่งใน 13 รายการ PKG-UNMAPPED หรือไม่",
+    "why_cannot_answer_now": "ยังไม่มี SRC-KW-001 ฉบับเต็ม จึงไม่รู้ว่า 13 รายการนั้นคืออะไร · เลือกเดินหน้าเพราะการรอทำให้หัวข้อที่ Owner กำหนดให้เน้นไม่มีอะไรคืบเลย และ action เป็น ENRICH บนหน้าที่มีอยู่แล้ว ไม่ได้สร้างหน้าใหม่",
+    "if_duplicate": "รวมเข้ากับรายการนั้นได้ ไม่ต้องทิ้งงาน เพราะเป็นการปรับปรุงหน้าเดิม",
+    "raised_on": "2026-09-24"
+  }
+}

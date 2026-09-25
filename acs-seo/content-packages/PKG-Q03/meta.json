@@ -1,0 +1,32 @@
+{
+  "package_id": "PKG-Q03",
+  "title": "ซื้อเครื่องสแกนบาร์โค้ดในไทย: สิ่งที่ต้องยืนยันก่อนสั่ง",
+  "meta_description": "แนวทางจัดหาเครื่องสแกนบาร์โค้ดสำหรับงานในประเทศไทย ตั้งแต่การกำหนดขอบเขตใช้งาน การทดสอบการอ่านกับฉลากจริง ไปจนถึงสิ่งที่ควรยืนยันกับผู้ขายก่อนสั่งซื้อ",
+  "canonical": "https://www.asiancoding.com/barcode-scanner-thailand",
+  "target_url": "https://www.asiancoding.com/barcode-scanner-thailand",
+  "page_type": "PRODUCT",
+  "canonical_intent": "หน้านี้ตอบว่าจะจัดหาเครื่องสแกนบาร์โค้ดสำหรับหน้างานในไทยอย่างไร ตั้งแต่กำหนดขอบเขตจนถึงสิ่งที่ต้องยืนยันก่อนสั่งซื้อ จงใจไม่อธิบายว่าเครื่องสแกนบาร์โค้ดคืออะไรหรือมีกี่ประเภท เพราะนั่นเป็นงานของหน้าหลักในกลุ่ม C-1",
+  "primary_keyword": "ซื้อเครื่องสแกนบาร์โค้ด",
+  "secondary_keywords": [
+    "จัดหาเครื่องสแกนบาร์โค้ด",
+    "เลือกเครื่องสแกนบาร์โค้ด หน้างาน",
+    "ขอใบเสนอราคาเครื่องสแกนบาร์โค้ด"
+  ],
+  "intent": "COMMERCIAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/เครื่องสแกนบาร์โค้ด",
+    "https://www.asiancoding.com/barcode-scanners",
+    "https://www.asiancoding.com/select-solution",
+    "https://www.asiancoding.com/contact"
+  ],
+  "hreflang_note": "หน้านี้ไม่อยู่ในชุด hreflang — alternate มีเฉพาะสองหน้าหลักของ C-1 คือ /เครื่องสแกนบาร์โค้ด (th) กับ /barcode-scanners (en) ตาม runbook §2 การเพิ่มหน้านี้เป็น en-TH alternate คือการรื้อการชนกันที่ D-08 ตั้งใจจะจบ",
+  "canonical_note": "self-canonical ตาม runbook §1 — การ canonical ไปหาหน้าหลักเท่ากับ option A ที่ถูกทับไปแล้ว และจะทิ้งเนื้อหาที่ option B มีไว้เพื่อสร้าง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "ซื้อเครื่องสแกนบาร์โค้ดในไทย: สิ่งที่ต้องยืนยันก่อนสั่ง",
+    "description": "แนวทางจัดหาเครื่องสแกนบาร์โค้ดสำหรับงานในประเทศไทย ตั้งแต่การกำหนดขอบเขตใช้งาน การทดสอบการอ่านกับฉลากจริง ไปจนถึงสิ่งที่ควรยืนยันกับผู้ขายก่อนสั่งซื้อ",
+    "image": null
+  }
+}

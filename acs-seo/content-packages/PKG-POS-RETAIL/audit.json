@@ -1,0 +1,42 @@
+{
+  "package_id": "PKG-POS-RETAIL",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [],
+  "evidence_note": "ว่างโดยตั้งใจ — ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต ไม่มีราคา และไม่ประกาศขอบเขตบริการใด",
+  "forbidden_scan": {
+    "run_at": "2026-09-24",
+    "tool": "node tools/redact.mjs content-packages/PKG-POS-RETAIL/article.md",
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": [],
+    "first_run_findings": [
+      "article.md: FW-O-003 ตัวแทน — ประโยค 'รหัสหนึ่งตัวแทนสินค้า' ใช้คำในความหมาย represents ไม่ใช่สถานะตัวแทนจำหน่าย แต่ severity OWNER ทำให้ FAIL จริง เรียบเรียงเป็น 'ใช้รหัสเดียวกันทั้งชนิดสินค้า'"
+    ],
+    "note": "รอบล่าสุดได้ 'ไม่พบข้อความที่ต้องจัดการ' exit 0"
+  },
+  "false_positive_observed": [
+    {
+      "rule": "FW-O-003",
+      "matched": "ตัวแทน",
+      "context": "ประโยคเรื่องโครงสร้างรหัสสินค้า ใช้คำว่าตัวแทนในความหมาย represents",
+      "verdict": "false positive",
+      "action": "เรียบเรียงประโยคของตัวเองใหม่ ไม่แก้กฎ",
+      "why_rule_should_not_change": "คำว่าตัวแทนในบริบทธุรกิจหมายถึงตัวแทนจำหน่ายเป็นหลัก และการอ้างสถานะตัวแทนโดยไม่มีเอกสารแต่งตั้งเป็นความเสี่ยงที่หนักกว่าการต้องเรียบเรียงประโยคใหม่",
+      "occurrence": "false positive รายที่สี่ของวันนี้ รายก่อนหน้าเป็น FW-O-013 สามครั้ง"
+    }
+  ],
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": [
+    "แพ็กเกจนอกคิว ทำตามหัวข้อ Retail Automation ที่ Owner กำหนดให้เน้น",
+    "หน้า Retail ห้าหน้า สี่หน้าอยู่ใน C-6 หรือ C-1 กับ C-6 ซึ่ง C-6 ยังไม่มี canonical owner เหลือหน้านี้หน้าเดียวที่เขียนได้",
+    "schema ใช้ WebPage ไม่ใช่ Service โดยตั้งใจ เพราะ Service ชวนให้ต้องประกาศ areaServed provider และ offers ซึ่งยังไม่มีหลักฐาน",
+    "comment ส่วนหัวของ article.md เขียนโดยเลี่ยงคำที่เป็นตัวกฎเอง ตามบทเรียนจาก PKG-WMS-INTEGRATION"
+  ]
+}

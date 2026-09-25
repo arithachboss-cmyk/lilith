@@ -1,0 +1,32 @@
+{
+  "package_id": "PKG-POS-RETAIL",
+  "title": "ระบบบาร์โค้ดหน้าร้าน — เริ่มที่รหัสสินค้า ไม่ใช่เครื่อง",
+  "meta_description": "ระบบบาร์โค้ดหน้าร้านเริ่มที่โครงสร้างรหัสสินค้า ไม่ใช่ที่เครื่องอ่าน บทความนี้อธิบายสิ่งที่หน้าร้านต่างจากคลัง และลำดับการตัดสินใจที่ทำให้ไม่ต้องรื้อทีหลัง",
+  "canonical": "https://www.asiancoding.com/pos-barcode-system",
+  "target_url": "https://www.asiancoding.com/pos-barcode-system",
+  "page_type": "SERVICE",
+  "canonical_intent": "อธิบายลำดับการตัดสินใจของการวางระบบบาร์โค้ดหน้าร้าน และเงื่อนไขที่หน้าร้านมีแต่คลังไม่มี จงใจไม่ประกาศขอบเขตบริการของ ACS ไม่ระบุรุ่นหรือซอฟต์แวร์ ไม่ให้ตัวเลข และไม่ครอบคลุมการเลือกเครื่องอ่านซึ่งเป็นเรื่องของ C-1 และ C-7",
+  "primary_keyword": "ระบบบาร์โค้ดหน้าร้าน",
+  "secondary_keywords": [
+    "วางระบบบาร์โค้ด ร้านค้า",
+    "pos บาร์โค้ด เริ่มต้น",
+    "รหัสสินค้า ร้านค้าปลีก"
+  ],
+  "intent": "COMMERCIAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/select-solution",
+    "https://www.asiancoding.com/knowledge/barcode-technology",
+    "https://www.asiancoding.com/contact"
+  ],
+  "scope_note": "แพ็กเกจนอกคิวหมายเลข — ทำตามหัวข้อที่ Owner กำหนดให้เน้น (Retail Automation) ไม่ได้อ้างว่าเป็นหนึ่งใน 13 รายการ PKG-UNMAPPED",
+  "cluster_note": "/pos-barcode-system ไม่อยู่ใน cluster ใดและไม่ถือ risk flag ใด · เป็นหน้า Retail Automation หน้าเดียวจากห้าหน้าที่เขียนได้ตอนนี้ ที่เหลืออยู่ใน C-6 ซึ่งยังไม่มี canonical owner",
+  "service_page_note": "หน้านี้เป็น page_type SERVICE แต่ดราฟต์ไม่ประกาศขอบเขตบริการใดของ ACS เลย เพราะ CLM-O-007 และ CLM-O-010 ยังไม่ปลด · เนื้อหาจึงเป็นลำดับการตัดสินใจของผู้ซื้อ และ CTA ขอให้ส่งข้อมูลมาเพื่อกำหนดขอบเขตร่วมกัน ไม่ใช่การประกาศว่าให้บริการอะไรบ้าง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "ระบบบาร์โค้ดหน้าร้าน — เริ่มที่รหัสสินค้า ไม่ใช่เครื่อง",
+    "description": "ระบบบาร์โค้ดหน้าร้านเริ่มที่โครงสร้างรหัสสินค้า ไม่ใช่ที่เครื่องอ่าน บทความนี้อธิบายสิ่งที่หน้าร้านต่างจากคลัง และลำดับการตัดสินใจที่ทำให้ไม่ต้องรื้อทีหลัง",
+    "image": null
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "package_id": "PKG-Q21",
+  "queue_id": 21,
+  "title": "ผลตอบแทนของระบบบาร์โค้ด: ตัวเลขต้องมาจากไซต์จริง",
+  "target_url": "https://www.asiancoding.com/roi-calculator",
+  "page_type": "LANDING",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "ดราฟต์ส่งแล้ว ไม่มีตัวเลขผลลัพธ์ใด และไม่แทนด้วยคำคลุมเครืออย่าง 'ดีขึ้นมาก' ซึ่ง spec §3 ระบุว่าเป็น claim เดิมที่ถอดหลักฐานออก · mechanical QA ผ่าน (PASS, tier T2_FULL ตาม risk flag NUMBERS ของหน้าปลายทาง) · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL และตัวเลขระยะอ่าน/ความเร็วบนหน้าสินค้ายังไม่ได้จัดการ ซึ่งเป็นการใช้คำตัดสินเดียวกันคนละจุด",
+  "qa_tier": "T2_FULL",
+  "qa_tier_note": "T2_FULL เพราะหน้าปลายทางถือ risk flag NUMBERS ไม่ใช่เพราะดราฟต์มีตัวเลข — ดราฟต์นี้ไม่มีตัวเลขเลย",
+  "flagged_claims": [
+    "CLM-B-001",
+    "CLM-B-006",
+    "CLM-E-001",
+    "CLM-E-002",
+    "CLM-E-003"
+  ],
+  "blocked_on_sources": [
+    "SRC-VEN-002",
+    "SRC-ACS-003"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "queue_decision": "Owner Queue #21 — ลบตัวเลขระยะอ่าน/ความเร็ว/ความแม่นยำ 65-70% → 95%+ จนกว่าจะมีหลักฐาน",
+  "revision_spec": "revision-specs/queue-21.md",
+  "cannibalization_cluster": null,
+  "cluster_note": "/roi-calculator เป็นหน้าแม่และไม่อยู่ใน cluster ใด · หน้าลูกทั้งสี่อยู่คนละ cluster (C-4 manufacturing, C-5 warehouse, C-6 retail) ซึ่งยังไม่มีหน้าหลัก แพ็กเกจนี้จึงไม่แตะหน้าลูกเลย",
+  "coverage_note": "ใช้คำตัดสิน Queue #21 กับหน้านี้เท่านั้น ตัวเลขระยะการอ่านบน /long-range-barcode-scanner และความเร็วพิมพ์บน /tsc-barcode-printer เป็นการใช้คำตัดสินเดียวกันคนละจุด ยังไม่ได้ทำ และ /tsc-barcode-printer อยู่ใน C-2 ซึ่งยังไม่มีหน้าหลัก"
+}

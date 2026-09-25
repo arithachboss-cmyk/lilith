@@ -1,0 +1,28 @@
+{
+  "package_id": "__fixture-violations__",
+  "queue_id": null,
+  "title": "เครื่องอ่านบาร์โค้ดที่ดีที่สุด อันดับ 1 ราคาถูก",
+  "target_url": "https://example.com/x",
+  "page_type": "PRODUCT",
+  "package_status": "READY_TO_PUBLISH",
+  "board_status": "PASS",
+  "board_reason": "fixture",
+  "qa_tier": "WORDING_QA_OK",
+  "flagged_claims": [
+    "CLM-B-001"
+  ],
+  "blocked_on_sources": [
+    "SRC-NOT-REAL"
+  ],
+  "gates": {
+    "mechanical": "PASS",
+    "claim_qa": "PASS",
+    "cannibalization": "PASS",
+    "rendering": "PASS",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": true,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false
+}
