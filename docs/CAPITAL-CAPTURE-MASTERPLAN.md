@@ -9,6 +9,15 @@
 
 ## 0 · The finding that governs this entire memo
 
+> **UPDATE 2026-09-25 — D1 is resolved.** The Owner ratified the `middle_success_fee` seed rule as
+> written: `basis: TRANSACTION_VALUE`, `payer: OWNER`, `rate_bp: 10`, `vat_rate_bp: 700`. See
+> `docs/adr/ADR-0014-success-fee-rule-ratified.md`. Passages below that describe the fee basis and
+> payer as undecided are superseded and kept for the record. The 6.36% figure from the Transparent
+> Bridge blueprint is superseded and must not be used. One question remains open and is raised in
+> the ADR: the rule prices rentals at 0.1% of annualised rent, which is about ฿420 on a
+> ฿35,000/month condo.
+
+
 The revenue engine is **already specified and already correct**. `docs/01-product-and-system-architecture.md`
 defines `fee_rules` with the right primitives:
 
@@ -327,7 +336,7 @@ higher fee from this bridge than from an unstructured broker.
 
 | Line | Basis | Trigger | Recognises revenue? | Status |
 |---|---|---|---|---|
-| **Success fee** | `TRANSACTION_VALUE × rate_bp` | `closing_event` PROVENANCE_OK | **Yes — the only line that does** | `rate_bp` and `payer` **UNDECIDED** |
+| **Success fee** | `TRANSACTION_VALUE × rate_bp` | `closing_event` PROVENANCE_OK | **Yes — the only line that does** | **Ratified: 10 bp, payer OWNER (ADR-0014)** |
 | **Rental placement fee** | `ANNUAL_RENT` or `MONTHLY_RENT × n` | Lease executed | Yes | Undecided |
 | **Evidence readiness engagement** | `FIXED` | Signed engagement, paid in advance | Yes | Designable today — needs no closing |
 | **Mandate retainer** | `FIXED` per period | Exclusive mandate signed | Yes | Designable today |
@@ -428,13 +437,15 @@ every satang of recognised revenue traces to a `closing_event` with `PROVENANCE_
 
 | # | Decision | Blocks | Cost to decide |
 |---|---|---|---|
-| **D1** | **`fee_rules.basis` and `fee_rules.payer`** | **The entire revenue system** | One sentence |
+| ~~**D1**~~ | ~~`fee_rules.basis` and `fee_rules.payer`~~ | ~~The entire revenue system~~ | **RESOLVED 2026-09-25 — ADR-0014** |
 | D2 | Middle Property Views: disable button, fix copy, or unpublish | A live false confirmation | One word |
 | D3 | Confirm no-custody scope with counsel | Every settlement design | One consultation |
 | D4 | Retainer and readiness-engagement pricing | The two pre-closing cash lines | One afternoon |
 | D5 | Accept review §3 (Property Pulse as read model) | Whether to enable its database | One line |
 
-**D1 is the memo.** Everything else is execution.
+**D1 was the memo, and it is now answered (ADR-0014).** Everything else is execution. The one
+question the answer opened — rental pricing at 0.1% of annualised rent — is in the ADR's
+consequences, not a blocker.
 
 ---
 

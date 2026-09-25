@@ -56,6 +56,12 @@ add Redis only when a measured load demands it. Neither condition exists today.
 
 ### 2.2 — **CRITICAL** · The worked example asserts a fee rate 63.6× the recorded one
 
+> **RESOLVED 2026-09-25.** The Owner ratified the `middle_success_fee` seed rule as written —
+> 10 bp, payer OWNER (`docs/adr/ADR-0014-success-fee-rule-ratified.md`). **The 6.36% figure in
+> the blueprint is superseded and must not be used.** The finding below stands as written: the
+> example was unsourced when written, and that is why it had to be challenged rather than
+> adopted.
+
 The example states a ฿17,800,000 success fee on a ฿280,000,000 asset.
 
 ```
@@ -72,10 +78,13 @@ One of three things is true, and **nobody currently knows which**:
 2. ฿17.8M is a blended figure across several lines and is not a rate at all;
 3. the number is illustrative and unsourced.
 
-`fee_rules.basis` and `fee_rules.payer` remain **undecided** (`CAPITAL-CAPTURE-MASTERPLAN.md` D1).
-A worked example that embeds a rate 63.6× the recorded one, before that decision is made, will be
-read by an implementer as the specification. **Mark every figure in §2 as unsourced illustration,
-or replace them with the decided rate.**
+At the time of review, `fee_rules.basis` and `fee_rules.payer` were **undecided**. A worked example
+embedding a rate 63.6× the recorded one, before that decision was made, would have been read by an
+implementer as the specification.
+
+**Now resolved (ADR-0014): the rate is 10 bp and the payer is OWNER.** The requirement stands in a
+sharper form — every figure in §2 of the blueprint must be **replaced with the ratified rate**, not
+merely marked as illustration.
 
 The same applies to ฿70,000,000 for 7 units (= ฿10,000,000 per unit) — unsourced.
 

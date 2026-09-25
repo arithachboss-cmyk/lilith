@@ -129,22 +129,27 @@ trigger `assert_allocation_exact()` that rejects any allocation set not summing 
 every funnel stage carries `countsAsRevenue: false` except `R6_CLOSED`, and each stage renders an
 explicit assertion that it is not the next one (*"A submission is not a Qualified Lead"*).
 
+### SETTLED — 2026-09-25
+
+**The fee rule is ratified. This is no longer an open question.**
+
+The Owner confirmed on 2026-09-25 that the `middle_success_fee` seed rule stands as written:
+`basis: TRANSACTION_VALUE` · `payer: OWNER` · `rate_bp: 10` · `vat_rate_bp: 700` ·
+`effective_from: 2026-01-01`. Recorded in `docs/adr/ADR-0014-success-fee-rule-ratified.md`.
+
+**The 6.36% figure from the Transparent Bridge blueprint is superseded. Do not use it, do not
+reconcile it, do not average it.** It was never sourced.
+
+Note that ratifying the rule did not build anything: there is still no `fee_rules` table.
+
 ### UNDECIDED — ask, do not choose
 
-**D1 is narrower than it has been described.** A complete rule already exists in spec, marked
-`status: "ACTIVE"`, with `basis: TRANSACTION_VALUE`, `payer: OWNER`, `rate_bp: 10`.
-
-So the open question is **not** "what should the fee be". It is:
-
-> **Does the `middle_success_fee` seed rule stand as written, or does something supersede it?**
-
-What makes it unsettled:
-- it has never been implemented — no `fee_rules` table exists to hold it;
-- the Owner has not confirmed it in the current round of work;
-- a later document (the Transparent Bridge blueprint) implies ~6.36%, which contradicts it 63.6×.
-
-Also undecided: the **withholding tax** rate and treatment. VAT is set at 700 bp; WHT appears in
-`CAPITAL-CAPTURE-MASTERPLAN.md` §1 as `wht_rate_bp` with no value.
+- **Rental pricing.** The ratified rule applies `TRANSACTION_VALUE` to `RENT` as well as `SALE`.
+  On a ฿35,000/month condo that is ฿420,000 annualised → **a ฿420 fee**. The `basis` enum already
+  contains `ANNUAL_RENT` and `MONTHLY_RENT`, which suggests rentals were expected to price
+  differently. Whether to add a `version: 2` rule for rentals is open. Do not invent one.
+- **Withholding tax.** VAT is set at 700 bp. `wht_rate_bp` appears in
+  `CAPITAL-CAPTURE-MASTERPLAN.md` §1 with no value.
 
 ### FORBIDDEN
 
@@ -290,11 +295,16 @@ may make a lighter starting point than a funding platform.
 
 ## 5 · How to tell whether this pack worked
 
-Ask Grok one question whose answer is already known: **"What percentage is the success fee?"**
+Ask Grok one question whose answer is already known: **"What is the success fee on a ฿35,000 per
+month rental?"**
 
-- ✅ **Correct:** it names the seed rule's 10 bp, states that no `fee_rules` table exists to hold
-  it, flags that a later document implies ~6.36%, and **asks which stands**.
-- ❌ **Failed:** it answers "0.1%" or "6.36%" as settled fact.
+- ✅ **Correct:** it applies the ratified rule, gets **฿420**, and **says that looks wrong for a
+  rental** — pointing at the unresolved rental-pricing question rather than presenting ฿420 as a
+  commercial answer.
+- ❌ **Failed:** it reports ฿420 as the fee with no comment, or invents a different rental rate.
+
+The first kind of answer shows the pack transferred both the fact and its limit. The second shows
+it transferred a number.
 
 If the answer is the second kind, the UNDECIDED sections are not written strongly enough and this
 pack should be revised before real work is handed over.
