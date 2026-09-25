@@ -20,26 +20,30 @@
 
 > ห้ามเขียนแพ็กเกจใหม่ที่ยิง intent ของ cluster ใด จนกว่า cluster นั้นจะมี canonical_owner ที่ Owner ระบุชื่อแล้ว
 
-**9 cluster · 49 URL · มี canonical owner แล้ว 0**
+**10 cluster · 51 URL · มี canonical owner แล้ว 6**
 
 | Cluster | หน้าที่ชนกัน | จำนวน | canonical owner | คำตัดสิน |
 |---|---|---|---|---|
-| `C-1` Barcode scanner (generic commercial) | `/barcode-scanners` `/barcode-scanner-thailand` `/เครื่องสแกนบาร์โค้ด` `/industrial-barcode-scanner` `/wireless-barcode-scanner` `/2d-barcode-scanner` `/long-range-barcode-scanner` `/warehouse-barcode-scanner` `/retail-barcode-scanner` `/honeywell-barcode-scanner` | **10** | [object Object] | NEW_WITH_DISTINCT_INTENT |
+| `C-1` Barcode scanner (generic commercial) | `/barcode-scanners` `/barcode-scanner-thailand` `/เครื่องสแกนบาร์โค้ด` `/industrial-barcode-scanner` `/wireless-barcode-scanner` `/2d-barcode-scanner` `/long-range-barcode-scanner` `/warehouse-barcode-scanner` `/retail-barcode-scanner` `/honeywell-barcode-scanner` | **10** | th: `/เครื่องสแกนบาร์โค้ด` · en: `/barcode-scanners` | NEW_WITH_DISTINCT_INTENT |
 | `C-2` Barcode printer | `/barcode-printers` `/barcode-printer-thailand` `/barcode-label-printer` `/tsc-barcode-printer` `/barcode-printer-buying-guide` `/knowledge/barcode-printer-types` | **6** | — | — |
-| `C-3` RFID | `/rfid-systems` `/rfid-reader` `/rfid-warehouse-system` `/rfid-workflow-context` `/brady/scanners-rfid` `/knowledge/rfid-warehouse-implementation` `/knowledge/rfid-technology` | **7** | — | — |
+| `C-3` RFID | `/rfid-systems` `/rfid-reader` `/rfid-warehouse-system` `/rfid-workflow-context` `/brady/scanners-rfid` `/knowledge/rfid-warehouse-implementation` `/knowledge/rfid-technology` | **7** | `/rfid-systems` | ENRICH_CANONICAL |
 | `C-4` Manufacturing | `/manufacturing` `/industry/manufacturing` `/brady/solutions/manufacturing` `/case-study/manufacturing` `/roi-calculator/manufacturing` | **5** | — | — |
-| `C-5` Warehouse / logistics | `/logistics` `/warehouse-data-capture` `/brady/solutions/warehouse-logistics` `/case-study/logistics` `/case-study/warehouse` `/roi-calculator/warehouse` | **6** | — | — |
-| `C-6` Retail | `/retail` `/retail-barcode-scanner` `/case-study/retail` `/roi-calculator/retail` | **4** | — | — |
-| `C-7` Scanner selection / comparison | `/barcode-scanner-comparison` `/knowledge/product-comparisons` `/knowledge/how-to-choose-barcode-scanner` `/knowledge/wired-vs-wireless-barcode-scanner` `/select-solution` | **5** | — | — |
+| `C-5` Warehouse / logistics | `/logistics` `/warehouse-data-capture` `/brady/solutions/warehouse-logistics` `/case-study/logistics` `/case-study/warehouse` `/roi-calculator/warehouse` | **6** | `/warehouse-data-capture` | ENRICH_CANONICAL |
+| `C-6` Retail | `/retail` `/case-study/retail` `/roi-calculator/retail` | **3** | `/retail` | ENRICH_CANONICAL |
+| `C-7` Scanner selection / comparison | `/barcode-scanner-comparison` `/knowledge/product-comparisons` `/knowledge/how-to-choose-barcode-scanner` `/knowledge/wired-vs-wireless-barcode-scanner` `/select-solution` | **5** | `/knowledge/how-to-choose-barcode-scanner` | ENRICH_CANONICAL |
 | `C-8` Partner ecosystem | `/partner-ecosystem-hub` `/why-acs/partner-ecosystem` | **2** | — | — |
-| `C-9` Company / เกี่ยวกับองค์กร | `/why-acs` `/why-acs/30-years` `/why-acs/service-capability` `/leadership` | **4** | — | — |
+| `C-9` Company / เกี่ยวกับองค์กร | `/why-acs` `/why-acs/30-years` `/why-acs/service-capability` `/leadership` | **4** | `/why-acs` | ENRICH_CANONICAL |
+| `C-10` Knowledge hub (generic, un-scoped) | `/knowledge/barcode-equipment` `/knowledge/industry-applications` `/knowledge/regional-solutions` | **3** | — | HOLD |
 
-- C-1 ตัดสินแล้วด้วย D-08 (option B) เหลืออีก 7 cluster ที่ยังไม่มีหน้าหลัก ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง ไม่ใช่การตกหล่น
+- C-1 ตัดสินแล้วด้วย D-08 (option B) · หลัง D-09..D-13 มีหน้าหลักแล้วหกกลุ่ม เหลืออีกสี่กลุ่มที่ยังไม่มี คือ C-2 · C-4 · C-8 · C-10 ซึ่งเป็นค่าตั้งต้นที่ถูกต้อง ไม่ใช่การตกหล่น
 - /barcode-scanner-thailand มี URL ของหน้า geo แต่ title เป็นหน้า generic — เป็นหน้าที่แย่ง head term อยู่จริงทั้งที่ URL บอกว่าแคบกว่านั้น
 - /barcode-scanners กับ /เครื่องสแกนบาร์โค้ด คือ intent เดียวกันคนละภาษา และ sitemap ไม่มี hreflang ผูกไว้ สองภาษาที่ไม่มี hreflang จะถูกอ่านเป็นหน้าซ้ำ ไม่ใช่หน้าคู่กัน
 - C-8 มี 2 URL ที่ดูจะพูดเรื่องเดียวกัน เป็นจุดที่แก้ถูกที่สุดบนบอร์ด — redirect เส้นเดียว
 - ยังไม่มีข้อมูลอันดับหรือ traffic ของหน้าใดเลย (Ahrefs และ OpenRush ตอบว่าแผนไม่พอ) ข้อเสนอทั้งหมดจึงอยู่บน intent ที่ประกาศไว้ ไม่ใช่ผลที่วัดได้
 - C-9 ถูกเพิ่มเมื่อ 2026-09-23 หลังพบว่ารายการเดิมไม่มีหมวดหน้าองค์กร ทำให้การซ้อนทับของหน้ากลุ่มนั้นมองไม่เห็น
+- 2026-09-25 · Owner มอบให้ Claude ตัดสินแทน (ตามอัธยาศัย) จึงตั้งหน้าหลักของ C-3/C-5/C-6/C-7/C-9 · decided_by บันทึกเป็น Claude ไม่ใช่ ACS Owner เพื่อให้ร่องรอยการตัดสินตรงกับความจริง
+- 2026-09-25 · /retail-barcode-scanner ถูกนำออกจาก C-6 และคงไว้ใน C-1 เท่านั้น (D-14) เหตุผล: หน้าตระกูล X-barcode-scanner ทั้งเจ็ดอยู่ใน C-1 อยู่แล้ว รวมถึง /warehouse-barcode-scanner ที่ไม่ได้ถูกใส่ใน C-5 การคง /retail-barcode-scanner ไว้สองกลุ่มจึงเป็นความไม่สม่ำเสมอ ไม่ใช่เจตนา · หลังแก้ urls_in_clusters เท่ากับจำนวน URL ไม่ซ้ำ
+- 2026-09-25 · C-10 ถูกตั้งขึ้นเพื่อให้ด่านมองเห็นสามหน้าที่ถือ flag CANNIBAL แต่ไม่เคยอยู่ใน cluster ใด · ยังไม่มีหน้าหลักโดยเจตนา
 
 ## หน้าทั้งหมด
 

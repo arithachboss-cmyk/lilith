@@ -1,0 +1,29 @@
+{
+  "package_id": "PKG-RETAIL",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [],
+  "evidence_note": "ว่างโดยตั้งใจ — ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่อ้างสเปกใด จึงไม่มีหลักฐานให้บันทึก",
+  "forbidden_scan": {
+    "run_at": "2026-09-25",
+    "tool": "node tools/redact.mjs content-packages/PKG-RETAIL/article.md",
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": [],
+    "first_run_findings": [],
+    "note": "รอบแรกได้ 'ไม่พบข้อความที่ต้องจัดการ' exit 0 — เป็นแพ็กเกจที่สองในชุดนี้ที่ผ่านรอบเดียว ต่อจาก PKG-RFID-SYSTEMS"
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": [
+    "C-6 มีสามหน้า และอีกสองหน้าที่เหลือเขียนไม่ได้ทั้งคู่ (CUSTOMER และ NUMBERS) การเสริมหน้าหลักจึงเป็นสิ่งเดียวที่ทำได้จริงใน cluster นี้ ซึ่งตรงกับ decision ENRICH_CANONICAL โดยไม่ต้องตีความเพิ่ม",
+    "ทั้ง /case-study/retail และ /roi-calculator/retail ปิดด้วยเอกสารฉบับเดียวกันคือ SRC-ACS-003 — เอกสารฉบับนี้ปลดสองหน้าใน C-6 และปลดอีกสี่หน้าในกลุ่ม /case-study/* กับ /roi-calculator/* ที่เหลือด้วย เป็นข้อมูลที่ Owner ใช้จัดลำดับได้",
+    "จุดสี่ของบทความ (หน้าแคชเชียร์) เขียนสั้นที่สุดโดยเจตนา และลิงก์ต่อไป /pos-barcode-system ทันที เป็นวิธีประกาศว่าหน้านั้นเป็นเจ้าของเรื่องนั้น",
+    "จุดสามว่าด้วยการเปลี่ยนราคา เขียนเป็นข้อเท็จจริงเชิงกระบวนการล้วน จงใจไม่แตะผลทางกฎหมายของการคิดราคาไม่ตรงป้าย ด้วยเหตุผลเดียวกับเรื่องย่านความถี่ใน PKG-RFID-TECHNOLOGY"
+  ]
+}

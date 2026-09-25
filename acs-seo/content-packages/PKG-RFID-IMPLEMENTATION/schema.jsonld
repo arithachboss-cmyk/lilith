@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "ลำดับการติดตั้ง RFID ในคลัง: หกขั้นที่ข้ามไม่ได้",
+  "description": "หน้านี้ว่าด้วยลำดับเวลา ไม่ใช่การเลือกของ ตั้งแต่การสำรวจจุดอ่าน การทดสอบตำแหน่งติดป้าย ไปจนถึงการตัดระบบ และสิ่งที่ต้องตกลงให้จบก่อนขั้นถัดไป",
+  "url": "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+  "inLanguage": "th-TH",
+  "_generation_note": "ไม่มี offers / price / aggregateRating / review และไม่ประกาศ HowTo เพราะ HowTo ที่ไม่มีเวลาและไม่มีเครื่องมือระบุชัด จะถูกอ่านเป็นการรับรองว่าทำตามแล้วได้ผล ซึ่ง CLM-B-006 ห้าม"
+}

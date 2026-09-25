@@ -1,0 +1,30 @@
+{
+  "package_id": "PKG-LOGISTICS",
+  "title": "จุดส่งมอบ: ข้อมูลขาดตอนตรงที่ของเปลี่ยนมือ",
+  "meta_description": "หน้านี้ว่าด้วยของที่ออกนอกคลังแล้ว ตั้งแต่ขึ้นรถ ระหว่างทาง ถึงมือผู้รับ จนถึงของตีกลับ และจุดที่ความรับผิดชอบเปลี่ยนมือแต่ข้อมูลไม่ได้เปลี่ยนตาม",
+  "canonical": "https://www.asiancoding.com/logistics",
+  "target_url": "https://www.asiancoding.com/logistics",
+  "page_type": "SERVICE",
+  "canonical_intent": "ว่าด้วยของที่ออกนอกคลังแล้ว เจาะจุดที่ความรับผิดชอบเปลี่ยนมือและข้อมูลมักขาดตอน จงใจไม่ครอบคลุมงานภายในคลังซึ่งเป็นเรื่องของหน้าหลัก C-5 ไม่ให้ตัวเลข ไม่ระบุผู้ให้บริการขนส่ง และไม่ประกาศขอบเขตบริการของ ACS",
+  "primary_keyword": "ข้อมูลการส่งมอบสินค้า",
+  "secondary_keywords": [
+    "logistics data capture",
+    "ระบบติดตามการส่งของ",
+    "หลักฐานการส่งมอบ"
+  ],
+  "intent": "COMMERCIAL_INVESTIGATION",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/warehouse-data-capture",
+    "https://www.asiancoding.com/knowledge/barcode-wms-integration",
+    "https://www.asiancoding.com/contact"
+  ],
+  "cluster_note": "หน้านี้อยู่ใน C-5 แต่ไม่ใช่หน้าหลัก — คำตัดสิน D-10 (2026-09-25) ตั้ง /warehouse-data-capture เป็นหน้าหลักของ C-5 และกำหนด decision = ENRICH_CANONICAL แพ็กเกจนี้จึงบีบขอบเขตของหน้าให้ไม่ทับหน้าหลัก และลิงก์ขึ้นหาหน้าหลักแทนการแข่ง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "จุดส่งมอบ: ข้อมูลขาดตอนตรงที่ของเปลี่ยนมือ",
+    "description": "หน้านี้ว่าด้วยของที่ออกนอกคลังแล้ว ตั้งแต่ขึ้นรถ ระหว่างทาง ถึงมือผู้รับ จนถึงของตีกลับ และจุดที่ความรับผิดชอบเปลี่ยนมือแต่ข้อมูลไม่ได้เปลี่ยนตาม",
+    "image": null
+  }
+}

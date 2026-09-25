@@ -1,0 +1,32 @@
+{
+  "package_id": "PKG-RFID-SYSTEMS",
+  "title": "ระบบ RFID ประกอบด้วยอะไรบ้าง และเริ่มตรงไหน",
+  "meta_description": "ระบบ RFID ไม่ได้มีแค่เครื่องอ่านกับป้าย หน้านี้แยกส่วนประกอบทั้งห้าออกให้เห็น และบอกว่าแต่ละส่วนตัดสินใจโดยใคร พร้อมทางแยกไปหน้าที่เจาะลึกแต่ละเรื่อง",
+  "canonical": "https://www.asiancoding.com/rfid-systems",
+  "target_url": "https://www.asiancoding.com/rfid-systems",
+  "page_type": "PRODUCT",
+  "canonical_intent": "เป็นหน้าตั้งต้นของหัวข้อ RFID ทั้งหมด อธิบายว่าระบบประกอบด้วยส่วนใดบ้างและแต่ละส่วนถูกตัดสินโดยใคร แล้วส่งผู้อ่านไปหน้าที่เจาะลึก จงใจไม่อธิบายหลักการเชิงฟิสิกส์ ไม่เจาะตัวเครื่องอ่าน ไม่ลงรายละเอียดการใช้ในคลัง และไม่ตอบว่าควรใช้ RFID หรือบาร์โค้ด",
+  "primary_keyword": "ระบบ RFID",
+  "secondary_keywords": [
+    "RFID คืออะไร",
+    "ระบบ RFID ประกอบด้วยอะไร",
+    "วางระบบ RFID เริ่มตรงไหน"
+  ],
+  "intent": "COMMERCIAL_INVESTIGATION",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/rfid-reader",
+    "https://www.asiancoding.com/rfid-warehouse-system",
+    "https://www.asiancoding.com/knowledge/rfid-technology",
+    "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+    "https://www.asiancoding.com/contact"
+  ],
+  "cluster_note": "หน้านี้เป็น canonical owner ของ C-3 — คำตัดสิน D-09 (2026-09-25) ตั้ง /rfid-systems เป็นหน้าหลักของ C-3 และกำหนด decision = ENRICH_CANONICAL การเขียนลงหน้านี้จึงเป็นการเสริมหน้าหลักโดยตรง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "ระบบ RFID ประกอบด้วยอะไรบ้าง และเริ่มตรงไหน",
+    "description": "ระบบ RFID ไม่ได้มีแค่เครื่องอ่านกับป้าย หน้านี้แยกส่วนประกอบทั้งห้าออกให้เห็น และบอกว่าแต่ละส่วนตัดสินใจโดยใคร พร้อมทางแยกไปหน้าที่เจาะลึกแต่ละเรื่อง",
+    "image": null
+  }
+}

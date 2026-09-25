@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-RFID-WORKFLOW",
+  "title": "RFID เปลี่ยนวิธีทำงานตรงไหน และไม่เปลี่ยนตรงไหน",
+  "meta_description": "การอ่านโดยไม่ต้องเล็งเปลี่ยนงานบางอย่างและไม่เปลี่ยนงานอีกหลายอย่าง หน้านี้แยกสองกลุ่มนั้นออกจากกัน เพื่อให้ตัดสินได้ก่อนว่าคุ้มจะเปลี่ยนกระบวนการหรือไม่",
+  "canonical": "https://www.asiancoding.com/rfid-workflow-context",
+  "target_url": "https://www.asiancoding.com/rfid-workflow-context",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "แยกงานที่การอ่านอัตโนมัติเปลี่ยนจริง ออกจากงานที่ไม่เปลี่ยน เพื่อให้ผู้อ่านตัดสินก่อนลงทุนว่ากระบวนการของตัวเองอยู่กลุ่มไหน จงใจไม่เปรียบเทียบ RFID กับบาร์โค้ดซึ่งเป็นเรื่องของ /knowledge/rfid-vs-barcode ไม่ลงรายละเอียดอุปกรณ์ และไม่ให้ตัวเลขผลลัพธ์",
+  "primary_keyword": "RFID เปลี่ยนกระบวนการทำงาน",
+  "secondary_keywords": [
+    "RFID workflow",
+    "RFID เหมาะกับงานแบบไหน",
+    "RFID เปลี่ยนอะไรบ้าง"
+  ],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/rfid-systems",
+    "https://www.asiancoding.com/knowledge/rfid-vs-barcode",
+    "https://www.asiancoding.com/knowledge/implementation-best-practices",
+    "https://www.asiancoding.com/contact"
+  ],
+  "cluster_note": "หน้านี้อยู่ใน C-3 แต่ไม่ใช่หน้าหลัก — คำตัดสิน D-09 (2026-09-25) ตั้ง /rfid-systems เป็นหน้าหลักของ C-3 และกำหนด decision = ENRICH_CANONICAL แพ็กเกจนี้จึงบีบขอบเขตของหน้าให้ไม่ทับหน้าหลัก และลิงก์ขึ้นหาหน้าหลักแทนการแข่ง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "RFID เปลี่ยนวิธีทำงานตรงไหน และไม่เปลี่ยนตรงไหน",
+    "description": "การอ่านโดยไม่ต้องเล็งเปลี่ยนงานบางอย่างและไม่เปลี่ยนงานอีกหลายอย่าง หน้านี้แยกสองกลุ่มนั้นออกจากกัน เพื่อให้ตัดสินได้ก่อนว่าคุ้มจะเปลี่ยนกระบวนการหรือไม่",
+    "image": null
+  }
+}

@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-RETAIL",
+  "title": "งานค้าปลีกที่ต้องยิงรหัส: ห้าจุดและใครดูแล",
+  "meta_description": "ค้าปลีกไม่ได้มีแค่หน้าแคชเชียร์ หน้านี้ไล่ห้าจุดที่ต้องยิงรหัส ตั้งแต่รับของ ขึ้นชั้น เปลี่ยนราคา หน้าแคชเชียร์ ถึงการรับคืนและนับ แล้วบอกว่าแต่ละจุดใครดูแล",
+  "canonical": "https://www.asiancoding.com/retail",
+  "target_url": "https://www.asiancoding.com/retail",
+  "page_type": "SERVICE",
+  "canonical_intent": "เป็นหน้าตั้งต้นของหัวข้อค้าปลีก ไล่จุดที่ต้องยิงรหัสตลอดเส้นทางสินค้าในร้าน และส่งต่อไปหน้าที่เจาะลึกแต่ละจุด จงใจไม่ลงรายละเอียดหน้าแคชเชียร์ซึ่งเป็นเรื่องของ /pos-barcode-system ไม่เลือกอุปกรณ์ ไม่ให้ตัวเลข และไม่อ้างถึงร้านค้ารายใด",
+  "primary_keyword": "ระบบบาร์โค้ดค้าปลีก",
+  "secondary_keywords": [
+    "retail barcode",
+    "งานค้าปลีกใช้บาร์โค้ด",
+    "ระบบร้านค้าปลีก"
+  ],
+  "intent": "COMMERCIAL_INVESTIGATION",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/pos-barcode-system",
+    "https://www.asiancoding.com/knowledge/barcode-inventory-management",
+    "https://www.asiancoding.com/retail-barcode-scanner",
+    "https://www.asiancoding.com/contact"
+  ],
+  "cluster_note": "หน้านี้เป็น canonical owner ของ C-6 — คำตัดสิน D-11 (2026-09-25) ตั้ง /retail เป็นหน้าหลักของ C-6 และกำหนด decision = ENRICH_CANONICAL การเขียนลงหน้านี้จึงเป็นการเสริมหน้าหลักโดยตรง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "งานค้าปลีกที่ต้องยิงรหัส: ห้าจุดและใครดูแล",
+    "description": "ค้าปลีกไม่ได้มีแค่หน้าแคชเชียร์ หน้านี้ไล่ห้าจุดที่ต้องยิงรหัส ตั้งแต่รับของ ขึ้นชั้น เปลี่ยนราคา หน้าแคชเชียร์ ถึงการรับคืนและนับ แล้วบอกว่าแต่ละจุดใครดูแล",
+    "image": null
+  }
+}

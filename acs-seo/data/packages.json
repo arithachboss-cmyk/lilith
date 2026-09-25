@@ -1,5 +1,5 @@
 {
-  "version": "4.0.0",
+  "version": "5.0.0",
   "as_of": "2026-09-25",
   "total_packages_declared_by_owner": 19,
   "global_rule": "ทุกแพ็กเกจอยู่ใน DRAFT_PENDING_REVIEW จนกว่า Owner QA อนุมัติ ห้าม publish / deploy / เปลี่ยน DNS / เปิด traffic",
@@ -9,7 +9,7 @@
     "HOLD",
     "BLOCKED"
   ],
-  "open_question": "Owner แจ้ง 19 packages แต่หมายเลข queue ที่อ้างถึงสูงสุดคือ #21 — ต้องยืนยันว่า queue ID กับจำนวนแพ็กเกจ map กันอย่างไร ระหว่างที่ยังไม่ยืนยัน 13 รายการถูกตั้งเป็น PKG-UNMAPPED-XX · ตอนนี้มี page inventory จริง 82 หน้าแล้ว การจับคู่ queue กับ target URL จึงทำได้ทันทีที่ได้ keyword queue ฉบับเต็ม",
+  "open_question": "Owner แจ้ง 19 packages แต่หมายเลข queue ที่อ้างถึงสูงสุดคือ #21 — ต้องยืนยันว่า queue ID กับจำนวนแพ็กเกจ map กันอย่างไร ระหว่างที่ยังไม่ยืนยัน 13 รายการถูกตั้งเป็น PKG-UNMAPPED-XX · ตอนนี้มี page inventory จริง 82 หน้าแล้ว การจับคู่ queue กับ target URL จึงทำได้ทันทีที่ได้ keyword queue ฉบับเต็ม · 2026-09-25: เพิ่มอีก 16 รายการจากการปลด cluster C-3/C-5/C-6 (D-09/D-10/D-11) ทั้ง 16 เป็น out_of_queue คือไม่ได้มาจาก keyword queue ของ Owner ตัวเลข total_packages_declared_by_owner = 19 จึงยังเป็นตัวเลขของ queue เดิม ไม่ใช่จำนวนแพ็กเกจในระบบ ต้องให้ Owner รับ 16 รายการนี้เข้าคิวก่อนจึงจะนับรวมกันได้",
   "packages": [
     {
       "package_id": "PKG-Q03",
@@ -955,6 +955,750 @@
         "note": "ต่างจากแพ็กเกจนอกคิวสี่ชุดก่อนหน้าตรงที่ชุดนี้เป็น action NEW ไม่ใช่ ENRICH",
         "raised_on": "2026-09-25"
       }
+    },
+    {
+      "package_id": "PKG-RFID-SYSTEMS",
+      "queue_id": null,
+      "title": "ระบบ RFID ประกอบด้วยอะไรบ้าง และเริ่มตรงไหน",
+      "target_url": "https://www.asiancoding.com/rfid-systems",
+      "page_type": "PRODUCT",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "เสริมหน้าหลักของ C-3 โดยตรงตามที่คำตัดสิน D-09 สั่ง (ENRICH_CANONICAL) · ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่อ้างขอบเขตบริการของ ACS · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL ทั้งระบบ และแพ็กเกจนี้ยังไม่ถูกรับเข้าคิวโดย Owner",
+      "owner_decision": "D-09 (2026-09-25) — ปลด cluster C-3 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-004",
+        "SRC-VEN-002"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RFID-SYSTEMS",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-3 · D-09",
+        "why": "หน้าหลักของ cluster ตามคำตัดสิน",
+        "urls": [
+          "https://www.asiancoding.com/rfid-systems"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-3",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-RFID-READER",
+      "queue_id": null,
+      "title": "เครื่องอ่าน RFID: สิ่งที่ตัวเครื่องตัดสิน",
+      "target_url": "https://www.asiancoding.com/rfid-reader",
+      "page_type": "PRODUCT",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "หน้ารองใน C-3 — แพ็กเกจบีบขอบเขต intent ให้ไม่ทับหน้าหลักและลิงก์ขึ้นหาหน้าหลัก ตามการตีความ ENRICH_CANONICAL ทาง B · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ แพ็กเกจยังไม่ถูกรับเข้าคิว และวิธีจัดการหน้ารอง (รวมหน้า vs บีบขอบเขต) ยังรอ Owner ยืนยัน",
+      "owner_decision": "D-09 (2026-09-25) — ปลด cluster C-3 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-VEN-002"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RFID-READER",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-3 · D-09",
+        "why": "หน้ารองใน cluster ที่ปลดแล้ว — แพ็กเกจบีบขอบเขต intent ไม่ให้ทับหน้าหลัก",
+        "urls": [
+          "https://www.asiancoding.com/rfid-reader"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-3",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-RFID-WAREHOUSE",
+      "queue_id": null,
+      "title": "RFID ในคลังสินค้า: จุดอ่านและขอบเขตของระบบ",
+      "target_url": "https://www.asiancoding.com/rfid-warehouse-system",
+      "page_type": "PRODUCT",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "หน้ารองใน C-3 — แพ็กเกจบีบขอบเขต intent ให้ไม่ทับหน้าหลักและลิงก์ขึ้นหาหน้าหลัก ตามการตีความ ENRICH_CANONICAL ทาง B · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ แพ็กเกจยังไม่ถูกรับเข้าคิว และวิธีจัดการหน้ารอง (รวมหน้า vs บีบขอบเขต) ยังรอ Owner ยืนยัน",
+      "owner_decision": "D-09 (2026-09-25) — ปลด cluster C-3 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-004"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RFID-WAREHOUSE",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-3 · D-09",
+        "why": "หน้ารองใน cluster ที่ปลดแล้ว — แพ็กเกจบีบขอบเขต intent ไม่ให้ทับหน้าหลัก",
+        "urls": [
+          "https://www.asiancoding.com/rfid-warehouse-system"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-3",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-RFID-WORKFLOW",
+      "queue_id": null,
+      "title": "RFID เปลี่ยนวิธีทำงานตรงไหน และไม่เปลี่ยนตรงไหน",
+      "target_url": "https://www.asiancoding.com/rfid-workflow-context",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "หน้ารองใน C-3 — แพ็กเกจบีบขอบเขต intent ให้ไม่ทับหน้าหลักและลิงก์ขึ้นหาหน้าหลัก ตามการตีความ ENRICH_CANONICAL ทาง B · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ แพ็กเกจยังไม่ถูกรับเข้าคิว และวิธีจัดการหน้ารอง (รวมหน้า vs บีบขอบเขต) ยังรอ Owner ยืนยัน",
+      "owner_decision": "D-09 (2026-09-25) — ปลด cluster C-3 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-003"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RFID-WORKFLOW",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-3 · D-09",
+        "why": "หน้ารองใน cluster ที่ปลดแล้ว — แพ็กเกจบีบขอบเขต intent ไม่ให้ทับหน้าหลัก",
+        "urls": [
+          "https://www.asiancoding.com/rfid-workflow-context"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-3",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-RFID-IMPLEMENTATION",
+      "queue_id": null,
+      "title": "ลำดับการติดตั้ง RFID ในคลัง: หกขั้นที่ข้ามไม่ได้",
+      "target_url": "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "หน้ารองใน C-3 — แพ็กเกจบีบขอบเขต intent ให้ไม่ทับหน้าหลักและลิงก์ขึ้นหาหน้าหลัก ตามการตีความ ENRICH_CANONICAL ทาง B · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ แพ็กเกจยังไม่ถูกรับเข้าคิว และวิธีจัดการหน้ารอง (รวมหน้า vs บีบขอบเขต) ยังรอ Owner ยืนยัน",
+      "owner_decision": "D-09 (2026-09-25) — ปลด cluster C-3 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-004",
+        "SRC-VEN-001"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RFID-IMPLEMENTATION",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-3 · D-09",
+        "why": "หน้ารองใน cluster ที่ปลดแล้ว — แพ็กเกจบีบขอบเขต intent ไม่ให้ทับหน้าหลัก",
+        "urls": [
+          "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-3",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-RFID-TECHNOLOGY",
+      "queue_id": null,
+      "title": "RFID ทำงานด้วยหลักอะไร: พื้นฐานก่อนเลือกของ",
+      "target_url": "https://www.asiancoding.com/knowledge/rfid-technology",
+      "page_type": "KNOWLEDGE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "หน้ารองใน C-3 — แพ็กเกจบีบขอบเขต intent ให้ไม่ทับหน้าหลักและลิงก์ขึ้นหาหน้าหลัก ตามการตีความ ENRICH_CANONICAL ทาง B · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ แพ็กเกจยังไม่ถูกรับเข้าคิว และวิธีจัดการหน้ารอง (รวมหน้า vs บีบขอบเขต) ยังรอ Owner ยืนยัน",
+      "owner_decision": "D-09 (2026-09-25) — ปลด cluster C-3 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-VEN-002",
+        "SRC-VEN-003"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RFID-TECHNOLOGY",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-3 · D-09",
+        "why": "หน้ารองใน cluster ที่ปลดแล้ว — แพ็กเกจบีบขอบเขต intent ไม่ให้ทับหน้าหลัก",
+        "urls": [
+          "https://www.asiancoding.com/knowledge/rfid-technology"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-3",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-WAREHOUSE-CAPTURE",
+      "queue_id": null,
+      "title": "เก็บข้อมูลในคลัง: หกจุดที่ของกับข้อมูลแยกกัน",
+      "target_url": "https://www.asiancoding.com/warehouse-data-capture",
+      "page_type": "SERVICE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "เสริมหน้าหลักของ C-5 โดยตรงตามที่คำตัดสิน D-10 สั่ง (ENRICH_CANONICAL) · ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่อ้างขอบเขตบริการของ ACS · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL ทั้งระบบ และแพ็กเกจนี้ยังไม่ถูกรับเข้าคิวโดย Owner",
+      "owner_decision": "D-10 (2026-09-25) — ปลด cluster C-5 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-003",
+        "SRC-ACS-004"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-WAREHOUSE-CAPTURE",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-5 · D-10",
+        "why": "หน้าหลักของ cluster ตามคำตัดสิน",
+        "urls": [
+          "https://www.asiancoding.com/warehouse-data-capture"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-5",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-LOGISTICS",
+      "queue_id": null,
+      "title": "จุดส่งมอบ: ข้อมูลขาดตอนตรงที่ของเปลี่ยนมือ",
+      "target_url": "https://www.asiancoding.com/logistics",
+      "page_type": "SERVICE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "หน้ารองใน C-5 — แพ็กเกจบีบขอบเขต intent ให้ไม่ทับหน้าหลักและลิงก์ขึ้นหาหน้าหลัก ตามการตีความ ENRICH_CANONICAL ทาง B · ยังเป็น REVISE เพราะ rendering gate ยัง FAIL ทั้งระบบ แพ็กเกจยังไม่ถูกรับเข้าคิว และวิธีจัดการหน้ารอง (รวมหน้า vs บีบขอบเขต) ยังรอ Owner ยืนยัน",
+      "owner_decision": "D-10 (2026-09-25) — ปลด cluster C-5 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-003",
+        "SRC-ACS-004"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-LOGISTICS",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-5 · D-10",
+        "why": "หน้ารองใน cluster ที่ปลดแล้ว — แพ็กเกจบีบขอบเขต intent ไม่ให้ทับหน้าหลัก",
+        "urls": [
+          "https://www.asiancoding.com/logistics"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-5",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-RETAIL",
+      "queue_id": null,
+      "title": "งานค้าปลีกที่ต้องยิงรหัส: ห้าจุดและใครดูแล",
+      "target_url": "https://www.asiancoding.com/retail",
+      "page_type": "SERVICE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "REVISE",
+      "board_reason": "เสริมหน้าหลักของ C-6 โดยตรงตามที่คำตัดสิน D-11 สั่ง (ENRICH_CANONICAL) · ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่อ้างขอบเขตบริการของ ACS · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL ทั้งระบบ และแพ็กเกจนี้ยังไม่ถูกรับเข้าคิวโดย Owner",
+      "owner_decision": "D-11 (2026-09-25) — ปลด cluster C-6 ด้วย decision ENRICH_CANONICAL · ตัดสินโดย Claude ภายใต้การมอบหมายของ ACS Owner",
+      "qa_tier": "WORDING_QA_OK",
+      "flagged_claims": [],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-003",
+        "SRC-ACS-004"
+      ],
+      "gates": {
+        "mechanical": "PASS",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": "content-packages/PKG-RETAIL",
+      "intake_required": false,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/cannibalization_clusters.json · C-6 · D-11",
+        "why": "หน้าหลักของ cluster ตามคำตัดสิน",
+        "urls": [
+          "https://www.asiancoding.com/retail"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-6",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "open_question": {
+        "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+        "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+        "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-CASE-LOGISTICS",
+      "queue_id": null,
+      "title": null,
+      "target_url": "https://www.asiancoding.com/case-study/logistics",
+      "page_type": "LANDING",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "หน้าเคสลูกค้า — เขียนไม่ได้เพราะ CLM-O-004 ระบุว่าความยินยอมเป็นของลูกค้า ไม่ใช่ของ ACS · การปิดชื่อลูกค้าไม่ได้ทำให้เล่าได้ เพราะสิ่งที่ต้องได้รับอนุญาตคือเรื่องราว ไม่ใช่ชื่อ · ปลดด้วย SRC-ACS-003 ซึ่งต้องมีทั้งเอกสารเคสและหนังสือยินยอม · cluster C-5 ปลดแล้ว แต่ cluster ไม่ใช่สิ่งที่กั้นหน้านี้ — สิ่งที่กั้นคือชั้น claim ของตัวหน้าเอง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-004"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-003"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/page_inventory.json risk_flags · cluster C-5",
+        "why": "หน้าถือ flag CUSTOMER ซึ่งเป็น FULL_QA_FLAGS",
+        "urls": [
+          "https://www.asiancoding.com/case-study/logistics"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-5",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "who_can_close": "ลูกค้าของ ACS — ACS อนุมัติแทนไม่ได้",
+      "open_question": {
+        "question": "ต้องการให้เขียนหน้านี้ก่อนได้หลักฐานหรือไม่ — ถ้าใช่ ต้องบอกว่าจะเขียนอะไรแทนสิ่งที่พูดไม่ได้",
+        "what_this_package_assumed": "ไม่เขียน และบันทึกว่าติดอะไรแทน — ห้ามสร้างเคส สถิติ หรือ partnership claim ขึ้นเอง ตามคำสั่งของ Owner",
+        "why_not_the_other_way": "หน้าที่ถือ flag เหล่านี้เขียนได้เฉพาะข้อความที่หลบ claim ของตัวเองทั้งหมด ซึ่งจะเหลือหน้าที่ไม่ตอบสิ่งที่ผู้อ่านมาหา และยังกินชื่อ URL ที่ควรเป็นของเนื้อหาจริงต่อไป",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-CASE-WAREHOUSE",
+      "queue_id": null,
+      "title": null,
+      "target_url": "https://www.asiancoding.com/case-study/warehouse",
+      "page_type": "LANDING",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "หน้าเคสลูกค้า — เขียนไม่ได้เพราะ CLM-O-004 ระบุว่าความยินยอมเป็นของลูกค้า ไม่ใช่ของ ACS · การปิดชื่อลูกค้าไม่ได้ทำให้เล่าได้ เพราะสิ่งที่ต้องได้รับอนุญาตคือเรื่องราว ไม่ใช่ชื่อ · ปลดด้วย SRC-ACS-003 ซึ่งต้องมีทั้งเอกสารเคสและหนังสือยินยอม · cluster C-5 ปลดแล้ว แต่ cluster ไม่ใช่สิ่งที่กั้นหน้านี้ — สิ่งที่กั้นคือชั้น claim ของตัวหน้าเอง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-004"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-003"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/page_inventory.json risk_flags · cluster C-5",
+        "why": "หน้าถือ flag CUSTOMER ซึ่งเป็น FULL_QA_FLAGS",
+        "urls": [
+          "https://www.asiancoding.com/case-study/warehouse"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-5",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "who_can_close": "ลูกค้าของ ACS — ACS อนุมัติแทนไม่ได้",
+      "open_question": {
+        "question": "ต้องการให้เขียนหน้านี้ก่อนได้หลักฐานหรือไม่ — ถ้าใช่ ต้องบอกว่าจะเขียนอะไรแทนสิ่งที่พูดไม่ได้",
+        "what_this_package_assumed": "ไม่เขียน และบันทึกว่าติดอะไรแทน — ห้ามสร้างเคส สถิติ หรือ partnership claim ขึ้นเอง ตามคำสั่งของ Owner",
+        "why_not_the_other_way": "หน้าที่ถือ flag เหล่านี้เขียนได้เฉพาะข้อความที่หลบ claim ของตัวเองทั้งหมด ซึ่งจะเหลือหน้าที่ไม่ตอบสิ่งที่ผู้อ่านมาหา และยังกินชื่อ URL ที่ควรเป็นของเนื้อหาจริงต่อไป",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-CASE-RETAIL",
+      "queue_id": null,
+      "title": null,
+      "target_url": "https://www.asiancoding.com/case-study/retail",
+      "page_type": "LANDING",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "หน้าเคสลูกค้า — เขียนไม่ได้เพราะ CLM-O-004 ระบุว่าความยินยอมเป็นของลูกค้า ไม่ใช่ของ ACS · การปิดชื่อลูกค้าไม่ได้ทำให้เล่าได้ เพราะสิ่งที่ต้องได้รับอนุญาตคือเรื่องราว ไม่ใช่ชื่อ · ปลดด้วย SRC-ACS-003 ซึ่งต้องมีทั้งเอกสารเคสและหนังสือยินยอม · cluster C-6 ปลดแล้ว แต่ cluster ไม่ใช่สิ่งที่กั้นหน้านี้ — สิ่งที่กั้นคือชั้น claim ของตัวหน้าเอง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-004"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-003"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/page_inventory.json risk_flags · cluster C-6",
+        "why": "หน้าถือ flag CUSTOMER ซึ่งเป็น FULL_QA_FLAGS",
+        "urls": [
+          "https://www.asiancoding.com/case-study/retail"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-6",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "who_can_close": "ลูกค้าของ ACS — ACS อนุมัติแทนไม่ได้",
+      "open_question": {
+        "question": "ต้องการให้เขียนหน้านี้ก่อนได้หลักฐานหรือไม่ — ถ้าใช่ ต้องบอกว่าจะเขียนอะไรแทนสิ่งที่พูดไม่ได้",
+        "what_this_package_assumed": "ไม่เขียน และบันทึกว่าติดอะไรแทน — ห้ามสร้างเคส สถิติ หรือ partnership claim ขึ้นเอง ตามคำสั่งของ Owner",
+        "why_not_the_other_way": "หน้าที่ถือ flag เหล่านี้เขียนได้เฉพาะข้อความที่หลบ claim ของตัวเองทั้งหมด ซึ่งจะเหลือหน้าที่ไม่ตอบสิ่งที่ผู้อ่านมาหา และยังกินชื่อ URL ที่ควรเป็นของเนื้อหาจริงต่อไป",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-ROI-WAREHOUSE",
+      "queue_id": null,
+      "title": null,
+      "target_url": "https://www.asiancoding.com/roi-calculator/warehouse",
+      "page_type": "LANDING",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "หน้าเครื่องคำนวณผลตอบแทน — เขียนไม่ได้เพราะ CLM-B-006 ห้ามรับประกันผลลัพธ์เป็นตัวเลข และตัวเลขตั้งต้นของเครื่องคำนวณคือการรับประกันผลในทางปฏิบัติ ไม่ว่าจะมีข้อความปฏิเสธความรับผิดกำกับหรือไม่ · ปลดได้ต่อเมื่อมีเคสจริงที่ยืนยันได้ (SRC-ACS-003) แล้ว Owner อนุมัติอีกชั้น · cluster C-5 ปลดแล้ว แต่ cluster ไม่ใช่สิ่งที่กั้นหน้านี้ — สิ่งที่กั้นคือชั้น claim ของตัวหน้าเอง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-B-006",
+        "CLM-O-004"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-003"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/page_inventory.json risk_flags · cluster C-5",
+        "why": "หน้าถือ flag NUMBERS ซึ่งเป็น FULL_QA_FLAGS",
+        "urls": [
+          "https://www.asiancoding.com/roi-calculator/warehouse"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-5",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "who_can_close": "ต้องมีเคสจริงก่อน แล้วจึงถึง Owner",
+      "open_question": {
+        "question": "ต้องการให้เขียนหน้านี้ก่อนได้หลักฐานหรือไม่ — ถ้าใช่ ต้องบอกว่าจะเขียนอะไรแทนสิ่งที่พูดไม่ได้",
+        "what_this_package_assumed": "ไม่เขียน และบันทึกว่าติดอะไรแทน — ห้ามสร้างเคส สถิติ หรือ partnership claim ขึ้นเอง ตามคำสั่งของ Owner",
+        "why_not_the_other_way": "หน้าที่ถือ flag เหล่านี้เขียนได้เฉพาะข้อความที่หลบ claim ของตัวเองทั้งหมด ซึ่งจะเหลือหน้าที่ไม่ตอบสิ่งที่ผู้อ่านมาหา และยังกินชื่อ URL ที่ควรเป็นของเนื้อหาจริงต่อไป",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-ROI-RETAIL",
+      "queue_id": null,
+      "title": null,
+      "target_url": "https://www.asiancoding.com/roi-calculator/retail",
+      "page_type": "LANDING",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "หน้าเครื่องคำนวณผลตอบแทน — เขียนไม่ได้เพราะ CLM-B-006 ห้ามรับประกันผลลัพธ์เป็นตัวเลข และตัวเลขตั้งต้นของเครื่องคำนวณคือการรับประกันผลในทางปฏิบัติ ไม่ว่าจะมีข้อความปฏิเสธความรับผิดกำกับหรือไม่ · ปลดได้ต่อเมื่อมีเคสจริงที่ยืนยันได้ (SRC-ACS-003) แล้ว Owner อนุมัติอีกชั้น · cluster C-6 ปลดแล้ว แต่ cluster ไม่ใช่สิ่งที่กั้นหน้านี้ — สิ่งที่กั้นคือชั้น claim ของตัวหน้าเอง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-B-006",
+        "CLM-O-004"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-003"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/page_inventory.json risk_flags · cluster C-6",
+        "why": "หน้าถือ flag NUMBERS ซึ่งเป็น FULL_QA_FLAGS",
+        "urls": [
+          "https://www.asiancoding.com/roi-calculator/retail"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-6",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "who_can_close": "ต้องมีเคสจริงก่อน แล้วจึงถึง Owner",
+      "open_question": {
+        "question": "ต้องการให้เขียนหน้านี้ก่อนได้หลักฐานหรือไม่ — ถ้าใช่ ต้องบอกว่าจะเขียนอะไรแทนสิ่งที่พูดไม่ได้",
+        "what_this_package_assumed": "ไม่เขียน และบันทึกว่าติดอะไรแทน — ห้ามสร้างเคส สถิติ หรือ partnership claim ขึ้นเอง ตามคำสั่งของ Owner",
+        "why_not_the_other_way": "หน้าที่ถือ flag เหล่านี้เขียนได้เฉพาะข้อความที่หลบ claim ของตัวเองทั้งหมด ซึ่งจะเหลือหน้าที่ไม่ตอบสิ่งที่ผู้อ่านมาหา และยังกินชื่อ URL ที่ควรเป็นของเนื้อหาจริงต่อไป",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-BRADY-SCANNERS-RFID",
+      "queue_id": null,
+      "title": null,
+      "target_url": "https://www.asiancoding.com/brady/scanners-rfid",
+      "page_type": "PRODUCT",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "หน้าในโฟลเดอร์ผู้ผลิต — เขียนไม่ได้เพราะ CLM-O-003 ระบุว่าสถานะตัวแทน/ผู้แทนจำหน่ายต้องมีหนังสือรับรองจากแบรนด์พร้อมวันที่ · ผู้ปิด claim นี้คือแบรนด์ ไม่ใช่ ACS และ ACS ยืนยันแทนไม่ได้ · หน้านี้ถือ flag SPEC ด้วย จึงต้องมี datasheet ทางการของรุ่นที่อ้างถึงเพิ่มอีกชั้น (CLM-E-001/E-007) · cluster C-3 ปลดแล้ว แต่ cluster ไม่ใช่สิ่งที่กั้นหน้านี้ — สิ่งที่กั้นคือชั้น claim ของตัวหน้าเอง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-003",
+        "CLM-E-011"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-004",
+        "SRC-VEN-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/page_inventory.json risk_flags · cluster C-3",
+        "why": "หน้าถือ flag PARTNER ซึ่งเป็น FULL_QA_FLAGS",
+        "urls": [
+          "https://www.asiancoding.com/brady/scanners-rfid"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-3",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "who_can_close": "แบรนด์เจ้าของสินค้า — ACS ยืนยันแทนไม่ได้",
+      "open_question": {
+        "question": "ต้องการให้เขียนหน้านี้ก่อนได้หลักฐานหรือไม่ — ถ้าใช่ ต้องบอกว่าจะเขียนอะไรแทนสิ่งที่พูดไม่ได้",
+        "what_this_package_assumed": "ไม่เขียน และบันทึกว่าติดอะไรแทน — ห้ามสร้างเคส สถิติ หรือ partnership claim ขึ้นเอง ตามคำสั่งของ Owner",
+        "why_not_the_other_way": "หน้าที่ถือ flag เหล่านี้เขียนได้เฉพาะข้อความที่หลบ claim ของตัวเองทั้งหมด ซึ่งจะเหลือหน้าที่ไม่ตอบสิ่งที่ผู้อ่านมาหา และยังกินชื่อ URL ที่ควรเป็นของเนื้อหาจริงต่อไป",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
+    },
+    {
+      "package_id": "PKG-BRADY-WAREHOUSE",
+      "queue_id": null,
+      "title": null,
+      "target_url": "https://www.asiancoding.com/brady/solutions/warehouse-logistics",
+      "page_type": "SERVICE",
+      "package_status": "DRAFT_PENDING_REVIEW",
+      "board_status": "BLOCKED",
+      "board_reason": "หน้าในโฟลเดอร์ผู้ผลิต — เขียนไม่ได้เพราะ CLM-O-003 ระบุว่าสถานะตัวแทน/ผู้แทนจำหน่ายต้องมีหนังสือรับรองจากแบรนด์พร้อมวันที่ · ผู้ปิด claim นี้คือแบรนด์ ไม่ใช่ ACS และ ACS ยืนยันแทนไม่ได้ · cluster C-5 ปลดแล้ว แต่ cluster ไม่ใช่สิ่งที่กั้นหน้านี้ — สิ่งที่กั้นคือชั้น claim ของตัวหน้าเอง",
+      "owner_decision": null,
+      "qa_tier": "T2_FULL",
+      "flagged_claims": [
+        "CLM-O-003",
+        "CLM-E-011"
+      ],
+      "blocked_on_sources": [
+        "SRC-ACS-001",
+        "SRC-ACS-004",
+        "SRC-VEN-001"
+      ],
+      "gates": {
+        "mechanical": "NOT_RUN",
+        "claim_qa": "NOT_RUN",
+        "cannibalization": "PASS",
+        "rendering": "FAIL",
+        "owner_approval": "NOT_GRANTED"
+      },
+      "package_path": null,
+      "intake_required": true,
+      "target_url_candidates": {
+        "status": "DERIVED_FROM_DECISION",
+        "derived_from": "data/page_inventory.json risk_flags · cluster C-5",
+        "why": "หน้าถือ flag PARTNER ซึ่งเป็น FULL_QA_FLAGS",
+        "urls": [
+          "https://www.asiancoding.com/brady/solutions/warehouse-logistics"
+        ],
+        "owner_confirmed": false
+      },
+      "cannibalization_cluster": "C-5",
+      "revision_spec": null,
+      "out_of_queue": true,
+      "who_can_close": "แบรนด์เจ้าของสินค้า — ACS ยืนยันแทนไม่ได้",
+      "open_question": {
+        "question": "ต้องการให้เขียนหน้านี้ก่อนได้หลักฐานหรือไม่ — ถ้าใช่ ต้องบอกว่าจะเขียนอะไรแทนสิ่งที่พูดไม่ได้",
+        "what_this_package_assumed": "ไม่เขียน และบันทึกว่าติดอะไรแทน — ห้ามสร้างเคส สถิติ หรือ partnership claim ขึ้นเอง ตามคำสั่งของ Owner",
+        "why_not_the_other_way": "หน้าที่ถือ flag เหล่านี้เขียนได้เฉพาะข้อความที่หลบ claim ของตัวเองทั้งหมด ซึ่งจะเหลือหน้าที่ไม่ตอบสิ่งที่ผู้อ่านมาหา และยังกินชื่อ URL ที่ควรเป็นของเนื้อหาจริงต่อไป",
+        "raised_on": "2026-09-25",
+        "needs": "OWNER_APPROVAL_REQUIRED"
+      }
     }
   ],
   "site_findings": {
@@ -970,5 +1714,6 @@
     "BLOCKED": 14,
     "HOLD": 1,
     "REVISE": 10
-  }
+  },
+  "out_of_queue_note": "แพ็กเกจที่มี out_of_queue = true มาจากการปลด cannibalization cluster ไม่ได้มาจาก keyword queue ในจำนวนนี้ 9 รายการเขียนเสร็จแล้ว (board_status REVISE) และ 7 รายการเขียนไม่ได้เพราะชั้น claim ของหน้าปลายทางเอง (board_status BLOCKED) ทั้ง 7 รายการที่ BLOCKED ไม่มีรายการใดที่ ACS ปิดได้ฝ่ายเดียว"
 }

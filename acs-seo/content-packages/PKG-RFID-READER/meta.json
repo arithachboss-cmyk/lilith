@@ -1,0 +1,30 @@
+{
+  "package_id": "PKG-RFID-READER",
+  "title": "เครื่องอ่าน RFID: สิ่งที่ตัวเครื่องตัดสิน",
+  "meta_description": "เครื่องอ่านเป็นส่วนหนึ่งของระบบ ไม่ใช่ทั้งระบบ หน้านี้แยกว่าอะไรที่ตัวเครื่องตัดสินได้จริง อะไรที่ป้ายกับหน้างานตัดสินแทน และรูปแบบการติดตั้งสามแบบต่างกันตรงไหน",
+  "canonical": "https://www.asiancoding.com/rfid-reader",
+  "target_url": "https://www.asiancoding.com/rfid-reader",
+  "page_type": "PRODUCT",
+  "canonical_intent": "เจาะเฉพาะตัวเครื่องอ่าน แยกว่าอะไรที่ตัวเครื่องตัดสินได้และอะไรที่ถูกตัดสินจากภายนอก และอธิบายรูปแบบการติดตั้งสามแบบตามลักษณะงาน จงใจไม่อธิบายระบบทั้งระบบซึ่งเป็นเรื่องของหน้าหลัก C-3 ไม่ให้สเปกตัวเลข และไม่เปรียบเทียบยี่ห้อ",
+  "primary_keyword": "เครื่องอ่าน RFID",
+  "secondary_keywords": [
+    "RFID reader",
+    "เครื่องอ่าน RFID แบบถือ",
+    "เครื่องอ่าน RFID ติดตั้งแบบไหน"
+  ],
+  "intent": "COMMERCIAL_INVESTIGATION",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/rfid-systems",
+    "https://www.asiancoding.com/knowledge/rfid-technology",
+    "https://www.asiancoding.com/contact"
+  ],
+  "cluster_note": "หน้านี้อยู่ใน C-3 แต่ไม่ใช่หน้าหลัก — คำตัดสิน D-09 (2026-09-25) ตั้ง /rfid-systems เป็นหน้าหลักของ C-3 และกำหนด decision = ENRICH_CANONICAL แพ็กเกจนี้จึงบีบขอบเขตของหน้าให้ไม่ทับหน้าหลัก และลิงก์ขึ้นหาหน้าหลักแทนการแข่ง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "เครื่องอ่าน RFID: สิ่งที่ตัวเครื่องตัดสิน",
+    "description": "เครื่องอ่านเป็นส่วนหนึ่งของระบบ ไม่ใช่ทั้งระบบ หน้านี้แยกว่าอะไรที่ตัวเครื่องตัดสินได้จริง อะไรที่ป้ายกับหน้างานตัดสินแทน และรูปแบบการติดตั้งสามแบบต่างกันตรงไหน",
+    "image": null
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "RFID เปลี่ยนวิธีทำงานตรงไหน และไม่เปลี่ยนตรงไหน",
+  "description": "การอ่านโดยไม่ต้องเล็งเปลี่ยนงานบางอย่างและไม่เปลี่ยนงานอีกหลายอย่าง หน้านี้แยกสองกลุ่มนั้นออกจากกัน เพื่อให้ตัดสินได้ก่อนว่าคุ้มจะเปลี่ยนกระบวนการหรือไม่",
+  "url": "https://www.asiancoding.com/rfid-workflow-context",
+  "inLanguage": "th-TH",
+  "_generation_note": "ไม่มี offers / price / aggregateRating / review และไม่มี ItemList"
+}

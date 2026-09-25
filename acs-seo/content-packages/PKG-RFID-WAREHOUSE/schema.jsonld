@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "RFID ในคลังสินค้า: จุดอ่านและขอบเขตของระบบ",
+  "description": "หน้านี้ไล่จุดที่คลังต้องรู้ว่าของอยู่ไหน แล้วถามทีละจุดว่าการอ่านอัตโนมัติตรงนั้นเปลี่ยนอะไร และข้อมูลที่ได้จะไปลงที่ระบบใด ก่อนจะพูดถึงอุปกรณ์",
+  "url": "https://www.asiancoding.com/rfid-warehouse-system",
+  "inLanguage": "th-TH",
+  "_generation_note": "ไม่มี offers / price / aggregateRating / review"
+}

@@ -1,0 +1,45 @@
+{
+  "package_id": "PKG-RETAIL",
+  "queue_id": null,
+  "title": "งานค้าปลีกที่ต้องยิงรหัส: ห้าจุดและใครดูแล",
+  "target_url": "https://www.asiancoding.com/retail",
+  "page_type": "SERVICE",
+  "package_status": "DRAFT_PENDING_REVIEW",
+  "board_status": "REVISE",
+  "board_reason": "เสริมหน้าหลักของ C-6 โดยตรงตามที่คำตัดสิน D-11 สั่ง (ENRICH_CANONICAL) · ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่อ้างขอบเขตบริการของ ACS · ยังเป็น REVISE ไม่ใช่ PASS เพราะ rendering gate ยัง FAIL ทั้งระบบ และแพ็กเกจนี้ยังไม่ถูกรับเข้าคิวโดย Owner",
+  "qa_tier": "WORDING_QA_OK",
+  "qa_tier_note": "หน้าปลายทางถือเฉพาะ flag CANNIBAL ซึ่งจงใจไม่อยู่ใน FULL_QA_FLAGS เพราะ cannibalization มีด่านของตัวเองแยกต่างหาก · ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่มี flagged_claims กฎจึงคำนวณได้ WORDING_QA_OK",
+  "flagged_claims": [],
+  "blocked_on_sources": [
+    "SRC-ACS-001",
+    "SRC-ACS-003",
+    "SRC-ACS-004"
+  ],
+  "gates": {
+    "mechanical": "NOT_RUN",
+    "claim_qa": "NOT_RUN",
+    "cannibalization": "PASS",
+    "rendering": "FAIL",
+    "owner_approval": "NOT_GRANTED"
+  },
+  "publish_allowed": false,
+  "last_checked": null,
+  "checked_by": null,
+  "p0": false,
+  "out_of_queue": true,
+  "out_of_queue_note": "ไม่ได้มาจาก keyword queue ของ Owner — มาจากการปลด cluster C-3/C-5/C-6 ด้วยคำตัดสิน D-09/D-10/D-11 เมื่อ 2026-09-25 ต้องให้ Owner รับเข้าคิวก่อนนับเป็นงานที่สั่ง",
+  "unblocked_by": {
+    "decision_id": "D-11",
+    "decided_on": "2026-09-25",
+    "what_it_decided": "คำตัดสิน D-11 (2026-09-25) ตั้ง /retail เป็นหน้าหลักของ C-6 และกำหนด decision = ENRICH_CANONICAL",
+    "decided_by": "Claude · delegated by ACS Owner 2026-09-25"
+  },
+  "open_question": {
+    "question": "สำหรับ cluster ที่ decision = ENRICH_CANONICAL หน้าที่ไม่ใช่หน้าหลัก ควรถูกรวมด้วย rel=canonical หรือคงไว้แล้วบีบขอบเขต intent",
+    "what_this_package_assumed": "คงหน้าไว้และบีบขอบเขต (ทาง B) — canonical ของทุกหน้าจึงยังชี้มาที่ตัวเอง",
+    "why_not_the_other_way": "การตั้ง rel=canonical ข้ามหน้าเป็นการเปลี่ยนสิ่งที่เผยแพร่อยู่จริงและทำให้หน้าหายจากผลค้นหา ซึ่งเป็นการตัดสินใจของ Owner ไม่ใช่ของผู้เขียนเนื้อหา",
+    "raised_on": "2026-09-25",
+    "needs": "OWNER_APPROVAL_REQUIRED"
+  },
+  "not_covered": []
+}

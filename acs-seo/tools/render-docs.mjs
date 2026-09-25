@@ -12,6 +12,20 @@ const readJson = (p) => JSON.parse(readFileSync(join(ROOT, p), 'utf8'));
 const BANNER = (src) => `<!-- GENERATED โดย tools/render-docs.mjs จาก ${src} — ห้ามแก้ไฟล์นี้ด้วยมือ -->\n`;
 const cell = (v) => (v === null || v === undefined || v === '' ? '—' : String(v).replace(/\|/g, '\\|'));
 
+/*
+ * canonical_owner เป็น object ที่ key คือภาษา ({en} หรือ {th, en}) ไม่ใช่สตริง
+ * การส่งเข้า cell() ตรง ๆ ทำให้ได้ "[object Object]" ซึ่งเป็นสิ่งที่เกิดขึ้นจริงในไฟล์ที่ commit ไว้
+ * หลังคำตัดสิน D-09..D-13 — เอกสารที่คนใช้ดูว่าหน้าไหนเป็นหน้าหลัก กลับไม่บอกว่าหน้าไหน
+ * selftest มีข้อตรวจกันการถดถอยไว้แล้ว ทั้งเรื่อง [object Object] และเรื่องลืมสั่ง render ใหม่
+ */
+const ownerCell = (v) => {
+  if (!v) return '—';
+  const entries = Object.entries(v);
+  if (entries.length === 0) return '—';
+  if (entries.length === 1) return `\`${entries[0][1]}\``;
+  return entries.map(([lang, url]) => `${lang}: \`${url}\``).join(' · ');
+};
+
 const sources = readJson('data/source_pack.json');
 const claims = readJson('data/claims.json');
 const board = readJson('data/packages.json');
@@ -165,11 +179,11 @@ const clusters = readJson('data/cannibalization_clusters.json');
     '',
     `> ${clusters.rule}`,
     '',
-    `**${clusters.totals.clusters} cluster · ${clusters.totals.urls_in_clusters} URL · มี canonical owner แล้ว 0**`,
+    `**${clusters.totals.clusters} cluster · ${clusters.totals.urls_in_clusters} URL · มี canonical owner แล้ว ${clusters.totals.clusters_with_canonical_owner}**`,
     '',
     '| Cluster | หน้าที่ชนกัน | จำนวน | canonical owner | คำตัดสิน |',
     '|---|---|---|---|---|',
-    ...clusters.clusters.map((c) => `| \`${c.cluster_id}\` ${cell(c.label)} | ${c.competing_urls.map((u) => `\`${u}\``).join(' ')} | **${c.count}** | ${cell(c.canonical_owner)} | ${cell(c.decision)} |`),
+    ...clusters.clusters.map((c) => `| \`${c.cluster_id}\` ${cell(c.label)} | ${c.competing_urls.map((u) => `\`${u}\``).join(' ')} | **${c.count}** | ${ownerCell(c.canonical_owner)} | ${cell(c.decision)} |`),
     '',
     ...clusters.notes.map((n) => `- ${n}`),
     '',

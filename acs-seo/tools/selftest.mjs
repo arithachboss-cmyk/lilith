@@ -441,6 +441,41 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   check('ไม่ส่ง --as-of ก็ยังตรวจ target ตัวแรกได้', /ตรวจ 1 รายการ/.test(noFlag.out));
 }
 
+/* ── เอกสาร governance ที่ generate ต้องสะท้อนข้อมูลจริง ─────────────
+ *
+ * 07-SITE-INVENTORY.md คือเอกสารที่คนเปิดดูว่าหน้าไหนเป็นหน้าหลักของ cluster ก่อนลงมือเขียน
+ * มันเคยพิมพ์ "[object Object]" ในช่อง canonical owner ทุกกลุ่มที่ตัดสินแล้ว เพราะ canonical_owner
+ * เป็น object ที่ key คือภาษา และ renderer ส่งเข้า String() ตรง ๆ · บรรทัดนับก็ถูก hardcode เป็น 0
+ *
+ * ทั้งสองข้อไม่ทำให้ tool ใดพัง จึงไม่มีอะไรจับได้เลยจนกว่าจะมีคนอ่านไฟล์
+ * ข้อตรวจชุดนี้จับทั้งการถดถอยของ renderer และการลืมสั่ง render ใหม่หลังแก้ข้อมูล
+ */
+{
+  const clusters = readJson('data/cannibalization_clusters.json');
+  const doc = readFileSync(join(ROOT, 'governance/07-SITE-INVENTORY.md'), 'utf8');
+  const owned = clusters.clusters.filter((c) => c.canonical_owner);
+
+  check('เอกสารที่ generate ไม่มี [object Object] หลงเหลือ', !doc.includes('[object Object]'));
+  check('บรรทัดนับหน้าหลักในเอกสารตรงกับข้อมูลจริง ไม่ใช่เลขที่ hardcode ไว้',
+    doc.includes(`มี canonical owner แล้ว ${owned.length}`),
+    `คาดว่า ${owned.length}`);
+  /* ต้องอ่านจากช่อง canonical owner ของแถวนั้นจริง ๆ ไม่ใช่แค่ "มีคำนี้อยู่ที่ไหนสักแห่งในไฟล์"
+     เพราะ URL ของหน้าหลักอยู่ในช่อง competing_urls ของแถวเดียวกันอยู่แล้วเสมอ
+     ข้อตรวจที่หา URL ทั้งไฟล์จึงผ่านตลอดและจับอะไรไม่ได้เลย */
+  const rowOf = (id) => doc.split('\n').find((l) => l.startsWith(`| \`${id}\``));
+  const ownerColOf = (id) => (rowOf(id) ?? '').split('|')[4] ?? '';
+  const wrongCol = owned.filter((c) =>
+    !Object.values(c.canonical_owner).every((u) => ownerColOf(c.cluster_id).includes(`\`${u}\``)));
+  check('ช่อง canonical owner ของทุกแถวแสดง URL จริง (จับ [object Object] และการลืม render ใหม่)',
+    wrongCol.length === 0, wrongCol.map((c) => `${c.cluster_id}:${ownerColOf(c.cluster_id).trim()}`).join(' | '));
+  const unownedCol = clusters.clusters.filter((c) => !c.canonical_owner)
+    .filter((c) => ownerColOf(c.cluster_id).trim() !== '—');
+  check('cluster ที่ยังไม่มีหน้าหลักต้องแสดงขีด ไม่ใช่ค่าว่างที่อ่านเป็นอย่างอื่นได้',
+    unownedCol.length === 0, unownedCol.map((c) => c.cluster_id).join(','));
+  check('ทุก cluster มีแถวของตัวเองในเอกสาร',
+    clusters.clusters.every((c) => rowOf(c.cluster_id) !== undefined));
+}
+
 rmSync(tmp, { recursive: true, force: true });
 console.log(`\n${failures.length ? `FAILED ${failures.length} ข้อ: ${failures.join(' | ')}` : 'selftest ผ่านทั้งหมด'}`);
 process.exit(failures.length ? 1 : 0);

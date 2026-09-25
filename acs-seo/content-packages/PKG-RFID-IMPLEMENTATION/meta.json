@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-RFID-IMPLEMENTATION",
+  "title": "ลำดับการติดตั้ง RFID ในคลัง: หกขั้นที่ข้ามไม่ได้",
+  "meta_description": "หน้านี้ว่าด้วยลำดับเวลา ไม่ใช่การเลือกของ ตั้งแต่การสำรวจจุดอ่าน การทดสอบตำแหน่งติดป้าย ไปจนถึงการตัดระบบ และสิ่งที่ต้องตกลงให้จบก่อนขั้นถัดไป",
+  "canonical": "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+  "target_url": "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+  "page_type": "KNOWLEDGE",
+  "canonical_intent": "ให้ลำดับเวลาของการนำ RFID เข้าคลัง ตั้งแต่สำรวจจนตัดระบบ พร้อมเงื่อนไขที่ต้องปิดก่อนขึ้นขั้นถัดไป จงใจไม่กำหนดขอบเขตระบบซึ่งเป็นเรื่องของ /rfid-warehouse-system ไม่ให้ระยะเวลาเป็นตัวเลข และไม่ระบุว่าใครเป็นผู้ติดตั้ง",
+  "primary_keyword": "ติดตั้ง RFID ในคลัง",
+  "secondary_keywords": [
+    "ขั้นตอนติดตั้ง RFID",
+    "RFID implementation",
+    "นำร่อง RFID"
+  ],
+  "intent": "INFORMATIONAL",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/rfid-warehouse-system",
+    "https://www.asiancoding.com/knowledge/implementation-best-practices",
+    "https://www.asiancoding.com/knowledge/rfid-technology",
+    "https://www.asiancoding.com/contact"
+  ],
+  "cluster_note": "หน้านี้อยู่ใน C-3 แต่ไม่ใช่หน้าหลัก — คำตัดสิน D-09 (2026-09-25) ตั้ง /rfid-systems เป็นหน้าหลักของ C-3 และกำหนด decision = ENRICH_CANONICAL แพ็กเกจนี้จึงบีบขอบเขตของหน้าให้ไม่ทับหน้าหลัก และลิงก์ขึ้นหาหน้าหลักแทนการแข่ง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "ลำดับการติดตั้ง RFID ในคลัง: หกขั้นที่ข้ามไม่ได้",
+    "description": "หน้านี้ว่าด้วยลำดับเวลา ไม่ใช่การเลือกของ ตั้งแต่การสำรวจจุดอ่าน การทดสอบตำแหน่งติดป้าย ไปจนถึงการตัดระบบ และสิ่งที่ต้องตกลงให้จบก่อนขั้นถัดไป",
+    "image": null
+  }
+}

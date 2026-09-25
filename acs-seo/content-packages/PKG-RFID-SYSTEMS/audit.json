@@ -1,0 +1,29 @@
+{
+  "package_id": "PKG-RFID-SYSTEMS",
+  "audited_at": null,
+  "audited_by": null,
+  "evidence": [],
+  "evidence_note": "ว่างโดยตั้งใจ — ดราฟต์ไม่มีตัวเลข ไม่มีชื่อผู้ผลิต และไม่อ้างสเปกใด จึงไม่มีหลักฐานให้บันทึก",
+  "forbidden_scan": {
+    "run_at": "2026-09-25",
+    "tool": "node tools/redact.mjs content-packages/PKG-RFID-SYSTEMS/article.md",
+    "block_hits": [],
+    "evidence_hits": [],
+    "owner_hits": [],
+    "first_run_findings": [],
+    "note": "รอบแรกได้ 'ไม่พบข้อความที่ต้องจัดการ' exit 0 — ไม่มีการเขียนใหม่เพื่อผ่านกฎเลย"
+  },
+  "mechanical_checks": {
+    "metadata": "NOT_RUN",
+    "internal_links": "NOT_RUN",
+    "sitemap": "NOT_RUN",
+    "schema": "NOT_RUN",
+    "forbidden_words": "NOT_RUN"
+  },
+  "notes": [
+    "เป็นหน้าหลักของ C-3 ตามคำตัดสิน D-09 การเขียนลงหน้านี้จึงเป็นสิ่งที่ decision ENRICH_CANONICAL สั่งให้ทำโดยตรง",
+    "จงใจไม่ลิงก์ไป /brady/scanners-rfid ซึ่งอยู่ใน C-3 เช่นกัน เพราะหน้านั้นถือ flag PARTNER และ SPEC — การลิงก์จากหน้าหลักของหัวข้อทั่วไปไปยังโฟลเดอร์ผู้ผลิต เป็นการรับรองสถานะที่ CLM-O-003 ยังไม่ปิด",
+    "ตารางความรับผิดชอบระบุว่าเสาอากาศและเครื่องอ่านเป็นเรื่องของ 'ผู้ขายหรือผู้ติดตั้ง' โดยไม่ระบุว่าเป็น ACS — ผู้อ่านจะตีความว่าเป็น ACS และถามต่อ ซึ่งเป็นคำถามที่ตอบไม่ได้จนกว่า SRC-ACS-004 จะมา",
+    "การตีความ ENRICH_CANONICAL ว่าหน้ารองให้บีบขอบเขต ไม่ใช่รวมหน้าด้วย rel=canonical เป็นข้อเปิดที่ต้องให้ Owner ยืนยัน บันทึกใน package_status.open_question ของทั้งหกหน้าใน C-3"
+  ]
+}

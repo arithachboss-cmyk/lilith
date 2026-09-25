@@ -1,0 +1,31 @@
+{
+  "package_id": "PKG-RFID-WAREHOUSE",
+  "title": "RFID ในคลังสินค้า: จุดอ่านและขอบเขตของระบบ",
+  "meta_description": "หน้านี้ไล่จุดที่คลังต้องรู้ว่าของอยู่ไหน แล้วถามทีละจุดว่าการอ่านอัตโนมัติตรงนั้นเปลี่ยนอะไร และข้อมูลที่ได้จะไปลงที่ระบบใด ก่อนจะพูดถึงอุปกรณ์",
+  "canonical": "https://www.asiancoding.com/rfid-warehouse-system",
+  "target_url": "https://www.asiancoding.com/rfid-warehouse-system",
+  "page_type": "PRODUCT",
+  "canonical_intent": "กำหนดขอบเขตของระบบ RFID ในคลังด้วยการไล่จุดอ่านตามเส้นทางของของ และระบุว่าข้อมูลแต่ละจุดไปลงระบบใด จงใจไม่ลงลำดับเวลาของการติดตั้งซึ่งเป็นเรื่องของ /knowledge/rfid-warehouse-implementation ไม่อธิบายส่วนประกอบทั้งระบบซึ่งเป็นเรื่องของหน้าหลัก C-3 และไม่ให้ตัวเลข",
+  "primary_keyword": "RFID คลังสินค้า",
+  "secondary_keywords": [
+    "ระบบ RFID ในคลัง",
+    "RFID warehouse",
+    "จุดอ่าน RFID ในคลัง"
+  ],
+  "intent": "COMMERCIAL_INVESTIGATION",
+  "action": "ENRICH",
+  "internal_links": [
+    "https://www.asiancoding.com/rfid-systems",
+    "https://www.asiancoding.com/knowledge/rfid-warehouse-implementation",
+    "https://www.asiancoding.com/warehouse-data-capture",
+    "https://www.asiancoding.com/contact"
+  ],
+  "cluster_note": "หน้านี้อยู่ใน C-3 แต่ไม่ใช่หน้าหลัก — คำตัดสิน D-09 (2026-09-25) ตั้ง /rfid-systems เป็นหน้าหลักของ C-3 และกำหนด decision = ENRICH_CANONICAL แพ็กเกจนี้จึงบีบขอบเขตของหน้าให้ไม่ทับหน้าหลัก และลิงก์ขึ้นหาหน้าหลักแทนการแข่ง",
+  "robots": "noindex,nofollow",
+  "robots_note": "คง noindex จนกว่า rendering gate ผ่านและ Owner อนุมัติ",
+  "og": {
+    "title": "RFID ในคลังสินค้า: จุดอ่านและขอบเขตของระบบ",
+    "description": "หน้านี้ไล่จุดที่คลังต้องรู้ว่าของอยู่ไหน แล้วถามทีละจุดว่าการอ่านอัตโนมัติตรงนั้นเปลี่ยนอะไร และข้อมูลที่ได้จะไปลงที่ระบบใด ก่อนจะพูดถึงอุปกรณ์",
+    "image": null
+  }
+}

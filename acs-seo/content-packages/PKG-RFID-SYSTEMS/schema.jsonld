@@ -1,0 +1,9 @@
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "name": "ระบบ RFID ประกอบด้วยอะไรบ้าง และเริ่มตรงไหน",
+  "description": "ระบบ RFID ไม่ได้มีแค่เครื่องอ่านกับป้าย หน้านี้แยกส่วนประกอบทั้งห้าออกให้เห็น และบอกว่าแต่ละส่วนตัดสินใจโดยใคร พร้อมทางแยกไปหน้าที่เจาะลึกแต่ละเรื่อง",
+  "url": "https://www.asiancoding.com/rfid-systems",
+  "inLanguage": "th-TH",
+  "_generation_note": "ไม่มี offers / price / aggregateRating / review แม้หน้าปลายทางจะเป็น PRODUCT เพราะยังไม่มีรายการสินค้าและราคาที่ ACS ยืนยัน (CLM-O-001 / CLM-O-002)"
+}
