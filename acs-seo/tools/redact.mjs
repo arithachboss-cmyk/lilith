@@ -14,6 +14,7 @@
  * ไม่ได้แก้ด้วยการลบตัวเลข
  */
 import { readFileSync, writeFileSync, statSync, readdirSync } from 'node:fs';
+import { loadRules, scanForbidden } from './forbidden-scan.mjs';
 import { join, extname, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -29,8 +30,7 @@ if (targets.length === 0) {
   process.exit(2);
 }
 
-const forbidden = JSON.parse(readFileSync(join(ROOT, 'data/forbidden_terms.json'), 'utf8'));
-const rules = forbidden.rules.map((r) => ({ ...r, re: new RegExp(r.pattern, 'giu') }));
+const rules = loadRules(join(ROOT, 'data/forbidden_terms.json'));
 const marker = (rule) => `⟦ลบ ${rule.claim_ref[0]} — รอหลักฐาน⟧`;
 const MARKER_RE = /⟦ลบ [^⟧]*⟧/g;
 
@@ -50,13 +50,9 @@ for (const target of targets) {
     let text = original;
     const findings = [];
 
-    for (const rule of rules) {
-      rule.re.lastIndex = 0;
-      const hits = [...text.matchAll(rule.re)].map((m) => m[0]);
-      if (hits.length === 0) continue;
-      const unique = [...new Set(hits)];
-      findings.push({ rule_id: rule.id, severity: rule.severity, claim_ref: rule.claim_ref, message: rule.message, matches: unique });
-      if (rule.severity === 'BLOCK') blockedTotal += unique.length;
+    for (const hit of scanForbidden(text, rules)) {
+      findings.push(hit);
+      if (hit.severity === 'BLOCK') blockedTotal += hit.matches.length;
     }
 
     if (flags.has('--fix')) {

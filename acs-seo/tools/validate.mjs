@@ -16,6 +16,7 @@
 import { readFileSync, writeFileSync, existsSync, readdirSync, statSync } from 'node:fs';
 import { createHash } from 'node:crypto';
 import { checkPackageEvidence } from './evidence-check.mjs';
+import { loadRules, scanForbidden } from './forbidden-scan.mjs';
 import { join, dirname, resolve } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -56,7 +57,6 @@ const readJson = (p) => JSON.parse(readFileSync(p, 'utf8'));
 
 const sources = readJson(join(DATA_DIR, 'source_pack.json'));
 const claimsDoc = readJson(join(DATA_DIR, 'claims.json'));
-const forbidden = readJson(join(DATA_DIR, 'forbidden_terms.json'));
 const inventory = readJson(join(DATA_DIR, 'page_inventory.json'));
 const sitemap = readJson(join(DATA_DIR, 'sitemap_urls.json'));
 const gates = readJson(join(DATA_DIR, 'gates.json'));
@@ -69,7 +69,7 @@ const AS_OF = opt2('as-of') ?? new Date().toISOString().slice(0, 10);
 
 const sourceById = new Map(sources.sources.map((s) => [s.id, s]));
 const claimById = new Map(claimsDoc.claims.map((c) => [c.id, c]));
-const rules = forbidden.rules.map((r) => ({ ...r, re: new RegExp(r.pattern, 'giu') }));
+const rules = loadRules(join(DATA_DIR, 'forbidden_terms.json'));
 const inventoryUrls = new Set((inventory.pages ?? []).map((p) => p.url));
 const inventoryByUrl = new Map((inventory.pages ?? []).map((p) => [p.url, p]));
 /*
@@ -157,15 +157,9 @@ function evidenceSatisfies(audit, severity) {
   });
 }
 
-function scanForbidden(text) {
-  const hits = [];
-  for (const rule of rules) {
-    rule.re.lastIndex = 0;
-    const found = text.match(rule.re);
-    if (found) hits.push({ rule_id: rule.id, severity: rule.severity, claim_ref: rule.claim_ref, message: rule.message, matches: [...new Set(found)].slice(0, 8) });
-  }
-  return hits;
-}
+/** ตัดจำนวน matches ที่ 8 เพื่อไม่ให้ข้อความ finding ยาวเกินอ่าน — การสแกนอยู่ใน forbidden-scan.mjs */
+const scanPackageText = (text) =>
+  scanForbidden(text, rules).map((h) => ({ ...h, matches: h.matches.slice(0, 8) }));
 
 function checkPackage(dir) {
   const name = dir.replace(ROOT + '/', '');
@@ -301,7 +295,7 @@ function checkPackage(dir) {
   const htmlFiles = readdirSync(dir).filter((f) => /\.html?$/i.test(f));
   const htmlText = htmlFiles.map((f) => readFileSync(join(dir, f), 'utf8'));
   const scanText = [raw['article.md'], ...htmlText, meta.title, meta.meta_description, JSON.stringify(schema)].filter(Boolean).join('\n');
-  const hits = scanForbidden(scanText);
+  const hits = scanPackageText(scanText);
   let evidenceFlags = 0, ownerFlags = 0;
   for (const h of hits) {
     if (h.severity === 'BLOCK') {
