@@ -416,8 +416,25 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
     catch (err) { return { out: String(err.stdout ?? ''), code: err.status }; }
   };
 
-  const good = runEv([F('price-good')]);
+  /*
+   * ทุกข้อที่ตัดสินว่า "ผ่าน/ไม่ผ่าน" ต้อง pin --as-of เสมอ
+   *
+   * เดิมข้อนี้กับข้อสุดท้ายของบล็อกเรียกโดยไม่ส่ง --as-of จึงใช้นาฬิกาจริง และ fixture price-good
+   * หมดอายุ 2026-12-31 แปลว่าทั้งสองข้อจะล้มเองตั้งแต่ 2027-01-01 โดยไม่มีใครแก้โค้ดอะไรเลย
+   * เป็นความบกพร่องตระกูลเดียวกับเทสต์ที่ล้มไม่ได้ — ผลของเทสต์ไม่ได้ตามโค้ด
+   *
+   * แก้ด้วยการ pin ไม่ใช่ด้วยการเลื่อน valid_until ของ fixture ออกไป — อย่างหลังคือเลื่อนระเบิด
+   * ไม่ใช่ถอดชนวน · ส่วนพฤติกรรม "ไม่ส่ง --as-of แล้วใช้วันนี้" ยังตรวจอยู่ ดูข้อสุดท้ายของบล็อก
+   */
+  const PINNED_AS_OF = '2026-10-01';
+  const good = runEv([F('price-good'), '--as-of', PINNED_AS_OF]);
   check('ราคาที่มีวันที่ครบและยังไม่หมดอายุ ผ่าน', good.code === 0, good.out.trim());
+
+  /* ด่านกันถอยหลัง: ถ้ามีใครแก้ fixture จน valid_until มาก่อนวันที่ pin ไว้ ข้อบนจะล้มโดยไม่มีคำอธิบาย
+     ข้อนี้ทำให้มันฟ้องที่ต้นเหตุแทน */
+  const goodValidUntil = readJson('tests/fixtures-evidence/price-good/price_evidence.json').validity.valid_until;
+  check('วันที่ pin ไว้ยังอยู่ก่อนวันหมดอายุของ fixture',
+    PINNED_AS_OF < goodValidUntil, `pin=${PINNED_AS_OF} valid_until=${goodValidUntil}`);
 
   const stale = runEv([F('price-stale')]);
   check('ราคาที่หมดอายุแล้วถูก FAIL', stale.code === 1);
@@ -438,8 +455,14 @@ const tmp = mkdtempSync(join(tmpdir(), 'acs-qa-'));
   const argOrder = runEv([F('price-good'), '--as-of', '2026-10-01']);
   check('ส่ง --as-of แล้วยังตรวจ target ที่ระบุจริง ไม่ถูกตัดทิ้ง',
     argOrder.code === 0 && /ตรวจ 1 รายการ/.test(argOrder.out), argOrder.out.trim());
+  /* พฤติกรรมที่ต้องตรวจคือ "ไม่ส่ง --as-of แล้วใช้วันนี้" ไม่ใช่ "ราคายังไม่หมดอายุ"
+     เดิมข้อนี้หา /ตรวจ 1 รายการ/ ซึ่งเป็นข้อความของกรณีผ่านเท่านั้น (กรณี FAIL พิมพ์ว่า
+     "จาก 1 รายการ") จึงผูกกับวันหมดอายุไปด้วยโดยไม่ตั้งใจ · ข้อความ "ณ <วันที่>" พิมพ์ทั้งสองกรณี
+     จึงยืนยันค่าเริ่มต้นของ as-of ได้โดยไม่สนว่า fixture หมดอายุหรือยัง */
+  const today = new Date().toISOString().slice(0, 10);
   const noFlag = runEv([F('price-good')]);
-  check('ไม่ส่ง --as-of ก็ยังตรวจ target ตัวแรกได้', /ตรวจ 1 รายการ/.test(noFlag.out));
+  check('ไม่ส่ง --as-of แล้วใช้วันนี้เป็นวันประเมิน',
+    noFlag.out.includes(`ณ ${today}`), noFlag.out.trim());
 }
 
 /* ── เอกสาร governance ที่ generate ต้องสะท้อนข้อมูลจริง ─────────────
