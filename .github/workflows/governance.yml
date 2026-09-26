@@ -48,3 +48,26 @@ jobs:
       #
       # จงใจไม่รัน evidence-check.mjs แยกต่างหาก — validate.mjs เรียก checkPackageEvidence
       # อยู่ในตัวแล้ว และการรันแยกบน PR จะผูกผลของ CI กับปฏิทินแทนที่จะผูกกับการเปลี่ยนแปลงโค้ด
+
+  prototype-ui:
+    # เทสต์เบราว์เซอร์ของ **ต้นแบบ** ใน hr-screens/ ไม่ใช่ของ apps/web
+    # เขียวที่นี่ไม่ได้แปลว่าเกณฑ์ AC-13/14/15 ผ่าน — อ่าน qa-browser/README.md
+    #
+    # แยก job เพราะต่างจาก governance ข้างบนตรงที่ต้องติดตั้ง dependency และต้องโหลดเบราว์เซอร์
+    # ซึ่งเป็นต้นทุนเวลาจริงของ CI และเป็นจุดพังใหม่ที่ยอมรับแลกกับการมีด่าน UI
+    runs-on: ubuntu-latest
+    timeout-minutes: 12
+    steps:
+      - uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: pnpm
+      - run: pnpm install --frozen-lockfile
+      - name: Install the browser this Playwright version expects
+        run: pnpm exec playwright install --with-deps chromium
+      - name: Prototype UI gates
+        run: pnpm test:prototype
+      - name: Verify the lockfile did not change
+        run: git diff --exit-code -- pnpm-lock.yaml
