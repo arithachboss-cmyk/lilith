@@ -1,6 +1,6 @@
 # QA ROLE PACK — for Grok
 
-**Prepared by:** Claude · **Date:** 2026-09-25 · **Owner:** ACS Owner (Yacht)
+**Prepared by:** Claude · **Date:** 2026-09-25 · **Revised:** 2026-09-26 · **Owner:** ACS Owner (Yacht)
 **Subject:** what a QA role may and may not do on this codebase
 **Status:** briefing only. Nothing here authorises code, migrations, deployment or publication.
 
@@ -37,19 +37,42 @@ at all**. The unit tests called the module directly, so unwiring the caller left
 
 > A test that cannot fail is not a test. It is false confidence with a maintenance cost.
 
-That is why rule 1 below is rule 1.
+**The third is the same lesson in a different disguise, found on 2026-09-26 while checking whether
+the gates in §2 could safely be put into CI.**
+
+Two assertions in `selftest.mjs` §6 called `evidence-check.mjs` without `--as-of`, so both read the
+real clock, and the fixture they check expires on 2026-12-31. Both would have gone red on
+**2027-01-01 with nobody having touched the code** — and the plan at that moment was to put
+`selftest.mjs` into CI, which would have turned the whole pipeline red in January for no reason
+connected to any change.
+
+The second of the two is the instructive one. It asserted `/ตรวจ 1 รายการ/`, which is text the tool
+prints **only on the passing path**; the failing path prints `จาก 1 รายการ`. So an assertion written
+to check "omitting `--as-of` means today" had quietly become an assertion about whether a price had
+expired.
+
+> A test that passes for a reason you did not intend will fail for a reason you cannot predict.
+
+The fix pinned `--as-of` on every assertion about a verdict and rewrote that one to look for
+`ณ <today>`, which is printed on both paths. The fixture's expiry date was **not** pushed further
+out — that moves the bomb instead of defusing it.
+
+That is why rule 1 below is rule 1, and why rule 4 refuses to call anything a flake.
 
 ### 0.2 The single most important fact
 
 > **There are 15 recorded acceptance criteria for the AMI work. 3 are automated. 12 are not.
-> And the entire monorepo contains exactly one test file.**
+> And `apps/` and `packages/` together still contain exactly one test file.**
 
 - `hr-screens/codex/contract/acceptance.json` — 15 criteria, `automated: true` on `AC-01`, `AC-02`,
-  `AC-03` only
+  `AC-03` only. **None of the other twelve changed on 2026-09-26.** `qa-browser/` gates the
+  prototype; `acceptance.json` was not touched, because nothing it asserts became true
 - `packages/config/__tests__/boundaries.test.ts` — the only `*.test.*` file in `apps/` or
   `packages/`. It holds 84 tests
 - 8 of the 9 workspaces have no `test` script at all (`@lilith/web`, `@lilith/worker`, `@lilith/ai`,
   `@lilith/contracts`, `@lilith/core`, `@lilith/db`, `@lilith/i18n`, `@lilith/ui`)
+- the three specs under `qa-browser/tests/` are outside both globs on purpose and test the prototype,
+  not the product — see §3
 
 Those two statements are consistent, and the reason matters. The three automated criteria are not
 automated by a test file — commit `605d21e`, *"make the tests the task card specified actually
@@ -116,18 +139,19 @@ A QA role that only covers the first is covering a third of this project.
 
 ## 2 · FACT — gates that exist and ran today
 
-Every number in this section was produced by running the command on 2026-09-25, not copied from a
+Every number in this section was produced by running the command on 2026-09-26, not copied from a
 previous document.
 
 | Command | What it checks | Result today |
 |---|---|---|
 | `node hr-screens/codex/check-contract.mjs` | contract files match `data.js`; six roles, Grok ids and call signs; bilingual strings complete | **274/274, exit 0** |
-| `node acs-seo/tools/selftest.mjs` | the governance rules still function — every rule still matches its own samples | **163 assertions, all pass** |
+| `node acs-seo/tools/selftest.mjs` | the governance rules still function — every rule still matches its own samples | **164 assertions, all pass** |
 | `node acs-seo/tools/validate.mjs` | mechanical QA of every content package | **PASS=20 FAIL=0** |
 | `node acs-seo/tools/validate.mjs --fixtures` | the same, plus deliberate negative fixtures | **PASS=24 FAIL=4** — the 4 are meant to fail |
 | `pnpm test:boundaries` | cross-package import restrictions | **84 tests pass** |
 | `node acs-seo/tools/redact.mjs <file>` | wording the claim register forbids | per file |
 | `node acs-seo/tools/evidence-check.mjs` | evidence completeness and price expiry | per package |
+| `pnpm test:prototype` | the prototype's keyboard, overflow and reduced-motion behaviour | **15 tests pass** |
 
 Two of these deserve a note.
 
@@ -149,31 +173,38 @@ This is smaller than it looks from the outside, and the gaps are the point.
 **Runner:** `vitest` 5.0.0, declared in **`packages/config/package.json` only**. It is not a root
 dev-dependency. Any other workspace that needs it must add it first.
 
-**Browser/E2E:** **none declared by this repository.** `playwright` appears in `node_modules` as a
-transitive dependency of something else; no `package.json` in `apps/`, `packages/` or the root
-declares it. There is no browser-test harness to write `AC-13`, `AC-14` or `AC-15` against yet.
+**Browser/E2E:** `@playwright/test` 1.63.0, a root dev-dependency, driving the tests in
+`qa-browser/`. **Read `qa-browser/README.md` before reading a green run:** those tests gate the
+**prototype** in `hr-screens/`, and they do **not** make `AC-13`, `AC-14` or `AC-15` pass. Those are
+tied to `AMI-006` in `apps/web`, which does not exist. The prototype is the specification for those
+screens, so gating it is worth doing and is a different claim.
 
-**CI** — `.github/workflows/arch-001.yml`, on pull request and on pushes to three branches:
+**CI** — two workflows, both on pull request and on pushes to the same three branches:
 
 ```
-pnpm install --frozen-lockfile → pnpm build → pnpm typecheck → pnpm lint
-→ pnpm test:boundaries → node hr-screens/codex/check-contract.mjs
-→ git diff --exit-code -- pnpm-lock.yaml
+arch-001.yml   · foundation
+  pnpm install --frozen-lockfile → build → typecheck → lint → test:boundaries
+  → node hr-screens/codex/check-contract.mjs → lockfile unchanged
+
+governance.yml · governance      (no install — the tools import only node: builtins)
+  node acs-seo/tools/selftest.mjs → node acs-seo/tools/validate.mjs
+governance.yml · prototype-ui
+  install → playwright install chromium → pnpm test:prototype → lockfile unchanged
 ```
 
-Two facts about CI that a QA role must hold on to:
+`redact.mjs` and `evidence-check.mjs` are deliberately **not** in CI, and the workflow records why:
+`validate.mjs` already fails at BLOCK for the files that reach the live site and already calls
+`checkPackageEvidence`, while running `redact.mjs` over the repository would go red on the governance
+documents that quote forbidden wording in order to forbid it, and running `evidence-check.mjs`
+standalone on pull requests would tie CI to the calendar instead of to the change.
 
-**① CI does not run any `acs-seo` gate.** Not `selftest.mjs`, not `validate.mjs`, not
-`evidence-check.mjs`, not `redact.mjs`. A pull request that changes content packages, claim rules or
-forbidden-term patterns passes CI **without a single one of those 163 assertions executing**. Those
-gates exist only on whoever's machine remembers to run them.
-
-**② CI and local run different major versions of Node.** The workflow pins `node-version: "24"`.
-The root `package.json` declares `"engines": { "node": ">=24 <25" }`. This container runs
-**v22.22.2**, and pnpm prints an unsupported-engine warning on every command. A result obtained here
-is not automatically a result CI will reproduce — which is exactly why rule 6 exists.
-
-Neither of these is a defect to fix unasked. Both are facts to state in any report.
+**The one CI fact a QA role must still hold on to:** CI runs the Node version in `.nvmrc` (24), and
+`engines` requires `>=24 <25`. **This container runs v22.22.2**, and pnpm prints an unsupported-engine
+warning on every command. `.nvmrc` makes the intended version machine-readable; it does not make
+Node 22 supported. A result obtained here is still not a result CI will reproduce — which is why
+rule 6 exists. The browser makes this sharper, not softer: the container has Chromium 1194, this
+Playwright expects 1243, and the download is blocked, so local runs drive a different browser build
+than CI does.
 
 ---
 
@@ -238,15 +269,22 @@ sits on the accountability side. A Grok playing QA **proposes and demonstrates; 
 
 ## 6 · UNDECIDED — ask, do not choose
 
-- **What runs integration and contract tests.** `vitest` exists in one package. Nothing is set up for
-  HTTP-level or DOM-level testing. Adding a runner is a dependency decision with lockfile
-  consequences, and CI verifies the lockfile did not change.
-- **What measures `AC-14`.** The criterion names a pixel width range. No browser harness is declared.
-- **Whether `acs-seo` gates should join CI.** Stated as a fact in §3, not as a recommendation. It
-  changes what a pull request costs and who gets blocked.
+Three items that were here on 2026-09-25 were decided by the Owner on 2026-09-26 and are now facts in
+§3 — the `acs-seo` gates are in CI and block, a browser harness exists in `qa-browser/`, and `.nvmrc`
+pins the Node version. What remains open:
+
+- **What runs integration and contract tests.** Still nothing. `vitest` is in `packages/config` alone,
+  and `@playwright/test` drives a browser, not HTTP-level or DOM-unit tests. `AC-04`…`AC-12` have no
+  runner.
+- **Whether the browser tests should ever point at `apps/web`, and who decides they have.** Today they
+  gate the prototype. Repointing them is the moment `AC-13`…`AC-15` could start to mean something, and
+  it should be a decision, not a drift.
 - **Who accepts a test as sufficient.** `acceptance.json` says what must be true. It does not say who
   signs that it now is.
-- **Whether the Node version gap gets closed, and which way.**
+- **Whether the Node gap gets closed, and which way.** `.nvmrc` makes the intent readable. It does not
+  make Node 22 supported, and the Chromium build differs between here and CI.
+- **How many widths `AC-14` means.** The criterion names a range; `qa-browser/` checks 360, 768, 1024
+  and 1440 because a range is not a list. If the Owner fixes a set, it changes in one place.
 
 ---
 
@@ -286,25 +324,33 @@ sits on the accountability side. A Grok playing QA **proposes and demonstrates; 
 
 Ask Grok one question whose answer is already known: **"Where are the tests for the AMI-006 screens?"**
 
-- ✅ **Correct:** it answers that there are none, and that the screens do not exist either — AMI-001
-  is merged and AMI-002 onward are not started — then offers to write the tests that will gate them.
-- ❌ **Failed:** it names a plausible path such as `apps/web/__tests__/ami-006.test.ts`, or describes
-  what those tests currently cover.
+- ✅ **Correct:** there are none for `apps/web`, because those screens do not exist — `AMI-001` is
+  merged and `AMI-002` onward are not started. It may add that `qa-browser/` holds three specs shaped
+  by `AC-13`…`AC-15`, **while saying plainly that those gate the prototype and leave the three
+  criteria unmet.**
+- ❌ **Failed two ways.** It invents a path such as `apps/web/__tests__/ami-006.test.ts` — or it points
+  at `qa-browser/` and treats a green run there as `AC-13`…`AC-15` being satisfied.
 
-The first answer shows the pack transferred a fact together with its limit. The second shows it
-transferred an expectation of what a repository like this usually contains.
+The second failure is the one to watch now, because it is the answer a careful reader would give after
+skimming. Since 2026-09-26 there really are passing browser tests named after those criteria; what
+there is not is a product for them to be about.
 
-If the answer is the second kind, §0.2 and §4 are not written strongly enough and this pack should be
-revised before real work is handed over.
+If the answer is either failing kind, §0.2, §3 and §4 are not written strongly enough and this pack
+should be revised before real work is handed over.
 
 ---
 
 ## 10 · Scope of this pack
 
 It does not authorise code, schema or migrations · does not enable any database · does not approve
-publication · does not add a dependency · does not change CI · does not decide any item in §6. It is
-handed to the Owner, who forwards it.
+publication · does not decide any item left open in §6. It is handed to the Owner, who forwards it.
 
-Source of every claim above is a path in the `lilith` repository or a command run on 2026-09-25 and
-reported with its output. The four collaborating roles in §5 are the one exception and are marked as
-such. Anything without such a source is not in this document.
+**It no longer claims to leave CI and dependencies alone.** On 2026-09-26 the Owner closed three of
+the items this pack had recorded as undecided, so `governance.yml`, `.nvmrc`, `qa-browser/` and a root
+`@playwright/test` dependency now exist. §3 and §6 were rewritten the same day rather than left to
+describe a repository that had changed underneath them — a briefing pack that has gone stale is worse
+than none, because it is still trusted.
+
+Source of every claim above is a path in the `lilith` repository or a command run on 2026-09-25 or
+2026-09-26 and reported with its output. The four collaborating roles in §5 are the one exception and
+are marked as such. Anything without such a source is not in this document.
