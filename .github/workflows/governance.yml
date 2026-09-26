@@ -1,0 +1,50 @@
+# ด่าน governance ของเนื้อหาและ claim
+#
+# แยกจาก arch-001.yml โดยตั้งใจ — ไฟล์นั้นมีความหมายเป็นด่านของงาน ARCH-001
+# ส่วนไฟล์นี้กั้นเรื่องที่ไม่เกี่ยวกับการ build คือกฎ claim คำต้องห้าม และ cannibalization
+#
+# ก่อนหน้านี้ด่านชุดนี้ไม่เคยรันใน CI เลย PR ที่แก้ content package แก้กฎ claim
+# หรือแก้ pattern คำต้องห้าม ผ่าน CI ได้โดยที่ข้อตรวจทั้งหมดไม่ถูกรันสักข้อ
+# มันอยู่แค่ในเครื่องของคนที่จำได้ว่าต้องรัน
+
+name: Governance gates
+
+on:
+  pull_request:
+  push:
+    branches:
+      ["feat/ARCH-001-monorepo-scaffold", "codex/lilith-prototype", "main"]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: governance-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  governance:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+
+      # ไม่มี pnpm install โดยตั้งใจ — เครื่องมือชุดนี้ import เฉพาะโมดูลในตัว Node
+      # (node:fs, node:path, node:crypto, node:os, node:child_process, node:url)
+      # ไม่มี dependency ภายนอกสักตัว job นี้จึงไม่ต้องรอการติดตั้งอะไรเลย
+
+      - name: Governance selftest
+        run: node acs-seo/tools/selftest.mjs
+
+      - name: Content package mechanical QA
+        run: node acs-seo/tools/validate.mjs
+
+      # จงใจไม่รัน redact.mjs ทั้ง repo — validate.mjs สแกนคำต้องห้ามและ FAIL ที่ระดับ BLOCK
+      # ให้อยู่แล้วสำหรับไฟล์ที่จะขึ้นเว็บจริง ส่วน brief.md / claim_register.md / 08-ROUND-LOG.md
+      # ยกคำต้องห้ามมาอ้างเพื่อห้ามโดยตั้งใจ การรัน redact ทั้ง repo จึงจะแดงโดยไม่มีอะไรผิด
+      #
+      # จงใจไม่รัน evidence-check.mjs แยกต่างหาก — validate.mjs เรียก checkPackageEvidence
+      # อยู่ในตัวแล้ว และการรันแยกบน PR จะผูกผลของ CI กับปฏิทินแทนที่จะผูกกับการเปลี่ยนแปลงโค้ด
