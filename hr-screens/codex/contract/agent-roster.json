@@ -1,0 +1,2139 @@
+{
+  "$generated_from": "hr-screens/office-data.js",
+  "$do_not_edit_by_hand": true,
+  "version": "1.0.0",
+  "nature": "CONFIGURATION_ONLY",
+  "en_status": "DRAFT_NEEDS_REVIEW",
+  "runtime": {
+    "provisioned_agents": 0,
+    "connection_state_for_all": "DEFINED_NOT_CONNECTED",
+    "added_running_cost": "NONE",
+    "rule_th": "ทะเบียนนี้เป็นการตั้งค่า ไม่ใช่การเปิดใช้งาน · 100 เอเจนต์ไม่ได้แปลว่า 100 process หรือ 100 การเชื่อมต่อ · การเปิดใช้จริงทำทีละตัวผ่าน ACTIVATION-REQUEST พร้อมผลทดสอบ ค่าใช้จ่ายที่ประเมินแล้ว และการอนุมัติของเจ้าของ",
+    "rule_en": "This roster is configuration, not activation. 100 agents do not mean 100 processes or 100 connections. Each agent is activated one at a time through ACTIVATION-REQUEST, with test results, an estimated cost and owner approval."
+  },
+  "teams": [
+    {
+      "team_id": "T01",
+      "lead_id": "GROK-10",
+      "lead_call_sign": "ORCHESTRATOR",
+      "owner_role_id": "HR-01",
+      "owner_title": "Director",
+      "pool": "dedicated",
+      "name_th": "สำนักบัญชาการ",
+      "name_en": "Command Office",
+      "mission_th": "รวมภาพข้ามทีม จัดลำดับเรื่องรอตัดสิน และดูแลภาพรวมรายได้",
+      "mission_en": "Combines the cross-team picture, orders pending decisions and keeps the revenue outlook",
+      "size": 9
+    },
+    {
+      "team_id": "T02",
+      "lead_id": "GROK-01",
+      "lead_call_sign": "PEOPLE",
+      "owner_role_id": "HR-02",
+      "owner_title": "Human Resources",
+      "pool": "dedicated",
+      "name_th": "ทีมคนและเครือข่ายคู่ค้า",
+      "name_en": "People and Partner Network",
+      "mission_th": "ดูแลการเริ่มงาน ความชัดเจนของบทบาท การฝึกอบรม และเครือข่ายนายหน้าคู่ค้า",
+      "mission_en": "Looks after onboarding, role clarity, training and the partner broker network",
+      "size": 8
+    },
+    {
+      "team_id": "T03",
+      "lead_id": "GROK-08",
+      "lead_call_sign": "WATCHTOWER",
+      "owner_role_id": "HR-03",
+      "owner_title": "Operations",
+      "pool": "dedicated",
+      "name_th": "ทีมปฏิบัติการและบริการ",
+      "name_en": "Operations and Service",
+      "mission_th": "ทำให้สายงานห้าขั้นเดินต่อ ตอบลูกค้าตรงเวลา และจัดคิวนัดชม",
+      "mission_en": "Keeps the five-stage pipeline moving, answers clients on time and runs viewings",
+      "size": 10
+    },
+    {
+      "team_id": "T04",
+      "lead_id": "GROK-02",
+      "lead_call_sign": "ANALYST",
+      "owner_role_id": "HR-04",
+      "owner_title": "Intelligence / Research",
+      "pool": "dedicated",
+      "name_th": "ทีมข่าวกรองตลาด",
+      "name_en": "Market Intelligence",
+      "mission_th": "เปลี่ยนข้อมูลตลาดเป็นบรีฟที่มีแหล่งและวันที่ ตรวจย้อนกลับได้",
+      "mission_en": "Turns market data into briefs with a source and date that can be traced back",
+      "size": 10
+    },
+    {
+      "team_id": "T05",
+      "lead_id": "GROK-04",
+      "lead_call_sign": "CONNECTOR",
+      "owner_role_id": "HR-05",
+      "owner_title": "Matchmaker",
+      "pool": "dedicated",
+      "name_th": "ทีมเติบโตและลูกค้าสัมพันธ์",
+      "name_en": "Growth and Client Connection",
+      "mission_th": "สร้างความต้องการและทรัพย์ใหม่ รับลูกค้า คัดกรอง และเตรียมการจับคู่",
+      "mission_en": "Generates demand and new listings, takes in clients, qualifies them and prepares matches",
+      "size": 16
+    },
+    {
+      "team_id": "T06",
+      "lead_id": "GROK-07",
+      "lead_call_sign": "ECOSYSTEM",
+      "owner_role_id": "HR-06",
+      "owner_title": "AI Coordinator",
+      "pool": "dedicated",
+      "name_th": "ทีม AI และแพลตฟอร์ม",
+      "name_en": "AI and Platform",
+      "mission_th": "ดูแลทะเบียนเอเจนต์ ชุดทดสอบ ค่าใช้จ่าย และคำขอเปิดใช้ทีละตัว",
+      "mission_en": "Keeps the agent registry, test sets, cost and one-at-a-time activation requests",
+      "size": 9
+    },
+    {
+      "team_id": "T07",
+      "lead_id": "GROK-03",
+      "lead_call_sign": "VERIFIER",
+      "owner_role_id": "HR-04",
+      "owner_title": "Intelligence / Research",
+      "pool": "shared",
+      "name_th": "ทีมประกาศและการตรวจสอบ",
+      "name_en": "Listings and Verification",
+      "mission_th": "รับข้อมูลทรัพย์ ตรวจความครบ เอกสาร ภาพ และข้อเท็จจริงก่อนเผยแพร่",
+      "mission_en": "Takes in listings and checks completeness, documents, photos and facts before publication",
+      "size": 10
+    },
+    {
+      "team_id": "T08",
+      "lead_id": "GROK-05",
+      "lead_call_sign": "NEGOTIATION",
+      "owner_role_id": "HR-05",
+      "owner_title": "Matchmaker",
+      "pool": "shared",
+      "name_th": "ทีมดีลและการปิดการขาย",
+      "name_en": "Deals and Closing",
+      "mission_th": "เตรียมข้อเสนอ ทางเลือกการต่อรอง รายการปิดดีล และการดูแลหลังโอน",
+      "mission_en": "Prepares offers, negotiation options, closing lists and post-transfer care",
+      "size": 10
+    },
+    {
+      "team_id": "T09",
+      "lead_id": "GROK-06",
+      "lead_call_sign": "RISK",
+      "owner_role_id": "HR-01",
+      "owner_title": "Director",
+      "pool": "shared",
+      "name_th": "ทีมความเสี่ยงและการปฏิบัติตาม",
+      "name_en": "Risk and Compliance",
+      "mission_th": "จับสัญญาณทุจริต ตรวจความยินยอม กันข้อมูลติดต่อรั่ว และดูแลทะเบียนความเสี่ยง",
+      "mission_en": "Spots fraud signals, checks consent, prevents contact leaks and keeps the risk register",
+      "size": 9
+    },
+    {
+      "team_id": "T10",
+      "lead_id": "GROK-09",
+      "lead_call_sign": "GOVERNANCE",
+      "owner_role_id": "HR-01",
+      "owner_title": "Director",
+      "pool": "shared",
+      "name_th": "ทีมธรรมาภิบาลและการอนุมัติ",
+      "name_en": "Governance and Approvals",
+      "mission_th": "บันทึกการตัดสินใจ ตรวจร่องรอย และเฝ้าประตูก่อนเผยแพร่ทุกชิ้น",
+      "mission_en": "Records decisions, reviews audit trails and guards the gate before anything is published",
+      "size": 9
+    }
+  ],
+  "agents": [
+    {
+      "agent_id": "GROK-10",
+      "call_sign": "ORCHESTRATOR",
+      "kind": "lead",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "หัวหน้าสำนักบัญชาการ",
+      "title_en": "Command lead",
+      "duty_th": "รวมสถานะข้ามทีมที่ได้รับอนุญาต จัดลำดับเรื่องรอตัดสิน และส่งบรีฟให้ Director",
+      "duty_en": "Combines permitted cross-team status, orders pending decisions and briefs the Director",
+      "handoff_to": "HR-01",
+      "escalate_to": "HR-01",
+      "route_to_human": [
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-001",
+      "call_sign": "DAILY-BRIEF",
+      "kind": "member",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ร่างบรีฟประจำวัน",
+      "title_en": "Daily brief drafter",
+      "duty_th": "ร่างสรุปสถานการณ์ประจำวันจากรายงานของทุกทีม",
+      "duty_en": "Drafts the daily situation summary from every team report",
+      "handoff_to": "GROK-10",
+      "escalate_to": "GROK-10",
+      "route_to_human": [
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-002",
+      "call_sign": "KPI-BOARD",
+      "kind": "member",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ดูแลกระดานตัวชี้วัด",
+      "title_en": "KPI board keeper",
+      "duty_th": "รวบรวมตัวชี้วัดที่มีแหล่งข้อมูลจริง และแสดงช่องว่างเมื่อยังไม่มีข้อมูล",
+      "duty_en": "Collects KPIs that have a real data source and shows a gap where none exists",
+      "handoff_to": "AGT-001",
+      "escalate_to": "GROK-10",
+      "route_to_human": [
+        "AGT-001",
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-003",
+      "call_sign": "DECISION-QUEUE",
+      "kind": "member",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ดูแลคิวเรื่องรอตัดสิน",
+      "title_en": "Decision queue keeper",
+      "duty_th": "จัดเรียงเรื่องรอตัดสินตามอายุและผลกระทบ พร้อมทางเลือกที่ระบุที่มา",
+      "duty_en": "Orders pending decisions by age and impact, with options that cite their source",
+      "handoff_to": "GROK-10",
+      "escalate_to": "GROK-10",
+      "route_to_human": [
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-004",
+      "call_sign": "ESCALATION-ROUTER",
+      "kind": "member",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้จัดเส้นทางยกระดับ",
+      "title_en": "Escalation router",
+      "duty_th": "จัดเรื่องที่เกินเกณฑ์ให้ถึงผู้ตัดสินที่ถูกต้องตามสายอำนาจ",
+      "duty_en": "Routes over-threshold issues to the right decision-maker along the line of authority",
+      "handoff_to": "AGT-003",
+      "escalate_to": "GROK-10",
+      "route_to_human": [
+        "AGT-003",
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-005",
+      "call_sign": "PRIORITY-PLANNER",
+      "kind": "member",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้วางลำดับความสำคัญ",
+      "title_en": "Priority planner",
+      "duty_th": "ร่างลำดับความสำคัญรายสัปดาห์ให้ทุกทีมเห็นรายการเดียวกัน",
+      "duty_en": "Drafts the weekly priority order so every team sees the same list",
+      "handoff_to": "AGT-001",
+      "escalate_to": "GROK-10",
+      "route_to_human": [
+        "AGT-001",
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-006",
+      "call_sign": "CAPACITY-PLANNER",
+      "kind": "member",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้วางแผนกำลังงาน",
+      "title_en": "Capacity planner",
+      "duty_th": "เทียบปริมาณงานกับกำลังคนและเอเจนต์ที่เปิดใช้จริง แล้วเสนอจุดที่ควรเสริม",
+      "duty_en": "Compares workload with people and agents actually in service and proposes where to add capacity",
+      "handoff_to": "AGT-005",
+      "escalate_to": "GROK-10",
+      "route_to_human": [
+        "AGT-005",
+        "AGT-001",
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-007",
+      "call_sign": "MEETING-SCRIBE",
+      "kind": "member",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้บันทึกการประชุม",
+      "title_en": "Meeting scribe",
+      "duty_th": "ร่างบันทึกการประชุมและรายการงานที่ต้องตามต่อ พร้อมเจ้าของงานทุกข้อ",
+      "duty_en": "Drafts meeting notes and follow-up items, each with an owner",
+      "handoff_to": "AGT-003",
+      "escalate_to": "GROK-10",
+      "route_to_human": [
+        "AGT-003",
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-008",
+      "call_sign": "REVENUE-OUTLOOK",
+      "kind": "member",
+      "team_id": "T01",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ร่างภาพรวมรายได้",
+      "title_en": "Revenue outlook drafter",
+      "duty_th": "สรุปดีลตามขั้นสถานะเพื่อดูแนวโน้มรายได้ โดยไม่คำนวณค่าธรรมเนียมจนกว่าเจ้าของจะยืนยันโมเดล",
+      "duty_en": "Summarises deals by stage for a revenue outlook, without computing fees until the owner confirms the model",
+      "handoff_to": "GROK-10",
+      "escalate_to": "GROK-10",
+      "route_to_human": [
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": "OWNER_DECISION_FEE_MODEL",
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-01",
+      "call_sign": "PEOPLE",
+      "kind": "lead",
+      "team_id": "T02",
+      "owner_role_id": "HR-02",
+      "title_th": "หัวหน้าทีมคนและคู่ค้า",
+      "title_en": "People lead",
+      "duty_th": "ดูแลการเริ่มงาน ความชัดเจนของบทบาท และเครือข่ายคู่ค้า แล้วส่งสรุปให้ Human Resources",
+      "duty_en": "Oversees onboarding, role clarity and the partner network, and reports to Human Resources",
+      "handoff_to": "HR-02",
+      "escalate_to": "HR-02",
+      "route_to_human": [
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-009",
+      "call_sign": "ONBOARDING-PLANNER",
+      "kind": "member",
+      "team_id": "T02",
+      "owner_role_id": "HR-02",
+      "title_th": "ผู้วางแผนต้อนรับ",
+      "title_en": "Onboarding planner",
+      "duty_th": "ร่างแผนต้อนรับสมาชิกใหม่ตั้งแต่ก่อนเริ่มงานถึงเดือนแรก",
+      "duty_en": "Drafts a new member welcome plan from before day one to the end of month one",
+      "handoff_to": "GROK-01",
+      "escalate_to": "GROK-01",
+      "route_to_human": [
+        "GROK-01",
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-010",
+      "call_sign": "ROLE-CLARITY",
+      "kind": "member",
+      "team_id": "T02",
+      "owner_role_id": "HR-02",
+      "title_th": "ผู้ตรวจความชัดเจนของบทบาท",
+      "title_en": "Role clarity reviewer",
+      "duty_th": "ตรวจคำอธิบายบทบาทว่าชัด ไม่ทับซ้อน และไม่สื่อถึงสิทธิ์ที่ตำแหน่งนั้นไม่มี",
+      "duty_en": "Checks role descriptions are clear, do not overlap and imply no permission the role lacks",
+      "handoff_to": "GROK-01",
+      "escalate_to": "GROK-01",
+      "route_to_human": [
+        "GROK-01",
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-011",
+      "call_sign": "PARTNER-RECRUIT",
+      "kind": "member",
+      "team_id": "T02",
+      "owner_role_id": "HR-02",
+      "title_th": "ผู้ร่างคำเชิญนายหน้าคู่ค้า",
+      "title_en": "Partner broker recruiter",
+      "duty_th": "ร่างคำเชิญและเกณฑ์คัดเลือกนายหน้าคู่ค้า ให้คนตัดสินก่อนติดต่อจริง",
+      "duty_en": "Drafts invitations and selection criteria for partner brokers; a person decides before any contact",
+      "handoff_to": "AGT-012",
+      "escalate_to": "GROK-01",
+      "route_to_human": [
+        "AGT-012",
+        "GROK-01",
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-012",
+      "call_sign": "PARTNER-ONBOARD",
+      "kind": "member",
+      "team_id": "T02",
+      "owner_role_id": "HR-02",
+      "title_th": "ผู้ดูแลการรับคู่ค้าเข้าระบบ",
+      "title_en": "Partner onboarding guide",
+      "duty_th": "เตรียมรายการเอกสารและขั้นตอนเริ่มต้นสำหรับคู่ค้าที่ได้รับอนุมัติแล้ว",
+      "duty_en": "Prepares the document list and first steps for partners who have been approved",
+      "handoff_to": "GROK-01",
+      "escalate_to": "GROK-01",
+      "route_to_human": [
+        "GROK-01",
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-013",
+      "call_sign": "TRAINING-DESIGNER",
+      "kind": "member",
+      "team_id": "T02",
+      "owner_role_id": "HR-02",
+      "title_th": "ผู้ออกแบบบทเรียน",
+      "title_en": "Training designer",
+      "duty_th": "ร่างบทเรียนสั้นตามบทบาทจากคู่มือที่ได้รับอนุมัติแล้วเท่านั้น",
+      "duty_en": "Drafts short role-based lessons from approved playbooks only",
+      "handoff_to": "AGT-014",
+      "escalate_to": "GROK-01",
+      "route_to_human": [
+        "AGT-014",
+        "GROK-01",
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-014",
+      "call_sign": "KNOWLEDGE-BASE",
+      "kind": "member",
+      "team_id": "T02",
+      "owner_role_id": "HR-02",
+      "title_th": "ผู้ดูแลคลังความรู้",
+      "title_en": "Knowledge base keeper",
+      "duty_th": "จัดเก็บคำตอบมาตรฐานและคู่มือ พร้อมวันที่และผู้อนุมัติ",
+      "duty_en": "Files standard answers and playbooks with their date and approver",
+      "handoff_to": "GROK-01",
+      "escalate_to": "GROK-01",
+      "route_to_human": [
+        "GROK-01",
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-015",
+      "call_sign": "SHIFT-ROSTER",
+      "kind": "member",
+      "team_id": "T02",
+      "owner_role_id": "HR-02",
+      "title_th": "ผู้จัดตารางเวร",
+      "title_en": "Shift roster planner",
+      "duty_th": "ร่างตารางเวรตอบลูกค้าและพาชมให้ครอบคลุมช่วงที่งานเข้ามาก",
+      "duty_en": "Drafts reply and viewing shifts that cover the busiest hours",
+      "handoff_to": "GROK-01",
+      "escalate_to": "GROK-01",
+      "route_to_human": [
+        "GROK-01",
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-08",
+      "call_sign": "WATCHTOWER",
+      "kind": "lead",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "หัวหน้าทีมปฏิบัติการ",
+      "title_en": "Operations lead",
+      "duty_th": "เฝ้าสายงานทั้งห้าขั้น ชี้จุดติดขัด และส่งลำดับงานที่ควรทำก่อนให้ Operations",
+      "duty_en": "Watches all five pipeline stages, flags bottlenecks and sends Operations the do-first order",
+      "handoff_to": "HR-03",
+      "escalate_to": "HR-03",
+      "route_to_human": [
+        "HR-03"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-016",
+      "call_sign": "PIPELINE-WATCH",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้เฝ้าสายงาน",
+      "title_en": "Pipeline watcher",
+      "duty_th": "หางานที่ค้างเกินเกณฑ์ในแต่ละขั้น ระบุเจ้าของงาน และร่างรายงานประจำสัปดาห์",
+      "duty_en": "Finds work past its threshold at each stage, names the owner and drafts the weekly report",
+      "handoff_to": "GROK-08",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "GROK-08",
+        "HR-03"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-017",
+      "call_sign": "HANDOFF-QUEUE",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้ดูแลคิวส่งต่อ",
+      "title_en": "Handoff queue keeper",
+      "duty_th": "ติดตามงานที่รอผู้รับช่วงและเตือนก่อนเลยกำหนด",
+      "duty_en": "Tracks work waiting for a receiver and warns before it runs late",
+      "handoff_to": "AGT-016",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "AGT-016",
+        "GROK-08",
+        "HR-03"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-018",
+      "call_sign": "SLA-MONITOR",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้เฝ้าเวลาตอบกลับ",
+      "title_en": "Response time monitor",
+      "duty_th": "วัดเวลาตอบลูกค้าเทียบกับเป้าที่ตั้งไว้และรายงานทุกวัน",
+      "duty_en": "Measures client response time against the set target and reports daily",
+      "handoff_to": "GROK-08",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "GROK-08",
+        "HR-03"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-019",
+      "call_sign": "INBOX-TRIAGE",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้คัดแยกข้อความเข้า",
+      "title_en": "Inbox triage",
+      "duty_th": "คัดแยกข้อความจากทุกช่องทางตามเรื่องและความเร่งด่วน แล้วส่งต่อทีมที่ถูกต้อง",
+      "duty_en": "Sorts incoming messages from every channel by topic and urgency and routes them to the right team",
+      "handoff_to": "AGT-042",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "AGT-042",
+        "AGT-043",
+        "AGT-044",
+        "AGT-045",
+        "AGT-046",
+        "AGT-047",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-020",
+      "call_sign": "VIEWING-SCHEDULER",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้จัดคิวนัดชม",
+      "title_en": "Viewing scheduler",
+      "duty_th": "เสนอช่วงเวลานัดชมที่ตรงกับทั้งสองฝ่าย ให้คนยืนยันก่อนแจ้งใคร",
+      "duty_en": "Proposes viewing slots that suit both sides; a person confirms before anyone is told",
+      "handoff_to": "AGT-021",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "AGT-021",
+        "AGT-022",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-021",
+      "call_sign": "VIEWING-REMINDER",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้ร่างข้อความเตือนนัด",
+      "title_en": "Viewing reminder drafter",
+      "duty_th": "ร่างข้อความเตือนนัดชมล่วงหน้า โดยไม่ใส่ข้อมูลติดต่อของอีกฝ่าย",
+      "duty_en": "Drafts viewing reminders without the other party contact details",
+      "handoff_to": "AGT-022",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "AGT-022",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-022",
+      "call_sign": "VIEWING-FEEDBACK",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้รวบรวมความเห็นหลังชม",
+      "title_en": "Viewing feedback collector",
+      "duty_th": "ร่างคำถามหลังชมและสรุปความเห็นให้ทีมจับคู่",
+      "duty_en": "Drafts post-viewing questions and summarises the answers for the matching team",
+      "handoff_to": "GROK-04",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-023",
+      "call_sign": "TASK-ROUTER",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้กระจายงาน",
+      "title_en": "Task router",
+      "duty_th": "เสนอผู้รับงานตามภาระงานและทักษะ ให้คนยืนยันก่อนมอบหมาย",
+      "duty_en": "Proposes an assignee by workload and skill; a person confirms the assignment",
+      "handoff_to": "AGT-016",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "AGT-016",
+        "GROK-08",
+        "HR-03"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-024",
+      "call_sign": "INCIDENT-LOG",
+      "kind": "member",
+      "team_id": "T03",
+      "owner_role_id": "HR-03",
+      "title_th": "ผู้บันทึกเหตุขัดข้อง",
+      "title_en": "Incident logger",
+      "duty_th": "บันทึกเหตุขัดข้องในงานบริการพร้อมเวลา ผลกระทบ และผู้แก้ไข",
+      "duty_en": "Logs service incidents with the time, the impact and who fixed them",
+      "handoff_to": "GROK-08",
+      "escalate_to": "GROK-08",
+      "route_to_human": [
+        "GROK-08",
+        "HR-03"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-02",
+      "call_sign": "ANALYST",
+      "kind": "lead",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "หัวหน้าทีมข่าวกรองตลาด",
+      "title_en": "Intelligence lead",
+      "duty_th": "แยกข้อเท็จจริง สมมติฐาน และสิ่งที่ต้องตรวจ แล้วส่งบรีฟพร้อมแหล่งและวันที่ให้ Intelligence",
+      "duty_en": "Separates fact, hypothesis and to-check items and sends Intelligence briefs with source and date",
+      "handoff_to": "HR-04",
+      "escalate_to": "HR-04",
+      "route_to_human": [
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-025",
+      "call_sign": "AREA-RESEARCH",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้วิจัยทำเล",
+      "title_en": "Area researcher",
+      "duty_th": "รวบรวมข้อมูลทำเล การเดินทาง สถานศึกษา และโครงการคมนาคมที่ประกาศแล้ว จากแหล่งที่อ้างได้",
+      "duty_en": "Collects area, transit, school and announced transport project facts from citable sources",
+      "handoff_to": "AGT-032",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "AGT-032",
+        "AGT-033",
+        "GROK-02",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-026",
+      "call_sign": "PROJECT-RESEARCH",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้วิจัยโครงการ",
+      "title_en": "Project researcher",
+      "duty_th": "สรุปข้อมูลโครงการคอนโดและหมู่บ้านจากเอกสารที่ตรวจย้อนได้",
+      "duty_en": "Summarises condo and housing projects from documents that can be traced",
+      "handoff_to": "AGT-032",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "AGT-032",
+        "AGT-033",
+        "GROK-02",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-027",
+      "call_sign": "PRICE-EVIDENCE",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้รวบรวมหลักฐานราคา",
+      "title_en": "Price evidence collector",
+      "duty_th": "เก็บราคาประกาศและราคาซื้อขายที่มีแหล่งอ้างอิง ไม่ประมาณราคาเอง",
+      "duty_en": "Gathers asking and sold prices that have a source and never estimates a price itself",
+      "handoff_to": "AGT-033",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "AGT-033",
+        "GROK-02",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-028",
+      "call_sign": "SUPPLY-TRACKER",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ติดตามอุปทาน",
+      "title_en": "Supply tracker",
+      "duty_th": "ติดตามทรัพย์ที่ประกาศใหม่และที่ถอนออกในทำเลเป้าหมาย",
+      "duty_en": "Tracks new and withdrawn listings in the target areas",
+      "handoff_to": "AGT-032",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "AGT-032",
+        "AGT-033",
+        "GROK-02",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-029",
+      "call_sign": "DEMAND-TREND",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ติดตามแนวโน้มความต้องการ",
+      "title_en": "Demand trend watcher",
+      "duty_th": "สรุปแนวโน้มความต้องการจากคำขอที่บันทึกในระบบเท่านั้น",
+      "duty_en": "Summarises demand trends only from requests recorded in the system",
+      "handoff_to": "AGT-032",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "AGT-032",
+        "AGT-033",
+        "GROK-02",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-030",
+      "call_sign": "COMPETITOR-WATCH",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้เฝ้าคู่แข่ง",
+      "title_en": "Competitor watcher",
+      "duty_th": "ติดตามบริการและข้อเสนอของคู่แข่งจากแหล่งสาธารณะ พร้อมวันที่พบ",
+      "duty_en": "Follows competitor services and offers from public sources, with the date seen",
+      "handoff_to": "AGT-032",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "AGT-032",
+        "AGT-033",
+        "GROK-02",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-031",
+      "call_sign": "REGULATION-WATCH",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้เฝ้ากฎระเบียบ",
+      "title_en": "Regulation watcher",
+      "duty_th": "แจ้งเมื่อมีประกาศกฎหมายหรือภาษีที่เกี่ยวกับอสังหา และส่งให้คนตีความ",
+      "duty_en": "Flags new property law or tax notices and passes them to a person to interpret",
+      "handoff_to": "GROK-06",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-032",
+      "call_sign": "BRIEF-WRITER",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ร่างบรีฟวิจัย",
+      "title_en": "Research brief writer",
+      "duty_th": "ร่างบรีฟวิจัยที่กำกับทุกข้อความว่าเป็นข้อเท็จจริง สมมติฐาน หรือต้องตรวจเพิ่ม",
+      "duty_en": "Drafts research briefs that label every statement fact, hypothesis or to-check",
+      "handoff_to": "AGT-033",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "AGT-033",
+        "GROK-02",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-033",
+      "call_sign": "DATA-QUALITY",
+      "kind": "member",
+      "team_id": "T04",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ตรวจคุณภาพข้อมูล",
+      "title_en": "Data quality checker",
+      "duty_th": "ตรวจว่าข้อมูลมีแหล่งและวันที่ครบ และไม่มีตัวเลขที่ไม่มีที่มา",
+      "duty_en": "Checks that data has a source and date and that no number lacks an origin",
+      "handoff_to": "GROK-02",
+      "escalate_to": "GROK-02",
+      "route_to_human": [
+        "GROK-02",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-04",
+      "call_sign": "CONNECTOR",
+      "kind": "lead",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "หัวหน้าทีมเติบโตและลูกค้า",
+      "title_en": "Growth and clients lead",
+      "duty_th": "เชื่อมความต้องการกับโอกาส และทบทวนงานของทีมก่อนส่งให้ Matchmaker ตัดสิน",
+      "duty_en": "Connects demand with opportunity and reviews team work before the Matchmaker decides",
+      "handoff_to": "HR-05",
+      "escalate_to": "HR-05",
+      "route_to_human": [
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-034",
+      "call_sign": "LISTING-COPY",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เขียนคำบรรยายประกาศ",
+      "title_en": "Listing copywriter",
+      "duty_th": "ร่างคำบรรยายประกาศจากข้อมูลทรัพย์ที่ตรวจแล้ว ไม่เติมคุณสมบัติที่ไม่มีหลักฐาน",
+      "duty_en": "Drafts listing descriptions from verified property data and adds no unproven feature",
+      "handoff_to": "AGT-064",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-064",
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-035",
+      "call_sign": "SOCIAL-PLANNER",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้วางแผนโพสต์โซเชียล",
+      "title_en": "Social content planner",
+      "duty_th": "ร่างปฏิทินโพสต์และข้อความโซเชียลจากทรัพย์ที่อนุมัติให้โปรโมตแล้ว",
+      "duty_en": "Drafts a social post calendar and copy from listings approved for promotion",
+      "handoff_to": "AGT-087",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-087",
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-036",
+      "call_sign": "VIDEO-SCRIPT",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เขียนสคริปต์วิดีโอสั้น",
+      "title_en": "Short video scriptwriter",
+      "duty_th": "ร่างสคริปต์วิดีโอสั้นพาชมทรัพย์จากข้อมูลที่ตรวจแล้ว",
+      "duty_en": "Drafts short property walk-through video scripts from verified data",
+      "handoff_to": "AGT-087",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-087",
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-037",
+      "call_sign": "SEO-WRITER",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เขียนบทความค้นหา",
+      "title_en": "Search article writer",
+      "duty_th": "จัดกลุ่มคำค้นตามทำเลและประเภททรัพย์ แล้วร่างบทความตอบคำถามผู้ซื้อและผู้เช่า",
+      "duty_en": "Groups search terms by area and property type and drafts guides that answer buyers and renters",
+      "handoff_to": "AGT-086",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-086",
+        "AGT-064",
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-038",
+      "call_sign": "LINE-BROADCAST",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้ร่างข้อความ LINE",
+      "title_en": "LINE message drafter",
+      "duty_th": "ร่างข้อความบรอดแคสต์ถึงผู้ที่ยินยอมรับข่าวสารเท่านั้น",
+      "duty_en": "Drafts broadcasts only for people who consented to receive them",
+      "handoff_to": "AGT-088",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-039",
+      "call_sign": "ADS-PLANNER",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้วางแผนโฆษณา",
+      "title_en": "Ads planner",
+      "duty_th": "ร่างแผนและข้อความโฆษณา ไม่ตั้งงบและไม่เปิดแคมเปญเอง",
+      "duty_en": "Drafts ad plans and copy and never sets a budget or launches a campaign",
+      "handoff_to": "AGT-086",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-086",
+        "AGT-064",
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-040",
+      "call_sign": "REPUTATION-WATCH",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เฝ้ารีวิว",
+      "title_en": "Review watcher",
+      "duty_th": "สรุปรีวิวและความเห็นสาธารณะ แล้วร่างคำตอบให้คนอนุมัติ",
+      "duty_en": "Summarises public reviews and comments and drafts replies for a person to approve",
+      "handoff_to": "AGT-087",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-087",
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-041",
+      "call_sign": "OWNER-OUTREACH",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้ร่างข้อความหาเจ้าของทรัพย์",
+      "title_en": "Owner outreach drafter",
+      "duty_th": "ร่างข้อความชวนเจ้าของทรัพย์ลงประกาศ ส่งได้เมื่อคนอนุมัติแล้วเท่านั้น",
+      "duty_en": "Drafts invitations for owners to list, sent only after a person approves",
+      "handoff_to": "AGT-057",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-057",
+        "AGT-058",
+        "AGT-059",
+        "AGT-060",
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-042",
+      "call_sign": "LEAD-INTAKE",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้รับความต้องการใหม่",
+      "title_en": "Lead intake",
+      "duty_th": "บันทึกความต้องการใหม่จากทุกช่องทางเป็นรูปแบบเดียวกัน",
+      "duty_en": "Records new demand from every channel in one format",
+      "handoff_to": "AGT-043",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-043",
+        "AGT-044",
+        "AGT-045",
+        "AGT-046",
+        "AGT-047",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-043",
+      "call_sign": "REQUIREMENT-CLARIFIER",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้ถามความต้องการให้ชัด",
+      "title_en": "Requirement clarifier",
+      "duty_th": "ร่างคำถามที่ยังขาดเพื่อให้ความต้องการครบพอจะจับคู่ได้",
+      "duty_en": "Drafts the missing questions so a requirement is complete enough to match",
+      "handoff_to": "AGT-044",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-044",
+        "AGT-045",
+        "AGT-046",
+        "AGT-047",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-044",
+      "call_sign": "LEAD-QUALIFIER",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้คัดกรองความต้องการ",
+      "title_en": "Lead qualifier",
+      "duty_th": "ตรวจความต้องการกับเกณฑ์คัดกรองที่ตั้งไว้ และระบุข้อที่ยังไม่ผ่าน",
+      "duty_en": "Checks a requirement against the set qualification criteria and names what is still missing",
+      "handoff_to": "AGT-045",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-045",
+        "AGT-046",
+        "AGT-047",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-045",
+      "call_sign": "CLIENT-PROFILE",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้สรุปโปรไฟล์ลูกค้า",
+      "title_en": "Client profile builder",
+      "duty_th": "สรุปความต้องการและความชอบของผู้ซื้อ ผู้เช่า หรือนักลงทุนเป็นบรีฟเดียว เท่าที่ลูกค้ายินยอมให้เก็บ",
+      "duty_en": "Summarises a buyer, renter or investor need and preferences into one brief, as far as the client consented",
+      "handoff_to": "AGT-046",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-046",
+        "AGT-047",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-046",
+      "call_sign": "MATCH-EXPLAINER",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้อธิบายผลจับคู่",
+      "title_en": "Match explainer",
+      "duty_th": "อธิบายเหตุผลของคะแนนจับคู่ซึ่งอ่านได้อย่างเดียว และไม่เปลี่ยนคะแนน",
+      "duty_en": "Explains the reasons behind the read-only match score and never changes the score",
+      "handoff_to": "AGT-047",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "AGT-047",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-047",
+      "call_sign": "SHORTLIST",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เตรียมรายการทรัพย์ที่เหมาะ",
+      "title_en": "Shortlist preparer",
+      "duty_th": "เตรียมรายการตัวเลือกพร้อมข้อขัดแย้งที่พบ ให้ Matchmaker ทบทวน",
+      "duty_en": "Prepares a shortlist with any conflicts found, for the Matchmaker to review",
+      "handoff_to": "GROK-04",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-048",
+      "call_sign": "FOLLOW-UP",
+      "kind": "member",
+      "team_id": "T05",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้ร่างข้อความติดตามลูกค้า",
+      "title_en": "Client follow-up drafter",
+      "duty_th": "ร่างข้อความติดตามตามรอบที่ลูกค้าเลือก และชวนลูกค้าเดิมที่ยินยอมเมื่อมีทรัพย์ใหม่ตรงความต้องการ",
+      "duty_en": "Drafts follow-ups on the client chosen schedule and re-contacts consenting past clients when a new listing fits",
+      "handoff_to": "GROK-04",
+      "escalate_to": "GROK-04",
+      "route_to_human": [
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-07",
+      "call_sign": "ECOSYSTEM",
+      "kind": "lead",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "หัวหน้าทีม AI และแพลตฟอร์ม",
+      "title_en": "AI and platform lead",
+      "duty_th": "รวมความพร้อมของเอเจนต์ทุกตัว แยกออกแบบแล้วจากเชื่อมต่อจริง และส่งแผนให้ AI Coordinator",
+      "duty_en": "Combines every agent readiness, keeps designed apart from connected and sends plans to the AI Coordinator",
+      "handoff_to": "HR-06",
+      "escalate_to": "HR-06",
+      "route_to_human": [
+        "HR-06"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-049",
+      "call_sign": "AGENT-REGISTRY",
+      "kind": "member",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "ผู้ดูแลทะเบียนเอเจนต์",
+      "title_en": "Agent registry keeper",
+      "duty_th": "ตรวจว่าเอเจนต์ทุกตัวมีหน้าที่ ทีม ผู้รับผิดชอบ และเส้นทางส่งต่อครบ",
+      "duty_en": "Checks every agent has a duty, a team, an owner and a handoff route",
+      "handoff_to": "GROK-07",
+      "escalate_to": "GROK-07",
+      "route_to_human": [
+        "GROK-07",
+        "HR-06"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-050",
+      "call_sign": "EVAL-DESIGNER",
+      "kind": "member",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "ผู้ออกแบบชุดทดสอบเอเจนต์",
+      "title_en": "Agent eval designer",
+      "duty_th": "ร่างชุดทดสอบที่เอเจนต์ต้องผ่านก่อนขอเปิดใช้จริง",
+      "duty_en": "Drafts the test set an agent must pass before activation is requested",
+      "handoff_to": "AGT-053",
+      "escalate_to": "GROK-07",
+      "route_to_human": [
+        "AGT-053",
+        "GROK-07",
+        "HR-06"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-051",
+      "call_sign": "PROMPT-VERSIONS",
+      "kind": "member",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "ผู้ดูแลเวอร์ชันคำสั่ง",
+      "title_en": "Prompt version keeper",
+      "duty_th": "บันทึกเวอร์ชันคำสั่งของเอเจนต์แต่ละตัวพร้อมเหตุผลที่เปลี่ยน",
+      "duty_en": "Records each agent prompt version and why it changed",
+      "handoff_to": "AGT-049",
+      "escalate_to": "GROK-07",
+      "route_to_human": [
+        "AGT-049",
+        "GROK-07",
+        "HR-06"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-052",
+      "call_sign": "COST-GUARD",
+      "kind": "member",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "ผู้เฝ้าค่าใช้จ่าย AI",
+      "title_en": "AI cost guard",
+      "duty_th": "ประเมินค่าใช้จ่ายก่อนเปิดใช้เอเจนต์แต่ละตัว ตอนนี้ยังไม่มีตัวใดเปิดใช้ ค่าใช้จ่ายที่เพิ่มจึงเป็นศูนย์",
+      "duty_en": "Estimates cost before any single agent is activated; none is active, so added cost is zero",
+      "handoff_to": "AGT-053",
+      "escalate_to": "GROK-07",
+      "route_to_human": [
+        "AGT-053",
+        "GROK-07",
+        "HR-06"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-053",
+      "call_sign": "ACTIVATION-REQUEST",
+      "kind": "member",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "ผู้เตรียมคำขอเปิดใช้งาน",
+      "title_en": "Activation request preparer",
+      "duty_th": "รวมผลทดสอบ ค่าใช้จ่าย และขอบเขตสิทธิ์เป็นคำขอเปิดใช้ทีละตัว ให้เจ้าของอนุมัติ",
+      "duty_en": "Bundles test results, cost and permission scope into a one-agent activation request for owner approval",
+      "handoff_to": "GROK-07",
+      "escalate_to": "GROK-07",
+      "route_to_human": [
+        "GROK-07",
+        "HR-06"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-054",
+      "call_sign": "CHANNEL-READINESS",
+      "kind": "member",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "ผู้ตรวจความพร้อมช่องทาง",
+      "title_en": "Channel readiness checker",
+      "duty_th": "ตรวจความพร้อมของเว็บไซต์ LINE และเพจ โดยไม่สร้างหรือเก็บคีย์ใด ๆ",
+      "duty_en": "Checks website, LINE and page readiness without creating or holding any key",
+      "handoff_to": "GROK-07",
+      "escalate_to": "GROK-07",
+      "route_to_human": [
+        "GROK-07",
+        "HR-06"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-055",
+      "call_sign": "LILI-LIAISON",
+      "kind": "member",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "ผู้ประสานผู้ช่วยขาย Lili",
+      "title_en": "Lili assistant liaison",
+      "duty_th": "สรุปบทสนทนาที่ผู้ช่วยขาย Lili ส่งต่อให้คน และเสนอคำตอบมาตรฐานใหม่",
+      "duty_en": "Summarises chats the Lili sales assistant handed to people and proposes new standard answers",
+      "handoff_to": "AGT-014",
+      "escalate_to": "GROK-07",
+      "route_to_human": [
+        "AGT-014",
+        "GROK-01",
+        "HR-02"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-056",
+      "call_sign": "DATA-MAP",
+      "kind": "member",
+      "team_id": "T06",
+      "owner_role_id": "HR-06",
+      "title_th": "ผู้ทำแผนที่เส้นทางข้อมูล",
+      "title_en": "Data flow mapper",
+      "duty_th": "ระบุว่าข้อมูลชุดใดไหลจากที่ใดไปที่ใด และใครเป็นผู้อนุมัติ",
+      "duty_en": "Maps which data flows from where to where and who approved it",
+      "handoff_to": "AGT-076",
+      "escalate_to": "GROK-07",
+      "route_to_human": [
+        "AGT-076",
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-03",
+      "call_sign": "VERIFIER",
+      "kind": "lead",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "หัวหน้าทีมตรวจสอบ",
+      "title_en": "Verification lead",
+      "duty_th": "ตรวจข้อเท็จจริงและหลักฐานของประกาศก่อนเผยแพร่ แล้วส่งผลให้ผู้ดูแลทีม",
+      "duty_en": "Checks listing facts and evidence before publication and reports to the team steward",
+      "handoff_to": "HR-04",
+      "escalate_to": "HR-04",
+      "route_to_human": [
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-057",
+      "call_sign": "LISTING-INTAKE",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้รับข้อมูลทรัพย์ใหม่",
+      "title_en": "Listing intake",
+      "duty_th": "บันทึกข้อมูลทรัพย์ที่เจ้าของให้มาเป็นแบบฟอร์มเดียวกัน",
+      "duty_en": "Records owner-supplied property data in one form",
+      "handoff_to": "AGT-058",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "AGT-058",
+        "AGT-059",
+        "AGT-060",
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-058",
+      "call_sign": "LISTING-COMPLETENESS",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ตรวจความครบของประกาศ",
+      "title_en": "Listing completeness checker",
+      "duty_th": "ตรวจช่องที่ต้องมีก่อนเผยแพร่และบอกว่ายังขาดอะไร",
+      "duty_en": "Checks the required fields before publishing and says what is still missing",
+      "handoff_to": "AGT-059",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "AGT-059",
+        "AGT-060",
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-059",
+      "call_sign": "DOCUMENT-CHECK",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ตรวจรายการเอกสาร",
+      "title_en": "Document checklist checker",
+      "duty_th": "ตรวจว่าเอกสารที่ต้องใช้ตามประเภททรัพย์ถูกแนบครบ",
+      "duty_en": "Checks the documents required for the property type are all attached",
+      "handoff_to": "AGT-060",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "AGT-060",
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-060",
+      "call_sign": "OWNERSHIP-PREP",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้เตรียมการตรวจกรรมสิทธิ์",
+      "title_en": "Ownership check preparer",
+      "duty_th": "เตรียมรายการที่คนต้องตรวจกับโฉนดหรือหนังสือกรรมสิทธิ์ ไม่ยืนยันกรรมสิทธิ์เอง",
+      "duty_en": "Prepares what a person must verify against the title deed and never confirms ownership itself",
+      "handoff_to": "GROK-03",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-061",
+      "call_sign": "PHOTO-QUALITY",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ตรวจคุณภาพภาพถ่าย",
+      "title_en": "Photo quality checker",
+      "duty_th": "ตรวจความชัด แสง และความครบของภาพ และเตือนเมื่อพบข้อมูลตำแหน่งฝังในไฟล์",
+      "duty_en": "Checks photo sharpness, light and coverage and warns when location data is embedded in a file",
+      "handoff_to": "AGT-058",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "AGT-058",
+        "AGT-059",
+        "AGT-060",
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-062",
+      "call_sign": "DUPLICATE-FINDER",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ค้นประกาศซ้ำ",
+      "title_en": "Duplicate finder",
+      "duty_th": "หาประกาศที่น่าจะเป็นทรัพย์เดียวกัน แล้วส่งให้คนตัดสิน",
+      "duty_en": "Finds listings that look like the same property and sends them to a person to decide",
+      "handoff_to": "GROK-03",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-063",
+      "call_sign": "GEO-CHECK",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ตรวจตำแหน่งที่ตั้ง",
+      "title_en": "Location checker",
+      "duty_th": "ตรวจว่าที่อยู่ เขต และหมุดแผนที่สอดคล้องกัน",
+      "duty_en": "Checks that the address, district and map pin agree",
+      "handoff_to": "AGT-058",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "AGT-058",
+        "AGT-059",
+        "AGT-060",
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-064",
+      "call_sign": "FACT-CHECK",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้ตรวจข้อเท็จจริงในเนื้อหา",
+      "title_en": "Content fact-checker",
+      "duty_th": "ตรวจข้อความในประกาศ บทความ และโฆษณาเทียบกับหลักฐานในทะเบียนข้อกล่าวอ้าง",
+      "duty_en": "Checks listing, article and ad statements against the evidence in the claim register",
+      "handoff_to": "AGT-088",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-065",
+      "call_sign": "STALE-LISTING",
+      "kind": "member",
+      "team_id": "T07",
+      "owner_role_id": "HR-04",
+      "title_th": "ผู้เฝ้าประกาศค้างนาน",
+      "title_en": "Stale listing watcher",
+      "duty_th": "เตือนเมื่อประกาศไม่ได้ยืนยันสถานะกับเจ้าของนานเกินเกณฑ์",
+      "duty_en": "Warns when a listing has not been reconfirmed with its owner for longer than the threshold",
+      "handoff_to": "GROK-03",
+      "escalate_to": "GROK-03",
+      "route_to_human": [
+        "GROK-03",
+        "HR-04"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-05",
+      "call_sign": "NEGOTIATION",
+      "kind": "lead",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "หัวหน้าทีมดีลและการปิดการขาย",
+      "title_en": "Deals and closing lead",
+      "duty_th": "เตรียมทางเลือกการเจรจาและรายการปิดดีล แล้วส่งให้ผู้ดูแลทีมตัดสิน",
+      "duty_en": "Prepares negotiation options and closing lists for the team steward to decide",
+      "handoff_to": "HR-05",
+      "escalate_to": "HR-05",
+      "route_to_human": [
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-066",
+      "call_sign": "OFFER-PREP",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เตรียมข้อเสนอ",
+      "title_en": "Offer preparer",
+      "duty_th": "ร่างข้อเสนอซื้อหรือเช่าจากเงื่อนไขที่ลูกค้ายืนยันแล้ว",
+      "duty_en": "Drafts purchase or rental offers from terms the client confirmed",
+      "handoff_to": "AGT-068",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "AGT-068",
+        "GROK-05",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-067",
+      "call_sign": "COUNTER-OPTIONS",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เตรียมทางเลือกต่อรอง",
+      "title_en": "Counter-offer options",
+      "duty_th": "ร่างทางเลือกเมื่อมีข้อเสนอโต้กลับ พร้อมข้อดีข้อเสียของแต่ละทาง",
+      "duty_en": "Drafts options when a counter-offer arrives, with the trade-offs of each",
+      "handoff_to": "AGT-068",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "AGT-068",
+        "GROK-05",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-068",
+      "call_sign": "TERMS-COMPARE",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เทียบเงื่อนไข",
+      "title_en": "Terms comparer",
+      "duty_th": "วางเงื่อนไขของทั้งสองฝ่ายเป็นตารางเดียวและชี้จุดที่ยังไม่ตรงกัน",
+      "duty_en": "Lays both sides terms in one table and points out where they still differ",
+      "handoff_to": "GROK-05",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "GROK-05",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-069",
+      "call_sign": "CLOSING-CHECKLIST",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้ดูแลรายการปิดดีล",
+      "title_en": "Closing checklist keeper",
+      "duty_th": "ติดตามรายการที่ต้องเสร็จก่อนวันโอน",
+      "duty_en": "Tracks what must be done before transfer day",
+      "handoff_to": "AGT-071",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "AGT-071",
+        "GROK-05",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-070",
+      "call_sign": "LOAN-DOCS",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เตรียมรายการเอกสารสินเชื่อ",
+      "title_en": "Mortgage document checklist",
+      "duty_th": "เตรียมรายการเอกสารที่ธนาคารมักขอ ให้ลูกค้ายืนยันกับธนาคารเอง",
+      "duty_en": "Prepares the documents banks usually ask for; the client confirms with the bank",
+      "handoff_to": "AGT-069",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "AGT-069",
+        "AGT-071",
+        "GROK-05",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-071",
+      "call_sign": "TRANSFER-DAY",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้ประสานวันโอน",
+      "title_en": "Transfer day coordinator",
+      "duty_th": "ร่างกำหนดการวันโอนและรายการสิ่งที่แต่ละฝ่ายต้องนำมา",
+      "duty_en": "Drafts the transfer-day schedule and what each party must bring",
+      "handoff_to": "GROK-05",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "GROK-05",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-072",
+      "call_sign": "MILESTONE-TRACKER",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้ติดตามขั้นของดีล",
+      "title_en": "Deal milestone tracker",
+      "duty_th": "ติดตามขั้นของดีลตามสถานะที่บันทึกในระบบ และไม่เปลี่ยนสถานะเอง",
+      "duty_en": "Follows deal stages as recorded in the system and never changes a status itself",
+      "handoff_to": "GROK-05",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "GROK-05",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-073",
+      "call_sign": "FEE-INVOICE",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้เตรียมใบแจ้งค่าธรรมเนียม",
+      "title_en": "Fee invoice preparer",
+      "duty_th": "เตรียมใบแจ้งค่าธรรมเนียมหลังปิดดีล โดยรอเจ้าของยืนยันฐานค่าธรรมเนียมและผู้จ่ายก่อน",
+      "duty_en": "Prepares the fee invoice after a close, waiting for the owner to confirm the fee basis and payer first",
+      "handoff_to": "GROK-10",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "GROK-10",
+        "HR-01"
+      ],
+      "blocked_by": "OWNER_DECISION_FEE_MODEL",
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-074",
+      "call_sign": "AFTER-SALE",
+      "kind": "member",
+      "team_id": "T08",
+      "owner_role_id": "HR-05",
+      "title_th": "ผู้ดูแลหลังการขาย",
+      "title_en": "After-sale care",
+      "duty_th": "ร่างข้อความดูแลหลังโอน เช่น การส่งมอบและการย้ายเข้า",
+      "duty_en": "Drafts post-transfer care messages such as handover and move-in",
+      "handoff_to": "AGT-048",
+      "escalate_to": "GROK-05",
+      "route_to_human": [
+        "AGT-048",
+        "GROK-04",
+        "HR-05"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-06",
+      "call_sign": "RISK",
+      "kind": "lead",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "หัวหน้าทีมความเสี่ยง",
+      "title_en": "Risk lead",
+      "duty_th": "ประเมินความเสี่ยงและข้อควบคุม แล้วส่งเรื่องที่ต้องตัดสินให้ผู้ดูแลทีม",
+      "duty_en": "Assesses risks and controls and sends what needs deciding to the team steward",
+      "handoff_to": "HR-01",
+      "escalate_to": "HR-01",
+      "route_to_human": [
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-075",
+      "call_sign": "FRAUD-SIGNAL",
+      "kind": "member",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้จับสัญญาณทุจริต",
+      "title_en": "Fraud signal spotter",
+      "duty_th": "ชี้รูปแบบที่น่าสงสัย เช่น ราคาต่ำผิดปกติหรือขอมัดจำก่อนชม แล้วส่งให้คนตรวจ",
+      "duty_en": "Flags suspicious patterns such as abnormally low prices or deposits asked before viewing, for a person to review",
+      "handoff_to": "GROK-06",
+      "escalate_to": "GROK-06",
+      "route_to_human": [
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-076",
+      "call_sign": "CONSENT-GUARD",
+      "kind": "member",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ตรวจความยินยอม",
+      "title_en": "Consent checker",
+      "duty_th": "ตรวจว่ามีความยินยอมตาม PDPA ก่อนเก็บข้อมูลหรือส่งข้อความหาใคร",
+      "duty_en": "Checks PDPA consent exists before anyone data is stored or anyone is messaged",
+      "handoff_to": "GROK-06",
+      "escalate_to": "GROK-06",
+      "route_to_human": [
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-077",
+      "call_sign": "CONTACT-SHIELD",
+      "kind": "member",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้กันข้อมูลติดต่อรั่ว",
+      "title_en": "Contact leak shield",
+      "duty_th": "ตรวจข้อความและเอกสารว่าไม่มีเบอร์ อีเมล หรือไอดีไลน์หลุดก่อนห้องดีลเปิด",
+      "duty_en": "Checks messages and files carry no phone, email or LINE ID before the deal room opens",
+      "handoff_to": "GROK-06",
+      "escalate_to": "GROK-06",
+      "route_to_human": [
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-078",
+      "call_sign": "SCAM-LISTING",
+      "kind": "member",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ตรวจประกาศหลอกลวง",
+      "title_en": "Scam listing checker",
+      "duty_th": "ชี้ประกาศที่ภาพหรือข้อความซ้ำกับแหล่งอื่นอย่างน่าสงสัย",
+      "duty_en": "Flags listings whose photos or text suspiciously copy other sources",
+      "handoff_to": "AGT-075",
+      "escalate_to": "GROK-06",
+      "route_to_human": [
+        "AGT-075",
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-079",
+      "call_sign": "CONTRACT-FLAGS",
+      "kind": "member",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ชี้ข้อสัญญาที่ต้องระวัง",
+      "title_en": "Contract clause flagger",
+      "duty_th": "ชี้ข้อสัญญาที่ควรให้นักกฎหมายอ่าน และไม่ให้ความเห็นทางกฎหมายเอง",
+      "duty_en": "Points out clauses a lawyer should read and gives no legal opinion itself",
+      "handoff_to": "AGT-089",
+      "escalate_to": "GROK-06",
+      "route_to_human": [
+        "AGT-089",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-080",
+      "call_sign": "KYC-PREP",
+      "kind": "member",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้เตรียมการยืนยันตัวตน",
+      "title_en": "Identity check preparer",
+      "duty_th": "เตรียมรายการยืนยันตัวตนที่คนต้องตรวจ และไม่เก็บสำเนาบัตรไว้ในข้อความ",
+      "duty_en": "Prepares the identity checks a person must do and keeps no ID copies in messages",
+      "handoff_to": "GROK-06",
+      "escalate_to": "GROK-06",
+      "route_to_human": [
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-081",
+      "call_sign": "DISPUTE-WATCH",
+      "kind": "member",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้เฝ้าสัญญาณข้อพิพาท",
+      "title_en": "Dispute early warning",
+      "duty_th": "เตือนเมื่อบทสนทนาหรือดีลมีสัญญาณขัดแย้งที่ควรให้คนเข้าดู",
+      "duty_en": "Warns when a conversation or deal shows signs of conflict a person should look at",
+      "handoff_to": "GROK-06",
+      "escalate_to": "GROK-06",
+      "route_to_human": [
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-082",
+      "call_sign": "RISK-REGISTER",
+      "kind": "member",
+      "team_id": "T09",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ดูแลทะเบียนความเสี่ยง",
+      "title_en": "Risk register keeper",
+      "duty_th": "บันทึกความเสี่ยง เจ้าของ ข้อควบคุมที่ใช้ และวันทบทวน",
+      "duty_en": "Records each risk with its owner, its controls and its review date",
+      "handoff_to": "GROK-06",
+      "escalate_to": "GROK-06",
+      "route_to_human": [
+        "GROK-06",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "GROK-09",
+      "call_sign": "GOVERNANCE",
+      "kind": "lead",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "หัวหน้าทีมธรรมาภิบาล",
+      "title_en": "Governance lead",
+      "duty_th": "ทบทวนแนวปฏิบัติและบันทึกการตัดสินใจ แล้วส่งเรื่องที่ต้องอนุมัติให้ผู้ดูแลทีม",
+      "duty_en": "Reviews practice and decision records and sends what needs approval to the team steward",
+      "handoff_to": "HR-01",
+      "escalate_to": "HR-01",
+      "route_to_human": [
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-083",
+      "call_sign": "DECISION-RECORD",
+      "kind": "member",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้บันทึกการตัดสินใจ",
+      "title_en": "Decision recorder",
+      "duty_th": "ร่างบันทึกการตัดสินใจพร้อมที่มา เหตุผล และว่ากลับทางได้หรือไม่",
+      "duty_en": "Drafts decision records with provenance, reasons and whether they can be reversed",
+      "handoff_to": "AGT-090",
+      "escalate_to": "GROK-09",
+      "route_to_human": [
+        "AGT-090",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-084",
+      "call_sign": "AUDIT-REVIEW",
+      "kind": "member",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ทบทวนร่องรอยการตรวจสอบ",
+      "title_en": "Audit trail reviewer",
+      "duty_th": "ตรวจว่าการกระทำสำคัญทุกครั้งมีผู้กระทำ เหตุผล และเวลาบันทึกไว้",
+      "duty_en": "Checks every important action has an actor, a reason and a time on record",
+      "handoff_to": "GROK-09",
+      "escalate_to": "GROK-09",
+      "route_to_human": [
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-085",
+      "call_sign": "POLICY-LIBRARY",
+      "kind": "member",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ดูแลคลังนโยบาย",
+      "title_en": "Policy librarian",
+      "duty_th": "จัดเก็บนโยบายฉบับล่าสุดและแจ้งทีมที่ได้รับผลเมื่อมีการเปลี่ยน",
+      "duty_en": "Keeps the current policies and tells affected teams when one changes",
+      "handoff_to": "GROK-09",
+      "escalate_to": "GROK-09",
+      "route_to_human": [
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-086",
+      "call_sign": "CLAIM-REGISTER",
+      "kind": "member",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ดูแลทะเบียนข้อกล่าวอ้าง",
+      "title_en": "Claim register keeper",
+      "duty_th": "ตรวจว่าข้อกล่าวอ้างทางการตลาดทุกข้อมีหลักฐานและสถานะการอนุมัติ",
+      "duty_en": "Checks every marketing claim has evidence and an approval status",
+      "handoff_to": "AGT-064",
+      "escalate_to": "GROK-09",
+      "route_to_human": [
+        "AGT-064",
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-087",
+      "call_sign": "BRAND-VOICE",
+      "kind": "member",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ตรวจน้ำเสียงแบรนด์",
+      "title_en": "Brand voice checker",
+      "duty_th": "ตรวจเนื้อหาว่าตรงน้ำเสียงแบรนด์ และไม่สัญญาสิ่งที่บริษัทไม่ได้ให้",
+      "duty_en": "Checks content matches the brand voice and promises nothing the company does not offer",
+      "handoff_to": "AGT-088",
+      "escalate_to": "GROK-09",
+      "route_to_human": [
+        "AGT-088",
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-088",
+      "call_sign": "PUBLISH-GATE",
+      "kind": "member",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้เฝ้าประตูก่อนเผยแพร่",
+      "title_en": "Publish gate",
+      "duty_th": "รวมผลตรวจข้อเท็จจริง ความยินยอม และน้ำเสียง แล้วส่งให้คนอนุมัติก่อนเผยแพร่ทุกชิ้น",
+      "duty_en": "Combines fact, consent and voice checks and sends every item to a person for approval before it is published",
+      "handoff_to": "GROK-09",
+      "escalate_to": "GROK-09",
+      "route_to_human": [
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-089",
+      "call_sign": "LEGAL-QUEUE",
+      "kind": "member",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ดูแลคิวทบทวนกฎหมาย",
+      "title_en": "Legal review queue keeper",
+      "duty_th": "จัดคิวเรื่องที่ต้องให้นักกฎหมายไทยทบทวน และไม่ถือว่าอนุมัติจนกว่านักกฎหมายจะตอบจริง",
+      "duty_en": "Queues items for Thai counsel and treats nothing as approved until counsel actually answers",
+      "handoff_to": "GROK-09",
+      "escalate_to": "GROK-09",
+      "route_to_human": [
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    },
+    {
+      "agent_id": "AGT-090",
+      "call_sign": "APPROVAL-LEDGER",
+      "kind": "member",
+      "team_id": "T10",
+      "owner_role_id": "HR-01",
+      "title_th": "ผู้ดูแลบัญชีการอนุมัติ",
+      "title_en": "Approval ledger keeper",
+      "duty_th": "บันทึกว่าใครอนุมัติอะไร เมื่อไร และอ้างหลักฐานใด",
+      "duty_en": "Records who approved what, when and on which evidence",
+      "handoff_to": "GROK-09",
+      "escalate_to": "GROK-09",
+      "route_to_human": [
+        "GROK-09",
+        "HR-01"
+      ],
+      "blocked_by": null,
+      "connection_state": "DEFINED_NOT_CONNECTED"
+    }
+  ],
+  "blockers": {
+    "OWNER_DECISION_FEE_MODEL": {
+      "th": "รอเจ้าของยืนยันฐานค่าธรรมเนียมและผู้จ่าย (ก่อน DB-008)",
+      "en": "Waiting for the owner to confirm the fee basis and payer (before DB-008)"
+    }
+  }
+}

@@ -11,12 +11,14 @@ node hr-screens/serve.mjs        # เปิดที่ http://127.0.0.1:4300
 ```
 
 เปิดหน้าจอเฉพาะบทบาทได้ด้วย hash เช่น `#role=HR-05`
+และเปิดสำนักงาน 100 เอเจนต์ที่ `http://127.0.0.1:4300/office.html` (ลิงก์ตรงถึงเอเจนต์ เช่น `#agent=AGT-019`)
 
 รวมเป็นไฟล์เดียวสำหรับแชร์หรือฝัง (อ่านจากไฟล์ต้นทางเสมอ ไม่มีสำเนาที่หลุดเวอร์ชัน):
 
 ```bash
-node hr-screens/build-single.mjs                          # dist/prototype.html
-node hr-screens/build-single.mjs --fragment --out=<path>  # ไม่มี doctype/head/body
+node hr-screens/build-single.mjs                          # dist/prototype.html + dist/office.html
+node hr-screens/build-single.mjs --page=office            # เฉพาะหน้าสำนักงาน
+node hr-screens/build-single.mjs --fragment --out=<path>  # ไม่มี doctype/head/body (--page=screens|office)
 ```
 
 HTML/CSS/JavaScript ล้วน ไม่มี framework ไม่มี dependency ไม่แตะ lockfile
@@ -74,6 +76,39 @@ The Keeper controls disclosure แสดงอยู่ในทุกหน้�
 | 04 Intelligence | แยกข้อเท็จจริง / สมมติฐาน / ต้องตรวจเพิ่ม พร้อม source-date | ไม่สร้างตัวเลขตลาด แหล่งอ้างอิง หรือระดับความมั่นใจเอง |
 | 05 Matchmaker | ทบทวนเหตุผล ข้อขัดแย้ง และเตรียมการส่งต่อ | ไม่ใช่ MATCHMAKER-1 / THE KEEPER · AI แก้คะแนน deterministic ไม่ได้ |
 | 06 AI Coordinator | เห็นทะเบียน agent และความพร้อมเชื่อมต่อ | ไม่สร้าง credentials ไม่อนุมัติ integration ไม่แสดง key/token/secret |
+
+## สำนักงาน 100 เอเจนต์
+
+`office.html` แสดงองค์กรเอเจนต์ครบ 100 ตัว ข้อมูลอยู่ที่ `office-data.js` ที่เดียว
+และ `codex/build-contract.mjs` สร้าง `codex/contract/agent-roster.json` จากไฟล์นั้น
+การตีความทั้งหมดบันทึกไว้ใน `docs/adr/ADR-0014-ami-agent-office-roster.md`
+
+- **10 ทีม หัวหน้าทีมคือ Grok 10 ตัวเดิม** ไม่เพิ่มรหัส Grok ใหม่ · สมาชิก 90 ตัว `AGT-001`..`AGT-090`
+- **ผู้รับผิดชอบเป็นคนจาก 6 ตำแหน่งเดิมเท่านั้น** ทีม shared pool มีผู้ดูแลทีมหนึ่งตำแหน่ง ทุกตำแหน่งยังขอใช้ได้ผ่าน AMI
+- **เส้นทางส่งต่องานจบที่คนเสมอ** สมาชิกส่งต่อให้เอเจนต์ หัวหน้าทีมส่งต่อให้คนที่รับผิดชอบ ไม่วน และไม่ข้ามหัวหน้าทีม
+- **การตั้งค่า ไม่ใช่การเปิดใช้งาน** ไม่มีโมเดล ปลายทาง คีย์ ตารางเวลา จำนวน instance หรืองบประมาณ
+  ทุกตัวอยู่ที่ `DEFINED_NOT_CONNECTED` · เปิดใช้จริง 0 ตัว · ค่าใช้จ่ายที่เพิ่มขึ้น: ไม่มี
+- **งานที่แตะค่าธรรมเนียมรอคำตัดสินของเจ้าของ** (`REVENUE-OUTLOOK`, `FEE-INVOICE`)
+
+| ทีม | ชื่อ | หัวหน้า | ผู้รับผิดชอบ | ประเภท | จำนวน |
+|---|---|---|---|---|---|
+| T01 | สำนักบัญชาการ | `GROK-10` ORCHESTRATOR | `HR-01` Director | ประจำตำแหน่ง | 9 |
+| T02 | ทีมคนและเครือข่ายคู่ค้า | `GROK-01` PEOPLE | `HR-02` Human Resources | ประจำตำแหน่ง | 8 |
+| T03 | ทีมปฏิบัติการและบริการ | `GROK-08` WATCHTOWER | `HR-03` Operations | ประจำตำแหน่ง | 10 |
+| T04 | ทีมข่าวกรองตลาด | `GROK-02` ANALYST | `HR-04` Intelligence / Research | ประจำตำแหน่ง | 10 |
+| T05 | ทีมเติบโตและลูกค้าสัมพันธ์ | `GROK-04` CONNECTOR | `HR-05` Matchmaker | ประจำตำแหน่ง | 16 |
+| T06 | ทีม AI และแพลตฟอร์ม | `GROK-07` ECOSYSTEM | `HR-06` AI Coordinator | ประจำตำแหน่ง | 9 |
+| T07 | ทีมประกาศและการตรวจสอบ | `GROK-03` VERIFIER | `HR-04` (ผู้ดูแลทีม) | shared | 10 |
+| T08 | ทีมดีลและการปิดการขาย | `GROK-05` NEGOTIATION | `HR-05` (ผู้ดูแลทีม) | shared | 10 |
+| T09 | ทีมความเสี่ยงและการปฏิบัติตาม | `GROK-06` RISK | `HR-01` (ผู้ดูแลทีม) | shared | 9 |
+| T10 | ทีมธรรมาภิบาลและการอนุมัติ | `GROK-09` GOVERNANCE | `HR-01` (ผู้ดูแลทีม) | shared | 9 |
+| | **รวม** | | | | **100** |
+
+ตารางนี้เป็นสรุปสำหรับคนอ่าน ค่าจริงอยู่ที่ `office-data.js` และ `check-contract.mjs` ตรวจขนาดทีมรวมได้ 100 เสมอ
+
+เรนเดอร์ `office.html` ด้วย headless Chromium (Playwright) ที่ 360 / 485 / 753 / 1009 / 1440 px แล้ว
+ทุกความกว้างแสดงครบ 100 การ์ด `scrollWidth == clientWidth` ไม่มี error และไม่มี request ออกนอกเครื่อง
+ตัวกรอง ลิงก์ตรง `#agent=` และการย้ายโฟกัสไปที่รายละเอียดทำงาน · ไฟล์ใน `dist/` เปิดจากดิสก์แล้วกดข้ามหน้าได้
 
 ## สถานะที่ออกแบบไว้
 

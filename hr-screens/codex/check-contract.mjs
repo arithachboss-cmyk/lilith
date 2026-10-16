@@ -12,7 +12,9 @@ import { copyFileSync, existsSync, readFileSync, rmSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildRoleRegistry, buildRolesTs, buildScreenIndex } from './build-contract.mjs';
+import { buildAgentRoster, buildRoleRegistry, buildRolesTs, buildScreenIndex } from './build-contract.mjs';
+import { ROLES } from '../data.js';
+import { AGENTS as SOURCE_AGENTS, TEAMS as SOURCE_TEAMS } from '../office-data.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const contract = (name) => JSON.parse(readFileSync(join(here, 'contract', name), 'utf8'));
@@ -129,7 +131,7 @@ ok('มี enum อย่างน้อยหนึ่งรายการถ�
 
 /* 7 — ช่องที่ไม่ควรมีในสัญญาเลย */
 const wholeContract = ['role-registry.json', 'screens.json', 'enums.json', 'server-contract.json',
-  'panel-payloads.schema.json', 'ui-strings.json', 'acceptance.json']
+  'panel-payloads.schema.json', 'ui-strings.json', 'acceptance.json', 'agent-roster.json']
   .map((name) => readFileSync(join(here, 'contract', name), 'utf8')).join('\n');
 for (const banned of ['api_key', 'apiKey', 'access_token', 'accessToken', 'client_secret', 'private_key', 'password']) {
   ok(`ไม่มีช่องชื่อ ${banned} ในสัญญา`, !wholeContract.includes(banned));
@@ -274,6 +276,229 @@ if (existsSync(TS_ENUMS)) {
     JSON.stringify(tsArray('AMI_SPECIALIST_REQUEST_STATES_ALLOWED_NOW')) ===
     JSON.stringify(enums.specialist_request_state.allowed_in_prototype));
 }
+
+/*
+ * 13 — สำนักงาน 100 เอเจนต์ · ADR-0014
+ *
+ * จำนวน หัวหน้าทีม และผู้ดูแลทีมเขียนไว้ตรงนี้โดยตั้งใจ ไม่ได้อ่านจาก office-data.js
+ * เส้นทางส่งต่อคำนวณใหม่ที่นี่จาก handoff_to ไม่เชื่อ route_to_human ที่ generate มา
+ */
+const EXPECTED_AGENT_TOTAL = 100;
+const EXPECTED_TEAM_TOTAL = 10;
+const EXPECTED_MEMBER_TOTAL = 90;
+const MAX_ROUTE_HOPS = 10;
+// Shared Specialist ไม่ผูกกับพนักงานคนเดียว แต่ทีมของมันต้องมีคนหนึ่งตำแหน่งดูแล · ADR-0014
+const SHARED_TEAM_STEWARDS = { 'GROK-03': 'HR-04', 'GROK-05': 'HR-05', 'GROK-06': 'HR-01', 'GROK-09': 'HR-01' };
+const KNOWN_BLOCKERS = ['OWNER_DECISION_FEE_MODEL'];
+const RUNTIME_KEYS = ['model', 'endpoint', 'url', 'base_url', 'schedule', 'cron', 'replicas', 'instances',
+  'concurrency', 'budget', 'max_tokens', 'temperature', 'webhook', 'api_key', 'token', 'secret', 'credential'];
+
+const roster = contract('agent-roster.json');
+const humanIds = BRIEF_TABLE.map((row) => row.role_id);
+const isHuman = (id) => humanIds.includes(id);
+const pad = (n, width) => String(n).padStart(width, '0');
+
+ok('agent-roster.json ตรงกับ office-data.js', same(roster, buildAgentRoster()),
+  'รัน node hr-screens/codex/build-contract.mjs แล้ว commit ใหม่');
+
+const agents = roster.agents || [];
+const teams = roster.teams || [];
+const agentById = new Map(agents.map((agent) => [agent.agent_id, agent]));
+const teamById = new Map(teams.map((team) => [team.team_id, team]));
+
+/* 13.1 ครบ 100 ไม่ซ้ำ ไม่หาย */
+ok(`มีเอเจนต์ครบ ${EXPECTED_AGENT_TOTAL} ตัว`, agents.length === EXPECTED_AGENT_TOTAL, `พบ ${agents.length}`);
+ok(`มีทีมครบ ${EXPECTED_TEAM_TOTAL} ทีม`, teams.length === EXPECTED_TEAM_TOTAL, `พบ ${teams.length}`);
+for (const field of ['agent_id', 'call_sign', 'title_th', 'title_en', 'duty_th', 'duty_en']) {
+  const values = agents.map((agent) => agent[field]);
+  const dupes = values.filter((value, i) => values.indexOf(value) !== i);
+  ok(`${field} ของเอเจนต์ไม่ซ้ำกัน`, dupes.length === 0, `ซ้ำ: ${[...new Set(dupes)].join(', ')}`);
+}
+ok('team_id ไม่ซ้ำกัน', teamById.size === teams.length);
+
+const memberIds = agents.filter((a) => a.agent_id.startsWith('AGT-')).map((a) => a.agent_id).sort();
+const expectedMembers = Array.from({ length: EXPECTED_MEMBER_TOTAL }, (_, i) => `AGT-${pad(i + 1, 3)}`);
+ok(`สมาชิกเป็น AGT-001 ถึง AGT-${pad(EXPECTED_MEMBER_TOTAL, 3)} ครบ ไม่มีเลขหาย`,
+  JSON.stringify(memberIds) === JSON.stringify(expectedMembers), `ได้ ${memberIds.length} รายการ`);
+const leadIds = agents.filter((a) => a.agent_id.startsWith('GROK-')).map((a) => a.agent_id).sort();
+ok('หัวหน้าทีมคือ GROK-01 ถึง GROK-10 พอดี ไม่เพิ่มรหัส Grok ใหม่',
+  JSON.stringify(leadIds) === JSON.stringify(expectedGrok), `ได้ ${leadIds.join(',')}`);
+ok('ไม่มีรหัสเอเจนต์รูปแบบอื่น',
+  agents.every((a) => /^(GROK-\d{2}|AGT-\d{3})$/.test(a.agent_id)));
+
+/* 13.2 หัวหน้าทีม ผู้ดูแลทีม และ pool ตรงกับบรีฟและ ADR-0014 */
+const briefCallSign = new Map([
+  ...BRIEF_TABLE.map((row) => [row.grok_id, row.call_sign]),
+  ...BRIEF_SPECIALISTS.map((row) => [row.grok_id, row.call_sign]),
+]);
+const expectedOwner = new Map([
+  ...BRIEF_TABLE.map((row) => [row.grok_id, row.role_id]),
+  ...Object.entries(SHARED_TEAM_STEWARDS),
+]);
+for (const grokId of expectedGrok) {
+  const led = teams.filter((team) => team.lead_id === grokId);
+  ok(`${grokId} เป็นหัวหน้าทีมเดียวพอดี`, led.length === 1, `เป็นหัวหน้า ${led.length} ทีม`);
+  const lead = agentById.get(grokId);
+  ok(`${grokId} call sign ตรงกับบรีฟ`, lead?.call_sign === briefCallSign.get(grokId),
+    `คาด ${briefCallSign.get(grokId)} ได้ ${lead?.call_sign}`);
+  if (led.length !== 1) continue;
+  const [team] = led;
+  ok(`ทีมของ ${grokId} มีผู้รับผิดชอบตามบรีฟหรือ ADR-0014`, team.owner_role_id === expectedOwner.get(grokId),
+    `คาด ${expectedOwner.get(grokId)} ได้ ${team.owner_role_id}`);
+  const shared = Object.prototype.hasOwnProperty.call(SHARED_TEAM_STEWARDS, grokId);
+  ok(`ทีมของ ${grokId} เป็น pool ${shared ? 'shared' : 'dedicated'}`, team.pool === (shared ? 'shared' : 'dedicated'));
+  ok(`ทีมของ ${grokId} ระบุ call sign หัวหน้าตรงกัน`, team.lead_call_sign === lead?.call_sign);
+}
+
+/* 13.3 ทุกตัวมีหน้าที่ ทีม และผู้รับผิดชอบ */
+let sizeSum = 0;
+for (const team of teams) {
+  const members = agents.filter((a) => a.team_id === team.team_id);
+  sizeSum += members.length;
+  ok(`${team.team_id} ขนาดที่ประกาศตรงกับจำนวนจริง`, team.size === members.length, `ประกาศ ${team.size} จริง ${members.length}`);
+  ok(`${team.team_id} มีหัวหน้าหนึ่งตัวและสมาชิกอย่างน้อยหนึ่งตัว`,
+    members.filter((a) => a.kind === 'lead').length === 1 && members.length >= 2);
+  ok(`${team.team_id} ผู้รับผิดชอบเป็นหนึ่งในหกตำแหน่งเดิม`, isHuman(team.owner_role_id), team.owner_role_id);
+  for (const key of ['name_th', 'name_en', 'mission_th', 'mission_en']) {
+    ok(`${team.team_id}.${key} ไม่ว่าง`, typeof team[key] === 'string' && team[key].trim().length > 0);
+  }
+}
+ok(`ขนาดทีมรวมกันได้ ${EXPECTED_AGENT_TOTAL}`, sizeSum === EXPECTED_AGENT_TOTAL, `ได้ ${sizeSum}`);
+
+for (const agent of agents) {
+  const id = agent.agent_id;
+  const team = teamById.get(agent.team_id);
+  ok(`${id} อยู่ในทีมที่มีอยู่จริง`, Boolean(team), agent.team_id);
+  ok(`${id} kind ตรงกับตำแหน่งในทีม`, agent.kind === (team && team.lead_id === id ? 'lead' : 'member'));
+  ok(`${id} ผู้รับผิดชอบคือผู้รับผิดชอบทีม`, Boolean(team) && agent.owner_role_id === team.owner_role_id);
+  for (const key of ['title_th', 'title_en', 'duty_th', 'duty_en']) {
+    ok(`${id}.${key} ไม่ว่าง`, typeof agent[key] === 'string' && agent[key].trim().length > 0);
+  }
+  ok(`${id} call sign เป็นตัวพิมพ์ใหญ่`, /^[A-Z][A-Z0-9-]*$/.test(agent.call_sign), agent.call_sign);
+  ok(`${id} ไม่ใช้ชื่อของ Confidentiality Gate`, !/KEEPER|MATCHMAKER/.test(agent.call_sign));
+}
+
+/* 13.4 เส้นทางส่งต่องาน ต้องจบที่คน ไม่วน และไม่ข้ามหัวหน้าทีม */
+for (const agent of agents) {
+  const id = agent.agent_id;
+  const team = teamById.get(agent.team_id);
+  const to = agent.handoff_to;
+  ok(`${id} มีปลายทางส่งต่อ`, typeof to === 'string' && to.length > 0, 'อ้าง call sign ที่ไม่มีอยู่');
+  ok(`${id} ไม่ส่งต่อให้ตัวเอง`, to !== id);
+  if (agent.kind === 'lead') {
+    ok(`${id} หัวหน้าทีมส่งต่อให้ผู้รับผิดชอบทีม`, Boolean(team) && to === team.owner_role_id, `ส่งให้ ${to}`);
+    ok(`${id} ยกระดับไปที่ผู้รับผิดชอบทีม`, Boolean(team) && agent.escalate_to === team.owner_role_id);
+  } else {
+    ok(`${id} สมาชิกส่งต่อให้เอเจนต์ ไม่ข้ามไปหาคนเอง`, agentById.has(to), `ส่งให้ ${to}`);
+    ok(`${id} ยกระดับไปที่หัวหน้าทีม`, Boolean(team) && agent.escalate_to === team.lead_id);
+  }
+
+  const route = [];
+  const seen = new Set([id]);
+  let at = to;
+  let verdict = 'ok';
+  while (true) {
+    if (isHuman(at)) { route.push(at); break; }
+    if (!agentById.has(at)) { verdict = `อ้าง ${at} ที่ไม่มีอยู่`; break; }
+    if (seen.has(at)) { verdict = `วนกลับมาที่ ${at}`; break; }
+    if (route.length >= MAX_ROUTE_HOPS) { verdict = `ยาวเกิน ${MAX_ROUTE_HOPS} ขั้น`; break; }
+    route.push(at);
+    seen.add(at);
+    at = agentById.get(at).handoff_to;
+  }
+  ok(`${id} เส้นทางส่งต่อจบที่คนโดยไม่วน`, verdict === 'ok', verdict);
+  if (verdict === 'ok') {
+    const lastAgent = route.length >= 2 ? agentById.get(route[route.length - 2]) : agent;
+    ok(`${id} คนที่รับงานปลายทางได้รับผ่านหัวหน้าทีม`, lastAgent.kind === 'lead');
+    ok(`${id} route_to_human ตรงกับที่คำนวณใหม่`,
+      JSON.stringify(agent.route_to_human) === JSON.stringify(route), `ได้ ${agent.route_to_human.join(' → ')}`);
+  }
+}
+
+/* 13.5 การตั้งค่าแยกจากการเปิดใช้จริง · ไม่เปิด 100 ตัวและไม่เพิ่มค่าใช้จ่ายเพียงให้ครบจำนวน */
+const nowState = enums.ai_connection_state.current_value_for_all_roles;
+ok('ทะเบียนประกาศว่าเป็นการตั้งค่าเท่านั้น', roster.nature === 'CONFIGURATION_ONLY');
+ok('ยังไม่มีเอเจนต์ที่ถูกเปิดใช้จริง', roster.runtime?.provisioned_agents === 0);
+ok('ไม่มีค่าใช้จ่ายที่เพิ่มขึ้นจากทะเบียนนี้', roster.runtime?.added_running_cost === 'NONE');
+ok('สถานะการเชื่อมต่อรวมตรงกับ enums.json', roster.runtime?.connection_state_for_all === nowState);
+ok(`เอเจนต์ทุกตัวอยู่ที่ ${nowState}`, agents.every((a) => a.connection_state === nowState),
+  `ไม่ตรง: ${agents.filter((a) => a.connection_state !== nowState).map((a) => a.agent_id).join(', ')}`);
+ok('กติกาการเปิดใช้ระบุไว้ทั้งสองภาษา',
+  typeof roster.runtime?.rule_th === 'string' && roster.runtime.rule_th.length > 40 &&
+  typeof roster.runtime?.rule_en === 'string' && roster.runtime.rule_en.length > 40);
+const keysIn = (value, out = []) => {
+  if (Array.isArray(value)) value.forEach((item) => keysIn(item, out));
+  else if (value && typeof value === 'object') {
+    for (const [key, inner] of Object.entries(value)) { out.push(key); keysIn(inner, out); }
+  }
+  return out;
+};
+const rosterKeys = new Set(keysIn(roster));
+for (const key of RUNTIME_KEYS) {
+  ok(`ทะเบียนไม่มีช่อง runtime ชื่อ ${key}`, !rosterKeys.has(key));
+}
+/*
+ * generator คัดลอกเฉพาะช่องที่รู้จัก ช่อง runtime ที่เพิ่มในไฟล์ต้นทางจึงหายเงียบจาก JSON
+ * ต้องตรวจที่ไฟล์ต้นทางด้วย ไม่อย่างนั้นการตั้งค่า runtime จะซ่อนอยู่ใน office-data.js ได้
+ */
+const SOURCE_AGENT_FIELDS = ['id', 'callSign', 'team', 'titleTh', 'titleEn', 'dutyTh', 'dutyEn', 'to', 'blockedBy'];
+const SOURCE_TEAM_FIELDS = ['id', 'lead', 'owner', 'pool', 'nameTh', 'nameEn', 'missionTh', 'missionEn'];
+for (const agent of SOURCE_AGENTS) {
+  const extra = Object.keys(agent).filter((key) => !SOURCE_AGENT_FIELDS.includes(key));
+  ok(`office-data.js ${agent.id} มีเฉพาะช่องการตั้งค่า`, extra.length === 0, `ช่องเกิน: ${extra.join(', ')}`);
+}
+for (const team of SOURCE_TEAMS) {
+  const extra = Object.keys(team).filter((key) => !SOURCE_TEAM_FIELDS.includes(key));
+  ok(`office-data.js ${team.id} มีเฉพาะช่องการตั้งค่า`, extra.length === 0, `ช่องเกิน: ${extra.join(', ')}`);
+}
+
+const officeFiles = ['office-data.js', 'office.html', 'office.js', 'office.css'];
+for (const name of officeFiles) {
+  const path = join(here, '..', name);
+  ok(`มีไฟล์ ${name}`, existsSync(path));
+  if (existsSync(path)) {
+    ok(`${name} ไม่เรียกบริการภายนอก`, !/https?:\/\/|url\(/.test(readFileSync(path, 'utf8')));
+  }
+}
+ok('agent-roster.json ไม่มีที่อยู่ภายนอก', !/https?:\/\//.test(JSON.stringify(roster)));
+
+/* 13.6 ห้ามแต่งฐานค่าธรรมเนียม ผู้จ่าย หรือการอนุมัติขึ้นเอง · AGENTS.md */
+for (const [id, blocker] of Object.entries(roster.blockers || {})) {
+  ok(`blocker ${id} เป็นค่าที่รู้จัก`, KNOWN_BLOCKERS.includes(id));
+  ok(`blocker ${id} มีทั้งสองภาษา`, Boolean(blocker.th) && Boolean(blocker.en));
+}
+for (const agent of agents) {
+  if (agent.blocked_by !== null) {
+    ok(`${agent.agent_id} blocked_by อ้าง blocker ที่ประกาศไว้`,
+      Object.prototype.hasOwnProperty.call(roster.blockers || {}, agent.blocked_by), agent.blocked_by);
+  }
+  const touchesFee = /\b(fee|fees|invoice|commission)\b/i.test(agent.duty_en) || /ค่าธรรมเนียม|ค่าคอม/.test(agent.duty_th);
+  if (touchesFee) {
+    ok(`${agent.agent_id} งานที่แตะค่าธรรมเนียมต้องรอคำตัดสินของเจ้าของ`,
+      agent.blocked_by === 'OWNER_DECISION_FEE_MODEL');
+  }
+  if (/\bscore\b/i.test(agent.duty_en)) {
+    ok(`${agent.agent_id} พูดถึงคะแนนได้เฉพาะแบบอ่านอย่างเดียว`,
+      /read-only/i.test(agent.duty_en) && /never changes/i.test(agent.duty_en));
+  }
+}
+
+/* 13.7 ฉบับ en ที่ยังไม่รีวิวต้องถูกระบุไว้ ไม่ใช่ซ่อนอยู่ใต้ REVIEWED_MEANING_OK */
+ok('ทะเบียนระบุสถานะฉบับ en', ['DRAFT_NEEDS_REVIEW', 'REVIEWED_MEANING_OK'].includes(roster.en_status), roster.en_status);
+const pending = strings.en_pending_review || [];
+const officeKeys = stringKeys.filter((key) => key.startsWith('office.'));
+ok('มีข้อความของหน้าสำนักงานอย่างน้อย 20 รายการ', officeKeys.length >= 20, `พบ ${officeKeys.length}`);
+ok('ข้อความ office.* ทุกตัวถูกระบุว่ารอรีวิว en', officeKeys.every((key) => pending.includes(key)),
+  `ไม่ได้ระบุ: ${officeKeys.filter((key) => !pending.includes(key)).join(', ')}`);
+ok('รายการรอรีวิวอ้างข้อความที่มีอยู่จริง', pending.every((key) => stringKeys.includes(key)));
+
+/* 13.8 จุดที่เคยอ้างจำนวนเดิม ต้องพูดตรงกับทะเบียน */
+const coordinator = ROLES.find((role) => role.roleId === 'HR-06');
+const coordinatorText = JSON.stringify(coordinator?.nextActions ?? []);
+ok('หน้าจอ AI Coordinator อ้างจำนวนเอเจนต์ตามทะเบียน', coordinatorText.includes(`${EXPECTED_AGENT_TOTAL} เอเจนต์`));
+ok('หน้าจอ AI Coordinator ไม่อ้างจำนวนเดิม 10 บทบาทแล้ว', !coordinatorText.includes('10 บทบาท'));
+ok('ทะเบียน Grok บนหน้าจอ AI Coordinator ยังมี 10 ตัวเท่ากับหัวหน้าทีม',
+  (coordinator?.panels?.agents ?? []).length === EXPECTED_TEAM_TOTAL);
 
 /* รายงาน */
 if (failures.length === 0) {

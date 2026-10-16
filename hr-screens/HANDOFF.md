@@ -115,6 +115,10 @@ prototype นี้ไม่ได้แตะระบบบัญชีทั�
 Shared Specialist: `GROK-03` VERIFIER · `GROK-05` NEGOTIATION · `GROK-06` RISK ·
 `GROK-09` GOVERNANCE — เป็น pool ไม่ผูกกับพนักงานคนเดียว
 
+**สำนักงาน 100 เอเจนต์** (`office.html`, ADR-0014): Grok ทั้ง 10 ตัวข้างบนเป็นหัวหน้าทีมละหนึ่งทีม
+มีสมาชิกอีก 90 ตัว `AGT-001`..`AGT-090` · ข้อมูลอยู่ที่ `office-data.js` ที่เดียว
+และ generate เป็น `codex/contract/agent-roster.json` · เป็นการตั้งค่าเท่านั้น ไม่มีตัวใดเชื่อมต่อจริง
+
 **หมายเหตุการตีความ:** บรีฟเขียน Grok เป็นรูปแบบ `GROK-xx / CALLSIGN`
 จึงอ่านว่าส่วนหน้าคือรหัส Grok และส่วนหลังคือ call sign ประจำตำแหน่ง
 ถ้าตั้งใจให้ call sign เป็นคนละค่ากับชื่อ Grok ต้องส่งตารางเพิ่ม

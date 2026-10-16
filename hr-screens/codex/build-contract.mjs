@@ -11,6 +11,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ROLES, SPECIALISTS, FUNNEL, PRINCIPLES } from '../data.js';
+import { TEAMS, AGENTS, BLOCKERS } from '../office-data.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const OUT = join(here, 'contract');
@@ -76,6 +77,101 @@ export function buildScreenIndex() {
         'authority',
       ],
     })),
+  };
+}
+
+/*
+ * ทะเบียนสำนักงาน 100 เอเจนต์ — generate จาก office-data.js
+ *
+ * เป็นการตั้งค่าเท่านั้น ไม่มีช่องของ runtime (โมเดล ปลายทาง คีย์ ตารางเวลา
+ * จำนวน instance หรืองบประมาณ) · ทุกตัวอยู่ที่ DEFINED_NOT_CONNECTED
+ * ดู docs/adr/ADR-0014-ami-agent-office-roster.md
+ */
+export const CONNECTION_STATE_NOW = 'DEFINED_NOT_CONNECTED';
+const HUMAN_ROLE = /^HR-\d{2}$/;
+
+export function buildAgentRoster() {
+  const byCallSign = new Map(AGENTS.map((agent) => [agent.callSign, agent]));
+  const teamOf = new Map(TEAMS.map((team) => [team.id, team]));
+  const roleTitle = new Map(ROLES.map((role) => [role.roleId, role.title]));
+
+  // call sign → agent_id · คนอ้างด้วย role_id ตรง ๆ · อ้างไม่เจอเป็น null ให้ checker ฟ้อง
+  const resolve = (to) => (HUMAN_ROLE.test(to) ? to : byCallSign.get(to)?.id ?? null);
+  const next = new Map(AGENTS.map((agent) => [agent.id, resolve(agent.to)]));
+
+  // เส้นทางจนถึงคน · หยุดเมื่อวนหรืออ้างไม่เจอ เพื่อให้ checker รายงานได้แทนที่จะค้าง
+  const routeOf = (id) => {
+    const route = [];
+    const seen = new Set([id]);
+    let at = next.get(id);
+    while (at && !HUMAN_ROLE.test(at) && !seen.has(at) && route.length < AGENTS.length) {
+      route.push(at);
+      seen.add(at);
+      at = next.get(at);
+    }
+    if (at) route.push(at);
+    return route;
+  };
+
+  return {
+    $generated_from: 'hr-screens/office-data.js',
+    $do_not_edit_by_hand: true,
+    version: '1.0.0',
+    nature: 'CONFIGURATION_ONLY',
+    // ฉบับ en ของชื่อและหน้าที่เอเจนต์ยังไม่ผ่านการรีวิว · D-AMI-04 ครอบเฉพาะข้อความของหน้าจอ 6 ตำแหน่ง
+    en_status: 'DRAFT_NEEDS_REVIEW',
+    runtime: {
+      provisioned_agents: 0,
+      connection_state_for_all: CONNECTION_STATE_NOW,
+      added_running_cost: 'NONE',
+      rule_th:
+        'ทะเบียนนี้เป็นการตั้งค่า ไม่ใช่การเปิดใช้งาน · 100 เอเจนต์ไม่ได้แปลว่า 100 process ' +
+        'หรือ 100 การเชื่อมต่อ · การเปิดใช้จริงทำทีละตัวผ่าน ACTIVATION-REQUEST ' +
+        'พร้อมผลทดสอบ ค่าใช้จ่ายที่ประเมินแล้ว และการอนุมัติของเจ้าของ',
+      rule_en:
+        'This roster is configuration, not activation. 100 agents do not mean 100 processes ' +
+        'or 100 connections. Each agent is activated one at a time through ACTIVATION-REQUEST, ' +
+        'with test results, an estimated cost and owner approval.',
+    },
+    teams: TEAMS.map((team) => {
+      const lead = AGENTS.find((agent) => agent.id === team.lead);
+      return {
+        team_id: team.id,
+        lead_id: team.lead,
+        lead_call_sign: lead ? lead.callSign : null,
+        owner_role_id: team.owner,
+        owner_title: roleTitle.get(team.owner) ?? null,
+        pool: team.pool,
+        name_th: team.nameTh,
+        name_en: team.nameEn,
+        mission_th: team.missionTh,
+        mission_en: team.missionEn,
+        size: AGENTS.filter((agent) => agent.team === team.id).length,
+      };
+    }),
+    agents: AGENTS.map((agent) => {
+      const team = teamOf.get(agent.team);
+      const isLead = Boolean(team && team.lead === agent.id);
+      return {
+        agent_id: agent.id,
+        call_sign: agent.callSign,
+        kind: isLead ? 'lead' : 'member',
+        team_id: agent.team,
+        owner_role_id: team ? team.owner : null,
+        title_th: agent.titleTh,
+        title_en: agent.titleEn,
+        duty_th: agent.dutyTh,
+        duty_en: agent.dutyEn,
+        handoff_to: next.get(agent.id),
+        escalate_to: isLead ? (team ? team.owner : null) : (team ? team.lead : null),
+        route_to_human: routeOf(agent.id),
+        blocked_by: agent.blockedBy ?? null,
+        connection_state: CONNECTION_STATE_NOW,
+      };
+    }),
+    blockers: Object.fromEntries(
+      Object.entries(BLOCKERS).map(([id, b]) => [id, { th: b.th, en: b.en }]),
+    ),
   };
 }
 
@@ -156,10 +252,12 @@ export function isAmiRoleId(value: string): value is AmiRoleId {
 if (import.meta.url === `file://${process.argv[1]}`) {
   writeJson('role-registry.json', buildRoleRegistry());
   writeJson('screens.json', buildScreenIndex());
+  writeJson('agent-roster.json', buildAgentRoster());
   mkdirSync(TS_OUT, { recursive: true });
   writeFileSync(join(TS_OUT, 'roles.ts'), buildRolesTs(), 'utf8');
   process.stdout.write(
-    'เขียน contract/role-registry.json, contract/screens.json และ packages/contracts/src/ami/roles.ts แล้ว\n',
+    'เขียน contract/role-registry.json, contract/screens.json, contract/agent-roster.json ' +
+      'และ packages/contracts/src/ami/roles.ts แล้ว\n',
   );
 }
 

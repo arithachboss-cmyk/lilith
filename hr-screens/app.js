@@ -334,6 +334,11 @@ function panelAi(role) {
           </div>
         </div>`).join('')}
       </div>`}
+      <p class="readonly-note" style="margin-top:12px">
+        Grok ทั้ง ${p.agents.length} ตัวเป็นหัวหน้าทีมของสำนักงาน 100 เอเจนต์ · ทะเบียนเต็มเป็นการตั้งค่าเท่านั้น
+        ยังไม่มีตัวใดเชื่อมต่อจริง ·
+        <a href="office.html" data-link="office" style="color:var(--accent)">เปิดสำนักงาน 100 เอเจนต์</a>
+      </p>
     </div>
   </section>
 
