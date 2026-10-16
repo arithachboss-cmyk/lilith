@@ -510,6 +510,7 @@ ok('ทะเบียน Grok บนหน้าจอ AI Coordinator ยัง
 const PROMPT_RULE_MARKERS = [
   'คุณทำได้แค่ร่าง', 'ห้ามแต่งข้อมูล', 'คะแนนจับคู่มาจากระบบจับคู่เท่านั้น', 'ข้อมูลส่วนบุคคล',
   'ค่าธรรมเนียม: ห้ามคำนวณ', 'ไม่ให้ความเห็นทางกฎหมาย', 'status: DRAFT', '=== HANDOFF ===', '=== END HANDOFF ===',
+  '\nwork: ', 'ตัวงานที่ต้องใช้ต่อจึงต้องอยู่ในช่อง work:',
 ];
 const PERSONAL_DATA = /[\w.+-]+@[\w-]+\.[\w.]+|\b0\d{1,2}-\d{3}-\d{4}\b|\b0[689]\d{8}\b|\b\d-\d{4}-\d{5}-\d{2}-\d\b/;
 const expectedPromptFiles = [...agents.map((a) => `${a.agent_id}-${a.call_sign}.md`), 'README.md'].sort();
