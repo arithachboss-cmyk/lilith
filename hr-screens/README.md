@@ -106,6 +106,10 @@ The Keeper controls disclosure แสดงอยู่ในทุกหน้�
 
 ตารางนี้เป็นสรุปสำหรับคนอ่าน ค่าจริงอยู่ที่ `office-data.js` และ `check-contract.mjs` ตรวจขนาดทีมรวมได้ 100 เสมอ
 
+ต้องการหน้าสำนักงานแบบ 3D isometric ให้ใช้ prompt ที่ `codex/prompts/office-3d-build-prompt.md`
+กับเครื่องมือสร้างแอปด้วย AI โดยแนบ `codex/contract/agent-roster.json` ไปด้วย
+prompt บังคับให้แสดงสถานะตามจริง คือยังไม่มีเอเจนต์ตัวใดเชื่อมต่อ และห้ามแต่งตัวเลขการทำงานแบบในวิดีโอตัวอย่าง
+
 เรนเดอร์ `office.html` ด้วย headless Chromium (Playwright) ที่ 360 / 485 / 753 / 1009 / 1440 px แล้ว
 ทุกความกว้างแสดงครบ 100 การ์ด `scrollWidth == clientWidth` ไม่มี error และไม่มี request ออกนอกเครื่อง
 ตัวกรอง ลิงก์ตรง `#agent=` และการย้ายโฟกัสไปที่รายละเอียดทำงาน · ไฟล์ใน `dist/` เปิดจากดิสก์แล้วกดข้ามหน้าได้
