@@ -18,15 +18,17 @@ custom instructions หรือ system prompt แล้วแต่แอป) �
 1. อย่าเปิดทั้ง 100 แชตพร้อมกัน เลือกเส้นทางเดียวจากรายการด้านล่าง แล้วเปิดเฉพาะแชตบนเส้นทางนั้น
 2. สร้างแชตหรือ Project หนึ่งอันต่อเอเจนต์ ตั้งชื่อตามรหัสและ call sign เช่น `AGT-037 SEO-WRITER`
 3. วางเนื้อหาไฟล์ของเอเจนต์นั้นทั้งไฟล์เป็นคำสั่งของแชต
-4. เริ่มที่เอเจนต์ต้นทาง ให้ข้อมูลหรือคำสั่ง แล้วคัดลอก HANDOFF ไปวางในแชตถัดไป
+4. เริ่มที่เอเจนต์ต้นทาง ให้ข้อมูลหรือคำสั่ง และวางข้อความต้นฉบับที่งานต้องอ้างแบบคำต่อคำ
+   เช่น ส่วนของคู่มือหรือข้อมูลทรัพย์ เอเจนต์จะเก็บไว้ในช่อง `sources:` และส่งต่อโดยไม่แก้
+   ถ้าไม่มีต้นฉบับ ขั้นตรวจข้อเท็จจริงจะไม่ผ่าน แล้วคัดลอก HANDOFF ไปวางในแชตถัดไป
 5. คัดลอกบล็อก HANDOFF ทั้งบล็อก ตัวงานเต็มอยู่ในช่อง `work:` เพราะแชตถัดไปไม่เห็นแชตก่อนหน้า
    และอ่านก่อนวางทุกครั้ง ถ้ามีเบอร์โทร อีเมล ไอดีไลน์ หรือเลขบัตรลูกค้าหลุดมา ให้ลบออกก่อน
 6. ปลายทางของทุกเส้นคือคน งานยังเป็นร่างจนกว่าคนจะอนุมัติและกดส่งเอง
 
 ## เส้นทางเริ่มต้นที่แนะนำ
 
-- **เนื้อหาการตลาด** — ร่างบทความ ตรวจข้อกล่าวอ้าง ตรวจข้อเท็จจริง แล้วรอคนอนุมัติก่อนเผยแพร่
-  `SEO-WRITER → CLAIM-REGISTER → FACT-CHECK → PUBLISH-GATE → GOVERNANCE → HR-01 Director`
+- **เนื้อหาการตลาด** — ร่างบทความ ตรวจข้อกล่าวอ้าง ตรวจข้อเท็จจริง ตรวจน้ำเสียงแบรนด์ แล้วรอคนอนุมัติก่อนเผยแพร่
+  `SEO-WRITER → CLAIM-REGISTER → FACT-CHECK → BRAND-VOICE → PUBLISH-GATE → GOVERNANCE → HR-01 Director`
 - **ลูกค้าใหม่** — ข้อความเข้า รับความต้องการ ถามให้ชัด คัดกรอง แล้วเตรียมรายการทรัพย์ให้ Matchmaker
   `INBOX-TRIAGE → LEAD-INTAKE → REQUIREMENT-CLARIFIER → LEAD-QUALIFIER → CLIENT-PROFILE → MATCH-EXPLAINER → SHORTLIST → CONNECTOR → HR-05 Matchmaker`
 - **ทรัพย์ใหม่** — ชวนเจ้าของลงประกาศ รับข้อมูล ตรวจความครบและเอกสาร แล้วให้คนตรวจกรรมสิทธิ์
@@ -111,7 +113,7 @@ custom instructions หรือ system prompt แล้วแต่แอป) �
 | `AGT-061` PHOTO-QUALITY | T07 | ผู้ตรวจคุณภาพภาพถ่าย | LISTING-COMPLETENESS | [AGT-061-PHOTO-QUALITY.md](AGT-061-PHOTO-QUALITY.md) |
 | `AGT-062` DUPLICATE-FINDER | T07 | ผู้ค้นประกาศซ้ำ | VERIFIER | [AGT-062-DUPLICATE-FINDER.md](AGT-062-DUPLICATE-FINDER.md) |
 | `AGT-063` GEO-CHECK | T07 | ผู้ตรวจตำแหน่งที่ตั้ง | LISTING-COMPLETENESS | [AGT-063-GEO-CHECK.md](AGT-063-GEO-CHECK.md) |
-| `AGT-064` FACT-CHECK | T07 | ผู้ตรวจข้อเท็จจริงในเนื้อหา | PUBLISH-GATE | [AGT-064-FACT-CHECK.md](AGT-064-FACT-CHECK.md) |
+| `AGT-064` FACT-CHECK | T07 | ผู้ตรวจข้อเท็จจริงในเนื้อหา | BRAND-VOICE | [AGT-064-FACT-CHECK.md](AGT-064-FACT-CHECK.md) |
 | `AGT-065` STALE-LISTING | T07 | ผู้เฝ้าประกาศค้างนาน | VERIFIER | [AGT-065-STALE-LISTING.md](AGT-065-STALE-LISTING.md) |
 | `GROK-05` NEGOTIATION | T08 | หัวหน้าทีมดีลและการปิดการขาย | HR-05 Matchmaker | [GROK-05-NEGOTIATION.md](GROK-05-NEGOTIATION.md) |
 | `AGT-066` OFFER-PREP | T08 | ผู้เตรียมข้อเสนอ | TERMS-COMPARE | [AGT-066-OFFER-PREP.md](AGT-066-OFFER-PREP.md) |

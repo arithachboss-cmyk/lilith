@@ -607,7 +607,7 @@ export const AGENTS = [
     titleTh: 'ผู้ตรวจข้อเท็จจริงในเนื้อหา', titleEn: 'Content fact-checker',
     dutyTh: 'ตรวจข้อความในประกาศ บทความ และโฆษณาเทียบกับหลักฐานในทะเบียนข้อกล่าวอ้าง',
     dutyEn: 'Checks listing, article and ad statements against the evidence in the claim register',
-    to: 'PUBLISH-GATE',
+    to: 'BRAND-VOICE',
   },
   {
     id: 'AGT-065', callSign: 'STALE-LISTING', team: 'T07',
