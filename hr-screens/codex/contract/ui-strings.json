@@ -27,6 +27,12 @@
     "office.nav_open",
     "office.pool_dedicated",
     "office.pool_shared",
+    "office.prompt_copied",
+    "office.prompt_copy",
+    "office.prompt_copy_fallback",
+    "office.prompt_note",
+    "office.prompt_title",
+    "office.prompt_view",
     "office.route_ends_human",
     "office.route_title",
     "office.stat_blocked",
@@ -207,6 +213,12 @@
     "office.detail_escalate": { "th": "ยกระดับไปที่", "en": "Escalates to" },
     "office.route_title": { "th": "เส้นทางส่งต่องาน", "en": "Handoff route" },
     "office.route_ends_human": { "th": "งานทุกชิ้นจบที่คนที่รับผิดชอบ และผ่านหัวหน้าทีมก่อนถึงคนเสมอ", "en": "All work ends with the responsible person and always passes a team lead first." },
-    "office.activation_note": { "th": "ยังเปิดใช้เอเจนต์นี้ไม่ได้ · การเปิดใช้ต้องผ่าน ACTIVATION-REQUEST พร้อมผลทดสอบ ค่าใช้จ่ายที่ประเมินแล้ว และการอนุมัติของเจ้าของ ทีละตัว", "en": "This agent cannot be activated yet. Activation goes through ACTIVATION-REQUEST with test results, an estimated cost and owner approval, one agent at a time." }
+    "office.activation_note": { "th": "ยังเปิดใช้เอเจนต์นี้ไม่ได้ · การเปิดใช้ต้องผ่าน ACTIVATION-REQUEST พร้อมผลทดสอบ ค่าใช้จ่ายที่ประเมินแล้ว และการอนุมัติของเจ้าของ ทีละตัว", "en": "This agent cannot be activated yet. Activation goes through ACTIVATION-REQUEST with test results, an estimated cost and owner approval, one agent at a time." },
+    "office.prompt_title": { "th": "Prompt สำหรับแชตของเอเจนต์นี้", "en": "Chat prompt for this agent" },
+    "office.prompt_note": { "th": "วางเป็นคำสั่งของแชตหนึ่งแชต แล้วคัดลอกบล็อก HANDOFF ระหว่างแชตด้วยมือ · ไม่ใช่การเชื่อมต่อระบบ · ห้ามวางเบอร์โทร อีเมล หรือเลขบัตรของลูกค้าลงในแชต", "en": "Use it as one chat's instructions, then copy the HANDOFF block between chats by hand. This is not a system connection. Never paste a client's phone, email or ID number into a chat." },
+    "office.prompt_copy": { "th": "คัดลอก prompt", "en": "Copy prompt" },
+    "office.prompt_copied": { "th": "คัดลอกแล้ว · วางเป็นคำสั่งของแชตใหม่ได้เลย", "en": "Copied. Paste it as a new chat's instructions." },
+    "office.prompt_copy_fallback": { "th": "คัดลอกอัตโนมัติไม่ได้ · เลือกข้อความไว้ให้แล้ว คัดลอกเองได้เลย", "en": "Automatic copy is blocked. The text is selected for you to copy." },
+    "office.prompt_view": { "th": "ดู prompt", "en": "Show prompt" }
   }
 }

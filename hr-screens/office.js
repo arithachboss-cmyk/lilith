@@ -7,8 +7,7 @@
 
 import { ROLES } from './data.js';
 import { AGENTS, BLOCKERS, TEAMS } from './office-data.js';
-
-const HUMAN_ROLE = /^HR-\d{2}$/;
+import { HUMAN_ROLE, buildAgentPrompt, routeToHuman } from './office-prompt.js';
 
 const els = {
   stats: document.getElementById('officeStats'),
@@ -26,6 +25,7 @@ const ui = { team: 'all', owner: 'all', query: '', blockedOnly: false, selected:
 
 /* ---------- ดัชนี ---------- */
 const byId = new Map(AGENTS.map((agent) => [agent.id, agent]));
+const PROMPT_CONTEXT = { agents: AGENTS, teams: TEAMS, roles: ROLES, blockers: BLOCKERS };
 const byCallSign = new Map(AGENTS.map((agent) => [agent.callSign, agent]));
 const teamById = new Map(TEAMS.map((team) => [team.id, team]));
 const roleById = new Map(ROLES.map((role) => [role.roleId, role]));
@@ -46,19 +46,10 @@ function nextOf(agent) {
   return target ? { kind: 'agent', agent: target } : null;
 }
 
-/** เส้นทางจนถึงคน · หยุดเมื่อวนหรืออ้างไม่เจอ (checker รายงานกรณีนั้นแยกอีกที) */
+/** เส้นทางจนถึงคน · ใช้ตัวคำนวณเดียวกับ build-contract.mjs */
 function routeOf(agent) {
-  const steps = [];
-  const seen = new Set([agent.id]);
-  let at = nextOf(agent);
-  while (at) {
-    if (at.kind === 'human') { steps.push(at); break; }
-    if (seen.has(at.agent.id) || steps.length >= AGENTS.length) break;
-    steps.push(at);
-    seen.add(at.agent.id);
-    at = nextOf(at.agent);
-  }
-  return steps;
+  return routeToHuman(agent, AGENTS).map((id) =>
+    HUMAN_ROLE.test(id) ? { kind: 'human', id } : { kind: 'agent', agent: byId.get(id) });
 }
 
 const stepLabel = (step) =>
@@ -207,7 +198,35 @@ function renderDetail() {
     <div class="send-note">
       ยังเปิดใช้เอเจนต์นี้ไม่ได้ · การเปิดใช้ต้องผ่าน ACTIVATION-REQUEST พร้อมผลทดสอบ
       ค่าใช้จ่ายที่ประเมินแล้ว และการอนุมัติของเจ้าของ ทีละตัว
-    </div>`;
+    </div>
+    <h3 class="route-title">Prompt สำหรับแชตของเอเจนต์นี้</h3>
+    <p class="readonly-note">
+      วางเป็นคำสั่งของแชตหนึ่งแชต แล้วคัดลอกบล็อก HANDOFF ระหว่างแชตด้วยมือ
+      · ไม่ใช่การเชื่อมต่อระบบ · ห้ามวางเบอร์โทร อีเมล หรือเลขบัตรของลูกค้าลงในแชต
+    </p>
+    <button class="btn btn-primary" type="button" data-act="copy-prompt">คัดลอก prompt</button>
+    <span class="copy-result" id="copyResult" role="status" aria-live="polite"></span>
+    <details class="prompt-view" id="promptView">
+      <summary>ดู prompt</summary>
+      <pre id="promptText">${esc(buildAgentPrompt(agent, PROMPT_CONTEXT))}</pre>
+    </details>`;
+}
+
+/* คัดลอกในเครื่องเท่านั้น · ถ้าเบราว์เซอร์ไม่อนุญาต ให้เปิดข้อความแล้วเลือกไว้ให้คัดลอกเอง */
+async function copyPrompt() {
+  const agent = byId.get(ui.selected);
+  const result = els.detail.querySelector('#copyResult');
+  if (!agent || !result) return;
+  try {
+    await navigator.clipboard.writeText(buildAgentPrompt(agent, PROMPT_CONTEXT));
+    result.textContent = 'คัดลอกแล้ว · วางเป็นคำสั่งของแชตใหม่ได้เลย';
+  } catch {
+    const view = els.detail.querySelector('#promptView');
+    const text = els.detail.querySelector('#promptText');
+    view.open = true;
+    window.getSelection().selectAllChildren(text);
+    result.textContent = 'คัดลอกอัตโนมัติไม่ได้ · เลือกข้อความไว้ให้แล้ว คัดลอกเองได้เลย';
+  }
 }
 
 /* ---------- การโต้ตอบ ---------- */
@@ -228,6 +247,10 @@ function select(agentId, { focus = true } = {}) {
 els.list.addEventListener('click', (event) => {
   const card = event.target.closest('[data-agent]');
   if (card) select(card.dataset.agent);
+});
+
+els.detail.addEventListener('click', (event) => {
+  if (event.target.closest('[data-act="copy-prompt"]')) copyPrompt();
 });
 
 els.team.addEventListener('change', () => { ui.team = els.team.value; renderList(); });

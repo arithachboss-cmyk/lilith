@@ -7,11 +7,12 @@
  * check-contract.mjs จะ fail ถ้าไฟล์ที่ commit ไว้ไม่ตรงกับ data.js
  */
 
-import { mkdirSync, writeFileSync } from 'node:fs';
+import { mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { ROLES, SPECIALISTS, FUNNEL, PRINCIPLES } from '../data.js';
 import { TEAMS, AGENTS, BLOCKERS } from '../office-data.js';
+import { buildAgentPrompt, promptFileName, resolveHandoff, routeToHuman } from '../office-prompt.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 export const OUT = join(here, 'contract');
@@ -88,30 +89,10 @@ export function buildScreenIndex() {
  * ดู docs/adr/ADR-0014-ami-agent-office-roster.md
  */
 export const CONNECTION_STATE_NOW = 'DEFINED_NOT_CONNECTED';
-const HUMAN_ROLE = /^HR-\d{2}$/;
 
 export function buildAgentRoster() {
-  const byCallSign = new Map(AGENTS.map((agent) => [agent.callSign, agent]));
   const teamOf = new Map(TEAMS.map((team) => [team.id, team]));
   const roleTitle = new Map(ROLES.map((role) => [role.roleId, role.title]));
-
-  // call sign → agent_id · คนอ้างด้วย role_id ตรง ๆ · อ้างไม่เจอเป็น null ให้ checker ฟ้อง
-  const resolve = (to) => (HUMAN_ROLE.test(to) ? to : byCallSign.get(to)?.id ?? null);
-  const next = new Map(AGENTS.map((agent) => [agent.id, resolve(agent.to)]));
-
-  // เส้นทางจนถึงคน · หยุดเมื่อวนหรืออ้างไม่เจอ เพื่อให้ checker รายงานได้แทนที่จะค้าง
-  const routeOf = (id) => {
-    const route = [];
-    const seen = new Set([id]);
-    let at = next.get(id);
-    while (at && !HUMAN_ROLE.test(at) && !seen.has(at) && route.length < AGENTS.length) {
-      route.push(at);
-      seen.add(at);
-      at = next.get(at);
-    }
-    if (at) route.push(at);
-    return route;
-  };
 
   return {
     $generated_from: 'hr-screens/office-data.js',
@@ -162,9 +143,10 @@ export function buildAgentRoster() {
         title_en: agent.titleEn,
         duty_th: agent.dutyTh,
         duty_en: agent.dutyEn,
-        handoff_to: next.get(agent.id),
+        // call sign → agent_id · คนอ้างด้วย role_id ตรง ๆ · อ้างไม่เจอเป็น null ให้ checker ฟ้อง
+        handoff_to: resolveHandoff(agent, AGENTS),
         escalate_to: isLead ? (team ? team.owner : null) : (team ? team.lead : null),
-        route_to_human: routeOf(agent.id),
+        route_to_human: routeToHuman(agent, AGENTS),
         blocked_by: agent.blockedBy ?? null,
         connection_state: CONNECTION_STATE_NOW,
       };
@@ -173,6 +155,86 @@ export function buildAgentRoster() {
       Object.entries(BLOCKERS).map(([id, b]) => [id, { th: b.th, en: b.en }]),
     ),
   };
+}
+
+/*
+ * prompt ประจำตัวเอเจนต์ 100 ไฟล์ + สารบัญ — generate จาก office-data.js ผ่าน office-prompt.js
+ * หนึ่งเอเจนต์คือหนึ่งแชต คนคัดลอก HANDOFF ระหว่างแชต จึงไม่มีการเชื่อมต่อระบบ
+ */
+export const PROMPTS_OUT = join(here, 'prompts', 'agents');
+const PROMPT_CONTEXT = { agents: AGENTS, teams: TEAMS, roles: ROLES, blockers: BLOCKERS };
+// เส้นทางตัวอย่างสำหรับเริ่มใช้ทีละเส้น · อ้างด้วย call sign ของเอเจนต์ต้นทาง
+const STARTER_ROUTES = [
+  ['SEO-WRITER', 'เนื้อหาการตลาด', 'ร่างบทความ ตรวจข้อกล่าวอ้าง ตรวจข้อเท็จจริง แล้วรอคนอนุมัติก่อนเผยแพร่'],
+  ['INBOX-TRIAGE', 'ลูกค้าใหม่', 'ข้อความเข้า รับความต้องการ ถามให้ชัด คัดกรอง แล้วเตรียมรายการทรัพย์ให้ Matchmaker'],
+  ['OWNER-OUTREACH', 'ทรัพย์ใหม่', 'ชวนเจ้าของลงประกาศ รับข้อมูล ตรวจความครบและเอกสาร แล้วให้คนตรวจกรรมสิทธิ์'],
+];
+
+function buildPromptIndex() {
+  const byCallSign = new Map(AGENTS.map((agent) => [agent.callSign, agent]));
+  const byId = new Map(AGENTS.map((agent) => [agent.id, agent]));
+  const roleTitle = (id) => ROLES.find((role) => role.roleId === id)?.title ?? id;
+  const label = (id) => (byId.has(id) ? byId.get(id).callSign : `${id} ${roleTitle(id)}`);
+  const cell = (text) => String(text).replace(/\|/g, '/');
+
+  const starters = STARTER_ROUTES.map(([callSign, title, what]) => {
+    const start = byCallSign.get(callSign);
+    const route = [start.callSign, ...routeToHuman(start, AGENTS).map(label)].join(' → ');
+    return `- **${title}** — ${what}\n  \`${route}\``;
+  });
+
+  const rows = AGENTS.map((agent) => {
+    const to = resolveHandoff(agent, AGENTS);
+    return `| \`${agent.id}\` ${agent.callSign} | ${agent.team} | ${cell(agent.titleTh)} | ${label(to)} | ` +
+      `[${promptFileName(agent)}](${promptFileName(agent)}) |`;
+  });
+
+  return `# Prompt ประจำตัวเอเจนต์ ${AGENTS.length} ตัว
+
+GENERATED จาก \`hr-screens/office-data.js\` ผ่าน \`hr-screens/office-prompt.js\` โดย \`hr-screens/codex/build-contract.mjs\`
+ห้ามแก้ไฟล์ในโฟลเดอร์นี้ด้วยมือ · แก้ที่ต้นทางแล้วรัน build ใหม่ · \`check-contract.mjs\` จะ fail ถ้าไฟล์หลุดจากต้นทาง
+
+## แนวคิด
+
+หนึ่งเอเจนต์คือหนึ่งแชต วาง prompt ของเอเจนต์นั้นเป็นคำสั่งของแชต (Project instructions,
+custom instructions หรือ system prompt แล้วแต่แอป) เมื่อทำงานเสร็จ แชตจะจบคำตอบด้วยบล็อก
+\`=== HANDOFF ===\` คุณคัดลอกบล็อกนั้นไปวางในแชตของเอเจนต์ที่ระบุใน \`to:\`
+งานจะเดินต่อจนถึงหัวหน้าทีม แล้วหัวหน้าทีมสรุปให้คนที่รับผิดชอบตัดสิน
+
+คนเป็นตัวกลางทุกขั้น จึงไม่มีการเชื่อมต่อระบบและไม่มี API key ทะเบียนเอเจนต์ยังอยู่ที่
+\`DEFINED_NOT_CONNECTED\` เหมือนเดิม prompt ทำงานได้กับแชต AI ทั่วไป ไม่ผูกกับเจ้าใดเจ้าหนึ่ง
+
+## เริ่มอย่างไร
+
+1. อย่าเปิดทั้ง ${AGENTS.length} แชตพร้อมกัน เลือกเส้นทางเดียวจากรายการด้านล่าง แล้วเปิดเฉพาะแชตบนเส้นทางนั้น
+2. สร้างแชตหรือ Project หนึ่งอันต่อเอเจนต์ ตั้งชื่อตามรหัสและ call sign เช่น \`AGT-037 SEO-WRITER\`
+3. วางเนื้อหาไฟล์ของเอเจนต์นั้นทั้งไฟล์เป็นคำสั่งของแชต
+4. เริ่มที่เอเจนต์ต้นทาง ให้ข้อมูลหรือคำสั่ง แล้วคัดลอก HANDOFF ไปวางในแชตถัดไป
+5. อ่านทุก HANDOFF ก่อนวาง ถ้ามีเบอร์โทร อีเมล ไอดีไลน์ หรือเลขบัตรลูกค้าหลุดมา ให้ลบออกก่อน
+6. ปลายทางของทุกเส้นคือคน งานยังเป็นร่างจนกว่าคนจะอนุมัติและกดส่งเอง
+
+## เส้นทางเริ่มต้นที่แนะนำ
+
+${starters.join('\n')}
+
+## ค่าใช้จ่าย
+
+ใช้แชตในบัญชี AI ที่มีอยู่แล้ว ไม่ต้องเปิด API จึงไม่มีค่าใช้จ่ายระบบเพิ่ม แต่ทุกแชตกินโควตาการใช้งาน
+ของบัญชี การเปิดเฉพาะเส้นทางที่ใช้จริงจึงทั้งถูกกว่าและตามงานง่ายกว่าการเปิดครบทุกตัว
+
+## รายชื่อทั้งหมด
+
+| เอเจนต์ | ทีม | ชื่อ | ส่งต่อให้ | prompt |
+|---|---|---|---|---|
+${rows.join('\n')}
+`;
+}
+
+export function buildAgentPromptFiles() {
+  return [
+    ...AGENTS.map((agent) => ({ name: promptFileName(agent), content: buildAgentPrompt(agent, PROMPT_CONTEXT) })),
+    { name: 'README.md', content: buildPromptIndex() },
+  ];
 }
 
 const writeJson = (name, value) =>
@@ -253,11 +315,19 @@ if (import.meta.url === `file://${process.argv[1]}`) {
   writeJson('role-registry.json', buildRoleRegistry());
   writeJson('screens.json', buildScreenIndex());
   writeJson('agent-roster.json', buildAgentRoster());
+  // เขียน prompt ใหม่ทั้งชุด และลบไฟล์ของเอเจนต์ที่ไม่มีในทะเบียนแล้ว
+  mkdirSync(PROMPTS_OUT, { recursive: true });
+  const promptFiles = buildAgentPromptFiles();
+  const keep = new Set(promptFiles.map((file) => file.name));
+  for (const name of readdirSync(PROMPTS_OUT)) {
+    if (name.endsWith('.md') && !keep.has(name)) rmSync(join(PROMPTS_OUT, name));
+  }
+  for (const file of promptFiles) writeFileSync(join(PROMPTS_OUT, file.name), file.content, 'utf8');
   mkdirSync(TS_OUT, { recursive: true });
   writeFileSync(join(TS_OUT, 'roles.ts'), buildRolesTs(), 'utf8');
   process.stdout.write(
-    'เขียน contract/role-registry.json, contract/screens.json, contract/agent-roster.json ' +
-      'และ packages/contracts/src/ami/roles.ts แล้ว\n',
+    'เขียน contract/role-registry.json, contract/screens.json, contract/agent-roster.json, ' +
+      `prompts/agents/ ${promptFiles.length} ไฟล์ และ packages/contracts/src/ami/roles.ts แล้ว\n`,
   );
 }
 

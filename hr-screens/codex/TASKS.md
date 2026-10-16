@@ -30,6 +30,7 @@
 | `contract/ui-strings.json` | ข้อความ 59 รายการ ครบทั้ง th และ en | ได้ |
 | `contract/acceptance.json` | เกณฑ์รับงาน 15 ข้อ ผูกกับ task และระบุวิธีตรวจ | ได้ |
 | `contract/agent-roster.json` | สำนักงาน 100 เอเจนต์ 10 ทีม · หน้าที่ ผู้รับผิดชอบ เส้นทางส่งต่อ · การตั้งค่าเท่านั้น | **ไม่ได้** generate จาก `hr-screens/office-data.js` |
+| `prompts/agents/*.md` | prompt ประจำตัวเอเจนต์ 100 ไฟล์ + สารบัญ · หนึ่งเอเจนต์หนึ่งแชต ส่งงานด้วยบล็อก HANDOFF | **ไม่ได้** generate ผ่าน `hr-screens/office-prompt.js` |
 
 ```bash
 node hr-screens/codex/build-contract.mjs   # สร้างไฟล์ที่ generate ใหม่จาก data.js

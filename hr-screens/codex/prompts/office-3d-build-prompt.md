@@ -87,6 +87,10 @@ shows live numbers; this app must not imitate them.
   role (gold text). Note under it: "งานทุกชิ้นจบที่คนที่รับผิดชอบ และผ่านหัวหน้าทีมก่อนถึงคนเสมอ".
   Add: "ยังเปิดใช้ไม่ได้ · ต้องผ่าน ACTIVATION-REQUEST พร้อมผลทดสอบ ค่าใช้จ่ายที่ประเมินแล้ว และการอนุมัติของเจ้าของ ทีละตัว".
 - While an agent is selected, highlight its route: the rooms and roads it passes.
+- If the `prompts/agents/` folder is attached, add a **คัดลอก prompt** button to the
+  agent panel that copies `<agent_id>-<call_sign>.md` exactly, with the note
+  "วางเป็นคำสั่งของแชตหนึ่งแชต แล้วคัดลอกบล็อก HANDOFF ระหว่างแชตด้วยมือ".
+  Never call an AI API from the page.
 - Tabs in the top bar: **สำนักงาน** (the scene), **เส้นทางส่งต่อ** (table of
   all 100 routes), **ผู้รับผิดชอบ** (agents grouped by the six human roles),
   **คำขอเปิดใช้** (empty state: "ยังไม่มีคำขอ · ยังไม่มีเอเจนต์ตัวใดเปิดใช้").

@@ -8,11 +8,13 @@
  * และช่องที่ไม่ควรมีอยู่ในสัญญาเลย
  */
 
-import { copyFileSync, existsSync, readFileSync, rmSync } from 'node:fs';
+import { copyFileSync, existsSync, readdirSync, readFileSync, rmSync } from 'node:fs';
 import { execFileSync } from 'node:child_process';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { buildAgentRoster, buildRoleRegistry, buildRolesTs, buildScreenIndex } from './build-contract.mjs';
+import {
+  PROMPTS_OUT, buildAgentPromptFiles, buildAgentRoster, buildRoleRegistry, buildRolesTs, buildScreenIndex,
+} from './build-contract.mjs';
 import { ROLES } from '../data.js';
 import { AGENTS as SOURCE_AGENTS, TEAMS as SOURCE_TEAMS } from '../office-data.js';
 
@@ -452,7 +454,7 @@ for (const team of SOURCE_TEAMS) {
   ok(`office-data.js ${team.id} มีเฉพาะช่องการตั้งค่า`, extra.length === 0, `ช่องเกิน: ${extra.join(', ')}`);
 }
 
-const officeFiles = ['office-data.js', 'office.html', 'office.js', 'office.css'];
+const officeFiles = ['office-data.js', 'office-prompt.js', 'office.html', 'office.js', 'office.css'];
 for (const name of officeFiles) {
   const path = join(here, '..', name);
   ok(`มีไฟล์ ${name}`, existsSync(path));
@@ -499,6 +501,56 @@ ok('หน้าจอ AI Coordinator อ้างจำนวนเอเจน
 ok('หน้าจอ AI Coordinator ไม่อ้างจำนวนเดิม 10 บทบาทแล้ว', !coordinatorText.includes('10 บทบาท'));
 ok('ทะเบียน Grok บนหน้าจอ AI Coordinator ยังมี 10 ตัวเท่ากับหัวหน้าทีม',
   (coordinator?.panels?.agents ?? []).length === EXPECTED_TEAM_TOTAL);
+
+/*
+ * 14 — prompt ประจำตัวเอเจนต์ · หนึ่งเอเจนต์หนึ่งแชต ส่งงานกันด้วยบล็อก HANDOFF ที่คนคัดลอก
+ *
+ * ชื่อไฟล์และปลายทาง to: ที่คาดไว้คำนวณจาก agent-roster.json ไม่ได้อ่านจาก office-prompt.js
+ */
+const PROMPT_RULE_MARKERS = [
+  'คุณทำได้แค่ร่าง', 'ห้ามแต่งข้อมูล', 'คะแนนจับคู่มาจากระบบจับคู่เท่านั้น', 'ข้อมูลส่วนบุคคล',
+  'ค่าธรรมเนียม: ห้ามคำนวณ', 'ไม่ให้ความเห็นทางกฎหมาย', 'status: DRAFT', '=== HANDOFF ===', '=== END HANDOFF ===',
+];
+const PERSONAL_DATA = /[\w.+-]+@[\w-]+\.[\w.]+|\b0\d{1,2}-\d{3}-\d{4}\b|\b0[689]\d{8}\b|\b\d-\d{4}-\d{5}-\d{2}-\d\b/;
+const expectedPromptFiles = [...agents.map((a) => `${a.agent_id}-${a.call_sign}.md`), 'README.md'].sort();
+const actualPromptFiles = existsSync(PROMPTS_OUT)
+  ? readdirSync(PROMPTS_OUT).filter((name) => name.endsWith('.md')).sort() : [];
+ok(`มีไฟล์ prompt ครบ ${EXPECTED_AGENT_TOTAL} ไฟล์และสารบัญ ไม่มีไฟล์เกิน`,
+  JSON.stringify(actualPromptFiles) === JSON.stringify(expectedPromptFiles),
+  `ขาด: ${expectedPromptFiles.filter((n) => !actualPromptFiles.includes(n)).join(', ') || '-'} · ` +
+  `เกิน: ${actualPromptFiles.filter((n) => !expectedPromptFiles.includes(n)).join(', ') || '-'}`);
+const generatedPrompts = new Map(buildAgentPromptFiles().map((file) => [file.name, file.content]));
+for (const name of actualPromptFiles) {
+  ok(`prompts/agents/${name} ตรงกับต้นทาง`, readFileSync(join(PROMPTS_OUT, name), 'utf8') === generatedPrompts.get(name),
+    'รัน node hr-screens/codex/build-contract.mjs แล้ว commit ใหม่');
+}
+for (const agent of agents) {
+  const name = `${agent.agent_id}-${agent.call_sign}.md`;
+  if (!actualPromptFiles.includes(name)) continue;
+  const prompt = readFileSync(join(PROMPTS_OUT, name), 'utf8');
+  const id = agent.agent_id;
+  const target = agentById.get(agent.handoff_to);
+  const expectedTo = target ? `${target.agent_id} ${target.call_sign}` : agent.handoff_to;
+  ok(`${id} prompt ระบุตัวตนของตัวเอง`, prompt.startsWith(`# บทบาทของคุณ: ${id} · ${agent.call_sign}\n`));
+  ok(`${id} prompt ส่ง HANDOFF จากตัวเอง`, prompt.includes(`\nfrom: ${id} ${agent.call_sign}\n`));
+  ok(`${id} prompt ส่ง HANDOFF ไปที่ปลายทางตามทะเบียน`, prompt.includes(`\nto: ${expectedTo}\n`), `คาด ${expectedTo}`);
+  ok(`${id} prompt มีหน้าที่ทั้งสองภาษา`, prompt.includes(agent.duty_th) && prompt.includes(agent.duty_en));
+  ok(`${id} prompt ระบุคนที่รับผิดชอบ`, prompt.includes(`คนที่รับผิดชอบงานของทีม: ${agent.owner_role_id} · `));
+  for (const marker of PROMPT_RULE_MARKERS) {
+    ok(`${id} prompt มีกติกา "${marker}"`, prompt.includes(marker));
+  }
+  ok(`${id} prompt ไม่มีข้อมูลส่วนบุคคลหรือที่อยู่ภายนอก`, !PERSONAL_DATA.test(prompt) && !/https?:\/\//.test(prompt));
+  ok(`${id} prompt ไม่มีช่อง key หรือ token`, !/api[_ ]?key|access[_ ]?token|client[_ ]?secret|password/i.test(prompt));
+  if (agent.blocked_by) {
+    ok(`${id} prompt ระบุว่ารอคำตัดสินของเจ้าของ`, prompt.includes(roster.blockers[agent.blocked_by].th));
+  }
+}
+if (actualPromptFiles.includes('README.md')) {
+  const index = readFileSync(join(PROMPTS_OUT, 'README.md'), 'utf8');
+  ok('สารบัญ prompt ลิงก์ครบทุกเอเจนต์',
+    agents.every((a) => index.includes(`](${a.agent_id}-${a.call_sign}.md)`)));
+  ok('สารบัญ prompt บอกให้เริ่มทีละเส้นทาง ไม่เปิดครบทุกตัว', index.includes(`อย่าเปิดทั้ง ${EXPECTED_AGENT_TOTAL} แชตพร้อมกัน`));
+}
 
 /* รายงาน */
 if (failures.length === 0) {

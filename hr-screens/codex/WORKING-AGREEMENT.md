@@ -14,6 +14,7 @@
 | `hr-screens/codex/contract/*.json` | สัญญาร่วม | อ่านได้ · แก้ได้เฉพาะไฟล์ที่ไม่ได้ generate และต้องมีเหตุผลใน PR |
 | `hr-screens/codex/contract/role-registry.json`, `screens.json` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `hr-screens/data.js` แล้ว build ใหม่ |
 | `hr-screens/codex/contract/agent-roster.json` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `hr-screens/office-data.js` แล้ว build ใหม่ · ADR-0014 |
+| `hr-screens/codex/prompts/agents/*.md` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `office-data.js` หรือ `office-prompt.js` แล้ว build ใหม่ |
 | `apps/`, `packages/` | งาน implement (Codex) | ฝั่ง prototype ไม่แตะ |
 | `docs/07-codex-handoff.md`, `docs/blueprint-source-manifest.json` | Blueprint | **ไม่มีใครแก้** ADR-0013 กำหนดให้นำเข้าโดยไม่แก้เนื้อหา |
 | `pnpm-lock.yaml` | workspace | แก้ได้เฉพาะเมื่อเพิ่ม dependency จริง และต้องอยู่ใน PR ที่อธิบายไว้ |
@@ -29,7 +30,7 @@ node hr-screens/codex/check-contract.mjs
 ```
 
 รันก่อน push ทุกครั้งที่แตะอะไรใน `hr-screens/` หรือใน contract
-ตอนนี้ตรวจกว่า 2,200 ข้อ (จำนวนจริงพิมพ์ออกมาทุกครั้งที่รัน ส่วนใหญ่เป็นการตรวจรายเอเจนต์ของสำนักงาน 100 เอเจนต์)
+ตอนนี้ตรวจกว่า 3,900 ข้อ (จำนวนจริงพิมพ์ออกมาทุกครั้งที่รัน ส่วนใหญ่เป็นการตรวจรายเอเจนต์และ prompt ของสำนักงาน 100 เอเจนต์)
 และ exit ไม่เป็นศูนย์เมื่อพัง จุดที่สำคัญที่สุดสี่ข้อ
 
 1. **ค่าต้องตรงกับตารางในบรีฟ** checker ฝังตารางไว้ในตัวเอง ไม่ได้อ่านจาก `data.js`
