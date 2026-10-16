@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>AMI Office · สำนักงาน 100 เอเจนต์</title>
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="styles.css">
+<link rel="stylesheet" href="office.css">
+</head>
+<body data-accent="mint">
+<a class="skip" href="#main">ข้ามไปยังเนื้อหาหลัก</a>
+
+<div class="demo-strip" role="note">
+  <span class="pill-demo">DEMO</span>
+  <span><b>ตัวอย่างการออกแบบ</b> · ทะเบียนนี้เป็นการตั้งค่าเท่านั้น ยังไม่มีเอเจนต์ตัวใดเชื่อมต่อจริง ไม่มีการเรียกบริการภายนอก และไม่มีค่าใช้จ่ายที่เพิ่มขึ้น</span>
+</div>
+
+<div class="shell">
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="sys">AMI</span>
+      <span class="org">OFFICE</span>
+      <span class="sub">สำนักงาน 100 เอเจนต์ · Middle Property</span>
+    </div>
+    <nav class="account" aria-label="หน้าจออื่น">
+      <a class="btn btn-ghost" href="index.html" data-link="screens">กลับไปหน้าจอ 6 ตำแหน่ง</a>
+    </nav>
+  </header>
+
+  <main id="main" tabindex="-1">
+    <section class="office-hero" aria-labelledby="officeTitle">
+      <div>
+        <span class="spacename">THE AGENT OFFICE</span>
+        <h1 id="officeTitle">สำนักงาน 100 เอเจนต์ · 10 ทีม</h1>
+        <p class="welcome-line">
+          ทุกเอเจนต์มีหน้าที่ ทีม คนที่รับผิดชอบ และเส้นทางส่งต่องานที่จบที่คนเสมอ
+          หัวหน้าทีมทั้ง 10 คือ Grok ประจำตำแหน่งเดิม ไม่มีการเพิ่มตำแหน่งคนใหม่
+        </p>
+      </div>
+      <dl class="office-stats" id="officeStats"></dl>
+    </section>
+
+    <section class="panel office-config" aria-labelledby="configTitle">
+      <h2 id="configTitle">การตั้งค่า ไม่ใช่การเปิดใช้งาน</h2>
+      <p id="configRule"></p>
+      <ul class="config-list">
+        <li>ไม่มีโมเดล ปลายทาง คีย์ ตารางเวลา จำนวน instance หรืองบประมาณอยู่ในทะเบียน</li>
+        <li>เปิดใช้จริงได้ทีละตัว ผ่านคำขอที่มีผลทดสอบ ค่าใช้จ่ายที่ประเมินแล้ว และการอนุมัติของเจ้าของ</li>
+        <li>งานที่แตะค่าธรรมเนียมรอเจ้าของยืนยันฐานค่าธรรมเนียมและผู้จ่ายก่อน</li>
+      </ul>
+    </section>
+
+    <section class="panel office-filters" aria-labelledby="filterTitle">
+      <h2 id="filterTitle">ค้นหาในสำนักงาน</h2>
+      <div class="filter-row">
+        <label class="field">
+          <span>ทีม</span>
+          <select id="teamFilter"></select>
+        </label>
+        <label class="field">
+          <span>ผู้รับผิดชอบ</span>
+          <select id="ownerFilter"></select>
+        </label>
+        <label class="field field-grow">
+          <span>ค้นหา call sign ชื่อ หรือหน้าที่</span>
+          <input id="searchFilter" type="search" autocomplete="off" spellcheck="false">
+        </label>
+        <label class="field field-check">
+          <input id="blockedFilter" type="checkbox">
+          <span>เฉพาะที่รอคำตัดสิน</span>
+        </label>
+      </div>
+      <p class="readonly-note" id="resultCount" aria-live="polite"></p>
+    </section>
+
+    <div class="office-layout">
+      <div id="teamList" class="team-list"></div>
+      <aside class="panel agent-detail" id="agentDetail" aria-labelledby="detailTitle" aria-live="polite"></aside>
+    </div>
+  </main>
+
+  <footer class="legal">
+    AMI Office · prototype สำหรับการออกแบบภายใน · ข้อมูลทั้งหมดเป็นข้อมูลสังเคราะห์<br>
+    ทะเบียนเอเจนต์เป็นการตั้งค่าเท่านั้น ยังไม่มีการเชื่อมต่อ xAI, AMI Core หรือ THE KEEPER · ไม่มีการส่งงานจริง ไม่มีการอนุมัติสิทธิ์จริง<br>
+    แหล่งข้อมูล hr-screens/office-data.js · สัญญา hr-screens/codex/contract/agent-roster.json
+  </footer>
+
+</div>
+
+<script type="module" src="office.js"></script>
+</body>
+</html>

@@ -29,6 +29,8 @@
 | `contract/panel-payloads.schema.json` | JSON Schema ของ payload ทั้ง 6 panel_kind | ได้ |
 | `contract/ui-strings.json` | ข้อความ 59 รายการ ครบทั้ง th และ en | ได้ |
 | `contract/acceptance.json` | เกณฑ์รับงาน 15 ข้อ ผูกกับ task และระบุวิธีตรวจ | ได้ |
+| `contract/agent-roster.json` | สำนักงาน 100 เอเจนต์ 10 ทีม · หน้าที่ ผู้รับผิดชอบ เส้นทางส่งต่อ · การตั้งค่าเท่านั้น | **ไม่ได้** generate จาก `hr-screens/office-data.js` |
+| `prompts/agents/*.md` | prompt ประจำตัวเอเจนต์ 100 ไฟล์ + สารบัญ · หนึ่งเอเจนต์หนึ่งแชต ส่งงานด้วยบล็อก HANDOFF | **ไม่ได้** generate ผ่าน `hr-screens/office-prompt.js` |
 
 ```bash
 node hr-screens/codex/build-contract.mjs   # สร้างไฟล์ที่ generate ใหม่จาก data.js
@@ -105,6 +107,16 @@ node hr-screens/codex/check-contract.mjs   # ด่านตรวจ ต้อ�
 - **Tests:** test ว่าสถานะอื่นถูกปฏิเสธ + test ว่าชุดข้อมูลที่ผู้ขอเห็นก่อนและหลังสร้างร่างเท่ากันทุกประการ
 
 ---
+
+## PHASE D — สำนักงาน 100 เอเจนต์
+
+### AMI-008 — Agent roster เข้าสัญญาฝั่ง TypeScript
+- **Goal:** ทะเบียน 100 เอเจนต์ใช้ได้ทั้งฝั่ง server และ UI แบบอ่านอย่างเดียว โดยยังไม่เปิดใช้เอเจนต์ใด
+- **Files:** `packages/contracts/src/ami/agents.ts` (generate จาก `office-data.js` แบบเดียวกับ `roles.ts`), `apps/web/src/app/api/ami/agents/route.ts`
+- **Dependencies:** AMI-001, AMI-003 · ยึด ADR-0014
+- **Acceptance:** `agent_id` และ call sign ที่ไม่อยู่ในทะเบียนเป็น TypeScript error · endpoint คืนเฉพาะการตั้งค่า ไม่มีช่อง runtime และ `connection_state` เป็น `DEFINED_NOT_CONNECTED` ทุกตัว · ไม่มี endpoint ใดเปิดใช้ เชื่อมต่อ หรือตั้งงบให้เอเจนต์ · ผู้ใช้ที่ไม่มี session ไม่เห็นทะเบียน
+- **Tests:** `node hr-screens/codex/check-contract.mjs` + fixture ที่ใช้ `AGT-091` ต้องคอมไพล์ไม่ผ่าน + contract test สแกน response ว่าไม่มีช่อง runtime
+- **หมายเหตุ:** การเปิดใช้เอเจนต์จริงไม่อยู่ในงานนี้ ต้องรอ AI-001 ขึ้นไป และทำทีละตัวผ่านคำขอที่เจ้าของอนุมัติ
 
 ## คำตัดสินที่ปลดล็อกงานชุดนี้
 

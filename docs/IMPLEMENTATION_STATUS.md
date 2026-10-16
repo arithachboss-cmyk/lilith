@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-09-24. Current task: **AMI-001 — AMI role registry and data contract**.
+Updated: 2026-10-16. Current task: **AMI office — 100-agent roster (configuration only)**, ADR-0014.
 
 ## Done
 
@@ -12,12 +12,13 @@ Updated: 2026-09-24. Current task: **AMI-001 — AMI role registry and data cont
 - Hosted [foundation CI passed](https://github.com/arithachboss-cmyk/lilith/actions/runs/34160514958) on implementation commit `0957eb1`. Full evidence: [execution report](ARCH-001_REPORT.md).
 - ARCH-001 merged as `762affe` (PR #2).
 - AMI prototype merged as `514abf8` (PR #7): six post-login screens under `hr-screens/` plus the machine-readable handoff set in `hr-screens/codex/` (contract JSON, task cards, working agreement, acceptance criteria, recorded decisions D-AMI-01..04).
-- AMI-001: `packages/contracts/src/ami/` — role registry, enums, panel payload types. `roles.ts` is generated from `hr-screens/codex/contract/role-registry.json` by `hr-screens/codex/build-contract.mjs`; the checker fails if the generated file is hand-edited.
+- AMI-001: `packages/contracts/src/ami/` — role registry, enums, panel payload types. `roles.ts` is generated from `hr-screens/codex/contract/role-registry.json` by `hr-screens/codex/build-contract.mjs`; the checker fails if the generated file is hand-edited. Merged as `6c09765` (PR #8).
+- AMI office (prototype + contract, this branch): `hr-screens/office-data.js` defines 100 agents in 10 teams — the ten existing Groks as team leads plus `AGT-001`..`AGT-090` — each with a duty (th/en), a team, a responsible role from the existing six and a handoff route that ends at a person through a team lead. `office.html` renders it. `agent-roster.json` is generated and checked in CI: count, uniqueness, lead/steward table, recomputed routes, no runtime fields, no connected agent, fee work blocked on the owner decision. Configuration only: 0 agents provisioned, no added running cost. Interpretation recorded in [ADR-0014](adr/ADR-0014-ami-agent-office-roster.md).
+- AMI office manual chat mode: one generated prompt per agent in `hr-screens/codex/prompts/agents/` (100 files + index), built by `hr-screens/office-prompt.js` and copyable from `office.html`. Agents pass work between chats with a `=== HANDOFF ===` block a person copies, so routes still end at the responsible role and nothing is connected. The checker verifies all 100 prompts against the roster.
 
 ## In Progress
 
-- AMI-001 PR open against `codex/lilith-prototype`, awaiting review.
-- PR #5 (ACS SEO governance) and PR #6 (Lili prototype and Brady brief) remain open; both green, no conflicts.
+- AMI office on branch `claude/trusting-meitner-bekwlp`; no PR opened yet. ADR-0014 awaits owner review.
 
 ## Blocked
 
@@ -26,13 +27,15 @@ Updated: 2026-09-24. Current task: **AMI-001 — AMI role registry and data cont
 
 ## Next
 
-1. Merge AMI-001, then start AMI-002 (bilingual strings) and AMI-003..007 (screen implementation) against the merged contract.
+1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
 2. Continue ARCH-002 → ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
 3. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
 ## Open risks
 
 - R-AMI-01: internal system names (THE KEEPER, MATCHMAKER-1, AMI Core, GROK-xx) appear in user-facing copy. Recorded, not blocking; owner may still rule on it.
+- R-AMI-04: in manual chat mode, client data typed into third-party chats sits outside the Keeper and RLS. Prompts and the index forbid contact details and ID numbers, but enforcement is the person's discipline, not code.
+- R-AMI-03: the four shared-pool team stewards and the placement of marketing agents under the Matchmaker are interpretations (ADR-0014), not owner answers. English agent titles, duties and `office.*` UI strings are drafts pending review.
 - R-AMI-02: D-AMI-01..04 were recorded under the owner's instruction to proceed, not as four separate owner answers. Three of the four are marked reversible; the one that is not (the Keeper's position) follows the structure already in `docs/03`. Both risks are recorded in `hr-screens/codex/contract/decisions.json`.
 
 ## Deferred owner decisions

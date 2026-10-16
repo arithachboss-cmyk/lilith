@@ -13,6 +13,8 @@
 | `hr-screens/` (ยกเว้น `codex/`) | prototype / spec | อ่านอย่างเดียว · เสนอแก้ผ่าน PR แยก ไม่แก้ในงานของตัวเอง |
 | `hr-screens/codex/contract/*.json` | สัญญาร่วม | อ่านได้ · แก้ได้เฉพาะไฟล์ที่ไม่ได้ generate และต้องมีเหตุผลใน PR |
 | `hr-screens/codex/contract/role-registry.json`, `screens.json` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `hr-screens/data.js` แล้ว build ใหม่ |
+| `hr-screens/codex/contract/agent-roster.json` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `hr-screens/office-data.js` แล้ว build ใหม่ · ADR-0014 |
+| `hr-screens/codex/prompts/agents/*.md` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `office-data.js` หรือ `office-prompt.js` แล้ว build ใหม่ |
 | `apps/`, `packages/` | งาน implement (Codex) | ฝั่ง prototype ไม่แตะ |
 | `docs/07-codex-handoff.md`, `docs/blueprint-source-manifest.json` | Blueprint | **ไม่มีใครแก้** ADR-0013 กำหนดให้นำเข้าโดยไม่แก้เนื้อหา |
 | `pnpm-lock.yaml` | workspace | แก้ได้เฉพาะเมื่อเพิ่ม dependency จริง และต้องอยู่ใน PR ที่อธิบายไว้ |
@@ -28,12 +30,15 @@ node hr-screens/codex/check-contract.mjs
 ```
 
 รันก่อน push ทุกครั้งที่แตะอะไรใน `hr-screens/` หรือใน contract
-ตอนนี้ตรวจ 218 ข้อ และ exit ไม่เป็นศูนย์เมื่อพัง จุดที่สำคัญที่สุดสามข้อ
+ตอนนี้ตรวจกว่า 3,900 ข้อ (จำนวนจริงพิมพ์ออกมาทุกครั้งที่รัน ส่วนใหญ่เป็นการตรวจรายเอเจนต์และ prompt ของสำนักงาน 100 เอเจนต์)
+และ exit ไม่เป็นศูนย์เมื่อพัง จุดที่สำคัญที่สุดสี่ข้อ
 
 1. **ค่าต้องตรงกับตารางในบรีฟ** checker ฝังตารางไว้ในตัวเอง ไม่ได้อ่านจาก `data.js`
    ถ้าอ่านจากแหล่งเดียวกับที่ตรวจ การตรวจก็ไม่ได้ตรวจอะไรเลย
 2. **ไฟล์ที่ generate ต้องไม่หลุดจาก `data.js`** ถ้าแก้มือ มันฟ้องทันที
 3. **ข้อความต้องมีครบสองภาษา** ตาม definition of done ของรีโป
+4. **สำนักงาน 100 เอเจนต์ต้องครบและเป็นการตั้งค่าเท่านั้น** ครบ 100 ไม่ซ้ำ ทุกตัวมีหน้าที่ ทีม
+   ผู้รับผิดชอบ และเส้นทางส่งต่อที่จบที่คนผ่านหัวหน้าทีม ไม่มีช่อง runtime และไม่มีตัวใดเชื่อมต่อจริง
 
 ถ้า checker ฟ้อง ให้แก้ที่ต้นเหตุ **ห้ามแก้ checker ให้ผ่าน** เว้นแต่ checker เองผิด
 ซึ่งกรณีนั้นต้องอธิบายใน PR ว่าผิดตรงไหนและทำไม
