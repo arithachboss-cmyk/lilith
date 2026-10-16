@@ -906,6 +906,7 @@
       "escalate_to": "GROK-04",
       "route_to_human": [
         "AGT-064",
+        "AGT-087",
         "AGT-088",
         "GROK-09",
         "HR-01"
@@ -970,6 +971,7 @@
       "route_to_human": [
         "AGT-086",
         "AGT-064",
+        "AGT-087",
         "AGT-088",
         "GROK-09",
         "HR-01"
@@ -1012,6 +1014,7 @@
       "route_to_human": [
         "AGT-086",
         "AGT-064",
+        "AGT-087",
         "AGT-088",
         "GROK-09",
         "HR-01"
@@ -1559,9 +1562,10 @@
       "title_en": "Content fact-checker",
       "duty_th": "ตรวจข้อความในประกาศ บทความ และโฆษณาเทียบกับหลักฐานในทะเบียนข้อกล่าวอ้าง",
       "duty_en": "Checks listing, article and ad statements against the evidence in the claim register",
-      "handoff_to": "AGT-088",
+      "handoff_to": "AGT-087",
       "escalate_to": "GROK-03",
       "route_to_human": [
+        "AGT-087",
         "AGT-088",
         "GROK-09",
         "HR-01"
@@ -2045,6 +2049,7 @@
       "escalate_to": "GROK-09",
       "route_to_human": [
         "AGT-064",
+        "AGT-087",
         "AGT-088",
         "GROK-09",
         "HR-01"
