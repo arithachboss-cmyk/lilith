@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-17. Current task: round 5 of the content route (manual chat run; nothing in the repository is in flight). The AMI office merged as PR #9 and the prompt fixes from its first live runs as PR #11. The content route has run four rounds in live chats, and the owner's answers after round 4 are being applied in round 5; ADR-0014 still waits on owner review.
+Updated: 2026-10-17. Current task: none in flight. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14. The content route has run five rounds in live chats and waits on owner answers and Thai counsel; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -25,13 +25,16 @@ Updated: 2026-10-17. Current task: round 5 of the content route (manual chat run
   - After round 4 the owner answered seven more questions, confirmed the LINE OA account is the company's, and approved the other two prompt changes:
     - one four-level verdict scale for every check; when steps disagree, both verdicts are recorded and the person decides;
     - owner-confirmed standing facts and preferred terms in `hr-screens/office-facts.js` (OF-01..OF-06), attached to every prompt. Each fact carries the owner's answer and date, and the checker pins the expected ids.
-    - With all three rules: 5,691 checks pass; 23 of 23 mutations are caught; the office page's copied prompt matches the generated file.
+    - With all three rules: 5,691 checks pass; 23 of 23 mutations are caught; the office page's copied prompt matches the generated file. Merged as `4cd379f` (PR #14).
+  - Round 5 (6 chats, about 53 minutes) ran on those prompts. **No step recorded a failure.** Office facts closed the wording questions, and where two steps disagreed, both verdicts were recorded for the person to decide. PUBLISH-GATE: not ready, with 9 items waiting on owner answers; 0 approvals; nothing published or sent.
+  - A parallel legal route (LEGAL-QUEUE → GOVERNANCE, 2 chats) prepared the L1–L2 questions for Thai counsel, quoting the draft's wording verbatim. The relay checked that the quoted wording matches the round-5 draft. Nothing has been sent to counsel.
+  - Lessons: a standing fact applied everywhere can still shift meaning in one place. Changing every "ลูกค้า" to "คุณ" turned "only clients ready to decide" into "when you are ready", which the checks caught (Q36). And a criterion that lives only in one round's HANDOFF is lost to later steps (Q16), so rules that apply to every job belong in office facts.
   - Run transcripts are kept outside this public repository: they quote the owner's internal sales handbook, and whether that may be published is itself an open owner question (Q10).
 
 ## In Progress
 
 - Nothing in flight. ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
-- `W-20261016-01` round 5 is applying the owner's latest answers (Q3, Q11, Q17, Q22, Q32, Q33, Q34). Before anything is published it still needs Thai counsel on L1–L3 (Q30) and the owner's approval of the final draft.
+- `W-20261016-01` is paused at HR-01 after round 5, with no failed checks. It waits on owner answers (Q4, Q16, Q19, Q20, Q29, Q36, Q38, Q39, Q41, Q42 and the L3 and Q40 scope), Thai counsel on L1–L3 (Q30) and the owner's approval of the final draft.
 
 ## Blocked
 
@@ -41,7 +44,7 @@ Updated: 2026-10-17. Current task: round 5 of the content route (manual chat run
 ## Next
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
-2. `W-20261016-01`: finish round 5, then send L1–L3 to Thai counsel and bring the final draft to the owner for approval. All three prompt changes proposed after round 3 are now applied: no stand-in wording, one verdict scale, and standing office facts.
+2. `W-20261016-01`: owner answers, then a short fix round; the owner sends L1–L2 to Thai counsel now and L3 once the service wording is final. Then the final draft goes to the owner for approval.
 3. Continue ARCH-002 → ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
