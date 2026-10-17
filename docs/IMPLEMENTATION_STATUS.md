@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-16. Current task: none in flight. The AMI office merged as PR #9 and the prompt fixes from its first live runs as PR #11. The content route has now run three rounds in live chats and waits on owner answers; ADR-0014 still waits on owner review.
+Updated: 2026-10-17. Current task: none in flight. The AMI office merged as PR #9 and the prompt fixes from its first live runs as PR #11. The content route has now run four rounds in live chats and waits on owner answers; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -20,12 +20,14 @@ Updated: 2026-10-16. Current task: none in flight. The AMI office merged as PR #
   - Rounds 1–2 found prompt gaps; the fixes merged as `096a792` (PR #11): a `work:` field for the deliverable, a shorter HANDOFF, verbatim `sources:`, BRAND-VOICE on the route, and failed checks recorded and passed on with approval left to the person at the end.
   - Round 3 (6 chats, about 44 minutes) ran on the merged prompts. Every hop passed the work on without escalating, including FACT-CHECK, which had escalated in rounds 1 and 2. Sources stayed verbatim across all six hops; no personal data, prices or fees appeared; PUBLISH-GATE ruled the draft not ready; 0 approvals; nothing was published or sent.
   - The remaining failures all wait on owner answers: wording written ahead of an answer failed in the next round, and open questions grew from 24 to 31. HANDOFF blocks ran 14k–24k characters per hop.
+  - The owner then answered eight questions and approved one prompt rule: wording that depends on an unanswered question is never written into a draft as a stand-in (kept as source wording or `[รอ Qn]`). The rule is in all 100 prompts and pinned by the checker (4,758 checks; 19 of 19 mutations caught).
+  - Round 4 (6 chats, about 47 minutes) used those answers. Promise-like wording fell from 3 failures to 0. FACT-CHECK's failed or not-yet-passed items fell from 9 to 2 failures plus 2 parts left blank pending answers (Q11, Q17); round 4 grades general advice separately, so the scales are not identical. Both remaining failures are word choices that differ from the source and wait on the owner (Q3, Q32). PUBLISH-GATE: not ready; 0 approvals; nothing published or sent.
   - Run transcripts are kept outside this public repository: they quote the owner's internal sales handbook, and whether that may be published is itself an open owner question (Q10).
 
 ## In Progress
 
 - Nothing in flight. ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
-- `W-20261016-01` is paused at HR-01 after round 3, waiting on owner answers. GOVERNANCE asked for Q23 (who answers as owner) and Q10 (how much of the sales handbook the article may use) first, and advised against a fourth round before then.
+- `W-20261016-01` is paused at HR-01 after round 4. It waits on owner answers to five short questions (Q3, Q11, Q17, Q32, Q34), a check that the LINE OA account is the company's (Q22), and Thai counsel on L1–L3 (Q30).
 
 ## Blocked
 
@@ -35,10 +37,9 @@ Updated: 2026-10-16. Current task: none in flight. The AMI office merged as PR #
 ## Next
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
-2. `W-20261016-01`: owner answers Q23 and Q10, then round 4. Round 3 proposed three prompt changes, none applied yet and all awaiting owner approval:
-   - never write interim wording for a point that waits on an open question;
-   - use one verdict scale across agents;
-   - attach owner-confirmed standing office facts to every job.
+2. `W-20261016-01`: get the remaining owner answers, then a short fix round. GOVERNANCE proposed that only the changed points be re-checked (GV4-02). Of the three prompt changes proposed after round 3, the owner approved the first: no stand-in wording. The other two still await approval:
+   - use one verdict scale across agents. In round 4, CLAIM-REGISTER and FACT-CHECK still graded the same claims differently;
+   - attach owner-confirmed standing office facts and preferred terms to every job. This would close wording questions such as Q3, Q32 and Q34 once for every job.
 3. Continue ARCH-002 → ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
