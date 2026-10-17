@@ -10,3 +10,11 @@ The supplied Blueprint v1.0 is the architecture specification. Read `BLUEPRINT_R
 - Update `docs/IMPLEMENTATION_STATUS.md` after meaningful phases. End a PR with `STATUS / EVIDENCE / RISKS / BLOCKERS / NEXT / OWNER APPROVAL`.
 
 Foundation validation: `pnpm install --frozen-lockfile`, `pnpm build`, `pnpm typecheck`, `pnpm lint`, `pnpm test:boundaries`.
+
+## Cursor Cloud specific instructions
+
+- Put Node.js 24 first on `PATH` before foundation commands: `export PATH="/usr/local/bin:$PATH"`. Login shells also see Node 22 earlier on `PATH`. This monorepo requires Node 24 and pnpm 11.19.0, pinned in `packageManager`.
+- No environment file is required for the foundation. Keep `AI_ENABLED=false`. `pnpm dev` serves http://127.0.0.1:3100.
+- Do not start `apps/worker`. `pnpm --filter @lilith/worker start` exits 78 until PostgreSQL and pg-boss exist.
+- `lili/` has no dependency install. `node server/index.js` serves http://127.0.0.1:4180 in demo mode when `OPENAI_API_KEY` is unset. From `lili/`, `node tests/run.js` runs the scenario checks. JSON under `lili/data/` is gitignored.
+- The sibling checkout `creativex2026-chula-cea-arithach` is a static site. From that repo root, `python3 -m http.server 4173 --bind 127.0.0.1` previews http://127.0.0.1:4173. `.env.example` there is for a future hosted database and is not used by the static preview.
