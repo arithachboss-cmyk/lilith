@@ -14,7 +14,7 @@
 | `hr-screens/codex/contract/*.json` | สัญญาร่วม | อ่านได้ · แก้ได้เฉพาะไฟล์ที่ไม่ได้ generate และต้องมีเหตุผลใน PR |
 | `hr-screens/codex/contract/role-registry.json`, `screens.json` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `hr-screens/data.js` แล้ว build ใหม่ |
 | `hr-screens/codex/contract/agent-roster.json` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `hr-screens/office-data.js` แล้ว build ใหม่ · ADR-0014 |
-| `hr-screens/codex/prompts/agents/*.md` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `office-data.js` หรือ `office-prompt.js` แล้ว build ใหม่ |
+| `hr-screens/codex/prompts/agents/*.md` | **generate เท่านั้น** | **ห้ามแก้ด้วยมือ** แก้ที่ `office-data.js`, `office-facts.js` หรือ `office-prompt.js` แล้ว build ใหม่ · `office-facts.js` เพิ่มได้เฉพาะคำตอบของเจ้าของพร้อมวันที่ |
 | `apps/`, `packages/` | งาน implement (Codex) | ฝั่ง prototype ไม่แตะ |
 | `docs/07-codex-handoff.md`, `docs/blueprint-source-manifest.json` | Blueprint | **ไม่มีใครแก้** ADR-0013 กำหนดให้นำเข้าโดยไม่แก้เนื้อหา |
 | `pnpm-lock.yaml` | workspace | แก้ได้เฉพาะเมื่อเพิ่ม dependency จริง และต้องอยู่ใน PR ที่อธิบายไว้ |

@@ -1,6 +1,6 @@
 # Prompt ประจำตัวเอเจนต์ 100 ตัว
 
-GENERATED จาก `hr-screens/office-data.js` ผ่าน `hr-screens/office-prompt.js` โดย `hr-screens/codex/build-contract.mjs`
+GENERATED จาก `hr-screens/office-data.js` และ `hr-screens/office-facts.js` ผ่าน `hr-screens/office-prompt.js` โดย `hr-screens/codex/build-contract.mjs`
 ห้ามแก้ไฟล์ในโฟลเดอร์นี้ด้วยมือ · แก้ที่ต้นทางแล้วรัน build ใหม่ · `check-contract.mjs` จะ fail ถ้าไฟล์หลุดจากต้นทาง
 
 ## แนวคิด
@@ -24,6 +24,8 @@ custom instructions หรือ system prompt แล้วแต่แอป) �
 5. คัดลอกบล็อก HANDOFF ทั้งบล็อก ตัวงานเต็มอยู่ในช่อง `work:` เพราะแชตถัดไปไม่เห็นแชตก่อนหน้า
    และอ่านก่อนวางทุกครั้ง ถ้ามีเบอร์โทร อีเมล ไอดีไลน์ หรือเลขบัตรลูกค้าหลุดมา ให้ลบออกก่อน
 6. ปลายทางของทุกเส้นคือคน งานยังเป็นร่างจนกว่าคนจะอนุมัติและกดส่งเอง
+7. คำตอบของเจ้าของที่ใช้ได้ทุกงาน เช่น คำเรียกหรือช่องทางของบริษัท ให้เพิ่มที่ `hr-screens/office-facts.js`
+   พร้อมวันที่และคำตอบของเจ้าของ แล้วรัน build ใหม่ ทุก prompt จะแนบไปให้เอง ข้อมูลเฉพาะงานยังวางใน `sources:`
 
 ## เส้นทางเริ่มต้นที่แนะนำ
 

@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-16. Current task: none in flight. The AMI office merged as PR #9 and the prompt fixes from its first live runs as PR #11. The content route has now run three rounds in live chats and waits on owner answers; ADR-0014 still waits on owner review.
+Updated: 2026-10-17. Current task: round 5 of the content route (manual chat run; nothing in the repository is in flight). The AMI office merged as PR #9 and the prompt fixes from its first live runs as PR #11. The content route has run four rounds in live chats, and the owner's answers after round 4 are being applied in round 5; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -20,12 +20,18 @@ Updated: 2026-10-16. Current task: none in flight. The AMI office merged as PR #
   - Rounds 1–2 found prompt gaps; the fixes merged as `096a792` (PR #11): a `work:` field for the deliverable, a shorter HANDOFF, verbatim `sources:`, BRAND-VOICE on the route, and failed checks recorded and passed on with approval left to the person at the end.
   - Round 3 (6 chats, about 44 minutes) ran on the merged prompts. Every hop passed the work on without escalating, including FACT-CHECK, which had escalated in rounds 1 and 2. Sources stayed verbatim across all six hops; no personal data, prices or fees appeared; PUBLISH-GATE ruled the draft not ready; 0 approvals; nothing was published or sent.
   - The remaining failures all wait on owner answers: wording written ahead of an answer failed in the next round, and open questions grew from 24 to 31. HANDOFF blocks ran 14k–24k characters per hop.
+  - The owner then answered eight questions and approved one prompt rule: wording that depends on an unanswered question is never written into a draft as a stand-in (kept as source wording or `[รอ Qn]`). The rule is in all 100 prompts and pinned by the checker (4,758 checks; 19 of 19 mutations caught).
+  - Round 4 (6 chats, about 47 minutes) used those answers. Promise-like wording fell from 3 failures to 0. FACT-CHECK's failed or not-yet-passed items fell from 9 to 2 failures plus 2 parts left blank pending answers (Q11, Q17); round 4 grades general advice separately, so the scales are not identical. Both remaining failures are word choices that differ from the source and wait on the owner (Q3, Q32). PUBLISH-GATE: not ready; 0 approvals; nothing published or sent.
+  - After round 4 the owner answered seven more questions, confirmed the LINE OA account is the company's, and approved the other two prompt changes:
+    - one four-level verdict scale for every check; when steps disagree, both verdicts are recorded and the person decides;
+    - owner-confirmed standing facts and preferred terms in `hr-screens/office-facts.js` (OF-01..OF-06), attached to every prompt. Each fact carries the owner's answer and date, and the checker pins the expected ids.
+    - With all three rules: 5,691 checks pass; 23 of 23 mutations are caught; the office page's copied prompt matches the generated file.
   - Run transcripts are kept outside this public repository: they quote the owner's internal sales handbook, and whether that may be published is itself an open owner question (Q10).
 
 ## In Progress
 
 - Nothing in flight. ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
-- `W-20261016-01` is paused at HR-01 after round 3, waiting on owner answers. GOVERNANCE asked for Q23 (who answers as owner) and Q10 (how much of the sales handbook the article may use) first, and advised against a fourth round before then.
+- `W-20261016-01` round 5 is applying the owner's latest answers (Q3, Q11, Q17, Q22, Q32, Q33, Q34). Before anything is published it still needs Thai counsel on L1–L3 (Q30) and the owner's approval of the final draft.
 
 ## Blocked
 
@@ -35,10 +41,7 @@ Updated: 2026-10-16. Current task: none in flight. The AMI office merged as PR #
 ## Next
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
-2. `W-20261016-01`: owner answers Q23 and Q10, then round 4. Round 3 proposed three prompt changes, none applied yet and all awaiting owner approval:
-   - never write interim wording for a point that waits on an open question;
-   - use one verdict scale across agents;
-   - attach owner-confirmed standing office facts to every job.
+2. `W-20261016-01`: finish round 5, then send L1–L3 to Thai counsel and bring the final draft to the owner for approval. All three prompt changes proposed after round 3 are now applied: no stand-in wording, one verdict scale, and standing office facts.
 3. Continue ARCH-002 → ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
@@ -46,7 +49,7 @@ Updated: 2026-10-16. Current task: none in flight. The AMI office merged as PR #
 
 - R-AMI-01: internal system names (THE KEEPER, MATCHMAKER-1, AMI Core, GROK-xx) appear in user-facing copy. Recorded, not blocking; owner may still rule on it.
 - R-AMI-02: D-AMI-01..04 were recorded under the owner's instruction to proceed, not as four separate owner answers. Three of the four are marked reversible; the one that is not (the Keeper's position) follows the structure already in `docs/03`. Both risks are recorded in `hr-screens/codex/contract/decisions.json`.
-- R-AMI-03: the four shared-pool team stewards and the placement of marketing agents under the Matchmaker are interpretations (ADR-0014), not owner answers. English agent titles, duties and `office.*` UI strings are drafts pending review.
+- R-AMI-03: the four shared-pool team stewards and the placement of marketing agents under the Matchmaker are interpretations (ADR-0014), not owner answers. So is applying the article-scoped answers behind OF-02..OF-05 to every job, and the "record both verdicts" tie rule. English agent titles, duties and `office.*` UI strings are drafts pending review.
 - R-AMI-04: in manual chat mode, client data typed into third-party chats sits outside the Keeper and RLS. Prompts and the index forbid contact details and ID numbers, but enforcement is the person's discipline, not code.
 - R-AMI-05: manual chat mode is slow to relay. One content round is six chats, about 44 minutes, and HANDOFF blocks of up to 24k characters, which is heavy to copy by hand on a phone. A note a person adds is only traceable when it is the owner's words, pasted verbatim into `sources:`.
 
@@ -58,6 +61,6 @@ Updated: 2026-10-16. Current task: none in flight. The AMI office merged as PR #
 - Before publishing the first article from the content route:
   - the owner's permission to describe internal process (Q10);
   - Thai counsel on recording calls, filming common areas and consumer-facing wording (L1–L3);
-  - a check that the LINE OA account in the call to action belongs to the company.
+  - a check that the LINE OA account in the call to action belongs to the company (the owner confirmed it on 2026-10-17).
 
 **Platform production-ready: false.** No migrations, product authentication, matching, deal workflows, invoices or 38-screen E2E release gate are delivered by these tasks. `hr-screens/` is a prototype and is outside the pnpm workspace globs.
