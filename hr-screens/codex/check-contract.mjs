@@ -17,6 +17,7 @@ import {
 } from './build-contract.mjs';
 import { ROLES } from '../data.js';
 import { AGENTS as SOURCE_AGENTS, TEAMS as SOURCE_TEAMS } from '../office-data.js';
+import { OFFICE_FACTS } from '../office-facts.js';
 
 const here = dirname(fileURLToPath(import.meta.url));
 const contract = (name) => JSON.parse(readFileSync(join(here, 'contract', name), 'utf8'));
@@ -454,7 +455,7 @@ for (const team of SOURCE_TEAMS) {
   ok(`office-data.js ${team.id} มีเฉพาะช่องการตั้งค่า`, extra.length === 0, `ช่องเกิน: ${extra.join(', ')}`);
 }
 
-const officeFiles = ['office-data.js', 'office-prompt.js', 'office.html', 'office.js', 'office.css'];
+const officeFiles = ['office-data.js', 'office-facts.js', 'office-prompt.js', 'office.html', 'office.js', 'office.css'];
 for (const name of officeFiles) {
   const path = join(here, '..', name);
   ok(`มีไฟล์ ${name}`, existsSync(path));
@@ -513,10 +514,30 @@ const PROMPT_RULE_MARKERS = [
   '5. ค่าธรรมเนียม: ห้ามคำนวณ', 'ไม่ให้ความเห็นทางกฎหมาย', 'status: DRAFT', '=== HANDOFF ===', '=== END HANDOFF ===',
   '\nwork: ', 'ตัวงานที่ต้องใช้ต่อจึงต้องอยู่ในช่อง work:',
   '\nsources: ', 'คัดลอกต่อทุกขั้นโดยไม่แก้ ไม่ถอดความ', 'ให้บล็อก HANDOFF สั้นที่สุดที่ยังทำงานต่อได้',
-  'ห้ามแต่งถ้อยคำชั่วคราวลงในร่าง',
+  'ห้ามแต่งถ้อยคำชั่วคราวลงในร่าง', 'ผลตรวจแต่ละข้อใช้ 4 ระดับนี้เท่านั้น', 'ยังไม่ผ่าน (รอคำตอบ)',
+  '## ข้อเท็จจริงและคำเรียกประจำสำนักงาน (เจ้าของยืนยันแล้ว)',
   'ผลตรวจกับการส่งต่อเป็นคนละเรื่อง', 'การอนุมัติเป็นของคนที่ปลายทาง และไม่มีอะไรเผยแพร่ได้จนกว่าคนจะอนุมัติ',
 ];
 const PERSONAL_DATA = /[\w.+-]+@[\w-]+\.[\w.]+|\b0\d{1,2}-\d{3}-\d{4}\b|\b0[689]\d{8}\b|\b\d-\d{4}-\d{5}-\d{2}-\d\b/;
+/*
+ * ข้อเท็จจริงประจำสำนักงานต้องเป็นคำตอบของเจ้าของเท่านั้น · รายการรหัสเขียนไว้ตรงนี้โดยตั้งใจ
+ * เพิ่มข้อใหม่ต้องแก้ทั้ง office-facts.js และแถวนี้ คนตรวจ PR จึงเห็นทุกครั้งที่ข้อเท็จจริงเปลี่ยน · ADR-0014
+ */
+const EXPECTED_OFFICE_FACT_IDS = ['OF-01', 'OF-02', 'OF-03', 'OF-04', 'OF-05', 'OF-06'];
+const OFFICE_FACT_FIELDS = ['id', 'th', 'basis'];
+ok('office-facts.js มีข้อเท็จจริงตามรายการที่ตรวจแล้ว',
+  JSON.stringify(OFFICE_FACTS.map((fact) => fact.id)) === JSON.stringify(EXPECTED_OFFICE_FACT_IDS),
+  `พบ ${OFFICE_FACTS.map((fact) => fact.id).join(', ')}`);
+for (const fact of OFFICE_FACTS) {
+  const extra = Object.keys(fact).filter((key) => !OFFICE_FACT_FIELDS.includes(key));
+  ok(`office-facts.js ${fact.id} มีเฉพาะช่อง id th basis`, extra.length === 0, `ช่องเกิน: ${extra.join(', ')}`);
+  ok(`office-facts.js ${fact.id} มีข้อความ`, typeof fact.th === 'string' && fact.th.trim().length > 0);
+  ok(`office-facts.js ${fact.id} อ้างวันที่และคำตอบของเจ้าของ`,
+    /^\d{4}-\d{2}-\d{2} · /.test(fact.basis || '') && /คำตอบ|"/.test(fact.basis || ''));
+  ok(`office-facts.js ${fact.id} ไม่มีข้อมูลส่วนบุคคลหรือที่อยู่ภายนอก`,
+    !PERSONAL_DATA.test(`${fact.th} ${fact.basis}`) && !/https?:\/\//.test(`${fact.th} ${fact.basis}`));
+  ok(`office-facts.js ${fact.id} ไม่ตั้งค่าธรรมเนียมเอง`, !/ค่าธรรมเนียม|ค่าคอม|ผู้จ่าย/.test(fact.th));
+}
 const expectedPromptFiles = [...agents.map((a) => `${a.agent_id}-${a.call_sign}.md`), 'README.md'].sort();
 const actualPromptFiles = existsSync(PROMPTS_OUT)
   ? readdirSync(PROMPTS_OUT).filter((name) => name.endsWith('.md')).sort() : [];
@@ -543,6 +564,9 @@ for (const agent of agents) {
   ok(`${id} prompt ระบุคนที่รับผิดชอบ`, prompt.includes(`คนที่รับผิดชอบงานของทีม: ${agent.owner_role_id} · `));
   for (const marker of PROMPT_RULE_MARKERS) {
     ok(`${id} prompt มีกติกา "${marker}"`, prompt.includes(marker));
+  }
+  for (const fact of OFFICE_FACTS) {
+    ok(`${id} prompt แนบข้อเท็จจริง ${fact.id}`, prompt.includes(`- ${fact.id} ${fact.th} (${fact.basis})`));
   }
   ok(`${id} prompt ไม่มีข้อมูลส่วนบุคคลหรือที่อยู่ภายนอก`, !PERSONAL_DATA.test(prompt) && !/https?:\/\//.test(prompt));
   ok(`${id} prompt ไม่มีช่อง key หรือ token`, !/api[_ ]?key|access[_ ]?token|client[_ ]?secret|password/i.test(prompt));

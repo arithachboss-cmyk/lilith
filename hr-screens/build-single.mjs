@@ -38,7 +38,7 @@ const PAGES = {
     title: 'AMI Command Console', file: 'prototype.html', links: { 'office.html': 'office.html' },
   },
   office: {
-    html: 'office.html', css: ['office.css'], scripts: ['data.js', 'office-data.js', 'office-prompt.js', 'office.js'],
+    html: 'office.html', css: ['office.css'], scripts: ['data.js', 'office-data.js', 'office-facts.js', 'office-prompt.js', 'office.js'],
     title: 'AMI Office · 100 agents', file: 'office.html', links: { 'index.html': 'prototype.html' },
   },
 };

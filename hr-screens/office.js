@@ -7,6 +7,7 @@
 
 import { ROLES } from './data.js';
 import { AGENTS, BLOCKERS, TEAMS } from './office-data.js';
+import { OFFICE_FACTS } from './office-facts.js';
 import { HUMAN_ROLE, buildAgentPrompt, routeToHuman } from './office-prompt.js';
 
 const els = {
@@ -25,7 +26,7 @@ const ui = { team: 'all', owner: 'all', query: '', blockedOnly: false, selected:
 
 /* ---------- ดัชนี ---------- */
 const byId = new Map(AGENTS.map((agent) => [agent.id, agent]));
-const PROMPT_CONTEXT = { agents: AGENTS, teams: TEAMS, roles: ROLES, blockers: BLOCKERS };
+const PROMPT_CONTEXT = { agents: AGENTS, teams: TEAMS, roles: ROLES, blockers: BLOCKERS, facts: OFFICE_FACTS };
 const byCallSign = new Map(AGENTS.map((agent) => [agent.callSign, agent]));
 const teamById = new Map(TEAMS.map((team) => [team.id, team]));
 const roleById = new Map(ROLES.map((role) => [role.roleId, role]));
