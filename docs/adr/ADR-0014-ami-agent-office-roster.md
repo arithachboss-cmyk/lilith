@@ -35,6 +35,7 @@ The owner's operating idea is one chat per agent, with the agents working togeth
 - Every prompt carries the same office rules: drafts only, no invented numbers, no self-scored matches, no personal contact data in handoffs, no fee calculation, no legal opinion.
 - Each answer ends with one `=== HANDOFF ===` block whose `to:` is the agent's handoff target from the roster. A person copies it into the next chat, so a person sees every step and the last hop always reaches the responsible role.
 - This is people using chat apps by hand, not a system connection: no API, no key, no service is wired up, and the roster stays `DEFINED_NOT_CONNECTED`. The index tells the owner to open one route's chats at a time, not all 100, because each chat uses the account's quota.
+- Wording that depends on an unanswered question is never written into a draft as a stand-in. Agents keep the source wording or leave `[รอ Qn]`, and keep any conditional wording proposal outside the draft. In the third live run, two stand-in wordings each failed the next round; the owner approved this rule on 2026-10-17.
 - Personal data is the real risk in this mode: chats sit outside the platform's Keeper and RLS. The prompts tell agents to use reference codes and refuse to repeat contact details, and the index tells the person to strip them before pasting.
 
 ## Enforcement
