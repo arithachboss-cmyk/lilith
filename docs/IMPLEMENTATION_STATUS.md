@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-17. Current task: none in flight. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14. The content route has run five rounds in live chats and waits on owner answers and Thai counsel; ADR-0014 still waits on owner review.
+Updated: 2026-10-18. Current task: none in flight. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14. The content route has run six rounds in live chats and waits on four owner answers and Thai counsel; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -24,17 +24,20 @@ Updated: 2026-10-17. Current task: none in flight. The AMI office merged as PR #
   - Round 4 (6 chats, about 47 minutes) used those answers. Promise-like wording fell from 3 failures to 0. FACT-CHECK's failed or not-yet-passed items fell from 9 to 2 failures plus 2 parts left blank pending answers (Q11, Q17); round 4 grades general advice separately, so the scales are not identical. Both remaining failures are word choices that differ from the source and wait on the owner (Q3, Q32). PUBLISH-GATE: not ready; 0 approvals; nothing published or sent.
   - After round 4 the owner answered seven more questions, confirmed the LINE OA account is the company's, and approved the other two prompt changes:
     - one four-level verdict scale for every check; when steps disagree, both verdicts are recorded and the person decides;
-    - owner-confirmed standing facts and preferred terms in `hr-screens/office-facts.js` (OF-01..OF-06), attached to every prompt. Each fact carries the owner's answer and date, and the checker pins the expected ids.
+    - owner-confirmed standing facts and preferred terms in `hr-screens/office-facts.js` (OF-01..OF-06 at the time; OF-07..OF-08 added after round 5), attached to every prompt. Each fact carries the owner's answer and date, and the checker pins the expected ids.
     - With all three rules: 5,691 checks pass; 23 of 23 mutations are caught; the office page's copied prompt matches the generated file. Merged as `4cd379f` (PR #14).
   - Round 5 (6 chats, about 53 minutes) ran on those prompts. **No step recorded a failure.** Office facts closed the wording questions, and where two steps disagreed, both verdicts were recorded for the person to decide. PUBLISH-GATE: not ready, with 9 items waiting on owner answers; 0 approvals; nothing published or sent.
   - A parallel legal route (LEGAL-QUEUE → GOVERNANCE, 2 chats) prepared the L1–L2 questions for Thai counsel, quoting the draft's wording verbatim. The relay checked that the quoted wording matches the round-5 draft. Nothing has been sent to counsel.
   - Lessons: a standing fact applied everywhere can still shift meaning in one place. Changing every "ลูกค้า" to "คุณ" turned "only clients ready to decide" into "when you are ready", which the checks caught (Q36). And a criterion that lives only in one round's HANDOFF is lost to later steps (Q16), so rules that apply to every job belong in office facts.
+  - After round 5 the owner accepted the eleven recommended options with "ใช้ตามที่แนะนำ" and answered Q41 directly. Two of the answers apply to every job and became office facts: OF-07, FACT-CHECK's criterion for general advice, and OF-08, the house tone. The checker now runs 5,901 checks; 23 of 23 mutations are still caught (commit `b8f8e6a`, not yet in a PR).
+  - Round 6 (6 chats, about 51 minutes) applied all twelve answers. **No step recorded a failure for the second round running.** The advice sections pass against OF-07 and the tone passes against OF-08. The relay confirmed by script that the draft changed only where the answers said. Still open: Q18 and Q43 (wording), Q21, Q22 and Q44 (pre-publication steps), and 12 items that wait on Thai counsel. PUBLISH-GATE: not ready; 0 approvals; nothing published or sent.
+  - The L1–L2 questions for counsel now include section 3 (Q40). The relay checked that all 12 quoted lines match the round-6 draft. L3 (title, service section, call to action) waits on Q18 and Q43 so it can go as one set.
   - Run transcripts are kept outside this public repository: they quote the owner's internal sales handbook, and whether that may be published is itself an open owner question (Q10).
 
 ## In Progress
 
 - Nothing in flight. ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
-- `W-20261016-01` is paused at HR-01 after round 5, with no failed checks. It waits on owner answers (Q4, Q16, Q19, Q20, Q29, Q36, Q38, Q39, Q41, Q42 and the L3 and Q40 scope), Thai counsel on L1–L3 (Q30) and the owner's approval of the final draft.
+- `W-20261016-01` is paused at HR-01 after round 6, with no failed checks. It waits on owner answers (Q18, Q43, Q21, Q22, Q44), Thai counsel on L1–L3 (Q30) and the owner's approval of the final draft.
 
 ## Blocked
 
@@ -44,7 +47,7 @@ Updated: 2026-10-17. Current task: none in flight. The AMI office merged as PR #
 ## Next
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
-2. `W-20261016-01`: owner answers, then a short fix round; the owner sends L1–L2 to Thai counsel now and L3 once the service wording is final. Then the final draft goes to the owner for approval.
+2. `W-20261016-01`: the owner sends L1–L2 to Thai counsel now; after Q18 and Q43, a short tag-and-wording round and the L3 set; then a tag-free copy checked word for word against the reviewed draft (Q44) goes to the owner for approval.
 3. Continue ARCH-002 → ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
@@ -52,9 +55,9 @@ Updated: 2026-10-17. Current task: none in flight. The AMI office merged as PR #
 
 - R-AMI-01: internal system names (THE KEEPER, MATCHMAKER-1, AMI Core, GROK-xx) appear in user-facing copy. Recorded, not blocking; owner may still rule on it.
 - R-AMI-02: D-AMI-01..04 were recorded under the owner's instruction to proceed, not as four separate owner answers. Three of the four are marked reversible; the one that is not (the Keeper's position) follows the structure already in `docs/03`. Both risks are recorded in `hr-screens/codex/contract/decisions.json`.
-- R-AMI-03: the four shared-pool team stewards and the placement of marketing agents under the Matchmaker are interpretations (ADR-0014), not owner answers. So is applying the article-scoped answers behind OF-02..OF-05 to every job, and the "record both verdicts" tie rule. English agent titles, duties and `office.*` UI strings are drafts pending review.
+- R-AMI-03: the four shared-pool team stewards and the placement of marketing agents under the Matchmaker are interpretations (ADR-0014), not owner answers. So is applying the article-scoped answers behind OF-02..OF-05 to every job, and the "record both verdicts" tie rule. The owner's 2026-10-18 reply "ใช้ตามที่แนะนำ" named no letters; matching it to options, and checking advice across the whole article under OF-07, are the relay's readings, recorded with both messages verbatim in the run record. English agent titles, duties and `office.*` UI strings are drafts pending review.
 - R-AMI-04: in manual chat mode, client data typed into third-party chats sits outside the Keeper and RLS. Prompts and the index forbid contact details and ID numbers, but enforcement is the person's discipline, not code.
-- R-AMI-05: manual chat mode is slow to relay. One content round is six chats, about 44 minutes, and HANDOFF blocks of up to 24k characters, which is heavy to copy by hand on a phone. A note a person adds is only traceable when it is the owner's words, pasted verbatim into `sources:`.
+- R-AMI-05: manual chat mode is slow to relay. One content round is six chats, 44–53 minutes, and HANDOFF blocks now reach 30k characters, which is heavy to copy by hand on a phone. A note a person adds is only traceable when it is the owner's words, pasted verbatim into `sources:`.
 
 ## Deferred owner decisions
 
