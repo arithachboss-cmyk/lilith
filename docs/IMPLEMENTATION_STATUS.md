@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-18. Current task: none in flight. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14. The content route has run six rounds in live chats and waits on four owner answers and Thai counsel; ADR-0014 still waits on owner review.
+Updated: 2026-10-18. Current task: none in flight. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, one owner re-confirmation and the pre-publication steps; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -32,12 +32,15 @@ Updated: 2026-10-18. Current task: none in flight. The AMI office merged as PR #
   - After round 5 the owner accepted the eleven recommended options with "ใช้ตามที่แนะนำ" and answered Q41 directly. Two of the answers apply to every job and became office facts: OF-07, FACT-CHECK's criterion for general advice, and OF-08, the house tone. The checker now runs 5,901 checks; 23 of 23 mutations are still caught (commit `b8f8e6a`, not yet in a PR).
   - Round 6 (6 chats, about 51 minutes) applied all twelve answers. **No step recorded a failure for the second round running.** The advice sections pass against OF-07 and the tone passes against OF-08. The relay confirmed by script that the draft changed only where the answers said. Still open: Q18 and Q43 (wording), Q21, Q22 and Q44 (pre-publication steps), and 12 items that wait on Thai counsel. PUBLISH-GATE: not ready; 0 approvals; nothing published or sent.
   - The L1–L2 questions for counsel now include section 3 (Q40). The relay checked that all 12 quoted lines match the round-6 draft. L3 (title, service section, call to action) waits on Q18 and Q43 so it can go as one set.
+  - Round 7 (6 chats, about 42 minutes) changed only tags and notes after the owner's next answers; the 38 reader-facing lines are identical to round 6, checked by script. **No failures for the third round running, and no wording waits on an answer.** In parallel, LEGAL-QUEUE and GOVERNANCE queued the L3 questions (LQ-08..LQ-14); GOVERNANCE sent back three explanatory phrases that went beyond the sources and proposed fixes. The relay merged L1–L3 into one counsel brief and checked its 23 quoted lines against the round-7 draft.
+  - Before publication a script strips the trace tags (Q44). It counts nested brackets and refuses output that still holds a bracket, "@" or a tag code; PUBLISH-GATE set five output criteria for the stripped copy, and the relay's dry run meets them. PUBLISH-GATE's own comparison comes after counsel answers.
+  - Lesson: GOVERNANCE noticed that the owner's last reply matched the example line in the relay's question character for character, including two answers only the owner can give (Q18, Q21), so it asked the owner to type them again (Q46). It proposed that examples never pre-fill owner-only answers and that questions to the owner be in Thai (GP7, Q47).
   - Run transcripts are kept outside this public repository: they quote the owner's internal sales handbook, and whether that may be published is itself an open owner question (Q10).
 
 ## In Progress
 
 - Nothing in flight. ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
-- `W-20261016-01` is paused at HR-01 after round 6, with no failed checks. It waits on owner answers (Q18, Q43, Q21, Q22, Q44), Thai counsel on L1–L3 (Q30) and the owner's approval of the final draft.
+- `W-20261016-01` is paused at HR-01 after round 7, with no failed checks and no wording waiting on an answer. It waits on the owner re-typing Q18 and Q21 (Q46), the owner sending the L1–L3 brief to Thai counsel (Q30, LQ-16, GVL3-Q2), the pre-publication checks (Q44, Q45) and the owner's approval.
 
 ## Blocked
 
@@ -47,7 +50,7 @@ Updated: 2026-10-18. Current task: none in flight. The AMI office merged as PR #
 ## Next
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
-2. `W-20261016-01`: the owner sends L1–L2 to Thai counsel now; after Q18 and Q43, a short tag-and-wording round and the L3 set; then a tag-free copy checked word for word against the reviewed draft (Q44) goes to the owner for approval.
+2. `W-20261016-01`: the owner confirms Q18 and Q21 (Q46) and sends the L1–L3 brief to Thai counsel; counsel's answers go back through the route; then PUBLISH-GATE compares the tag-free copy (Q44), the web person tests the button, and the owner approves.
 3. Continue ARCH-002 → ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
