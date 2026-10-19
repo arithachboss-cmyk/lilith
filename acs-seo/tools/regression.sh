@@ -35,6 +35,7 @@ chk "node claim-scan.mjs ../packages/about-acs/draft-v1-publishable.md" 0 "the p
 chk "node claim-scan.mjs ../packages/about-acs"                       1 "directory scan skips governance files but still finds the draft"
 chk "node claim-scan.mjs ../packages/about-acs/publish"               0 "the publish-ready HTML is clean"
 chk "node claim-scan.mjs fixtures/date-not-a-price.md"                0 "an ISO date is not read as a price range"
+chk "node claim-scan.mjs fixtures/comment-warning.html"               0 "an HTML comment warning about a claim is not itself a claim"
 
 echo
 echo "claim-scan --fix"
@@ -53,6 +54,7 @@ echo
 echo "evidence-check"
 chk "node evidence-check.mjs fixtures/pkg-bad"                            1 "incomplete evidence is rejected"
 chk "node evidence-check.mjs fixtures/pkg-good"                           0 "complete evidence passes"
+chk "node evidence-check.mjs ../packages/about-acs/publish"              0 "the about-ACS evidence records are complete"
 chk "node evidence-check.mjs fixtures/pkg-price-stale"                    1 "stale price is rejected"
 chk "node evidence-check.mjs fixtures/pkg-price-good --as-of 2026-09-22"  0 "price valid on its effective date"
 chk "node evidence-check.mjs fixtures/pkg-price-good --as-of 2027-01-15"  1 "same price rejected after expiry"

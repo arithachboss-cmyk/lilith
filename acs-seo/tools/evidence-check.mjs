@@ -22,6 +22,8 @@ import { join, basename } from "node:path";
 import { parseArgs } from "./argv.mjs";
 
 const REQUIRED_SOURCE = ["document_uri", "revision_or_date", "date_checked", "checked_by"];
+/** Rows that describe a product. Only these need a product identity and measured conditions. */
+const SPEC_ROWS_OUTER = new Set(["CR-01", "CR-07"]);
 const NEEDS_CONDITIONS = /\d/; // a quoted figure must carry its measured conditions
 
 const { values, positional } = parseArgs(process.argv.slice(2), ["as-of"]);
@@ -122,15 +124,21 @@ function checkEvidence(file) {
   for (const f of REQUIRED_SOURCE) {
     if (isBlank(rec.source?.[f])) problems.push(`${file}: source.${f} is empty`);
   }
-  if (isBlank(rec.product?.vendor) || isBlank(rec.product?.part_number)) {
+  // A product identity is only meaningful for a claim about a product.
+  if (SPEC_ROWS_OUTER.has(rec.claim_id) && (isBlank(rec.product?.vendor) || isBlank(rec.product?.part_number))) {
     problems.push(`${file}: the product this claim is about is not identified (vendor + part_number)`);
   }
   if (isBlank(rec.what_the_source_actually_says)) {
     problems.push(`${file}: "what_the_source_actually_says" is empty — the claim cannot be checked against the source`);
   }
-  const quotesFigure = NEEDS_CONDITIONS.test(String(rec.what_the_source_actually_says ?? ""))
+  // `a && b || c` groups as `(a && b) || c`, so the guard has to wrap the whole
+  // disjunction, not just its first term.
+  const conditionsApply = SPEC_ROWS_OUTER.has(rec.claim_id);
+  const quotesFigure = conditionsApply && (
+    NEEDS_CONDITIONS.test(String(rec.what_the_source_actually_says ?? ""))
     || NEEDS_CONDITIONS.test(String(rec.approved_wording_th ?? ""))
-    || NEEDS_CONDITIONS.test(String(rec.approved_wording_en ?? ""));
+    || NEEDS_CONDITIONS.test(String(rec.approved_wording_en ?? ""))
+  );
   if (quotesFigure) {
     const cond = rec.measured_conditions ?? {};
     const stated = ["temperature", "exposure", "substrate", "duration", "test_method"].filter((k) => !isBlank(cond[k]));

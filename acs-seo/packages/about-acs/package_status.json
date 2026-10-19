@@ -22,26 +22,28 @@
         "CR-10"
       ],
       "note": "Cannot publish until the rows close."
+    },
+    "evidenced": {
+      "file": "draft-v3-evidenced.md",
+      "note": "v1 plus the two claims that now have evidence. Supersedes v1 as the publish target.",
+      "evidence": [
+        "publish/claim-evidence-cr10.json",
+        "publish/claim-evidence-cr06.json"
+      ]
     }
   },
   "open_claims": [
-    "CR-04",
-    "CR-06",
-    "CR-08",
-    "CR-10"
+    "CR-08"
   ],
   "closure_owner": {
-    "CR-10": "ACS — company registration or founding-year document",
-    "CR-06": "Honeywell — written authorisation, not ACS",
-    "CR-08": "The named customer — their consent, not ACS's approval",
-    "CR-04": "nothing closes it; the superlative is removed"
+    "CR-08": "The named customer — their consent, not ACS's approval. Still open."
   },
   "rendering_gate": {
     "cleared": false,
     "owner": "Manus"
   },
   "publish_approved": true,
-  "last_updated": "2026-09-23",
+  "last_updated": "2026-10-19",
   "evidence_requests": [
     {
       "sent_on": "2026-09-23",
@@ -73,13 +75,14 @@
         "SRC-07 stock and lead time",
         "SRC-08 support coverage"
       ],
-      "response_received": false,
-      "note": "The email states that draft v1 is publishable without any of these, so the request does not block the page."
+      "response_received": true,
+      "note": "The email states that draft v1 is publishable without any of these, so the request does not block the page.",
+      "response_note": "Not answered directly. The evidence was found in the same mailbox instead: a 27 Sep CEO email stating the founding year, and a 28 Sep reply from the vendor's partner team confirming the partner agreement."
     }
   ],
   "approved_by": "ACS Owner",
   "approved_on": "2026-09-23",
-  "approved_draft": "draft-v1-publishable.md",
+  "approved_draft": "draft-v3-evidenced.md",
   "publish": {
     "target_url": "https://www.asiancoding.com/why-acs",
     "url_action": "ENRICH",
@@ -102,6 +105,22 @@
       "limitation": "get_project does not expose custom domains at all — only preview_url and editor_url. A project serving asiancoding.com on a custom domain would therefore NOT be identifiable from this API by name. Absence here is not proof it is not on Lovable; it is proof it is not on THIS Lovable account under a recognisable name.",
       "consistent_with_lovable": "The live site is client-side rendered and serves only <title> to a non-JS crawler, which is what a Vite SPA does. The platform claim is plausible.",
       "unblocks_if": "The Owner supplies the Lovable project id that carries the asiancoding.com custom domain. Publishing is then a send_message to that project's agent."
+    }
+  },
+  "closed_claims": {
+    "CR-10": {
+      "closed_on": "2026-10-19",
+      "evidence": "publish/claim-evidence-cr10.json",
+      "correction": "Founded 1994, so 32 years as of 2026 — the requested '30 ปี' understated it. Publishes the founding year, not a running total, so it does not go stale."
+    },
+    "CR-06": {
+      "closed_on": "2026-10-19",
+      "evidence": "publish/claim-evidence-cr06.json",
+      "correction": "Not 'Honeywell partner'. Honeywell PSS was acquired by Brady; the programme is Brady IPS. ACS is not in the separate Brady IDS programme."
+    },
+    "CR-04": {
+      "closed_on": "2026-10-19",
+      "how": "the superlative was removed, which was the only way to close it"
     }
   }
 }

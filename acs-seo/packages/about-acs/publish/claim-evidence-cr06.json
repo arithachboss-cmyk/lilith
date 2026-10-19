@@ -1,0 +1,26 @@
+{
+  "claim_id": "CR-06",
+  "package_queue_id": "about-acs",
+  "sentence_verbatim": "ACS เป็นพาร์ทเนอร์ภายใต้โปรแกรม Brady IPS (เดิมคือ Honeywell PSS) โดยข้อตกลงพาร์ทเนอร์ปัจจุบันยังมีผลอยู่",
+  "source": {
+    "document_title": "RE: [External] Asian Coding Systems (Thailand): sales plan for Brady IPS product lines — reply from Honeywell PSS Partners",
+    "document_uri": "gmail:thread/1a0e06eea2c39ae7#msg/1a0e6b15fbe2b3df",
+    "revision_or_date": "2026-09-28",
+    "issued_by": "Svetlana, PSS Partners, PSSPartners@honeywell.com",
+    "date_checked": "2026-10-19",
+    "checked_by": "ACS Owner"
+  },
+  "what_the_source_actually_says": "\"Your current partner program status provides you access to all Brady IPS offerings (Honeywell AIDC/Honeywell PSS).\" and \"At this time, your existing partner agreement for Brady IPS (formerly known as Honeywell PSS) remains valid, the pricing and support terms continue unchanged and no new agreement or registration is required.\"",
+  "what_it_does_NOT_license": [
+    "'พาร์ทเนอร์ Honeywell' as a general claim. Honeywell PSS was acquired by Brady; the programme is now Brady IPS. Naming Honeywell alone is now inaccurate.",
+    "Brady core products. The same email states ACS must request to join the separate Brady IDS programme to access those — ACS is not in it yet.",
+    "Any product line not covered by Brady IPS."
+  ],
+  "approved_wording_th": "ACS เป็นพาร์ทเนอร์ภายใต้โปรแกรม Brady IPS (เดิมคือ Honeywell PSS) ข้อตกลงพาร์ทเนอร์ปัจจุบันยังมีผล (ยืนยันโดย Brady IPS Partner Team, 28 ก.ย. 2569)",
+  "approved_wording_en": "ACS is a partner under the Brady IPS programme (formerly Honeywell PSS); the existing partner agreement remains valid (confirmed by the Brady IPS partner team, 28 Sep 2026).",
+  "expiry_note": "The source says 'At this time'. Re-confirm before any renewal cycle; a partner status is not permanent.",
+  "verdict": "CLEARED",
+  "strength": "Written confirmation from the vendor's own partner team — exactly the document CR-06 asks for.",
+  "reviewer": "ACS Owner",
+  "reviewed_on": "2026-10-19"
+}

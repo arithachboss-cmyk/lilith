@@ -9,12 +9,39 @@ below close.
 
 | # | Sentence | Row | Class | What closes it | Who can close it |
 |---|---|---|---|---|---|
-| 1 | "…มา 30 ปี" | CR-10 | OWNER_REQUIRED | Company registration or an ACS document stating the founding year | **ACS** — likely a same-day fix |
-| 2 | "เป็นพาร์ทเนอร์ของ Honeywell" | CR-06 | EVIDENCE_REQUIRED | A written authorisation from Honeywell, with dates | **Honeywell**, not ACS |
-| 3 | "ทำงานร่วมกับ … Honeywell" | CR-06 | EVIDENCE_REQUIRED | Same. Softening "partner" to "work with" does not change what a reader infers | **Honeywell** |
+| 1 | "…มา 30 ปี" | CR-10 | **CLOSED 19 Oct** | CEO email to the vendor, 27 Sep 2026, stating the company was founded in 1994 | **Corrected: 32 years, not 30.** Publishes the founding year instead of a running total |
+| 2 | "เป็นพาร์ทเนอร์ของ Honeywell" | CR-06 | **CLOSED 19 Oct, reworded** | Written reply from the vendor's partner team, 28 Sep 2026 | **Corrected: Brady IPS, not Honeywell.** See note below |
+| 3 | "ทำงานร่วมกับ … Honeywell" | CR-06 | **CLOSED 19 Oct, reworded** | Same source | Same correction |
 | 4 | "ดูแลระบบให้กับ 7-Eleven" | CR-08 | OWNER_REQUIRED | Written consent from the customer to be named publicly | **The customer** — ACS approving it does not clear it |
 | 5 | "ร้านสะดวกซื้อรายใหญ่ที่สุดในประเทศ" | CR-04 | **BLOCKED** | Nothing. It is a superlative, and it identifies the customer without naming them | — |
 | 6 | "ซื่อสัตย์", "มั่นคง" | CR-14 | SAFE_WORDING | — a stated commitment, not a checkable fact | publishable |
+
+## What the evidence changed
+
+Both closures are **corrections**, not confirmations — the requested copy was wrong in each
+case, and in ACS's favour both times.
+
+**"30 ปี" understated it.** The CEO's own email to the vendor, 27 Sep 2026, states the
+company was founded in 1994. That is 32 years as of 2026. The page now publishes the
+founding year rather than a running total, so it does not quietly go stale every January.
+
+**"พาร์ทเนอร์ Honeywell" is out of date.** Honeywell PSS was acquired by Brady. The vendor's
+partner team wrote on 28 Sep 2026: *"your existing partner agreement for Brady IPS (formerly
+known as Honeywell PSS) remains valid, the pricing and support terms continue unchanged and
+no new agreement or registration is required."* So the accurate claim is **a partner under
+the Brady IPS programme**. The same email is explicit that Brady **core** products sit in a
+separate **Brady IDS** programme that ACS must still request to join — so "Brady partner"
+unqualified would overclaim.
+
+That source also carries an expiry signal: it says *"At this time"*. A partner status is not
+permanent and should be re-confirmed before any renewal cycle.
+
+## CR-08 is still open, and the same mailbox shows why that matters
+
+The CEO's 27 Sep email says ACS has supplied scanners "deployed at 7-Eleven Counter Service
+stores nationwide". That makes the relationship real — and it still does not close CR-08.
+ACS asserting a deployment to a vendor is not the customer consenting to be named on a
+public page. The distinction the register drew holds: **this one is not ACS's to grant.**
 
 ## Three notes worth keeping
 

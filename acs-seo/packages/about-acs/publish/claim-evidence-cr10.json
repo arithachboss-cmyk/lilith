@@ -1,0 +1,21 @@
+{
+  "claim_id": "CR-10",
+  "package_queue_id": "about-acs",
+  "sentence_verbatim": "Asian Coding Systems ก่อตั้งเมื่อปี 1994",
+  "source": {
+    "document_title": "Asian Coding Systems (Thailand): sales plan for Brady IPS product lines — email from the ACS CEO to Honeywell PSS Partners",
+    "document_uri": "gmail:thread/1a0e06eea2c39ae7#msg/1a0e06eea2c39ae7",
+    "revision_or_date": "2026-09-27",
+    "issued_by": "Arithach Chartariyapong, CEO, Asian Coding Systems",
+    "date_checked": "2026-10-19",
+    "checked_by": "ACS Owner"
+  },
+  "what_the_source_actually_says": "\"...CEO of Asian Coding Systems (ACS), an Auto-ID solutions company in Thailand founded in 1994.\" Stated by the CEO in a formal email to a vendor partner team, with six ACS colleagues in copy.",
+  "approved_wording_th": "Asian Coding Systems ก่อตั้งเมื่อปี 1994",
+  "approved_wording_en": "Asian Coding Systems was founded in 1994",
+  "correction": "The requested copy said '30 ปี'. Founded 1994 makes it 32 years as of 2026 — the original claim understated it. Publish the founding year rather than a running total, so the page does not go stale every January.",
+  "verdict": "CLEARED",
+  "strength": "Owner attestation in a dated external document. Stronger than a verbal claim; the company registration certificate would make it documentary.",
+  "reviewer": "ACS Owner",
+  "reviewed_on": "2026-10-19"
+}

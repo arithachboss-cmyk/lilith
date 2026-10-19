@@ -108,7 +108,7 @@ const RULES = [
     id: "company-tenure",
     cr: "CR-10", cls: "OWNER_REQUIRED", redact: false,
     why: "อายุบริษัท/ประสบการณ์เป็นตัวเลข ต้องยืนยันด้วยหนังสือรับรองบริษัทหรือเอกสาร ACS",
-    re: /(?:\d{1,3}\s*ปี(?:\s*(?:ใน|ที่|ของ)?\s*(?:วงการ|ประสบการณ์|ธุรกิจ|ตลาด|อุตสาหกรรม|ที่ผ่านมา|แล้ว))?|ก่อตั้ง(?:เมื่อ|ปี)?\s*(?:พ\.ศ\.|ค\.ศ\.)?\s*\d{4}|since\s+(?:19|20)\d{2}|\d{1,3}\+?\s*years?\s+(?:of\s+)?(?:experience|in\s+business)?)/gi,
+    re: /(?:\d{1,3}\s*ปี(?:\s*(?:ใน|ที่|ของ)?\s*(?:วงการ|ประสบการณ์|ธุรกิจ|ตลาด|อุตสาหกรรม|ที่ผ่านมา|แล้ว))?|ก่อตั้ง(?:เมื่อ)?\s*(?:ปี)?\s*(?:พ\.ศ\.|ค\.ศ\.)?\s*\d{4}|since\s+(?:19|20)\d{2}|\d{1,3}\+?\s*years?\s+(?:of\s+)?(?:experience|in\s+business)?)/gi,
   },
   {
     id: "availability",
@@ -208,8 +208,17 @@ function collect(target, out = [], { explicit = false, all = false } = {}) {
   return out;
 }
 
+/**
+ * HTML comments are developer notes, not published copy, and the notes on a page often
+ * quote the very wording they warn against. Blank their contents before scanning,
+ * preserving newlines so line and column numbers stay accurate.
+ */
+function stripHtmlComments(text) {
+  return text.replace(/<!--[\s\S]*?-->/g, (m) => m.replace(/[^\n]/g, " "));
+}
+
 function scanText(text) {
-  const lines = text.split("\n");
+  const lines = stripHtmlComments(text).split("\n");
   const findings = [];
   lines.forEach((line, i) => {
     // A line already redacted is not re-reported.
@@ -248,7 +257,10 @@ function scanText(text) {
 
 function redact(text) {
   let changed = 0;
-  const out = text.split("\n").map((line) => {
+  // Redaction edits the real file, so comments are left exactly as they are.
+  const commentFree = stripHtmlComments(text).split("\n");
+  const out = text.split("\n").map((line, i) => {
+    if (commentFree[i] !== undefined && commentFree[i].trim() === "" && line.trim() !== "") return line;
     if (line.includes("⟦ลบตัวเลข")) return line;
     let next = line;
     for (const rule of RULES) {
