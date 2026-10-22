@@ -1,5 +1,9 @@
 # ACS SEO — Source Pack Index
 
+> ⚠️ **Superseded in part by `05_SITE_REALITY_CHECK.md` (22 Oct 2026).** The 82-URL
+> inventory below comes from a sitemap that advertises pages which now return 404, and the
+> rendering-gate finding has been withdrawn — the site is server-rendered.
+
 **Project:** ACS SEO Package Factory — Governance Scope
 **Compiled:** 20 September 2026
 **Status:** PARTIAL — the live site inventory is real; five of six source streams are still missing.

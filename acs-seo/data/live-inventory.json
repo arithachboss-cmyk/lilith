@@ -709,5 +709,6 @@
    "type": "Article",
    "flags": []
   }
- ]
+ ],
+ "_WARNING": "UNRELIABLE as of 22 Oct 2026 — derived from a sitemap whose URLs include 404s. See 05_SITE_REALITY_CHECK.md. Rebuild by crawling from the homepage."
 }

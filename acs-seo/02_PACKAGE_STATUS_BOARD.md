@@ -1,5 +1,9 @@
 # ACS SEO — Package Status Board
 
+> ⚠️ **Superseded in part by `05_SITE_REALITY_CHECK.md` (22 Oct 2026).** The 82-URL
+> inventory below comes from a sitemap that advertises pages which now return 404, and the
+> rendering-gate finding has been withdrawn — the site is server-rendered.
+
 **As of:** 23 September 2026
 **Global state:** all 19 packages are `DRAFT_PENDING_REVIEW`. **Nothing is published. Nothing is approved to publish.**
 

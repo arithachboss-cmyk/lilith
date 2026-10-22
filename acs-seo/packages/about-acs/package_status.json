@@ -43,7 +43,7 @@
     "owner": "Manus"
   },
   "publish_approved": true,
-  "last_updated": "2026-10-19",
+  "last_updated": "2026-10-22",
   "evidence_requests": [
     {
       "sent_on": "2026-09-23",
@@ -84,7 +84,7 @@
   "approved_on": "2026-09-23",
   "approved_draft": "draft-v3-evidenced.md",
   "publish": {
-    "target_url": "https://www.asiancoding.com/why-acs",
+    "target_url": "UNRESOLVED",
     "url_action": "ENRICH",
     "url_action_reason": "C-9 canonical owner is /why-acs. A second company page would repeat the cannibalisation pattern C-1 was just decided to fix, so this replaces that page's copy rather than adding /about-acs.",
     "cannibalisation_gate": "PROCEED_WITH_CANONICAL (C-9)",
@@ -104,8 +104,17 @@
       "detail": "Both workspaces listed in full. No project is asiancoding.com. The only ACS project is 'ACS Prototype' (b1d14add), the five-page industrial-ID prototype created 7 Sep, which is unpublished and is not the corporate site. 'Ajungma Retail OS' is by ACS but its file tree is a POS application — no /brady/, /knowledge/ or barcode-scanner routes.",
       "limitation": "get_project does not expose custom domains at all — only preview_url and editor_url. A project serving asiancoding.com on a custom domain would therefore NOT be identifiable from this API by name. Absence here is not proof it is not on Lovable; it is proof it is not on THIS Lovable account under a recognisable name.",
       "consistent_with_lovable": "The live site is client-side rendered and serves only <title> to a non-JS crawler, which is what a Vite SPA does. The platform claim is plausible.",
-      "unblocks_if": "The Owner supplies the Lovable project id that carries the asiancoding.com custom domain. Publishing is then a send_message to that project's agent."
-    }
+      "unblocks_if": "The Owner supplies the Lovable project id that carries the asiancoding.com custom domain. Publishing is then a send_message to that project's agent.",
+      "owner_supplied_id": {
+        "id": "8cf2dcf0-484f-4bb4-980e-02519f32f9b8",
+        "checked_on": "2026-10-22",
+        "is_the_website": false,
+        "what_it_actually_is": "ACS ERP Command Center — internal staging prototype. Twelve ERP routes, components under src/components/erp/, src/lib/mock-data.ts, page title 'Dashboard — ACS ERP Command Center (Staging)'. No marketing routes.",
+        "action_taken": "none — verified before acting. An SSR migration here would have rewritten an unrelated internal prototype.",
+        "note": "It is already on TanStack Start with server-rendered metadata, so it has no SSR problem either."
+      }
+    },
+    "target_url_note": "/why-acs returns 404 as of 22 Oct 2026 — the sitemap it came from is stale. The copy and its evidence stand; only the destination needs re-choosing. See ../../05_SITE_REALITY_CHECK.md."
   },
   "closed_claims": {
     "CR-10": {
