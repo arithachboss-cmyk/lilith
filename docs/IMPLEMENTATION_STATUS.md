@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-10-17. Current task: round 5 of the content route (manual chat run; nothing in the repository is in flight). The AMI office merged as PR #9 and the prompt fixes from its first live runs as PR #11. The content route has run four rounds in live chats, and the owner's answers after round 4 are being applied in round 5; ADR-0014 still waits on owner review.
+Updated: 2026-10-22. Current task: PR #15 (office facts OF-07 and OF-08, and this record) waits on the owner's merge. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -24,14 +24,25 @@ Updated: 2026-10-17. Current task: round 5 of the content route (manual chat run
   - Round 4 (6 chats, about 47 minutes) used those answers. Promise-like wording fell from 3 failures to 0. FACT-CHECK's failed or not-yet-passed items fell from 9 to 2 failures plus 2 parts left blank pending answers (Q11, Q17); round 4 grades general advice separately, so the scales are not identical. Both remaining failures are word choices that differ from the source and wait on the owner (Q3, Q32). PUBLISH-GATE: not ready; 0 approvals; nothing published or sent.
   - After round 4 the owner answered seven more questions, confirmed the LINE OA account is the company's, and approved the other two prompt changes:
     - one four-level verdict scale for every check; when steps disagree, both verdicts are recorded and the person decides;
-    - owner-confirmed standing facts and preferred terms in `hr-screens/office-facts.js` (OF-01..OF-06), attached to every prompt. Each fact carries the owner's answer and date, and the checker pins the expected ids.
-    - With all three rules: 5,691 checks pass; 23 of 23 mutations are caught; the office page's copied prompt matches the generated file.
+    - owner-confirmed standing facts and preferred terms in `hr-screens/office-facts.js` (OF-01..OF-06 at the time; OF-07..OF-08 added after round 5), attached to every prompt. Each fact carries the owner's answer and date, and the checker pins the expected ids.
+    - With all three rules: 5,691 checks pass; 23 of 23 mutations are caught; the office page's copied prompt matches the generated file. Merged as `4cd379f` (PR #14).
+  - Round 5 (6 chats, about 53 minutes) ran on those prompts. **No step recorded a failure.** Office facts closed the wording questions, and where two steps disagreed, both verdicts were recorded for the person to decide. PUBLISH-GATE: not ready, with 9 items waiting on owner answers; 0 approvals; nothing published or sent.
+  - A parallel legal route (LEGAL-QUEUE → GOVERNANCE, 2 chats) prepared the L1–L2 questions for Thai counsel, quoting the draft's wording verbatim. The relay checked that the quoted wording matches the round-5 draft. Nothing has been sent to counsel.
+  - Lessons: a standing fact applied everywhere can still shift meaning in one place. Changing every "ลูกค้า" to "คุณ" turned "only clients ready to decide" into "when you are ready", which the checks caught (Q36). And a criterion that lives only in one round's HANDOFF is lost to later steps (Q16), so rules that apply to every job belong in office facts.
+  - After round 5 the owner accepted the eleven recommended options with "ใช้ตามที่แนะนำ" and answered Q41 directly. Two of the answers apply to every job and became office facts: OF-07, FACT-CHECK's criterion for general advice, and OF-08, the house tone. The checker now runs 5,901 checks; 23 of 23 mutations are still caught (commit `b8f8e6a`, not yet in a PR).
+  - Round 6 (6 chats, about 51 minutes) applied all twelve answers. **No step recorded a failure for the second round running.** The advice sections pass against OF-07 and the tone passes against OF-08. The relay confirmed by script that the draft changed only where the answers said. Still open: Q18 and Q43 (wording), Q21, Q22 and Q44 (pre-publication steps), and 12 items that wait on Thai counsel. PUBLISH-GATE: not ready; 0 approvals; nothing published or sent.
+  - The L1–L2 questions for counsel now include section 3 (Q40). The relay checked that all 12 quoted lines match the round-6 draft. L3 (title, service section, call to action) waits on Q18 and Q43 so it can go as one set.
+  - Round 7 (6 chats, about 42 minutes) changed only tags and notes after the owner's next answers; the 38 reader-facing lines are identical to round 6, checked by script. **No failures for the third round running, and no wording waits on an answer.** In parallel, LEGAL-QUEUE and GOVERNANCE queued the L3 questions (LQ-08..LQ-14); GOVERNANCE sent back three explanatory phrases that went beyond the sources and proposed fixes. The relay merged L1–L3 into one counsel brief and checked its 23 quoted lines against the round-7 draft.
+  - Before publication a script strips the trace tags (Q44). It counts nested brackets and refuses output that still holds a bracket, "@" or a tag code; PUBLISH-GATE set five output criteria for the stripped copy, and the relay's dry run meets them. PUBLISH-GATE's own comparison comes after counsel answers.
+  - Lesson: GOVERNANCE noticed that the owner's last reply matched the example line in the relay's question character for character, including two answers only the owner can give (Q18, Q21), so it asked the owner to type them again (Q46). It proposed that examples never pre-fill owner-only answers and that questions to the owner be in Thai (GP7, Q47).
+  - On 2026-10-22 the owner answered by picking options in a question form, and the run record keeps each question and option verbatim. Q18 and Q21, shown with no recommendation, came back as before, so the draft does not change (Q46 closed). The owner adopted GP7 for later questions (Q47 ก); the relay applies it, and the prompts are unchanged. The owner also chose a second comparison against the live page text before publishing (Q45 ข).
+  - The owner confirmed the L3 scope and GOVERNANCE's three fixes, and asked counsel to read the meta description and first paragraph too (LQ-16 ก). LEGAL-QUEUE and GOVERNANCE (2 chats) wrote that question as LQ-18; the owner kept it to viewing in person only, against both agents' recommendation (LQ-20 ข). The counsel brief now has eight topics, and the relay checked its 25 quoted lines against the round-7 draft. The owner has no Thai lawyer yet (Q30), so nothing can be sent.
   - Run transcripts are kept outside this public repository: they quote the owner's internal sales handbook, and whether that may be published is itself an open owner question (Q10).
 
 ## In Progress
 
-- Nothing in flight. ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
-- `W-20261016-01` round 5 is applying the owner's latest answers (Q3, Q11, Q17, Q22, Q32, Q33, Q34). Before anything is published it still needs Thai counsel on L1–L3 (Q30) and the owner's approval of the final draft.
+- PR #15 is open with `foundation` green and waits on the owner's merge. ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
+- `W-20261016-01` is paused at HR-01 after round 7 and the LQ-18 queue, with no failed checks and no wording waiting on an answer. It waits on the owner finding a Thai lawyer and sending the brief (Q30), counsel's answers, the pre-publication checks (Q44, Q45) and the owner's approval.
 
 ## Blocked
 
@@ -41,7 +52,7 @@ Updated: 2026-10-17. Current task: round 5 of the content route (manual chat run
 ## Next
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
-2. `W-20261016-01`: finish round 5, then send L1–L3 to Thai counsel and bring the final draft to the owner for approval. All three prompt changes proposed after round 3 are now applied: no stand-in wording, one verdict scale, and standing office facts.
+2. `W-20261016-01`: the owner finds a Thai lawyer and sends the eight-topic brief (Q30); counsel's answers go back through the route; then PUBLISH-GATE compares the tag-free copy (Q44) and the live page text (Q45), the web person tests the button, and the owner approves.
 3. Continue ARCH-002 → ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
@@ -49,9 +60,9 @@ Updated: 2026-10-17. Current task: round 5 of the content route (manual chat run
 
 - R-AMI-01: internal system names (THE KEEPER, MATCHMAKER-1, AMI Core, GROK-xx) appear in user-facing copy. Recorded, not blocking; owner may still rule on it.
 - R-AMI-02: D-AMI-01..04 were recorded under the owner's instruction to proceed, not as four separate owner answers. Three of the four are marked reversible; the one that is not (the Keeper's position) follows the structure already in `docs/03`. Both risks are recorded in `hr-screens/codex/contract/decisions.json`.
-- R-AMI-03: the four shared-pool team stewards and the placement of marketing agents under the Matchmaker are interpretations (ADR-0014), not owner answers. So is applying the article-scoped answers behind OF-02..OF-05 to every job, and the "record both verdicts" tie rule. English agent titles, duties and `office.*` UI strings are drafts pending review.
+- R-AMI-03: the four shared-pool team stewards and the placement of marketing agents under the Matchmaker are interpretations (ADR-0014), not owner answers. So is applying the article-scoped answers behind OF-02..OF-05 to every job, and the "record both verdicts" tie rule. The owner's 2026-10-18 reply "ใช้ตามที่แนะนำ" named no letters; matching it to options, and checking advice across the whole article under OF-07, are the relay's readings, recorded with both messages verbatim in the run record. English agent titles, duties and `office.*` UI strings are drafts pending review.
 - R-AMI-04: in manual chat mode, client data typed into third-party chats sits outside the Keeper and RLS. Prompts and the index forbid contact details and ID numbers, but enforcement is the person's discipline, not code.
-- R-AMI-05: manual chat mode is slow to relay. One content round is six chats, about 44 minutes, and HANDOFF blocks of up to 24k characters, which is heavy to copy by hand on a phone. A note a person adds is only traceable when it is the owner's words, pasted verbatim into `sources:`.
+- R-AMI-05: manual chat mode is slow to relay. One content round is six chats, 42–53 minutes, and HANDOFF blocks now reach 30k characters, which is heavy to copy by hand on a phone. A note a person adds is only traceable when it is the owner's words, pasted verbatim into `sources:`.
 
 ## Deferred owner decisions
 
