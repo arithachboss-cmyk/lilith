@@ -133,11 +133,28 @@ specific price without an ACS price list carrying a date.
 
 ## 6. Cannibalisation
 
-Re-point `tools/cannibalisation-check.mjs` at `../../data/real-inventory.json` before
-running it. `data/clusters.json` is retired and every cluster in it 404s.
+**Done 2026-10-23.** `tools/cannibalisation-check.mjs` now reads
+`../../data/real-inventory.json` plus the 14 planned `/products/<id>` URLs, and
+`../../data/clusters.json` has been rebuilt as R-1 … R-7 from the real site. The
+sitemap-era clusters are in `../../data/retired/`.
 
-New product pages create a genuine cannibalisation risk the old clusters never
-captured: `/products/1950g`, `/products/1960g`, `/products/ds2208` and
-`/products/ds3600` are all handheld scanners. Build the cluster map from the real URL
-set *as the pages are created*, not afterwards — that is the mistake this whole
-reconciliation exists to correct.
+The cluster map was built *before* the pages exist, which is the point: the collisions
+are visible now, while they still cost nothing to avoid.
+
+| Cluster | Collision once built | Blocked on |
+|---|---|---|
+| R-3 ribbons | **Highest.** Three entries differing only in ribbon type, sharing one `url` today. | D-10 |
+| R-1 scanners | Four pages; `1950g` and `1960g` are both Honeywell Xenon handhelds. | D-09 |
+| R-2 printers | Four pages; `te200` and `zd421` are both desktop printers. | D-09 |
+| R-7 company | No company page exists at all; `/why-acs` 404s. | D-11 |
+
+All seven owners are `null`, so the gate currently HOLDs every head-term package and
+names the decision that is blocking it. That is correct: the product-URL decision settled
+the product level, not which page owns a generic head term. Three Owner decisions are
+pending, recorded in `decisions_needed` in `clusters.json`:
+
+- **D-09** — do category pages get their own URLs, or is `/products.html?category=X` the
+  canonical home for each category head term?
+- **D-10** — three ribbon pages with one owning the head term, or one page covering the
+  choice?
+- **D-11** — where does the approved about-ACS copy live now that `/why-acs` 404s?

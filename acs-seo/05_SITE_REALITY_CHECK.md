@@ -2,7 +2,8 @@
 
 **This document corrects earlier findings in this pack. Read it before using
 `00_SOURCE_PACK_INDEX.md`, `02_PACKAGE_STATUS_BOARD.md`, `data/live-inventory.json`
-or `data/clusters.json`.**
+or `data/clusters.json`.** Those two data files now live under `data/retired/`; see
+`06_CRAWL_RECONCILIATION.md`, which supersedes this document on every URL fact.
 
 ---
 

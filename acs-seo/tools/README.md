@@ -96,7 +96,9 @@ to be thrown away.
 | `REVIEW` | 0 | No cluster, but live URLs overlap the intent |
 | `HOLD` | 1 | The URL already exists, or the cluster has no canonical owner yet |
 
-Data lives in `../data/clusters.json` and `../data/live-inventory.json`. The inventory is
+Data lives in `../data/clusters.json` (rebuilt 2026-10-23 as R-1 … R-7) and
+`../data/real-inventory.json`. The sitemap-era files are in `../data/retired/` and must not
+be fed to any tool: 81 of their 82 paths return 404. The inventory is
 generated from `00_SOURCE_PACK_INDEX.md` §S-2 rather than maintained separately, so the two
 cannot drift. **Setting `canonical_owner` on a cluster is an Owner decision**, not a code
 change — every cluster is null today, which is why every in-cluster intent currently holds.

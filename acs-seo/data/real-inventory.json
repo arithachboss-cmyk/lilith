@@ -18,7 +18,10 @@
   "live": [
     {
       "page": "Home",
-      "addresses": ["/", "/index.html", "www:/", "www:/index.html"],
+      "addresses": [
+        "/",
+        "/index.html"
+      ],
       "status": 200,
       "render": "Server-rendered static HTML. Full marketing copy present in source.",
       "title": "ACS | Barcode, RFID & Identification Solutions",
@@ -27,7 +30,10 @@
     },
     {
       "page": "Product catalogue",
-      "addresses": ["/products.html", "/products", "www:/products.html", "www:/products"],
+      "addresses": [
+        "/products.html",
+        "/products"
+      ],
       "status": 200,
       "render": "MIXED. Page chrome, headings, breadcrumb and body copy are server-rendered. The product grid is <div id=\"product-grid\"></div>, empty in source, populated client-side from catalog-data.js.",
       "title": "รายการสินค้า ACS | Barcode, RFID, Printers & Supplies",
@@ -36,7 +42,10 @@
     },
     {
       "page": "Cart / request submission",
-      "addresses": ["/cart.html", "/cart", "www:/cart.html", "www:/cart"],
+      "addresses": [
+        "/cart.html",
+        "/cart"
+      ],
       "status": 200,
       "render": "Server-rendered. Cart contents load client-side.",
       "title": "ตะกร้าและส่งรายการ | ACS",
@@ -45,7 +54,10 @@
     },
     {
       "page": "Commerce Lab (Shopify comparison sandbox)",
-      "addresses": ["/commerce-lab.html", "/commerce-lab", "www:/commerce-lab.html", "www:/commerce-lab"],
+      "addresses": [
+        "/commerce-lab.html",
+        "/commerce-lab"
+      ],
       "status": 200,
       "render": "Server-rendered shell, client-side app.",
       "title": "ACS Commerce Lab | จำลองและเปรียบเทียบ Shopify",
@@ -54,7 +66,10 @@
     },
     {
       "page": "Assessment (workflow-context intake)",
-      "addresses": ["/assessment", "/assessment.html", "www:/assessment", "www:/assessment.html"],
+      "addresses": [
+        "/assessment",
+        "/assessment.html"
+      ],
       "status": 200,
       "render": "Fully server-rendered, including the three-step form.",
       "title": "ส่งข้อมูลกระบวนการทำงาน | ACS",
@@ -63,7 +78,10 @@
     },
     {
       "page": "Download profile (planning overview)",
-      "addresses": ["/download-profile", "/download-profile.html", "www:/download-profile", "www:/download-profile.html"],
+      "addresses": [
+        "/download-profile",
+        "/download-profile.html"
+      ],
       "status": 200,
       "render": "Fully server-rendered.",
       "title": "เอกสารเตรียมวางแผนโซลูชัน | ACS",
@@ -142,7 +160,15 @@
     "_source": "catalog-data.js?v=5, fetched 2026-10-23",
     "categories": 6,
     "products": 14,
-    "brands": ["Honeywell", "TSC", "Zebra", "Brady", "PRINTING SUPPLIES", "RFID SOLUTIONS"],
+    "brands": [
+      "Honeywell",
+      "TSC",
+      "Zebra",
+      "Brady",
+      "PRINTING SUPPLIES",
+      "RFID SOLUTIONS"
+    ],
     "note": "Each product carries an `evidence` field with values acs_named_model, manufacturer_reference or acs_named_family. That is the site's own provenance marking and is worth reusing in the claim register rather than inventing a parallel scheme."
-  }
+  },
+  "_addresses_note": "Paths are relative to https://www.asiancoding.com, the host the apex 301s to. The apex forms are not listed separately because they redirect."
 }

@@ -76,7 +76,9 @@ Exit 1 means HOLD. Run against the 82-URL live inventory in `00_SOURCE_PACK_INDE
   **NEW** URL with a written canonical-intent statement saying what it owns and what the
   existing page keeps · **HOLD** for Owner.
 - **Every cluster is HOLD by default** until the Owner records a `canonical_owner` in
-  `data/clusters.json`. All eight are null today.
+  `data/clusters.json`. Rebuilt 2026-10-23: the clusters are now R-1 … R-7, built from the
+  real site and the 14 catalogue products, and all seven owners are null pending Owner
+  decisions D-09, D-10 and D-11 (listed in `decisions_needed` in that file).
 - For C-1 the intent map is done — `packages/queue-3/INTENT_MAP.md`. It found that only
   three of the ten URLs actually collide; the other seven carry a real differentiator in
   their own title and are legitimate modifier pages.

@@ -16,8 +16,27 @@ import { dirname, join } from "node:path";
 import { parseArgs } from "./argv.mjs";
 
 const here = dirname(fileURLToPath(import.meta.url));
-const clusters = JSON.parse(readFileSync(join(here, "../data/clusters.json"), "utf8")).clusters;
-const inventory = JSON.parse(readFileSync(join(here, "../data/live-inventory.json"), "utf8")).pages;
+const clusterFile = JSON.parse(readFileSync(join(here, "../data/clusters.json"), "utf8"));
+const clusters = clusterFile.clusters;
+const decisionsNeeded = clusterFile.decisions_needed ?? [];
+const real = JSON.parse(readFileSync(join(here, "../data/real-inventory.json"), "utf8"));
+
+/**
+ * The inventory is built from what the site actually serves, plus the product URLs the
+ * Owner has decided on but which are not built yet. The distinction matters: clashing
+ * with a live page means enrich it, clashing with a planned one means two packages are
+ * being aimed at the same future URL.
+ *
+ * It used to read live-inventory.json, 81 of whose 82 paths return 404. See
+ * 06_CRAWL_RECONCILIATION.md.
+ */
+const inventory = [
+  ...real.live.flatMap((p) => p.addresses.map((path) => ({ path, cls: "LIVE", page: p.page }))),
+  ...(real.live_but_not_public ?? []).map((p) => ({ path: p.path, cls: "NON_PUBLIC", page: p.path })),
+  ...[...new Set(clusters.flatMap((c) => c.planned_urls ?? []))].map((path) => ({
+    path, cls: "PLANNED", page: path,
+  })),
+];
 
 const { has, values, positional } = parseArgs(process.argv.slice(2), ["url"]);
 const asJson = has("json");
@@ -56,15 +75,23 @@ const exactUrlClash = proposedUrl
   : null;
 
 let verdict, reason, action;
-if (exactUrlClash) {
+if (exactUrlClash && exactUrlClash.cls === "PLANNED") {
   verdict = "HOLD";
-  reason = `The proposed URL already exists: ${exactUrlClash.path}`;
+  reason = `The proposed URL is already claimed by a planned product page: ${exactUrlClash.path}`;
+  action = "That URL is spoken for by the product-URL decision of 2026-10-23. Pick another, or fold this package into that page's content (see packages/site-fixes/PRODUCT_URL_SPEC.md).";
+} else if (exactUrlClash) {
+  verdict = "HOLD";
+  reason = `The proposed URL already exists and serves a ${exactUrlClash.cls === "NON_PUBLIC" ? "non-public" : "live"} page: ${exactUrlClash.path} (${exactUrlClash.page})`;
   action = "ENRICH the existing page, or choose a different URL.";
 } else if (clusterHits.some((h) => !h.cluster.canonical_owner)) {
   const open = clusterHits.filter((h) => !h.cluster.canonical_owner);
+  const blockers = [...new Set(open.map((h) => h.cluster.blocked_by).filter(Boolean))];
   verdict = "HOLD";
   reason = `Intent falls in ${open.map((h) => h.cluster.id).join(", ")}, and no canonical owner is recorded for ${open.length > 1 ? "those clusters" : "that cluster"}.`;
-  action = "The Owner names the canonical owner first (see packages/queue-3/INTENT_MAP.md). Do not write yet.";
+  const pending = decisionsNeeded.filter((d) => blockers.includes(d.id));
+  action = pending.length
+    ? `Blocked on Owner decision ${pending.map((d) => d.id).join(", ")}: ${pending.map((d) => d.question).join(" | ")} Do not write yet.`
+    : "The Owner names the canonical owner first. Do not write yet.";
 } else if (clusterHits.length) {
   verdict = "PROCEED_WITH_CANONICAL";
   reason = `Intent falls in ${clusterHits.map((h) => `${h.cluster.id} (owner: ${h.cluster.canonical_owner})`).join(", ")}.`;
@@ -90,11 +117,18 @@ if (asJson) {
     console.log(`\n${h.cluster.id} — ${h.cluster.label}`);
     console.log(`  matched: ${h.matched.join(", ")}`);
     console.log(`  canonical owner: ${h.cluster.canonical_owner ?? "NOT SET"}`);
+    if (h.cluster.blocked_by) console.log(`  blocked by: ${h.cluster.blocked_by}`);
     console.log(`  live URLs in this cluster (${h.cluster.urls.length}):`);
     for (const u of h.cluster.urls) console.log(`    ${u}`);
+    const planned = h.cluster.planned_urls ?? [];
+    if (planned.length) {
+      console.log(`  planned, not built (${planned.length}):`);
+      for (const u of planned) console.log(`    ${u}`);
+    }
+    if (h.cluster.risk) console.log(`  risk: ${h.cluster.risk}`);
   }
   if (urlHits.length) {
-    console.log(`\noverlapping live URLs:`);
+    console.log(`\noverlapping URLs:`);
     for (const u of urlHits.slice(0, 8)) console.log(`  ${String(u.overlap).padStart(3)}%  ${u.path}  [${u.cls}]`);
   }
 }

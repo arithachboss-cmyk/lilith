@@ -1,234 +1,97 @@
 {
- "_RETIRED": "RETIRED 2026-10-23. Every cluster owner and member returns 404, so no cannibalisation exists to resolve and decisions D-07/D-08 are moot. Do not trust a cannibalisation verdict built on this file; re-point the gate at data/real-inventory.json first. See 06_CRAWL_RECONCILIATION.md.",
- "_source": "00_SOURCE_PACK_INDEX.md §S-3. `canonical_owner` is null until the Owner decides; a null owner makes the cluster a HOLD for any new package. Setting one is an Owner decision, never a code change.",
+ "_source": "Built 2026-10-23 from the real site: the 6 live pages in real-inventory.json plus the 14 products in the live catalog-data.js. Replaces the sitemap-era clusters, now in data/retired/.",
+ "_owner_rule": "canonical_owner is null until the Owner sets it. A null owner makes the cluster a HOLD for any new package. Setting one is an Owner decision, never a code change.",
+ "_why_all_owners_are_null": "The Owner decided on 2026-10-23 that products get their own URLs. That settles the product level. It does NOT settle which page owns a generic head term like 'เครื่องสแกนบาร์โค้ด': the candidates are the catalogue /products.html, a per-category page that does not exist yet, or the filtered view /products.html?category=scanners. Until that is decided, writing a package against a head term risks building the page that then has to be thrown away — which is exactly what this gate exists to prevent.",
+ "decisions_needed": [
+  {
+   "id": "D-09",
+   "question": "Do category pages exist as their own URLs, or is the filtered catalogue (/products.html?category=X) the canonical home for each category head term?",
+   "blocks": ["R-1", "R-2", "R-3", "R-4", "R-5", "R-6"],
+   "note": "A query-parameter view is a weak canonical owner: it is one page serving six different head terms. Real category pages are stronger but are six more pages to write and evidence."
+  },
+  {
+   "id": "D-10",
+   "question": "Three ribbon products (wax, wax-resin, resin) will all target the same intent, 'ริบบอน / thermal transfer ribbon'. Do they get three pages with one owning the head term, or one page covering the choice between them?",
+   "blocks": ["R-3"],
+   "note": "This is the sharpest cannibalisation risk on the site and it does not exist yet — the pages are not built. Deciding now costs nothing; deciding after costs three pages."
+  },
+  {
+   "id": "D-11",
+   "question": "Where does the approved about-ACS copy live, now that /why-acs returns 404?",
+   "blocks": ["R-7"],
+   "note": "Content and evidence stand (CR-06, CR-10 closed). Only the target URL was wrong. The homepage is currently the only company surface."
+  }
+ ],
  "clusters": [
   {
-   "id": "C-1",
-   "label": "Barcode scanner (generic commercial)",
-   "canonical_owner": "/เครื่องสแกนบาร์โค้ด",
-   "canonical_owner_by_lang": {
-    "th": "/เครื่องสแกนบาร์โค้ด",
-    "en": "/barcode-scanners"
-   },
-   "decision": {
-    "id": "D-08",
-    "option": "B",
-    "supersedes": "D-07",
-    "summary": "Keep /barcode-scanner-thailand and re-scope it into a genuine Thailand buying page. It stops targeting the bare head term in title and H1, self-canonicals, and links up to the head-term page. No redirect.",
-    "decided_by": "ACS Owner",
-    "decided_on": "2026-09-23",
-    "record": "../packages/queue-3/INTENT_MAP.md §5",
-    "executed": false,
-    "execution_blocked_by": "Rendering gate, plus the content B requires is itself unevidenced — see CR-15 and CR-10."
-   },
-   "superseded_decisions": [
-    {
-     "id": "D-07",
-     "option": "A",
-     "summary": "301 /barcode-scanner-thailand to the Thai head-term page.",
-     "decided_on": "2026-09-23",
-     "superseded_on": "2026-09-23",
-     "executed": false,
-     "note": "Never executed, so no rollback was required."
-    }
-   ],
-   "retiring_urls": [],
-   "rescoping_urls": [
-    {
-     "url": "/barcode-scanner-thailand",
-     "from": "generic head term (title reads \"Barcode Scanner\", no geo modifier)",
-     "to": "Thailand buying page — availability, local support, lead times",
-     "blocked_by": [
-      "CR-15",
-      "CR-10",
-      "SRC-02",
-      "SRC-06"
-     ]
-    }
-   ],
-   "terms": [
-    "barcode scanner",
-    "barcode scanners",
-    "เครื่องสแกนบาร์โค้ด",
-    "สแกนบาร์โค้ด",
-    "เครื่องอ่านบาร์โค้ด",
-    "scanner บาร์โค้ด"
-   ],
-   "urls": [
-    "/barcode-scanners",
-    "/barcode-scanner-thailand",
-    "/เครื่องสแกนบาร์โค้ด",
-    "/industrial-barcode-scanner",
-    "/wireless-barcode-scanner",
-    "/2d-barcode-scanner",
-    "/long-range-barcode-scanner",
-    "/warehouse-barcode-scanner",
-    "/retail-barcode-scanner",
-    "/honeywell-barcode-scanner"
-   ]
-  },
-  {
-   "id": "C-2",
-   "label": "Barcode printer",
+   "id": "R-1",
+   "label": "Barcode scanner — generic head term",
    "canonical_owner": null,
-   "terms": [
-    "barcode printer",
-    "label printer",
-    "เครื่องพิมพ์บาร์โค้ด",
-    "เครื่องพิมพ์ฉลาก",
-    "printer บาร์โค้ด"
-   ],
-   "urls": [
-    "/barcode-printers",
-    "/barcode-printer-thailand",
-    "/barcode-label-printer",
-    "/tsc-barcode-printer",
-    "/barcode-printer-buying-guide",
-    "/knowledge/barcode-printer-types"
-   ]
+   "blocked_by": "D-09",
+   "terms": ["barcode scanner", "barcode scanners", "handheld scanner", "เครื่องสแกนบาร์โค้ด", "เครื่องอ่านบาร์โค้ด", "สแกนบาร์โค้ด", "เครื่องสแกน", "เครื่องอ่านคิวอาร์โค้ด"],
+   "urls": ["/products.html?category=scanners"],
+   "planned_urls": ["/products/1950g", "/products/1960g", "/products/ds2208", "/products/ds3600"],
+   "risk": "Four scanner pages competing for one head term once built. 1950g and 1960g are both Honeywell Xenon handhelds, which is the closest pair on the site."
   },
   {
-   "id": "C-3",
+   "id": "R-2",
+   "label": "Barcode / label printer — generic head term",
+   "canonical_owner": null,
+   "blocked_by": "D-09",
+   "terms": ["barcode printer", "label printer", "เครื่องพิมพ์บาร์โค้ด", "เครื่องพิมพ์ฉลาก", "เครื่องพิมพ์สติกเกอร์", "เครื่องพิมพ์สติ๊กเกอร์"],
+   "urls": ["/products.html?category=printers"],
+   "planned_urls": ["/products/te200", "/products/zt411", "/products/m510", "/products/zd421"],
+   "risk": "Four printer pages. te200 and zd421 are both desktop printers; zt411 is industrial and m510 portable, so those two are more separable."
+  },
+  {
+   "id": "R-3",
+   "label": "Thermal transfer ribbon",
+   "canonical_owner": null,
+   "blocked_by": "D-10",
+   "terms": ["ribbon", "thermal transfer ribbon", "ริบบอน", "ริบบอนพิมพ์บาร์โค้ด", "ผ้าหมึก", "หมึกพิมพ์", "wax ribbon", "resin ribbon"],
+   "urls": ["/products.html?category=ribbons"],
+   "planned_urls": ["/products/wax-ribbons", "/products/wax-resin-ribbons", "/products/resin-ribbons"],
+   "risk": "HIGHEST. Three entries whose Thai descriptions differ only in ribbon type and which share one `url` value in catalog-data.js today. They will compete directly."
+  },
+  {
+   "id": "R-4",
+   "label": "Barcode label / sticker",
+   "canonical_owner": null,
+   "blocked_by": "D-09",
+   "terms": ["barcode label", "label", "sticker", "ฉลากบาร์โค้ด", "ฉลากสินค้า", "สติกเกอร์", "สติ๊กเกอร์", "ฉลาก"],
+   "urls": ["/products.html?category=labels"],
+   "planned_urls": ["/products/labels"],
+   "risk": "One entry, and it carries no `evidence` field and kind:supplies. Likely a category page rather than a product page."
+  },
+  {
+   "id": "R-5",
    "label": "RFID",
    "canonical_owner": null,
-   "terms": [
-    "rfid",
-    "อาร์เอฟไอดี",
-    "rfid reader",
-    "rfid system",
-    "rfid คลังสินค้า"
-   ],
-   "urls": [
-    "/rfid-systems",
-    "/rfid-reader",
-    "/rfid-warehouse-system",
-    "/rfid-workflow-context",
-    "/brady/scanners-rfid",
-    "/knowledge/rfid-warehouse-implementation",
-    "/knowledge/rfid-technology"
-   ]
+   "blocked_by": "D-09",
+   "terms": ["rfid", "rfid reader", "rfid system", "อาร์เอฟไอดี", "เครื่องอ่าน rfid", "เครื่องอ่านอาร์เอฟไอดี", "ระบบ rfid"],
+   "urls": ["/products.html?category=rfid"],
+   "planned_urls": ["/products/rfid"],
+   "risk": "One entry, no `evidence` field, kind:solution. Likely a category or solution page rather than a product page."
   },
   {
-   "id": "C-4",
-   "label": "Manufacturing",
+   "id": "R-6",
+   "label": "Mobile computer / enterprise mobility",
    "canonical_owner": null,
-   "terms": [
-    "manufacturing",
-    "โรงงาน",
-    "สายการผลิต",
-    "การผลิต",
-    "traceability การผลิต"
-   ],
-   "urls": [
-    "/manufacturing",
-    "/industry/manufacturing",
-    "/brady/solutions/manufacturing",
-    "/case-study/manufacturing",
-    "/roi-calculator/manufacturing"
-   ]
+   "blocked_by": "D-09",
+   "terms": ["mobile computer", "handheld computer", "enterprise mobility", "โมบายคอมพิวเตอร์", "คอมพิวเตอร์พกพา", "เครื่องตรวจนับสินค้า", "pda"],
+   "urls": ["/products.html?category=mobile"],
+   "planned_urls": ["/products/tc22"],
+   "risk": "One entry, but kind:family — it covers TC22 and TC27. The page must not read as a single model."
   },
   {
-   "id": "C-5",
-   "label": "Warehouse / logistics",
-   "canonical_owner": null,
-   "terms": [
-    "warehouse",
-    "logistics",
-    "คลังสินค้า",
-    "โลจิสติกส์",
-    "ศูนย์กระจายสินค้า"
-   ],
-   "urls": [
-    "/logistics",
-    "/warehouse-data-capture",
-    "/brady/solutions/warehouse-logistics",
-    "/case-study/logistics",
-    "/case-study/warehouse",
-    "/roi-calculator/warehouse"
-   ]
-  },
-  {
-   "id": "C-6",
-   "label": "Retail",
-   "canonical_owner": null,
-   "terms": [
-    "retail",
-    "ร้านค้า",
-    "ค้าปลีก",
-    "pos"
-   ],
-   "urls": [
-    "/retail",
-    "/retail-barcode-scanner",
-    "/case-study/retail",
-    "/roi-calculator/retail"
-   ]
-  },
-  {
-   "id": "C-7",
-   "label": "Scanner selection / comparison",
-   "canonical_owner": null,
-   "terms": [
-    "เลือกเครื่องสแกน",
-    "เปรียบเทียบ",
-    "comparison",
-    "how to choose",
-    "buying guide",
-    "ยี่ห้อไหนดี"
-   ],
-   "urls": [
-    "/barcode-scanner-comparison",
-    "/knowledge/product-comparisons",
-    "/knowledge/how-to-choose-barcode-scanner",
-    "/knowledge/wired-vs-wireless-barcode-scanner",
-    "/select-solution"
-   ]
-  },
-  {
-   "id": "C-9",
+   "id": "R-7",
    "label": "Company / about ACS",
-   "canonical_owner": "/why-acs",
-   "decision": {
-    "id": "D-09",
-    "summary": "/why-acs is the company page. New about-ACS copy enriches it rather than creating a second one.",
-    "decided_by": "ACS Owner",
-    "decided_on": "2026-09-23",
-    "executed": false
-   },
-   "terms": [
-    "เกี่ยวกับเรา",
-    "แนะนำบริษัท",
-    "เกี่ยวกับ acs",
-    "about acs",
-    "about us",
-    "who we are",
-    "บริษัทของเรา",
-    "ประวัติบริษัท",
-    "ทำไมต้อง acs",
-    "why acs"
-   ],
-   "urls": [
-    "/why-acs",
-    "/why-acs/30-years",
-    "/why-acs/service-capability",
-    "/why-acs/partner-ecosystem",
-    "/leadership"
-   ]
-  },
-  {
-   "id": "C-8",
-   "label": "Partner ecosystem",
    "canonical_owner": null,
-   "terms": [
-    "partner",
-    "ecosystem",
-    "พาร์ทเนอร์",
-    "ตัวแทนจำหน่าย"
-   ],
-   "urls": [
-    "/partner-ecosystem-hub",
-    "/why-acs/partner-ecosystem"
-   ]
+   "blocked_by": "D-11",
+   "terms": ["about acs", "why acs", "asian coding systems", "เกี่ยวกับ acs", "ทำไมต้อง acs", "บริษัท acs"],
+   "urls": ["/"],
+   "planned_urls": [],
+   "risk": "No dedicated company page exists. /why-acs 404s. The approved about-ACS copy has nowhere to go."
   }
  ]
 }

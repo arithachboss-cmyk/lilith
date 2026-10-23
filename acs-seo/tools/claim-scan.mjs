@@ -17,7 +17,7 @@
  * there is a bug: the register is the source of truth.
  */
 import { readFileSync, writeFileSync, statSync, readdirSync } from "node:fs";
-import { join, extname, basename } from "node:path";
+import { join, extname, basename, sep } from "node:path";
 
 const MARKER = (cr) => `⟦ลบตัวเลข ${cr} — รอหลักฐาน⟧`;
 
@@ -202,8 +202,19 @@ const GOVERNANCE_PATTERNS = [
   /-reconciliation\.json$/i,
 ];
 
+/**
+ * Directories whose contents are archived records, never drafts. Skipped wholesale, by
+ * path rather than by filename, because a retired file keeps whatever name it had and
+ * renaming one must not quietly put it back in the gate — which is exactly what happened
+ * when data/clusters.json became data/retired/clusters-sitemap-era.json and stopped
+ * matching the skip list.
+ */
+const ARCHIVE_DIRS = [/(^|\/)data\/retired(\/|$)/];
+
 function isGovernance(file) {
   const name = basename(file);
+  const path = file.split(sep).join("/");
+  if (ARCHIVE_DIRS.some((re) => re.test(path))) return true;
   return GOVERNANCE_FILES.has(name) || GOVERNANCE_PATTERNS.some((re) => re.test(name));
 }
 

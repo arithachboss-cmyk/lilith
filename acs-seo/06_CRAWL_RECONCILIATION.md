@@ -115,11 +115,11 @@ server response.
 
 | Artefact | Status after this crawl |
 |---|---|
-| `data/live-inventory.json` (82 pages) | **RETIRED.** 81 of 82 rows describe 404s. Superseded by `data/real-inventory.json`. |
-| `data/clusters.json` (C-1 … C-9) | **RETIRED.** Every cluster owner and member 404s. No cannibalisation exists to resolve. |
-| `data/c1-cluster.json` | **RETIRED.** All 10 URLs 404. |
+| `data/live-inventory.json` (82 pages) | **RETIRED** → `data/retired/live-inventory-sitemap-era.json`. Superseded by `data/real-inventory.json`. |
+| `data/clusters.json` (C-1 … C-9) | **RETIRED** → `data/retired/clusters-sitemap-era.json`. Rebuilt as R-1 … R-7 from the real site and the 14 catalogue products. |
+| `data/c1-cluster.json` | **RETIRED** → `data/retired/c1-cluster-sitemap-era.json`. All 10 URLs 404. |
 | `00_SOURCE_PACK_INDEX.md` §S-2, §S-3 | **SUPERSEDED** for URL facts. Source-stream status is unaffected. |
-| Cannibalisation gate (`tools/cannibalisation-check.mjs`) | **Code is sound, data was not.** Re-point it at `real-inventory.json` before trusting a verdict. |
+| Cannibalisation gate (`tools/cannibalisation-check.mjs`) | **RE-POINTED 2026-10-23.** Now reads `real-inventory.json` plus the planned product URLs, and distinguishes a live clash from a planned one. A regression check fails the suite if it ever reads the retired inventory again. |
 | Decisions D-07 / D-08 (`/barcode-scanner-thailand`) | **MOOT.** Neither URL exists. Neither was executed. |
 | `/why-acs` as publish target for the about-ACS copy | **INVALID.** Needs a new home among the 6 live pages. |
 | CR-06 and CR-10 evidence closures | **UNAFFECTED.** They rest on email records, not on URLs. |
