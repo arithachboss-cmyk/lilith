@@ -103,20 +103,34 @@ the approved about-ACS copy in `../about-acs/draft-v3-evidenced.md` once §3 of
 
 ---
 
-## 4. Why this is a spec and not a commit
+## 4. Where to apply it
 
-The Owner authorised the change. I could not locate the deployment source from this
-session: it is not in any reachable GitHub repo (`arithachboss-cmyk/lilith`,
-`the-middle-th/middle-property-rental-intelligence`,
-`arithachboss-cmyk/creativex2026-chula-cea-arithach`), not in either Lovable
-workspace, and there are no Vercel projects, no matching Netlify project and no
-WordPress.com sites.
+**The platform is ChatGPT sites hosting (`*.chatgpt.site`), behind Cloudflare.** Identified
+2026-10-23; the evidence is in `../../06_CRAWL_RECONCILIATION.md` §9 and
+`../../data/real-inventory.json` → `hosting`. The ACS workspace subdomain is
+`yacht369.chatgpt.site`, which already serves a sibling site at
+`acs-portal-six.yacht369.chatgpt.site`.
 
-Circumstantial evidence points at OpenAI/ChatGPT site hosting: `/erp` links to
-`acs-portal-six.yacht369.chatgpt.site` and `/signin-with-chatgpt` serves OpenAI's
-own sign-in page on the ACS origin. That is a surface this session has no API access
-to.
+Good news for this patch: **the site is not a framework app.** Every page is hand-written HTML
+with plain CSS and JS, so `catalog-data.js` is an editable static file rather than a build
+artefact. The change is a text edit in five `url`/`acsUrl` values and one footer anchor.
 
-**To get this applied, one of:** point me at the repo or host that deploys
-`catalog-data.js`, grant this session access to it, or hand this spec to whoever
-has it. The patch is exact; nothing here needs re-deriving.
+**Apply it wherever the `yacht369` ChatGPT workspace manages this site.** This session has no API
+access to that platform, which is the only reason this is still a spec. Ruled out by checking:
+no matching GitHub repo among the three reachable, neither Lovable workspace, zero Vercel
+projects, one unrelated Netlify project, zero WordPress.com sites.
+
+### One thing to watch when applying
+
+Assets are cache-busted by query string, and the versions are not in step: every page loads
+`catalog-data.js?v=5` except `/sales`, which loads `?v=4`. If the fix is published without
+bumping the version, Cloudflare may keep serving the old file. **Bump `catalog-data.js` to `?v=6`
+in every page that references it** — `index.html`, `products.html`, `cart.html` and `sales`
+— so the corrected links actually reach visitors.
+
+## 5. Also found while looking for the source
+
+`/sales` returns 200 unauthenticated, carries no robots meta, and has no auth gate in its served
+HTML, while listing customer requests. That is DEF-08, it is urgent, and it is not an SEO
+problem. See `../../06_CRAWL_RECONCILIATION.md` §9 — including what was deliberately **not**
+verified and why.

@@ -46,7 +46,12 @@ reachable at two addresses on it — with and without `.html` — and none decla
 | Assessment intake | `/assessment`, `/assessment.html` | Fully server-rendered, form included |
 | Download profile | `/download-profile`, `/download-profile.html` | Fully server-rendered |
 
-Live but not public, and not for indexing: `/erp` and `/planning-inbox`, both auth-gated.
+Live but not public: `/erp` and `/planning-inbox`, both auth-gated, both `noindex`. And
+`/sales`, which is neither — see DEF-08.
+
+Robots meta, read from the served head: `/assessment` is `noindex,follow`, `/erp` is
+`noindex,nofollow`, and `/` and `/products.html` carry none. `/sales` carries none either, which
+is the part that matters.
 
 `/signin-with-chatgpt` serves **OpenAI's own sign-in page under the asiancoding.com origin**.
 That is raised here for the Owner as a trust question, not an SEO one: a third-party credential
@@ -55,6 +60,12 @@ form on ACS's own domain is worth a deliberate decision either way.
 ---
 
 ## 3. Defects found, worst first
+
+**DEF-08 · `/sales` exposes a customer-request list without an auth gate.** *(Found 2026-10-23.
+Urgent, and not an SEO finding — see §9.)* The page returns 200 unauthenticated, carries no
+robots meta so it is indexable, and its served HTML has no authentication gate at all, unlike
+`/erp` and `/planning-inbox`. **Whether the data behind it is exposed is not established** — I
+did not try to load it. §9 says why and what to check.
 
 **DEF-01 · The sitemap is gone.** Both sitemap URLs 404 and robots.txt names no sitemap. Nothing
 tells a crawler what the site contains.
@@ -188,3 +199,61 @@ server-rendering product pages is feasible on the stack that already exists.
 renders; verify the URL set against the site, not the sitemap. This one is narrower and sharper:
 **a tool that follows redirects hides them.** Status codes are evidence; a final rendered page
 is not. Read the response chain before claiming anything about redirects or canonicalisation.
+
+---
+
+## 9. Where the site is hosted, and one urgent find on the way there
+
+The Owner asked me to find the deployment source so the authorised dead-link fix could be
+applied. I did not find an editable source I can reach, but I did identify the platform, and
+found something that outranks everything else in this document.
+
+### The urgent one first: `/sales`
+
+`/sales` is an ACS Sales Desk page that lists customer requests for follow-up. It is linked only
+from `/planning-inbox`, never from a public page, which is why the first crawl missed it. It:
+
+- returns **200 to an unauthenticated request**,
+- carries **no robots meta**, so it is indexable, and
+- **has no auth gate in its served HTML.**
+
+That last point is the one to look at. `/erp` ships a `<div id="auth-screen">` that holds the
+shell until authentication resolves, and `/planning-inbox` renders a permissions-check message
+with a sign-in link. `/sales` renders straight into `<div id="sales-list">`.
+
+**What I did not do:** load the customer data. Confirming an exposure by pulling real customer
+records would be the harm itself, so the honest statement is narrow — *the page shell is public;
+whether the data is public is unverified.* If the endpoint `commerce.js` calls authorises by
+session, this is just a missing `noindex`. If it does not, the names, companies, emails, phone
+numbers and addresses submitted through `/cart` and `/assessment` are reachable without signing
+in.
+
+**To check:** open the endpoint `/sales` calls from a signed-out browser. Add `noindex` to
+`/sales` either way.
+
+### The platform
+
+**ChatGPT sites hosting (`*.chatgpt.site`), behind Cloudflare.** High confidence, from
+converging evidence rather than one header:
+
+| Evidence | What it shows |
+|---|---|
+| `yacht369.chatgpt.site` → *"404 Not found / No site here"*, serving `/_sites/dispatch-assets/404-petlost.gif` | `/_sites/` is host infrastructure. `yacht369` is the workspace subdomain. |
+| `acs-portal-six.yacht369.chatgpt.site` serves the ACS HR Portal | Sites deploy as `<name>.yacht369.chatgpt.site`; ACS already runs one. |
+| `/signin-with-chatgpt` and `/signout-with-chatgpt` on the ACS origin, with `?return_to=` | Platform-provided ChatGPT identity. A plain static site has no such endpoints. |
+| `GET /api/cart` → 200 | The platform serves server-side endpoints beside the static files. |
+| The 404 body is the platform default | Which is why it reads as Next.js while every real page is hand-written static HTML with no `_next` assets. |
+
+Ruled out by checking: no matching GitHub repo among the three reachable, neither Lovable
+workspace, zero Vercel projects, one unrelated Netlify project, zero WordPress.com sites.
+
+**The site is not a framework app.** Every page is hand-written HTML with plain CSS and JS —
+`styles.css`, `app.js`, `catalog-data.js`, `commerce.js`, `planning.css/js`, `erp.css/js`,
+`accounting.js`, `integration-hub.js`. `planning.js` imports `./planning-contract.js`,
+`./planning-controller.js` and `./planning-content.js`, so the source is ES modules rather than a
+bundle. That is good news for the dead-link fix: `catalog-data.js` is an editable static file,
+not a build artefact.
+
+**So the fix is applied wherever the `yacht369` ChatGPT workspace manages this site.** This
+session has no API access to that platform, so `packages/site-fixes/DEAD_LINK_FIX_SPEC.md` stays
+a spec — but it is exact, and the file it targets is plain text.

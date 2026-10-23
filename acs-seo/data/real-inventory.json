@@ -104,6 +104,11 @@
       "path": "/signin-with-chatgpt",
       "status": 200,
       "notes": "Serves OpenAI's own 'Welcome back' sign-in page under the asiancoding.com origin. Flagged for the Owner: a third-party credential form on ACS's own domain is a trust and phishing-surface question, not an SEO one."
+    },
+    {
+      "path": "/sales",
+      "status": 200,
+      "notes": "ACS Sales Desk, listing customer requests for follow-up. Found 2026-10-23 through a link on /planning-inbox; it is not linked from any public page. See DEF-08 -- urgent, and not an SEO finding."
     }
   ],
   "backend": {
@@ -154,6 +159,15 @@
       "severity": "low",
       "finding": "/commerce-lab is an indexable, self-declared simulation carrying sample prices and stock.",
       "consequence": "Sample pricing is publicly crawlable. Relevant to CR-03 even though ACS did not author it as a price claim."
+    },
+    {
+      "id": "DEF-08",
+      "severity": "URGENT - not an SEO defect",
+      "finding": "/sales is an ACS Sales Desk page listing customer requests. It returns 200 to an unauthenticated request, carries no robots meta so it is indexable, and unlike /erp and /planning-inbox its served HTML contains no authentication gate at all. /erp ships a div id=auth-screen that blocks the shell until auth resolves, and /planning-inbox renders a permissions-check message with a sign-in link. /sales renders straight into div id=sales-list.",
+      "not_verified": "Whether the endpoint that fills that list requires authentication. I did NOT attempt to load the customer data: pulling real customer records to confirm an exposure would itself be the harm. The page shell being public is established. The data being public is NOT established and must be checked by someone with the right to see it.",
+      "why_it_matters": "If the backing endpoint authorises by session, this is only a missing noindex. If it does not, customer names, companies, emails, phone numbers and addresses submitted through /cart and /assessment are reachable without signing in.",
+      "owner_action": "From a signed-out browser, check the endpoint commerce.js calls for /sales. Add noindex to /sales either way.",
+      "also": "/sales loads catalog-data.js?v=4 while every other page loads ?v=5, so it renders against a stale catalogue, and its meta description is copy-pasted from the products page."
     }
   ],
   "catalogue": {
@@ -170,5 +184,31 @@
     ],
     "note": "Each product carries an `evidence` field with values acs_named_model, manufacturer_reference or acs_named_family. That is the site's own provenance marking and is worth reusing in the claim register rather than inventing a parallel scheme."
   },
-  "_addresses_note": "Paths are relative to https://www.asiancoding.com, the host the apex 301s to. The apex forms are not listed separately because they redirect."
+  "_addresses_note": "Paths are relative to https://www.asiancoding.com, the host the apex 301s to. The apex forms are not listed separately because they redirect.",
+  "hosting": {
+    "platform": "ChatGPT sites hosting (*.chatgpt.site), fronted by Cloudflare",
+    "confidence": "High, from converging evidence rather than a single header.",
+    "evidence": [
+      "https://yacht369.chatgpt.site/ returns the PLATFORM 404 -- '404 Not found / No site here' -- serving /_sites/dispatch-assets/404-petlost.gif. That /_sites/ namespace is host infrastructure, not an ACS path.",
+      "acs-portal-six.yacht369.chatgpt.site serves the ACS HR Portal, so yacht369 is the ACS workspace subdomain and sites deploy as <name>.yacht369.chatgpt.site.",
+      "asiancoding.com exposes /signin-with-chatgpt and /signout-with-chatgpt on its own origin, with ?return_to= parameters. That is platform-provided ChatGPT identity, not something a static site has.",
+      "GET /api/cart returns 200, so the platform serves server-side endpoints alongside static files.",
+      "The 404 body on asiancoding.com is the platform default, which is why it looks like Next.js while every real page is hand-written static HTML with no _next assets anywhere."
+    ],
+    "ruled_out": "No matching repo among the three reachable on GitHub; neither Lovable workspace; zero Vercel projects; one unrelated Netlify project; zero WordPress.com sites.",
+    "what_this_means_for_edits": "catalog-data.js is a static file in this deployment. To apply packages/site-fixes/DEAD_LINK_FIX_SPEC.md, edit it wherever the yacht369 ChatGPT workspace manages this site. This session has no API access to that platform.",
+    "not_a_framework_app": "Every page fetched is hand-written HTML plus plain CSS/JS: styles.css, app.js, catalog-data.js, commerce.js, planning.css/js, erp.css/js, accounting.js, integration-hub.js. planning.js imports ./planning-contract.js, ./planning-controller.js and ./planning-content.js, so the source is ES modules rather than a bundle."
+  },
+  "robots_meta": {
+    "_method": "Read from the served HTML head of each page on 2026-10-23. 'not read' means the page was fetched as markdown only, so its head was not inspected.",
+    "/": "none",
+    "/products.html": "none",
+    "/assessment": "noindex,follow",
+    "/erp": "noindex,nofollow",
+    "/sales": "NONE - indexable",
+    "/cart.html": "not read",
+    "/commerce-lab.html": "not read",
+    "/download-profile": "not read",
+    "/planning-inbox": "not read"
+  }
 }
