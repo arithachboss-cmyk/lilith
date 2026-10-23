@@ -32,13 +32,15 @@ using the `id` already in `catalog-data.js`, so no new identifier is invented:
 
 Rules, all of which follow from defects the crawl found:
 
-- **One address per product.** Do not also serve `/products/<id>.html`. The site
-  currently serves six pages at 24 addresses with zero canonicals (DEF-03); do not
-  extend that pattern.
+- **One address per product.** Do not also serve `/products/<id>.html`. The six
+  existing pages each answer at two addresses with zero canonicals (DEF-03); do not
+  extend that pattern. Put product pages on **www**, which the apex already 301s to.
 - **Self-referencing canonical** on every product page, on the chosen host.
 - **Server-rendered.** A client-side product page is worth nothing here — the whole
   point is crawlable product text. If the page cannot be server-rendered, this
   decision delivers no SEO value and should be deferred rather than shipped.
+  This is feasible on the current stack: `GET /api/cart` returns 200, so a
+  server-side layer already exists (`../../data/real-inventory.json` → `backend`).
 - Keep `products.html?category=…` working as the filtered list. Those are query
   parameters on one page, not separate URLs, so they need no canonical work.
 

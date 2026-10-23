@@ -20,7 +20,8 @@ stop describing a site that no longer exists.
 | Sitemap file itself | **gone** — `/sitemap.xml` and `/sitemap_index.xml` both 404 |
 | `Sitemap:` directive in robots.txt | **none** |
 | Distinct pages actually live | **6** public, plus 2 auth-gated |
-| Addresses serving those 6 pages | **24** |
+| Addresses serving those 6 pages | **12** |
+| Apex vs www | **resolved** — apex 301s to www |
 | Canonical tags found | **0** |
 
 All 82 were fetched individually. This is not a sample.
@@ -33,17 +34,17 @@ that had already been replaced.
 
 ## 2. What is actually live
 
-Six public pages. Each is reachable at four addresses — apex and www, with and without `.html` —
-and none of them declares a canonical.
+Six public pages. The apex 301-redirects to www, so www is the live host. Each page is then
+reachable at two addresses on it — with and without `.html` — and none declares a canonical.
 
-| Page | Addresses | Rendering |
+| Page | Addresses (on www) | Rendering |
 |---|---|---|
-| Home | `/`, `/index.html` (× apex, www) | Server-rendered static HTML |
-| Product catalogue | `/products.html`, `/products` (× apex, www) | **Mixed** — see §4 |
-| Cart / request submission | `/cart.html`, `/cart` (× apex, www) | Server-rendered; cart loads client-side |
-| Commerce Lab (Shopify sandbox) | `/commerce-lab.html`, `/commerce-lab` (× apex, www) | Shell server-rendered, app client-side |
-| Assessment intake | `/assessment`, `/assessment.html` (× apex, www) | Fully server-rendered, form included |
-| Download profile | `/download-profile`, `/download-profile.html` (× apex, www) | Fully server-rendered |
+| Home | `/`, `/index.html` | Server-rendered static HTML |
+| Product catalogue | `/products.html`, `/products` | **Mixed** — see §4 |
+| Cart / request submission | `/cart.html`, `/cart` | Server-rendered; cart loads client-side |
+| Commerce Lab (Shopify sandbox) | `/commerce-lab.html`, `/commerce-lab` | Shell server-rendered, app client-side |
+| Assessment intake | `/assessment`, `/assessment.html` | Fully server-rendered, form included |
+| Download profile | `/download-profile`, `/download-profile.html` | Fully server-rendered |
 
 Live but not public, and not for indexing: `/erp` and `/planning-inbox`, both auth-gated.
 
@@ -61,8 +62,11 @@ tells a crawler what the site contains.
 **DEF-02 · 81 dead URLs with no redirects.** Every inbound link, bookmark and indexed result
 pointing at the old structure lands on a 404.
 
-**DEF-03 · Four-way duplication, zero canonicals.** Six pages at 24 addresses. Apex does not
-redirect to www or vice versa; `.html` and extensionless both return 200 with identical bytes.
+**DEF-03 · Two-way duplication, zero canonicals.** *(Corrected 2026-10-23 — see §8.)* Each of
+the six pages answers at two addresses, with and without `.html`, both 200 with identical bytes
+and no canonical tag. `app.js` rewrites `/products` to `/products.html` in the address bar, but
+that is client-side and no crawler sees it. The apex-vs-www half of this is **not** a defect:
+the apex 301s to www.
 
 **DEF-04 · The live catalogue links to ACS's own dead pages.** `catalog-data.js` sends 5 of the 14
 products to ACS paths that 404. All five were fetched and confirmed:
@@ -158,3 +162,29 @@ site, and like every other claim in this pack it needs checking before anything 
 An 82-row inventory that nobody fetched read exactly like an 82-row inventory that was true, and
 produced nine clusters, two Owner decisions and a cannibalisation gate — all of them about pages
 that return 404. The check cost nine batched fetches.
+
+---
+
+## 8. Correction, 2026-10-23
+
+Two things in the first version of this document were wrong, both for the same reason, and both
+are corrected above rather than quietly edited out.
+
+**The apex does redirect to www.** I recorded "neither redirects to the other". It 301s. The
+error came from reading batched scrapes that follow redirects silently: fetching
+`asiancoding.com/` and `www.asiancoding.com/` both returned the homepage, which I read as two
+independently reachable hosts rather than one plus a redirect. The response chain, requested
+once, settled it. So DEF-03 is **medium, not high**, and the address count is 12, not 24.
+
+**`/products` is not an HTTP redirect to `/products.html`.** It returns 200 directly; `app.js`
+then rewrites the address bar. So the remaining duplication is real and a crawler does see both
+200s — the browser's final URL made it look resolved when it was not. This half of DEF-03 stands.
+
+Also found: **`GET /api/cart` returns 200**, so the site has a server-side API and is not
+purely static hosting. That matters for the product-URL decision, because it means
+server-rendering product pages is feasible on the stack that already exists.
+
+**Method rule, third one.** The first two were: fetch the HTML before judging how a page
+renders; verify the URL set against the site, not the sitemap. This one is narrower and sharper:
+**a tool that follows redirects hides them.** Status codes are evidence; a final rendered page
+is not. Read the response chain before claiming anything about redirects or canonicalisation.

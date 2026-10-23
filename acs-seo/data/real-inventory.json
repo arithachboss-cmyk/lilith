@@ -5,7 +5,7 @@
   "hosts": {
     "apex": "https://asiancoding.com",
     "www": "https://www.asiancoding.com",
-    "relationship": "Both serve byte-identical content. Neither redirects to the other and no canonical tag names a preferred host."
+    "relationship": "The apex 301-redirects to www (verified 2026-10-23 from the response chain), so the preferred host IS resolved. Corrected on 2026-10-23: an earlier reading of this file said neither redirected, which was wrong — a scraper following redirects silently made both hosts look independently reachable."
   },
   "sitemap": {
     "/sitemap.xml": 404,
@@ -13,7 +13,7 @@
     "robots_txt": "200, but carries only Cloudflare content-signals boilerplate: no Sitemap: directive and no Disallow rules."
   },
   "distinct_pages": 6,
-  "addresses_serving_those_pages": 24,
+  "addresses_serving_those_pages": 12,
   "canonical_tags_found": 0,
   "live": [
     {
@@ -88,6 +88,12 @@
       "notes": "Serves OpenAI's own 'Welcome back' sign-in page under the asiancoding.com origin. Flagged for the Owner: a third-party credential form on ACS's own domain is a trust and phishing-surface question, not an SEO one."
     }
   ],
+  "backend": {
+    "finding": "GET /api/cart returns 200. The site has a real server-side API, not just static hosting.",
+    "observed": "2026-10-23, in the request chain of both / and /products",
+    "relevance": "Server-rendering product pages is therefore feasible on the existing stack — see packages/site-fixes/PRODUCT_URL_SPEC.md §1.",
+    "note": "The endpoint itself could not be read; Brightdata declines it under robots.txt without KYC."
+  },
   "defects": [
     {
       "id": "DEF-01",
@@ -103,9 +109,9 @@
     },
     {
       "id": "DEF-03",
-      "severity": "high",
-      "finding": "6 distinct pages are served at 24 addresses (apex and www, with and without .html) and not one page carries a canonical tag.",
-      "consequence": "Four-way duplication per page, with no signal naming the preferred address."
+      "severity": "medium",
+      "finding": "6 distinct pages are each served at 2 addresses, with and without .html, both returning 200 with identical content and no canonical tag. app.js rewrites the address bar from /products to /products.html client-side, which no crawler sees.",
+      "consequence": "Two-way duplication per page with no signal naming the preferred form. Downgraded from high on 2026-10-23: the apex-vs-www half of this was wrong, since the apex 301s to www."
     },
     {
       "id": "DEF-04",
