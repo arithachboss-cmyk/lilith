@@ -1,0 +1,28 @@
+{
+ "package": "site-fixes",
+ "status": "DRAFT_PENDING_REVIEW",
+ "created": "2026-10-23",
+ "contents": [
+  {
+   "file": "DEAD_LINK_FIX_SPEC.md",
+   "kind": "exact patch spec",
+   "owner_authorised": "2026-10-23",
+   "applied": false,
+   "blocked_by": "No reachable deployment source for catalog-data.js from this session. See §4."
+  },
+  {
+   "file": "PRODUCT_URL_SPEC.md",
+   "kind": "implementation spec",
+   "owner_decision": "Products get their own URLs — Owner, 2026-10-23",
+   "built": false,
+   "blocked_by": "SRC-03 (datasheets) still open for the 5 products asserting spec figures; see §3."
+  }
+ ],
+ "gate": {
+  "claim_scan": "BLOCKED 0 — passes the default gate as of 2026-10-23",
+  "note": "The remaining EVIDENCE_REQUIRED/OWNER_REQUIRED findings are the specs describing the claim rules, not making claims."
+ },
+ "published": false,
+ "deployed": false,
+ "live_site_changed": false
+}
