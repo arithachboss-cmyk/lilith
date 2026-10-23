@@ -1,4 +1,5 @@
 {
+ "_RETIRED": "RETIRED 2026-10-23. 81 of these 82 paths return 404 — verified individually, see data/sitemap-reconciliation.json. Superseded by data/real-inventory.json. Kept only as the record of what the 2026-09-20 sitemap claimed.",
  "_source": "Parsed from 00_SOURCE_PACK_INDEX.md S-2, itself built from the live sitemap of 2026-09-20. Regenerate rather than edit by hand.",
  "count": 82,
  "pages": [
@@ -709,6 +710,5 @@
    "type": "Article",
    "flags": []
   }
- ],
- "_WARNING": "UNRELIABLE as of 22 Oct 2026 — derived from a sitemap whose URLs include 404s. See 05_SITE_REALITY_CHECK.md. Rebuild by crawling from the homepage."
+ ]
 }

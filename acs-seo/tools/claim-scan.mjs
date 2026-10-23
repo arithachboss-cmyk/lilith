@@ -102,7 +102,7 @@ const RULES = [
     id: "customer-implied",
     cr: "CR-08", cls: "OWNER_REQUIRED", redact: false,
     why: "อ้างว่าดูแล/ให้บริการลูกค้ารายใด แม้ไม่เอ่ยชื่อ ก็ยังเป็นข้ออ้างเรื่องลูกค้า",
-    re: /(?:ดูแล(?:ระบบ)?ให้(?:กับ)?|ให้บริการ(?:แก่|กับ)|ลูกค้าของเรา(?:ได้แก่|เช่น)?|เป็นผู้ดูแลระบบให้|ไว้วางใจโดย|trusted\s+by|clients?\s+include|serving)\s*[^\n.·]{0,40}/gi,
+    re: /(?:ดูแล(?:ระบบ)?ให้(?:กับ)?|ให้บริการ(?:แก่|กับ)|ลูกค้าของเรา(?:ได้แก่|เช่น)?|เป็นผู้ดูแลระบบให้|ไว้วางใจโดย|trusted\s+by|clients?\s+include|\bserving\s+(?:over\s+|more\s+than\s+|almost\s+|nearly\s+)?(?:\d[\d,]*\+?\s+)?(?:customers?|clients?|companies|businesses|brands?|retailers?|stores?|organi[sz]ations?|firms?|partners?|users?|accounts?|SMEs?|enterprises?))\s*[^\n.·]{0,40}/gi,
   },
   {
     id: "company-tenure",
@@ -184,12 +184,23 @@ const RULES = [
  * Governance files quote the claims they govern, so scanning them reports the register
  * against itself. They are skipped by name when a directory is scanned; pass a file
  * explicitly, or --all, to scan one anyway.
+ *
+ * The URL inventories belong here for the same reason: they record ACS's own paths as
+ * observed data, and a path is not prose. `/knowledge/implementation-best-practices`
+ * tripped the brand-ranking rule on the "best" inside the slug, and `/brady/labels`
+ * tripped the partner rule — neither is a claim anyone wrote.
  */
 const GOVERNANCE_FILES = new Set([
   "claim_register.md", "package_status.json", "audit.json", "brief.md",
   "REVISION_SPEC.md", "EXECUTION_RUNBOOK.md", "INTENT_MAP.md", "README.md",
+  "clusters.json", "c1-cluster.json",
 ]);
-const GOVERNANCE_PATTERNS = [/evidence.*\.json$/i, /^\d\d_.*\.md$/];
+const GOVERNANCE_PATTERNS = [
+  /evidence.*\.json$/i,
+  /^\d\d_.*\.md$/,
+  /-inventory\.json$/i,
+  /-reconciliation\.json$/i,
+];
 
 function isGovernance(file) {
   const name = basename(file);

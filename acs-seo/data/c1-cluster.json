@@ -1,4 +1,5 @@
 {
+  "_RETIRED": "RETIRED 2026-10-23. All 10 URLs return 404 \u2014 verified individually. The titles below remain accurate as a record of what was served on 2026-09-22, but the pages are gone. See 06_CRAWL_RECONCILIATION.md.",
   "_source": "Sitemap of www.asiancoding.com retrieved 2026-09-20; page titles fetched 2026-09-22 with a non-JS crawler. Titles are FACT, verbatim as served. Some render truncated because only the <title> is served — the body is client-side rendered.",
   "cluster": "C-1",
   "intent": "barcode scanner — generic commercial",

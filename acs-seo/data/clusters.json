@@ -1,4 +1,5 @@
 {
+ "_RETIRED": "RETIRED 2026-10-23. Every cluster owner and member returns 404, so no cannibalisation exists to resolve and decisions D-07/D-08 are moot. Do not trust a cannibalisation verdict built on this file; re-point the gate at data/real-inventory.json first. See 06_CRAWL_RECONCILIATION.md.",
  "_source": "00_SOURCE_PACK_INDEX.md §S-3. `canonical_owner` is null until the Owner decides; a null owner makes the cluster a HOLD for any new package. Setting one is an Owner decision, never a code change.",
  "clusters": [
   {
@@ -229,6 +230,5 @@
     "/why-acs/partner-ecosystem"
    ]
   }
- ],
- "_WARNING": "UNRELIABLE as of 22 Oct 2026 — cluster URLs include 404s, so the cannibalisation gate is checking against a site that does not exist. See 05_SITE_REALITY_CHECK.md."
+ ]
 }

@@ -76,4 +76,26 @@ chk "node cannibalisation-check.mjs 'GS1 standards'"                   0 "cannib
 chk "node cannibalisation-check.mjs 'GS1 standards' --url /new-page"   0 "cannibalisation-check works with --url"
 
 echo
+echo "CR-08 'serving' must need an actual customer (a bare 'serving' matched JSON keys)"
+chk "node claim-scan.mjs fixtures/cr08-serving.md" 1 "cr08 fixture still fails the gate"
+# The fixture is split: true positives above the FALSE POSITIVES marker, decoys below.
+# Only the line numbers matter here, so count CR-08 hits on each side separately.
+cr08_split=$(grep -n 'FALSE POSITIVES' fixtures/cr08-serving.md | cut -d: -f1)
+cr08_hits=$(node claim-scan.mjs fixtures/cr08-serving.md 2>/dev/null | grep -o 'CR-08' | wc -l | tr -d ' ')
+cr08_decoys=$(node claim-scan.mjs fixtures/cr08-serving.md 2>/dev/null \
+  | awk -v s="$cr08_split" '/CR-08/ { split($1,a,":"); if (a[1]+0 > s) n++ } END { print n+0 }')
+if [ "$cr08_hits" -ge 7 ]; then
+  printf 'PASS  %s\n' "cr08: all 7 real customer claims are caught ($cr08_hits findings)"
+else
+  printf 'FAIL  %s\n' "cr08: only $cr08_hits findings, expected at least 7"
+  fail=1
+fi
+if [ "$cr08_decoys" = 0 ]; then
+  printf 'PASS  %s\n' "cr08: no false positive on 'serving' without a customer"
+else
+  printf 'FAIL  %s\n' "cr08: $cr08_decoys false positive(s) below the decoy marker"
+  fail=1
+fi
+
+echo
 [ "$fail" = 0 ] && { echo "all regression checks passed"; exit 0; } || { echo "REGRESSION FAILED"; exit 1; }

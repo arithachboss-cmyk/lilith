@@ -1,0 +1,584 @@
+{
+ "_source": "Reconciliation of the 82 URLs in the 2026-09-20 sitemap (data/live-inventory.json) against the live site. Every row was fetched on 2026-10-23 via Brightdata.",
+ "checked_on": "2026-10-23",
+ "total": 82,
+ "resolving": 1,
+ "gone": 81,
+ "coverage": "82 of 82 checked. No sampling.",
+ "rows": [
+  {
+   "n": 1,
+   "path": "/",
+   "cls": "Landing",
+   "type": "Home",
+   "status": 200
+  },
+  {
+   "n": 2,
+   "path": "/solutions",
+   "cls": "Service",
+   "type": "Hub",
+   "status": 404
+  },
+  {
+   "n": 3,
+   "path": "/contact",
+   "cls": "Landing",
+   "type": "Conversion",
+   "status": 404
+  },
+  {
+   "n": 4,
+   "path": "/select-solution",
+   "cls": "Landing",
+   "type": "Tool",
+   "status": 404
+  },
+  {
+   "n": 5,
+   "path": "/brady",
+   "cls": "Product",
+   "type": "Brand hub",
+   "status": 404
+  },
+  {
+   "n": 6,
+   "path": "/brady/printers/m510",
+   "cls": "Product",
+   "type": "Model page",
+   "status": 404
+  },
+  {
+   "n": 7,
+   "path": "/brady/labels",
+   "cls": "Product",
+   "type": "Category",
+   "status": 404
+  },
+  {
+   "n": 8,
+   "path": "/brady/scanners-rfid",
+   "cls": "Product",
+   "type": "Category",
+   "status": 404
+  },
+  {
+   "n": 9,
+   "path": "/brady/software",
+   "cls": "Product",
+   "type": "Category",
+   "status": 404
+  },
+  {
+   "n": 10,
+   "path": "/brady/solutions/manufacturing",
+   "cls": "Service",
+   "type": "Solution",
+   "status": 404
+  },
+  {
+   "n": 11,
+   "path": "/brady/solutions/warehouse-logistics",
+   "cls": "Service",
+   "type": "Solution",
+   "status": 404
+  },
+  {
+   "n": 12,
+   "path": "/pos-barcode-system",
+   "cls": "Service",
+   "type": "Solution",
+   "status": 404
+  },
+  {
+   "n": 13,
+   "path": "/warehouse-data-capture",
+   "cls": "Service",
+   "type": "Solution",
+   "status": 404
+  },
+  {
+   "n": 14,
+   "path": "/rfid-workflow-context",
+   "cls": "Knowledge",
+   "type": "Explainer",
+   "status": 404
+  },
+  {
+   "n": 15,
+   "path": "/why-acs",
+   "cls": "Landing",
+   "type": "Company",
+   "status": 404
+  },
+  {
+   "n": 16,
+   "path": "/why-acs/30-years",
+   "cls": "Landing",
+   "type": "Company",
+   "status": 404
+  },
+  {
+   "n": 17,
+   "path": "/why-acs/service-capability",
+   "cls": "Service",
+   "type": "Company",
+   "status": 404
+  },
+  {
+   "n": 18,
+   "path": "/why-acs/partner-ecosystem",
+   "cls": "Landing",
+   "type": "Company",
+   "status": 404
+  },
+  {
+   "n": 19,
+   "path": "/esg-solutions",
+   "cls": "Service",
+   "type": "Solution",
+   "status": 404
+  },
+  {
+   "n": 20,
+   "path": "/retail",
+   "cls": "Service",
+   "type": "Industry",
+   "status": 404
+  },
+  {
+   "n": 21,
+   "path": "/logistics",
+   "cls": "Service",
+   "type": "Industry",
+   "status": 404
+  },
+  {
+   "n": 22,
+   "path": "/manufacturing",
+   "cls": "Service",
+   "type": "Industry",
+   "status": 404
+  },
+  {
+   "n": 23,
+   "path": "/industry/manufacturing",
+   "cls": "Service",
+   "type": "Industry",
+   "status": 404
+  },
+  {
+   "n": 24,
+   "path": "/industry/healthcare",
+   "cls": "Service",
+   "type": "Industry",
+   "status": 404
+  },
+  {
+   "n": 25,
+   "path": "/ai-consultant",
+   "cls": "Service",
+   "type": "Tool",
+   "status": 404
+  },
+  {
+   "n": 26,
+   "path": "/roi-calculator",
+   "cls": "Landing",
+   "type": "Tool",
+   "status": 404
+  },
+  {
+   "n": 27,
+   "path": "/roi-calculator/retail",
+   "cls": "Landing",
+   "type": "Tool",
+   "status": 404
+  },
+  {
+   "n": 28,
+   "path": "/roi-calculator/warehouse",
+   "cls": "Landing",
+   "type": "Tool",
+   "status": 404
+  },
+  {
+   "n": 29,
+   "path": "/roi-calculator/manufacturing",
+   "cls": "Landing",
+   "type": "Tool",
+   "status": 404
+  },
+  {
+   "n": 30,
+   "path": "/roi-calculator/mobility",
+   "cls": "Landing",
+   "type": "Tool",
+   "status": 404
+  },
+  {
+   "n": 31,
+   "path": "/case-studies",
+   "cls": "Landing",
+   "type": "Hub",
+   "status": 404
+  },
+  {
+   "n": 32,
+   "path": "/case-study/retail",
+   "cls": "Landing",
+   "type": "Case",
+   "status": 404
+  },
+  {
+   "n": 33,
+   "path": "/case-study/warehouse",
+   "cls": "Landing",
+   "type": "Case",
+   "status": 404
+  },
+  {
+   "n": 34,
+   "path": "/case-study/manufacturing",
+   "cls": "Landing",
+   "type": "Case",
+   "status": 404
+  },
+  {
+   "n": 35,
+   "path": "/case-study/logistics",
+   "cls": "Landing",
+   "type": "Case",
+   "status": 404
+  },
+  {
+   "n": 36,
+   "path": "/case-study/healthcare",
+   "cls": "Landing",
+   "type": "Case",
+   "status": 404
+  },
+  {
+   "n": 37,
+   "path": "/insights",
+   "cls": "Knowledge",
+   "type": "Hub",
+   "status": 404
+  },
+  {
+   "n": 38,
+   "path": "/revenue-articles",
+   "cls": "Knowledge",
+   "type": "Hub",
+   "status": 404
+  },
+  {
+   "n": 39,
+   "path": "/leadership",
+   "cls": "Landing",
+   "type": "Company",
+   "status": 404
+  },
+  {
+   "n": 40,
+   "path": "/partner-ecosystem-hub",
+   "cls": "Landing",
+   "type": "Company",
+   "status": 404
+  },
+  {
+   "n": 41,
+   "path": "/barcode-scanner-thailand",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 42,
+   "path": "/barcode-printer-thailand",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 43,
+   "path": "/honeywell-barcode-scanner",
+   "cls": "Product",
+   "type": "Brand",
+   "status": 404
+  },
+  {
+   "n": 44,
+   "path": "/tsc-barcode-printer",
+   "cls": "Product",
+   "type": "Brand",
+   "status": 404
+  },
+  {
+   "n": 45,
+   "path": "/rfid-warehouse-system",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 46,
+   "path": "/เครื่องสแกนบาร์โค้ด",
+   "cls": "Product",
+   "type": "Commercial TH",
+   "status": 404
+  },
+  {
+   "n": 47,
+   "path": "/barcode-label-printer",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 48,
+   "path": "/wireless-barcode-scanner",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 49,
+   "path": "/industrial-barcode-scanner",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 50,
+   "path": "/rfid-reader",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 51,
+   "path": "/barcode-printers",
+   "cls": "Product",
+   "type": "Category",
+   "status": 404
+  },
+  {
+   "n": 52,
+   "path": "/rfid-systems",
+   "cls": "Product",
+   "type": "Category",
+   "status": 404
+  },
+  {
+   "n": 53,
+   "path": "/barcode-scanner-price-guide",
+   "cls": "Knowledge",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 54,
+   "path": "/barcode-scanners",
+   "cls": "Product",
+   "type": "Category",
+   "status": 404
+  },
+  {
+   "n": 55,
+   "path": "/barcode-ribbons",
+   "cls": "Product",
+   "type": "Category",
+   "status": 404
+  },
+  {
+   "n": 56,
+   "path": "/warehouse-barcode-scanner",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 57,
+   "path": "/retail-barcode-scanner",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 58,
+   "path": "/2d-barcode-scanner",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 59,
+   "path": "/long-range-barcode-scanner",
+   "cls": "Product",
+   "type": "Commercial",
+   "status": 404
+  },
+  {
+   "n": 60,
+   "path": "/barcode-scanner-comparison",
+   "cls": "Knowledge",
+   "type": "Comparison",
+   "status": 404
+  },
+  {
+   "n": 61,
+   "path": "/barcode-printer-buying-guide",
+   "cls": "Knowledge",
+   "type": "Guide",
+   "status": 404
+  },
+  {
+   "n": 62,
+   "path": "/knowledge",
+   "cls": "Knowledge",
+   "type": "Hub",
+   "status": 404
+  },
+  {
+   "n": 63,
+   "path": "/knowledge/barcode-technology",
+   "cls": "Knowledge",
+   "type": "Cluster hub",
+   "status": 404
+  },
+  {
+   "n": 64,
+   "path": "/knowledge/barcode-equipment",
+   "cls": "Knowledge",
+   "type": "Cluster hub",
+   "status": 404
+  },
+  {
+   "n": 65,
+   "path": "/knowledge/rfid-technology",
+   "cls": "Knowledge",
+   "type": "Cluster hub",
+   "status": 404
+  },
+  {
+   "n": 66,
+   "path": "/knowledge/industry-applications",
+   "cls": "Knowledge",
+   "type": "Cluster hub",
+   "status": 404
+  },
+  {
+   "n": 67,
+   "path": "/knowledge/implementation-best-practices",
+   "cls": "Knowledge",
+   "type": "Cluster hub",
+   "status": 404
+  },
+  {
+   "n": 68,
+   "path": "/knowledge/regional-solutions",
+   "cls": "Knowledge",
+   "type": "Cluster hub",
+   "status": 404
+  },
+  {
+   "n": 69,
+   "path": "/knowledge/product-comparisons",
+   "cls": "Knowledge",
+   "type": "Cluster hub",
+   "status": 404
+  },
+  {
+   "n": 70,
+   "path": "/knowledge/emerging-trends",
+   "cls": "Knowledge",
+   "type": "Cluster hub",
+   "status": 404
+  },
+  {
+   "n": 71,
+   "path": "/knowledge/1d-vs-2d-barcode",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 72,
+   "path": "/knowledge/how-to-choose-barcode-scanner",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 73,
+   "path": "/knowledge/wired-vs-wireless-barcode-scanner",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 74,
+   "path": "/knowledge/barcode-printer-types",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 75,
+   "path": "/knowledge/rfid-vs-barcode",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 76,
+   "path": "/knowledge/rfid-warehouse-implementation",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 77,
+   "path": "/knowledge/barcode-inventory-management",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 78,
+   "path": "/knowledge/barcode-system-implementation",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 79,
+   "path": "/knowledge/barcode-scanner-troubleshooting",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 80,
+   "path": "/knowledge/barcode-printer-calibration",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 81,
+   "path": "/knowledge/barcode-label-materials",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  },
+  {
+   "n": 82,
+   "path": "/knowledge/barcode-wms-integration",
+   "cls": "Knowledge",
+   "type": "Article",
+   "status": 404
+  }
+ ]
+}

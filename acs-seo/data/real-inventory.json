@@ -1,0 +1,142 @@
+{
+  "_source": "Direct crawl of the live site on 2026-10-23, entered from the homepage and followed by internal links, not from any sitemap. Every row below was fetched. This file supersedes live-inventory.json.",
+  "crawled_on": "2026-10-23",
+  "method": "Brightdata scrape_as_markdown / scrape_as_html / scrape_batch. The sandbox egress proxy blocks asiancoding.com directly, so every fetch went through Brightdata.",
+  "hosts": {
+    "apex": "https://asiancoding.com",
+    "www": "https://www.asiancoding.com",
+    "relationship": "Both serve byte-identical content. Neither redirects to the other and no canonical tag names a preferred host."
+  },
+  "sitemap": {
+    "/sitemap.xml": 404,
+    "/sitemap_index.xml": 404,
+    "robots_txt": "200, but carries only Cloudflare content-signals boilerplate: no Sitemap: directive and no Disallow rules."
+  },
+  "distinct_pages": 6,
+  "addresses_serving_those_pages": 24,
+  "canonical_tags_found": 0,
+  "live": [
+    {
+      "page": "Home",
+      "addresses": ["/", "/index.html", "www:/", "www:/index.html"],
+      "status": 200,
+      "render": "Server-rendered static HTML. Full marketing copy present in source.",
+      "title": "ACS | Barcode, RFID & Identification Solutions",
+      "lang": "th",
+      "notes": "Assets versioned: styles.css?v=4, app.js?v=4, catalog-data.js?v=5, commerce.js?v=4. Featured-products grid is empty in source and filled by catalog-data.js."
+    },
+    {
+      "page": "Product catalogue",
+      "addresses": ["/products.html", "/products", "www:/products.html", "www:/products"],
+      "status": 200,
+      "render": "MIXED. Page chrome, headings, breadcrumb and body copy are server-rendered. The product grid is <div id=\"product-grid\"></div>, empty in source, populated client-side from catalog-data.js.",
+      "title": "รายการสินค้า ACS | Barcode, RFID, Printers & Supplies",
+      "lang": "th",
+      "notes": "No per-product URL exists. Product detail opens in <dialog id=\"product-dialog\">, so the 14 products have no addressable pages and no crawlable product content."
+    },
+    {
+      "page": "Cart / request submission",
+      "addresses": ["/cart.html", "/cart", "www:/cart.html", "www:/cart"],
+      "status": 200,
+      "render": "Server-rendered. Cart contents load client-side.",
+      "title": "ตะกร้าและส่งรายการ | ACS",
+      "lang": "th",
+      "notes": "Collects name, company, email, phone, province, postcode. States no payment is taken; ACS confirms price, stock and shipping first."
+    },
+    {
+      "page": "Commerce Lab (Shopify comparison sandbox)",
+      "addresses": ["/commerce-lab.html", "/commerce-lab", "www:/commerce-lab.html", "www:/commerce-lab"],
+      "status": 200,
+      "render": "Server-rendered shell, client-side app.",
+      "title": "ACS Commerce Lab | จำลองและเปรียบเทียบ Shopify",
+      "lang": "th",
+      "notes": "Self-declared simulation: prices, stock, customers and orders are sample data. Indexable but should not be. Noindex candidate."
+    },
+    {
+      "page": "Assessment (workflow-context intake)",
+      "addresses": ["/assessment", "/assessment.html", "www:/assessment", "www:/assessment.html"],
+      "status": 200,
+      "render": "Fully server-rendered, including the three-step form.",
+      "title": "ส่งข้อมูลกระบวนการทำงาน | ACS",
+      "lang": "th",
+      "notes": "Consent checkbox present. Explicitly states it is not an automated assessment, quotation or guarantee."
+    },
+    {
+      "page": "Download profile (planning overview)",
+      "addresses": ["/download-profile", "/download-profile.html", "www:/download-profile", "www:/download-profile.html"],
+      "status": 200,
+      "render": "Fully server-rendered.",
+      "title": "เอกสารเตรียมวางแผนโซลูชัน | ACS",
+      "lang": "th",
+      "notes": "Delivers ACS-Corporate-Profile-Planning-Overview.txt. Page itself says it is a .txt planning overview, not a company-profile PDF or commercial proposal."
+    }
+  ],
+  "live_but_not_public": [
+    {
+      "path": "/erp",
+      "status": 200,
+      "notes": "Auth-gated ACS ERP Command Center. Links to /signin-with-chatgpt, /planning-inbox and external acs-portal-six.yacht369.chatgpt.site. Should not be indexed."
+    },
+    {
+      "path": "/planning-inbox",
+      "status": 200,
+      "notes": "Auth-gated admin view of submitted requests. Should not be indexed."
+    },
+    {
+      "path": "/signin-with-chatgpt",
+      "status": 200,
+      "notes": "Serves OpenAI's own 'Welcome back' sign-in page under the asiancoding.com origin. Flagged for the Owner: a third-party credential form on ACS's own domain is a trust and phishing-surface question, not an SEO one."
+    }
+  ],
+  "defects": [
+    {
+      "id": "DEF-01",
+      "severity": "high",
+      "finding": "The sitemap is gone. /sitemap.xml and /sitemap_index.xml both 404, and robots.txt carries no Sitemap: directive.",
+      "consequence": "Nothing tells a crawler what the site contains."
+    },
+    {
+      "id": "DEF-02",
+      "severity": "high",
+      "finding": "81 of the 82 URLs in the old sitemap return 404. Only / survives.",
+      "consequence": "Every inbound link, bookmark and indexed result pointing at the old structure lands on a 404 with no redirect."
+    },
+    {
+      "id": "DEF-03",
+      "severity": "high",
+      "finding": "6 distinct pages are served at 24 addresses (apex and www, with and without .html) and not one page carries a canonical tag.",
+      "consequence": "Four-way duplication per page, with no signal naming the preferred address."
+    },
+    {
+      "id": "DEF-04",
+      "severity": "high",
+      "finding": "The live catalogue links to ACS's own dead pages. catalog-data.js sends 5 of 14 products to www.asiancoding.com paths that 404: /ads/barcode-scanner, /brady/printers/m510, /rfid-systems, /barcode-printers, /barcode-ribbons.",
+      "consequence": "Customers clicking 'ดูข้อมูลหมวดสินค้าจาก ACS' reach a 404. All five were fetched and confirmed."
+    },
+    {
+      "id": "DEF-05",
+      "severity": "medium",
+      "finding": "The footer on every page links to https://www.asiancoding.com/contact, which 404s.",
+      "consequence": "A site-wide broken link on the highest-intent navigation item."
+    },
+    {
+      "id": "DEF-06",
+      "severity": "medium",
+      "finding": "The 14 products have no URLs. Detail opens in a <dialog>.",
+      "consequence": "No product page can rank, and no product content is crawlable. The catalogue is the only product surface and its grid is client-side."
+    },
+    {
+      "id": "DEF-07",
+      "severity": "low",
+      "finding": "/commerce-lab is an indexable, self-declared simulation carrying sample prices and stock.",
+      "consequence": "Sample pricing is publicly crawlable. Relevant to CR-03 even though ACS did not author it as a price claim."
+    }
+  ],
+  "catalogue": {
+    "_source": "catalog-data.js?v=5, fetched 2026-10-23",
+    "categories": 6,
+    "products": 14,
+    "brands": ["Honeywell", "TSC", "Zebra", "Brady", "PRINTING SUPPLIES", "RFID SOLUTIONS"],
+    "note": "Each product carries an `evidence` field with values acs_named_model, manufacturer_reference or acs_named_family. That is the site's own provenance marking and is worth reusing in the claim register rather than inventing a parallel scheme."
+  }
+}
