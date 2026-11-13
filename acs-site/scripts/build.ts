@@ -51,6 +51,7 @@ const report = {
   indexableRoutes: site.pages.filter((p) => p.indexable).map((p) => p.route),
   activeEvidenceRecords: evidenceRecords.filter((r) => r.status === 'active').length,
   omittedFigures: site.omittedFigures,
+  shownFigures: site.shownFigures,
   // Drafts wait for a named person other than their author. `blockedBy` is empty when only that is missing.
   evidenceDrafts: evidenceRecords.filter((r) => r.status === 'draft').map((r) => ({ id: r.id, productId: r.subject.productId, feature: r.subject.feature, source: r.sourceUrl, blockedBy: draftBlockers(r).map((c) => c.name) })),
   figuresWithNoDraft: evidenceGaps,
@@ -63,5 +64,5 @@ const report = {
 writeFileSync(join(dist, 'build-report.json'), JSON.stringify(report, null, 2) + '\n');
 
 console.log(
-  `built ${site.pages.length} pages · system=${statusConfig.system} · indexable=${report.indexableRoutes.length} · omitted figures=${site.omittedFigures.length}`,
+  `built ${site.pages.length} pages · system=${statusConfig.system} · indexable=${report.indexableRoutes.length} · figures shown=${site.shownFigures.length} · held back=${site.omittedFigures.length}`,
 );

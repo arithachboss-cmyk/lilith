@@ -129,6 +129,8 @@ export interface Approval {
   approvedBy: string;
   /** ISO date or timestamp of the approval. */
   approvedOn: string;
+  /** What the approver said or was shown. Kept for the record; the gate does not read it. */
+  statement?: string;
 }
 
 /**

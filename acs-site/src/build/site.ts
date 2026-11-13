@@ -25,6 +25,8 @@ export interface RenderedSite {
   files: Map<string, string>;
   pages: PageInfo[];
   omittedFigures: OmittedFigure[];
+  /** Figure lines the pages do show, each with the record that allows it. */
+  shownFigures: Array<OmittedFigure & { recordId: string; approvedBy: string }>;
   /** Moved addresses → where each now lives. The host must apply these too. */
   redirects: Readonly<Record<string, string>>;
 }
@@ -99,5 +101,11 @@ export function renderSite(
   );
   const problems = redirectProblems(REDIRECTS, pages.map((p) => p.route));
   if (problems.length) throw new Error(`redirect list is wrong: ${problems.join('; ')}`);
-  return { files, pages, omittedFigures, redirects: REDIRECTS };
+  const shownFigures = products.flatMap((p) =>
+    splitFeatures(p.id, p.features, records, asOf).shown.flatMap((feature) => {
+      const record = records.find((r) => r.status === 'active' && r.subject.productId === p.id && r.subject.feature === feature);
+      return record ? [{ productId: p.id, feature, recordId: record.id, approvedBy: record.approvedBy ?? '' }] : [];
+    }),
+  );
+  return { files, pages, omittedFigures, shownFigures, redirects: REDIRECTS };
 }

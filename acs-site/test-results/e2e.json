@@ -1,6 +1,6 @@
 {
-  "ranAt": "2026-11-13T23:41:34.306Z",
-  "base": "http://127.0.0.1:37709",
+  "ranAt": "2026-11-13T23:53:57.975Z",
+  "base": "http://127.0.0.1:35653",
   "routes": 26,
   "passed": 41,
   "failed": 0,
@@ -91,7 +91,7 @@
     },
     {
       "id": "E09",
-      "name": "unsourced spec figures are omitted and the page says how many",
+      "name": "figure lines match the build report on all 14 product pages (7 shown under an approved record, 0 held back)",
       "pass": true,
       "detail": ""
     },

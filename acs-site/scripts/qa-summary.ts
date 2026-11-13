@@ -27,7 +27,7 @@ const unit = load<{ numTotalTests: number; numPassedTests: number; numFailedTest
 const canonical = load<{ checks: Check[] }>('canonical.json');
 const sitemap = load<{ checks: Check[]; urls: unknown[] }>('sitemap.json');
 const schema = load<{ checks: Check[] }>('schema.json');
-const claims = load<{ pass: boolean; byClass: Record<string, number>; omittedFigures: unknown[]; activeEvidenceRecords: number }>('claims.json');
+const claims = load<{ pass: boolean; byClass: Record<string, number>; omittedFigures: unknown[]; activeEvidenceRecords: number; shownFigures?: Array<{ recordId: string; approvedBy: string }> }>('claims.json');
 const cwv = load<{ passed: number; failed: number; pages: unknown[] }>('cwv.json');
 const offline = load<{ pass: boolean; commit: string; steps: Array<{ name: string; pass: boolean }>; networkBlocked: boolean }>('offline.json');
 
@@ -104,9 +104,15 @@ add('T11', 'The enquiry form refuses an empty required field and announces each 
 add('T12', 'Submitting returns not-connected and no success message appears', 'e2e.json', combine(fromE2e(['E19', 'E20']), unitTests(/store boundary/)));
 add('T13', 'Consent boxes start unticked; service consent required; marketing consent not', 'e2e.json', fromE2e(['E13', 'E17', 'E18']));
 add('T14', 'After a filled form, storage and URLs hold nothing personal', 'pii.json', fromE2e(['E21', 'E22', 'E23']));
-add('T15', 'A figure with no active evidence record is not shown, and the build names it', 'claims.json, norender.json',
+add('T15', 'A figure is shown only under an active evidence record; any other is held back and named', 'claims.json, norender.json',
   combine(
-    claims ? { status: claims.activeEvidenceRecords === 0 && claims.omittedFigures.length > 0 ? 'PASS' : 'FAIL', detail: `${claims.omittedFigures.length} figures held back, ${claims.activeEvidenceRecords} active records` } : { status: 'NOT RUN', detail: 'claims.json missing' },
+    // Every figure the build shows must sit under an approved record; the rest must be held back.
+    claims
+      ? {
+        status: (claims.shownFigures ?? []).every((f) => f.recordId && f.approvedBy) && (claims.shownFigures ?? []).length <= claims.activeEvidenceRecords ? 'PASS' : 'FAIL',
+        detail: `${(claims.shownFigures ?? []).length} figures shown, each under an approved record; ${claims.omittedFigures.length} held back; ${claims.activeEvidenceRecords} active records`,
+      }
+      : { status: 'NOT RUN', detail: 'claims.json missing' },
     fromE2e(['E09']),
     unitTests(/what a product page may show/),
   ));

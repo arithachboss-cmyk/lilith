@@ -1,18 +1,18 @@
 {
-  "ranAt": "2026-11-13T23:41:14.988Z",
+  "ranAt": "2026-11-13T23:46:38.324Z",
   "scanner": "acs-seo/tools/claim-scan.mjs over dist/",
   "filesScanned": 29,
   "pass": true,
   "error": "",
   "byClass": {
     "BLOCKED": 0,
-    "EVIDENCE_REQUIRED": 95,
+    "EVIDENCE_REQUIRED": 90,
     "OWNER_REQUIRED": 2
   },
   "tally": {
     "CR-10 OWNER_REQUIRED company-tenure": 2,
     "CR-06 EVIDENCE_REQUIRED partner-claim": 2,
-    "CR-06 EVIDENCE_REQUIRED vendor-name": 93
+    "CR-06 EVIDENCE_REQUIRED vendor-name": 88
   },
   "blocked": [],
   "aboutPageClaims": [
@@ -25,35 +25,50 @@
       "verdict": "CLEARED"
     }
   ],
-  "activeEvidenceRecords": 0,
-  "omittedFigures": [
+  "activeEvidenceRecords": 7,
+  "omittedFigures": [],
+  "shownFigures": [
     {
       "productId": "1950g",
-      "feature": "มาตรฐานการป้องกัน IP52"
+      "feature": "มาตรฐานการป้องกัน IP52",
+      "recordId": "EV-1950G-01",
+      "approvedBy": "Arithach Chartariyapong, CEO, Asian Coding Systems"
     },
     {
       "productId": "1950g",
-      "feature": "ช่วงอุณหภูมิใช้งาน 0–50 °C"
+      "feature": "ช่วงอุณหภูมิใช้งาน 0–50 °C",
+      "recordId": "EV-1950G-02",
+      "approvedBy": "Arithach Chartariyapong, CEO, Asian Coding Systems"
     },
     {
       "productId": "m510",
-      "feature": "พิมพ์แบบ Thermal Transfer ความละเอียด 300 dpi"
+      "feature": "พิมพ์แบบ Thermal Transfer ความละเอียด 300 dpi",
+      "recordId": "EV-M510-01",
+      "approvedBy": "Arithach Chartariyapong, CEO, Asian Coding Systems"
     },
     {
       "productId": "m510",
-      "feature": "รองรับฉลากกว้างสูงสุด 1.5 นิ้ว"
+      "feature": "รองรับฉลากกว้างสูงสุด 1.5 นิ้ว",
+      "recordId": "EV-M510-02",
+      "approvedBy": "Arithach Chartariyapong, CEO, Asian Coding Systems"
     },
     {
       "productId": "1960g",
-      "feature": "มาตรฐานการป้องกัน IP52"
+      "feature": "มาตรฐานการป้องกัน IP52",
+      "recordId": "EV-1960G-01",
+      "approvedBy": "Arithach Chartariyapong, CEO, Asian Coding Systems"
     },
     {
       "productId": "zd421",
-      "feature": "ความละเอียด 203 หรือ 300 dpi ตามรุ่นย่อย"
+      "feature": "ความละเอียด 203 หรือ 300 dpi ตามรุ่นย่อย",
+      "recordId": "EV-ZD421-01",
+      "approvedBy": "Arithach Chartariyapong, CEO, Asian Coding Systems"
     },
     {
       "productId": "ds2208",
-      "feature": "เซนเซอร์ภาพ 640 × 480 พิกเซล"
+      "feature": "เซนเซอร์ภาพ 640 × 480 พิกเซล",
+      "recordId": "EV-DS2208-01",
+      "approvedBy": "Arithach Chartariyapong, CEO, Asian Coding Systems"
     }
   ]
 }

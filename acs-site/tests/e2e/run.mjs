@@ -157,9 +157,25 @@ try {
     if (await page.locator('#enquiry-form').isVisible()) deadControls.push('enquiry form');
     const noscript = await page.locator('noscript').first().textContent();
     check('E33', 'without JavaScript, script-only controls stay hidden and the page says how to reach ACS', deadControls.length === 0 && noscript.includes('02-203-0232'), deadControls.join(' | '));
-    await page.goto(`${BASE}/products/1950g/`);
-    const text = await page.locator('main').textContent();
-    check('E09', 'unsourced spec figures are omitted and the page says how many', !text.includes('IP52') && !text.includes('0–50') && (await page.locator('[data-omitted-figures="2"]').count()) === 1);
+    // What each product page shows must match the build report exactly: a figure
+    // line appears only if the report ties it to an approved record, a held-back
+    // line never appears, and the page states how many it holds back.
+    const wrongFigures = [];
+    for (const route of PRODUCT_ROUTES) {
+      const id = route.split('/')[2];
+      await page.goto(BASE + route);
+      const lines = await page.locator('.feature-list li').allTextContents();
+      const shown = (report.shownFigures ?? []).filter((f) => f.productId === id);
+      const held = report.omittedFigures.filter((f) => f.productId === id);
+      for (const f of shown) if (!lines.includes(f.feature) || !f.recordId || !f.approvedBy) wrongFigures.push(`${id}: approved line missing "${f.feature}"`);
+      for (const f of held) if (lines.includes(f.feature)) wrongFigures.push(`${id}: held-back line shown "${f.feature}"`);
+      const notice = await page.locator('[data-omitted-figures]').getAttribute('data-omitted-figures').catch(() => null);
+      if ((held.length ? String(held.length) : null) !== notice) wrongFigures.push(`${id}: page says ${notice} held back, report says ${held.length}`);
+      const sourceNote = await page.locator('[data-figure-source]').count();
+      if (shown.length > 0 && sourceNote !== 1) wrongFigures.push(`${id}: shows figures without naming their source`);
+    }
+    const accounted = (report.shownFigures ?? []).length + report.omittedFigures.length;
+    check('E09', `figure lines match the build report on all ${PRODUCT_ROUTES.length} product pages (${(report.shownFigures ?? []).length} shown under an approved record, ${report.omittedFigures.length} held back)`, wrongFigures.length === 0 && accounted === 7, wrongFigures.join(' | '));
     const familyNotes = [];
     for (const id of ['tc22', 'ds3600', 'te200']) {
       await page.goto(`${BASE}/products/${id}/`);

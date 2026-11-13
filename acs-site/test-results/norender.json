@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-11-13T23:41:34.307Z",
+  "ranAt": "2026-11-13T23:53:57.977Z",
   "about": "product text and catalogue present in the HTML with JavaScript disabled",
   "passed": 5,
   "failed": 0,
@@ -30,7 +30,7 @@
     },
     {
       "id": "E09",
-      "name": "unsourced spec figures are omitted and the page says how many",
+      "name": "figure lines match the build report on all 14 product pages (7 shown under an approved record, 0 held back)",
       "pass": true,
       "detail": ""
     }

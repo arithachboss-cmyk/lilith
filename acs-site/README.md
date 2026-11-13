@@ -38,6 +38,7 @@ testing a stale server from an earlier run.
 | M2c | Evidence drafts for five of the seven held-back figures, each quoting the manufacturer's own page; the gate now compares number and unit (Thai or English spelling) and rejects a longer number that merely ends the same way | 176/176 | 41/41 | BLOCKED 0 |
 | M2d | Brady M510 page read: a ready draft for 300 dpi; the label-width line stays blocked because the source states inches only | 177/177 | 41/41 | BLOCKED 0 |
 | M2e | Owner decision D-12: the M510 label width is shown in inches only, as Brady states it. Recorded as an override beside the untouched snapshot; all seven drafts now wait only for an approver | 184/184 | 41/41 | BLOCKED 0 |
+| M2f | The Owner approved all seven evidence records. The seven spec figures are now shown, each on its product page with its source named; nothing is held back | 186/186 | 41/41 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
 `npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
@@ -47,9 +48,10 @@ testing a stale server from an earlier run.
 and the eighteenth is a human step. The gate still needs M2 complete, a review of the
 exact commit by someone other than the author, and Owner UAT.
 
-**M2 is not finished.** M2a and M2b are the parts that did not need material from ACS.
-What is left needs it: spec figures need a named person at ACS to approve seven drafts; prices need a dated price list; stock needs dated
-stock data; product pages need images; DS3600 needs its model list. See "Still missing".
+**M2 is not finished.** Spec figures are done: all seven are shown under approved
+records. What is left needs material from ACS: prices need a dated price list; stock
+needs dated stock data; product pages need images; DS3600 needs its model list. See
+"Still missing".
 
 ## Non-negotiables, and where each one lives
 
@@ -76,9 +78,11 @@ stock data; product pages need images; DS3600 needs its model list. See "Still m
 ## Status rules
 
 `system` is `demo`. A feature moves to `live` only when its acceptance test passes **and**
-the material behind it is named. Four features cannot move until ACS supplies something:
-spec figures (an approver), prices (a dated price list),
-stock (dated stock data) and product images (the files).
+the material behind it is named. Three features cannot move until ACS supplies something:
+prices (a dated price list), stock (dated stock data) and product images (the files).
+
+Spec figures moved to `live` on 2026-11-13, when the Owner approved the seven evidence
+records.
 
 The company page moved to `live` on 2026-11-13: the Owner approved the copy and chose its
 address (D-11). `live` here means the content is real and approved. The system as a whole
@@ -117,7 +121,8 @@ Recorded in `../acs-seo/data/clusters.json` (`decisions_made`) and
    author, the figure appears on the product page. If not, it stays hidden and
    `dist/build-report.json` records the refusal.
 
-Seven drafts exist, one for every held-back figure. Each is blocked by nothing except step 2:
+Seven records exist, one for every figure line in the catalogue. On 2026-11-13 the Owner
+(Arithach Chartariyapong, CEO) approved all seven, so all seven are active and shown:
 
 | Draft | Product | Figure | The manufacturer's words |
 |---|---|---|---|
@@ -164,9 +169,14 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 
 - **Demo mode.** The enquiry form validates and then refuses to submit; nothing is stored
   or sent anywhere. The basket keeps product ids in `sessionStorage` and nothing else.
-- **No active evidence.** Seven drafts wait for an approver; zero records are active, so all
-  7 figure lines across 5 products are still omitted. `dist/build-report.json` lists each.
-- **The drafts cite a web page, not a signed datasheet.** The source is the
+- **Seven figures are shown, on the Owner's approval.** Remove a line from
+  `evidence-approvals.json` and that figure is hidden again on the next build. `dist/build-report.json` lists each.
+- **One person approved all seven records, and no one has checked the quotes against the
+  pages independently.** The gate checks that the approver is not the author; it cannot
+  check that the author transcribed the source correctly.
+- **The ZD421 line covers both resolutions** ("203 หรือ 300 dpi ตามรุ่นย่อย"). Which one ACS
+  supplies was not stated at approval; the line does not claim either.
+- **The records cite a web page, not a signed datasheet.** The source is the
   manufacturer's own product page as served on 2026-11-13. It carries no revision number.
   The approver also confirms that the model ACS sells is the one the page describes.
 - **Redirects are a hosting requirement.** `/why-acs` and `/company` redirect on the
@@ -196,7 +206,6 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 
 ## Still missing (planned, not built)
 
-- An approver for the seven drafts.
 - A dated ACS price list, dated stock data, product images, the DS3600 model list.
 - A redirect plan for the 81 dead URLs of the old site — needs Search Console data.
   Only `/why-acs` is redirected so far, because the Owner named its new home.
@@ -204,7 +213,7 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 
 ## Known scanner note
 
-`npm run claims` reports 94 `EVIDENCE_REQUIRED` and 2 `OWNER_REQUIRED` findings, and no
+`npm run claims` reports 90 `EVIDENCE_REQUIRED` and 2 `OWNER_REQUIRED` findings, and no
 `BLOCKED`. Almost all are CR-06 on a manufacturer's name used as a product brand
 (Honeywell, TSC, Zebra, Brady): the rule working as written, since a vendor name needs a
 human to confirm it is a spec reference and not a partnership claim.

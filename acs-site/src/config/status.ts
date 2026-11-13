@@ -36,7 +36,8 @@ export const statusConfig: StatusConfig = {
     search: 'live',
     enquiry: 'demo',
     basket: 'demo',
-    specFigures: 'not_connected',
+    // Seven figures, each under an evidence record the Owner approved on 2026-11-13.
+    specFigures: 'live',
     prices: 'not_connected',
     stock: 'not_connected',
     productImages: 'not_connected',
@@ -73,7 +74,7 @@ export const FEATURE_NOTE: Record<FeatureKey, string> = {
   search: 'ค้นหาในเบราว์เซอร์จากข้อมูลชุดเดียวกัน',
   enquiry: 'กรอกและตรวจข้อมูลได้ แต่ยังไม่ส่งและไม่บันทึกที่ใด',
   basket: 'เก็บเฉพาะรหัสสินค้าในเบราว์เซอร์นี้ ไม่ส่งถึง ACS',
-  specFigures: 'รอ datasheet จากผู้ผลิต',
+  specFigures: 'แสดงเฉพาะตัวเลขที่ตรงกับหน้าผลิตภัณฑ์ของผู้ผลิตและมีผู้อนุมัติของ ACS',
   prices: 'รอรายการราคา ACS พร้อมวันที่มีผล',
   stock: 'รอข้อมูลสต็อก ACS พร้อมวันที่ของแต่ละตัวเลข',
   productImages: 'รอไฟล์รูปสินค้า',

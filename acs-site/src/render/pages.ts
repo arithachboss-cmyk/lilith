@@ -123,6 +123,10 @@ export function productPage(
   const category = categoryById(p.category);
   const { shown, omitted } = splitFeatures(p.id, p.features, records, asOf);
   const ref = referenceLink(p);
+  // A manufacturer link is a source only for the figures an approved record ties to it.
+  const sources = records.filter((r) => r.status === 'active' && r.subject.productId === p.id && shown.includes(r.subject.feature));
+  const sourced = ref !== null && sources.length > 0 && sources.every((r) => r.sourceUrl === ref);
+  const checkedOn = sources.map((r) => r.retrievedOn).sort().at(-1) ?? '';
   const product = productJsonLd(p);
   const jsonLd: JsonLd[] = [...(product ? [product] : []), breadcrumbJsonLd(p)];
   const features = shown.length
@@ -156,7 +160,7 @@ export function productPage(
         <a class="button button-outline" href="/enquiry/">ขอราคา / ติดต่อ ACS</a>
       </p>
       <p id="basket-feedback" class="count" role="status" aria-live="polite"></p>
-      ${ref ? `<p class="ref"><a href="${esc(ref)}" rel="noopener noreferrer external">${esc(p.referenceLabel)}<span class="sr-only"> (เปิดเว็บไซต์ภายนอก)</span></a> <span class="muted">— ลิงก์อ้างอิงของผู้ผลิต ไม่ใช่หลักฐานยืนยันสเปกของสินค้าที่ ACS จำหน่าย</span></p>` : ''}
+      ${ref ? `<p class="ref"><a href="${esc(ref)}" rel="noopener noreferrer external">${esc(p.referenceLabel)}<span class="sr-only"> (เปิดเว็บไซต์ภายนอก)</span></a> <span class="muted"${sourced ? ` data-figure-source="${sources.length}"` : ''}>${sourced ? `— แหล่งที่มาของตัวเลขสเปกในหน้านี้ ตรวจสอบเมื่อ ${esc(checkedOn)} รุ่นย่อยและอุปกรณ์เสริมยืนยันกับ ACS` : '— ลิงก์อ้างอิงของผู้ผลิต ไม่ใช่หลักฐานยืนยันสเปกของสินค้าที่ ACS จำหน่าย'}</span></p>` : ''}
     </div>
   </div>
 </div>`;

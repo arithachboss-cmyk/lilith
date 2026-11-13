@@ -111,9 +111,19 @@ describe('what a product page may show', () => {
     expect(figureAllowed('1950g', feature, [{ ...active, expiresOn: '2026-11-12' }], '2026-11-13')).toBe(false);
   });
 
-  it('ships zero active records today, so every figure line is omitted', () => {
-    expect(evidenceRecords.filter((r) => r.status === 'active')).toHaveLength(0);
+  it('ships seven active records, each approved by someone other than its author, and holds nothing back', () => {
+    const active = evidenceRecords.filter((r) => r.status === 'active');
+    expect(active).toHaveLength(7);
+    for (const r of active) {
+      expect(r.approvedBy).toBeTruthy();
+      expect(r.approvedBy!.trim().toLowerCase()).not.toBe(r.author.trim().toLowerCase());
+    }
     const omitted = products.flatMap((p) => splitFeatures(p.id, p.features, evidenceRecords, '2026-11-13').omitted);
+    expect(omitted).toEqual([]);
+  });
+
+  it('holds all seven back again the moment the approvals are taken away', () => {
+    const omitted = products.flatMap((p) => splitFeatures(p.id, p.features, [], '2026-11-13').omitted);
     expect(omitted).toHaveLength(7);
   });
 

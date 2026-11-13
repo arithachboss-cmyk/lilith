@@ -8,11 +8,21 @@ const asOf = '2026-11-13';
 const held = products.flatMap((p) => splitFeatures(p.id, p.features, [], asOf).omitted.map((feature) => `${p.id}|${feature}`));
 
 describe('evidence drafts', () => {
-  it('are all drafts, and none is approved yet', () => {
+  it('are written as drafts; only a recorded approval makes one active', () => {
     expect(evidenceDrafts.every((r) => r.status === 'draft' && !r.approvedBy)).toBe(true);
-    expect(evidenceApprovals).toEqual([]);
     expect(evidenceProblems).toEqual([]);
-    expect(evidenceRecords.filter((r) => r.status === 'active')).toEqual([]);
+    expect(evidenceApprovals.map((a) => a.recordId).sort()).toEqual(evidenceDrafts.map((r) => r.id).sort());
+    expect(evidenceRecords.filter((r) => r.status === 'active')).toHaveLength(evidenceApprovals.length);
+  });
+
+  it('were each approved by a named person who is not the author', () => {
+    for (const a of evidenceApprovals) {
+      const draft = evidenceDrafts.find((r) => r.id === a.recordId)!;
+      expect(a.approvedBy).toMatch(/\S+ \S+/);
+      expect(a.approvedBy.toLowerCase()).not.toContain('claude');
+      expect(a.approvedBy.trim().toLowerCase()).not.toBe(draft.author.trim().toLowerCase());
+      expect(a.approvedOn).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    }
   });
 
   it('each point at a figure line the catalogue really has', () => {
@@ -48,7 +58,9 @@ describe('evidence drafts', () => {
 
   it('show nothing while they are drafts', () => {
     const p = products.find((x) => x.id === '1950g')!;
-    expect(splitFeatures(p.id, p.features, evidenceRecords, asOf).omitted).toHaveLength(2);
+    const unapproved = applyApprovals(evidenceDrafts, [], new AuditLog()).records;
+    expect(unapproved.every((r) => r.status === 'draft')).toBe(true);
+    expect(splitFeatures(p.id, p.features, unapproved, asOf).omitted).toHaveLength(2);
   });
 });
 

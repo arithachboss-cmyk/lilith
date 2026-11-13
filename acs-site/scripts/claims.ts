@@ -49,7 +49,7 @@ const aboutClaims = aboutRows.map((cr) => {
 const unevidenced = aboutClaims.filter((c) => c.verdict !== 'CLEARED');
 
 const report = JSON.parse(readFileSync(join(root, 'dist', 'build-report.json'), 'utf8')) as {
-  omittedFigures: unknown[]; activeEvidenceRecords: number;
+  omittedFigures: unknown[]; activeEvidenceRecords: number; shownFigures?: Array<{ recordId: string; approvedBy: string }>;
 };
 const pass = !error && files.length > 0 && blocked.length === 0 && unevidenced.length === 0;
 writeFileSync(join(out, 'claims.json'), JSON.stringify({
@@ -64,10 +64,11 @@ writeFileSync(join(out, 'claims.json'), JSON.stringify({
   aboutPageClaims: aboutClaims,
   activeEvidenceRecords: report.activeEvidenceRecords,
   omittedFigures: report.omittedFigures,
+  shownFigures: report.shownFigures ?? [],
 }, null, 2) + '\n');
 
 console.log(`${pass ? 'PASS' : 'FAIL'}  claim scan: BLOCKED ${byClass.BLOCKED} · EVIDENCE_REQUIRED ${byClass.EVIDENCE_REQUIRED} · OWNER_REQUIRED ${byClass.OWNER_REQUIRED} · files ${files.length}`);
-console.log(`      figures held back for want of evidence: ${report.omittedFigures.length}`);
+console.log(`      figures shown under an approved record: ${(report.shownFigures ?? []).length} · held back for want of evidence: ${report.omittedFigures.length}`);
 console.log(`      about page claims: ${aboutClaims.map((c) => `${c.cr} ${c.verdict}`).join(' · ') || 'none raised'}`);
 if (error) console.log(`      ${error}`);
 process.exit(pass ? 0 : 1);

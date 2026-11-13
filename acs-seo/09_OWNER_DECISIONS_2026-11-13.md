@@ -1,6 +1,6 @@
 # Owner decisions — 13 November 2026
 
-Five decisions the Owner made on 13 Nov 2026. They close items B, C and D of
+Six decisions the Owner made on 13 Nov 2026. They close items B, C and D of
 `07_OWNER_DECISION_REPORT.md`. Item A (the dead-link patch on the live site) is unchanged:
 authorised on 23 Oct, still not applied, because the live site's source is not reachable
 from here.
@@ -12,6 +12,8 @@ from here.
 | D-11 | Where does the company copy live? | `/about/`. `/why-acs` and `/company` redirect to it. |
 | — | Is `packages/about-acs/draft-v3-evidenced.md` approved for that page? | Yes. Approved as shown, unchanged. |
 | D-12 | The catalogue gives the Brady M510's label width as "1.5 นิ้ว (38.1 มม.)". Brady's page states 1.5 in and no millimetre value. What does the site show? | Only "1.5 นิ้ว", as Brady states it. |
+
+| — | Seven evidence records for spec figures (CR-07), drafted from the manufacturers' product pages. Who approves them? | The Owner approved all seven himself. |
 
 ## What changed because of them
 
@@ -27,6 +29,10 @@ from here.
 - D-12 is recorded in `../acs-site/src/data/catalog.overrides.json`. The catalogue
   snapshot is not edited. The live site still shows the line with "(38.1 มม.)"; changing
   that is a separate edit to the live site, which is not reachable from here.
+
+- The seven approvals are in `../acs-site/src/data/evidence-approvals.json`. The seven
+  figures now appear on five product pages of the rebuild, each naming its source.
+  Removing an approval hides its figure again.
 
 ## What did not change
 
