@@ -1,6 +1,6 @@
 # QA report — ACS website rebuild (M3, author's part)
 
-**Commit tested:** `45a10e3` (M2d; earlier runs of this report were on `1c6841c`, `74d1468` and `f335044`) · **Date:** 2026-11-13 · **System status:** demo
+**Commit tested:** `9c4a07b` (M2e; earlier runs of this report were on `1c6841c`, `74d1468`, `f335044` and `45a10e3`) · **Date:** 2026-11-13 · **System status:** demo
 
 **M3 gate: CLOSED.** The automated tests are green, but M3 closes only when all three of
 these have happened, and none has:
@@ -19,14 +19,14 @@ evidence file is missing is reported NOT RUN, never assumed.
 
 | # | What it proves | Result | Evidence in `test-results/` |
 |---|---|---|---|
-| T1 | Every rule and parser behaves, including on Thai input | PASS · 177/177 unit tests | `unit.json` |
-| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `45a10e3`, network blocked | `offline.json` |
+| T1 | Every rule and parser behaves, including on Thai input | PASS · 184/184 unit tests | `unit.json` |
+| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `9c4a07b`, network blocked | `offline.json` |
 | T3 | 14 product routes return 200 with distinct headings | PASS · E01, E02, E31 | `e2e.json` |
 | T4 | Self-referencing canonical on every indexable page; no page answers at two addresses | PASS · 7/7 + E28, E29, E36 | `canonical.json`, `links.json` |
 | T5 | Product text is present with JavaScript disabled | PASS · E07, E08, E33, E37 | `norender.json` |
 | T6 | No internal link resolves to a 404 | PASS · E05, E06 | `links.json` |
 | T7 | The sitemap lists every indexable URL and only those; robots.txt names it | PASS · 10/10 | `sitemap.json` |
-| T8 | The claim scanner reports zero BLOCKED over the built HTML | PASS · BLOCKED 0, EVIDENCE_REQUIRED 94; both about-page claim rows CLEARED | `claims.json` |
+| T8 | The claim scanner reports zero BLOCKED over the built HTML | PASS · BLOCKED 0, EVIDENCE_REQUIRED 95; both about-page claim rows CLEARED | `claims.json` |
 | T9 | No serious or critical accessibility violation at 360 and 1280 px | PASS · E26 at both widths | `axe.json` |
 | T10 | No horizontal page scroll at 360 or 1280 px | PASS · E25 at both widths | `overflow.json` |
 | T11 | The enquiry form refuses an empty required field and announces each error | PASS · E15, E16, E24 | `e2e.json` |
@@ -111,25 +111,24 @@ seen for one interaction per page, an approximation of INP.
 
 Only ACS can supply these. Nothing below was guessed or filled in.
 
-- **An approver for six drafts.** `EV-1950G-01`, `EV-1950G-02`, `EV-1960G-01`,
-  `EV-ZD421-01`, `EV-DS2208-01`, `EV-M510-01` each quote the manufacturer's product page,
-  and each page agrees with the catalogue. A named person at ACS, not the drafting
-  assistant, has to approve each and confirm the model ACS sells is the one the page
-  describes. README, "Evidence".
-- **The M510 label-width line** ("1.5 นิ้ว (38.1 มม.)"). Brady's page states 1.5 in and no
-  millimetre value, so `EV-M510-02` is blocked. It needs a Brady document that states the
-  width in millimetres, or an Owner decision on the wording.
+- **An approver for seven drafts**, one for every held-back figure: `EV-1950G-01`,
+  `EV-1950G-02`, `EV-1960G-01`, `EV-ZD421-01`, `EV-DS2208-01`, `EV-M510-01`,
+  `EV-M510-02`. Each quotes the manufacturer's product page. A named person at ACS, not
+  the drafting assistant, has to approve each and confirm the model ACS sells is the one
+  the page describes. README, "Evidence".
 - An ACS price list with an effective date → prices.
 - Stock and lead-time data with dates → stock.
 - Which DS3600 models ACS sells.
 - Product images.
 - A backend for enquiries, with its own gate.
 
-Decisions D-09, D-10 and D-11 are no longer open: the Owner made them on 2026-11-13.
+Decisions D-09, D-10, D-11 and D-12 are no longer open: the Owner made them on 2026-11-13.
+D-12 shows the M510 label width as "1.5 นิ้ว" only; `tests/unit/overrides.test.ts` (7)
+checks that the snapshot is untouched and that an override can only say less.
 
 ## For the reviewer
 
-Review commit `45a10e3` (code) — the commit after it adds only this report and evidence.
+Review commit `9c4a07b` (code) — the commit after it adds only this report and evidence.
 
 ```sh
 cd acs-site && npm ci
