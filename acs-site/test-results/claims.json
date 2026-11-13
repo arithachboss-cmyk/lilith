@@ -1,18 +1,18 @@
 {
-  "ranAt": "2026-11-13T23:30:24.453Z",
+  "ranAt": "2026-11-13T23:41:14.988Z",
   "scanner": "acs-seo/tools/claim-scan.mjs over dist/",
   "filesScanned": 29,
   "pass": true,
   "error": "",
   "byClass": {
     "BLOCKED": 0,
-    "EVIDENCE_REQUIRED": 94,
+    "EVIDENCE_REQUIRED": 95,
     "OWNER_REQUIRED": 2
   },
   "tally": {
     "CR-10 OWNER_REQUIRED company-tenure": 2,
     "CR-06 EVIDENCE_REQUIRED partner-claim": 2,
-    "CR-06 EVIDENCE_REQUIRED vendor-name": 92
+    "CR-06 EVIDENCE_REQUIRED vendor-name": 93
   },
   "blocked": [],
   "aboutPageClaims": [
@@ -41,7 +41,7 @@
     },
     {
       "productId": "m510",
-      "feature": "รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)"
+      "feature": "รองรับฉลากกว้างสูงสุด 1.5 นิ้ว"
     },
     {
       "productId": "1960g",

@@ -37,6 +37,7 @@ testing a stale server from an earlier run.
 | M2b | Owner decisions D-09, D-10, D-11 built: six category pages, the ribbon category owning the ribbon choice, the approved company copy at `/about/` with `/why-acs` and `/company` redirecting to it; evidence drafts and a recorded-approval path | 169/169 | 41/41 | BLOCKED 0 |
 | M2c | Evidence drafts for five of the seven held-back figures, each quoting the manufacturer's own page; the gate now compares number and unit (Thai or English spelling) and rejects a longer number that merely ends the same way | 176/176 | 41/41 | BLOCKED 0 |
 | M2d | Brady M510 page read: a ready draft for 300 dpi; the label-width line stays blocked because the source states inches only | 177/177 | 41/41 | BLOCKED 0 |
+| M2e | Owner decision D-12: the M510 label width is shown in inches only, as Brady states it. Recorded as an override beside the untouched snapshot; all seven drafts now wait only for an approver | 184/184 | 41/41 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
 `npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
@@ -47,8 +48,7 @@ and the eighteenth is a human step. The gate still needs M2 complete, a review o
 exact commit by someone other than the author, and Owner UAT.
 
 **M2 is not finished.** M2a and M2b are the parts that did not need material from ACS.
-What is left needs it: spec figures need a named person at ACS to approve six drafts,
-and a decision on the M510 label-width line; prices need a dated price list; stock needs dated
+What is left needs it: spec figures need a named person at ACS to approve seven drafts; prices need a dated price list; stock needs dated
 stock data; product pages need images; DS3600 needs its model list. See "Still missing".
 
 ## Non-negotiables, and where each one lives
@@ -66,6 +66,7 @@ stock data; product pages need images; DS3600 needs its model list. See "Still m
 | Structured data never carries a price, offer, availability, rating or review | `src/render/structured.ts` |
 | A page's `lastmod` moves only when its content does; a changed page cannot keep its old date | `src/build/versions.ts`, `src/data/page-versions.json` |
 | Catalogue data is a verbatim snapshot, never edited to fit | `src/data/catalog.source.json` |
+| A line shown differently from the snapshot needs a recorded Owner decision, and may only say less | `src/data/catalog.overrides.json`, `src/rules/overrides.ts` |
 | A category page states only what the catalogue states | `categoryPage` in `src/render/pages.ts`, `tests/unit/category.test.ts` |
 | The company copy is the governed draft, character for character | `src/content/about.json`, `tests/unit/about.test.ts` |
 | Every claim the company page makes has a CLEARED evidence record | `scripts/claims.ts` |
@@ -76,7 +77,7 @@ stock data; product pages need images; DS3600 needs its model list. See "Still m
 
 `system` is `demo`. A feature moves to `live` only when its acceptance test passes **and**
 the material behind it is named. Four features cannot move until ACS supplies something:
-spec figures (an approver, and a decision on the M510 label-width line), prices (a dated price list),
+spec figures (an approver), prices (a dated price list),
 stock (dated stock data) and product images (the files).
 
 The company page moved to `live` on 2026-11-13: the Owner approved the copy and chose its
@@ -104,6 +105,7 @@ Recorded in `../acs-seo/data/clusters.json` (`decisions_made`) and
 |---|---|
 | D-09: six category pages | `/categories/<id>/`, generated from the catalogue. Not under `/products/`, because two entries are named `labels` and `rfid` like their categories. |
 | D-10: the ribbon category owns "ริบบอน" | `/categories/ribbons/` sets the three kinds side by side, using the catalogue's own words. The three ribbon pages stay. |
+| D-12: the M510 label width in inches only | The snapshot says "1.5 นิ้ว (38.1 มม.)"; Brady's page states 1.5 in and no millimetre value. The site shows "1.5 นิ้ว". The snapshot file is unchanged; the change lives in `src/data/catalog.overrides.json`. |
 | D-11: the company page is `/about/` | The approved copy, verbatim. `/why-acs` and `/company` answer 301 to it in every spelling. |
 
 ## Evidence: how a figure gets shown
@@ -115,7 +117,7 @@ Recorded in `../acs-seo/data/clusters.json` (`decisions_made`) and
    author, the figure appears on the product page. If not, it stays hidden and
    `dist/build-report.json` records the refusal.
 
-Seven drafts exist. Six are blocked by nothing except step 2:
+Seven drafts exist, one for every held-back figure. Each is blocked by nothing except step 2:
 
 | Draft | Product | Figure | The manufacturer's words |
 |---|---|---|---|
@@ -127,12 +129,12 @@ Seven drafts exist. Six are blocked by nothing except step 2:
 
 | `EV-M510-01` | Brady M510 | 300 dpi | "Print Resolution: 300 dpi" |
 
-The seventh, `EV-M510-02`, **cannot be approved as it stands.** The catalogue line reads
-"รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)". Brady's page states "Maximum Label/Tape Width:
-1.5 in" and no millimetre value. 38.1 mm is what 1.5 in converts to, but the source does
-not say it and the gate does not convert units, so the check for "38.1 มม." fails. The
-ways forward are a source that states the millimetre figure, or an Owner decision on how
-the line should read. The catalogue snapshot itself is never edited to fit.
+| `EV-M510-02` | Brady M510 | 1.5 in label width | "Maximum Label/Tape Width: 1.5 in" |
+
+`EV-M510-02` covers the line as the Owner decided to show it (D-12). Against the
+snapshot's own wording, which adds "(38.1 มม.)", the same draft is still refused: the
+source does not state that value and the gate does not convert units. A test keeps that
+true.
 
 **What "the source states the figure" means** (`quoteCovers` in `src/rules/figures.ts`):
 the same number with the same unit. A unit may be spelled in Thai or English (พิกเซล =
@@ -162,7 +164,7 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 
 - **Demo mode.** The enquiry form validates and then refuses to submit; nothing is stored
   or sent anywhere. The basket keeps product ids in `sessionStorage` and nothing else.
-- **No active evidence.** Six drafts wait for an approver and one is blocked; zero records are active, so all
+- **No active evidence.** Seven drafts wait for an approver; zero records are active, so all
   7 figure lines across 5 products are still omitted. `dist/build-report.json` lists each.
 - **The drafts cite a web page, not a signed datasheet.** The source is the
   manufacturer's own product page as served on 2026-11-13. It carries no revision number.
@@ -194,9 +196,7 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 
 ## Still missing (planned, not built)
 
-- An approver for the six ready drafts.
-- For the M510 label width: a Brady document that states the width in millimetres, or an
-  Owner decision on the wording.
+- An approver for the seven drafts.
 - A dated ACS price list, dated stock data, product images, the DS3600 model list.
 - A redirect plan for the 81 dead URLs of the old site — needs Search Console data.
   Only `/why-acs` is redirected so far, because the Owner named its new home.

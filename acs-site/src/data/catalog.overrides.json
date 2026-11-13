@@ -1,0 +1,14 @@
+{
+  "_rule": "catalog.source.json is a verbatim snapshot and is never edited. A line the Owner decides to show differently is recorded here instead, with the original, the replacement, who decided and why. An override may only remove words from a line; it may never add a figure. tests/unit/overrides.test.ts enforces both.",
+  "features": [
+    {
+      "productId": "m510",
+      "from": "รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)",
+      "to": "รองรับฉลากกว้างสูงสุด 1.5 นิ้ว",
+      "decision": "D-12",
+      "decidedBy": "ACS Owner",
+      "decidedOn": "2026-11-13",
+      "reason": "Brady's M510 page states the maximum label width as 1.5 in and gives no millimetre value. The Owner chose to show only what the manufacturer states."
+    }
+  ]
+}

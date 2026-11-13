@@ -94,13 +94,12 @@ export const evidenceDrafts: readonly EvidenceRecord[] = [
     author: AUTHOR,
   },
   {
-    // NOT ready. The page gives the width in inches only. 38.1 mm is what 1.5 in
-    // converts to, but the source does not say it, and the gate does not convert
-    // units. This draft stays blocked until a source that states the millimetre
-    // figure is cited, or the Owner decides how the line should read.
+    // The catalogue snapshot adds "(38.1 มม.)", which the page does not state. On
+    // 2026-11-13 the Owner decided (D-12) to show only the inch figure; the line
+    // below is the overridden one from catalog.overrides.json.
     id: 'EV-M510-02',
     claimId: 'CR-07',
-    subject: { productId: 'm510', feature: 'รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)' },
+    subject: { productId: 'm510', feature: 'รองรับฉลากกว้างสูงสุด 1.5 นิ้ว' },
     quote: 'Maximum Label/Tape Width: 1.5 in',
     conditions: 'The page states 1.5 in and no millimetre value. It also lists "Maximum Print Width 1.44 in", which is the printed area, not the label.',
     sourceUrl: BRADY_M510,

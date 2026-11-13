@@ -10,12 +10,16 @@ import { renderSite } from '../src/build/site';
 import { isIndexable, statusConfig } from '../src/config/status';
 import { evidenceGaps, evidenceLog, evidenceProblems, evidenceRecords } from '../src/data/evidence';
 import { draftBlockers } from '../src/rules/evidence';
+import { featureOverrides } from '../src/data/catalog';
+import { overrideProblems } from '../src/rules/overrides';
 import versions from '../src/data/page-versions.json';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 const asOf = new Date().toISOString().slice(0, 10);
 
+const overrideIssues = overrideProblems(featureOverrides);
+if (overrideIssues.length) throw new Error(`catalogue overrides are wrong: ${overrideIssues.join('; ')}`);
 if (evidenceProblems.length) throw new Error(`evidence approvals are wrong: ${evidenceProblems.join('; ')}`);
 const site = renderSite(statusConfig, evidenceRecords, asOf, versions);
 
@@ -50,6 +54,8 @@ const report = {
   // Drafts wait for a named person other than their author. `blockedBy` is empty when only that is missing.
   evidenceDrafts: evidenceRecords.filter((r) => r.status === 'draft').map((r) => ({ id: r.id, productId: r.subject.productId, feature: r.subject.feature, source: r.sourceUrl, blockedBy: draftBlockers(r).map((c) => c.name) })),
   figuresWithNoDraft: evidenceGaps,
+  // Lines shown differently from the catalogue snapshot, each by a recorded Owner decision.
+  catalogueOverrides: featureOverrides,
   evidenceDecisions: evidenceLog.entries().map((e) => ({ at: e.at, recordId: e.recordId, action: e.action, actor: e.actor })),
   // Addresses that moved. Whichever host serves dist/ has to answer each with a 301.
   redirects: site.redirects,

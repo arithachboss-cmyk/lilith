@@ -22,21 +22,20 @@ describe('evidence drafts', () => {
     }
   });
 
-  it('are blocked by nothing except a second person, with one exception', () => {
-    const blocked = Object.fromEntries(evidenceDrafts.map((r) => [r.id, draftBlockers(r).map((c) => c.name)]));
-    expect(Object.keys(blocked)).toHaveLength(7);
-    // The Brady page states the label width in inches only; the catalogue line adds millimetres.
-    expect(blocked['EV-M510-02']).toEqual(['quote-covers:38.1 มม.']);
-    for (const [id, checks] of Object.entries(blocked)) if (id !== 'EV-M510-02') expect(checks).toEqual([]);
+  it('are blocked by nothing except a second person', () => {
+    expect(evidenceDrafts).toHaveLength(7);
+    for (const r of evidenceDrafts) expect(draftBlockers(r).map((c) => c.name)).toEqual([]);
   });
 
-  it('cannot be approved while its source leaves one figure unstated', () => {
+  it('would still be refused for the catalogue line the Owner chose not to show', () => {
+    // The snapshot's own wording adds a millimetre value the source never states.
+    const draft = evidenceDrafts.find((r) => r.id === 'EV-M510-02')!;
+    const asSnapshot = { ...draft, subject: { ...draft.subject, feature: 'รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)' } };
+    expect(draftBlockers(asSnapshot).map((c) => c.name)).toEqual(['quote-covers:38.1 มม.']);
     const log = new AuditLog();
-    const { records } = applyApprovals(evidenceDrafts, [{ recordId: 'EV-M510-02', approvedBy: 'Somchai (ACS product manager)', approvedOn: '2026-11-20' }], log);
-    expect(records.find((r) => r.id === 'EV-M510-02')?.status).toBe('draft');
+    const { records } = applyApprovals([asSnapshot], [{ recordId: 'EV-M510-02', approvedBy: 'Somchai (ACS product manager)', approvedOn: '2026-11-20' }], log);
+    expect(records[0]?.status).toBe('draft');
     expect(log.entries()[0]?.action).toBe('activation_refused');
-    const p = products.find((x) => x.id === 'm510')!;
-    expect(splitFeatures(p.id, p.features, records, asOf).omitted).toContain('รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)');
   });
 
   it('account, with the listed gaps, for every held-back figure exactly once', () => {

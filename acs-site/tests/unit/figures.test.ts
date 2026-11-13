@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import { figureParts, quoteCovers } from '../../src/rules/figures';
-import { products } from '../../src/data/catalog';
+import { products, sourceProducts } from '../../src/data/catalog';
 import { extractFigures, hasSpecFigure, normaliseFigure } from '../../src/rules/figures';
 
 describe('spec figure detection', () => {
@@ -16,7 +16,8 @@ describe('spec figure detection', () => {
 
   it('flags exactly the figure-bearing lines of the live catalogue', () => {
     const found: Record<string, string[]> = {};
-    for (const p of products) {
+    // The snapshot as fetched, before any recorded Owner override.
+    for (const p of sourceProducts) {
       const lines = p.features.filter(hasSpecFigure);
       if (lines.length) found[p.id] = lines;
     }

@@ -1,3 +1,4 @@
+import overrides from './catalog.overrides.json';
 import source from './catalog.source.json';
 
 export type CategoryId = 'printers' | 'scanners' | 'labels' | 'ribbons' | 'rfid' | 'mobile';
@@ -36,7 +37,44 @@ export const SOURCE_URL: string = source._source;
 export const SOURCE_FETCHED: readonly string[] = source._fetched;
 
 export const categories: readonly Category[] = source.categories as Category[];
-export const products: readonly Product[] = source.products as Product[];
+/** The catalogue exactly as the live site served it. Never edited. */
+export const sourceProducts: readonly Product[] = source.products as Product[];
+
+/** A line the Owner decided to show differently from the snapshot. */
+export interface FeatureOverride {
+  productId: string;
+  /** The snapshot's line, exactly. */
+  from: string;
+  /** What the site shows instead. */
+  to: string;
+  decision: string;
+  decidedBy: string;
+  decidedOn: string;
+  reason: string;
+}
+
+export const featureOverrides: readonly FeatureOverride[] = overrides.features;
+
+/**
+ * Applies recorded Owner decisions on top of the snapshot. An override that
+ * does not match a snapshot line exactly is an error, not a no-op: a silent
+ * miss would leave the old line on the site with nobody the wiser.
+ */
+export function applyOverrides(list: readonly Product[], changes: readonly FeatureOverride[]): Product[] {
+  for (const o of changes) {
+    const product = list.find((p) => p.id === o.productId);
+    if (!product || product.features.filter((f) => f === o.from).length !== 1) {
+      throw new Error(`catalogue override matches no line: ${o.productId} "${o.from}"`);
+    }
+  }
+  return list.map((p) => ({
+    ...p,
+    features: p.features.map((f) => changes.find((o) => o.productId === p.id && o.from === f)?.to ?? f),
+  }));
+}
+
+/** What the site is built from: the snapshot, with the Owner's recorded decisions applied. */
+export const products: readonly Product[] = applyOverrides(sourceProducts, featureOverrides);
 
 export function productById(id: string): Product | undefined {
   return products.find((p) => p.id === id);
