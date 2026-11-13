@@ -1,18 +1,18 @@
 {
-  "ranAt": "2026-11-13T22:51:34.610Z",
+  "ranAt": "2026-11-13T23:26:59.075Z",
   "scanner": "acs-seo/tools/claim-scan.mjs over dist/",
   "filesScanned": 29,
   "pass": true,
   "error": "",
   "byClass": {
     "BLOCKED": 0,
-    "EVIDENCE_REQUIRED": 91,
+    "EVIDENCE_REQUIRED": 94,
     "OWNER_REQUIRED": 2
   },
   "tally": {
     "CR-10 OWNER_REQUIRED company-tenure": 2,
     "CR-06 EVIDENCE_REQUIRED partner-claim": 2,
-    "CR-06 EVIDENCE_REQUIRED vendor-name": 89
+    "CR-06 EVIDENCE_REQUIRED vendor-name": 92
   },
   "blocked": [],
   "aboutPageClaims": [

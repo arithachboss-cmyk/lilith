@@ -1,11 +1,12 @@
-import { extractFigures, normaliseFigure } from './figures';
+import { extractFigures, quoteCovers } from './figures';
 
 /**
  * Evidence records and their activation gate.
  *
  * A spec figure appears on a product page only while an ACTIVE record covers
  * it. A record goes draft → active only when:
- *   1. every figure in the feature line is quoted verbatim by the source,
+ *   1. every figure in the feature line is stated by the source's own words
+ *      (same number, same unit; see `quoteCovers`),
  *   2. a source and its revision are named, and
  *   3. the approver is not the author.
  * Nothing is edited in place: every decision is appended to an audit log.
@@ -64,7 +65,6 @@ const same = (a: string, b: string) => a.trim().toLowerCase() === b.trim().toLow
 export function runChecks(record: EvidenceRecord, approver: string): CheckResult[] {
   const checks: CheckResult[] = [];
   const figures = extractFigures(record.subject.feature);
-  const quote = normaliseFigure(record.quote);
 
   checks.push({
     name: 'feature-has-figure',
@@ -72,11 +72,11 @@ export function runChecks(record: EvidenceRecord, approver: string): CheckResult
     detail: figures.length ? `${figures.length} figure(s) to cover` : 'the feature line holds no figure to evidence',
   });
   for (const figure of figures) {
-    const covered = quote.includes(normaliseFigure(figure));
+    const covered = quoteCovers(figure, record.quote);
     checks.push({
       name: `quote-covers:${figure}`,
       pass: covered,
-      detail: covered ? 'stated verbatim by the source quote' : 'not found in the source quote',
+      detail: covered ? 'stated by the source quote' : 'not found in the source quote',
     });
   }
   checks.push({

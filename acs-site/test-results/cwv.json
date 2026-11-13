@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-11-13T22:52:04.421Z",
+  "ranAt": "2026-11-13T23:27:31.997Z",
   "kind": "lab measurement on a local preview server — not field data",
   "profile": {
     "cpuSlowdown": 4,
@@ -27,15 +27,15 @@
   "pages": [
     {
       "route": "/",
-      "lcpMs": 640,
+      "lcpMs": 612,
       "cls": 0,
       "interaction": "none",
-      "slowestInteractionMs": null,
+      "slowestInteractionMs": 24,
       "pass": true
     },
     {
       "route": "/products/",
-      "lcpMs": 696,
+      "lcpMs": 744,
       "cls": 0,
       "interaction": "filter tap + search input",
       "slowestInteractionMs": 24,
@@ -43,23 +43,23 @@
     },
     {
       "route": "/products/te200/",
-      "lcpMs": 612,
+      "lcpMs": 668,
       "cls": 0,
       "interaction": "add to basket tap",
-      "slowestInteractionMs": 32,
+      "slowestInteractionMs": 40,
       "pass": true
     },
     {
       "route": "/products/1950g/",
-      "lcpMs": 640,
+      "lcpMs": 648,
       "cls": 0,
       "interaction": "add to basket tap",
-      "slowestInteractionMs": 32,
+      "slowestInteractionMs": 40,
       "pass": true
     },
     {
       "route": "/enquiry/",
-      "lcpMs": 572,
+      "lcpMs": 600,
       "cls": 0,
       "interaction": "next step tap (shows validation errors)",
       "slowestInteractionMs": 32,

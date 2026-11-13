@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-13T22:53:38.684Z",
+  "generatedAt": "2026-11-13T23:27:32.399Z",
   "counts": {
-    "PASS": 17,
+    "PASS": 16,
     "FAIL": 0,
-    "NOT RUN": 0,
+    "NOT RUN": 1,
     "HUMAN STEP": 1
   },
   "gate": {
-    "automatedTestsGreen": true,
+    "automatedTestsGreen": false,
     "m2Complete": false,
     "externalReview": false,
     "ownerUat": false,
@@ -20,14 +20,14 @@
       "proves": "Every rule and parser behaves, including on Thai input",
       "evidence": "unit.json",
       "status": "PASS",
-      "detail": "169/169 unit tests"
+      "detail": "176/176 unit tests"
     },
     {
       "id": "T2",
       "proves": "A clean checkout builds and tests with no network access",
       "evidence": "offline.json",
-      "status": "PASS",
-      "detail": "commit 74d1468 · 9/9 steps · network blocked"
+      "status": "NOT RUN",
+      "detail": "ran on 74d1468; 4 code file(s) changed since — run tests/qa/offline.mjs again on a committed tree"
     },
     {
       "id": "T3",
@@ -69,7 +69,7 @@
       "proves": "The claim scanner reports zero BLOCKED over the built HTML",
       "evidence": "claims.json",
       "status": "PASS",
-      "detail": "BLOCKED 0 · EVIDENCE_REQUIRED 91"
+      "detail": "BLOCKED 0 · EVIDENCE_REQUIRED 94"
     },
     {
       "id": "T9",

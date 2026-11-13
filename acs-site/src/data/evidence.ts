@@ -43,6 +43,42 @@ export const evidenceDrafts: readonly EvidenceRecord[] = [
     status: 'draft',
     author: AUTHOR,
   },
+  {
+    id: 'EV-1960G-01',
+    claimId: 'CR-07',
+    subject: { productId: '1960g', feature: 'มาตรฐานการป้องกัน IP52' },
+    quote: 'IP Rating : IP52',
+    conditions: 'The manufacturer\'s published figure for the Xenon Ultra 1960g. The approver confirms the 1960g that ACS sells is this model.',
+    sourceUrl: 'https://automation.honeywell.com/us/en/products/productivity-solutions/barcode-scanners/general-purpose-handheld/xenon-ultra-1960-scanner',
+    sourceRevision: 'Honeywell product page "Xenon Ultra 1960 Scanner", Specifications section, as served on 2026-11-13. The page carries no revision number; the "Xenon Ultra 1960g Data Sheet" it links is dated 5/4/2026.',
+    retrievedOn: '2026-11-13',
+    status: 'draft',
+    author: AUTHOR,
+  },
+  {
+    id: 'EV-ZD421-01',
+    claimId: 'CR-07',
+    subject: { productId: 'zd421', feature: 'ความละเอียด 203 หรือ 300 dpi ตามรุ่นย่อย' },
+    quote: 'Print Resolution 203 dpi (8 dot/mm)|300 dpi (12 dot/mm)',
+    conditions: 'Both resolutions are listed as available configurations of the ZD421; a given unit has one of them. The approver confirms which ACS supplies.',
+    sourceUrl: 'https://www.zebra.com/us/en/products/printers/desktop/zd400-series/zd421.html',
+    sourceRevision: 'Zebra product page "ZD421 Desktop Printer: 4-Inch Wide", sections "Available configurations" and "Compare with similar items", as served on 2026-11-13. The page carries no revision number.',
+    retrievedOn: '2026-11-13',
+    status: 'draft',
+    author: AUTHOR,
+  },
+  {
+    id: 'EV-DS2208-01',
+    claimId: 'CR-07',
+    subject: { productId: 'ds2208', feature: 'เซนเซอร์ภาพ 640 × 480 พิกเซล' },
+    quote: 'IMAGE SENSOR: 640X480 PIXELS',
+    conditions: 'The manufacturer\'s published figure for the DS2208. The approver confirms the DS2208 that ACS sells is this model.',
+    sourceUrl: 'https://www.zebra.com/us/en/products/scanners/general-purpose-handheld-scanners/ds2200-series/ds2208.html',
+    sourceRevision: 'Zebra product page "DS2208 Handheld Scanner", section "Key features", as served on 2026-11-13. The page carries no revision number.',
+    retrievedOn: '2026-11-13',
+    status: 'draft',
+    author: AUTHOR,
+  },
 ];
 
 /**
@@ -50,11 +86,8 @@ export const evidenceDrafts: readonly EvidenceRecord[] = [
  * the figure; it only records that no source has been read for it yet.
  */
 export const evidenceGaps: ReadonlyArray<{ productId: string; feature: string; why: string }> = [
-  { productId: '1960g', feature: 'มาตรฐานการป้องกัน IP52', why: 'manufacturer page fetched on 2026-11-13 but its specification section was not read' },
-  { productId: 'm510', feature: 'พิมพ์แบบ Thermal Transfer ความละเอียด 300 dpi', why: 'manufacturer page timed out on 2026-11-13' },
-  { productId: 'm510', feature: 'รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)', why: 'manufacturer page timed out on 2026-11-13' },
-  { productId: 'zd421', feature: 'ความละเอียด 203 หรือ 300 dpi ตามรุ่นย่อย', why: 'manufacturer page fetched on 2026-11-13 but its specification section was not read' },
-  { productId: 'ds2208', feature: 'เซนเซอร์ภาพ 640 × 480 พิกเซล', why: 'manufacturer page fetched on 2026-11-13 but its specification section was not read' },
+  { productId: 'm510', feature: 'พิมพ์แบบ Thermal Transfer ความละเอียด 300 dpi', why: 'the manufacturer page (bradyid.com) timed out on three attempts on 2026-11-13; no source was read' },
+  { productId: 'm510', feature: 'รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)', why: 'the manufacturer page (bradyid.com) timed out on three attempts on 2026-11-13; no source was read' },
 ];
 
 export const evidenceApprovals: readonly Approval[] = approvals as Approval[];

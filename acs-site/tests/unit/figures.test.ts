@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest';
+import { figureParts, quoteCovers } from '../../src/rules/figures';
 import { products } from '../../src/data/catalog';
 import { extractFigures, hasSpecFigure, normaliseFigure } from '../../src/rules/figures';
 
@@ -69,5 +70,53 @@ describe('spec figure detection', () => {
 
   it('normalises dashes and spacing', () => {
     expect(normaliseFigure('0–50 °C')).toBe(normaliseFigure('0-50°C'));
+  });
+});
+
+describe('does a source quote state a figure?', () => {
+  it('accepts the same number and unit whatever the spacing or dash', () => {
+    expect(quoteCovers('IP52', 'IP Rating : IP52')).toBe(true);
+    expect(quoteCovers('0–50 °C', 'Operating Temperature : 0 - 50 °C|32 - 122 °F')).toBe(true);
+  });
+
+  it('accepts a unit spelled in Thai against the same unit in English', () => {
+    expect(quoteCovers('640 × 480 พิกเซล', 'IMAGE SENSOR: 640X480 PIXELS')).toBe(true);
+    expect(quoteCovers('1.5 นิ้ว', 'Maximum label width 1.5 in. (38.1 mm)')).toBe(true);
+    expect(quoteCovers('38.1 มม.', 'Maximum label width 1.5 in. (38.1 mm)')).toBe(true);
+  });
+
+  it('never converts between units', () => {
+    expect(quoteCovers('1.5 นิ้ว', 'Maximum label width 38.1 mm')).toBe(false);
+    expect(quoteCovers('38.1 มม.', 'Maximum label width 1.5 in')).toBe(false);
+    expect(quoteCovers('640 × 480 พิกเซล', '640 x 480 mm')).toBe(false);
+  });
+
+  it('needs every alternative in a list, each with the unit', () => {
+    expect(figureParts('203 หรือ 300 dpi')).toEqual(['203dpi', '300dpi']);
+    expect(quoteCovers('203 หรือ 300 dpi', 'Print Resolution 203 dpi (8 dot/mm)|300 dpi (12 dot/mm)')).toBe(true);
+    expect(quoteCovers('203 หรือ 300 dpi', 'Print Resolution 203 dpi (8 dot/mm)')).toBe(false);
+    expect(quoteCovers('203 หรือ 300 dpi', 'Print Resolution 203 or 300')).toBe(false);
+    expect(quoteCovers('203 หรือ 300 dpi', '203 dpi, optional 600 dpi')).toBe(false);
+  });
+
+  it('keeps a range whole: both ends, as a range', () => {
+    expect(figureParts('0–50 °C')).toEqual(['0-50°c']);
+    expect(quoteCovers('0–50 °C', 'Operating Temperature 0 °C minimum')).toBe(false);
+    expect(quoteCovers('0–50 °C', 'Operating Temperature : 0 - 40 °C')).toBe(false);
+    expect(quoteCovers('0–50 °C', 'Operating Temperature : -10 - 50 °C')).toBe(false);
+  });
+
+  it('is not fooled by a longer number that ends the same way', () => {
+    expect(quoteCovers('300 dpi', 'up to 1300 dpi')).toBe(false);
+    expect(quoteCovers('5 mm', 'thickness 2.5 mm')).toBe(false);
+    expect(quoteCovers('IP52', 'IP520 series')).toBe(false);
+    expect(quoteCovers('640 × 480 พิกเซล', '1640x480 pixels')).toBe(false);
+    expect(quoteCovers('640 × 480 พิกเซล', '640x4800 pixels')).toBe(false);
+  });
+
+  it('refuses a different value', () => {
+    expect(quoteCovers('IP52', 'IP Rating : IP41')).toBe(false);
+    expect(quoteCovers('640 × 480 พิกเซล', 'IMAGE SENSOR: 1280X800 PIXELS')).toBe(false);
+    expect(quoteCovers('300 dpi', '')).toBe(false);
   });
 });

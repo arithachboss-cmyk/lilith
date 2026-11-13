@@ -83,3 +83,54 @@ export function normaliseFigure(text: string): string {
     .replace(/\s+/g, '')
     .toLowerCase();
 }
+
+/**
+ * The same quantity, written the way the catalogue (Thai) and a manufacturer
+ * (English) each write it. Only spellings of one unit are listed; nothing here
+ * converts between units.
+ */
+const UNIT_SPELLINGS: Array<[RegExp, string]> = [
+  [/พิกเซล|pixels?|px/g, 'pixels'],
+  [/นิ้ว|inch(?:es)?|in\.|(?<=\d)in(?![a-z])|(?<=\d)"/g, 'in'],
+  [/มม\.?|millimet(?:er|re)s?|(?<=\d)mm\.?/g, 'mm'],
+];
+
+function canonical(text: string): string {
+  let out = normaliseFigure(text).replace(/×/g, 'x');
+  for (const [pattern, unit] of UNIT_SPELLINGS) out = out.replace(pattern, unit);
+  return out;
+}
+
+const LIST_SEPARATOR = /หรือ|และ|or|and|\//;
+
+/**
+ * The parts of a figure that a source has to state. A range ("0–50 °C") is one
+ * claim and stays whole. A list of alternatives ("203 หรือ 300 dpi") is one
+ * claim per number, each carrying the shared unit.
+ */
+export function figureParts(figure: string): string[] {
+  const text = normaliseFigure(figure);
+  const match = new RegExp(`^((?:${NUM})(?:(?:${LIST_SEPARATOR.source})(?:${NUM}))+)(.*)$`).exec(text);
+  if (!match) return [canonical(figure)];
+  const unit = match[2] ?? '';
+  return (match[1] ?? '').split(LIST_SEPARATOR).map((n) => canonical(n + unit));
+}
+
+/**
+ * Does the source quote state this figure? Every part must appear in the
+ * quote, and not as the tail of a longer number: "300 dpi" is not covered by
+ * "1300 dpi", nor "5 mm" by "2.5 mm".
+ */
+export function quoteCovers(figure: string, quote: string): boolean {
+  const source = canonical(quote);
+  return figureParts(figure).every((part) => {
+    for (let at = source.indexOf(part); at !== -1; at = source.indexOf(part, at + 1)) {
+      const before = source[at - 1] ?? '';
+      const after = source[at + part.length] ?? '';
+      const startsClean = !/[\d.,]/.test(before) || !/^\d/.test(part);
+      const endsClean = !(/\d$/.test(part) && /\d/.test(after)) && !(/[a-z]$/.test(part) && /[a-z]/.test(after));
+      if (startsClean && endsClean) return true;
+    }
+    return false;
+  });
+}

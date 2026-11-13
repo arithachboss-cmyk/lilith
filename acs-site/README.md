@@ -35,6 +35,7 @@ testing a stale server from an earlier run.
 | M1 | Discoverability: one address per page, self-referencing canonical, sitemap of exactly the indexable pages, robots naming it; family pages say so | 108/108 | 34/34 | BLOCKED 0 |
 | M2a | Product structured data with no price, offer, availability or rating; sitemap `lastmod` from a committed content-hash manifest | 125/125 | 35/35 | BLOCKED 0 |
 | M2b | Owner decisions D-09, D-10, D-11 built: six category pages, the ribbon category owning the ribbon choice, the approved company copy at `/about/` with `/why-acs` and `/company` redirecting to it; evidence drafts and a recorded-approval path | 169/169 | 41/41 | BLOCKED 0 |
+| M2c | Evidence drafts for five of the seven held-back figures, each quoting the manufacturer's own page; the gate now compares number and unit (Thai or English spelling) and rejects a longer number that merely ends the same way | 176/176 | 41/41 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
 `npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
@@ -45,8 +46,8 @@ and the eighteenth is a human step. The gate still needs M2 complete, a review o
 exact commit by someone other than the author, and Owner UAT.
 
 **M2 is not finished.** M2a and M2b are the parts that did not need material from ACS.
-What is left needs it: spec figures need a named person at ACS to approve the two drafts
-and sources for five more figures; prices need a dated price list; stock needs dated
+What is left needs it: spec figures need a named person at ACS to approve five drafts,
+and a source for the two M510 figures; prices need a dated price list; stock needs dated
 stock data; product pages need images; DS3600 needs its model list. See "Still missing".
 
 ## Non-negotiables, and where each one lives
@@ -74,7 +75,7 @@ stock data; product pages need images; DS3600 needs its model list. See "Still m
 
 `system` is `demo`. A feature moves to `live` only when its acceptance test passes **and**
 the material behind it is named. Four features cannot move until ACS supplies something:
-spec figures (an approver, and sources for five figures), prices (a dated price list),
+spec figures (an approver, and a source for the two M510 figures), prices (a dated price list),
 stock (dated stock data) and product images (the files).
 
 The company page moved to `live` on 2026-11-13: the Owner approved the copy and chose its
@@ -113,8 +114,25 @@ Recorded in `../acs-seo/data/clusters.json` (`decisions_made`) and
    author, the figure appears on the product page. If not, it stays hidden and
    `dist/build-report.json` records the refusal.
 
-Two drafts exist, both for the Xenon XP 1950g and both blocked by nothing except step 2.
-Five figures have no draft yet; `evidenceGaps` in the same file says why for each.
+Five drafts exist, and each is blocked by nothing except step 2:
+
+| Draft | Product | Figure | The manufacturer's words |
+|---|---|---|---|
+| `EV-1950G-01` | Xenon XP 1950g | IP52 | "IP Rating : IP52" |
+| `EV-1950G-02` | Xenon XP 1950g | 0–50 °C | "Operating Temperature : 0 - 50 °C\|32 - 122 °F" |
+| `EV-1960G-01` | Xenon Ultra 1960g | IP52 | "IP Rating : IP52" |
+| `EV-ZD421-01` | ZD421 | 203 or 300 dpi | "Print Resolution 203 dpi (8 dot/mm)\|300 dpi (12 dot/mm)" |
+| `EV-DS2208-01` | DS2208 | 640 × 480 pixels | "IMAGE SENSOR: 640X480 PIXELS" |
+
+Two figures, both on the Brady M510 (300 dpi; 1.5 in / 38.1 mm label width), have no
+draft: bradyid.com timed out on three attempts, so no source was read. Nothing about
+those two figures was confirmed or contradicted.
+
+**What "the source states the figure" means** (`quoteCovers` in `src/rules/figures.ts`):
+the same number with the same unit. A unit may be spelled in Thai or English (พิกเซล =
+pixels, นิ้ว = in, มม. = mm); units are never converted. A list such as "203 หรือ 300 dpi"
+needs every alternative. A range needs both ends as a range. "300 dpi" is not covered by
+"1300 dpi".
 
 ## Limits right now
 
@@ -138,7 +156,7 @@ Five figures have no draft yet; `evidenceGaps` in the same file says why for eac
 
 - **Demo mode.** The enquiry form validates and then refuses to submit; nothing is stored
   or sent anywhere. The basket keeps product ids in `sessionStorage` and nothing else.
-- **No active evidence.** Two drafts wait for an approver; zero records are active, so all
+- **No active evidence.** Five drafts wait for an approver; zero records are active, so all
   7 figure lines across 5 products are still omitted. `dist/build-report.json` lists each.
 - **The drafts cite a web page, not a signed datasheet.** The source is the
   manufacturer's own product page as served on 2026-11-13. It carries no revision number.
@@ -170,7 +188,8 @@ Five figures have no draft yet; `evidenceGaps` in the same file says why for eac
 
 ## Still missing (planned, not built)
 
-- An approver for the two 1950g drafts, and sources for the other five figures.
+- An approver for the five drafts, and a source for the two M510 figures (ACS, as a Brady
+  partner, can supply the M510 datasheet directly).
 - A dated ACS price list, dated stock data, product images, the DS3600 model list.
 - A redirect plan for the 81 dead URLs of the old site — needs Search Console data.
   Only `/why-acs` is redirected so far, because the Owner named its new home.
@@ -178,7 +197,7 @@ Five figures have no draft yet; `evidenceGaps` in the same file says why for eac
 
 ## Known scanner note
 
-`npm run claims` reports 91 `EVIDENCE_REQUIRED` and 2 `OWNER_REQUIRED` findings, and no
+`npm run claims` reports 94 `EVIDENCE_REQUIRED` and 2 `OWNER_REQUIRED` findings, and no
 `BLOCKED`. Almost all are CR-06 on a manufacturer's name used as a product brand
 (Honeywell, TSC, Zebra, Brady): the rule working as written, since a vendor name needs a
 human to confirm it is a spec reference and not a partnership claim.
