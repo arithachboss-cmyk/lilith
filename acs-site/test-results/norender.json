@@ -1,9 +1,15 @@
 {
-  "ranAt": "2026-11-13T21:34:04.904Z",
+  "ranAt": "2026-11-13T22:51:53.104Z",
   "about": "product text and catalogue present in the HTML with JavaScript disabled",
-  "passed": 4,
+  "passed": 5,
   "failed": 0,
   "checks": [
+    {
+      "id": "E37",
+      "name": "each category page lists products of its own category only, without JavaScript",
+      "pass": true,
+      "detail": ""
+    },
     {
       "id": "E07",
       "name": "product page text is in the HTML with JavaScript disabled",

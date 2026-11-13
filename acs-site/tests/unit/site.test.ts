@@ -2,7 +2,8 @@ import { describe, expect, it } from 'vitest';
 import { resolveAddress } from '../../src/build/address';
 import { absoluteUrl, canonicalOf, htmlIsIndexable, renderSite } from '../../src/build/site';
 import { statusConfig, type StatusConfig } from '../../src/config/status';
-import { products } from '../../src/data/catalog';
+import { REDIRECTS, redirectProblems } from '../../src/build/redirects';
+import { categories, products } from '../../src/data/catalog';
 
 const asOf = '2026-11-13';
 const liveConfig = (features: Partial<StatusConfig['features']> = {}): StatusConfig => ({
@@ -14,8 +15,8 @@ const live = renderSite(liveConfig(), [], asOf);
 const locsOf = (xml: string) => [...xml.matchAll(/<loc>([^<]*)<\/loc>/g)].map((m) => m[1]);
 
 describe('the shipped demo build', () => {
-  it('renders 20 pages', () => {
-    expect(demo.pages).toHaveLength(20);
+  it('renders 26 pages', () => {
+    expect(demo.pages).toHaveLength(26);
   });
 
   it('opens nothing to crawlers', () => {
@@ -36,13 +37,17 @@ describe('the shipped demo build', () => {
 describe('a live build', () => {
   const indexable = live.pages.filter((p) => p.indexable).map((p) => p.route);
 
-  it('indexes the home page, the catalogue, 14 products and the enquiry page', () => {
-    expect(indexable.sort()).toEqual(['/', '/products/', '/enquiry/', ...products.map((p) => `/products/${p.id}/`)].sort());
-    expect(indexable).toHaveLength(17);
+  it('indexes the home page, the catalogue, 6 categories, 14 products, the enquiry page and the about page', () => {
+    expect(indexable.sort()).toEqual([
+      '/', '/products/', '/enquiry/', '/about/',
+      ...categories.map((c) => `/categories/${c.id}/`),
+      ...products.map((p) => `/products/${p.id}/`),
+    ].sort());
+    expect(indexable).toHaveLength(24);
   });
 
-  it('keeps the basket, the status page and the placeholder company page out', () => {
-    for (const route of ['/basket/', '/status/', '/company/']) {
+  it('keeps the basket and the status page out', () => {
+    for (const route of ['/basket/', '/status/']) {
       const html = live.files.get(`${route.slice(1)}index.html`)!;
       expect(htmlIsIndexable(html)).toBe(false);
       expect(canonicalOf(html)).toEqual([]);
@@ -86,10 +91,17 @@ describe('a live build', () => {
     expect(robots).not.toMatch(/^Disallow: \/\s*$/m);
   });
 
-  it('adds the company page to the sitemap once its content is live', () => {
-    const withCompany = renderSite(liveConfig({ company: 'live' }), [], asOf);
-    expect(locsOf(withCompany.files.get('sitemap.xml')!)).toContain('https://www.asiancoding.com/company/');
-    expect(locsOf(live.files.get('sitemap.xml')!)).not.toContain('https://www.asiancoding.com/company/');
+  it('lists the about page only while its copy is approved', () => {
+    const unapproved = renderSite(liveConfig({ company: 'not_connected' }), [], asOf);
+    expect(locsOf(live.files.get('sitemap.xml')!)).toContain('https://www.asiancoding.com/about/');
+    expect(locsOf(unapproved.files.get('sitemap.xml')!)).not.toContain('https://www.asiancoding.com/about/');
+    expect(htmlIsIndexable(unapproved.files.get('about/index.html')!)).toBe(false);
+  });
+
+  it('lists the category pages only while that feature is live', () => {
+    const without = renderSite(liveConfig({ categoryPages: 'not_connected' }), [], asOf);
+    expect(locsOf(without.files.get('sitemap.xml')!).filter((u) => u?.includes('/categories/'))).toEqual([]);
+    expect(locsOf(live.files.get('sitemap.xml')!).filter((u) => u?.includes('/categories/'))).toHaveLength(6);
   });
 
   it('emits each page under one file name only', () => {
@@ -141,6 +153,32 @@ describe('one address per page', () => {
   it('does not treat the error page as an address', () => {
     expect(resolveAddress('/404/', files)).toEqual({ status: 404 });
     expect(resolveAddress('/404', files)).toEqual({ status: 404 });
+  });
+
+  it.each([
+    ['/why-acs'], ['/why-acs/'], ['/why-acs.html'], ['/why-acs/index.html'],
+    ['/company'], ['/company/'], ['/company.html'], ['/company/index.html'],
+  ])('sends the moved address %s to /about/ in one hop', (from) => {
+    expect(resolveAddress(from, files, REDIRECTS)).toEqual({ status: 301, location: '/about/' });
+    expect(resolveAddress('/about/', files, REDIRECTS)).toEqual({ status: 200, file: 'about/index.html' });
+  });
+
+  it('does not redirect an address that merely starts like a moved one', () => {
+    expect(resolveAddress('/why-acs-not/', files, REDIRECTS)).toEqual({ status: 404 });
+    expect(resolveAddress('/company/team/', files, REDIRECTS)).toEqual({ status: 404 });
+  });
+
+  it('never lets a redirect shadow a real page', () => {
+    expect(resolveAddress('/about/', files, { '/about/': '/products/' })).toEqual({ status: 200, file: 'about/index.html' });
+  });
+
+  it('accepts the shipped redirect list and rejects a broken one', () => {
+    const routes = live.pages.map((p) => p.route);
+    expect(redirectProblems(REDIRECTS, routes)).toEqual([]);
+    expect(redirectProblems({ '/about/': '/products/' }, routes).join()).toContain('is a real page');
+    expect(redirectProblems({ '/old/': '/nowhere/' }, routes).join()).toContain('is not a page');
+    expect(redirectProblems({ '/a/': '/b/', '/b/': '/about/' }, routes).join()).toContain('a chain');
+    expect(redirectProblems({ 'old': '/about/' }, routes).join()).toContain('must look like');
   });
 
   it('refuses path tricks', () => {

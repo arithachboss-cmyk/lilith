@@ -51,6 +51,19 @@ export function productPath(id: string): string {
 }
 
 /**
+ * Category pages (decision D-09, Owner, 2026-11-13). They sit outside
+ * `/products/` because two catalogue entries are named `labels` and `rfid`,
+ * the same as their categories.
+ */
+export function categoryPath(id: CategoryId): string {
+  return `/categories/${id}/`;
+}
+
+export function productsIn(id: CategoryId): Product[] {
+  return products.filter((p) => p.category === id);
+}
+
+/**
  * A manufacturer page is a reference worth linking. An asiancoding.com URL in
  * this data is not: on 2026-10-23 and again on 2026-11-13 every one of them
  * returned 404, so the build never renders one. `acsUrl` is never rendered.

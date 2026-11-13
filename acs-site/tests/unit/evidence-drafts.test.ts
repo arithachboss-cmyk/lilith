@@ -1,0 +1,85 @@
+import { describe, expect, it } from 'vitest';
+import { products } from '../../src/data/catalog';
+import { evidenceApprovals, evidenceDrafts, evidenceGaps, evidenceProblems, evidenceRecords } from '../../src/data/evidence';
+import { applyApprovals, AuditLog, draftBlockers, splitFeatures } from '../../src/rules/evidence';
+import { extractFigures } from '../../src/rules/figures';
+
+const asOf = '2026-11-13';
+const held = products.flatMap((p) => splitFeatures(p.id, p.features, [], asOf).omitted.map((feature) => `${p.id}|${feature}`));
+
+describe('evidence drafts', () => {
+  it('are all drafts, and none is approved yet', () => {
+    expect(evidenceDrafts.every((r) => r.status === 'draft' && !r.approvedBy)).toBe(true);
+    expect(evidenceApprovals).toEqual([]);
+    expect(evidenceProblems).toEqual([]);
+    expect(evidenceRecords.filter((r) => r.status === 'active')).toEqual([]);
+  });
+
+  it('each point at a figure line the catalogue really has', () => {
+    for (const r of evidenceDrafts) {
+      expect(held).toContain(`${r.subject.productId}|${r.subject.feature}`);
+      expect(extractFigures(r.subject.feature).length).toBeGreaterThan(0);
+    }
+  });
+
+  it('are blocked by nothing except a second person', () => {
+    for (const r of evidenceDrafts) expect(draftBlockers(r).map((c) => c.name)).toEqual([]);
+  });
+
+  it('account, with the listed gaps, for every held-back figure exactly once', () => {
+    const covered = [
+      ...evidenceDrafts.map((r) => `${r.subject.productId}|${r.subject.feature}`),
+      ...evidenceGaps.map((g) => `${g.productId}|${g.feature}`),
+    ];
+    expect(covered.sort()).toEqual([...held].sort());
+  });
+
+  it('show nothing while they are drafts', () => {
+    const p = products.find((x) => x.id === '1950g')!;
+    expect(splitFeatures(p.id, p.features, evidenceRecords, asOf).omitted).toHaveLength(2);
+  });
+});
+
+describe('approving a draft', () => {
+  const draft = evidenceDrafts[0]!;
+
+  it('activates it when a different, named person approves', () => {
+    const log = new AuditLog();
+    const { records, problems } = applyApprovals(evidenceDrafts, [{ recordId: draft.id, approvedBy: 'Somchai (ACS product manager)', approvedOn: '2026-11-20' }], log);
+    expect(problems).toEqual([]);
+    const active = records.find((r) => r.id === draft.id)!;
+    expect(active).toMatchObject({ status: 'active', approvedBy: 'Somchai (ACS product manager)' });
+    expect(records.filter((r) => r.status === 'active')).toHaveLength(1);
+    expect(log.entries().map((e) => [e.recordId, e.action, e.at])).toEqual([[draft.id, 'activated', '2026-11-20']]);
+    const p = products.find((x) => x.id === '1950g')!;
+    expect(splitFeatures(p.id, p.features, records, asOf).shown).toContain(draft.subject.feature);
+    expect(splitFeatures(p.id, p.features, records, asOf).omitted).toHaveLength(1);
+  });
+
+  it('refuses the author, in any spelling, and logs the refusal', () => {
+    for (const approvedBy of [draft.author, ` ${draft.author.toUpperCase()} `, '']) {
+      const log = new AuditLog();
+      const { records } = applyApprovals(evidenceDrafts, [{ recordId: draft.id, approvedBy, approvedOn: '2026-11-20' }], log);
+      expect(records.every((r) => r.status === 'draft')).toBe(true);
+      expect(log.entries().map((e) => e.action)).toEqual(['activation_refused']);
+    }
+  });
+
+  it('refuses an approval when the quote does not cover the figure', () => {
+    const log = new AuditLog();
+    const wrong = [{ ...draft, quote: 'IP Rating : IP41' }];
+    const { records } = applyApprovals(wrong, [{ recordId: draft.id, approvedBy: 'Somchai', approvedOn: '2026-11-20' }], log);
+    expect(records[0]?.status).toBe('draft');
+    expect(log.entries()[0]?.checks.filter((c) => !c.pass).map((c) => c.name)).toEqual(['quote-covers:IP52']);
+  });
+
+  it('reports an approval that names no draft, a duplicate, and a record typed in as active', () => {
+    const log = new AuditLog();
+    expect(applyApprovals(evidenceDrafts, [{ recordId: 'EV-NOPE', approvedBy: 'Somchai', approvedOn: '2026-11-20' }], log).problems).toEqual(['approval names no draft: EV-NOPE']);
+    const twice = [{ recordId: draft.id, approvedBy: 'A', approvedOn: '2026-11-20' }, { recordId: draft.id, approvedBy: 'B', approvedOn: '2026-11-21' }];
+    expect(applyApprovals(evidenceDrafts, twice, log).problems).toEqual([`more than one approval for ${draft.id}`]);
+    const typedIn = applyApprovals([{ ...draft, status: 'active', approvedBy: 'Somchai' }], [], log);
+    expect(typedIn.problems).toEqual([`${draft.id}: a record must be written as a draft`]);
+    expect(typedIn.records[0]?.status).toBe('draft');
+  });
+});

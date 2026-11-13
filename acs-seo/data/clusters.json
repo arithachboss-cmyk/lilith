@@ -1,97 +1,221 @@
 {
- "_source": "Built 2026-10-23 from the real site: the 6 live pages in real-inventory.json plus the 14 products in the live catalog-data.js. Replaces the sitemap-era clusters, now in data/retired/.",
- "_owner_rule": "canonical_owner is null until the Owner sets it. A null owner makes the cluster a HOLD for any new package. Setting one is an Owner decision, never a code change.",
- "_why_all_owners_are_null": "The Owner decided on 2026-10-23 that products get their own URLs. That settles the product level. It does NOT settle which page owns a generic head term like 'เครื่องสแกนบาร์โค้ด': the candidates are the catalogue /products.html, a per-category page that does not exist yet, or the filtered view /products.html?category=scanners. Until that is decided, writing a package against a head term risks building the page that then has to be thrown away — which is exactly what this gate exists to prevent.",
- "decisions_needed": [
-  {
-   "id": "D-09",
-   "question": "Do category pages exist as their own URLs, or is the filtered catalogue (/products.html?category=X) the canonical home for each category head term?",
-   "blocks": ["R-1", "R-2", "R-3", "R-4", "R-5", "R-6"],
-   "note": "A query-parameter view is a weak canonical owner: it is one page serving six different head terms. Real category pages are stronger but are six more pages to write and evidence."
-  },
-  {
-   "id": "D-10",
-   "question": "Three ribbon products (wax, wax-resin, resin) will all target the same intent, 'ริบบอน / thermal transfer ribbon'. Do they get three pages with one owning the head term, or one page covering the choice between them?",
-   "blocks": ["R-3"],
-   "note": "This is the sharpest cannibalisation risk on the site and it does not exist yet — the pages are not built. Deciding now costs nothing; deciding after costs three pages."
-  },
-  {
-   "id": "D-11",
-   "question": "Where does the approved about-ACS copy live, now that /why-acs returns 404?",
-   "blocks": ["R-7"],
-   "note": "Content and evidence stand (CR-06, CR-10 closed). Only the target URL was wrong. The homepage is currently the only company surface."
-  }
- ],
- "clusters": [
-  {
-   "id": "R-1",
-   "label": "Barcode scanner — generic head term",
-   "canonical_owner": null,
-   "blocked_by": "D-09",
-   "terms": ["barcode scanner", "barcode scanners", "handheld scanner", "เครื่องสแกนบาร์โค้ด", "เครื่องอ่านบาร์โค้ด", "สแกนบาร์โค้ด", "เครื่องสแกน", "เครื่องอ่านคิวอาร์โค้ด"],
-   "urls": ["/products.html?category=scanners"],
-   "planned_urls": ["/products/1950g", "/products/1960g", "/products/ds2208", "/products/ds3600"],
-   "risk": "Four scanner pages competing for one head term once built. 1950g and 1960g are both Honeywell Xenon handhelds, which is the closest pair on the site."
-  },
-  {
-   "id": "R-2",
-   "label": "Barcode / label printer — generic head term",
-   "canonical_owner": null,
-   "blocked_by": "D-09",
-   "terms": ["barcode printer", "label printer", "เครื่องพิมพ์บาร์โค้ด", "เครื่องพิมพ์ฉลาก", "เครื่องพิมพ์สติกเกอร์", "เครื่องพิมพ์สติ๊กเกอร์"],
-   "urls": ["/products.html?category=printers"],
-   "planned_urls": ["/products/te200", "/products/zt411", "/products/m510", "/products/zd421"],
-   "risk": "Four printer pages. te200 and zd421 are both desktop printers; zt411 is industrial and m510 portable, so those two are more separable."
-  },
-  {
-   "id": "R-3",
-   "label": "Thermal transfer ribbon",
-   "canonical_owner": null,
-   "blocked_by": "D-10",
-   "terms": ["ribbon", "thermal transfer ribbon", "ริบบอน", "ริบบอนพิมพ์บาร์โค้ด", "ผ้าหมึก", "หมึกพิมพ์", "wax ribbon", "resin ribbon"],
-   "urls": ["/products.html?category=ribbons"],
-   "planned_urls": ["/products/wax-ribbons", "/products/wax-resin-ribbons", "/products/resin-ribbons"],
-   "risk": "HIGHEST. Three entries whose Thai descriptions differ only in ribbon type and which share one `url` value in catalog-data.js today. They will compete directly."
-  },
-  {
-   "id": "R-4",
-   "label": "Barcode label / sticker",
-   "canonical_owner": null,
-   "blocked_by": "D-09",
-   "terms": ["barcode label", "label", "sticker", "ฉลากบาร์โค้ด", "ฉลากสินค้า", "สติกเกอร์", "สติ๊กเกอร์", "ฉลาก"],
-   "urls": ["/products.html?category=labels"],
-   "planned_urls": ["/products/labels"],
-   "risk": "One entry, and it carries no `evidence` field and kind:supplies. Likely a category page rather than a product page."
-  },
-  {
-   "id": "R-5",
-   "label": "RFID",
-   "canonical_owner": null,
-   "blocked_by": "D-09",
-   "terms": ["rfid", "rfid reader", "rfid system", "อาร์เอฟไอดี", "เครื่องอ่าน rfid", "เครื่องอ่านอาร์เอฟไอดี", "ระบบ rfid"],
-   "urls": ["/products.html?category=rfid"],
-   "planned_urls": ["/products/rfid"],
-   "risk": "One entry, no `evidence` field, kind:solution. Likely a category or solution page rather than a product page."
-  },
-  {
-   "id": "R-6",
-   "label": "Mobile computer / enterprise mobility",
-   "canonical_owner": null,
-   "blocked_by": "D-09",
-   "terms": ["mobile computer", "handheld computer", "enterprise mobility", "โมบายคอมพิวเตอร์", "คอมพิวเตอร์พกพา", "เครื่องตรวจนับสินค้า", "pda"],
-   "urls": ["/products.html?category=mobile"],
-   "planned_urls": ["/products/tc22"],
-   "risk": "One entry, but kind:family — it covers TC22 and TC27. The page must not read as a single model."
-  },
-  {
-   "id": "R-7",
-   "label": "Company / about ACS",
-   "canonical_owner": null,
-   "blocked_by": "D-11",
-   "terms": ["about acs", "why acs", "asian coding systems", "เกี่ยวกับ acs", "ทำไมต้อง acs", "บริษัท acs"],
-   "urls": ["/"],
-   "planned_urls": [],
-   "risk": "No dedicated company page exists. /why-acs 404s. The approved about-ACS copy has nowhere to go."
-  }
- ]
+  "_source": "Built 2026-10-23 from the real site: the 6 live pages in real-inventory.json plus the 14 products in the live catalog-data.js. Replaces the sitemap-era clusters, now in data/retired/.",
+  "_owner_rule": "canonical_owner is set only by an Owner decision, recorded in decisions_made with its date. A null owner makes the cluster a HOLD for any new package. Setting one is never a code change.",
+  "_owner_status": "All seven owners were set by the Owner on 2026-11-13 (D-09, D-10, D-11). Every owner URL is PLANNED: the page is built in acs-site/ and is not deployed. On the live site these addresses do not exist yet, so a package may be written against an owner but nothing may link to it until the rebuild is live.",
+  "decisions_needed": [],
+  "decisions_made": [
+    {
+      "id": "D-09",
+      "question": "Do category pages exist as their own URLs, or is the filtered catalogue (/products.html?category=X) the canonical home for each category head term?",
+      "decision": "Six category pages, one per category, at /categories/<id>/. Each owns its category's head term. They are generated from the catalogue and state nothing the catalogue does not.",
+      "decided_by": "ACS Owner",
+      "decided_on": "2026-11-13",
+      "settles": [
+        "R-1",
+        "R-2",
+        "R-3",
+        "R-4",
+        "R-5",
+        "R-6"
+      ]
+    },
+    {
+      "id": "D-10",
+      "question": "Three ribbon products (wax, wax-resin, resin) will all target the same intent, 'ริบบอน / thermal transfer ribbon'. Do they get three pages with one owning the head term, or one page covering the choice between them?",
+      "decision": "The ribbon category page (/categories/ribbons/) owns the head term and sets the three kinds side by side. The three product pages stay; each owns only its own kind (wax, wax-resin, resin).",
+      "decided_by": "ACS Owner",
+      "decided_on": "2026-11-13",
+      "settles": [
+        "R-3"
+      ]
+    },
+    {
+      "id": "D-11",
+      "question": "Where does the approved about-ACS copy live, now that /why-acs returns 404?",
+      "decision": "/about/. The old address /why-acs and the earlier build's /company both answer 301 to it.",
+      "decided_by": "ACS Owner",
+      "decided_on": "2026-11-13",
+      "settles": [
+        "R-7"
+      ]
+    }
+  ],
+  "clusters": [
+    {
+      "id": "R-1",
+      "label": "Barcode scanner — generic head term",
+      "canonical_owner": "/categories/scanners/",
+      "terms": [
+        "barcode scanner",
+        "barcode scanners",
+        "handheld scanner",
+        "เครื่องสแกนบาร์โค้ด",
+        "เครื่องอ่านบาร์โค้ด",
+        "สแกนบาร์โค้ด",
+        "เครื่องสแกน",
+        "เครื่องอ่านคิวอาร์โค้ด"
+      ],
+      "urls": [
+        "/products.html?category=scanners"
+      ],
+      "planned_urls": [
+        "/categories/scanners/",
+        "/products/1950g",
+        "/products/1960g",
+        "/products/ds2208",
+        "/products/ds3600"
+      ],
+      "risk": "Four scanner pages competing for one head term once built. 1950g and 1960g are both Honeywell Xenon handhelds, which is the closest pair on the site.",
+      "owner_state": "PLANNED",
+      "owner_decision": "D-09"
+    },
+    {
+      "id": "R-2",
+      "label": "Barcode / label printer — generic head term",
+      "canonical_owner": "/categories/printers/",
+      "terms": [
+        "barcode printer",
+        "label printer",
+        "เครื่องพิมพ์บาร์โค้ด",
+        "เครื่องพิมพ์ฉลาก",
+        "เครื่องพิมพ์สติกเกอร์",
+        "เครื่องพิมพ์สติ๊กเกอร์"
+      ],
+      "urls": [
+        "/products.html?category=printers"
+      ],
+      "planned_urls": [
+        "/categories/printers/",
+        "/products/te200",
+        "/products/zt411",
+        "/products/m510",
+        "/products/zd421"
+      ],
+      "risk": "Four printer pages. te200 and zd421 are both desktop printers; zt411 is industrial and m510 portable, so those two are more separable.",
+      "owner_state": "PLANNED",
+      "owner_decision": "D-09"
+    },
+    {
+      "id": "R-3",
+      "label": "Thermal transfer ribbon",
+      "canonical_owner": "/categories/ribbons/",
+      "terms": [
+        "ribbon",
+        "thermal transfer ribbon",
+        "ริบบอน",
+        "ริบบอนพิมพ์บาร์โค้ด",
+        "ผ้าหมึก",
+        "หมึกพิมพ์",
+        "wax ribbon",
+        "resin ribbon"
+      ],
+      "urls": [
+        "/products.html?category=ribbons"
+      ],
+      "planned_urls": [
+        "/categories/ribbons/",
+        "/products/wax-ribbons",
+        "/products/wax-resin-ribbons",
+        "/products/resin-ribbons"
+      ],
+      "risk": "Settled by D-10: the category page owns 'ริบบอน'. The risk that remains is drift — a ribbon product page that starts answering 'which ribbon?' takes the head term back. Each ribbon page covers its own kind only.",
+      "owner_state": "PLANNED",
+      "owner_decision": "D-10"
+    },
+    {
+      "id": "R-4",
+      "label": "Barcode label / sticker",
+      "canonical_owner": "/categories/labels/",
+      "terms": [
+        "barcode label",
+        "label",
+        "sticker",
+        "ฉลากบาร์โค้ด",
+        "ฉลากสินค้า",
+        "สติกเกอร์",
+        "สติ๊กเกอร์",
+        "ฉลาก"
+      ],
+      "urls": [
+        "/products.html?category=labels"
+      ],
+      "planned_urls": [
+        "/categories/labels/",
+        "/products/labels"
+      ],
+      "risk": "One entry, and it carries no `evidence` field and kind:supplies. Likely a category page rather than a product page. After D-09 this category has one entry, so the category page and that entry sit close together: the category page owns the head term, the entry owns its own name. Watch for the two converging.",
+      "owner_state": "PLANNED",
+      "owner_decision": "D-09"
+    },
+    {
+      "id": "R-5",
+      "label": "RFID",
+      "canonical_owner": "/categories/rfid/",
+      "terms": [
+        "rfid",
+        "rfid reader",
+        "rfid system",
+        "อาร์เอฟไอดี",
+        "เครื่องอ่าน rfid",
+        "เครื่องอ่านอาร์เอฟไอดี",
+        "ระบบ rfid"
+      ],
+      "urls": [
+        "/products.html?category=rfid"
+      ],
+      "planned_urls": [
+        "/categories/rfid/",
+        "/products/rfid"
+      ],
+      "risk": "One entry, no `evidence` field, kind:solution. Likely a category or solution page rather than a product page. After D-09 this category has one entry, so the category page and that entry sit close together: the category page owns the head term, the entry owns its own name. Watch for the two converging.",
+      "owner_state": "PLANNED",
+      "owner_decision": "D-09"
+    },
+    {
+      "id": "R-6",
+      "label": "Mobile computer / enterprise mobility",
+      "canonical_owner": "/categories/mobile/",
+      "terms": [
+        "mobile computer",
+        "handheld computer",
+        "enterprise mobility",
+        "โมบายคอมพิวเตอร์",
+        "คอมพิวเตอร์พกพา",
+        "เครื่องตรวจนับสินค้า",
+        "pda"
+      ],
+      "urls": [
+        "/products.html?category=mobile"
+      ],
+      "planned_urls": [
+        "/categories/mobile/",
+        "/products/tc22"
+      ],
+      "risk": "One entry, but kind:family — it covers TC22 and TC27. The page must not read as a single model. After D-09 this category has one entry, so the category page and that entry sit close together: the category page owns the head term, the entry owns its own name. Watch for the two converging.",
+      "owner_state": "PLANNED",
+      "owner_decision": "D-09"
+    },
+    {
+      "id": "R-7",
+      "label": "Company / about ACS",
+      "canonical_owner": "/about/",
+      "terms": [
+        "about acs",
+        "why acs",
+        "asian coding systems",
+        "เกี่ยวกับ acs",
+        "ทำไมต้อง acs",
+        "บริษัท acs"
+      ],
+      "urls": [
+        "/"
+      ],
+      "planned_urls": [
+        "/about/"
+      ],
+      "risk": "No dedicated company page exists. /why-acs 404s. The approved about-ACS copy has nowhere to go.",
+      "owner_state": "PLANNED",
+      "owner_decision": "D-11"
+    }
+  ]
 }

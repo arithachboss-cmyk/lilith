@@ -6,6 +6,7 @@
  * Writes test-results/summary.json. Exits non-zero if any test FAILS; NOT RUN
  * and the human steps do not fail the run, but they keep the gate closed.
  */
+import { execFileSync } from 'node:child_process';
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -29,6 +30,22 @@ const schema = load<{ checks: Check[] }>('schema.json');
 const claims = load<{ pass: boolean; byClass: Record<string, number>; omittedFigures: unknown[]; activeEvidenceRecords: number }>('claims.json');
 const cwv = load<{ passed: number; failed: number; pages: unknown[] }>('cwv.json');
 const offline = load<{ pass: boolean; commit: string; steps: Array<{ name: string; pass: boolean }>; networkBlocked: boolean }>('offline.json');
+
+/**
+ * An offline run proves something only about the code it ran on. Returns the
+ * code files that differ between that commit and what is on disk now; reports
+ * and evidence files do not count.
+ */
+function codeChangedSince(commit: string): string[] | null {
+  try {
+    const repo = join(out, '..', '..');
+    const names = execFileSync('git', ['-C', repo, 'diff', '--name-only', commit, '--', 'acs-site', 'acs-seo/tools'], { encoding: 'utf8' });
+    return names.split('\n').filter((f) => f && !f.includes('/test-results/') && !f.endsWith('.md'));
+  } catch {
+    return null;
+  }
+}
+const stale = offline ? codeChangedSince(offline.commit) : null;
 
 const rows: Row[] = [];
 
@@ -69,12 +86,14 @@ const add = (id: string, proves: string, evidence: string, result: { status: Sta
 add('T1', 'Every rule and parser behaves, including on Thai input', 'unit.json',
   unit ? { status: unit.numFailedTests === 0 && unit.numTotalTests > 0 ? 'PASS' : 'FAIL', detail: `${unit.numPassedTests}/${unit.numTotalTests} unit tests` } : { status: 'NOT RUN', detail: 'unit.json missing' });
 add('T2', 'A clean checkout builds and tests with no network access', 'offline.json',
-  offline
+  offline && (stale === null || stale.length > 0)
+    ? { status: 'NOT RUN', detail: stale === null ? `ran on ${offline.commit.slice(0, 7)}, which git cannot compare with the current code` : `ran on ${offline.commit.slice(0, 7)}; ${stale.length} code file(s) changed since — run tests/qa/offline.mjs again on a committed tree` }
+    : offline
     ? { status: offline.pass && offline.networkBlocked ? 'PASS' : 'FAIL', detail: `commit ${offline.commit.slice(0, 7)} · ${offline.steps.filter((s) => s.pass).length}/${offline.steps.length} steps · network ${offline.networkBlocked ? 'blocked' : 'NOT blocked'}` }
     : { status: 'NOT RUN', detail: 'offline.json missing — run tests/qa/offline.mjs on a committed tree' });
 add('T3', '14 product routes return 200 with distinct headings', 'e2e.json', fromE2e(['E01', 'E02', 'E31']));
-add('T4', 'Self-referencing canonical on every indexable page; no page answers at two addresses', 'canonical.json, links.json', combine(fromChecks(canonical, 'canonical.json'), fromE2e(['E28', 'E29'])));
-add('T5', 'Product text is present with JavaScript disabled', 'norender.json', fromE2e(['E07', 'E08', 'E33']));
+add('T4', 'Self-referencing canonical on every indexable page; no page answers at two addresses', 'canonical.json, links.json', combine(fromChecks(canonical, 'canonical.json'), fromE2e(['E28', 'E29', 'E36'])));
+add('T5', 'Product text is present with JavaScript disabled', 'norender.json', fromE2e(['E07', 'E08', 'E33', 'E37']));
 add('T6', 'No internal link resolves to a 404', 'links.json', fromE2e(['E05', 'E06']));
 add('T7', 'The sitemap lists every indexable URL and only those; robots.txt names it', 'sitemap.json', fromChecks(sitemap, 'sitemap.json'));
 add('T8', 'The claim scanner reports zero BLOCKED over the built HTML', 'claims.json',

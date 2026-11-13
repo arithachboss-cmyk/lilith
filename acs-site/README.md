@@ -34,17 +34,20 @@ testing a stale server from an earlier run.
 | M0 | Skeleton: 20 pages reachable in demo mode, one status config, store boundary, evidence gate, enquiry wizard, basket | 82/82 | 30/30 | BLOCKED 0 |
 | M1 | Discoverability: one address per page, self-referencing canonical, sitemap of exactly the indexable pages, robots naming it; family pages say so | 108/108 | 34/34 | BLOCKED 0 |
 | M2a | Product structured data with no price, offer, availability or rating; sitemap `lastmod` from a committed content-hash manifest | 125/125 | 35/35 | BLOCKED 0 |
+| M2b | Owner decisions D-09, D-10, D-11 built: six category pages, the ribbon category owning the ribbon choice, the approved company copy at `/about/` with `/why-acs` and `/company` redirecting to it; evidence drafts and a recorded-approval path | 169/169 | 41/41 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
-`npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap).
+`npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
+25/25 at M2b (24 URLs). The M3 row was measured before M2b; `QA.md` carries the current run.
 
 **M3 is not closed.** The QA pass is in [`QA.md`](QA.md): 17 of 18 acceptance tests pass
 and the eighteenth is a human step. The gate still needs M2 complete, a review of the
 exact commit by someone other than the author, and Owner UAT.
 
-**M2 is only partly done.** M2a is the part that does not wait on the Owner. The rest of
-M2 — spec figures, prices, stock, category pages, the ribbon decision and the company
-page — cannot start until the material and decisions listed under "Still missing" arrive.
+**M2 is not finished.** M2a and M2b are the parts that did not need material from ACS.
+What is left needs it: spec figures need a named person at ACS to approve the two drafts
+and sources for five more figures; prices need a dated price list; stock needs dated
+stock data; product pages need images; DS3600 needs its model list. See "Still missing".
 
 ## Non-negotiables, and where each one lives
 
@@ -61,13 +64,22 @@ page — cannot start until the material and decisions listed under "Still missi
 | Structured data never carries a price, offer, availability, rating or review | `src/render/structured.ts` |
 | A page's `lastmod` moves only when its content does; a changed page cannot keep its old date | `src/build/versions.ts`, `src/data/page-versions.json` |
 | Catalogue data is a verbatim snapshot, never edited to fit | `src/data/catalog.source.json` |
+| A category page states only what the catalogue states | `categoryPage` in `src/render/pages.ts`, `tests/unit/category.test.ts` |
+| The company copy is the governed draft, character for character | `src/content/about.json`, `tests/unit/about.test.ts` |
+| Every claim the company page makes has a CLEARED evidence record | `scripts/claims.ts` |
+| A moved address redirects in one hop and never shadows a real page | `src/build/redirects.ts`, `src/build/address.ts` |
+| A record becomes active only through a recorded approval by someone other than its author | `applyApprovals` in `src/rules/evidence.ts`, `src/data/evidence-approvals.json` |
 
 ## Status rules
 
 `system` is `demo`. A feature moves to `live` only when its acceptance test passes **and**
-the material behind it is named. Four features cannot move until the Owner supplies
-something: spec figures (datasheets), prices (a dated price list), stock (dated stock
-data) and the company page (its URL, decision D-11).
+the material behind it is named. Four features cannot move until ACS supplies something:
+spec figures (an approver, and sources for five figures), prices (a dated price list),
+stock (dated stock data) and product images (the files).
+
+The company page moved to `live` on 2026-11-13: the Owner approved the copy and chose its
+address (D-11). `live` here means the content is real and approved. The system as a whole
+is still `demo`, so the page is still closed to crawlers and nothing is deployed.
 
 ## How the live rules are proven while the build stays demo
 
@@ -77,9 +89,32 @@ proven on a **live-config variant rendered in memory** (`renderSite` in
 `src/build/site.ts`), never written to `dist/`. `npm run verify` and
 `tests/unit/site.test.ts` both do this. Nothing flips the shipped config.
 
-On a live system 17 pages are indexable: home, catalogue, 14 products and the enquiry
-page. The basket, the status page and the error page never are, and the company page
-joins only when its content is live.
+On a live system 24 pages are indexable: home, catalogue, 6 categories, 14 products, the
+enquiry page and the about page. The basket, the status page and the error page never
+are. The about page and the category pages drop out if their feature is not `live`.
+
+## Owner decisions built in M2b
+
+Recorded in `../acs-seo/data/clusters.json` (`decisions_made`) and
+`../acs-seo/09_OWNER_DECISIONS_2026-11-13.md`.
+
+| Decision | What was built |
+|---|---|
+| D-09: six category pages | `/categories/<id>/`, generated from the catalogue. Not under `/products/`, because two entries are named `labels` and `rfid` like their categories. |
+| D-10: the ribbon category owns "ริบบอน" | `/categories/ribbons/` sets the three kinds side by side, using the catalogue's own words. The three ribbon pages stay. |
+| D-11: the company page is `/about/` | The approved copy, verbatim. `/why-acs` and `/company` answer 301 to it in every spelling. |
+
+## Evidence: how a figure gets shown
+
+1. A draft goes in `src/data/evidence.ts` with the source's own words and its address.
+2. A named person at ACS, not the draft's author, approves it: one line in
+   `src/data/evidence-approvals.json` — `{"recordId": "EV-1950G-01", "approvedBy": "<name and role>", "approvedOn": "<date>"}`.
+3. The build runs the gate. If the quote covers every figure and the approver is not the
+   author, the figure appears on the product page. If not, it stays hidden and
+   `dist/build-report.json` records the refusal.
+
+Two drafts exist, both for the Xenon XP 1950g and both blocked by nothing except step 2.
+Five figures have no draft yet; `evidenceGaps` in the same file says why for each.
 
 ## Limits right now
 
@@ -103,13 +138,20 @@ joins only when its content is live.
 
 - **Demo mode.** The enquiry form validates and then refuses to submit; nothing is stored
   or sent anywhere. The basket keeps product ids in `sessionStorage` and nothing else.
-- **No evidence records.** Zero are active, so 7 figure lines across 5 products are
-  omitted. `dist/build-report.json` lists each one.
-- **The audit log is in memory.** It is append-only by construction but does not persist.
+- **No active evidence.** Two drafts wait for an approver; zero records are active, so all
+  7 figure lines across 5 products are still omitted. `dist/build-report.json` lists each.
+- **The drafts cite a web page, not a signed datasheet.** The source is the
+  manufacturer's own product page as served on 2026-11-13. It carries no revision number.
+  The approver also confirms that the model ACS sells is the one the page describes.
+- **Redirects are a hosting requirement.** `/why-acs` and `/company` redirect on the
+  preview server. The eventual host has to apply the list in `dist/build-report.json`.
+- **Three categories hold one entry each** (labels, RFID, mobile). The category page and
+  its single entry sit close together; the category owns the head term, the entry its own
+  name. Worth watching once real search data exists.
+- **The audit log is rebuilt on every build** from `evidence-approvals.json`, and written
+  to `dist/build-report.json`. Git history of that file is the durable record.
 - **No product images.** The live assets were not available to this build; pages show a
   labelled placeholder.
-- **Company page is a placeholder.** The approved copy exists
-  (`../acs-seo/packages/about-acs/`) but its URL is undecided.
 
 ## Not yet tested
 
@@ -128,18 +170,23 @@ joins only when its content is live.
 
 ## Still missing (planned, not built)
 
+- An approver for the two 1950g drafts, and sources for the other five figures.
+- A dated ACS price list, dated stock data, product images, the DS3600 model list.
 - A redirect plan for the 81 dead URLs of the old site — needs Search Console data.
-- Category pages, the three-ribbon decision, the company URL — Owner decisions D-09,
-  D-10, D-11.
+  Only `/why-acs` is redirected so far, because the Owner named its new home.
 - A backend for enquiries, with its own gate.
 
 ## Known scanner note
 
-`npm run claims` reports 71 `EVIDENCE_REQUIRED` findings (54 before structured data
-repeated each brand name), all CR-06 on a manufacturer's
-name used as a product brand (Honeywell, TSC, Zebra, Brady). That is the rule working as
-written — a vendor name needs a human to confirm it is a spec reference and not a
-partnership claim — and here each one is the brand field of a catalogue entry.
+`npm run claims` reports 91 `EVIDENCE_REQUIRED` and 2 `OWNER_REQUIRED` findings, and no
+`BLOCKED`. Almost all are CR-06 on a manufacturer's name used as a product brand
+(Honeywell, TSC, Zebra, Brady): the rule working as written, since a vendor name needs a
+human to confirm it is a spec reference and not a partnership claim.
+
+The about page is different: it does make claims about ACS — the founding year (CR-10)
+and the partner programme (CR-06). `npm run claims` therefore checks that every claim row
+raised on that page has a `CLEARED` evidence record in
+`../acs-seo/packages/about-acs/publish/`, and fails if one does not.
 
 ## Review
 

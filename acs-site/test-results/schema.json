@@ -1,8 +1,8 @@
 {
-  "ranAt": "2026-11-13T21:33:48.550Z",
+  "ranAt": "2026-11-13T22:51:34.079Z",
   "variant": "live (rendered in memory, never written to dist/)",
   "validation": "structural only: parsed and checked against this project's rules, not run through an external validator",
-  "passed": 7,
+  "passed": 8,
   "failed": 0,
   "checks": [
     {
@@ -32,6 +32,11 @@
     },
     {
       "name": "every product page carries one breadcrumb trail",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "structured data on all 26 pages parses and carries no forbidden key or spec figure",
       "pass": true,
       "detail": ""
     },

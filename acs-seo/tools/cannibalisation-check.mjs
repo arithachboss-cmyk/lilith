@@ -22,8 +22,8 @@ const decisionsNeeded = clusterFile.decisions_needed ?? [];
 const real = JSON.parse(readFileSync(join(here, "../data/real-inventory.json"), "utf8"));
 
 /**
- * The inventory is built from what the site actually serves, plus the product URLs the
- * Owner has decided on but which are not built yet. The distinction matters: clashing
+ * The inventory is built from what the site actually serves, plus the product, category
+ * and company URLs the Owner has decided on but which are not deployed yet. The distinction matters: clashing
  * with a live page means enrich it, clashing with a planned one means two packages are
  * being aimed at the same future URL.
  *
@@ -77,8 +77,8 @@ const exactUrlClash = proposedUrl
 let verdict, reason, action;
 if (exactUrlClash && exactUrlClash.cls === "PLANNED") {
   verdict = "HOLD";
-  reason = `The proposed URL is already claimed by a planned product page: ${exactUrlClash.path}`;
-  action = "That URL is spoken for by the product-URL decision of 2026-10-23. Pick another, or fold this package into that page's content (see packages/site-fixes/PRODUCT_URL_SPEC.md).";
+  reason = `The proposed URL is already claimed by a planned page: ${exactUrlClash.path}`;
+  action = "That URL is spoken for by an Owner decision (products 2026-10-23; categories and /about/ 2026-11-13, see data/clusters.json decisions_made). Pick another, or fold this package into that page's content.";
 } else if (exactUrlClash) {
   verdict = "HOLD";
   reason = `The proposed URL already exists and serves a ${exactUrlClash.cls === "NON_PUBLIC" ? "non-public" : "live"} page: ${exactUrlClash.path} (${exactUrlClash.page})`;

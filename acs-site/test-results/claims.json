@@ -1,18 +1,30 @@
 {
-  "ranAt": "2026-11-13T21:33:49.172Z",
+  "ranAt": "2026-11-13T22:51:34.610Z",
   "scanner": "acs-seo/tools/claim-scan.mjs over dist/",
-  "filesScanned": 23,
+  "filesScanned": 29,
   "pass": true,
   "error": "",
   "byClass": {
     "BLOCKED": 0,
-    "EVIDENCE_REQUIRED": 71,
-    "OWNER_REQUIRED": 0
+    "EVIDENCE_REQUIRED": 91,
+    "OWNER_REQUIRED": 2
   },
   "tally": {
-    "CR-06 EVIDENCE_REQUIRED vendor-name": 71
+    "CR-10 OWNER_REQUIRED company-tenure": 2,
+    "CR-06 EVIDENCE_REQUIRED partner-claim": 2,
+    "CR-06 EVIDENCE_REQUIRED vendor-name": 89
   },
   "blocked": [],
+  "aboutPageClaims": [
+    {
+      "cr": "CR-06",
+      "verdict": "CLEARED"
+    },
+    {
+      "cr": "CR-10",
+      "verdict": "CLEARED"
+    }
+  ],
   "activeEvidenceRecords": 0,
   "omittedFigures": [
     {

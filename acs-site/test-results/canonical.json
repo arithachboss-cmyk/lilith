@@ -1,7 +1,7 @@
 {
-  "ranAt": "2026-11-13T21:33:48.550Z",
+  "ranAt": "2026-11-13T22:51:34.079Z",
   "variant": "live (rendered in memory, never written to dist/)",
-  "passed": 6,
+  "passed": 7,
   "failed": 0,
   "checks": [
     {
@@ -25,7 +25,12 @@
       "detail": ""
     },
     {
-      "name": "each of 20 pages answers 200 at one address and 301 from every other form",
+      "name": "each of 26 pages answers 200 at one address and 301 from every other form",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "name": "each of 2 moved addresses answers 301 to its new page in one hop, in every spelling",
       "pass": true,
       "detail": ""
     },
@@ -49,6 +54,54 @@
       "indexable": true,
       "canonical": [
         "https://www.asiancoding.com/products/"
+      ],
+      "noindex": false
+    },
+    {
+      "route": "/categories/printers/",
+      "indexable": true,
+      "canonical": [
+        "https://www.asiancoding.com/categories/printers/"
+      ],
+      "noindex": false
+    },
+    {
+      "route": "/categories/scanners/",
+      "indexable": true,
+      "canonical": [
+        "https://www.asiancoding.com/categories/scanners/"
+      ],
+      "noindex": false
+    },
+    {
+      "route": "/categories/labels/",
+      "indexable": true,
+      "canonical": [
+        "https://www.asiancoding.com/categories/labels/"
+      ],
+      "noindex": false
+    },
+    {
+      "route": "/categories/ribbons/",
+      "indexable": true,
+      "canonical": [
+        "https://www.asiancoding.com/categories/ribbons/"
+      ],
+      "noindex": false
+    },
+    {
+      "route": "/categories/rfid/",
+      "indexable": true,
+      "canonical": [
+        "https://www.asiancoding.com/categories/rfid/"
+      ],
+      "noindex": false
+    },
+    {
+      "route": "/categories/mobile/",
+      "indexable": true,
+      "canonical": [
+        "https://www.asiancoding.com/categories/mobile/"
       ],
       "noindex": false
     },
@@ -179,10 +232,12 @@
       "noindex": false
     },
     {
-      "route": "/company/",
-      "indexable": false,
-      "canonical": [],
-      "noindex": true
+      "route": "/about/",
+      "indexable": true,
+      "canonical": [
+        "https://www.asiancoding.com/about/"
+      ],
+      "noindex": false
     },
     {
       "route": "/status/",

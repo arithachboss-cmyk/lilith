@@ -172,3 +172,7 @@ tbody tr:last-child th, tbody tr:last-child td { border-bottom: 0; }
 .footer-links a { display: inline-flex; align-items: center; min-height: 44px; color: #fff; }
 .footer-note { margin: 0; font-size: .9rem; color: #d5deea; }
 .site-footer :focus-visible { outline-color: var(--accent); }
+
+/* The company page is prose: give it room to be read. */
+.about p { margin-block: 1rem; }
+.about h1 { margin-bottom: 1.25rem; }

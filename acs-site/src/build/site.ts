@@ -1,10 +1,11 @@
 import { SITE } from '../config/site';
 import { isIndexable, type StatusConfig } from '../config/status';
 import type { Versions } from './versions';
-import { productPath, products } from '../data/catalog';
+import { categories, categoryPath, productPath, products } from '../data/catalog';
+import { REDIRECTS, redirectProblems } from './redirects';
 import { splitFeatures, type EvidenceRecord } from '../rules/evidence';
 import {
-  basketPage, cataloguePage, companyPage, enquiryPage, homePage, notFoundPage, productPage, statusPage,
+  aboutPage, basketPage, categoryPage, cataloguePage, enquiryPage, homePage, notFoundPage, productPage, statusPage,
 } from '../render/pages';
 
 export interface PageInfo {
@@ -24,6 +25,8 @@ export interface RenderedSite {
   files: Map<string, string>;
   pages: PageInfo[];
   omittedFigures: OmittedFigure[];
+  /** Moved addresses → where each now lives. The host must apply these too. */
+  redirects: Readonly<Record<string, string>>;
 }
 
 const routeToFile = (route: string) => (route === '/' ? 'index.html' : `${route.slice(1)}index.html`);
@@ -72,10 +75,11 @@ export function renderSite(
 
   page('/', homePage(config));
   page('/products/', cataloguePage(config));
+  for (const c of categories) page(categoryPath(c.id), categoryPage(c, config));
   for (const p of products) page(productPath(p.id), productPage(p, records, asOf, config));
   page('/basket/', basketPage(config));
   page('/enquiry/', enquiryPage(config));
-  page('/company/', companyPage(config));
+  page('/about/', aboutPage(config));
   page('/status/', statusPage(config));
   files.set('404.html', notFoundPage(config));
 
@@ -93,5 +97,7 @@ export function renderSite(
   const omittedFigures = products.flatMap((p) =>
     splitFeatures(p.id, p.features, records, asOf).omitted.map((feature) => ({ productId: p.id, feature })),
   );
-  return { files, pages, omittedFigures };
+  const problems = redirectProblems(REDIRECTS, pages.map((p) => p.route));
+  if (problems.length) throw new Error(`redirect list is wrong: ${problems.join('; ')}`);
+  return { files, pages, omittedFigures, redirects: REDIRECTS };
 }

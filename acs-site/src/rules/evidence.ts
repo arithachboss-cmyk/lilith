@@ -123,6 +123,47 @@ export function activate(
   return { ok: true, record: { ...record, status: 'active', approvedBy: approver.trim() } };
 }
 
+/** One line of evidence-approvals.json: a named person approving one draft. */
+export interface Approval {
+  recordId: string;
+  approvedBy: string;
+  /** ISO date or timestamp of the approval. */
+  approvedOn: string;
+}
+
+/**
+ * Runs every recorded approval through the same gate as `activate`. A draft
+ * with an accepted approval comes back active; one whose approval is refused
+ * stays a draft, and the refusal is in the log. This is the only way a record
+ * becomes active in a build.
+ */
+export function applyApprovals(
+  drafts: readonly EvidenceRecord[],
+  approvals: readonly Approval[],
+  log: AuditLog,
+): { records: EvidenceRecord[]; problems: string[] } {
+  const problems: string[] = [];
+  const ids = drafts.map((d) => d.id);
+  for (const id of ids.filter((x, i) => ids.indexOf(x) !== i)) problems.push(`draft id used twice: ${id}`);
+  for (const d of drafts) if (d.status !== 'draft') problems.push(`${d.id}: a record must be written as a draft`);
+  for (const a of approvals) {
+    if (!ids.includes(a.recordId)) problems.push(`approval names no draft: ${a.recordId}`);
+    if (approvals.filter((x) => x.recordId === a.recordId).length > 1) problems.push(`more than one approval for ${a.recordId}`);
+  }
+  const records = drafts.map((draft) => {
+    const approval = approvals.find((a) => a.recordId === draft.id);
+    if (!approval || draft.status !== 'draft') return { ...draft, status: 'draft' as const };
+    const result = activate(draft, approval.approvedBy, log, () => approval.approvedOn);
+    return result.ok ? result.record : draft;
+  });
+  return { records, problems: [...new Set(problems)] };
+}
+
+/** What still stands between a draft and activation, apart from someone approving it. */
+export function draftBlockers(record: EvidenceRecord): CheckResult[] {
+  return runChecks(record, `not ${record.author}`).filter((c) => !c.pass);
+}
+
 /** May this feature line be rendered with its figures? */
 export function figureAllowed(
   productId: string,

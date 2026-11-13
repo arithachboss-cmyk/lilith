@@ -1,0 +1,14 @@
+{
+  "_source": "acs-seo/packages/about-acs/draft-v3-evidenced.md",
+  "_rule": "Verbatim copy. tests/unit/about.test.ts fails if this differs from the package file by one character. Change the package and re-approve it; never edit the copy here.",
+  "approval": {
+    "approvedBy": "ACS Owner",
+    "approvedOn": "2026-11-13",
+    "decision": "D-11: the copy lives at /about/; /why-acs and /company redirect to it",
+    "evidence": [
+      "CR-10 acs-seo/packages/about-acs/publish/claim-evidence-cr10.json",
+      "CR-06 acs-seo/packages/about-acs/publish/claim-evidence-cr06.json"
+    ]
+  },
+  "markdown": "# อยู่ข้างหน้างานจริงตั้งแต่ปี 1994\n\nAsian Coding Systems ก่อตั้งเมื่อปี 1994 ทำงานด้านบาร์โค้ดและระบบระบุตัวตนให้กับธุรกิจไทย\n\nเราอยู่กับงานที่คนส่วนใหญ่ไม่เห็น — จุดสแกนที่ต้องอ่านผ่านทุกครั้ง ฉลากที่ต้องทนอยู่ได้จนจบอายุงาน\nข้อมูลที่ต้องตรงกันระหว่างหน้างานกับระบบบัญชี งานพวกนี้ไม่มีใครชม แต่ถ้าพลาดขึ้นมา\nทั้งกะต้องมาตามแก้\n\nงานของเราครอบคลุมทั้งคลังสินค้า สายการผลิต ค้าปลีก และร้านสะดวกซื้อ\nโดยทำงานกับอุปกรณ์จากผู้ผลิตหลายรายเพื่อเลือกสิ่งที่เหมาะกับสภาพหน้างานจริง\nไม่ใช่สิ่งที่ขายง่ายที่สุด\n\nACS เป็นพาร์ทเนอร์ภายใต้โปรแกรม Brady IPS ซึ่งเดิมคือ Honeywell PSS\nข้อตกลงพาร์ทเนอร์ปัจจุบันยังมีผล ยืนยันโดยทีม Brady IPS Partner เมื่อเดือนกันยายน 2569\n\nสิ่งที่เราเลือกทำต่อจากนี้ไม่ต่างจากเดิม\n\n**ซื่อสัตย์** — พูดเท่าที่ตรวจสอบได้ สิ่งไหนยังไม่รู้เราบอกว่ายังไม่รู้\nและไปหาคำตอบมาให้ ดีกว่าเดาแล้วให้ลูกค้ามารับผลทีหลัง\n\n**มั่นคง** — อยู่ให้ได้นาน ๆ เพราะระบบที่เราวางไว้ต้องมีคนดูแลต่อในอีกหลายปีข้างหน้า\nความมั่นคงของเราคือเงื่อนไขที่ทำให้ลูกค้าวางแผนระยะยาวได้\n\nเราตั้งใจจะทำแบบนี้ต่อไป\n"
+}

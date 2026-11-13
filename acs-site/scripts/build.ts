@@ -8,13 +8,15 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderSite } from '../src/build/site';
 import { isIndexable, statusConfig } from '../src/config/status';
-import { evidenceRecords } from '../src/data/evidence';
+import { evidenceGaps, evidenceLog, evidenceProblems, evidenceRecords } from '../src/data/evidence';
+import { draftBlockers } from '../src/rules/evidence';
 import versions from '../src/data/page-versions.json';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
 const dist = join(root, 'dist');
 const asOf = new Date().toISOString().slice(0, 10);
 
+if (evidenceProblems.length) throw new Error(`evidence approvals are wrong: ${evidenceProblems.join('; ')}`);
 const site = renderSite(statusConfig, evidenceRecords, asOf, versions);
 
 rmSync(dist, { recursive: true, force: true });
@@ -45,6 +47,12 @@ const report = {
   indexableRoutes: site.pages.filter((p) => p.indexable).map((p) => p.route),
   activeEvidenceRecords: evidenceRecords.filter((r) => r.status === 'active').length,
   omittedFigures: site.omittedFigures,
+  // Drafts wait for a named person other than their author. `blockedBy` is empty when only that is missing.
+  evidenceDrafts: evidenceRecords.filter((r) => r.status === 'draft').map((r) => ({ id: r.id, productId: r.subject.productId, feature: r.subject.feature, source: r.sourceUrl, blockedBy: draftBlockers(r).map((c) => c.name) })),
+  figuresWithNoDraft: evidenceGaps,
+  evidenceDecisions: evidenceLog.entries().map((e) => ({ at: e.at, recordId: e.recordId, action: e.action, actor: e.actor })),
+  // Addresses that moved. Whichever host serves dist/ has to answer each with a 301.
+  redirects: site.redirects,
 };
 writeFileSync(join(dist, 'build-report.json'), JSON.stringify(report, null, 2) + '\n');
 

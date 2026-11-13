@@ -69,9 +69,10 @@ describe('product structured data', () => {
     expect(items.map((i) => i.item)).toEqual([
       'https://www.asiancoding.com/',
       'https://www.asiancoding.com/products/',
+      'https://www.asiancoding.com/categories/printers/',
       'https://www.asiancoding.com/products/zd421/',
     ]);
-    expect(items.map((i) => i.position)).toEqual([1, 2, 3]);
+    expect(items.map((i) => i.position)).toEqual([1, 2, 3, 4]);
   });
 
   it('cannot be closed early by a value containing a script tag', () => {

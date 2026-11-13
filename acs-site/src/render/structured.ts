@@ -1,5 +1,5 @@
 import { SITE } from '../config/site';
-import { categoryById, productPath, type Product } from '../data/catalog';
+import { categoryById, categoryPath, productPath, type Category, type Product } from '../data/catalog';
 
 /**
  * Structured data for product pages.
@@ -40,14 +40,57 @@ export function productJsonLd(p: Product): JsonLd | null {
   };
 }
 
-export function breadcrumbJsonLd(p: Product): JsonLd {
-  const item = (position: number, name: string, path: string) => ({
-    '@type': 'ListItem', position, name, item: SITE.origin + path,
-  });
+function breadcrumbs(trail: ReadonlyArray<readonly [name: string, path: string]>): JsonLd {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
-    itemListElement: [item(1, 'หน้าแรก', '/'), item(2, 'สินค้า', '/products/'), item(3, p.thaiTitle, productPath(p.id))],
+    itemListElement: trail.map(([name, path], index) => ({
+      '@type': 'ListItem', position: index + 1, name, item: SITE.origin + path,
+    })),
+  };
+}
+
+/** Home → catalogue → category → product: the same trail the page shows. */
+export function breadcrumbJsonLd(p: Product): JsonLd {
+  const category = categoryById(p.category);
+  return breadcrumbs([
+    ['หน้าแรก', '/'],
+    ['สินค้า', '/products/'],
+    ...(category ? [[category.thai, categoryPath(category.id)] as const] : []),
+    [p.thaiTitle, productPath(p.id)],
+  ]);
+}
+
+export function categoryBreadcrumbJsonLd(c: Category): JsonLd {
+  return breadcrumbs([['หน้าแรก', '/'], ['สินค้า', '/products/'], [c.thai, categoryPath(c.id)]]);
+}
+
+/** The category's entries, in page order. Names and addresses only. */
+export function categoryListJsonLd(c: Category, items: readonly Product[]): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    name: c.thai,
+    numberOfItems: items.length,
+    itemListElement: items.map((p, index) => ({
+      '@type': 'ListItem', position: index + 1, name: p.name, url: SITE.origin + productPath(p.id),
+    })),
+  };
+}
+
+/**
+ * The company, as the about page states it. `foundingDate` is claim CR-10,
+ * cleared in acs-seo/packages/about-acs/publish/claim-evidence-cr10.json.
+ */
+export function organizationJsonLd(): JsonLd {
+  return {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Asian Coding Systems',
+    url: SITE.origin + '/',
+    foundingDate: '1994',
+    telephone: SITE.phoneHref.replace('tel:', ''),
+    email: SITE.salesEmail,
   };
 }
 

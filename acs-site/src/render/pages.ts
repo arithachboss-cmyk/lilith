@@ -3,14 +3,19 @@ import {
   FEATURE_LABEL, FEATURE_NOTE, STATUS_LABEL, statusConfig, systemBadgeText,
   type FeatureKey, type Status, type StatusConfig,
 } from '../config/status';
+import { ABOUT_APPROVAL, parseAbout } from '../content/about';
 import {
-  categories, categoryById, productPath, products, referenceLink, type Product,
+  categories, categoryById, categoryPath, productPath, products, productsIn, referenceLink,
+  type Category, type Product,
 } from '../data/catalog';
 import { splitFeatures, type EvidenceRecord } from '../rules/evidence';
 import { COUNTRIES, INDUSTRIES, INTERESTS, LABELS, MESSAGE_MAX, SCALES } from '../rules/enquiry';
 import { esc } from './html';
 import { layout } from './layout';
-import { breadcrumbJsonLd, productJsonLd, type JsonLd } from './structured';
+import {
+  breadcrumbJsonLd, categoryBreadcrumbJsonLd, categoryListJsonLd, organizationJsonLd, productJsonLd,
+  type JsonLd,
+} from './structured';
 
 const KIND_LABEL: Record<Product['kind'], string> = {
   model: 'รุ่นผลิตภัณฑ์',
@@ -43,9 +48,13 @@ function productCard(p: Product): string {
 </li>`;
 }
 
+function categoryLink(c: Category): string {
+  return `<li><a class="cat-link" href="${categoryPath(c.id)}">${esc(c.thai)}<span lang="en">${esc(c.title)}</span></a></li>`;
+}
+
 export function homePage(config: StatusConfig = statusConfig): string {
   const cats = categories
-    .map((c) => `<li><a class="cat-link" href="/products/?category=${c.id}">${esc(c.thai)}<span>${esc(c.title)}</span></a></li>`)
+    .map(categoryLink)
     .join('');
   const featured = products.filter((p) => p.featured).map(productCard).join('\n');
   const main = `
@@ -94,6 +103,10 @@ export function cataloguePage(config: StatusConfig = statusConfig): string {
 ${products.map(productCard).join('\n')}
   </ul>
   <p id="catalogue-empty" class="empty" hidden>ไม่พบสินค้าที่ตรงกับคำค้นหรือหมวดที่เลือก ลองค้นด้วยชื่อรุ่น เช่น TE200</p>
+  <section aria-labelledby="by-category-heading">
+    <h2 id="by-category-heading">ดูตามหมวด</h2>
+    <ul class="cat-grid">${categories.map(categoryLink).join('')}</ul>
+  </section>
 </div>`;
   return layout(
     { path: '/products/', title: `รายการสินค้า | ${SITE.shortName}`, description: 'รายการสินค้า ACS: เครื่องสแกนบาร์โค้ด เครื่องพิมพ์ฉลาก ฉลาก ริบบอน RFID และโมบายคอมพิวเตอร์', nav: 'products', script: true },
@@ -120,7 +133,7 @@ export function productPage(
     : '';
   const main = `
 <div class="wrap section product">
-  <nav class="breadcrumbs" aria-label="เส้นทาง"><a href="/">หน้าแรก</a> <span aria-hidden="true">/</span> <a href="/products/">สินค้า</a> <span aria-hidden="true">/</span> <a href="/products/?category=${p.category}">${esc(category?.thai ?? p.category)}</a></nav>
+  <nav class="breadcrumbs" aria-label="เส้นทาง"><a href="/">หน้าแรก</a> <span aria-hidden="true">/</span> <a href="/products/">สินค้า</a> <span aria-hidden="true">/</span> <a href="${categoryPath(p.category)}">${esc(category?.thai ?? p.category)}</a></nav>
   <div class="product-grid">
     <div>${imagePlaceholder()}</div>
     <div>
@@ -251,16 +264,88 @@ export function enquiryPage(config: StatusConfig = statusConfig): string {
   );
 }
 
-export function companyPage(config: StatusConfig = statusConfig): string {
+/**
+ * A category page owns its category's head term (decision D-09). It states
+ * only what the catalogue states: the category's name and its entries.
+ */
+export function categoryPage(c: Category, config: StatusConfig = statusConfig): string {
+  const items = productsIn(c.id);
+  // Where a category holds several kinds of one consumable, the page sets them
+  // side by side so that it, not one of them, answers "which one?" (decision D-10).
+  const compare = items.length > 1 && items.every((p) => p.kind === 'supplies');
+  const chooser = compare
+    ? `
+  <section aria-labelledby="choose-heading" data-chooser>
+    <h2 id="choose-heading">เลือกชนิด${esc(c.thai)}</h2>
+    <div class="table-wrap" tabindex="0" role="region" aria-label="ตารางเทียบชนิด${esc(c.thai)}">
+      <table>
+        <thead><tr><th scope="col">ชนิด</th><th scope="col">บริบทการใช้งาน</th><th scope="col">สิ่งที่ต้องตรวจก่อนเลือก</th></tr></thead>
+        <tbody>${items.map((p) => `<tr><th scope="row"><a href="${productPath(p.id)}">${esc(p.thaiTitle)}</a></th><td>${esc(p.thaiDescription)}</td><td>${p.features.map(esc).join(' · ')}</td></tr>`).join('')}</tbody>
+      </table>
+    </div>
+    <p class="muted">ตารางนี้ยกข้อความจาก catalogue ของ ACS ชนิดที่ตรงกับงานของคุณต้องยืนยันกับ ACS พร้อมรุ่นเครื่องพิมพ์และวัสดุฉลากที่ใช้</p>
+  </section>`
+    : '';
+  const others = categories.filter((other) => other.id !== c.id).map(categoryLink).join('');
   const main = `
+<div class="wrap section" data-category-page="${esc(c.id)}">
+  <nav class="breadcrumbs" aria-label="เส้นทาง"><a href="/">หน้าแรก</a> <span aria-hidden="true">/</span> <a href="/products/">สินค้า</a> <span aria-hidden="true">/</span> <span aria-current="page">${esc(c.thai)}</span></nav>
+  <h1>${esc(c.thai)}</h1>
+  <p class="product-name" lang="en">${esc(c.title)}</p>
+  <p class="lead">${items.length} รายการในหมวดนี้ จาก catalogue ของ ACS รุ่นที่จำหน่าย ราคา และการจัดส่งต้องยืนยันกับ ACS</p>${chooser}
+  <ul class="card-grid" id="category-grid">
+${items.map(productCard).join('\n')}
+  </ul>
+  <p class="actions"><a class="button button-primary" href="/enquiry/">ขอราคา / ติดต่อ ACS</a> <a class="button button-outline" href="/products/">ดูสินค้าทั้งหมด</a></p>
+  <section aria-labelledby="other-cats-heading">
+    <h2 id="other-cats-heading">หมวดอื่น</h2>
+    <ul class="cat-grid">${others}</ul>
+  </section>
+</div>`;
+  return layout(
+    {
+      path: categoryPath(c.id),
+      title: `${c.thai} (${c.title}) | ${SITE.shortName}`,
+      description: `${c.thai} จาก Asian Coding Systems: ${items.map((p) => p.name).join(', ')}`,
+      nav: 'products',
+      index: config.features.categoryPages === 'live',
+      jsonLd: [categoryBreadcrumbJsonLd(c), categoryListJsonLd(c, items)],
+    },
+    main, config,
+  );
+}
+
+/**
+ * The company page (decision D-11: it lives at /about/). The copy is the
+ * governed package draft the Owner approved; until that approval is recorded
+ * in the status config the page shows a placeholder and stays out of the index.
+ */
+export function aboutPage(config: StatusConfig = statusConfig): string {
+  const live = config.features.company === 'live';
+  const about = parseAbout();
+  const main = live
+    ? `
+<article class="wrap section narrow about" data-about-approved="${esc(ABOUT_APPROVAL.approvedOn)}">
+  <h1>${esc(about.heading)}</h1>
+  ${about.paragraphs.map((html) => `<p>${html}</p>`).join('\n  ')}
+  <p class="actions"><a class="button button-primary" href="/enquiry/">ขอราคา / ติดต่อ ACS</a> <a class="button button-outline" href="/products/">ดูรายการสินค้า</a></p>
+</article>`
+    : `
 <div class="wrap section narrow">
   <h1>เกี่ยวกับ ACS</h1>
-  <p class="notice notice-${config.features.company}">${statusChip(config.features.company)} เนื้อหาหน้านี้ <strong>ยังไม่เผยแพร่</strong> — ${esc(FEATURE_NOTE.company)}</p>
+  <p class="notice notice-${config.features.company}">${statusChip(config.features.company)} เนื้อหาหน้านี้ <strong>ยังไม่เผยแพร่</strong> — รอเจ้าของอนุมัติข้อความ</p>
   <p>ระหว่างนี้ติดต่อ Asian Coding Systems ได้ที่ <a href="${SITE.phoneHref}">${esc(SITE.phoneDisplay)}</a> หรือ <a href="mailto:${esc(SITE.salesEmail)}">${esc(SITE.salesEmail)}</a></p>
 </div>`;
   return layout(
-    // A placeholder is not worth indexing; the page opens to crawlers only once its content is live.
-    { path: '/company/', title: `เกี่ยวกับ ACS | ${SITE.shortName}`, description: 'ข้อมูลเกี่ยวกับ Asian Coding Systems', nav: 'company', index: config.features.company === 'live' },
+    {
+      path: '/about/',
+      title: `เกี่ยวกับ ACS | ${SITE.shortName}`,
+      description: live ? 'Asian Coding Systems ก่อตั้งเมื่อปี 1994 ทำงานด้านบาร์โค้ดและระบบระบุตัวตนให้กับธุรกิจไทย' : 'ข้อมูลเกี่ยวกับ Asian Coding Systems',
+      nav: 'company',
+      // A placeholder is not worth indexing; the page opens to crawlers only once its content is live.
+      index: live,
+      ...(live ? { jsonLd: [organizationJsonLd()] } : {}),
+    },
     main, config,
   );
 }

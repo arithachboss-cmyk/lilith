@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-11-13T21:34:04.904Z",
+  "ranAt": "2026-11-13T22:51:53.103Z",
   "tags": [
     "wcag2a",
     "wcag2aa",
@@ -38,7 +38,17 @@
       "violations": []
     },
     {
-      "route": "/company/",
+      "route": "/about/",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "route": "/categories/ribbons/",
+      "width": 360,
+      "violations": []
+    },
+    {
+      "route": "/categories/scanners/",
       "width": 360,
       "violations": []
     },
@@ -78,7 +88,17 @@
       "violations": []
     },
     {
-      "route": "/company/",
+      "route": "/about/",
+      "width": 1280,
+      "violations": []
+    },
+    {
+      "route": "/categories/ribbons/",
+      "width": 1280,
+      "violations": []
+    },
+    {
+      "route": "/categories/scanners/",
       "width": 1280,
       "violations": []
     },

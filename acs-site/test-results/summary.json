@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-13T21:35:04.618Z",
+  "generatedAt": "2026-11-13T22:52:16.804Z",
   "counts": {
-    "PASS": 17,
+    "PASS": 16,
     "FAIL": 0,
-    "NOT RUN": 0,
+    "NOT RUN": 1,
     "HUMAN STEP": 1
   },
   "gate": {
-    "automatedTestsGreen": true,
+    "automatedTestsGreen": false,
     "m2Complete": false,
     "externalReview": false,
     "ownerUat": false,
@@ -20,14 +20,14 @@
       "proves": "Every rule and parser behaves, including on Thai input",
       "evidence": "unit.json",
       "status": "PASS",
-      "detail": "127/127 unit tests"
+      "detail": "169/169 unit tests"
     },
     {
       "id": "T2",
       "proves": "A clean checkout builds and tests with no network access",
       "evidence": "offline.json",
-      "status": "PASS",
-      "detail": "commit 1c6841c · 9/9 steps · network blocked"
+      "status": "NOT RUN",
+      "detail": "ran on 1c6841c; 22 code file(s) changed since — run tests/qa/offline.mjs again on a committed tree"
     },
     {
       "id": "T3",
@@ -41,14 +41,14 @@
       "proves": "Self-referencing canonical on every indexable page; no page answers at two addresses",
       "evidence": "canonical.json, links.json",
       "status": "PASS",
-      "detail": "6/6 checks · 2/2 checks (E28, E29)"
+      "detail": "7/7 checks · 3/3 checks (E28, E29, E36)"
     },
     {
       "id": "T5",
       "proves": "Product text is present with JavaScript disabled",
       "evidence": "norender.json",
       "status": "PASS",
-      "detail": "3/3 checks (E07, E08, E33)"
+      "detail": "4/4 checks (E07, E08, E33, E37)"
     },
     {
       "id": "T6",
@@ -69,7 +69,7 @@
       "proves": "The claim scanner reports zero BLOCKED over the built HTML",
       "evidence": "claims.json",
       "status": "PASS",
-      "detail": "BLOCKED 0 · EVIDENCE_REQUIRED 71"
+      "detail": "BLOCKED 0 · EVIDENCE_REQUIRED 91"
     },
     {
       "id": "T9",
@@ -132,14 +132,14 @@
       "proves": "Product structured data validates and carries no price or availability",
       "evidence": "schema.json",
       "status": "PASS",
-      "detail": "7/7 checks · 1/1 checks (E32)"
+      "detail": "8/8 checks · 1/1 checks (E32)"
     },
     {
       "id": "T18",
       "proves": "Screenshots of every page type at 360 and 1280 px, reviewed by eye",
       "evidence": "screens/*.png",
       "status": "HUMAN STEP",
-      "detail": "16 screenshots captured. Looked at by the author only; a second pair of eyes has not seen them."
+      "detail": "22 screenshots captured. Looked at by the author only; a second pair of eyes has not seen them."
     }
   ],
   "beyondThePrdTests": {

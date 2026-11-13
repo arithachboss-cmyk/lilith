@@ -1,13 +1,13 @@
 {
-  "ranAt": "2026-11-13T21:34:04.903Z",
-  "base": "http://127.0.0.1:42219",
-  "routes": 20,
-  "passed": 39,
+  "ranAt": "2026-11-13T22:51:53.103Z",
+  "base": "http://127.0.0.1:44883",
+  "routes": 26,
+  "passed": 41,
   "failed": 0,
   "checks": [
     {
       "id": "E01",
-      "name": "all 20 routes return 200 with exactly one h1 and a title",
+      "name": "all 26 routes return 200 with exactly one h1 and a title",
       "pass": true,
       "detail": ""
     },
@@ -25,7 +25,7 @@
     },
     {
       "id": "E28",
-      "name": "each of 20 pages answers at one address; every other form is a 301 to it",
+      "name": "each of 26 pages answers at one address; every other form is a 301 to it",
       "pass": true,
       "detail": ""
     },
@@ -34,6 +34,18 @@
       "name": "a redirect keeps the query string",
       "pass": true,
       "detail": "301 /products/?category=printers"
+    },
+    {
+      "id": "E36",
+      "name": "each of 2 moved addresses (/why-acs/, /company/) answers 301 to its new page, in every spelling",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "id": "E37",
+      "name": "each category page lists products of its own category only, without JavaScript",
+      "pass": true,
+      "detail": ""
     },
     {
       "id": "E30",
@@ -193,19 +205,19 @@
     },
     {
       "id": "E25-360",
-      "name": "no horizontal page scroll at 360px on any of 20 routes",
+      "name": "no horizontal page scroll at 360px on any of 26 routes",
       "pass": true,
       "detail": ""
     },
     {
       "id": "E35-360",
-      "name": "no element marked hidden is displayed at 360px on any of 20 routes",
+      "name": "no element marked hidden is displayed at 360px on any of 26 routes",
       "pass": true,
       "detail": ""
     },
     {
       "id": "E26-360",
-      "name": "no serious or critical accessibility violation at 360px (8 page types)",
+      "name": "no serious or critical accessibility violation at 360px (10 page types)",
       "pass": true,
       "detail": ""
     },
@@ -217,19 +229,19 @@
     },
     {
       "id": "E25-1280",
-      "name": "no horizontal page scroll at 1280px on any of 20 routes",
+      "name": "no horizontal page scroll at 1280px on any of 26 routes",
       "pass": true,
       "detail": ""
     },
     {
       "id": "E35-1280",
-      "name": "no element marked hidden is displayed at 1280px on any of 20 routes",
+      "name": "no element marked hidden is displayed at 1280px on any of 26 routes",
       "pass": true,
       "detail": ""
     },
     {
       "id": "E26-1280",
-      "name": "no serious or critical accessibility violation at 1280px (8 page types)",
+      "name": "no serious or critical accessibility violation at 1280px (10 page types)",
       "pass": true,
       "detail": ""
     },

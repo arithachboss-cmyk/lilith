@@ -64,9 +64,13 @@ echo
 echo "cannibalisation-check"
 # Rebuilt 2026-10-23 for the real URL set. The old expectations named clusters C-1..C-9
 # and URLs like /knowledge/barcode-label-materials — all of which return 404.
-chk "node cannibalisation-check.mjs 'เครื่องสแกนบาร์โค้ด ราคา'"                        1 "R-1 holds: head-term owner is a pending Owner decision (D-09)"
-chk "node cannibalisation-check.mjs 'ริบบอน wax resin'"                                1 "R-3 holds on D-10, the three-ribbon collision"
-chk "node cannibalisation-check.mjs 'about asian coding systems'"                      1 "R-7 holds on D-11: no company page exists"
+# 2026-11-13: the Owner set every canonical owner (D-09, D-10, D-11), so a head-term
+# intent now proceeds as a modifier page instead of holding. The owner URLs themselves hold.
+chk "node cannibalisation-check.mjs 'เครื่องสแกนบาร์โค้ด ราคา'"                        0 "R-1 proceeds as a modifier: /categories/scanners/ owns the head term (D-09)"
+chk "node cannibalisation-check.mjs 'ริบบอน wax resin'"                                0 "R-3 proceeds as a modifier: the ribbon category page owns the choice (D-10)"
+chk "node cannibalisation-check.mjs 'about asian coding systems'"                      0 "R-7 proceeds as a modifier: /about/ is the company page (D-11)"
+chk "node cannibalisation-check.mjs 'anything' --url /categories/scanners/"            1 "a category owner URL holds"
+chk "node cannibalisation-check.mjs 'anything' --url /about"                           1 "the company page URL holds, with or without its slash"
 chk "node cannibalisation-check.mjs 'anything' --url /cart.html"                       1 "a live URL holds"
 chk "node cannibalisation-check.mjs 'anything' --url /products/1950g"                  1 "a PLANNED product URL holds too"
 chk "node cannibalisation-check.mjs 'anything' --url /erp"                             1 "a non-public live URL holds"
@@ -81,11 +85,18 @@ if grep -E 'readFileSync[^)]*live-inventory|from .*live-inventory' cannibalisati
 else
   printf 'PASS  %s\n' "cannibalisation-check reads real-inventory.json, not the retired file"
 fi
-inv_planned=$(node -e 'const c=require("./../data/clusters.json").clusters;console.log(new Set(c.flatMap(x=>x.planned_urls||[])).size)')
-if [ "$inv_planned" = 14 ]; then
-  printf 'PASS  %s\n' "all 14 catalogue products are claimed by a cluster"
+inv_planned=$(node -e 'const c=require("./../data/clusters.json").clusters;const u=[...new Set(c.flatMap(x=>x.planned_urls||[]))];console.log(u.filter(x=>x.startsWith("/products/")).length+" "+u.filter(x=>x.startsWith("/categories/")).length+" "+u.filter(x=>x==="/about/").length)')
+if [ "$inv_planned" = "14 6 1" ]; then
+  printf 'PASS  %s\n' "clusters claim all 14 product URLs, 6 category URLs and /about/"
 else
-  printf 'FAIL  %s\n' "clusters cover $inv_planned planned product URLs, expected 14"
+  printf 'FAIL  %s\n' "clusters claim (products categories about) = $inv_planned, expected 14 6 1"
+  fail=1
+fi
+inv_owners=$(node -e 'const d=require("./../data/clusters.json");const ids=new Set(d.decisions_made.map(x=>x.id));console.log(d.clusters.filter(c=>c.canonical_owner&&ids.has(c.owner_decision)&&c.planned_urls.includes(c.canonical_owner)).length+"/"+d.clusters.length+" "+d.decisions_needed.length)')
+if [ "$inv_owners" = "7/7 0" ]; then
+  printf 'PASS  %s\n' "every cluster owner traces to a recorded Owner decision and is itself a claimed URL"
+else
+  printf 'FAIL  %s\n' "owners traced to a decision / clusters, open decisions = $inv_owners, expected 7/7 0"
   fail=1
 fi
 

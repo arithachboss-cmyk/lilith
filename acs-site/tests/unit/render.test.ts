@@ -3,7 +3,7 @@ import { isIndexable, statusConfig, systemBadgeText, type StatusConfig } from '.
 import { products } from '../../src/data/catalog';
 import { esc } from '../../src/render/html';
 import {
-  cataloguePage, companyPage, enquiryPage, homePage, productPage, statusPage,
+  aboutPage, cataloguePage, enquiryPage, homePage, productPage, statusPage,
 } from '../../src/render/pages';
 import type { EvidenceRecord } from '../../src/rules/evidence';
 
@@ -27,7 +27,7 @@ describe('status config drives every screen', () => {
   });
 
   it('closes every page of a non-live build to crawlers', () => {
-    for (const html of [homePage(), cataloguePage(), enquiryPage(), companyPage(), statusPage(), productPage(product('te200'), [], '2026-11-13')]) {
+    for (const html of [homePage(), cataloguePage(), enquiryPage(), aboutPage(), statusPage(), productPage(product('te200'), [], '2026-11-13')]) {
       expect(html).toContain('<meta name="robots" content="noindex,nofollow">');
     }
     expect(homePage(withSystem('live'))).not.toContain('noindex');
@@ -105,8 +105,11 @@ describe('other pages', () => {
     expect(html).not.toMatch(/<input[^>]*\schecked/);
   });
 
-  it('shows a placeholder for the company page instead of copy', () => {
-    expect(companyPage()).toContain('รอเจ้าของกำหนด');
+  it('shows a placeholder for the company page until its copy is approved', () => {
+    const html = aboutPage(withSystem('live', { company: 'not_connected' }));
+    expect(html).toContain('ยังไม่เผยแพร่');
+    expect(html).not.toContain('1994');
+    expect(html).toContain('noindex');
   });
 
   it('escapes HTML', () => {

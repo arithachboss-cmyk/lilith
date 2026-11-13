@@ -9,6 +9,7 @@ import { createServer } from 'node:http';
 import { dirname, extname, join, relative } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveAddress } from '../src/build/address';
+import { REDIRECTS } from '../src/build/redirects';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..', 'dist');
 const portArg = process.argv.indexOf('--port');
@@ -36,7 +37,7 @@ const files = new Set(listFiles(root));
 
 const server = createServer((req, res) => {
   res.setHeader('X-ACS-Preview', '1');
-  const result = resolveAddress(req.url ?? '/', files);
+  const result = resolveAddress(req.url ?? '/', files, REDIRECTS);
   if (result.status === 301) {
     const query = (req.url ?? '').includes('?') ? `?${(req.url ?? '').split('?')[1]}` : '';
     res.writeHead(301, { Location: result.location + query });

@@ -24,7 +24,7 @@ const NAV: Array<{ key: NonNullable<PageMeta['nav']>; href: string; label: strin
   { key: 'products', href: '/products/', label: 'สินค้า' },
   { key: 'basket', href: '/basket/', label: 'รายการขอราคา' },
   { key: 'enquiry', href: '/enquiry/', label: 'ขอราคา / ติดต่อ' },
-  { key: 'company', href: '/company/', label: 'เกี่ยวกับ ACS' },
+  { key: 'company', href: '/about/', label: 'เกี่ยวกับ ACS' },
   { key: 'status', href: '/status/', label: 'สถานะระบบ' },
 ];
 

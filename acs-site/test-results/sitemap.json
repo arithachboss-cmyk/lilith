@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-11-13T21:33:48.550Z",
+  "ranAt": "2026-11-13T22:51:34.079Z",
   "variant": "live (rendered in memory, never written to dist/)",
   "passed": 10,
   "failed": 0,
@@ -58,71 +58,99 @@
   "urls": [
     {
       "loc": "https://www.asiancoding.com/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
+    },
+    {
+      "loc": "https://www.asiancoding.com/categories/printers/",
+      "lastmod": "2026-11-13T22:47:00Z"
+    },
+    {
+      "loc": "https://www.asiancoding.com/categories/scanners/",
+      "lastmod": "2026-11-13T22:47:00Z"
+    },
+    {
+      "loc": "https://www.asiancoding.com/categories/labels/",
+      "lastmod": "2026-11-13T22:47:00Z"
+    },
+    {
+      "loc": "https://www.asiancoding.com/categories/ribbons/",
+      "lastmod": "2026-11-13T22:47:00Z"
+    },
+    {
+      "loc": "https://www.asiancoding.com/categories/rfid/",
+      "lastmod": "2026-11-13T22:47:00Z"
+    },
+    {
+      "loc": "https://www.asiancoding.com/categories/mobile/",
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/1950g/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/te200/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/zt411/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/tc22/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/m510/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/ds3600/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/rfid/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/labels/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/wax-ribbons/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/wax-resin-ribbons/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/resin-ribbons/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/1960g/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/zd421/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/ds2208/",
-      "lastmod": "2026-11-13T18:55:54Z"
+      "lastmod": "2026-11-13T22:47:00Z"
     },
     {
       "loc": "https://www.asiancoding.com/enquiry/",
       "lastmod": "2026-11-13T18:55:54Z"
+    },
+    {
+      "loc": "https://www.asiancoding.com/about/",
+      "lastmod": "2026-11-13T22:47:00Z"
     }
   ]
 }

@@ -1,70 +1,98 @@
 {
   "/": {
-    "hash": "9277f31de60013a7",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "b8592c1ff43359f4",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/": {
-    "hash": "74326e570e602156",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "9a94638f9e0dbee3",
+    "lastmod": "2026-11-13T22:47:00Z"
+  },
+  "/categories/printers/": {
+    "hash": "ae4480e84d22e2ab",
+    "lastmod": "2026-11-13T22:47:00Z"
+  },
+  "/categories/scanners/": {
+    "hash": "4052e13097a12496",
+    "lastmod": "2026-11-13T22:47:00Z"
+  },
+  "/categories/labels/": {
+    "hash": "24eea81070f2f959",
+    "lastmod": "2026-11-13T22:47:00Z"
+  },
+  "/categories/ribbons/": {
+    "hash": "4daada2a09a30787",
+    "lastmod": "2026-11-13T22:47:00Z"
+  },
+  "/categories/rfid/": {
+    "hash": "c3a1ddca872fd616",
+    "lastmod": "2026-11-13T22:47:00Z"
+  },
+  "/categories/mobile/": {
+    "hash": "0c89b66d3852e871",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/1950g/": {
-    "hash": "c6d290036e0e59ca",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "d5255b04bd097f29",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/te200/": {
-    "hash": "a5c6a8ac2cbc8257",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "644f527448498c51",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/zt411/": {
-    "hash": "489ebc9591945f41",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "2d5bfd9c24a74520",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/tc22/": {
-    "hash": "6033a1b099aea60f",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "ac2f5679ed90cff0",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/m510/": {
-    "hash": "3d8129764df7bcbb",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "77d032335f23376d",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/ds3600/": {
-    "hash": "fde2613e718b2a71",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "095d905128437439",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/rfid/": {
-    "hash": "d7c85293df1ec6f5",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "ae988536143a2844",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/labels/": {
-    "hash": "f9d5f004aaa417cd",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "39180b50d5d90357",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/wax-ribbons/": {
-    "hash": "a91206c7752d5114",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "300decba23eb30a9",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/wax-resin-ribbons/": {
-    "hash": "f1034ebcd8431138",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "cb4d43d0c0ce14ef",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/resin-ribbons/": {
-    "hash": "d7b38db991d1e04f",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "8fc7abd35bccee48",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/1960g/": {
-    "hash": "d9fe1638e1a09c68",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "4a769b39dfd9e62e",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/zd421/": {
-    "hash": "067c065ca18e762e",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "3293b0e30eb0fa98",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/products/ds2208/": {
-    "hash": "ac9371ef657004ec",
-    "lastmod": "2026-11-13T18:55:54Z"
+    "hash": "f82292decd305000",
+    "lastmod": "2026-11-13T22:47:00Z"
   },
   "/enquiry/": {
     "hash": "ab877f09a37410b2",
     "lastmod": "2026-11-13T18:55:54Z"
+  },
+  "/about/": {
+    "hash": "df8f2c9248df40b0",
+    "lastmod": "2026-11-13T22:47:00Z"
   }
 }

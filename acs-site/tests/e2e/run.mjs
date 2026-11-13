@@ -23,7 +23,7 @@ const ROUTES = report.routes;
 const PRODUCT_ROUTES = ROUTES.filter((r) => /^\/products\/[^/]+\/$/.test(r));
 const WIDTHS = [360, 1280];
 // One of each page type is enough for screenshots and axe; overflow runs on every route.
-const SAMPLE = ['/', '/products/', '/products/1950g/', '/products/tc22/', '/basket/', '/enquiry/', '/company/', '/status/'];
+const SAMPLE = ['/', '/products/', '/products/1950g/', '/products/tc22/', '/basket/', '/enquiry/', '/about/', '/categories/ribbons/', '/categories/scanners/', '/status/'];
 const PII = { name: 'สมชาย ทดสอบระบบ', phone: '081-555-0142', company: 'บริษัท ทดสอบอีทูอี จำกัด', email: 'e2e-check@example.com', message: 'ข้อความทดสอบลับเฉพาะ' };
 
 const checks = [];
@@ -76,6 +76,33 @@ try {
     check('E28', `each of ${ROUTES.length} pages answers at one address; every other form is a 301 to it`, wrong.length === 0, wrong.join(' | '));
     const kept = await fetch(`${BASE}/products?category=printers`, { redirect: 'manual' });
     check('E29', 'a redirect keeps the query string', kept.status === 301 && kept.headers.get('location') === '/products/?category=printers', `${kept.status} ${kept.headers.get('location')}`);
+
+    // Addresses that moved (build-report.json lists them) must land on their new page in one hop.
+    const moves = Object.entries(report.redirects ?? {});
+    const lost = [];
+    for (const [from, to] of moves) {
+      const bare = from.replace(/\/$/, '');
+      for (const form of [from, bare, `${bare}.html`, `${from}index.html`]) {
+        const r = await fetch(BASE + form, { redirect: 'manual' });
+        if (!(r.status === 301 && r.headers.get('location') === to)) lost.push(`${form} → ${r.status} ${r.headers.get('location') ?? ''}`);
+      }
+      const landed = await fetch(BASE + to, { redirect: 'manual' });
+      if (landed.status !== 200) lost.push(`${to} → ${landed.status}`);
+    }
+    check('E36', `each of ${moves.length} moved addresses (${moves.map(([from]) => from).join(', ')}) answers 301 to its new page, in every spelling`, moves.length > 0 && lost.length === 0, lost.join(' | '));
+
+    // The six category pages list their own products, with JavaScript off.
+    const noJs = await browser.newContext({ javaScriptEnabled: false });
+    const catPage = await noJs.newPage();
+    const wrongCats = [];
+    for (const route of ROUTES.filter((r) => r.startsWith('/categories/'))) {
+      await catPage.goto(BASE + route);
+      const id = route.split('/')[2];
+      const cards = await catPage.locator('[data-product-card]').evaluateAll((els) => els.map((el) => el.dataset.category));
+      if (cards.length === 0 || cards.some((c) => c !== id)) wrongCats.push(`${route} cards=${cards.join(',')}`);
+    }
+    await noJs.close();
+    check('E37', 'each category page lists products of its own category only, without JavaScript', ROUTES.filter((r) => r.startsWith('/categories/')).length === 6 && wrongCats.length === 0, wrongCats.join(' | '));
     const sitemap = await fetch(`${BASE}/sitemap.xml`);
     check('E30', 'a demo build serves no sitemap', report.indexable || sitemap.status === 404, `status ${sitemap.status}`);
 
@@ -334,8 +361,8 @@ const slice = (file, about, ids) => {
   const picked = checks.filter((c) => ids.some((id) => c.id === id || c.id.startsWith(`${id}-`)));
   writeFileSync(join(out, file), JSON.stringify({ ranAt: new Date().toISOString(), about, passed: picked.filter((c) => c.pass).length, failed: picked.filter((c) => !c.pass).length, checks: picked }, null, 2) + '\n');
 };
-slice('norender.json', 'product text and catalogue present in the HTML with JavaScript disabled', ['E07', 'E08', 'E09', 'E33']);
-slice('links.json', 'internal links, dead-link guard and the one-address rule', ['E05', 'E06', 'E28', 'E29']);
+slice('norender.json', 'product text and catalogue present in the HTML with JavaScript disabled', ['E07', 'E08', 'E09', 'E33', 'E37']);
+slice('links.json', 'internal links, dead-link guard and the one-address rule', ['E05', 'E06', 'E28', 'E29', 'E36']);
 slice('overflow.json', 'no horizontal page scroll at 360 and 1280 px', ['E25']);
 slice('pii.json', 'nothing personal in storage, cookies, URLs or outbound requests', ['E21', 'E22', 'E23']);
 console.log(`\n${checks.length - failed.length}/${checks.length} checks passed`);

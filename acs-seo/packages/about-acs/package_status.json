@@ -1,6 +1,6 @@
 {
   "package_slug": "about-acs",
-  "status": "DRAFT_PENDING_REVIEW",
+  "status": "APPROVED_NOT_PUBLISHED",
   "qa_result": "PASS",
   "requested_by": "ACS Owner",
   "requested_on": "2026-09-23",
@@ -43,7 +43,7 @@
     "owner": "Manus"
   },
   "publish_approved": true,
-  "last_updated": "2026-10-22",
+  "last_updated": "2026-11-13",
   "evidence_requests": [
     {
       "sent_on": "2026-09-23",
@@ -131,5 +131,18 @@
       "closed_on": "2026-10-19",
       "how": "the superlative was removed, which was the only way to close it"
     }
+  },
+  "owner_qa": {
+    "approved_by": "ACS Owner",
+    "approved_on": "2026-11-13",
+    "approved_file": "draft-v3-evidenced.md",
+    "target_url": "/about/",
+    "decision": "D-11",
+    "redirects": [
+      "/why-acs → /about/",
+      "/company → /about/"
+    ],
+    "scope": "Approved as the content of the company page in the rebuild (acs-site/). Not deployed: publishing still needs the Owner's explicit go-ahead for the whole site.",
+    "superseded_target": "publish/why-acs.html was prepared for /why-acs, which now redirects."
   }
 }

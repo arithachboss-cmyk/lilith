@@ -9,6 +9,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { resolveAddress } from '../src/build/address';
+import { REDIRECTS } from '../src/build/redirects';
 import { absoluteUrl, canonicalOf, htmlIsIndexable, renderSite } from '../src/build/site';
 import { staleRoutes, type Versions } from '../src/build/versions';
 import { products } from '../src/data/catalog';
@@ -66,6 +67,17 @@ for (const p of site.pages) {
 }
 add(canonicalChecks, `each of ${site.pages.length} pages answers 200 at one address and 301 from every other form`, variants.length === 0, variants.join(' | '));
 
+const badMoves: string[] = [];
+for (const [from, to] of Object.entries(REDIRECTS)) {
+  const bare = from.replace(/\/$/, '');
+  for (const form of [from, bare, `${bare}.html`, `${from}index.html`]) {
+    const r = resolveAddress(form, fileSet, REDIRECTS);
+    if (!(r.status === 301 && r.location === to)) badMoves.push(`${form} → ${r.status}`);
+  }
+  if (resolveAddress(to, fileSet, REDIRECTS).status !== 200) badMoves.push(`${to} is not 200`);
+}
+add(canonicalChecks, `each of ${Object.keys(REDIRECTS).length} moved addresses answers 301 to its new page in one hop, in every spelling`, badMoves.length === 0, badMoves.join(' | '));
+
 const demoRows = demo.pages.map((p) => demo.files.get(p.file) ?? '');
 add(canonicalChecks, 'the shipped demo build: every page noindex, no canonical anywhere', demoRows.every((h) => !htmlIsIndexable(h) && canonicalOf(h).length === 0));
 
@@ -121,6 +133,14 @@ const leaked = schemaRows.filter((r) => r.figures.length);
 add(schemaChecks, 'no structured data states a spec figure', leaked.length === 0, leaked.map((r) => `${r.id}:${r.figures.join(',')}`).join(' '));
 const badCrumbs = schemaRows.filter((r) => r.crumbs.length !== 1);
 add(schemaChecks, 'every product page carries one breadcrumb trail', badCrumbs.length === 0, badCrumbs.map((r) => r.id).join(' '));
+const everyBlock = site.pages.map((p) => {
+  let blocks: Record<string, unknown>[] = [];
+  try { blocks = extractJsonLd(site.files.get(p.file) ?? ''); } catch { return { route: p.route, bad: 'does not parse' }; }
+  const forbiddenHere = forbiddenKeysIn(blocks);
+  const figuresHere = allStrings(blocks).flatMap((text) => extractFigures(text));
+  return { route: p.route, bad: [...forbiddenHere, ...figuresHere].join(',') };
+}).filter((r) => r.bad);
+add(schemaChecks, `structured data on all ${site.pages.length} pages parses and carries no forbidden key or spec figure`, everyBlock.length === 0, everyBlock.map((r) => `${r.route}:${r.bad}`).join(' '));
 const others = site.pages.filter((p) => !p.route.startsWith('/products/') || p.route === '/products/').filter((p) => extractJsonLd(site.files.get(p.file) ?? '').some((b) => b['@type'] === 'Product'));
 add(schemaChecks, 'no other page claims to be a Product', others.length === 0, others.map((p) => p.route).join(' '));
 

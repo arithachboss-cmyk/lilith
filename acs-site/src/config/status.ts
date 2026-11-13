@@ -11,6 +11,7 @@ export type Status = 'live' | 'demo' | 'not_connected';
 export type FeatureKey =
   | 'catalogue'
   | 'productPages'
+  | 'categoryPages'
   | 'search'
   | 'enquiry'
   | 'basket'
@@ -31,6 +32,7 @@ export const statusConfig: StatusConfig = {
   features: {
     catalogue: 'live',
     productPages: 'live',
+    categoryPages: 'live',
     search: 'live',
     enquiry: 'demo',
     basket: 'demo',
@@ -38,7 +40,8 @@ export const statusConfig: StatusConfig = {
     prices: 'not_connected',
     stock: 'not_connected',
     productImages: 'not_connected',
-    company: 'not_connected',
+    // The Owner approved the copy and its address on 2026-11-13 (decision D-11).
+    company: 'live',
   },
 };
 
@@ -51,6 +54,7 @@ export const STATUS_LABEL: Record<Status, string> = {
 export const FEATURE_LABEL: Record<FeatureKey, string> = {
   catalogue: 'รายการสินค้าและตัวกรองหมวด',
   productPages: 'หน้าสินค้าแยกรายรุ่น',
+  categoryPages: 'หน้าหมวดสินค้า',
   search: 'ค้นหาสินค้า',
   enquiry: 'แบบฟอร์มขอราคา',
   basket: 'รายการขอราคา',
@@ -65,6 +69,7 @@ export const FEATURE_LABEL: Record<FeatureKey, string> = {
 export const FEATURE_NOTE: Record<FeatureKey, string> = {
   catalogue: 'ข้อมูลจาก catalogue ของเว็บปัจจุบัน',
   productPages: 'สร้างจากข้อมูล catalogue ชุดเดียวกัน',
+  categoryPages: 'หมวดละหนึ่งหน้า สร้างจากข้อมูล catalogue ชุดเดียวกัน',
   search: 'ค้นหาในเบราว์เซอร์จากข้อมูลชุดเดียวกัน',
   enquiry: 'กรอกและตรวจข้อมูลได้ แต่ยังไม่ส่งและไม่บันทึกที่ใด',
   basket: 'เก็บเฉพาะรหัสสินค้าในเบราว์เซอร์นี้ ไม่ส่งถึง ACS',
@@ -72,7 +77,7 @@ export const FEATURE_NOTE: Record<FeatureKey, string> = {
   prices: 'รอรายการราคา ACS พร้อมวันที่มีผล',
   stock: 'รอข้อมูลสต็อก ACS พร้อมวันที่ของแต่ละตัวเลข',
   productImages: 'รอไฟล์รูปสินค้า',
-  company: 'รอเจ้าของกำหนด URL ของหน้านี้',
+  company: 'ข้อความที่เจ้าของอนุมัติเมื่อ 13 พ.ย. 2569 อยู่ที่ /about/',
 };
 
 /** A build that is not live must never be indexed, wherever it gets hosted. */
