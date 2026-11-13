@@ -1,6 +1,6 @@
 # QA report — ACS website rebuild (M3, author's part)
 
-**Commit tested:** `f335044` (M2c; earlier runs of this report were on `1c6841c` and `74d1468`) · **Date:** 2026-11-13 · **System status:** demo
+**Commit tested:** `45a10e3` (M2d; earlier runs of this report were on `1c6841c`, `74d1468` and `f335044`) · **Date:** 2026-11-13 · **System status:** demo
 
 **M3 gate: CLOSED.** The automated tests are green, but M3 closes only when all three of
 these have happened, and none has:
@@ -19,8 +19,8 @@ evidence file is missing is reported NOT RUN, never assumed.
 
 | # | What it proves | Result | Evidence in `test-results/` |
 |---|---|---|---|
-| T1 | Every rule and parser behaves, including on Thai input | PASS · 176/176 unit tests | `unit.json` |
-| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `f335044`, network blocked | `offline.json` |
+| T1 | Every rule and parser behaves, including on Thai input | PASS · 177/177 unit tests | `unit.json` |
+| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `45a10e3`, network blocked | `offline.json` |
 | T3 | 14 product routes return 200 with distinct headings | PASS · E01, E02, E31 | `e2e.json` |
 | T4 | Self-referencing canonical on every indexable page; no page answers at two addresses | PASS · 7/7 + E28, E29, E36 | `canonical.json`, `links.json` |
 | T5 | Product text is present with JavaScript disabled | PASS · E07, E08, E33, E37 | `norender.json` |
@@ -111,14 +111,14 @@ seen for one interaction per page, an approximation of INP.
 
 Only ACS can supply these. Nothing below was guessed or filled in.
 
-- **An approver for five drafts.** `EV-1950G-01`, `EV-1950G-02`, `EV-1960G-01`,
-  `EV-ZD421-01`, `EV-DS2208-01` each quote the manufacturer's product page, and each
-  page agrees with the catalogue. A named person at ACS, not the drafting assistant, has
-  to approve each and confirm the model ACS sells is the one the page describes. README,
-  "Evidence".
-- **A source for the two M510 figures** (300 dpi; 1.5 in / 38.1 mm). bradyid.com timed
-  out on three attempts. No source was read; the figures are neither confirmed nor
-  contradicted.
+- **An approver for six drafts.** `EV-1950G-01`, `EV-1950G-02`, `EV-1960G-01`,
+  `EV-ZD421-01`, `EV-DS2208-01`, `EV-M510-01` each quote the manufacturer's product page,
+  and each page agrees with the catalogue. A named person at ACS, not the drafting
+  assistant, has to approve each and confirm the model ACS sells is the one the page
+  describes. README, "Evidence".
+- **The M510 label-width line** ("1.5 นิ้ว (38.1 มม.)"). Brady's page states 1.5 in and no
+  millimetre value, so `EV-M510-02` is blocked. It needs a Brady document that states the
+  width in millimetres, or an Owner decision on the wording.
 - An ACS price list with an effective date → prices.
 - Stock and lead-time data with dates → stock.
 - Which DS3600 models ACS sells.
@@ -129,7 +129,7 @@ Decisions D-09, D-10 and D-11 are no longer open: the Owner made them on 2026-11
 
 ## For the reviewer
 
-Review commit `f335044` (code) — the commit after it adds only this report and evidence.
+Review commit `45a10e3` (code) — the commit after it adds only this report and evidence.
 
 ```sh
 cd acs-site && npm ci
@@ -144,7 +144,7 @@ Worth an independent look, because the author is the least able to see them:
 - Try to make `submitEnquiry` succeed, and to activate an evidence record you authored.
 - Check that E33–E35 really fail when the `[hidden]` rule is removed from `site.css`.
 - Compare `/about/` with `../acs-seo/packages/about-acs/draft-v3-evidenced.md` by eye.
-- Read the five evidence drafts against the manufacturer pages they cite. The author
+- Read the seven evidence drafts against the manufacturer pages they cite. The author
   transcribed the quotes; nobody has checked the transcription.
 - Try to approve a draft as its own author in `src/data/evidence-approvals.json`.
 
