@@ -16,6 +16,8 @@ import approvals from './evidence-approvals.json';
 const AUTHOR = 'Claude (drafting assistant)';
 const HONEYWELL_1950G = 'https://automation.honeywell.com/us/en/products/productivity-solutions/barcode-scanners/general-purpose-handheld/xenon-xp-1950g-general-duty-scanner';
 const PAGE_1950G = 'Honeywell product page "Xenon XP 1950g General Duty Scanner", Specifications section, as served on 2026-11-13. The page carries no revision number; the data sheet it links is dated 2/1/2023.';
+const BRADY_M510 = 'https://www.bradyid.com/label-printers/portable/m510-portable-industrial-label-printer-pid-176546';
+const PAGE_M510 = 'Brady product page "M510 Portable Industrial Label Printer - Brady Part: M510", sections "Key features" and "Printing specifications", as served on 2026-11-13. The page carries no revision number.';
 const SCOPE_1950G = 'The manufacturer\'s published figure for the Xenon XP 1950g. The approver confirms the 1950g that ACS sells is this model, not a regional variant with a different rating.';
 
 export const evidenceDrafts: readonly EvidenceRecord[] = [
@@ -79,16 +81,41 @@ export const evidenceDrafts: readonly EvidenceRecord[] = [
     status: 'draft',
     author: AUTHOR,
   },
+  {
+    id: 'EV-M510-01',
+    claimId: 'CR-07',
+    subject: { productId: 'm510', feature: 'พิมพ์แบบ Thermal Transfer ความละเอียด 300 dpi' },
+    quote: 'Print Resolution: 300 dpi',
+    conditions: 'The same Key Features list states "Print Technology: Thermal Transfer". The approver confirms the M510 that ACS sells is this model (Brady part M510, product number 176546).',
+    sourceUrl: BRADY_M510,
+    sourceRevision: PAGE_M510,
+    retrievedOn: '2026-11-13',
+    status: 'draft',
+    author: AUTHOR,
+  },
+  {
+    // NOT ready. The page gives the width in inches only. 38.1 mm is what 1.5 in
+    // converts to, but the source does not say it, and the gate does not convert
+    // units. This draft stays blocked until a source that states the millimetre
+    // figure is cited, or the Owner decides how the line should read.
+    id: 'EV-M510-02',
+    claimId: 'CR-07',
+    subject: { productId: 'm510', feature: 'รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)' },
+    quote: 'Maximum Label/Tape Width: 1.5 in',
+    conditions: 'The page states 1.5 in and no millimetre value. It also lists "Maximum Print Width 1.44 in", which is the printed area, not the label.',
+    sourceUrl: BRADY_M510,
+    sourceRevision: PAGE_M510,
+    retrievedOn: '2026-11-13',
+    status: 'draft',
+    author: AUTHOR,
+  },
 ];
 
 /**
  * Figures still without even a draft, and why. Nothing here is a judgement on
  * the figure; it only records that no source has been read for it yet.
  */
-export const evidenceGaps: ReadonlyArray<{ productId: string; feature: string; why: string }> = [
-  { productId: 'm510', feature: 'พิมพ์แบบ Thermal Transfer ความละเอียด 300 dpi', why: 'the manufacturer page (bradyid.com) timed out on three attempts on 2026-11-13; no source was read' },
-  { productId: 'm510', feature: 'รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)', why: 'the manufacturer page (bradyid.com) timed out on three attempts on 2026-11-13; no source was read' },
-];
+export const evidenceGaps: ReadonlyArray<{ productId: string; feature: string; why: string }> = [];
 
 export const evidenceApprovals: readonly Approval[] = approvals as Approval[];
 /** Every approval decision of this build, accepted or refused. */

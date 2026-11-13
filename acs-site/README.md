@@ -36,6 +36,7 @@ testing a stale server from an earlier run.
 | M2a | Product structured data with no price, offer, availability or rating; sitemap `lastmod` from a committed content-hash manifest | 125/125 | 35/35 | BLOCKED 0 |
 | M2b | Owner decisions D-09, D-10, D-11 built: six category pages, the ribbon category owning the ribbon choice, the approved company copy at `/about/` with `/why-acs` and `/company` redirecting to it; evidence drafts and a recorded-approval path | 169/169 | 41/41 | BLOCKED 0 |
 | M2c | Evidence drafts for five of the seven held-back figures, each quoting the manufacturer's own page; the gate now compares number and unit (Thai or English spelling) and rejects a longer number that merely ends the same way | 176/176 | 41/41 | BLOCKED 0 |
+| M2d | Brady M510 page read: a ready draft for 300 dpi; the label-width line stays blocked because the source states inches only | 177/177 | 41/41 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
 `npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
@@ -46,8 +47,8 @@ and the eighteenth is a human step. The gate still needs M2 complete, a review o
 exact commit by someone other than the author, and Owner UAT.
 
 **M2 is not finished.** M2a and M2b are the parts that did not need material from ACS.
-What is left needs it: spec figures need a named person at ACS to approve five drafts,
-and a source for the two M510 figures; prices need a dated price list; stock needs dated
+What is left needs it: spec figures need a named person at ACS to approve six drafts,
+and a decision on the M510 label-width line; prices need a dated price list; stock needs dated
 stock data; product pages need images; DS3600 needs its model list. See "Still missing".
 
 ## Non-negotiables, and where each one lives
@@ -75,7 +76,7 @@ stock data; product pages need images; DS3600 needs its model list. See "Still m
 
 `system` is `demo`. A feature moves to `live` only when its acceptance test passes **and**
 the material behind it is named. Four features cannot move until ACS supplies something:
-spec figures (an approver, and a source for the two M510 figures), prices (a dated price list),
+spec figures (an approver, and a decision on the M510 label-width line), prices (a dated price list),
 stock (dated stock data) and product images (the files).
 
 The company page moved to `live` on 2026-11-13: the Owner approved the copy and chose its
@@ -114,7 +115,7 @@ Recorded in `../acs-seo/data/clusters.json` (`decisions_made`) and
    author, the figure appears on the product page. If not, it stays hidden and
    `dist/build-report.json` records the refusal.
 
-Five drafts exist, and each is blocked by nothing except step 2:
+Seven drafts exist. Six are blocked by nothing except step 2:
 
 | Draft | Product | Figure | The manufacturer's words |
 |---|---|---|---|
@@ -124,9 +125,14 @@ Five drafts exist, and each is blocked by nothing except step 2:
 | `EV-ZD421-01` | ZD421 | 203 or 300 dpi | "Print Resolution 203 dpi (8 dot/mm)\|300 dpi (12 dot/mm)" |
 | `EV-DS2208-01` | DS2208 | 640 × 480 pixels | "IMAGE SENSOR: 640X480 PIXELS" |
 
-Two figures, both on the Brady M510 (300 dpi; 1.5 in / 38.1 mm label width), have no
-draft: bradyid.com timed out on three attempts, so no source was read. Nothing about
-those two figures was confirmed or contradicted.
+| `EV-M510-01` | Brady M510 | 300 dpi | "Print Resolution: 300 dpi" |
+
+The seventh, `EV-M510-02`, **cannot be approved as it stands.** The catalogue line reads
+"รองรับฉลากกว้างสูงสุด 1.5 นิ้ว (38.1 มม.)". Brady's page states "Maximum Label/Tape Width:
+1.5 in" and no millimetre value. 38.1 mm is what 1.5 in converts to, but the source does
+not say it and the gate does not convert units, so the check for "38.1 มม." fails. The
+ways forward are a source that states the millimetre figure, or an Owner decision on how
+the line should read. The catalogue snapshot itself is never edited to fit.
 
 **What "the source states the figure" means** (`quoteCovers` in `src/rules/figures.ts`):
 the same number with the same unit. A unit may be spelled in Thai or English (พิกเซล =
@@ -156,7 +162,7 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 
 - **Demo mode.** The enquiry form validates and then refuses to submit; nothing is stored
   or sent anywhere. The basket keeps product ids in `sessionStorage` and nothing else.
-- **No active evidence.** Five drafts wait for an approver; zero records are active, so all
+- **No active evidence.** Six drafts wait for an approver and one is blocked; zero records are active, so all
   7 figure lines across 5 products are still omitted. `dist/build-report.json` lists each.
 - **The drafts cite a web page, not a signed datasheet.** The source is the
   manufacturer's own product page as served on 2026-11-13. It carries no revision number.
@@ -188,8 +194,9 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 
 ## Still missing (planned, not built)
 
-- An approver for the five drafts, and a source for the two M510 figures (ACS, as a Brady
-  partner, can supply the M510 datasheet directly).
+- An approver for the six ready drafts.
+- For the M510 label width: a Brady document that states the width in millimetres, or an
+  Owner decision on the wording.
 - A dated ACS price list, dated stock data, product images, the DS3600 model list.
 - A redirect plan for the 81 dead URLs of the old site — needs Search Console data.
   Only `/why-acs` is redirected so far, because the Owner named its new home.

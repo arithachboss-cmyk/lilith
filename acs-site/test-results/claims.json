@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-11-13T23:26:59.075Z",
+  "ranAt": "2026-11-13T23:30:24.453Z",
   "scanner": "acs-seo/tools/claim-scan.mjs over dist/",
   "filesScanned": 29,
   "pass": true,
