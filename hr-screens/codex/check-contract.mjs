@@ -523,7 +523,7 @@ const PERSONAL_DATA = /[\w.+-]+@[\w-]+\.[\w.]+|\b0\d{1,2}-\d{3}-\d{4}\b|\b0[689]
  * ข้อเท็จจริงประจำสำนักงานต้องเป็นคำตอบของเจ้าของเท่านั้น · รายการรหัสเขียนไว้ตรงนี้โดยตั้งใจ
  * เพิ่มข้อใหม่ต้องแก้ทั้ง office-facts.js และแถวนี้ คนตรวจ PR จึงเห็นทุกครั้งที่ข้อเท็จจริงเปลี่ยน · ADR-0014
  */
-const EXPECTED_OFFICE_FACT_IDS = ['OF-01', 'OF-02', 'OF-03', 'OF-04', 'OF-05', 'OF-06'];
+const EXPECTED_OFFICE_FACT_IDS = ['OF-01', 'OF-02', 'OF-03', 'OF-04', 'OF-05', 'OF-06', 'OF-07', 'OF-08'];
 const OFFICE_FACT_FIELDS = ['id', 'th', 'basis'];
 ok('office-facts.js มีข้อเท็จจริงตามรายการที่ตรวจแล้ว',
   JSON.stringify(OFFICE_FACTS.map((fact) => fact.id)) === JSON.stringify(EXPECTED_OFFICE_FACT_IDS),
