@@ -3,16 +3,33 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./src/index.ts",
+    "./dto": "./src/dto/index.ts",
+    "./errors": "./src/errors.ts",
+    "./events": "./src/events.ts",
+    "./routes": "./src/routes.ts",
+    "./openapi": "./src/openapi.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run",
+    "openapi": "tsx scripts/openapi.ts",
+    "openapi:check": "tsx scripts/openapi.ts --check",
+    "openapi:lint": "redocly lint openapi.json --config redocly.yaml"
+  },
+  "dependencies": {
+    "zod": "4.6.7"
   },
   "devDependencies": {
     "@lilith/config": "workspace:*",
+    "@redocly/cli": "2.78.0",
+    "@types/node": "22.19.19",
+    "eslint": "9.39.4",
+    "fast-check": "4.10.2",
+    "tsx": "4.23.15",
     "typescript": "5.9.3",
-    "eslint": "9.39.4"
+    "vitest": "5.0.0"
   }
 }

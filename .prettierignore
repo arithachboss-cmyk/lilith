@@ -5,3 +5,4 @@ docs/0*.md
 **/.next/**
 **/dist/**
 **/node_modules/**
+packages/contracts/openapi.json

@@ -1,0 +1,8 @@
+# This file instructs Redocly's linter to ignore the rules contained for specific parts of your API.
+# See https://redocly.com/docs/cli/ for more information.
+# Blueprint §18.8 defines these two routes as `302` redirects to a signed URL,
+# so they have no 2xx response. Nothing else is excused.
+openapi.json:
+  operation-2xx-response:
+    - '#/paths/~1api~1invoices~1{id}~1pdf/get/responses'
+    - '#/paths/~1api~1receipts~1{id}~1pdf/get/responses'
