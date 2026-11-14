@@ -14,6 +14,7 @@ pnpm build
 pnpm typecheck
 pnpm lint
 pnpm test:boundaries
+pnpm test:core
 pnpm dev
 ```
 

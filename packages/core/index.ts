@@ -1,2 +1,2 @@
-// Reserved by Blueprint v1.0. Domain implementation belongs to subsequent tasks.
-export {};
+// Domain modules arrive with their own tasks. ARCH-002 provides the shared kernel.
+export * from "./shared/index";
