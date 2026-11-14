@@ -17,6 +17,7 @@ from here.
 
 | — | Which ZD421 resolution does ACS supply? (asked by record `EV-ZD421-01`) | Both, 203 dpi and 300 dpi. Stated on 14 Nov 2026. |
 | — | Should the ZD421 page say so? | Yes. The page carries the note "ACS จำหน่ายทั้งรุ่น 203 dpi และ 300 dpi" (14 Nov 2026). It says nothing about stock. |
+| — | Which DS3600 models does ACS sell? | All eight that Zebra's Asia Pacific page lists: SR, HP, HD, XR, DP, DPA, DPX, KD. Corded (DS3608) and cordless (DS3678). Stated on 14 Nov 2026. The page names them and adds "by model", because Zebra lists the KD as cordless only. |
 
 ## What changed because of them
 

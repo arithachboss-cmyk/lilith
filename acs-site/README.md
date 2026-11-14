@@ -40,6 +40,7 @@ testing a stale server from an earlier run.
 | M2e | Owner decision D-12: the M510 label width is shown in inches only, as Brady states it. Recorded as an override beside the untouched snapshot; all seven drafts now wait only for an approver | 184/184 | 41/41 | BLOCKED 0 |
 | M2f | The Owner approved all seven evidence records. The seven spec figures are now shown, each on its product page with its source named; nothing is held back | 186/186 | 41/41 | BLOCKED 0 |
 | M2g | The ZD421 page says, on the Owner's statement, that ACS sells both resolutions. A note from ACS is shown only while every figure in it is stated by an approved evidence record | 197/197 | 41/41 | BLOCKED 0 |
+| M2h | The DS3600 page names the eight models ACS sells, on the Owner's statement | 198/198 | 41/41 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
 `npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
@@ -51,8 +52,7 @@ exact commit by someone other than the author, and Owner UAT.
 
 **M2 is not finished.** Spec figures are done: all seven are shown under approved
 records. What is left needs material from ACS: prices need a dated price list; stock
-needs dated stock data; product pages need images; DS3600 needs its model list. See
-"Still missing".
+needs dated stock data; product pages need images. See "Still missing".
 
 ## Non-negotiables, and where each one lives
 
@@ -166,9 +166,10 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 - **Model numbers are recognised from the catalogue only.** `1950g` is no longer read as
   "1950 g" because it is a known model token. A model number that is not in the catalogue
   and ends in a unit letter would still read as a figure and be held back.
-- **DS3600 does not list its models.** The catalogue names the family but not which
-  models ACS sells, so the page says it is a family and lists none rather than guessing.
-
+- **The DS3600 page names eight models and gives no spec for any of them.** The names are
+  the ones Zebra's Asia Pacific series page lists; that ACS sells all eight, corded and
+  cordless, is the Owner's statement of 2026-11-14. The page is still a family page: specs
+  for each model have to be confirmed with ACS.
 - **Demo mode.** The enquiry form validates and then refuses to submit; nothing is stored
   or sent anywhere. The basket keeps product ids in `sessionStorage` and nothing else.
 - **Seven figures are shown, on the Owner's approval.** Remove a line from
@@ -210,7 +211,7 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 
 ## Still missing (planned, not built)
 
-- A dated ACS price list, dated stock data, product images, the DS3600 model list.
+- A dated ACS price list, dated stock data, product images.
 - A redirect plan for the 81 dead URLs of the old site — needs Search Console data.
   Only `/why-acs` is redirected so far, because the Owner named its new home.
 - A backend for enquiries, with its own gate.

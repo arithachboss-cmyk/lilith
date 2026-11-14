@@ -150,7 +150,7 @@ export function productPage(
       <h1>${esc(p.thaiTitle)}</h1>
       <p class="product-name">${esc(p.name)}</p>
       <p class="kind">${esc(KIND_LABEL[p.kind])}</p>
-      ${p.kind === 'family' ? `<p class="family-note" data-family-note>หน้านี้เป็นข้อมูลระดับตระกูล (${esc(p.name)}) ไม่ใช่รุ่นใดรุ่นหนึ่ง รุ่นย่อยที่ ACS จำหน่ายและสเปกของแต่ละรุ่นต้องยืนยันกับ ACS</p>` : ''}
+      ${p.kind === 'family' ? `<p class="family-note" data-family-note>หน้านี้เป็นข้อมูลระดับตระกูล (${esc(p.name)}) ไม่ใช่รุ่นใดรุ่นหนึ่ง ${acsNotes ? 'สเปกของแต่ละรุ่นต้องยืนยันกับ ACS' : 'รุ่นย่อยที่ ACS จำหน่ายและสเปกของแต่ละรุ่นต้องยืนยันกับ ACS'}</p>` : ''}
       <p class="lead">${esc(p.thaiDescription)}</p>
       <p class="muted" lang="en">${esc(p.description)}</p>
       <h2>รายละเอียด</h2>

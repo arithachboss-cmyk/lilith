@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-11-14T00:27:27.323Z",
+  "ranAt": "2026-11-14T09:52:35.832Z",
   "variant": "live (rendered in memory, never written to dist/)",
   "passed": 10,
   "failed": 0,
@@ -110,7 +110,7 @@
     },
     {
       "loc": "https://www.asiancoding.com/products/ds3600/",
-      "lastmod": "2026-11-13T22:47:00Z"
+      "lastmod": "2026-11-14T09:52:32Z"
     },
     {
       "loc": "https://www.asiancoding.com/products/rfid/",
