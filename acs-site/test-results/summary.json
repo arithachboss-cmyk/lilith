@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-11-14T00:19:40.721Z",
+  "generatedAt": "2026-11-14T00:35:02.483Z",
   "counts": {
     "PASS": 16,
     "FAIL": 0,
@@ -20,14 +20,14 @@
       "proves": "Every rule and parser behaves, including on Thai input",
       "evidence": "unit.json",
       "status": "PASS",
-      "detail": "187/187 unit tests"
+      "detail": "197/197 unit tests"
     },
     {
       "id": "T2",
       "proves": "A clean checkout builds and tests with no network access",
       "evidence": "offline.json",
       "status": "NOT RUN",
-      "detail": "ran on ab622dc; 3 code file(s) changed since — run tests/qa/offline.mjs again on a committed tree"
+      "detail": "ran on 11a6b22; 6 code file(s) changed since — run tests/qa/offline.mjs again on a committed tree"
     },
     {
       "id": "T3",

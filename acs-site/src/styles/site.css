@@ -105,6 +105,8 @@ main:focus { outline: none; }
 .kind { display: inline-block; font-size: .85rem; background: var(--wash); border: 1px solid var(--line); border-radius: 4px; padding: .1rem .5rem; }
 .family-note { margin-top: .6rem; padding: .6rem .9rem; background: var(--wash); border-left: 4px solid var(--navy); border-radius: 4px; }
 .feature-list { padding-left: 1.2rem; }
+.acs-note { margin-top: .6rem; padding: .6rem .9rem; background: var(--wash); border-left: 4px solid var(--navy); border-radius: 4px; }
+.acs-note-label { font-weight: 700; margin-right: .4rem; }
 .feature-list li { margin-bottom: .35rem; }
 .held { background: var(--off-bg); color: var(--off-ink); border-left: 4px solid var(--off-ink); padding: .75rem 1rem; border-radius: 4px; }
 .pending-list { margin: 1rem 0; display: grid; gap: .5rem; }

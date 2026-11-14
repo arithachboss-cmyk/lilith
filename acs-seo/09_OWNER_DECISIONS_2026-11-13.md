@@ -16,6 +16,7 @@ from here.
 | — | Seven evidence records for spec figures (CR-07), drafted from the manufacturers' product pages. Who approves them? | The Owner approved all seven himself. |
 
 | — | Which ZD421 resolution does ACS supply? (asked by record `EV-ZD421-01`) | Both, 203 dpi and 300 dpi. Stated on 14 Nov 2026. |
+| — | Should the ZD421 page say so? | Yes. The page carries the note "ACS จำหน่ายทั้งรุ่น 203 dpi และ 300 dpi" (14 Nov 2026). It says nothing about stock. |
 
 ## What changed because of them
 

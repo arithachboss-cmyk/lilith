@@ -10,7 +10,8 @@ import { renderSite } from '../src/build/site';
 import { isIndexable, statusConfig } from '../src/config/status';
 import { evidenceGaps, evidenceLog, evidenceProblems, evidenceRecords } from '../src/data/evidence';
 import { draftBlockers } from '../src/rules/evidence';
-import { featureOverrides } from '../src/data/catalog';
+import { featureOverrides, productNotes, products } from '../src/data/catalog';
+import { noteAllowed, noteProblems } from '../src/rules/notes';
 import { overrideProblems } from '../src/rules/overrides';
 import versions from '../src/data/page-versions.json';
 
@@ -20,6 +21,8 @@ const asOf = new Date().toISOString().slice(0, 10);
 
 const overrideIssues = overrideProblems(featureOverrides);
 if (overrideIssues.length) throw new Error(`catalogue overrides are wrong: ${overrideIssues.join('; ')}`);
+const noteIssues = noteProblems(productNotes);
+if (noteIssues.length) throw new Error(`product notes are wrong: ${noteIssues.join('; ')}`);
 if (evidenceProblems.length) throw new Error(`evidence approvals are wrong: ${evidenceProblems.join('; ')}`);
 const site = renderSite(statusConfig, evidenceRecords, asOf, versions);
 
@@ -57,6 +60,8 @@ const report = {
   figuresWithNoDraft: evidenceGaps,
   // Lines shown differently from the catalogue snapshot, each by a recorded Owner decision.
   catalogueOverrides: featureOverrides,
+  // Owner statements about a product. `shown` is false while a figure in the note lacks approved evidence.
+  productNotes: productNotes.map((n) => ({ ...n, shown: products.some((p) => p.id === n.productId) && noteAllowed(n, evidenceRecords, asOf) })),
   evidenceDecisions: evidenceLog.entries().map((e) => ({ at: e.at, recordId: e.recordId, action: e.action, actor: e.actor })),
   // Addresses that moved. Whichever host serves dist/ has to answer each with a 301.
   redirects: site.redirects,

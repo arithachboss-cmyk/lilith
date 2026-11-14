@@ -39,6 +39,7 @@ testing a stale server from an earlier run.
 | M2d | Brady M510 page read: a ready draft for 300 dpi; the label-width line stays blocked because the source states inches only | 177/177 | 41/41 | BLOCKED 0 |
 | M2e | Owner decision D-12: the M510 label width is shown in inches only, as Brady states it. Recorded as an override beside the untouched snapshot; all seven drafts now wait only for an approver | 184/184 | 41/41 | BLOCKED 0 |
 | M2f | The Owner approved all seven evidence records. The seven spec figures are now shown, each on its product page with its source named; nothing is held back | 186/186 | 41/41 | BLOCKED 0 |
+| M2g | The ZD421 page says, on the Owner's statement, that ACS sells both resolutions. A note from ACS is shown only while every figure in it is stated by an approved evidence record | 197/197 | 41/41 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
 `npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
@@ -68,6 +69,7 @@ needs dated stock data; product pages need images; DS3600 needs its model list. 
 | Structured data never carries a price, offer, availability, rating or review | `src/render/structured.ts` |
 | A page's `lastmod` moves only when its content does; a changed page cannot keep its old date | `src/build/versions.ts`, `src/data/page-versions.json` |
 | Catalogue data is a verbatim snapshot, never edited to fit | `src/data/catalog.source.json` |
+| A note from ACS on a product page is a recorded Owner statement; it may not speak of price, stock or delivery, and its figures need approved evidence | `src/data/product-notes.json`, `src/rules/notes.ts` |
 | A line shown differently from the snapshot needs a recorded Owner decision, and may only say less | `src/data/catalog.overrides.json`, `src/rules/overrides.ts` |
 | A category page states only what the catalogue states | `categoryPage` in `src/render/pages.ts`, `tests/unit/category.test.ts` |
 | The company copy is the governed draft, character for character | `src/content/about.json`, `tests/unit/about.test.ts` |
@@ -174,9 +176,10 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 - **One person approved all seven records, and no one has checked the quotes against the
   pages independently.** The gate checks that the approver is not the author; it cannot
   check that the author transcribed the source correctly.
-- **The ZD421 line covers both resolutions** ("203 หรือ 300 dpi ตามรุ่นย่อย"). On 2026-11-14
-  the Owner confirmed ACS sells both; the answer is recorded on the approval. The page
-  wording is unchanged and does not itself say which ACS stocks.
+- **The ZD421 page says "ACS จำหน่ายทั้งรุ่น 203 dpi และ 300 dpi"**, on the Owner's statement of
+  2026-11-14. That is a statement about what ACS sells, not about stock: the page still
+  shows stock and delivery as waiting for data. The note disappears if the ZD421 evidence
+  record is no longer approved.
 - **The records cite a web page, not a signed datasheet.** The source is the
   manufacturer's own product page as served on 2026-11-13. It carries no revision number.
   The approver also confirms that the model ACS sells is the one the page describes.

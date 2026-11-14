@@ -174,6 +174,14 @@ try {
       const sourceNote = await page.locator('[data-figure-source]').count();
       if (shown.length > 0 && sourceNote !== 1) wrongFigures.push(`${id}: shows figures without naming their source`);
     }
+    // A note from ACS appears on its product page exactly when the report says it is shown.
+    for (const route of PRODUCT_ROUTES) {
+      const id = route.split('/')[2];
+      await page.goto(BASE + route);
+      const onPage = (await page.locator('[data-acs-note]').allTextContents()).map((t) => t.replace('ข้อมูลจาก ACS', '').trim());
+      const expected = (report.productNotes ?? []).filter((n) => n.productId === id && n.shown).map((n) => n.text);
+      if (JSON.stringify(onPage) !== JSON.stringify(expected)) wrongFigures.push(`${id}: notes on page ${JSON.stringify(onPage)} ≠ report ${JSON.stringify(expected)}`);
+    }
     const accounted = (report.shownFigures ?? []).length + report.omittedFigures.length;
     check('E09', `figure lines match the build report on all ${PRODUCT_ROUTES.length} product pages (${(report.shownFigures ?? []).length} shown under an approved record, ${report.omittedFigures.length} held back)`, wrongFigures.length === 0 && accounted === 7, wrongFigures.join(' | '));
     const familyNotes = [];

@@ -1,0 +1,12 @@
+{
+  "_rule": "A note is something ACS says about a product beyond the catalogue snapshot. Each one is a recorded Owner statement. A note may not state a price, stock or delivery, and any figure in it must already be stated by an approved evidence record for the same product; otherwise the page does not show it. tests/unit/notes.test.ts enforces this.",
+  "notes": [
+    {
+      "productId": "zd421",
+      "text": "ACS จำหน่ายทั้งรุ่น 203 dpi และ 300 dpi",
+      "statedBy": "Arithach Chartariyapong, CEO, Asian Coding Systems",
+      "statedOn": "2026-11-14",
+      "basis": "The Owner stated that ACS sells the ZD421 in both resolutions, and asked for the product page to say so."
+    }
+  ]
+}

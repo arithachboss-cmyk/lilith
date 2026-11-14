@@ -1,6 +1,6 @@
 {
-  "ranAt": "2026-11-14T00:01:59.813Z",
-  "commit": "ab622dc6edf37dae9323b52e4c52da7092f5eb4f",
+  "ranAt": "2026-11-14T00:27:14.393Z",
+  "commit": "11a6b223e3565e243bf8969888c55ef12cba7377",
   "uncommittedChanges": 0,
   "isolation": "Linux network namespace (unshare -n), loopback only",
   "networkBlocked": true,
@@ -16,7 +16,7 @@
     {
       "name": "npm ci (network on)",
       "pass": true,
-      "seconds": 1,
+      "seconds": 4,
       "tail": ""
     },
     {
@@ -58,7 +58,7 @@
     {
       "name": "npm run e2e (network off)",
       "pass": true,
-      "seconds": 439,
+      "seconds": 444,
       "tail": ""
     }
   ]

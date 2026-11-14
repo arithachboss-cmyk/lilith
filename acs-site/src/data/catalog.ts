@@ -1,5 +1,6 @@
 import overrides from './catalog.overrides.json';
 import source from './catalog.source.json';
+import notes from './product-notes.json';
 
 export type CategoryId = 'printers' | 'scanners' | 'labels' | 'ribbons' | 'rfid' | 'mobile';
 export type ProductKind = 'model' | 'family' | 'solution' | 'supplies';
@@ -32,6 +33,9 @@ export interface Product {
   acsUrl?: string;
   evidence?: EvidenceMark;
 }
+
+/** Recorded Owner statements about a product. Checked and filtered in rules/notes.ts. */
+export const productNotes: ReadonlyArray<{ productId: string; text: string; statedBy: string; statedOn: string; basis: string }> = notes.notes;
 
 export const SOURCE_URL: string = source._source;
 export const SOURCE_FETCHED: readonly string[] = source._fetched;

@@ -5,10 +5,11 @@ import {
 } from '../config/status';
 import { ABOUT_APPROVAL, parseAbout } from '../content/about';
 import {
-  categories, categoryById, categoryPath, productPath, products, productsIn, referenceLink,
+  categories, categoryById, categoryPath, productNotes, productPath, products, productsIn, referenceLink,
   type Category, type Product,
 } from '../data/catalog';
 import { splitFeatures, type EvidenceRecord } from '../rules/evidence';
+import { notesFor } from '../rules/notes';
 import { COUNTRIES, INDUSTRIES, INTERESTS, LABELS, MESSAGE_MAX, SCALES } from '../rules/enquiry';
 import { esc } from './html';
 import { layout } from './layout';
@@ -132,6 +133,10 @@ export function productPage(
   const features = shown.length
     ? `<ul class="feature-list">${shown.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`
     : `<p class="muted">ยังไม่มีรายละเอียดที่แสดงได้</p>`;
+  // What ACS itself says about this product, shown only while its figures are evidenced.
+  const acsNotes = notesFor(p.id, productNotes, records, asOf)
+    .map((n) => `<p class="acs-note" data-acs-note><span class="acs-note-label">ข้อมูลจาก ACS</span> ${esc(n.text)}</p>`)
+    .join('\n      ');
   const held = omitted.length
     ? `<p class="held" data-omitted-figures="${omitted.length}">ตัวเลขสเปก ${omitted.length} รายการของสินค้านี้ยังไม่แสดง เพราะยังไม่มี datasheet จากผู้ผลิตยืนยัน ${statusChip(config.features.specFigures)}</p>`
     : '';
@@ -149,7 +154,7 @@ export function productPage(
       <p class="lead">${esc(p.thaiDescription)}</p>
       <p class="muted" lang="en">${esc(p.description)}</p>
       <h2>รายละเอียด</h2>
-      ${features}
+      ${features}${acsNotes ? `\n      ${acsNotes}` : ''}
       ${held}
       <dl class="pending-list">
         ${pending('ราคา', 'prices', config)}
