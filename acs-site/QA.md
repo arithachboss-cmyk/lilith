@@ -1,6 +1,6 @@
 # QA report — ACS website rebuild (M3, author's part)
 
-**Commit tested:** `124476f` (launch skeleton L0; earlier runs were on `1c6841c`, `74d1468`, `f335044`, `45a10e3`, `9c4a07b`, `ab622dc`, `beb6d36` and `611d068`) · **Date:** 2026-11-13 · **System status:** demo
+**Commit tested:** `b1fd395` (enquiry vertical slice L1; earlier runs were on `1c6841c`, `74d1468`, `f335044`, `45a10e3`, `9c4a07b`, `ab622dc`, `beb6d36`, `611d068` and `124476f`) · **Date:** 2026-11-13 · **System status:** demo
 
 **M3 gate: CLOSED.** The automated tests are green, but M3 closes only when all three of
 these have happened, and none has:
@@ -19,8 +19,8 @@ evidence file is missing is reported NOT RUN, never assumed.
 
 | # | What it proves | Result | Evidence in `test-results/` |
 |---|---|---|---|
-| T1 | Every rule and parser behaves, including on Thai input | PASS · 231/231 unit tests | `unit.json` |
-| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `124476f`, network blocked | `offline.json` |
+| T1 | Every rule and parser behaves, including on Thai input | PASS · 264/264 unit tests | `unit.json` |
+| T2 | A clean checkout builds and tests with no network access | PASS · 10/10 steps on `b1fd395`, network blocked (the slice is one of the steps) | `offline.json` |
 | T3 | 14 product routes return 200 with distinct headings | PASS · E01, E02, E31 | `e2e.json` |
 | T4 | Self-referencing canonical on every indexable page; no page answers at two addresses | PASS · 7/7 + E28, E29, E36 | `canonical.json`, `links.json` |
 | T5 | Product text is present with JavaScript disabled | PASS · E07, E08, E33, E37 | `norender.json` |
@@ -38,7 +38,7 @@ evidence file is missing is reported NOT RUN, never assumed.
 | T17 | Product structured data validates and carries no price or availability | PASS · 8/8 + E32 | `schema.json` |
 | T18 | Screenshots of every page type at 360 and 1280 px, reviewed by eye | **HUMAN STEP** · 22 captured, seen by the author only | `screens/*.png` |
 
-**PASS 17 · FAIL 0 · NOT RUN 0 · HUMAN STEP 1.** End-to-end: 42/42 checks.
+**PASS 17 · FAIL 0 · NOT RUN 0 · HUMAN STEP 1.** End-to-end: 42/42 checks. Enquiry slice: 12/12 checks against a throwaway test store.
 `../acs-seo/tools/regression.sh`: 44 checks pass.
 
 What these results do **not** say: T4 and T7 are proven on a live-config variant rendered
@@ -56,6 +56,7 @@ Q-02 now have a test that fails against the old code.
 |---|---|---|---|---|
 | Q-01 | Elements marked `hidden` were displayed wherever CSS set `display`. An empty basket offered "continue to enquiry"; with JavaScript off the catalogue showed a search box that did nothing. | Screenshot review of `basket-360.png` | One rule: `[hidden] { display: none !important; }` | E33, E34, E35 — 4 checks fail on the old stylesheet |
 | Q-03 | The acceptance matrix accepted an offline run (T2) made on older code and showed PASS. | Reading the M2b summary | T2 is NOT RUN when code changed since the commit the offline run used | Seen to report NOT RUN before the re-run on `74d1468` |
+| Q-04 | In the slice, a successful receipt was drawn in the error colour, and the form stayed up after a success so the same enquiry could be sent again. | Screenshot review of `slice-enquiry-success-360.png`; 11 of 11 checks passed with both present | The receipt is styled by outcome; the form is hidden once sent | S12 |
 | Q-02 | A model number ending in a unit letter (`1950g`) was read as a spec figure, "1950 g". It failed safe (a line would be omitted, not wrongly shown) and needed an exemption in `verify.ts`. | Listed as a known limit at M2a | Catalogue model tokens are excluded by exact match | 2 unit tests; the exemption is removed |
 
 Q-01 is the reason T18 matters: 35/35 automated checks passed while the defect was on
@@ -110,6 +111,8 @@ seen for one interaction per page, an approximation of INP.
 | M2h: the eight DS3600 models named on the family page, with no spec figure | `tests/unit/notes.test.ts` (11 in all), E09 |
 | L0: the enquiry backend contract and the store's two gates | `tests/unit/enquiry-backend.test.ts` (14) |
 | L0: price and stock wording modes, image manifest, old-address plan, launch readiness | `tests/unit/launch.test.ts` (19), E38 |
+| L1: the enquiry endpoint, the HTTP backend and the slice config | `tests/unit/enquiry-handler.test.ts` (33) |
+| L1: one enquiry from a real browser to a file on disk and back | `tests/e2e/slice.mjs` (S01–S12) → `slice.json` |
 
 ## Open items that keep M2 (and so M3) open
 
@@ -127,7 +130,7 @@ checks that the snapshot is untouched and that an override can only say less.
 
 ## For the reviewer
 
-Review commit `124476f` (code) — the commit after it adds only this report and evidence.
+Review commit `b1fd395` (code) — the commit after it adds only this report and evidence.
 
 ```sh
 cd acs-site && npm ci
@@ -140,6 +143,9 @@ Worth an independent look, because the author is the least able to see them:
 - Open every file in `test-results/screens/` at full size. Q-01 was visible there.
 - Read `dist/products/1950g/index.html` and confirm no number with a unit appears.
 - Try to make `submitEnquiry` succeed, and to activate an evidence record you authored.
+- Attack `src/server/enquiry-handler.ts`: it is the first code here that accepts input
+  from outside. Try to store an enquiry without consent, from another origin, with extra
+  fields, or twice.
 - Read `src/data/redirect-plan.json`: 30 proposed targets and 50 addresses left as 404
   were chosen by the author with no traffic or backlink data.
 - Check that E33–E35 really fail when the `[hidden]` rule is removed from `site.css`.
