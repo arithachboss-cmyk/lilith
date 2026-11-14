@@ -9,6 +9,15 @@ export {
   type DatabaseTransaction,
 } from "./client";
 export {
+  DEFAULT_STATION_LIMIT,
+  MAX_STATION_LIMIT,
+  MAX_STATION_RADIUS_METERS,
+  type GeoPoint,
+  type GeoQueries,
+  type NearbyStation,
+  type TransitSystem,
+} from "./geo";
+export {
   LOCAL_DATABASE_URL,
   databaseUrl,
   migrationDatabaseUrl,

@@ -29,6 +29,7 @@ The local database is PostgreSQL 16 with PostGIS and pgvector in Docker. It need
 ```bash
 pnpm db:up          # build and start the database on 127.0.0.1:54329
 pnpm db:migrate     # apply the migrations in packages/db/migrations
+pnpm db:seed        # write the locations and the 24 transit stations; safe to repeat
 pnpm test:db        # database tests; each run uses its own throwaway database
 pnpm test:skeleton  # /api/health through every layer, against the database
 pnpm db:down        # stop it (the data volume is kept)

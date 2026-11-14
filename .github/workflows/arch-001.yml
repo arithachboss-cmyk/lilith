@@ -42,6 +42,8 @@ jobs:
       - name: Start the local database (PostgreSQL 16 + PostGIS + pgvector)
         run: pnpm db:up
       - run: pnpm db:migrate
+      - name: Seed the reference data (locations and transit stations)
+        run: pnpm db:seed
       - run: pnpm test:db
       - name: Walking skeleton — /api/health through every layer
         run: pnpm test:skeleton
