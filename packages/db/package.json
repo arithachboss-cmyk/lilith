@@ -3,16 +3,31 @@
   "private": true,
   "type": "module",
   "exports": {
-    ".": "./src/index.ts"
+    ".": "./index.ts"
   },
   "scripts": {
+    "postinstall": "prisma generate",
+    "generate": "prisma generate",
+    "migrate": "prisma migrate deploy",
+    "migrate:status": "prisma migrate status",
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run --exclude \"**/*.integration.test.ts\"",
+    "test:integration": "vitest run .integration."
+  },
+  "dependencies": {
+    "@prisma/adapter-pg": "7.10.1",
+    "@prisma/client": "7.10.1",
+    "pg": "8.23.1"
   },
   "devDependencies": {
     "@lilith/config": "workspace:*",
+    "@types/node": "22.19.19",
+    "@types/pg": "8.23.1",
+    "eslint": "9.39.4",
+    "prisma": "7.10.1",
     "typescript": "5.9.3",
-    "eslint": "9.39.4"
+    "vitest": "5.0.0"
   }
 }

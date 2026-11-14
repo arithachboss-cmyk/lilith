@@ -31,6 +31,7 @@ export default tseslint.config(
       "**/dist/**",
       "**/.turbo/**",
       "**/coverage/**",
+      "**/generated/**",
       "**/next-env.d.ts",
     ],
   },
