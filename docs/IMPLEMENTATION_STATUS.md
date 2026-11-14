@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-11-14. Current task: ARCH-002 (shared kernel) is open as PR #16 with its tests green in CI, and waits on the owner's merge. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
+Updated: 2026-11-14. Current task: ARCH-003 (contracts package) is implemented on the session branch with its checks green locally; it has no pull request yet, so hosted CI has not run on it. ARCH-002 (shared kernel) merged as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -44,10 +44,26 @@ Updated: 2026-11-14. Current task: ARCH-002 (shared kernel) is open as PR #16 wi
   - Local verification (Node 22): 113 unit and property tests pass, including `fromBaht(format(x)) === x` and `fromBaht(formatBaht(x)) === x` over 10,000 random values each across the whole `BIGINT` range; 22 of 22 hand-made mutations of the kernel are caught; build, typecheck, lint and the 84 boundary tests pass.
   - CI (Node 24): hosted [foundation CI passed](https://github.com/arithachboss-cmyk/lilith/actions/runs/43532519111) on implementation commit `65314e6`, including the new `pnpm test:core` step with 113 of 113 tests.
   - The work is on the session's branch, not `feat/ARCH-002-shared-kernel`, because this session may push only to that branch.
+  - Merged as `860a756` (PR #16) on 2026-11-14, at the owner's request, with `foundation` green on head `5612a20`.
 
 ## In Progress
 
-- PR #16 (ARCH-002) waits on the owner's merge. ADR-0015 is **proposed**; its interpretations wait on owner review.
+- ARCH-003 (contracts package) is implemented and **not yet Done**: its hosted CI has not run. `packages/contracts/src/{dto/*,errors.ts,events.ts,routes.ts,openapi.ts}` and the generated `packages/contracts/openapi.json`. Interpretations are in [ADR-0016](adr/ADR-0016-contracts-package.md).
+  - What it holds: 228 named zod schemas; the route table of all 104 endpoints of §18; the 12 canonical error codes of §18.0 plus the 4 endpoint codes §18 uses; the event registry with 77 names; an OpenAPI 3.1 document with 104 operations.
+  - Acceptance criteria:
+    - `pnpm contracts:openapi` emits an OpenAPI 3.1 document, and `redocly lint` accepts it under its strict rule set, with two excused findings (the two `302` PDF routes of §18.8).
+    - Every error code of §18.0 exists with its status.
+    - `trackEvent('not_registered')` is a TypeScript error, checked by `@ts-expect-error` lines that `pnpm typecheck` compiles.
+  - Local verification (Node 22): 143 tests pass.
+    - 47 example payloads parse and come back with every member; those the blueprint shows are copied from it, and the rest are examples of the derived shapes.
+    - The route table equals the list of every `METHOD /path` read from `docs/04-api-contracts.md`.
+    - Parsing a private listing with the public schema removes every private value.
+    - Satang converts to and from `bigint` without loss over 10,000 random values.
+    - 71 of 71 hand-made faults in the package are caught.
+    - `pnpm install --frozen-lockfile`, build, typecheck, lint, the 84 boundary tests, the 113 core tests, `pnpm contracts:check` and the AMI checker (5,901 checks) pass.
+  - CI: not run yet. The `foundation` workflow runs on a pull request, and none is open for this work. The workflow now also runs `pnpm test:contracts` and `pnpm contracts:check`.
+  - Not covered, by design: shapes the blueprint names without defining stay open, and 28 routes have no response schema because §18 gives none (ADR-0016 lists both). The work is on the session's branch, not `feat/ARCH-003-contracts`, because this session may push only to that branch.
+- ADR-0015 and ADR-0016 are **proposed**; their interpretations wait on owner review.
 - ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
 - `W-20261016-01` is paused at HR-01 after round 7 and the LQ-18 queue, with no failed checks and no wording waiting on an answer. It waits on the owner finding a Thai lawyer and sending the brief (Q30), counsel's answers, the pre-publication checks (Q44, Q45) and the owner's approval.
 
@@ -60,7 +76,7 @@ Updated: 2026-11-14. Current task: ARCH-002 (shared kernel) is open as PR #16 wi
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
 2. `W-20261016-01`: the owner finds a Thai lawyer and sends the eight-topic brief (Q30); counsel's answers go back through the route; then PUBLISH-GATE compares the tag-free copy (Q44) and the live page text (Q45), the web person tests the button, and the owner approves.
-3. After PR #16 merges, continue ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
+3. Open a pull request for ARCH-003 when the owner asks; after it merges, continue ARCH-004 → ARCH-005 in the specified order.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
 ## Open risks
