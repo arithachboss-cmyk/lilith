@@ -1,6 +1,6 @@
 # QA report — ACS website rebuild (M3, author's part)
 
-**Commit tested:** `611d068` (M2h; earlier runs were on `1c6841c`, `74d1468`, `f335044`, `45a10e3`, `9c4a07b`, `ab622dc` and `beb6d36`) · **Date:** 2026-11-13 · **System status:** demo
+**Commit tested:** `124476f` (launch skeleton L0; earlier runs were on `1c6841c`, `74d1468`, `f335044`, `45a10e3`, `9c4a07b`, `ab622dc`, `beb6d36` and `611d068`) · **Date:** 2026-11-13 · **System status:** demo
 
 **M3 gate: CLOSED.** The automated tests are green, but M3 closes only when all three of
 these have happened, and none has:
@@ -19,8 +19,8 @@ evidence file is missing is reported NOT RUN, never assumed.
 
 | # | What it proves | Result | Evidence in `test-results/` |
 |---|---|---|---|
-| T1 | Every rule and parser behaves, including on Thai input | PASS · 198/198 unit tests | `unit.json` |
-| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `611d068`, network blocked | `offline.json` |
+| T1 | Every rule and parser behaves, including on Thai input | PASS · 231/231 unit tests | `unit.json` |
+| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `124476f`, network blocked | `offline.json` |
 | T3 | 14 product routes return 200 with distinct headings | PASS · E01, E02, E31 | `e2e.json` |
 | T4 | Self-referencing canonical on every indexable page; no page answers at two addresses | PASS · 7/7 + E28, E29, E36 | `canonical.json`, `links.json` |
 | T5 | Product text is present with JavaScript disabled | PASS · E07, E08, E33, E37 | `norender.json` |
@@ -38,7 +38,7 @@ evidence file is missing is reported NOT RUN, never assumed.
 | T17 | Product structured data validates and carries no price or availability | PASS · 8/8 + E32 | `schema.json` |
 | T18 | Screenshots of every page type at 360 and 1280 px, reviewed by eye | **HUMAN STEP** · 22 captured, seen by the author only | `screens/*.png` |
 
-**PASS 17 · FAIL 0 · NOT RUN 0 · HUMAN STEP 1.** End-to-end: 41/41 checks.
+**PASS 17 · FAIL 0 · NOT RUN 0 · HUMAN STEP 1.** End-to-end: 42/42 checks.
 `../acs-seo/tools/regression.sh`: 44 checks pass.
 
 What these results do **not** say: T4 and T7 are proven on a live-config variant rendered
@@ -108,6 +108,8 @@ seen for one interaction per page, an approximation of INP.
 | M2c: five drafts; the quote check compares number and unit | `tests/unit/figures.test.ts` (7 new, incl. refusals) |
 | M2g: the note from ACS on the ZD421 page, tied to approved evidence | `tests/unit/notes.test.ts`, E09 |
 | M2h: the eight DS3600 models named on the family page, with no spec figure | `tests/unit/notes.test.ts` (11 in all), E09 |
+| L0: the enquiry backend contract and the store's two gates | `tests/unit/enquiry-backend.test.ts` (14) |
+| L0: price and stock wording modes, image manifest, old-address plan, launch readiness | `tests/unit/launch.test.ts` (19), E38 |
 
 ## Open items that keep M2 (and so M3) open
 
@@ -125,7 +127,7 @@ checks that the snapshot is untouched and that an override can only say less.
 
 ## For the reviewer
 
-Review commit `611d068` (code) — the commit after it adds only this report and evidence.
+Review commit `124476f` (code) — the commit after it adds only this report and evidence.
 
 ```sh
 cd acs-site && npm ci
@@ -138,6 +140,8 @@ Worth an independent look, because the author is the least able to see them:
 - Open every file in `test-results/screens/` at full size. Q-01 was visible there.
 - Read `dist/products/1950g/index.html` and confirm no number with a unit appears.
 - Try to make `submitEnquiry` succeed, and to activate an evidence record you authored.
+- Read `src/data/redirect-plan.json`: 30 proposed targets and 50 addresses left as 404
+  were chosen by the author with no traffic or backlink data.
 - Check that E33–E35 really fail when the `[hidden]` rule is removed from `site.css`.
 - Compare `/about/` with `../acs-seo/packages/about-acs/draft-v3-evidenced.md` by eye.
 - Read the seven evidence records against the manufacturer pages they cite. **This is the
