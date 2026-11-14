@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-11-14. Current task: SKEL-001 (walking skeleton: `GET /api/health` through every layer) is open as PR #19 with its tests green in CI; the owner approved merging it once CI passes. The owner's next request is a first vertical slice, searching locations and transit stations, which starts with a detailed plan. ARCH-004 (database package and local stack) merged as PR #18, ARCH-003 (contracts package) as PR #17 and ARCH-002 (shared kernel) as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
+Updated: 2026-11-14. Current task: DB-003 (geo tables and the station seed) is implemented on the session's branch and has no PR yet. It is the first half of the vertical slice the owner asked for, searching locations and transit stations; the second half, SLICE-001, starts after DB-003 is merged. SKEL-001 (walking skeleton) merged as PR #19, ARCH-004 (database package and local stack) as PR #18, ARCH-003 (contracts package) as PR #17 and ARCH-002 (shared kernel) as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -97,24 +97,45 @@ Updated: 2026-11-14. Current task: SKEL-001 (walking skeleton: `GET /api/health`
     - The full foundation validation passes, including `pnpm test:skeleton`.
   - CI (Node 24): hosted [foundation CI passed](https://github.com/arithachboss-cmyk/lilith/actions/runs/43589378998) on head `75ace4d`. Its log shows the new `pnpm test:skeleton` step passing 4 core tests against the database and 9 and 6 web tests.
   - Not covered, by design: login, tables, business features, the job queue, the AI service and storage. OPS-003 still owns the full health endpoint; until then this route must not gate a deployment.
+  - Merged as `4ec30b9` (PR #19) on 2026-11-14, at the owner's request, with `foundation` green on head `0ca9521`.
 
 ## In Progress
 
-- PR #19 (SKEL-001) merges once CI is green on its head, as the owner approved on 2026-11-14.
-- ADR-0015, ADR-0016, ADR-0017 and ADR-0018 are **proposed**; their interpretations wait on owner review.
+- DB-003 (geo tables and the station seed) is implemented and pushed; it has no PR, so CI has not run on it. The owner's answers and this task's readings are in [ADR-0019](adr/ADR-0019-geo-tables-and-station-seed.md).
+  - What it holds:
+    - `packages/db/migrations/0004_geo/migration.sql`: `locations` and `transit_stations` of §8.2.2, with their indexes, constraints and the `updated_at` trigger; `schema.prisma` describes both.
+    - `packages/db/seed/`: the 24 stations of the launch corridor and the 3 areas under Bangkok and Thailand, with fixed ids; `pnpm db:seed` writes them and is safe to repeat.
+    - `packages/db/geo.ts`: `client.geo.nearestStations(origin, radiusMeters)`, a straight-line distance in whole metres.
+  - Where the positions come from: the Department of Rail Transport's open dataset on the Ministry of Transport's catalogue, which the owner chose on 2026-11-14 after Wikidata proved precise for only 15 of the 24 stations. The seed rows were copied from the download by script.
+  - Acceptance criteria:
+    - BTS and MRT stations from On Nut to Ari are seeded with real coordinates: 15 BTS Sukhumvit line stations and 9 MRT Blue line stations.
+    - The GiST indexes on `centroid`, `boundary` and `point` exist.
+    - `nearestStations(point, 1500)` returns the right stations in the right order, compared from six origins with a calculation that shares no code with PostGIS.
+    - Known distances from Thong Lo station to six fixed points hold to half a metre; the card asks for 50 metres.
+  - Local verification (Node 22, Docker 29):
+    - 154 tests pass in `packages/db`, 119 of them new: 28 need no database and 91 run against PostgreSQL.
+    - Every seed station is within 50 metres of Wikidata's position at the 13 precisely placed elevated stations, and within 150 metres at the others.
+    - Seeding twice changes no row; a renamed or moved row is put back; a blocked run writes nothing.
+    - `prisma migrate diff` between the migrated database and `schema.prisma` is empty.
+    - Hand-made faults: the first 40 of 131 have been run, the 39 in the migration and 1 in the query, and all 40 are caught. The other 91 have not been run yet.
+    - The full foundation validation passes, including `pnpm db:migrate`, `pnpm db:seed` run twice, `pnpm test:db` (36 and 118 tests) and `pnpm test:skeleton`.
+  - CI: not run. The foundation workflow runs on pull requests, and the new `pnpm db:seed` step is in it.
+  - Not covered, by design: `property_transit`, which needs the `properties` table of DB-004; districts, subdistricts and area boundaries; the search service, routes and page of SLICE-001. The work is on the session's branch, not `feat/DB-003-geo`, because this session may push only to that branch.
+- ADR-0015, ADR-0016, ADR-0017, ADR-0018 and ADR-0019 are **proposed**; their interpretations wait on owner review.
 - ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
 - `W-20261016-01` is paused at HR-01 after round 7 and the LQ-18 queue, with no failed checks and no wording waiting on an answer. It waits on the owner finding a Thai lawyer and sending the brief (Q30), counsel's answers, the pre-publication checks (Q44, Q45) and the owner's approval.
 
 ## Blocked
 
 - Nothing blocks AMI-002 (bilingual UI strings) or AMI-003..007; D-AMI-01 and D-AMI-02 removed the login/auth dependency by scoping AMI to post-login screens only.
-- The complete ARCH-005 pipeline remains unimplemented; the current `foundation` workflow runs only the checks that ARCH-001 to ARCH-004 added.
+- The complete ARCH-005 pipeline remains unimplemented; the current `foundation` workflow runs only the checks that ARCH-001 to ARCH-004, SKEL-001 and DB-003 added.
+- SLICE-001 waits on DB-003 being merged (one task, one PR; no task starts before its dependencies are merged).
 
 ## Next
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
 2. `W-20261016-01`: the owner finds a Thai lawyer and sends the eight-topic brief (Q30); counsel's answers go back through the route; then PUBLISH-GATE compares the tag-free copy (Q44) and the live page text (Q45), the web person tests the button, and the owner approves.
-3. After PR #19 merges, propose the detailed plan of the first vertical slice (locations and transit stations: DB-003 and the search part of API-004) to the owner. ARCH-005 (the CI pipeline) remains the next Blueprint task.
+3. DB-003: open a PR when the owner asks, and merge it on the owner's word once CI is green. Then SLICE-001: the search service in core, `GET /api/geo/search` and `GET /api/geo/stations` without login, and a search section on the foundation page that shows a straight-line distance in metres. ARCH-005 (the CI pipeline) remains the next Blueprint task.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
 ## Open risks
@@ -125,14 +146,19 @@ Updated: 2026-11-14. Current task: SKEL-001 (walking skeleton: `GET /api/health`
 - R-AMI-04: in manual chat mode, client data typed into third-party chats sits outside the Keeper and RLS. Prompts and the index forbid contact details and ID numbers, but enforcement is the person's discipline, not code.
 - R-AMI-05: manual chat mode is slow to relay. One content round is six chats, 42–53 minutes, and HANDOFF blocks now reach 30k characters, which is heavy to copy by hand on a phone. A note a person adds is only traceable when it is the owner's words, pasted verbatim into `sources:`.
 
+- R-GEO-01: the terms of use of the station data are not spelled out. The catalogue labels the dataset "Open Data Common", classes it as public data and states no access condition, and it links no licence text. Nobody has confirmed that this covers a commercial product (ADR-0019).
+- R-GEO-02: a station is one point. At the two underground stations with a precise second source, the two sources are 82 and 144 metres apart. A distance to a station is good to about 100 metres and is never a walking distance.
+- R-GEO-03: Thai name search depends on the database's locale; under the `C` locale it finds nothing. The local database is tested; a hosted one is not chosen yet.
+
 ## Deferred owner decisions
 
 - Before DB-008: fee basis and payer.
 - Before first live invoice: legal review of fee agreement and platform positioning.
 - Before launch: retain, label as demo, or retire the public Lovable prototype.
+- Before station distances are shown to the public: confirm the terms of use of the Department of Rail Transport dataset (R-GEO-01).
 - Before publishing the first article from the content route:
   - the owner's permission to describe internal process (Q10);
   - Thai counsel on recording calls, filming common areas and consumer-facing wording (L1–L3);
   - a check that the LINE OA account in the call to action belongs to the company (the owner confirmed it on 2026-10-17).
 
-**Platform production-ready: false.** No migrations, product authentication, matching, deal workflows, invoices or 38-screen E2E release gate are delivered by these tasks. `hr-screens/` is a prototype and is outside the pnpm workspace globs.
+**Platform production-ready: false.** Two reference tables exist and nothing else of the data model. No product authentication, matching, deal workflows, invoices or 38-screen E2E release gate are delivered by these tasks. `hr-screens/` is a prototype and is outside the pnpm workspace globs.
