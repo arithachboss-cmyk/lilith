@@ -5,12 +5,16 @@ import {
 } from '../config/status';
 import { ABOUT_APPROVAL, parseAbout } from '../content/about';
 import {
-  categories, categoryById, categoryPath, productNotes, productPath, products, productsIn, referenceLink,
+  categories, categoryById, categoryPath, productImages, productNotes, productPath, products, productsIn, referenceLink,
   type Category, type Product,
 } from '../data/catalog';
 import { splitFeatures, type EvidenceRecord } from '../rules/evidence';
+import { imageFor, type ProductImage } from '../rules/images';
 import { notesFor } from '../rules/notes';
-import { COUNTRIES, INDUSTRIES, INTERESTS, LABELS, MESSAGE_MAX, SCALES } from '../rules/enquiry';
+import { launchReadiness } from '../build/launch';
+import {
+  COUNTRIES, INDUSTRIES, INTERESTS, LABELS, MARKETING_CONSENT_TEXT, MESSAGE_MAX, SCALES, SERVICE_CONSENT_TEXT,
+} from '../rules/enquiry';
 import { esc } from './html';
 import { layout } from './layout';
 import {
@@ -33,6 +37,29 @@ function pending(label: string, feature: FeatureKey, config: StatusConfig): stri
   return `<div class="pending"><dt>${esc(label)}</dt><dd>รอเจ้าของกำหนด ${statusChip(config.features[feature])}<span class="pending-note">${esc(FEATURE_NOTE[feature])}</span></dd></div>`;
 }
 
+/** The product's photograph when ACS has supplied one, the labelled placeholder when not. */
+export function imageBlock(p: Product, images: readonly ProductImage[] = productImages): string {
+  const image = imageFor(p.id, images);
+  if (!image) return imagePlaceholder();
+  return `<img class="product-img" src="/assets/products/${esc(image.file)}" width="${image.width}" height="${image.height}" alt="${esc(image.alt)}" loading="lazy" decoding="async">`;
+}
+
+/** A price that is not shown: the waiting notice, or the Owner's chosen wording. */
+export function priceBlock(config: StatusConfig): string {
+  if (config.features.prices !== 'live' && config.presentation?.prices === 'quote_on_request') {
+    return `<div class="pending" data-price-mode="quote_on_request"><dt>ราคา</dt><dd>ขอใบเสนอราคาจาก ACS<span class="pending-note">ราคาขึ้นกับรุ่น จำนวน และอุปกรณ์เสริมที่เลือก</span></dd></div>`;
+  }
+  return pending('ราคา', 'prices', config);
+}
+
+/** Stock that is not shown: the waiting notice, or the Owner's chosen wording. */
+export function stockBlock(config: StatusConfig): string {
+  if (config.features.stock !== 'live' && config.presentation?.stock === 'ask_acs') {
+    return `<div class="pending" data-stock-mode="ask_acs"><dt>สต็อกและระยะเวลาส่งมอบ</dt><dd>สอบถาม ACS<span class="pending-note">ยืนยันกับ ACS ก่อนสั่งซื้อทุกครั้ง</span></dd></div>`;
+  }
+  return pending('สต็อกและระยะเวลาส่งมอบ', 'stock', config);
+}
+
 function imagePlaceholder(): string {
   return `<div class="img-placeholder" role="img" aria-label="ยังไม่มีรูปสินค้า"><span aria-hidden="true">รอรูปสินค้า</span></div>`;
 }
@@ -40,7 +67,7 @@ function imagePlaceholder(): string {
 function productCard(p: Product): string {
   const category = categoryById(p.category);
   return `<li class="card" data-product-card data-id="${esc(p.id)}" data-category="${esc(p.category)}">
-  ${imagePlaceholder()}
+  ${imageBlock(p)}
   <p class="card-brand">${esc(p.brand)}</p>
   <h3 class="card-title"><a href="${productPath(p.id)}">${esc(p.thaiTitle)}</a></h3>
   <p class="card-name">${esc(p.name)}</p>
@@ -144,7 +171,7 @@ export function productPage(
 <div class="wrap section product">
   <nav class="breadcrumbs" aria-label="เส้นทาง"><a href="/">หน้าแรก</a> <span aria-hidden="true">/</span> <a href="/products/">สินค้า</a> <span aria-hidden="true">/</span> <a href="${categoryPath(p.category)}">${esc(category?.thai ?? p.category)}</a></nav>
   <div class="product-grid">
-    <div>${imagePlaceholder()}</div>
+    <div>${imageBlock(p)}</div>
     <div>
       <p class="card-brand">${esc(p.brand)}</p>
       <h1>${esc(p.thaiTitle)}</h1>
@@ -157,8 +184,8 @@ export function productPage(
       ${features}${acsNotes ? `\n      ${acsNotes}` : ''}
       ${held}
       <dl class="pending-list">
-        ${pending('ราคา', 'prices', config)}
-        ${pending('สต็อกและระยะเวลาส่งมอบ', 'stock', config)}
+        ${priceBlock(config)}
+        ${stockBlock(config)}
       </dl>
       <p class="actions">
         <button type="button" class="button button-primary" data-add-to-basket="${esc(p.id)}" hidden>เพิ่มในรายการขอราคา</button>
@@ -252,11 +279,11 @@ export function enquiryPage(config: StatusConfig = statusConfig): string {
       </div>
       ${field('message', 'รายละเอียดเพิ่มเติม (ไม่บังคับ)', `<textarea id="f-message" name="message" rows="5" maxlength="${MESSAGE_MAX}" aria-describedby="hint-message err-message"></textarea>`, `สูงสุด ${MESSAGE_MAX.toLocaleString('en-US')} ตัวอักษร ไม่ต้องใส่รหัสผ่านหรือข้อมูลอ่อนไหว`)}
       <div class="field">
-        <label class="check consent"><input type="checkbox" id="f-serviceConsent" name="serviceConsent" required aria-describedby="err-serviceConsent"> <span>ยินยอมให้ ACS ใช้ข้อมูลติดต่อและรายละเอียดนี้ เพื่อรับคำขอและติดต่อกลับเกี่ยวกับคำขอนี้เท่านั้น <span aria-hidden="true">*</span></span></label>
+        <label class="check consent"><input type="checkbox" id="f-serviceConsent" name="serviceConsent" required aria-describedby="err-serviceConsent"> <span>${esc(SERVICE_CONSENT_TEXT)} <span aria-hidden="true">*</span></span></label>
         <p class="field-error" id="err-serviceConsent" role="alert" hidden></p>
       </div>
       <div class="field">
-        <label class="check consent"><input type="checkbox" id="f-marketingConsent" name="marketingConsent"> <span>ยินยอมรับข่าวสารและข้อเสนอจาก ACS (ไม่บังคับ และไม่มีผลต่อการส่งคำขอนี้)</span></label>
+        <label class="check consent"><input type="checkbox" id="f-marketingConsent" name="marketingConsent"> <span>${esc(MARKETING_CONSENT_TEXT)}</span></label>
       </div>
     </fieldset>
 
@@ -372,6 +399,14 @@ export function statusPage(config: StatusConfig = statusConfig): string {
     <table>
       <thead><tr><th scope="col">ส่วนของระบบ</th><th scope="col">สถานะ</th><th scope="col">หมายเหตุ</th></tr></thead>
       <tbody>${rows}</tbody>
+    </table>
+  </div>
+  <h2 id="launch-heading">ความพร้อมก่อนเปิดเว็บ</h2>
+  <p>ตารางนี้อ่านจากการตั้งค่าและข้อมูลชุดเดียวกับที่ใช้สร้างเว็บ แถวหนึ่งจะขึ้นว่าพร้อมก็ต่อเมื่อสิ่งนั้นมีอยู่จริง</p>
+  <div class="table-wrap" tabindex="0" role="region" aria-labelledby="launch-heading">
+    <table>
+      <thead><tr><th scope="col">เรื่อง</th><th scope="col">พร้อมหรือยัง</th><th scope="col">รายละเอียด</th></tr></thead>
+      <tbody>${launchReadiness(config).map((row) => `<tr data-launch="${row.key}" data-ready="${row.ready}"><th scope="row">${esc(row.label)}</th><td><span class="chip chip-${row.ready ? 'live' : 'not_connected'}">${row.ready ? 'พร้อม' : 'ยังไม่พร้อม'}</span></td><td>${esc(row.detail)}</td></tr>`).join('')}</tbody>
     </table>
   </div>
   <h2>ความหมายของสถานะ</h2>

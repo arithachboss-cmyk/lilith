@@ -1,5 +1,5 @@
 {
-  "ranAt": "2026-11-14T09:59:51.682Z",
+  "ranAt": "2026-11-14T11:58:29.722Z",
   "about": "internal links, dead-link guard and the one-address rule",
   "passed": 5,
   "failed": 0,
@@ -18,7 +18,7 @@
     },
     {
       "id": "E36",
-      "name": "each of 2 moved addresses (/why-acs/, /company/) answers 301 to its new page, in every spelling",
+      "name": "each of 2 moved addresses (/company/, /why-acs/) answers 301 to its new page, in every spelling",
       "pass": true,
       "detail": ""
     },

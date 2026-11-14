@@ -1,0 +1,654 @@
+{
+ "_source": "The 81 addresses of the 2026-09-20 sitemap that returned 404 on 2026-10-23 (acs-seo/data/sitemap-reconciliation.json).",
+ "_rule": "Only rows with status \"approved\" are applied. \"proposed\" is the author's suggestion and waits for the Owner; it redirects nothing. \"no_equivalent\" stays a 404 on purpose. No row was chosen from traffic or backlink data: none was available.",
+ "rows": [
+  {
+   "from": "/solutions/",
+   "oldClass": "Service",
+   "oldType": "Hub",
+   "to": "/products/",
+   "status": "proposed",
+   "reason": "A hub; the catalogue is the nearest hub."
+  },
+  {
+   "from": "/contact/",
+   "oldClass": "Landing",
+   "oldType": "Conversion",
+   "to": "/enquiry/",
+   "status": "proposed",
+   "reason": "The enquiry page is the contact page of the new site."
+  },
+  {
+   "from": "/select-solution/",
+   "oldClass": "Landing",
+   "oldType": "Tool",
+   "to": "/products/",
+   "status": "proposed",
+   "reason": "A selection tool; the catalogue with its filters is the nearest equivalent."
+  },
+  {
+   "from": "/brady/",
+   "oldClass": "Product",
+   "oldType": "Brand hub",
+   "to": "/products/",
+   "status": "proposed",
+   "reason": "A brand hub; the catalogue is the nearest hub."
+  },
+  {
+   "from": "/brady/printers/m510/",
+   "oldClass": "Product",
+   "oldType": "Model page",
+   "to": "/products/m510/",
+   "status": "proposed",
+   "reason": "The same product."
+  },
+  {
+   "from": "/brady/labels/",
+   "oldClass": "Product",
+   "oldType": "Category",
+   "to": "/categories/labels/",
+   "status": "proposed",
+   "reason": "The label category."
+  },
+  {
+   "from": "/brady/scanners-rfid/",
+   "oldClass": "Product",
+   "oldType": "Category",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "Scanners and RFID were one page; scanners is the closer half."
+  },
+  {
+   "from": "/brady/software/",
+   "oldClass": "Product",
+   "oldType": "Category",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A software category. The new site lists no software."
+  },
+  {
+   "from": "/brady/solutions/manufacturing/",
+   "oldClass": "Service",
+   "oldType": "Solution",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A solution page. The new site has none."
+  },
+  {
+   "from": "/brady/solutions/warehouse-logistics/",
+   "oldClass": "Service",
+   "oldType": "Solution",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A solution page. The new site has none."
+  },
+  {
+   "from": "/pos-barcode-system/",
+   "oldClass": "Service",
+   "oldType": "Solution",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A solution page. The new site has none."
+  },
+  {
+   "from": "/warehouse-data-capture/",
+   "oldClass": "Service",
+   "oldType": "Solution",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A solution page. The new site has none."
+  },
+  {
+   "from": "/rfid-workflow-context/",
+   "oldClass": "Knowledge",
+   "oldType": "Explainer",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "An explainer. The new site has no article on this subject."
+  },
+  {
+   "from": "/why-acs/",
+   "oldClass": "Landing",
+   "oldType": "Company",
+   "to": "/about/",
+   "status": "approved",
+   "reason": "The Owner named /about/ as its new home (D-11, 2026-11-13)."
+  },
+  {
+   "from": "/why-acs/30-years/",
+   "oldClass": "Landing",
+   "oldType": "Company",
+   "to": "/about/",
+   "status": "proposed",
+   "reason": "A company page; the about page states the founding year."
+  },
+  {
+   "from": "/why-acs/service-capability/",
+   "oldClass": "Service",
+   "oldType": "Company",
+   "to": "/about/",
+   "status": "proposed",
+   "reason": "A company page."
+  },
+  {
+   "from": "/why-acs/partner-ecosystem/",
+   "oldClass": "Landing",
+   "oldType": "Company",
+   "to": "/about/",
+   "status": "proposed",
+   "reason": "A company page; the about page states the partner programme."
+  },
+  {
+   "from": "/esg-solutions/",
+   "oldClass": "Service",
+   "oldType": "Solution",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A solution page. The new site has none."
+  },
+  {
+   "from": "/retail/",
+   "oldClass": "Service",
+   "oldType": "Industry",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "An industry page. The new site has none."
+  },
+  {
+   "from": "/logistics/",
+   "oldClass": "Service",
+   "oldType": "Industry",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "An industry page. The new site has none."
+  },
+  {
+   "from": "/manufacturing/",
+   "oldClass": "Service",
+   "oldType": "Industry",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "An industry page. The new site has none."
+  },
+  {
+   "from": "/industry/manufacturing/",
+   "oldClass": "Service",
+   "oldType": "Industry",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "An industry page. The new site has none."
+  },
+  {
+   "from": "/industry/healthcare/",
+   "oldClass": "Service",
+   "oldType": "Industry",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "An industry page. The new site has none."
+  },
+  {
+   "from": "/ai-consultant/",
+   "oldClass": "Service",
+   "oldType": "Tool",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A calculator or tool. The new site has none; its figures were never sourced (CR-09)."
+  },
+  {
+   "from": "/roi-calculator/",
+   "oldClass": "Landing",
+   "oldType": "Tool",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A calculator or tool. The new site has none; its figures were never sourced (CR-09)."
+  },
+  {
+   "from": "/roi-calculator/retail/",
+   "oldClass": "Landing",
+   "oldType": "Tool",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A calculator or tool. The new site has none; its figures were never sourced (CR-09)."
+  },
+  {
+   "from": "/roi-calculator/warehouse/",
+   "oldClass": "Landing",
+   "oldType": "Tool",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A calculator or tool. The new site has none; its figures were never sourced (CR-09)."
+  },
+  {
+   "from": "/roi-calculator/manufacturing/",
+   "oldClass": "Landing",
+   "oldType": "Tool",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A calculator or tool. The new site has none; its figures were never sourced (CR-09)."
+  },
+  {
+   "from": "/roi-calculator/mobility/",
+   "oldClass": "Landing",
+   "oldType": "Tool",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A calculator or tool. The new site has none; its figures were never sourced (CR-09)."
+  },
+  {
+   "from": "/case-studies/",
+   "oldClass": "Landing",
+   "oldType": "Hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A hub for content the new site does not have."
+  },
+  {
+   "from": "/case-study/retail/",
+   "oldClass": "Landing",
+   "oldType": "Case",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A case study. None is published: customer consent (CR-08) is still open."
+  },
+  {
+   "from": "/case-study/warehouse/",
+   "oldClass": "Landing",
+   "oldType": "Case",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A case study. None is published: customer consent (CR-08) is still open."
+  },
+  {
+   "from": "/case-study/manufacturing/",
+   "oldClass": "Landing",
+   "oldType": "Case",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A case study. None is published: customer consent (CR-08) is still open."
+  },
+  {
+   "from": "/case-study/logistics/",
+   "oldClass": "Landing",
+   "oldType": "Case",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A case study. None is published: customer consent (CR-08) is still open."
+  },
+  {
+   "from": "/case-study/healthcare/",
+   "oldClass": "Landing",
+   "oldType": "Case",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A case study. None is published: customer consent (CR-08) is still open."
+  },
+  {
+   "from": "/insights/",
+   "oldClass": "Knowledge",
+   "oldType": "Hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A hub for content the new site does not have."
+  },
+  {
+   "from": "/revenue-articles/",
+   "oldClass": "Knowledge",
+   "oldType": "Hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A hub for content the new site does not have."
+  },
+  {
+   "from": "/leadership/",
+   "oldClass": "Landing",
+   "oldType": "Company",
+   "to": "/about/",
+   "status": "proposed",
+   "reason": "A company page. The about page names no leaders."
+  },
+  {
+   "from": "/partner-ecosystem-hub/",
+   "oldClass": "Landing",
+   "oldType": "Company",
+   "to": "/about/",
+   "status": "proposed",
+   "reason": "A company page."
+  },
+  {
+   "from": "/barcode-scanner-thailand/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A scanner landing page."
+  },
+  {
+   "from": "/barcode-printer-thailand/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/printers/",
+   "status": "proposed",
+   "reason": "A printer landing page."
+  },
+  {
+   "from": "/honeywell-barcode-scanner/",
+   "oldClass": "Product",
+   "oldType": "Brand",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A brand page for scanners; both Honeywell models are in this category."
+  },
+  {
+   "from": "/tsc-barcode-printer/",
+   "oldClass": "Product",
+   "oldType": "Brand",
+   "to": "/categories/printers/",
+   "status": "proposed",
+   "reason": "A brand page for printers; the TSC model is in this category."
+  },
+  {
+   "from": "/rfid-warehouse-system/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/rfid/",
+   "status": "proposed",
+   "reason": "An RFID landing page."
+  },
+  {
+   "from": "/เครื่องสแกนบาร์โค้ด/",
+   "oldClass": "Product",
+   "oldType": "Commercial TH",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A scanner landing page in Thai."
+  },
+  {
+   "from": "/barcode-label-printer/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/printers/",
+   "status": "proposed",
+   "reason": "A printer landing page."
+  },
+  {
+   "from": "/wireless-barcode-scanner/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A scanner landing page."
+  },
+  {
+   "from": "/industrial-barcode-scanner/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A scanner landing page."
+  },
+  {
+   "from": "/rfid-reader/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/rfid/",
+   "status": "proposed",
+   "reason": "An RFID landing page."
+  },
+  {
+   "from": "/barcode-printers/",
+   "oldClass": "Product",
+   "oldType": "Category",
+   "to": "/categories/printers/",
+   "status": "proposed",
+   "reason": "The printer category."
+  },
+  {
+   "from": "/rfid-systems/",
+   "oldClass": "Product",
+   "oldType": "Category",
+   "to": "/categories/rfid/",
+   "status": "proposed",
+   "reason": "The RFID category."
+  },
+  {
+   "from": "/barcode-scanner-price-guide/",
+   "oldClass": "Knowledge",
+   "oldType": "Commercial",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A buying guide with prices. The new site states no price."
+  },
+  {
+   "from": "/barcode-scanners/",
+   "oldClass": "Product",
+   "oldType": "Category",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "The scanner category."
+  },
+  {
+   "from": "/barcode-ribbons/",
+   "oldClass": "Product",
+   "oldType": "Category",
+   "to": "/categories/ribbons/",
+   "status": "proposed",
+   "reason": "The ribbon category."
+  },
+  {
+   "from": "/warehouse-barcode-scanner/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A scanner landing page."
+  },
+  {
+   "from": "/retail-barcode-scanner/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A scanner landing page."
+  },
+  {
+   "from": "/2d-barcode-scanner/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A scanner landing page."
+  },
+  {
+   "from": "/long-range-barcode-scanner/",
+   "oldClass": "Product",
+   "oldType": "Commercial",
+   "to": "/categories/scanners/",
+   "status": "proposed",
+   "reason": "A scanner landing page."
+  },
+  {
+   "from": "/barcode-scanner-comparison/",
+   "oldClass": "Knowledge",
+   "oldType": "Comparison",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A comparison. The new site ranks no brand (CR-04)."
+  },
+  {
+   "from": "/barcode-printer-buying-guide/",
+   "oldClass": "Knowledge",
+   "oldType": "Guide",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A buying guide. The new site has no article on this subject."
+  },
+  {
+   "from": "/knowledge/",
+   "oldClass": "Knowledge",
+   "oldType": "Hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A hub for content the new site does not have."
+  },
+  {
+   "from": "/knowledge/barcode-technology/",
+   "oldClass": "Knowledge",
+   "oldType": "Cluster hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge hub. The new site has no knowledge section."
+  },
+  {
+   "from": "/knowledge/barcode-equipment/",
+   "oldClass": "Knowledge",
+   "oldType": "Cluster hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge hub. The new site has no knowledge section."
+  },
+  {
+   "from": "/knowledge/rfid-technology/",
+   "oldClass": "Knowledge",
+   "oldType": "Cluster hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge hub. The new site has no knowledge section."
+  },
+  {
+   "from": "/knowledge/industry-applications/",
+   "oldClass": "Knowledge",
+   "oldType": "Cluster hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge hub. The new site has no knowledge section."
+  },
+  {
+   "from": "/knowledge/implementation-best-practices/",
+   "oldClass": "Knowledge",
+   "oldType": "Cluster hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge hub. The new site has no knowledge section."
+  },
+  {
+   "from": "/knowledge/regional-solutions/",
+   "oldClass": "Knowledge",
+   "oldType": "Cluster hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge hub. The new site has no knowledge section."
+  },
+  {
+   "from": "/knowledge/product-comparisons/",
+   "oldClass": "Knowledge",
+   "oldType": "Cluster hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge hub. The new site has no knowledge section."
+  },
+  {
+   "from": "/knowledge/emerging-trends/",
+   "oldClass": "Knowledge",
+   "oldType": "Cluster hub",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge hub. The new site has no knowledge section."
+  },
+  {
+   "from": "/knowledge/1d-vs-2d-barcode/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/how-to-choose-barcode-scanner/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/wired-vs-wireless-barcode-scanner/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/barcode-printer-types/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/rfid-vs-barcode/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/rfid-warehouse-implementation/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/barcode-inventory-management/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/barcode-system-implementation/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/barcode-scanner-troubleshooting/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/barcode-printer-calibration/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/barcode-label-materials/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  },
+  {
+   "from": "/knowledge/barcode-wms-integration/",
+   "oldClass": "Knowledge",
+   "oldType": "Article",
+   "to": null,
+   "status": "no_equivalent",
+   "reason": "A knowledge article. The new site has no article on this subject, and a redirect to an unrelated page is a soft 404."
+  }
+ ]
+}

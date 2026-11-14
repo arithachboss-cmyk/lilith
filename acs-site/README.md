@@ -41,6 +41,7 @@ testing a stale server from an earlier run.
 | M2f | The Owner approved all seven evidence records. The seven spec figures are now shown, each on its product page with its source named; nothing is held back | 186/186 | 41/41 | BLOCKED 0 |
 | M2g | The ZD421 page says, on the Owner's statement, that ACS sells both resolutions. A note from ACS is shown only while every figure in it is stated by an approved evidence record | 197/197 | 41/41 | BLOCKED 0 |
 | M2h | The DS3600 page names the eight models ACS sells, on the Owner's statement | 198/198 | 41/41 | BLOCKED 0 |
+| L0 | Launch skeleton: every launch condition (PRD G1–G3) has its switch, boundary or plan, all still off. Price and stock wording modes, an image manifest, the enquiry backend contract with two gates, the plan for the 81 dead addresses, and a launch-readiness table on the status page | 231/231 | 42/42 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
 `npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
@@ -60,6 +61,10 @@ needs dated stock data; product pages need images. See "Still missing".
 |---|---|
 | One place says live / demo / not connected | `src/config/status.ts` |
 | Every write is refused until a backend passes its gate | `src/data/store.ts` |
+| An enquiry is sent only when the config says live AND a backend is registered; a backend that throws or returns no reference is a failure | `src/data/store.ts`, `src/data/enquiry-backend.ts` |
+| Consent is stored as given, with the version of the wording shown | `toStoredEnquiry`, `consentWordingVersion` |
+| Only an approved row of the old-address plan redirects | `src/build/redirects.ts`, `src/data/redirect-plan.json` |
+| A launch condition reads "ready" only when the thing exists | `src/build/launch.ts` |
 | A spec figure renders only under an active evidence record | `src/rules/evidence.ts`, `src/rules/figures.ts` |
 | Evidence goes draft → active only if the source quotes every figure, a source is named, and approver ≠ author; decisions are append-only | `src/rules/evidence.ts` |
 | Nothing personal in URLs, storage, cookies or logs | `src/client/main.ts` (state in memory), checked by E21–E23 |
@@ -113,6 +118,20 @@ Recorded in `../acs-seo/data/clusters.json` (`decisions_made`) and
 | D-10: the ribbon category owns "ริบบอน" | `/categories/ribbons/` sets the three kinds side by side, using the catalogue's own words. The three ribbon pages stay. |
 | D-12: the M510 label width in inches only | The snapshot says "1.5 นิ้ว (38.1 มม.)"; Brady's page states 1.5 in and no millimetre value. The site shows "1.5 นิ้ว". The snapshot file is unchanged; the change lives in `src/data/catalog.overrides.json`. |
 | D-11: the company page is `/about/` | The approved copy, verbatim. `/why-acs` and `/company` answer 301 to it in every spelling. |
+
+## Launch skeleton: what each Owner decision switches on
+
+Nothing below changes what the site shows today. Each row is built and tested, and off.
+
+| Decision | Where it is made | What happens |
+|---|---|---|
+| Price wording | `presentation.prices` in `src/config/status.ts`: `pending` → `quote_on_request` | The waiting notice becomes "ขอใบเสนอราคาจาก ACS". No figure is shown. |
+| Stock wording | `presentation.stock`: `pending` → `ask_acs` | The waiting notice becomes "สอบถาม ACS". No availability is claimed. |
+| Product images | An entry in `src/data/product-images.json` and the file in `src/assets/products/` | The placeholder becomes the picture, with its size and alt text. The build fails on a missing file. |
+| Where enquiries go | A backend registered in `src/data/enquiry-backend.ts`, and `enquiry: 'live'` | The form sends. Both are needed; either alone still refuses. |
+| Old addresses | A row's `status` in `src/data/redirect-plan.json`: `proposed` → `approved` | That address answers 301. 30 rows are proposed, 50 have no equivalent and stay 404, 1 is approved. |
+
+`/status/` shows where each stands, read from the same config and data.
 
 ## Evidence: how a figure gets shown
 
@@ -170,6 +189,13 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
   the ones Zebra's Asia Pacific series page lists; that ACS sells all eight, corded and
   cordless, is the Owner's statement of 2026-11-14. The page is still a family page: specs
   for each model have to be confirmed with ACS.
+- **No enquiry backend exists.** The contract is written and proven against a backend that
+  lives only in the tests. Nothing real has been built or chosen.
+- **The redirect plan was made without traffic or backlink data.** None was available. The
+  30 proposed targets are the author's judgement of the nearest page; 50 addresses are
+  left as 404 because no page of the new site covers their subject.
+- **`dist/build-report.json` is an internal file inside the published folder.** It should
+  be excluded when the site is deployed.
 - **Demo mode.** The enquiry form validates and then refuses to submit; nothing is stored
   or sent anywhere. The basket keeps product ids in `sessionStorage` and nothing else.
 - **Seven figures are shown, on the Owner's approval.** Remove a line from
@@ -214,7 +240,10 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 - A dated ACS price list, dated stock data, product images.
 - A redirect plan for the 81 dead URLs of the old site — needs Search Console data.
   Only `/why-acs` is redirected so far, because the Owner named its new home.
-- A backend for enquiries, with its own gate.
+- A real enquiry backend, once the Owner says where enquiries go. It has to pass the
+  contract in `tests/unit/enquiry-backend.test.ts`.
+- The Owner's choice of price and stock wording, the product images, and approval of the
+  30 proposed redirects.
 
 ## Known scanner note
 

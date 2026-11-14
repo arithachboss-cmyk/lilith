@@ -1,8 +1,8 @@
 {
-  "ranAt": "2026-11-14T09:59:51.681Z",
-  "base": "http://127.0.0.1:37465",
+  "ranAt": "2026-11-14T11:58:29.720Z",
+  "base": "http://127.0.0.1:43437",
   "routes": 26,
-  "passed": 41,
+  "passed": 42,
   "failed": 0,
   "checks": [
     {
@@ -37,9 +37,15 @@
     },
     {
       "id": "E36",
-      "name": "each of 2 moved addresses (/why-acs/, /company/) answers 301 to its new page, in every spelling",
+      "name": "each of 2 moved addresses (/company/, /why-acs/) answers 301 to its new page, in every spelling",
       "pass": true,
       "detail": ""
+    },
+    {
+      "id": "E38",
+      "name": "the old-address plan holds on the server (81 rows: only approved ones redirect) and the status page shows the launch conditions as the build reports them",
+      "pass": true,
+      "detail": "[{\"key\":\"prices\",\"ready\":false,\"detail\":\"รอเจ้าของตัดสินใจ: แสดงราคาจริง หรือ ขอใบเสนอราคา\"},{\"key\":\"stock\",\"ready\":false,\"detail\":\"รอเจ้าของตัดสินใจ: แสดงข้อมูลจริง หรือ ให้สอบถาม ACS\"},{\"key\":\"images\",\"ready\":false,\"detail\":\"มีรูปแล้ว 0 จาก 14 รายการ\"},{\"key\":\"enquiry\",\"ready\":false,\"detail\":\"ยังไม่มีระบบรับคำขอ รอเจ้าของกำหนดปลายทาง\"},{\"key\":\"redirects\",\"ready\":false,\"detail\":\"อนุมัติแล้ว 1 · เสนอไว้รออนุมัติ 30 · ไม่มีหน้าเทียบเท่า 50\"}]"
     },
     {
       "id": "E37",

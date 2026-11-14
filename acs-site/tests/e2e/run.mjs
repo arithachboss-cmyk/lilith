@@ -91,6 +91,21 @@ try {
     }
     check('E36', `each of ${moves.length} moved addresses (${moves.map(([from]) => from).join(', ')}) answers 301 to its new page, in every spelling`, moves.length > 0 && lost.length === 0, lost.join(' | '));
 
+    // The plan for the old site's addresses: an approved row redirects, a proposed
+    // one does not (it waits for the Owner), and one with no equivalent stays a 404.
+    const plan = JSON.parse(readFileSync(join(root, 'src', 'data', 'redirect-plan.json'), 'utf8')).rows;
+    const counted = Object.values(report.redirectPlan?.counts ?? {}).reduce((sum, n) => sum + n, 0);
+    const planWrong = [];
+    for (const row of plan) {
+      const r = await fetch(BASE + encodeURI(row.from), { redirect: 'manual' });
+      const expected = row.status === 'approved' ? 301 : 404;
+      if (r.status !== expected) planWrong.push(`${row.from} (${row.status}) → ${r.status}`);
+    }
+    await page.goto(`${BASE}/status/`);
+    const launchRows = await page.locator('[data-launch]').evaluateAll((els) => els.map((el) => ({ key: el.dataset.launch, ready: el.dataset.ready === 'true', detail: el.querySelector('td:last-child')?.textContent ?? '' })));
+    const launchExpected = (report.launch ?? []).map((row) => ({ key: row.key, ready: row.ready, detail: row.detail }));
+    check('E38', `the old-address plan holds on the server (${plan.length} rows: only approved ones redirect) and the status page shows the launch conditions as the build reports them`, plan.length === 81 && counted === 81 && planWrong.length === 0 && launchExpected.length === 5 && JSON.stringify(launchRows) === JSON.stringify(launchExpected), planWrong.join(' | ') || JSON.stringify(launchRows));
+
     // The six category pages list their own products, with JavaScript off.
     const noJs = await browser.newContext({ javaScriptEnabled: false });
     const catPage = await noJs.newPage();

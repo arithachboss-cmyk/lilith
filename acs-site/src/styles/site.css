@@ -104,6 +104,7 @@ main:focus { outline: none; }
 .product-name { font-weight: 700; font-size: 1.1rem; margin-bottom: .25rem; }
 .kind { display: inline-block; font-size: .85rem; background: var(--wash); border: 1px solid var(--line); border-radius: 4px; padding: .1rem .5rem; }
 .family-note { margin-top: .6rem; padding: .6rem .9rem; background: var(--wash); border-left: 4px solid var(--navy); border-radius: 4px; }
+.product-img { display: block; width: 100%; height: auto; border-radius: 8px; background: var(--wash); }
 .feature-list { padding-left: 1.2rem; }
 .acs-note { margin-top: .6rem; padding: .6rem .9rem; background: var(--wash); border-left: 4px solid var(--navy); border-radius: 4px; }
 .acs-note-label { font-weight: 700; margin-right: .4rem; }

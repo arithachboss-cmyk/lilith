@@ -1,0 +1,4 @@
+{
+  "_rule": "One entry per product once ACS supplies the file. The file goes in src/assets/products/. width and height are the image's real pixel size, so the page reserves its space; alt describes what is in the picture. The build fails if an entry names a missing file.",
+  "images": []
+}

@@ -3,14 +3,17 @@
  * in the server response and never depends on JavaScript.
  */
 import { build as esbuild } from 'esbuild';
-import { cpSync, mkdirSync, rmSync, writeFileSync } from 'node:fs';
+import { cpSync, existsSync, mkdirSync, readdirSync, rmSync, writeFileSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { renderSite } from '../src/build/site';
 import { isIndexable, statusConfig } from '../src/config/status';
 import { evidenceGaps, evidenceLog, evidenceProblems, evidenceRecords } from '../src/data/evidence';
 import { draftBlockers } from '../src/rules/evidence';
-import { featureOverrides, productNotes, products } from '../src/data/catalog';
+import { featureOverrides, productImages, productNotes, products } from '../src/data/catalog';
+import { launchReadiness } from '../src/build/launch';
+import { planCounts, planProblems, redirectPlan } from '../src/build/redirects';
+import { imageProblems } from '../src/rules/images';
 import { noteAllowed, noteProblems } from '../src/rules/notes';
 import { overrideProblems } from '../src/rules/overrides';
 import versions from '../src/data/page-versions.json';
@@ -23,6 +26,10 @@ const overrideIssues = overrideProblems(featureOverrides);
 if (overrideIssues.length) throw new Error(`catalogue overrides are wrong: ${overrideIssues.join('; ')}`);
 const noteIssues = noteProblems(productNotes);
 if (noteIssues.length) throw new Error(`product notes are wrong: ${noteIssues.join('; ')}`);
+const imageDir = join(root, 'src/assets/products');
+const imageFiles = existsSync(imageDir) ? readdirSync(imageDir) : [];
+const imageIssues = imageProblems(productImages, products.map((p) => p.id), imageFiles);
+if (imageIssues.length) throw new Error(`product images are wrong: ${imageIssues.join('; ')}`);
 if (evidenceProblems.length) throw new Error(`evidence approvals are wrong: ${evidenceProblems.join('; ')}`);
 const site = renderSite(statusConfig, evidenceRecords, asOf, versions);
 
@@ -35,6 +42,13 @@ for (const [file, content] of site.files) {
 }
 
 cpSync(join(root, 'src/styles/site.css'), join(dist, 'assets/site.css'));
+// Only the pictures the manifest names are shipped; a stray file in the folder is not.
+for (const image of productImages) {
+  mkdirSync(join(dist, 'assets/products'), { recursive: true });
+  cpSync(join(imageDir, image.file), join(dist, 'assets/products', image.file));
+}
+const planIssues = planProblems(redirectPlan, site.pages.map((p) => p.route));
+if (planIssues.length) throw new Error(`redirect plan is wrong: ${planIssues.join('; ')}`);
 await esbuild({
   entryPoints: [join(root, 'src/client/main.ts')],
   bundle: true,
@@ -65,6 +79,10 @@ const report = {
   evidenceDecisions: evidenceLog.entries().map((e) => ({ at: e.at, recordId: e.recordId, action: e.action, actor: e.actor })),
   // Addresses that moved. Whichever host serves dist/ has to answer each with a 301.
   redirects: site.redirects,
+  // Where each launch condition stands, and the plan for the old site's dead addresses.
+  launch: launchReadiness(statusConfig),
+  // Counts only: the rows are old addresses, kept in src/data/redirect-plan.json and not shipped.
+  redirectPlan: { counts: planCounts(redirectPlan) },
 };
 writeFileSync(join(dist, 'build-report.json'), JSON.stringify(report, null, 2) + '\n');
 

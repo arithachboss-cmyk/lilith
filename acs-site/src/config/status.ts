@@ -21,10 +21,20 @@ export type FeatureKey =
   | 'productImages'
   | 'company';
 
+/** How a product page words a price it does not show. `pending` is the waiting notice. */
+export type PriceDisplay = 'pending' | 'quote_on_request';
+/** How a product page words stock it does not show. */
+export type StockDisplay = 'pending' | 'ask_acs';
+
 export interface StatusConfig {
   /** State of the system as a whole. Drives the badge and indexability. */
   system: Status;
   features: Record<FeatureKey, Status>;
+  /**
+   * Wording for what is not shown. Both are the Owner's to choose and both are
+   * `pending` until chosen; absent means pending.
+   */
+  presentation?: { prices: PriceDisplay; stock: StockDisplay };
 }
 
 export const statusConfig: StatusConfig = {
@@ -44,6 +54,7 @@ export const statusConfig: StatusConfig = {
     // The Owner approved the copy and its address on 2026-11-13 (decision D-11).
     company: 'live',
   },
+  presentation: { prices: 'pending', stock: 'pending' },
 };
 
 export const STATUS_LABEL: Record<Status, string> = {

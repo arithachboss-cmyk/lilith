@@ -49,6 +49,20 @@ export const STEP_FIELDS: Record<1 | 2 | 3, FieldName[]> = {
 
 export const MESSAGE_MAX = 4900;
 
+/** The consent wording, in one place: the page shows these and a stored enquiry cites their version. */
+export const SERVICE_CONSENT_TEXT = 'ยินยอมให้ ACS ใช้ข้อมูลติดต่อและรายละเอียดนี้ เพื่อรับคำขอและติดต่อกลับเกี่ยวกับคำขอนี้เท่านั้น';
+export const MARKETING_CONSENT_TEXT = 'ยินยอมรับข่าวสารและข้อเสนอจาก ACS (ไม่บังคับ และไม่มีผลต่อการส่งคำขอนี้)';
+
+/**
+ * Changes whenever either consent sentence changes, so a stored enquiry can
+ * be matched to the exact words its sender agreed to.
+ */
+export function consentWordingVersion(): string {
+  let hash = 5381;
+  for (const ch of `${SERVICE_CONSENT_TEXT}\n${MARKETING_CONSENT_TEXT}`) hash = ((hash * 33) ^ ch.codePointAt(0)!) >>> 0;
+  return `c-${hash.toString(16).padStart(8, '0')}`;
+}
+
 export function emptyEnquiry(): EnquiryFields {
   return {
     name: '', phone: '', company: '', email: '', industry: '', businessScale: '', country: 'TH',

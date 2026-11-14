@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-14T10:07:46.645Z",
+  "generatedAt": "2026-11-14T11:58:41.345Z",
   "counts": {
-    "PASS": 17,
+    "PASS": 16,
     "FAIL": 0,
-    "NOT RUN": 0,
+    "NOT RUN": 1,
     "HUMAN STEP": 1
   },
   "gate": {
-    "automatedTestsGreen": true,
+    "automatedTestsGreen": false,
     "m2Complete": false,
     "externalReview": false,
     "ownerUat": false,
@@ -20,14 +20,14 @@
       "proves": "Every rule and parser behaves, including on Thai input",
       "evidence": "unit.json",
       "status": "PASS",
-      "detail": "198/198 unit tests"
+      "detail": "231/231 unit tests"
     },
     {
       "id": "T2",
       "proves": "A clean checkout builds and tests with no network access",
       "evidence": "offline.json",
-      "status": "PASS",
-      "detail": "commit 611d068 · 9/9 steps · network blocked"
+      "status": "NOT RUN",
+      "detail": "ran on 611d068; 10 code file(s) changed since — run tests/qa/offline.mjs again on a committed tree"
     },
     {
       "id": "T3",
