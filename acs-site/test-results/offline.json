@@ -1,6 +1,6 @@
 {
-  "ranAt": "2026-11-14T00:43:03.330Z",
-  "commit": "beb6d364cb916d9800026ddcf4ba2352d137b36b",
+  "ranAt": "2026-11-14T10:07:33.052Z",
+  "commit": "611d06814483a16833e85aa1e97213147505fd04",
   "uncommittedChanges": 0,
   "isolation": "Linux network namespace (unshare -n), loopback only",
   "networkBlocked": true,
@@ -16,7 +16,7 @@
     {
       "name": "npm ci (network on)",
       "pass": true,
-      "seconds": 1,
+      "seconds": 3,
       "tail": ""
     },
     {
@@ -28,37 +28,37 @@
     {
       "name": "npm run typecheck (network off)",
       "pass": true,
-      "seconds": 2,
+      "seconds": 1,
       "tail": ""
     },
     {
       "name": "npm run build (network off)",
       "pass": true,
-      "seconds": 1,
+      "seconds": 0,
       "tail": ""
     },
     {
       "name": "npm run test (network off)",
       "pass": true,
-      "seconds": 2,
+      "seconds": 1,
       "tail": ""
     },
     {
       "name": "npm run verify (network off)",
       "pass": true,
-      "seconds": 1,
+      "seconds": 0,
       "tail": ""
     },
     {
       "name": "npm run claims (network off)",
       "pass": true,
-      "seconds": 1,
+      "seconds": 0,
       "tail": ""
     },
     {
       "name": "npm run e2e (network off)",
       "pass": true,
-      "seconds": 440,
+      "seconds": 436,
       "tail": ""
     }
   ]
