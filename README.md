@@ -15,12 +15,16 @@ pnpm typecheck
 pnpm lint
 pnpm test:boundaries
 pnpm test:core
+pnpm test:contracts
+pnpm contracts:check
 pnpm dev
 ```
 
 Open http://127.0.0.1:3100 for the clearly labelled foundation page. `pnpm --filter @lilith/web start` serves the production build locally. No credentials or environment file are needed by this scaffold; the full validated environment contract is a later task.
 
 `apps/web` is the Next.js app. `apps/worker` builds independently, but starting it exits with code 78 because its PostgreSQL/pg-boss setup has not been implemented. It never pretends to process jobs. Shared packages: contracts, core, db, ai, ui, i18n and config. [Architecture and import rules](docs/ARCHITECTURE.md).
+
+`pnpm contracts:openapi` regenerates `packages/contracts/openapi.json` from the zod schemas; the file is never edited by hand, and `pnpm contracts:check` fails when it is out of date.
 
 `pnpm test` runs the current workspace tests. The ARCH-001 CI workflow checks the scaffold and boundary suite; database integration, E2E, migration and other release gates belong to later tasks. No deployment is configured by this task.
 

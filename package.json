@@ -14,6 +14,9 @@
     "test": "turbo run test",
     "test:boundaries": "pnpm --filter @lilith/config test",
     "test:core": "pnpm --filter @lilith/core test",
+    "test:contracts": "pnpm --filter @lilith/contracts test",
+    "contracts:openapi": "pnpm --filter @lilith/contracts openapi",
+    "contracts:check": "pnpm --filter @lilith/contracts openapi:check && pnpm --filter @lilith/contracts openapi:lint",
     "check": "pnpm build && pnpm typecheck && pnpm lint && pnpm test"
   },
   "devDependencies": {

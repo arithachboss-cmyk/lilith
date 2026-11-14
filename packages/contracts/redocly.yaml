@@ -1,0 +1,10 @@
+# Lint rules for the generated OpenAPI document (Blueprint ARCH-003).
+# `recommended-strict` turns every recommended warning into an error.
+extends:
+  - recommended-strict
+rules:
+  # The repository declares no licence, and the generator does not choose one.
+  info-license: off
+
+# Linting is local: no usage data leaves the machine.
+telemetry: off
