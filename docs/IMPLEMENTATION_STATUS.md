@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-11-14. Current task: ARCH-004 (database package and local stack) is open as PR #18 with its tests green in CI, and waits on the owner's merge. ARCH-003 (contracts package) merged as PR #17 and ARCH-002 (shared kernel) as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
+Updated: 2026-11-14. Current task: SKEL-001 (walking skeleton: `GET /api/health` through every layer) is implemented on the session branch with its checks green locally; it has no pull request yet, so hosted CI has not run on it. ARCH-004 (database package and local stack) merged as PR #18, ARCH-003 (contracts package) as PR #17 and ARCH-002 (shared kernel) as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -79,11 +79,27 @@ Updated: 2026-11-14. Current task: ARCH-004 (database package and local stack) i
     - From a clean state (no image, no volume, no generated client): `pnpm install --frozen-lockfile`, build, typecheck, lint, the 84 boundary tests, the 113 core tests, the 143 contract tests, `pnpm contracts:check`, `pnpm db:up`, `pnpm db:migrate`, `pnpm test:db` and the AMI checker (5,901 checks) pass.
   - CI (Node 24): hosted [foundation CI passed](https://github.com/arithachboss-cmyk/lilith/actions/runs/43583593796) on head `e79882f`. Its log shows the image built from the Dockerfile, the container healthy, `pnpm db:migrate` applying `0001_extensions`, and `pnpm test:db` passing 6 and 21 tests.
   - Not covered, by design: no tables, no Row Level Security policies and no application database role yet (DB-001 onward, DB-010). The work is on the session's branch, not `feat/ARCH-004-database`, because this session may push only to that branch.
+  - Merged as `b13ecbd` (PR #18) on 2026-11-14, at the owner's request, with `foundation` green on head `39ea7ac`.
 
 ## In Progress
 
-- PR #18 (ARCH-004) waits on the owner's merge.
-- ADR-0015, ADR-0016 and ADR-0017 are **proposed**; their interpretations wait on owner review.
+- SKEL-001 (walking skeleton) is implemented and **not yet Done**: its hosted CI has not run. The owner asked for it on 2026-11-14; it is not a Blueprint task. Scope and readings are in [ADR-0018](adr/ADR-0018-walking-skeleton.md).
+  - What it holds: one path through every layer, `GET /api/health` of §18.10.
+    - `apps/web/src/app/api/health/route.ts` and `apps/web/src/lib/server/`: the route adapter, with `X-Request-Id` on every response and the error envelope on failure.
+    - `packages/core/system/`: the service that decides the answer, and its repository.
+    - `packages/db/client.ts`: `probe()`, which reads the system catalogue only, and `getDatabaseClient()`.
+    - `packages/contracts`: `HealthResponse` now names its values, so `openapi.json` changed.
+    - The foundation page shows the same answer in Thai and English on every request.
+  - What it shows: with the database up the route answers `status: ok`, `db: ok`; with it stopped, `status: degraded`, `db: unreachable`, still as a 200 and with no connection detail; after a restart it is `ok` again without restarting the web server. The job queue and the AI service are reported as `not_configured`.
+  - Local verification (Node 22, Docker 29):
+    - Tests: 16 new in core and 4 more against the database; 8 new in the database package; 15 in the web app, 5 of them through the real route; 3 new in contracts.
+    - The real route is tested twice: against a migrated database, and with `DATABASE_URL` pointing at a port where nothing listens.
+    - 31 of 31 hand-made faults are caught. The first run exposed one timing-dependent test of the new probe; it was rewritten to be deterministic, and each suite then passed 10 to 20 runs in a row.
+    - Browser check on the production build: 19 of 19 checks pass, at 360 to 1440 px, with no console error and no request leaving the local server.
+    - The full foundation validation passes, including `pnpm test:skeleton`.
+  - CI: not run yet. The `foundation` workflow runs on a pull request, and none is open for this work. It now also runs `pnpm test:skeleton`.
+  - Not covered, by design: login, tables, business features, the job queue, the AI service and storage. OPS-003 still owns the full health endpoint; until then this route must not gate a deployment.
+- ADR-0015, ADR-0016, ADR-0017 and ADR-0018 are **proposed**; their interpretations wait on owner review.
 - ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
 - `W-20261016-01` is paused at HR-01 after round 7 and the LQ-18 queue, with no failed checks and no wording waiting on an answer. It waits on the owner finding a Thai lawyer and sending the brief (Q30), counsel's answers, the pre-publication checks (Q44, Q45) and the owner's approval.
 
@@ -96,7 +112,7 @@ Updated: 2026-11-14. Current task: ARCH-004 (database package and local stack) i
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
 2. `W-20261016-01`: the owner finds a Thai lawyer and sends the eight-topic brief (Q30); counsel's answers go back through the route; then PUBLISH-GATE compares the tag-free copy (Q44) and the live page text (Q45), the web person tests the button, and the owner approves.
-3. After PR #18 merges, continue with ARCH-005 (the CI pipeline).
+3. Open a pull request for SKEL-001 when the owner asks; then continue with ARCH-005 (the CI pipeline).
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
 ## Open risks
