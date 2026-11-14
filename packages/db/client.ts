@@ -22,12 +22,29 @@ export interface DatabaseClient {
     userId: string,
     fn: (tx: DatabaseTransaction) => Promise<T>,
   ): Promise<T>;
+  /**
+   * Asks the server what it is. It reads the system catalogue only, touches
+   * no table and needs no actor. It rejects when the database does not answer
+   * within `timeoutMs` (2 seconds unless given).
+   */
+  probe(options?: { readonly timeoutMs?: number }): Promise<DatabaseProbe>;
   /** Closes the client. A pool passed in by the caller stays open. */
   close(): Promise<void>;
 }
 
+/** What `probe` learns from the server. */
+export interface DatabaseProbe {
+  readonly serverVersion: string;
+  /** Installed extensions, sorted, without the built-in `plpgsql`. */
+  readonly extensions: readonly string[];
+}
+
 /** The setting that Row Level Security policies read. */
 export const ACTOR_SETTING = "app.user_id";
+
+const PROBE_TIMEOUT_MS = 2_000;
+// A new connection that cannot be made fails after this long instead of hanging.
+const CONNECTION_TIMEOUT_MS = 5_000;
 
 const UUID_PATTERN =
   /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
@@ -39,7 +56,15 @@ const UUID_PATTERN =
 export function createDatabaseClient(
   source: string | pg.Pool | pg.PoolConfig = databaseUrl(process.env),
 ): DatabaseClient {
-  const prisma = new PrismaClient({ adapter: new PrismaPg(source) });
+  const adapter = new PrismaPg(
+    typeof source === "string"
+      ? {
+          connectionString: source,
+          connectionTimeoutMillis: CONNECTION_TIMEOUT_MS,
+        }
+      : source,
+  );
+  const prisma = new PrismaClient({ adapter });
   return {
     async withActor(userId, fn) {
       if (typeof userId !== "string" || !UUID_PATTERN.test(userId))
@@ -53,6 +78,47 @@ export function createDatabaseClient(
         return fn(tx);
       });
     },
+    async probe(options) {
+      const rows = await withTimeout(
+        prisma.$queryRaw<{ version: string; extensions: string[] }[]>`
+          SELECT current_setting('server_version') AS version,
+                 COALESCE(
+                   array_agg(extname::text ORDER BY extname)
+                     FILTER (WHERE extname <> 'plpgsql'),
+                   ARRAY[]::text[]) AS extensions
+            FROM pg_extension`,
+        options?.timeoutMs ?? PROBE_TIMEOUT_MS,
+      );
+      const row = rows[0];
+      if (row === undefined) throw new Error("The database gave no answer");
+      return { serverVersion: row.version, extensions: row.extensions };
+    },
     close: () => prisma.$disconnect(),
   };
+}
+
+function withTimeout<T>(work: Promise<T>, milliseconds: number): Promise<T> {
+  let timer: ReturnType<typeof setTimeout> | undefined;
+  const expiry = new Promise<never>((_, reject) => {
+    timer = setTimeout(
+      () =>
+        reject(
+          new Error(`The database did not answer within ${milliseconds} ms`),
+        ),
+      milliseconds,
+    );
+  });
+  return Promise.race([work, expiry]).finally(() => clearTimeout(timer));
+}
+
+const SHARED_CLIENT = Symbol.for("lilith.db.client");
+
+/**
+ * The one client of this process, created on first use from `DATABASE_URL`.
+ * It is kept on `globalThis` so that a development server which reloads its
+ * modules does not open a new pool each time.
+ */
+export function getDatabaseClient(): DatabaseClient {
+  const holder = globalThis as { [SHARED_CLIENT]?: DatabaseClient };
+  return (holder[SHARED_CLIENT] ??= createDatabaseClient());
 }

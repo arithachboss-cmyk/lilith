@@ -43,6 +43,8 @@ jobs:
         run: pnpm db:up
       - run: pnpm db:migrate
       - run: pnpm test:db
+      - name: Walking skeleton — /api/health through every layer
+        run: pnpm test:skeleton
       - name: AMI contract check
         run: node hr-screens/codex/check-contract.mjs
       - name: Verify the lockfile did not change

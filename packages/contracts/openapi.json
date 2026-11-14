@@ -7612,6 +7612,15 @@
           "events_emitted"
         ]
       },
+      "DependencyStatus": {
+        "type": "string",
+        "enum": [
+          "ok",
+          "not_migrated",
+          "unreachable",
+          "not_configured"
+        ]
+      },
       "DocumentClassification": {
         "type": "string",
         "enum": [
@@ -7940,19 +7949,25 @@
         "type": "object",
         "properties": {
           "status": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "ok",
+              "degraded"
+            ]
           },
           "db": {
-            "type": "string"
+            "$ref": "#/components/schemas/DependencyStatus"
           },
           "queue": {
-            "type": "string"
+            "$ref": "#/components/schemas/DependencyStatus"
           },
           "ai": {
-            "type": "string"
+            "$ref": "#/components/schemas/DependencyStatus"
           },
           "version": {
-            "type": "string"
+            "type": "string",
+            "minLength": 1,
+            "maxLength": 64
           }
         },
         "required": [

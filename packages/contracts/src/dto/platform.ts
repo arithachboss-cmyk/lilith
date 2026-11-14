@@ -102,14 +102,31 @@ export const PushSubscribeBody = dto(
 
 // ---- Health ----------------------------------------------------------------
 
-// GET /api/health — §18.10 names the members and not their values.
+/**
+ * State of one thing the service depends on. §18.10 names the members of the
+ * health response and not their values; these are the contract's own
+ * (ADR-0018).
+ *
+ *   ok              reachable and ready
+ *   not_migrated    the database answers, but its migrations are not applied
+ *   unreachable     no answer in time
+ *   not_configured  this part of the platform does not exist yet
+ */
+export const DependencyStatus = dto(
+  "DependencyStatus",
+  z.enum(["ok", "not_migrated", "unreachable", "not_configured"]),
+);
+export type DependencyStatus = z.infer<typeof DependencyStatus>;
+
+// GET /api/health — always 200: a monitor reads `status`.
 export const HealthResponse = dto(
   "HealthResponse",
   z.object({
-    status: z.string(),
-    db: z.string(),
-    queue: z.string(),
-    ai: z.string(),
-    version: z.string(),
+    status: z.enum(["ok", "degraded"]),
+    db: DependencyStatus,
+    queue: DependencyStatus,
+    ai: DependencyStatus,
+    version: z.string().min(1).max(64),
   }),
 );
+export type HealthResponse = z.infer<typeof HealthResponse>;

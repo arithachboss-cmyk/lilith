@@ -629,6 +629,14 @@ export const insightsResponse = {
   suppression_reason: "sample_below_k10",
 };
 
+export const healthResponse = {
+  status: "ok",
+  db: "ok",
+  queue: "not_configured",
+  ai: "not_configured",
+  version: "1f37e29",
+};
+
 // ---- §16.2 -----------------------------------------------------------------
 
 export const eventEnvelope = {
