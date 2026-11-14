@@ -20,17 +20,18 @@ pnpm contracts:check
 pnpm dev
 ```
 
-Open http://127.0.0.1:3100 for the clearly labelled foundation page. `pnpm --filter @lilith/web start` serves the production build locally. No credentials or environment file are needed by this scaffold: `.env.example` lists the keys the code reads, and the full validated environment contract is a later task.
+Open http://127.0.0.1:3100 for the clearly labelled foundation page. It shows the live system status, read from the database on every request; http://127.0.0.1:3100/api/health gives the same answer as JSON. `pnpm --filter @lilith/web start` serves the production build locally. No credentials or environment file are needed by this scaffold: `.env.example` lists the keys the code reads, and the full validated environment contract is a later task.
 
 `apps/web` is the Next.js app. `apps/worker` builds independently, but starting it exits with code 78 because its PostgreSQL/pg-boss setup has not been implemented. It never pretends to process jobs. Shared packages: contracts, core, db, ai, ui, i18n and config. [Architecture and import rules](docs/ARCHITECTURE.md).
 
 The local database is PostgreSQL 16 with PostGIS and pgvector in Docker. It needs no environment file:
 
 ```bash
-pnpm db:up        # build and start the database on 127.0.0.1:54329
-pnpm db:migrate   # apply the migrations in packages/db/migrations
-pnpm test:db      # database tests; each run uses its own throwaway database
-pnpm db:down      # stop it (the data volume is kept)
+pnpm db:up          # build and start the database on 127.0.0.1:54329
+pnpm db:migrate     # apply the migrations in packages/db/migrations
+pnpm test:db        # database tests; each run uses its own throwaway database
+pnpm test:skeleton  # /api/health through every layer, against the database
+pnpm db:down        # stop it (the data volume is kept)
 ```
 
 `pnpm contracts:openapi` regenerates `packages/contracts/openapi.json` from the zod schemas; the file is never edited by hand, and `pnpm contracts:check` fails when it is out of date.

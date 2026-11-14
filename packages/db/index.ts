@@ -3,7 +3,9 @@
 export {
   ACTOR_SETTING,
   createDatabaseClient,
+  getDatabaseClient,
   type DatabaseClient,
+  type DatabaseProbe,
   type DatabaseTransaction,
 } from "./client";
 export {

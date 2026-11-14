@@ -125,6 +125,7 @@ describe("blueprint examples round-trip through their schemas", () => {
       fixtures.aiPropertyReviewResponse,
     ],
     ["InsightsResponse", d.InsightsResponse, fixtures.insightsResponse],
+    ["HealthResponse", d.HealthResponse, fixtures.healthResponse],
   ];
 
   it.each(cases)("%s", (_name, schema, example) => {
@@ -506,6 +507,37 @@ describe("input discipline (§15.3)", () => {
         property_type: "CONDO",
       }).success,
     ).toBe(false);
+  });
+});
+
+describe("health response (§18.10)", () => {
+  it("knows the four states of a dependency and the two overall states", () => {
+    expect(d.DependencyStatus.options).toEqual([
+      "ok",
+      "not_migrated",
+      "unreachable",
+      "not_configured",
+    ]);
+    for (const status of ["ok", "degraded"])
+      expect(
+        d.HealthResponse.safeParse({ ...fixtures.healthResponse, status })
+          .success,
+      ).toBe(true);
+  });
+
+  it("refuses a state it does not know, and an empty version", () => {
+    for (const wrong of [
+      { status: "down" },
+      { db: "on fire" },
+      { queue: "ready" },
+      { ai: "" },
+      { version: "" },
+    ])
+      expect(
+        d.HealthResponse.safeParse({ ...fixtures.healthResponse, ...wrong })
+          .success,
+        JSON.stringify(wrong),
+      ).toBe(false);
   });
 });
 

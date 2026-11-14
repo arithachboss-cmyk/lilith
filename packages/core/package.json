@@ -4,13 +4,15 @@
   "type": "module",
   "exports": {
     ".": "./index.ts",
-    "./shared": "./shared/index.ts"
+    "./shared": "./shared/index.ts",
+    "./system": "./system/index.ts"
   },
   "scripts": {
     "build": "tsc -p tsconfig.build.json",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "test": "vitest run"
+    "test": "vitest run --exclude \"**/*.integration.test.ts\"",
+    "test:integration": "vitest run .integration."
   },
   "devDependencies": {
     "@lilith/config": "workspace:*",

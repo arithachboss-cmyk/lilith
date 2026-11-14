@@ -8,6 +8,7 @@ const config: NextConfig = {
   transpilePackages: [
     "@lilith/contracts",
     "@lilith/core",
+    "@lilith/db",
     "@lilith/ui",
     "@lilith/i18n",
   ],

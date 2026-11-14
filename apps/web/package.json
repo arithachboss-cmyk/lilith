@@ -7,7 +7,9 @@
     "build": "next build && node scripts/package-standalone.mjs",
     "start": "HOSTNAME=127.0.0.1 PORT=3100 node .next/standalone/apps/web/server.js",
     "typecheck": "tsc --noEmit",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "test": "vitest run --exclude \"**/*.integration.test.ts\"",
+    "test:integration": "vitest run .integration."
   },
   "dependencies": {
     "next": "15.5.25",
@@ -25,6 +27,7 @@
     "@types/react": "19.2.14",
     "@types/react-dom": "19.2.3",
     "typescript": "5.9.3",
-    "eslint": "9.39.4"
+    "eslint": "9.39.4",
+    "vitest": "5.0.0"
   }
 }
