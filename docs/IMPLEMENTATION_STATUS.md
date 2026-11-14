@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-11-14. Current task: ARCH-004 (database package and local stack) is implemented on the session branch with its checks green locally; it has no pull request yet, so hosted CI has not run on it. ARCH-003 (contracts package) merged as PR #17 and ARCH-002 (shared kernel) as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
+Updated: 2026-11-14. Current task: ARCH-004 (database package and local stack) is open as PR #18 with its tests green in CI, and waits on the owner's merge. ARCH-003 (contracts package) merged as PR #17 and ARCH-002 (shared kernel) as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -63,9 +63,7 @@ Updated: 2026-11-14. Current task: ARCH-004 (database package and local stack) i
   - Not covered, by design: shapes the blueprint names without defining stay open, and 28 routes have no response schema because §18 gives none (ADR-0016 lists both). The work is on the session's branch, not `feat/ARCH-003-contracts`, because this session may push only to that branch.
   - Merged as `1f37e29` (PR #17) on 2026-11-14, at the owner's request, with `foundation` green on head `3fa6a62`.
 
-## In Progress
-
-- ARCH-004 (database package and local stack) is implemented and **not yet Done**: its hosted CI has not run. Interpretations are in [ADR-0017](adr/ADR-0017-database-package.md).
+- ARCH-004 (database package and local stack). Interpretations are in [ADR-0017](adr/ADR-0017-database-package.md).
   - What it holds:
     - `docker-compose.yml` and `packages/db/docker/Dockerfile`: PostgreSQL 16.15 with PostGIS 3.6.4 and pgvector 0.8.7, built from two official images pinned by digest, listening on `127.0.0.1:54329` only.
     - `packages/db/prisma/schema.prisma` and `prisma.config.ts`: Prisma 7.10.1 configured; no tables yet.
@@ -79,8 +77,12 @@ Updated: 2026-11-14. Current task: ARCH-004 (database package and local stack) i
     - 27 tests pass: 6 need no database and 21 run against PostgreSQL. `app.user_id` is correct inside `withActor` and cleared outside, checked on the same connection; 40 concurrent transactions each see only their own actor.
     - 24 of 24 hand-made faults are caught, and an image built without the pgvector library makes the migration fail.
     - From a clean state (no image, no volume, no generated client): `pnpm install --frozen-lockfile`, build, typecheck, lint, the 84 boundary tests, the 113 core tests, the 143 contract tests, `pnpm contracts:check`, `pnpm db:up`, `pnpm db:migrate`, `pnpm test:db` and the AMI checker (5,901 checks) pass.
-  - CI: not run yet. The `foundation` workflow runs on a pull request, and none is open for this work. It now also starts the database and runs `pnpm db:migrate` and `pnpm test:db`.
+  - CI (Node 24): hosted [foundation CI passed](https://github.com/arithachboss-cmyk/lilith/actions/runs/43583593796) on head `e79882f`. Its log shows the image built from the Dockerfile, the container healthy, `pnpm db:migrate` applying `0001_extensions`, and `pnpm test:db` passing 6 and 21 tests.
   - Not covered, by design: no tables, no Row Level Security policies and no application database role yet (DB-001 onward, DB-010). The work is on the session's branch, not `feat/ARCH-004-database`, because this session may push only to that branch.
+
+## In Progress
+
+- PR #18 (ARCH-004) waits on the owner's merge.
 - ADR-0015, ADR-0016 and ADR-0017 are **proposed**; their interpretations wait on owner review.
 - ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
 - `W-20261016-01` is paused at HR-01 after round 7 and the LQ-18 queue, with no failed checks and no wording waiting on an answer. It waits on the owner finding a Thai lawyer and sending the brief (Q30), counsel's answers, the pre-publication checks (Q44, Q45) and the owner's approval.
@@ -88,13 +90,13 @@ Updated: 2026-11-14. Current task: ARCH-004 (database package and local stack) i
 ## Blocked
 
 - Nothing blocks AMI-002 (bilingual UI strings) or AMI-003..007; D-AMI-01 and D-AMI-02 removed the login/auth dependency by scoping AMI to post-login screens only.
-- The complete ARCH-005 pipeline remains unimplemented; the current `foundation` workflow is the ARCH-001 check only.
+- The complete ARCH-005 pipeline remains unimplemented; the current `foundation` workflow runs only the checks that ARCH-001 to ARCH-004 added.
 
 ## Next
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
 2. `W-20261016-01`: the owner finds a Thai lawyer and sends the eight-topic brief (Q30); counsel's answers go back through the route; then PUBLISH-GATE compares the tag-free copy (Q44) and the live page text (Q45), the web person tests the button, and the owner approves.
-3. Open a pull request for ARCH-004 when the owner asks; after it merges, continue with ARCH-005 (the CI pipeline).
+3. After PR #18 merges, continue with ARCH-005 (the CI pipeline).
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
 ## Open risks

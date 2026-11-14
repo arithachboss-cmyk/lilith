@@ -21,6 +21,7 @@ jobs:
       CI: "true"
       NEXT_TELEMETRY_DISABLED: "1"
       TURBO_TELEMETRY_DISABLED: "1"
+      CHECKPOINT_DISABLE: "1"
       AI_ENABLED: "false"
     steps:
       - uses: actions/checkout@v4

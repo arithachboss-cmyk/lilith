@@ -33,6 +33,7 @@ ARCH-004 asks for PostgreSQL 16 with PostGIS and pgvector in Docker, Prisma conf
 - The client is generated into `packages/db/generated/prisma` by `prisma generate`, which runs when the package is installed. Generated code is not committed, and lint and formatting skip it.
 - The client connects through the `pg` driver with `@prisma/adapter-pg`.
 - pnpm is allowed to run the install scripts of `prisma` and `@prisma/engines`; they fetch the engine that `prisma migrate` uses.
+- The Prisma CLI's update check is switched off in CI (`CHECKPOINT_DISABLE`), like the telemetry of the other tools there.
 - `schema.prisma` has no models yet. Tables arrive with DB-001.
 
 ### 4. Where the database is
