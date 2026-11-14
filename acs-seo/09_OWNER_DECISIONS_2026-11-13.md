@@ -15,6 +15,8 @@ from here.
 
 | — | Seven evidence records for spec figures (CR-07), drafted from the manufacturers' product pages. Who approves them? | The Owner approved all seven himself. |
 
+| — | Which ZD421 resolution does ACS supply? (asked by record `EV-ZD421-01`) | Both, 203 dpi and 300 dpi. Stated on 14 Nov 2026. |
+
 ## What changed because of them
 
 - `data/clusters.json`: every cluster R-1…R-7 now has a canonical owner, each traced to

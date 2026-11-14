@@ -56,6 +56,15 @@ describe('evidence drafts', () => {
     expect(covered.sort()).toEqual([...held].sort());
   });
 
+  it('carries the Owner\'s answer to the one question a record left open', () => {
+    // The ZD421 record asked which resolution ACS supplies. The line on the page covers both.
+    const zd421 = evidenceApprovals.find((a) => a.recordId === 'EV-ZD421-01')!;
+    expect(zd421.confirmations).toEqual([
+      { on: '2026-11-14', by: 'Arithach Chartariyapong, CEO, Asian Coding Systems', text: 'ACS sells the ZD421 in both resolutions, 203 dpi and 300 dpi.' },
+    ]);
+    expect(evidenceDrafts.find((r) => r.id === 'EV-ZD421-01')?.subject.feature).toBe('ความละเอียด 203 หรือ 300 dpi ตามรุ่นย่อย');
+  });
+
   it('show nothing while they are drafts', () => {
     const p = products.find((x) => x.id === '1950g')!;
     const unapproved = applyApprovals(evidenceDrafts, [], new AuditLog()).records;

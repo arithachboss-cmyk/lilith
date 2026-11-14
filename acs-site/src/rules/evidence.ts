@@ -131,6 +131,8 @@ export interface Approval {
   approvedOn: string;
   /** What the approver said or was shown. Kept for the record; the gate does not read it. */
   statement?: string;
+  /** Later answers to a question the record left open. Added to, never rewritten. */
+  confirmations?: Array<{ on: string; by: string; text: string }>;
 }
 
 /**

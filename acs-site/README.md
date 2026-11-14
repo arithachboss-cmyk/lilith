@@ -174,8 +174,9 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
 - **One person approved all seven records, and no one has checked the quotes against the
   pages independently.** The gate checks that the approver is not the author; it cannot
   check that the author transcribed the source correctly.
-- **The ZD421 line covers both resolutions** ("203 หรือ 300 dpi ตามรุ่นย่อย"). Which one ACS
-  supplies was not stated at approval; the line does not claim either.
+- **The ZD421 line covers both resolutions** ("203 หรือ 300 dpi ตามรุ่นย่อย"). On 2026-11-14
+  the Owner confirmed ACS sells both; the answer is recorded on the approval. The page
+  wording is unchanged and does not itself say which ACS stocks.
 - **The records cite a web page, not a signed datasheet.** The source is the
   manufacturer's own product page as served on 2026-11-13. It carries no revision number.
   The approver also confirms that the model ACS sells is the one the page describes.
