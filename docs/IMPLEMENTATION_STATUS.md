@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-11-14. Current task: ARCH-002 (shared kernel) is implemented on `claude/trusting-meitner-bekwlp` and verified locally; it is not Done until its tests pass in CI. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
+Updated: 2026-11-14. Current task: ARCH-002 (shared kernel) is open as PR #16 with its tests green in CI, and waits on the owner's merge. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -40,12 +40,14 @@ Updated: 2026-11-14. Current task: ARCH-002 (shared kernel) is implemented on `c
   - Run transcripts are kept outside this public repository: they quote the owner's internal sales handbook, and whether that may be published is itself an open owner question (Q10).
   - Merged as `59cc36e` (PR #15) on 2026-11-14, at the owner's request, with `foundation` green on head `48dff63`. ADR-0014 also records that office facts are Thai prompt content and sit outside the `th`/`en` rule for UI strings; that reading is the ADR's, not an owner decision.
 
+- ARCH-002 (shared kernel): `packages/core/shared/{result,errors,actor,money,ids,clock}.ts`, exported from `@lilith/core` and `@lilith/core/shared`. Interpretations are in ADR-0015.
+  - Local verification (Node 22): 113 unit and property tests pass, including `fromBaht(format(x)) === x` and `fromBaht(formatBaht(x)) === x` over 10,000 random values each across the whole `BIGINT` range; 22 of 22 hand-made mutations of the kernel are caught; build, typecheck, lint and the 84 boundary tests pass.
+  - CI (Node 24): hosted [foundation CI passed](https://github.com/arithachboss-cmyk/lilith/actions/runs/43532519111) on implementation commit `65314e6`, including the new `pnpm test:core` step with 113 of 113 tests.
+  - The work is on the session's branch, not `feat/ARCH-002-shared-kernel`, because this session may push only to that branch.
+
 ## In Progress
 
-- ARCH-002 (shared kernel): `packages/core/shared/{result,errors,actor,money,ids,clock}.ts`, exported from `@lilith/core` and `@lilith/core/shared`. Interpretations are in ADR-0015 (proposed).
-  - Local verification (Node 22; CI runs Node 24): 113 unit and property tests pass, including `fromBaht(format(x)) === x` and `fromBaht(formatBaht(x)) === x` over 10,000 random values each across the whole `BIGINT` range; 22 of 22 hand-made mutations of the kernel are caught; build, typecheck, lint and the 84 boundary tests pass.
-  - CI: the foundation workflow gains `pnpm test:core`. No CI result yet; the task moves to Done only after that run is green.
-  - The work is on the session's branch, not `feat/ARCH-002-shared-kernel`, because this session may push only to that branch.
+- PR #16 (ARCH-002) waits on the owner's merge. ADR-0015 is **proposed**; its interpretations wait on owner review.
 - ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
 - `W-20261016-01` is paused at HR-01 after round 7 and the LQ-18 queue, with no failed checks and no wording waiting on an answer. It waits on the owner finding a Thai lawyer and sending the brief (Q30), counsel's answers, the pre-publication checks (Q44, Q45) and the owner's approval.
 
@@ -58,7 +60,7 @@ Updated: 2026-11-14. Current task: ARCH-002 (shared kernel) is implemented on `c
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
 2. `W-20261016-01`: the owner finds a Thai lawyer and sends the eight-topic brief (Q30); counsel's answers go back through the route; then PUBLISH-GATE compares the tag-free copy (Q44) and the live page text (Q45), the web person tests the button, and the owner approves.
-3. Open the ARCH-002 PR when the owner asks for it and get `foundation` green; then ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
+3. After PR #16 merges, continue ARCH-003 → ARCH-004 → ARCH-005 in the specified order.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
 ## Open risks
