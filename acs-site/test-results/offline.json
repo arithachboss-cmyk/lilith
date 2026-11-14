@@ -1,6 +1,6 @@
 {
-  "ranAt": "2026-11-13T23:42:36.149Z",
-  "commit": "9c4a07b2bf6d04f70a6cb1491970f92a1f35f801",
+  "ranAt": "2026-11-14T00:01:59.813Z",
+  "commit": "ab622dc6edf37dae9323b52e4c52da7092f5eb4f",
   "uncommittedChanges": 0,
   "isolation": "Linux network namespace (unshare -n), loopback only",
   "networkBlocked": true,
@@ -58,7 +58,7 @@
     {
       "name": "npm run e2e (network off)",
       "pass": true,
-      "seconds": 21,
+      "seconds": 439,
       "tail": ""
     }
   ]

@@ -1,6 +1,6 @@
 # QA report — ACS website rebuild (M3, author's part)
 
-**Commit tested:** `9c4a07b` (M2e; earlier runs of this report were on `1c6841c`, `74d1468`, `f335044` and `45a10e3`) · **Date:** 2026-11-13 · **System status:** demo
+**Commit tested:** `ab622dc` (M2f; earlier runs were on `1c6841c`, `74d1468`, `f335044`, `45a10e3` and `9c4a07b`) · **Date:** 2026-11-13 · **System status:** demo
 
 **M3 gate: CLOSED.** The automated tests are green, but M3 closes only when all three of
 these have happened, and none has:
@@ -19,21 +19,21 @@ evidence file is missing is reported NOT RUN, never assumed.
 
 | # | What it proves | Result | Evidence in `test-results/` |
 |---|---|---|---|
-| T1 | Every rule and parser behaves, including on Thai input | PASS · 184/184 unit tests | `unit.json` |
-| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `9c4a07b`, network blocked | `offline.json` |
+| T1 | Every rule and parser behaves, including on Thai input | PASS · 186/186 unit tests | `unit.json` |
+| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `ab622dc`, network blocked | `offline.json` |
 | T3 | 14 product routes return 200 with distinct headings | PASS · E01, E02, E31 | `e2e.json` |
 | T4 | Self-referencing canonical on every indexable page; no page answers at two addresses | PASS · 7/7 + E28, E29, E36 | `canonical.json`, `links.json` |
 | T5 | Product text is present with JavaScript disabled | PASS · E07, E08, E33, E37 | `norender.json` |
 | T6 | No internal link resolves to a 404 | PASS · E05, E06 | `links.json` |
 | T7 | The sitemap lists every indexable URL and only those; robots.txt names it | PASS · 10/10 | `sitemap.json` |
-| T8 | The claim scanner reports zero BLOCKED over the built HTML | PASS · BLOCKED 0, EVIDENCE_REQUIRED 95; both about-page claim rows CLEARED | `claims.json` |
+| T8 | The claim scanner reports zero BLOCKED over the built HTML | PASS · BLOCKED 0, EVIDENCE_REQUIRED 90; both about-page claim rows CLEARED | `claims.json` |
 | T9 | No serious or critical accessibility violation at 360 and 1280 px | PASS · E26 at both widths | `axe.json` |
 | T10 | No horizontal page scroll at 360 or 1280 px | PASS · E25 at both widths | `overflow.json` |
 | T11 | The enquiry form refuses an empty required field and announces each error | PASS · E15, E16, E24 | `e2e.json` |
 | T12 | Submitting returns not-connected and no success message appears | PASS · E19, E20 + 4 unit tests | `e2e.json`, `unit.json` |
 | T13 | Consent boxes start unticked; service consent required; marketing consent not | PASS · E13, E17, E18 | `e2e.json` |
 | T14 | After a filled form, storage and URLs hold nothing personal | PASS · E21, E22, E23 | `pii.json` |
-| T15 | A figure with no active evidence record is not shown, and the build names it | PASS · 7 figures held back, 0 active records | `claims.json`, `norender.json` |
+| T15 | A figure is shown only under an active evidence record; any other is held back and named | PASS · 7 shown, each under an approved record; 0 held back; E09 on all 14 product pages | `claims.json`, `norender.json` |
 | T16 | An evidence record cannot go active when its approver is its author | PASS · 9 unit tests | `unit.json` |
 | T17 | Product structured data validates and carries no price or availability | PASS · 8/8 + E32 | `schema.json` |
 | T18 | Screenshots of every page type at 360 and 1280 px, reviewed by eye | **HUMAN STEP** · 22 captured, seen by the author only | `screens/*.png` |
@@ -111,24 +111,20 @@ seen for one interaction per page, an approximation of INP.
 
 Only ACS can supply these. Nothing below was guessed or filled in.
 
-- **An approver for seven drafts**, one for every held-back figure: `EV-1950G-01`,
-  `EV-1950G-02`, `EV-1960G-01`, `EV-ZD421-01`, `EV-DS2208-01`, `EV-M510-01`,
-  `EV-M510-02`. Each quotes the manufacturer's product page. A named person at ACS, not
-  the drafting assistant, has to approve each and confirm the model ACS sells is the one
-  the page describes. README, "Evidence".
 - An ACS price list with an effective date → prices.
 - Stock and lead-time data with dates → stock.
 - Which DS3600 models ACS sells.
 - Product images.
 - A backend for enquiries, with its own gate.
 
-Decisions D-09, D-10, D-11 and D-12 are no longer open: the Owner made them on 2026-11-13.
+Spec figures are no longer open: the Owner approved all seven evidence records on
+2026-11-13 and the figures are shown. Decisions D-09, D-10, D-11 and D-12 are no longer open: the Owner made them on 2026-11-13.
 D-12 shows the M510 label width as "1.5 นิ้ว" only; `tests/unit/overrides.test.ts` (7)
 checks that the snapshot is untouched and that an override can only say less.
 
 ## For the reviewer
 
-Review commit `9c4a07b` (code) — the commit after it adds only this report and evidence.
+Review commit `ab622dc` (code) — the commit after it adds only this report and evidence.
 
 ```sh
 cd acs-site && npm ci
@@ -143,7 +139,9 @@ Worth an independent look, because the author is the least able to see them:
 - Try to make `submitEnquiry` succeed, and to activate an evidence record you authored.
 - Check that E33–E35 really fail when the `[hidden]` rule is removed from `site.css`.
 - Compare `/about/` with `../acs-seo/packages/about-acs/draft-v3-evidenced.md` by eye.
-- Read the seven evidence drafts against the manufacturer pages they cite. The author
+- Read the seven evidence records against the manufacturer pages they cite. **This is the
+  check that matters most now**: the figures are on the pages, one person approved all
+  seven, and the gate cannot tell whether a quote was transcribed correctly. The author
   transcribed the quotes; nobody has checked the transcription.
 - Try to approve a draft as its own author in `src/data/evidence-approvals.json`.
 
@@ -156,7 +154,8 @@ Worth an independent look, because the author is the least able to see them:
 - [ ] หน้าสินค้ามีครบ 14 รายการ ชื่อ ยี่ห้อ และหมวดถูกต้องตามที่ ACS ขายจริง
 - [ ] หน้าหมวดทั้ง 6 หน้าแสดงสินค้าถูกหมวด และหน้าหมวดริบบอนเทียบ 3 ชนิดด้วยถ้อยคำที่ ACS ยอมรับ
 - [ ] หน้า "เกี่ยวกับ ACS" (/about/) ตรงกับข้อความที่อนุมัติ และ /why-acs พามาที่หน้านี้
-- [ ] ไม่มีราคา สต็อก ระยะเวลาส่งมอบ หรือตัวเลขสเปกใดปรากฏ (ทุกจุดต้องเขียนว่า "รอเจ้าของกำหนด")
+- [ ] ไม่มีราคา สต็อก หรือระยะเวลาส่งมอบปรากฏ (ทุกจุดต้องเขียนว่า "รอเจ้าของกำหนด")
+- [ ] ตัวเลขสเปก 7 รายการบนหน้า 1950g, 1960g, M510, ZD421, DS2208 ตรงกับสินค้าที่ ACS ขายจริง และแต่ละหน้าบอกแหล่งที่มา
 - [ ] หน้าตระกูลสินค้า (เช่น TC22 / TC27, DS3600) บอกชัดว่าเป็นตระกูล ไม่ใช่รุ่นเดียว
 - [ ] ค้นหาและกรองหมวดในหน้าสินค้าได้ผลตามที่คาด
 - [ ] เพิ่มสินค้าในรายการขอราคา ลบออก และตะกร้าว่างแสดงข้อความว่าง ไม่มีปุ่มไปต่อ
