@@ -1,6 +1,6 @@
 # QA report — ACS website rebuild (M3, author's part)
 
-**Commit tested:** `ab622dc` (M2f; earlier runs were on `1c6841c`, `74d1468`, `f335044`, `45a10e3` and `9c4a07b`) · **Date:** 2026-11-13 · **System status:** demo
+**Commit tested:** `beb6d36` (M2g; earlier runs were on `1c6841c`, `74d1468`, `f335044`, `45a10e3`, `9c4a07b` and `ab622dc`) · **Date:** 2026-11-13 · **System status:** demo
 
 **M3 gate: CLOSED.** The automated tests are green, but M3 closes only when all three of
 these have happened, and none has:
@@ -19,8 +19,8 @@ evidence file is missing is reported NOT RUN, never assumed.
 
 | # | What it proves | Result | Evidence in `test-results/` |
 |---|---|---|---|
-| T1 | Every rule and parser behaves, including on Thai input | PASS · 186/186 unit tests | `unit.json` |
-| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `ab622dc`, network blocked | `offline.json` |
+| T1 | Every rule and parser behaves, including on Thai input | PASS · 197/197 unit tests | `unit.json` |
+| T2 | A clean checkout builds and tests with no network access | PASS · 9/9 steps on `beb6d36`, network blocked | `offline.json` |
 | T3 | 14 product routes return 200 with distinct headings | PASS · E01, E02, E31 | `e2e.json` |
 | T4 | Self-referencing canonical on every indexable page; no page answers at two addresses | PASS · 7/7 + E28, E29, E36 | `canonical.json`, `links.json` |
 | T5 | Product text is present with JavaScript disabled | PASS · E07, E08, E33, E37 | `norender.json` |
@@ -106,6 +106,7 @@ seen for one interaction per page, an approximation of INP.
 | `/why-acs` and `/company` → 301 `/about/` | `site.test.ts`, verify, E36 |
 | Evidence drafts and the recorded-approval path | `tests/unit/evidence-drafts.test.ts` (9) |
 | M2c: five drafts; the quote check compares number and unit | `tests/unit/figures.test.ts` (7 new, incl. refusals) |
+| M2g: the note from ACS on the ZD421 page, tied to approved evidence | `tests/unit/notes.test.ts` (10), E09 |
 
 ## Open items that keep M2 (and so M3) open
 
@@ -124,7 +125,7 @@ checks that the snapshot is untouched and that an override can only say less.
 
 ## For the reviewer
 
-Review commit `ab622dc` (code) — the commit after it adds only this report and evidence.
+Review commit `beb6d36` (code) — the commit after it adds only this report and evidence.
 
 ```sh
 cd acs-site && npm ci
@@ -156,6 +157,7 @@ Worth an independent look, because the author is the least able to see them:
 - [ ] หน้า "เกี่ยวกับ ACS" (/about/) ตรงกับข้อความที่อนุมัติ และ /why-acs พามาที่หน้านี้
 - [ ] ไม่มีราคา สต็อก หรือระยะเวลาส่งมอบปรากฏ (ทุกจุดต้องเขียนว่า "รอเจ้าของกำหนด")
 - [ ] ตัวเลขสเปก 7 รายการบนหน้า 1950g, 1960g, M510, ZD421, DS2208 ตรงกับสินค้าที่ ACS ขายจริง และแต่ละหน้าบอกแหล่งที่มา
+- [ ] หน้า ZD421 มีข้อความ "ACS จำหน่ายทั้งรุ่น 203 dpi และ 300 dpi" และอ่านแล้วไม่ทำให้เข้าใจว่ามีของพร้อมส่ง
 - [ ] หน้าตระกูลสินค้า (เช่น TC22 / TC27, DS3600) บอกชัดว่าเป็นตระกูล ไม่ใช่รุ่นเดียว
 - [ ] ค้นหาและกรองหมวดในหน้าสินค้าได้ผลตามที่คาด
 - [ ] เพิ่มสินค้าในรายการขอราคา ลบออก และตะกร้าว่างแสดงข้อความว่าง ไม่มีปุ่มไปต่อ

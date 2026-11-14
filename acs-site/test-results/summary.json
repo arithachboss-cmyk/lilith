@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-14T00:35:02.483Z",
+  "generatedAt": "2026-11-14T00:43:16.687Z",
   "counts": {
-    "PASS": 16,
+    "PASS": 17,
     "FAIL": 0,
-    "NOT RUN": 1,
+    "NOT RUN": 0,
     "HUMAN STEP": 1
   },
   "gate": {
-    "automatedTestsGreen": false,
+    "automatedTestsGreen": true,
     "m2Complete": false,
     "externalReview": false,
     "ownerUat": false,
@@ -26,8 +26,8 @@
       "id": "T2",
       "proves": "A clean checkout builds and tests with no network access",
       "evidence": "offline.json",
-      "status": "NOT RUN",
-      "detail": "ran on 11a6b22; 6 code file(s) changed since — run tests/qa/offline.mjs again on a committed tree"
+      "status": "PASS",
+      "detail": "commit beb6d36 · 9/9 steps · network blocked"
     },
     {
       "id": "T3",
