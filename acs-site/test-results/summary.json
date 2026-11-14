@@ -1,13 +1,13 @@
 {
-  "generatedAt": "2026-11-14T12:06:52.907Z",
+  "generatedAt": "2026-11-14T17:54:35.424Z",
   "counts": {
-    "PASS": 17,
+    "PASS": 16,
     "FAIL": 0,
-    "NOT RUN": 0,
+    "NOT RUN": 1,
     "HUMAN STEP": 1
   },
   "gate": {
-    "automatedTestsGreen": true,
+    "automatedTestsGreen": false,
     "m2Complete": false,
     "externalReview": false,
     "ownerUat": false,
@@ -20,14 +20,14 @@
       "proves": "Every rule and parser behaves, including on Thai input",
       "evidence": "unit.json",
       "status": "PASS",
-      "detail": "231/231 unit tests"
+      "detail": "264/264 unit tests"
     },
     {
       "id": "T2",
       "proves": "A clean checkout builds and tests with no network access",
       "evidence": "offline.json",
-      "status": "PASS",
-      "detail": "commit 124476f · 9/9 steps · network blocked"
+      "status": "NOT RUN",
+      "detail": "ran on 124476f; 15 code file(s) changed since — run tests/qa/offline.mjs again on a committed tree"
     },
     {
       "id": "T3",
@@ -139,10 +139,14 @@
       "proves": "Screenshots of every page type at 360 and 1280 px, reviewed by eye",
       "evidence": "screens/*.png",
       "status": "HUMAN STEP",
-      "detail": "22 screenshots captured. Looked at by the author only; a second pair of eyes has not seen them."
+      "detail": "23 screenshots captured. Looked at by the author only; a second pair of eyes has not seen them."
     }
   ],
   "beyondThePrdTests": {
+    "enquirySlice": {
+      "status": "PASS (test store only)",
+      "detail": "12/12 checks: browser to handler to a throwaway file store; nothing reaches ACS"
+    },
     "coreWebVitals": {
       "status": "PASS (lab only)",
       "detail": "5/5 pages within target on a local server; not field data"

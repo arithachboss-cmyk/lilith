@@ -52,7 +52,7 @@ export async function submitEnquiry(
     if (!receipt || typeof receipt.reference !== 'string' || !receipt.reference.trim()) {
       return { ok: false, status: 'failed', message: FAILED_MESSAGE };
     }
-    return { ok: true, data: { reference: receipt.reference, createdAt: receipt.createdAt } };
+    return { ok: true, data: { reference: receipt.reference, createdAt: receipt.createdAt, ...(receipt.environment ? { environment: receipt.environment } : {}) } };
   } catch {
     // The reason stays out of the message and out of any log: it may carry what the visitor typed.
     return { ok: false, status: 'failed', message: FAILED_MESSAGE };

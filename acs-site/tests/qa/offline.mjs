@@ -57,7 +57,7 @@ if (canIsolate) {
   networkBlocked = probe.status === 7;
   steps.push({ name: 'network is unreachable inside the namespace', pass: networkBlocked, seconds: 0, tail: networkBlocked ? '' : `probe exited ${probe.status}` });
   console.log(`${networkBlocked ? 'PASS' : 'FAIL'}  network is unreachable inside the namespace`);
-  for (const name of ['typecheck', 'build', 'test', 'verify', 'claims', 'e2e']) {
+  for (const name of ['typecheck', 'build', 'test', 'verify', 'claims', 'e2e', 'slice']) {
     step(`npm run ${name} (network off)`, 'unshare', inside(`npm run ${name}`), join(clone, 'acs-site'));
   }
 }

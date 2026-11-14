@@ -127,7 +127,11 @@ rows.push({
   detail: `${shots} screenshots captured. Looked at by the author only; a second pair of eyes has not seen them.`,
 });
 
+const slice = load<{ passed: number; failed: number; checks: unknown[]; storeRemoved: boolean }>('slice.json');
 const extra = {
+  enquirySlice: slice
+    ? { status: slice.failed === 0 && slice.storeRemoved ? 'PASS (test store only)' : 'FAIL', detail: `${slice.passed}/${slice.checks.length} checks: browser to handler to a throwaway file store; nothing reaches ACS` }
+    : { status: 'NOT RUN', detail: 'slice.json missing' },
   coreWebVitals: cwv
     ? { status: cwv.failed === 0 ? 'PASS (lab only)' : 'FAIL', detail: `${cwv.passed}/${cwv.pages.length} pages within target on a local server; not field data` }
     : { status: 'NOT RUN', detail: 'cwv.json missing' },
@@ -153,6 +157,7 @@ writeFileSync(join(out, 'summary.json'), JSON.stringify({
 
 for (const r of rows) console.log(`${r.status.padEnd(10)} ${r.id.padEnd(4)} ${r.proves}\n           ${r.detail}`);
 console.log(`\nCore Web Vitals: ${extra.coreWebVitals.status} — ${extra.coreWebVitals.detail}`);
+console.log(`Enquiry slice: ${extra.enquirySlice.status} — ${extra.enquirySlice.detail}`);
 console.log(`\nPASS ${count('PASS')} · FAIL ${count('FAIL')} · NOT RUN ${count('NOT RUN')} · HUMAN STEP ${count('HUMAN STEP')}`);
 console.log(`M3 gate: ${gate.open ? 'OPEN' : 'CLOSED'} — ${gate.why}`);
-process.exit(count('FAIL') ? 1 : 0);
+process.exit(count('FAIL') || extra.enquirySlice.status === 'FAIL' ? 1 : 0);

@@ -1,0 +1,82 @@
+{
+  "ranAt": "2026-11-14T17:54:35.073Z",
+  "about": "the enquiry slice: browser to handler to a throwaway file store, and back",
+  "storeRemoved": true,
+  "passed": 12,
+  "failed": 0,
+  "error": "",
+  "checks": [
+    {
+      "id": "S01",
+      "name": "the slice says it is a test before anyone types, stays demo and closed to crawlers",
+      "pass": true,
+      "detail": "demo noindex,nofollow"
+    },
+    {
+      "id": "S02",
+      "name": "without service consent nothing is posted and nothing is stored",
+      "pass": true,
+      "detail": "0 posts, 0 rows"
+    },
+    {
+      "id": "S03",
+      "name": "a filled form is posted once, stored once, and the receipt shown is the one stored",
+      "pass": true,
+      "detail": "success · 1 posts · 1 rows · ENQ-20261114-DD90D0B9"
+    },
+    {
+      "id": "S04",
+      "name": "the receipt says it is a test and that the enquiry has not reached ACS",
+      "pass": true,
+      "detail": "บันทึกคำขอในระบบทดสอบแล้ว เลขอ้างอิง ENQ-20261114-DD90D0B9 — คำขอนี้ยังไม่ถึงทีมขาย ACS"
+    },
+    {
+      "id": "S12",
+      "name": "once sent, the form is gone so it cannot be sent twice, and the receipt does not look like an error",
+      "pass": true,
+      "detail": "{\"border\":\"rgb(90, 67, 0)\",\"background\":\"rgb(255, 241, 194)\"}"
+    },
+    {
+      "id": "S05",
+      "name": "what is stored is what was typed, with the consent as given and the wording version",
+      "pass": true,
+      "detail": "{\"service\":true,\"marketing\":false,\"wordingVersion\":\"c-85967ee8\",\"givenAt\":\"2026-11-14T17:54:34.016Z\"}"
+    },
+    {
+      "id": "S06",
+      "name": "after sending, storage, cookies and the URL hold nothing personal, and no request left the site",
+      "pass": true,
+      "detail": " "
+    },
+    {
+      "id": "S07",
+      "name": "the endpoint refuses another site and anything but a POST",
+      "pass": true,
+      "detail": "403 405"
+    },
+    {
+      "id": "S08",
+      "name": "when the endpoint cannot be reached the form reports a failure, shows no reference, and nothing more is stored",
+      "pass": true,
+      "detail": "failed · ส่งคำขอไม่สำเร็จ ข้อมูลยังไม่ถึง ACS กรุณาลองส่งอีกครั้ง หรือโทร 02-203-0232"
+    },
+    {
+      "id": "S09",
+      "name": "when the store refuses (503) the form reports a failure",
+      "pass": true,
+      "detail": ""
+    },
+    {
+      "id": "S10",
+      "name": "the result is announced, takes focus, and the page has no serious accessibility violation",
+      "pass": true,
+      "detail": " focus=enquiry-result"
+    },
+    {
+      "id": "S11",
+      "name": "the shipped build in dist/ names no endpoint and carries no test notice",
+      "pass": true,
+      "detail": ""
+    }
+  ]
+}

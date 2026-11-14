@@ -233,6 +233,15 @@ const options = (values: readonly string[], placeholder?: string) =>
   (placeholder ? `<option value="">${esc(placeholder)}</option>` : '') +
   values.map((v) => `<option value="${esc(v)}">${esc(LABELS[v] ?? v)}</option>`).join('');
 
+/** Says, before anyone types, where an enquiry will and will not go. */
+function enquiryNotice(config: StatusConfig): string {
+  if (config.enquiryEnvironment === 'preview') {
+    return `<p class="notice notice-demo" data-enquiry-environment="preview"><span class="chip chip-demo">ระบบทดสอบ</span> แบบฟอร์มนี้ส่งคำขอไปยังที่เก็บทดสอบเท่านั้น <strong>คำขอยังไม่ถึงทีมขาย ACS</strong> กรุณาอย่ากรอกข้อมูลจริงของลูกค้า หากต้องการติดต่อ ACS กรุณาโทร <a href="${SITE.phoneHref}">${esc(SITE.phoneDisplay)}</a></p>`;
+  }
+  if (config.features.enquiry === 'live') return '';
+  return `<p class="notice notice-${config.features.enquiry}">${statusChip(config.features.enquiry)} แบบฟอร์มนี้อยู่ในโหมดสาธิต กรอกและตรวจข้อมูลได้ แต่ <strong>ยังไม่ส่งและไม่บันทึกข้อมูลไปที่ใด</strong> หากต้องการติดต่อ ACS ตอนนี้ กรุณาโทร <a href="${SITE.phoneHref}">${esc(SITE.phoneDisplay)}</a></p>`;
+}
+
 export function enquiryPage(config: StatusConfig = statusConfig): string {
   const interests = INTERESTS.map((id) => {
     const c = categoryById(id);
@@ -241,7 +250,7 @@ export function enquiryPage(config: StatusConfig = statusConfig): string {
   const main = `
 <div class="wrap section narrow">
   <h1>ขอราคา / ติดต่อ ACS</h1>
-  <p class="notice notice-${config.features.enquiry}">${statusChip(config.features.enquiry)} แบบฟอร์มนี้อยู่ในโหมดสาธิต กรอกและตรวจข้อมูลได้ แต่ <strong>ยังไม่ส่งและไม่บันทึกข้อมูลไปที่ใด</strong> หากต้องการติดต่อ ACS ตอนนี้ กรุณาโทร <a href="${SITE.phoneHref}">${esc(SITE.phoneDisplay)}</a></p>
+  ${enquiryNotice(config)}
   <noscript><p class="notice">แบบฟอร์มนี้ต้องใช้ JavaScript กรุณาโทร ${esc(SITE.phoneDisplay)} หรืออีเมล ${esc(SITE.salesEmail)}</p></noscript>
   <div id="enquiry-result" class="result" role="alert" tabindex="-1" hidden></div>
   <form id="enquiry-form" novalidate hidden>
@@ -388,7 +397,7 @@ export function aboutPage(config: StatusConfig = statusConfig): string {
 
 export function statusPage(config: StatusConfig = statusConfig): string {
   const rows = (Object.keys(config.features) as FeatureKey[])
-    .map((key) => `<tr data-feature="${key}"><th scope="row">${esc(FEATURE_LABEL[key])}</th><td>${statusChip(config.features[key])}</td><td>${esc(FEATURE_NOTE[key])}</td></tr>`)
+    .map((key) => `<tr data-feature="${key}"><th scope="row">${esc(FEATURE_LABEL[key])}</th><td>${key === 'enquiry' && config.enquiryEnvironment === 'preview' ? '<span class="chip chip-demo">ระบบทดสอบ</span>' : statusChip(config.features[key])}</td><td>${esc(key === 'enquiry' && config.enquiryEnvironment === 'preview' ? 'ส่งไปยังที่เก็บทดสอบเท่านั้น ยังไม่ถึงทีมขาย ACS' : FEATURE_NOTE[key])}</td></tr>`)
     .join('');
   const main = `
 <div class="wrap section">

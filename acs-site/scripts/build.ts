@@ -19,7 +19,9 @@ import { overrideProblems } from '../src/rules/overrides';
 import versions from '../src/data/page-versions.json';
 
 const root = join(dirname(fileURLToPath(import.meta.url)), '..');
-const dist = join(root, 'dist');
+// The slice build writes beside dist/, never into it (scripts/build-slice.ts).
+const slice = typeof (globalThis as { __ACS_SLICE__?: string }).__ACS_SLICE__ === 'string' ? (globalThis as { __ACS_SLICE__?: string }).__ACS_SLICE__! : '';
+const dist = join(root, slice ? 'dist-slice' : 'dist');
 const asOf = new Date().toISOString().slice(0, 10);
 
 const overrideIssues = overrideProblems(featureOverrides);
@@ -55,6 +57,7 @@ await esbuild({
   format: 'esm',
   target: 'es2022',
   minify: true,
+  define: { __ACS_SLICE__: JSON.stringify(slice) },
   outfile: join(dist, 'assets/app.js'),
   logLevel: 'warning',
 });
@@ -62,6 +65,8 @@ await esbuild({
 // The build says exactly which figures it held back, and which pages it opened to crawlers.
 const report = {
   builtOn: asOf,
+  slice: slice || null,
+  enquiryEnvironment: statusConfig.enquiryEnvironment ?? null,
   system: statusConfig.system,
   indexable: isIndexable(),
   routes: site.pages.map((p) => p.route),

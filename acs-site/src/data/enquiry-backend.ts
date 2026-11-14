@@ -1,4 +1,6 @@
+import { ENQUIRY_ENDPOINT } from '../config/status';
 import { consentWordingVersion, validateEnquiry, type EnquiryFields, type Errors } from '../rules/enquiry';
+import { HttpEnquiryBackend } from './http-backend';
 
 /**
  * The contract a real enquiry backend has to meet, and what it is handed.
@@ -29,6 +31,8 @@ export interface StoredEnquiry {
 export interface EnquiryReceipt {
   reference: string;
   createdAt: string;
+  /** Set by the server. `preview` means a test store: the enquiry did not reach ACS. */
+  environment?: 'preview' | 'production';
 }
 
 export interface EnquiryBackend {
@@ -60,6 +64,8 @@ export function toStoredEnquiry(fields: EnquiryFields, givenAt: string, idempote
 
 /**
  * The backend the site uses. `null` means none exists, and the store refuses
- * every write. Where enquiries go is the Owner's decision; it is not made here.
+ * every write. The shipped build has none: where enquiries go is the Owner's
+ * decision, and it is not made here. Only the enquiry slice build, which is
+ * never the published site, names an endpoint (config/status.ts).
  */
-export const enquiryBackend: EnquiryBackend | null = null;
+export const enquiryBackend: EnquiryBackend | null = ENQUIRY_ENDPOINT ? new HttpEnquiryBackend(ENQUIRY_ENDPOINT) : null;

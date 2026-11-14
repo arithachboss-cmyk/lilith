@@ -20,7 +20,9 @@ export function launchReadiness(config: StatusConfig): LaunchRow[] {
   const stock = config.presentation?.stock ?? 'pending';
   const withImage = products.filter((p) => productImages.some((i) => i.productId === p.id)).length;
   const plan = planCounts(redirectPlan);
-  const backendLive = enquiryBackend !== null && config.features.enquiry === 'live';
+  const preview = config.enquiryEnvironment === 'preview';
+  // A test store is not a destination: sales never sees what lands there.
+  const backendLive = enquiryBackend !== null && config.features.enquiry === 'live' && !preview;
   return [
     {
       key: 'prices', label: 'วิธีแสดงราคา',
@@ -40,7 +42,7 @@ export function launchReadiness(config: StatusConfig): LaunchRow[] {
     {
       key: 'enquiry', label: 'ปลายทางของคำขอราคา',
       ready: backendLive,
-      detail: backendLive ? `เชื่อมต่อแล้ว (${enquiryBackend?.name ?? ''})` : enquiryBackend ? 'มีระบบรับแล้ว แต่ยังไม่เปิดใช้' : 'ยังไม่มีระบบรับคำขอ รอเจ้าของกำหนดปลายทาง',
+      detail: preview ? 'เชื่อมกับที่เก็บทดสอบเท่านั้น ยังไม่ถึงทีมขาย ACS' : backendLive ? `เชื่อมต่อแล้ว (${enquiryBackend?.name ?? ''})` : enquiryBackend ? 'มีระบบรับแล้ว แต่ยังไม่เปิดใช้' : 'ยังไม่มีระบบรับคำขอ รอเจ้าของกำหนดปลายทาง',
     },
     {
       key: 'redirects', label: 'ที่อยู่เดิมของเว็บเก่า',

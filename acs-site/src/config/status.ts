@@ -35,9 +35,20 @@ export interface StatusConfig {
    * `pending` until chosen; absent means pending.
    */
   presentation?: { prices: PriceDisplay; stock: StockDisplay };
+  /** `preview` when enquiries go to a test store that ACS sales never sees. */
+  enquiryEnvironment?: 'preview';
 }
 
-export const statusConfig: StatusConfig = {
+/**
+ * Set only by the slice build (scripts/build-slice.ts), which writes to
+ * dist-slice/ and never to dist/. In every other build and in the tests it is
+ * absent, and the shipped configuration below is used unchanged.
+ */
+declare const __ACS_SLICE__: string | undefined;
+const SLICE = typeof __ACS_SLICE__ === 'string' ? __ACS_SLICE__ : '';
+
+/** What `npm run build` ships. */
+export const shippedConfig: StatusConfig = {
   system: 'demo',
   features: {
     catalogue: 'live',
@@ -56,6 +67,19 @@ export const statusConfig: StatusConfig = {
   },
   presentation: { prices: 'pending', stock: 'pending' },
 };
+
+/**
+ * The enquiry slice: the shipped configuration with the enquiry path switched
+ * on against a TEST store. The system stays `demo`, closed to crawlers.
+ */
+export function enquirySliceConfig(base: StatusConfig = shippedConfig): StatusConfig {
+  return { ...base, features: { ...base.features, enquiry: 'live' }, enquiryEnvironment: 'preview' };
+}
+
+export const statusConfig: StatusConfig = SLICE === 'enquiry' ? enquirySliceConfig() : shippedConfig;
+
+/** Where the browser posts an enquiry. `null` in the shipped build: there is nowhere to post. */
+export const ENQUIRY_ENDPOINT: string | null = SLICE === 'enquiry' ? '/api/enquiries' : null;
 
 export const STATUS_LABEL: Record<Status, string> = {
   live: 'ทำงานจริง',

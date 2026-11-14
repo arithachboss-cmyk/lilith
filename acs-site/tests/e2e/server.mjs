@@ -5,8 +5,8 @@
 // ours, so the port is never assumed and the server has to identify itself.
 import { spawn } from 'node:child_process';
 
-export async function startServer(root) {
-  const child = spawn('npx', ['tsx', 'scripts/serve.ts', '--port', '0'], {
+export async function startServer(root, extraArgs = []) {
+  const child = spawn('npx', ['tsx', 'scripts/serve.ts', '--port', '0', ...extraArgs], {
     cwd: root, detached: true, stdio: ['ignore', 'pipe', 'inherit'],
   });
   const stop = () => { try { process.kill(-child.pid); } catch { /* already gone */ } };

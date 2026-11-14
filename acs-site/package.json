@@ -14,7 +14,9 @@
     "e2e": "node tests/e2e/run.mjs",
     "claims": "tsx scripts/claims.ts",
     "cwv": "node tests/e2e/cwv.mjs",
-    "qa": "npm run typecheck && npm run build && npm test && npm run verify && npm run claims && npm run e2e && npm run cwv && tsx scripts/qa-summary.ts"
+    "qa": "npm run typecheck && npm run build && npm test && npm run verify && npm run claims && npm run e2e && npm run cwv && npm run slice && tsx scripts/qa-summary.ts",
+    "build:slice": "tsx scripts/build-slice.ts",
+    "slice": "npm run build:slice && node tests/e2e/slice.mjs"
   },
   "devDependencies": {
     "@types/node": "^22.20.5",

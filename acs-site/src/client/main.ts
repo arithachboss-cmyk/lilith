@@ -257,7 +257,13 @@ function initEnquiry(): void {
     // Only a real success may ever be reported as one.
     if (outcome.ok) {
       result.dataset.outcome = 'success';
-      result.textContent = `บันทึกคำขอแล้ว เลขอ้างอิง ${outcome.data.reference}`;
+      // A test store is said to be one: the visitor must not think ACS has the enquiry.
+      result.dataset.environment = outcome.data.environment ?? '';
+      result.textContent = outcome.data.environment === 'preview'
+        ? `บันทึกคำขอในระบบทดสอบแล้ว เลขอ้างอิง ${outcome.data.reference} — คำขอนี้ยังไม่ถึงทีมขาย ACS`
+        : `บันทึกคำขอแล้ว เลขอ้างอิง ${outcome.data.reference}`;
+      // It has been sent. Leaving the form up invites sending it again.
+      form.hidden = true;
     } else {
       result.dataset.outcome = outcome.status;
       result.textContent = outcome.message;

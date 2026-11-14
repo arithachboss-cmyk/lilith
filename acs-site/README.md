@@ -17,6 +17,7 @@ npm run stamp      # re-stamp page versions after changing page content; commit 
 npm run e2e        # Playwright + axe against the preview server → test-results/
 npm run claims     # ACS claim scanner over the built HTML → test-results/claims.json
 npm run cwv        # lab Core Web Vitals on a throttled phone profile → test-results/cwv.json
+npm run slice      # builds dist-slice/ and runs one enquiry end to end against a throwaway store
 npm run qa         # all of the above, then the T1–T18 matrix → test-results/summary.json
 node tests/qa/offline.mjs <scratch-dir>   # T2: clean clone, no network (Linux, root, unshare)
 npm run preview    # serve dist/ on http://127.0.0.1:4173
@@ -42,6 +43,7 @@ testing a stale server from an earlier run.
 | M2g | The ZD421 page says, on the Owner's statement, that ACS sells both resolutions. A note from ACS is shown only while every figure in it is stated by an approved evidence record | 197/197 | 41/41 | BLOCKED 0 |
 | M2h | The DS3600 page names the eight models ACS sells, on the Owner's statement | 198/198 | 41/41 | BLOCKED 0 |
 | L0 | Launch skeleton: every launch condition (PRD G1–G3) has its switch, boundary or plan, all still off. Price and stock wording modes, an image manifest, the enquiry backend contract with two gates, the plan for the 81 dead addresses, and a launch-readiness table on the status page | 231/231 | 42/42 | BLOCKED 0 |
+| L1 | Vertical slice: one enquiry travels browser → HTTP → server-side handler → store → receipt, in a preview build with a throwaway file store. The shipped build still refuses. Found and fixed by looking: a success shown in the error colour, and a form that could be sent twice | 264/264 | 42/42 + slice 12/12 | BLOCKED 0 |
 | M3 (author's part) | QA harness, acceptance matrix T1–T18, offline clean-checkout run, lab Core Web Vitals; two defects found and fixed | 127/127 | 39/39 | BLOCKED 0 |
 
 `npm run verify` on the live-config variant: 13/13 at M1, 23/23 at M2a (17 URLs in its sitemap),
@@ -133,6 +135,26 @@ Nothing below changes what the site shows today. Each row is built and tested, a
 
 `/status/` shows where each stands, read from the same config and data.
 
+## The enquiry slice
+
+`npm run slice` proves the whole enquiry path with real parts: a browser, an HTTP
+request, the handler, a file on disk.
+
+| Part | File | What it does |
+|---|---|---|
+| Browser side | `src/data/http-backend.ts` | Posts JSON with an idempotency key and no cookies. Anything but a 201 with a reference is a failure. |
+| Server side | `src/server/enquiry-handler.ts` | Runs every rule again, builds the consent record itself, refuses other origins, oversized bodies and bursts, logs nothing. Written against plain values so it can sit behind any host. |
+| Store | `src/server/file-store.ts` | **Preview only.** One JSON line per enquiry in a folder outside the site. Not a production store. |
+| Build | `scripts/build-slice.ts` → `dist-slice/` | The shipped site with the enquiry path on against the test store. Still `demo`, still closed to crawlers. |
+
+The slice is never the published site. `dist/` names no endpoint, and S11 checks that on
+every run. In the slice, the form says before anyone types that the enquiry does not
+reach ACS, and the receipt says it again.
+
+What a production version still needs, none of which is decided or built: a real store,
+a way to tell sales, a host for the handler, and a rate limit that survives more than one
+process.
+
 ## Evidence: how a figure gets shown
 
 1. A draft goes in `src/data/evidence.ts` with the source's own words and its address.
@@ -189,8 +211,10 @@ needs every alternative. A range needs both ends as a range. "300 dpi" is not co
   the ones Zebra's Asia Pacific series page lists; that ACS sells all eight, corded and
   cordless, is the Owner's statement of 2026-11-14. The page is still a family page: specs
   for each model have to be confirmed with ACS.
-- **No enquiry backend exists.** The contract is written and proven against a backend that
-  lives only in the tests. Nothing real has been built or chosen.
+- **No production enquiry backend exists.** The path is proven end to end against a file
+  store on the test machine. Sales receives nothing; no destination has been chosen.
+- **The rate limit is in memory and per process**, and the origin check trusts the
+  `Origin` header. Both are right for one preview server and too little for production.
 - **The redirect plan was made without traffic or backlink data.** None was available. The
   30 proposed targets are the author's judgement of the nearest page; 50 addresses are
   left as 404 because no page of the new site covers their subject.
