@@ -17,6 +17,10 @@
     "test:contracts": "pnpm --filter @lilith/contracts test",
     "contracts:openapi": "pnpm --filter @lilith/contracts openapi",
     "contracts:check": "pnpm --filter @lilith/contracts openapi:check && pnpm --filter @lilith/contracts openapi:lint",
+    "db:up": "docker compose up -d --wait",
+    "db:down": "docker compose down",
+    "db:migrate": "pnpm --filter @lilith/db migrate",
+    "test:db": "pnpm --filter @lilith/db test && pnpm --filter @lilith/db test:integration",
     "check": "pnpm build && pnpm typecheck && pnpm lint && pnpm test"
   },
   "devDependencies": {

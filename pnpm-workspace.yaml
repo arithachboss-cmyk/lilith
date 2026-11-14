@@ -2,5 +2,8 @@ packages:
   - apps/*
   - packages/*
 allowBuilds:
+  # Prisma's install scripts fetch the schema engine that `prisma migrate` runs.
+  "@prisma/engines": true
   esbuild: true
+  prisma: true
   sharp: true

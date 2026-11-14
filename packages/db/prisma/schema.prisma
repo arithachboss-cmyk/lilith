@@ -1,0 +1,11 @@
+// Schema authority for the Prisma client (Blueprint §8).
+// ARCH-004 configures Prisma; the tables arrive with DB-001 onward.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../generated/prisma"
+}
+
+datasource db {
+  provider = "postgresql"
+}

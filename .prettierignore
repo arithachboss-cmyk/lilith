@@ -6,3 +6,4 @@ docs/0*.md
 **/dist/**
 **/node_modules/**
 packages/contracts/openapi.json
+packages/db/generated/

@@ -21,6 +21,7 @@ jobs:
       CI: "true"
       NEXT_TELEMETRY_DISABLED: "1"
       TURBO_TELEMETRY_DISABLED: "1"
+      CHECKPOINT_DISABLE: "1"
       AI_ENABLED: "false"
     steps:
       - uses: actions/checkout@v4
@@ -38,6 +39,10 @@ jobs:
       - run: pnpm test:contracts
       - name: OpenAPI document is up to date and lints clean
         run: pnpm contracts:check
+      - name: Start the local database (PostgreSQL 16 + PostGIS + pgvector)
+        run: pnpm db:up
+      - run: pnpm db:migrate
+      - run: pnpm test:db
       - name: AMI contract check
         run: node hr-screens/codex/check-contract.mjs
       - name: Verify the lockfile did not change
