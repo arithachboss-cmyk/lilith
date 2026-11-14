@@ -34,6 +34,7 @@ jobs:
       - run: pnpm typecheck
       - run: pnpm lint
       - run: pnpm test:boundaries
+      - run: pnpm test:core
       - name: AMI contract check
         run: node hr-screens/codex/check-contract.mjs
       - name: Verify the lockfile did not change

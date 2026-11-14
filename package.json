@@ -13,6 +13,7 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "test:boundaries": "pnpm --filter @lilith/config test",
+    "test:core": "pnpm --filter @lilith/core test",
     "check": "pnpm build && pnpm typecheck && pnpm lint && pnpm test"
   },
   "devDependencies": {

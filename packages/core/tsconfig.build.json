@@ -5,5 +5,6 @@
     "declaration": true,
     "outDir": "dist",
     "rootDir": "."
-  }
+  },
+  "exclude": ["node_modules", "dist", "**/__tests__/**", "vitest.config.ts"]
 }
