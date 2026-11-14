@@ -95,13 +95,14 @@ Answers 3 and 4 concern SLICE-001 and are recorded here so that they stay with t
 
 ## Enforcement
 
-- 119 new tests in `packages/db`, 28 without a database and 91 against PostgreSQL; `pnpm test:db` runs them.
+- 121 new tests in `packages/db`, 28 without a database and 93 against PostgreSQL; `pnpm test:db` runs them.
   - Schema: columns, types, enums, indexes and the foreign key are compared with lists written out in the test, and each constraint is shown to refuse a bad row.
   - `prisma migrate diff` between the migrated database and `schema.prisma` must be empty.
-  - Seed: 24 stations and 3 areas; a second run changes no row; a renamed or moved row is put back; a blocked run writes nothing.
+  - Seed: 24 stations and 3 areas; a second run changes no row; a renamed or moved row is put back; a run that fails, in the database or outside it, writes nothing.
   - Every seed station is compared with Wikidata's position for it: within 50 metres at the 13 precisely placed elevated stations, within 150 metres at the others.
   - Known distances from Thong Lo station to six fixed points, computed with Karney's algorithm outside PostGIS, hold to half a metre. The card asks for 50.
   - From six origins, the stations within 1,500 metres and their order equal an independent calculation written in the test.
+- 129 of 131 hand-made faults were caught on the first pass. One of the other two showed a check that did nothing, now removed; the other showed a missing test, now added.
 - The foundation workflow gains `pnpm db:seed`.
 
 ## Consequences

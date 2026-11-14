@@ -113,12 +113,12 @@ Updated: 2026-11-14. Current task: DB-003 (geo tables and the station seed) is i
     - `nearestStations(point, 1500)` returns the right stations in the right order, compared from six origins with a calculation that shares no code with PostGIS.
     - Known distances from Thong Lo station to six fixed points hold to half a metre; the card asks for 50 metres.
   - Local verification (Node 22, Docker 29):
-    - 154 tests pass in `packages/db`, 119 of them new: 28 need no database and 91 run against PostgreSQL.
+    - 156 tests pass in `packages/db`, 121 of them new: 28 need no database and 93 run against PostgreSQL.
     - Every seed station is within 50 metres of Wikidata's position at the 13 precisely placed elevated stations, and within 150 metres at the others.
-    - Seeding twice changes no row; a renamed or moved row is put back; a blocked run writes nothing.
+    - Seeding twice changes no row; a renamed or moved row is put back; a run that fails, in the database or outside it, writes nothing.
     - `prisma migrate diff` between the migrated database and `schema.prisma` is empty.
-    - Hand-made faults: the first 40 of 131 have been run, the 39 in the migration and 1 in the query, and all 40 are caught. The other 91 have not been run yet.
-    - The full foundation validation passes, including `pnpm db:migrate`, `pnpm db:seed` run twice, `pnpm test:db` (36 and 118 tests) and `pnpm test:skeleton`.
+    - Hand-made faults: 129 of 131 were caught on the first pass. One of the other two showed a check that did nothing, now removed. The other showed a missing test, that a run stopped outside the database is rolled back; the test is added. The three faults that touch the changed lines are caught.
+    - The full foundation validation passes, including `pnpm db:migrate`, `pnpm db:seed` run twice, `pnpm test:db` (36 and 120 tests) and `pnpm test:skeleton`.
   - CI: not run. The foundation workflow runs on pull requests, and the new `pnpm db:seed` step is in it.
   - Not covered, by design: `property_transit`, which needs the `properties` table of DB-004; districts, subdistricts and area boundaries; the search service, routes and page of SLICE-001. The work is on the session's branch, not `feat/DB-003-geo`, because this session may push only to that branch.
 - ADR-0015, ADR-0016, ADR-0017, ADR-0018 and ADR-0019 are **proposed**; their interpretations wait on owner review.
