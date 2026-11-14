@@ -75,8 +75,8 @@ function wholeNumberBetween(
 }
 
 function degrees(value: number, limit: number, what: string): number {
-  if (typeof value !== "number" || !Number.isFinite(value))
-    throw new RangeError(`${what} must be a number`);
+  // Number.isFinite is false for NaN, for an infinity and for a non-number.
+  if (!Number.isFinite(value)) throw new RangeError(`${what} must be a number`);
   if (value < -limit || value > limit)
     throw new RangeError(`${what} must be from -${limit} to ${limit}`);
   return value;

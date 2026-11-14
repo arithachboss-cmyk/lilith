@@ -32,16 +32,20 @@ export async function seedReferenceData(
 }
 
 /**
- * `pnpm db:seed`: connects, writes the seed in one transaction and
- * disconnects. Either every row is written or none is.
+ * `pnpm db:seed`: connects, runs `write` in one transaction and disconnects.
+ * Either every row is written or none is, whatever stops the run. Without
+ * `write` it writes the reference data.
  */
-export async function runSeed(connectionString: string): Promise<SeedResult[]> {
+export async function runSeed(
+  connectionString: string,
+  write: (db: SeedConnection) => Promise<SeedResult[]> = seedReferenceData,
+): Promise<SeedResult[]> {
   const client = new pg.Client({ connectionString });
   await client.connect();
   try {
     await client.query("BEGIN");
     try {
-      const results = await seedReferenceData(client);
+      const results = await write(client);
       await client.query("COMMIT");
       return results;
     } catch (error) {

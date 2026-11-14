@@ -7,6 +7,7 @@ import {
   STATION_SEEDS,
   locationSeedId,
   runSeed,
+  seedLocations,
   stationSeedId,
   type SeedResult,
 } from "../seed/index";
@@ -374,6 +375,38 @@ describe("the reference seed, when a row is in its way", () => {
               (SELECT count(*)::int FROM transit_stations) AS stations`,
     );
     expect(row).toEqual({ locations: 0, stations: 1 });
+  });
+
+  it("writes nothing either when the run stops for a reason the database does not know", async () => {
+    // A failed statement makes PostgreSQL discard the transaction by itself.
+    // An error outside the database does not: only a rollback undoes it.
+    await expect(
+      runSeed(blocked.url, async (db) => {
+        const written = await seedLocations(db);
+        expect(written.inserted).toBe(5);
+        throw new Error("stopped half way");
+      }),
+    ).rejects.toThrow("stopped half way");
+    const [row] = await query<{ locations: number }>(
+      blocked.url,
+      "SELECT count(*)::int AS locations FROM locations",
+    );
+    expect(row?.locations).toBe(0);
+  });
+
+  it("runs the function it is given, in place of the reference data", async () => {
+    const results = await runSeed(blocked.url, async (db) => [
+      await seedLocations(db),
+    ]);
+    expect(results).toEqual([
+      { table: "locations", inserted: 5, updated: 0, unchanged: 0 },
+    ]);
+    const [row] = await query<{ locations: number; stations: number }>(
+      blocked.url,
+      `SELECT (SELECT count(*)::int FROM locations) AS locations,
+              (SELECT count(*)::int FROM transit_stations) AS stations`,
+    );
+    expect(row).toEqual({ locations: 5, stations: 1 });
   });
 });
 
