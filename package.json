@@ -20,6 +20,7 @@
     "db:up": "docker compose up -d --wait",
     "db:down": "docker compose down",
     "db:migrate": "pnpm --filter @lilith/db migrate",
+    "db:seed": "pnpm --filter @lilith/db seed",
     "test:db": "pnpm --filter @lilith/db test && pnpm --filter @lilith/db test:integration",
     "test:skeleton": "pnpm --filter @lilith/core test:integration && pnpm --filter @lilith/web test && pnpm --filter @lilith/web test:integration",
     "check": "pnpm build && pnpm typecheck && pnpm lint && pnpm test"

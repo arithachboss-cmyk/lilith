@@ -109,7 +109,7 @@ describe("pnpm db:migrate", () => {
     await query(database.url, "DROP TABLE index_probe");
   });
 
-  it("records the migration, and a second run changes nothing", async () => {
+  it("records each migration once, and a second run changes nothing", async () => {
     const again = migrate(database.url);
     expect(again.status, again.output).toBe(0);
     expect(again.output).toContain("No pending migrations to apply");
@@ -120,6 +120,7 @@ describe("pnpm db:migrate", () => {
     );
     expect(rows).toEqual([
       { migration_name: "0001_extensions", applied: true },
+      { migration_name: "0004_geo", applied: true },
     ]);
   });
 

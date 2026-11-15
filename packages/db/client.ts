@@ -2,6 +2,7 @@ import { PrismaPg } from "@prisma/adapter-pg";
 import type pg from "pg";
 import { databaseUrl } from "./env";
 import { PrismaClient, type Prisma } from "./generated/prisma/client";
+import { createGeoQueries, type GeoQueries } from "./geo";
 
 /**
  * The Prisma client of one transaction. Repositories receive this, so every
@@ -28,6 +29,12 @@ export interface DatabaseClient {
    * within `timeoutMs` (2 seconds unless given).
    */
   probe(options?: { readonly timeoutMs?: number }): Promise<DatabaseProbe>;
+  /**
+   * Named reads of the geography reference data: locations and transit
+   * stations. That data is public, so these reads need no actor. This is not
+   * a way to query other tables without one.
+   */
+  readonly geo: GeoQueries;
   /** Closes the client. A pool passed in by the caller stays open. */
   close(): Promise<void>;
 }
@@ -93,6 +100,7 @@ export function createDatabaseClient(
       if (row === undefined) throw new Error("The database gave no answer");
       return { serverVersion: row.version, extensions: row.extensions };
     },
+    geo: createGeoQueries(prisma),
     close: () => prisma.$disconnect(),
   };
 }

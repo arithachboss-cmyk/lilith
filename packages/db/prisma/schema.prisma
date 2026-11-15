@@ -1,5 +1,6 @@
 // Schema authority for the Prisma client (Blueprint §8).
-// ARCH-004 configures Prisma; the tables arrive with DB-001 onward.
+// The SQL in ../migrations creates the tables; this file describes them to
+// the client. A test keeps the two the same (ADR-0019).
 
 generator client {
   provider = "prisma-client"
@@ -8,4 +9,68 @@ generator client {
 
 datasource db {
   provider = "postgresql"
+}
+
+// ---- Geography (§8.2.2, migration 0004_geo) ---------------------------------
+
+enum LocationLevel {
+  COUNTRY
+  PROVINCE
+  DISTRICT
+  SUBDISTRICT
+  AREA
+  PROJECT
+
+  @@map("location_level")
+}
+
+enum TransitSystem {
+  BTS
+  MRT
+  ARL
+  SRT
+  BRT
+
+  @@map("transit_system")
+}
+
+model Location {
+  id        String                                   @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  parentId  String?                                  @map("parent_id") @db.Uuid
+  level     LocationLevel
+  nameTh    String                                   @map("name_th")
+  nameEn    String                                   @map("name_en")
+  slug      String                                   @unique
+  centroid  Unsupported("geography(Point, 4326)")
+  boundary  Unsupported("geography(Polygon, 4326)")?
+  createdAt DateTime                                 @default(now()) @map("created_at") @db.Timestamptz(6)
+  // Maintained by the trigger of 0004_geo, not by the client.
+  updatedAt DateTime                                 @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  parent   Location?  @relation("LocationParent", fields: [parentId], references: [id], onDelete: Restrict, onUpdate: NoAction)
+  children Location[] @relation("LocationParent")
+
+  @@index([parentId], map: "idx_locations_parent")
+  @@index([centroid], map: "idx_locations_centroid", type: Gist)
+  @@index([boundary], map: "idx_locations_boundary", type: Gist)
+  @@index([nameTh(ops: raw("gin_trgm_ops"))], map: "idx_locations_name_th_trgm", type: Gin)
+  @@index([nameEn(ops: raw("gin_trgm_ops"))], map: "idx_locations_name_en_trgm", type: Gin)
+  @@map("locations")
+}
+
+model TransitStation {
+  id        String                                @id @default(dbgenerated("gen_random_uuid()")) @db.Uuid
+  system    TransitSystem
+  line      String
+  code      String
+  nameTh    String                                @map("name_th")
+  nameEn    String                                @map("name_en")
+  point     Unsupported("geography(Point, 4326)")
+  createdAt DateTime                              @default(now()) @map("created_at") @db.Timestamptz(6)
+  // Maintained by the trigger of 0004_geo, not by the client.
+  updatedAt DateTime                              @default(now()) @map("updated_at") @db.Timestamptz(6)
+
+  @@unique([system, line, code])
+  @@index([point], map: "idx_transit_stations_point", type: Gist)
+  @@map("transit_stations")
 }
