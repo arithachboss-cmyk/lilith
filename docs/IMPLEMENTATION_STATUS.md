@@ -1,6 +1,6 @@
 # Implementation status
 
-Updated: 2026-11-14. Current task: DB-003 (geo tables and the station seed) is implemented on the session's branch and has no PR yet. It is the first half of the vertical slice the owner asked for, searching locations and transit stations; the second half, SLICE-001, starts after DB-003 is merged. SKEL-001 (walking skeleton) merged as PR #19, ARCH-004 (database package and local stack) as PR #18, ARCH-003 (contracts package) as PR #17 and ARCH-002 (shared kernel) as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
+Updated: 2026-11-15. Current task: DB-003 (geo tables and the station seed) is open as PR #20 with its tests green in CI; merging waits on the owner's word. It is the first half of the vertical slice the owner asked for, searching locations and transit stations; the second half, SLICE-001, starts after DB-003 is merged. SKEL-001 (walking skeleton) merged as PR #19, ARCH-004 (database package and local stack) as PR #18, ARCH-003 (contracts package) as PR #17 and ARCH-002 (shared kernel) as PR #16. The AMI office merged as PR #9; prompt fixes from its live runs merged as PR #11 and PR #14; office facts OF-07 and OF-08 and the record of rounds 5–7 merged as PR #15. The content route has run seven rounds in live chats; the wording is settled and waits on Thai counsel, whom the owner has not yet found, and the pre-publication steps; ADR-0014 still waits on owner review.
 
 ## Done
 
@@ -99,9 +99,7 @@ Updated: 2026-11-14. Current task: DB-003 (geo tables and the station seed) is i
   - Not covered, by design: login, tables, business features, the job queue, the AI service and storage. OPS-003 still owns the full health endpoint; until then this route must not gate a deployment.
   - Merged as `4ec30b9` (PR #19) on 2026-11-14, at the owner's request, with `foundation` green on head `0ca9521`.
 
-## In Progress
-
-- DB-003 (geo tables and the station seed) is implemented and pushed; it has no PR, so CI has not run on it. The owner's answers and this task's readings are in [ADR-0019](adr/ADR-0019-geo-tables-and-station-seed.md).
+- DB-003 (geo tables and the station seed), the first half of the owner's vertical slice. The owner's answers and this task's readings are in [ADR-0019](adr/ADR-0019-geo-tables-and-station-seed.md).
   - What it holds:
     - `packages/db/migrations/0004_geo/migration.sql`: `locations` and `transit_stations` of §8.2.2, with their indexes, constraints and the `updated_at` trigger; `schema.prisma` describes both.
     - `packages/db/seed/`: the 24 stations of the launch corridor and the 3 areas under Bangkok and Thailand, with fixed ids; `pnpm db:seed` writes them and is safe to repeat.
@@ -119,8 +117,12 @@ Updated: 2026-11-14. Current task: DB-003 (geo tables and the station seed) is i
     - `prisma migrate diff` between the migrated database and `schema.prisma` is empty.
     - Hand-made faults: 129 of 131 were caught on the first pass. One of the other two showed a check that did nothing, now removed. The other showed a missing test, that a run stopped outside the database is rolled back; the test is added. The three faults that touch the changed lines are caught.
     - The full foundation validation passes, including `pnpm db:migrate`, `pnpm db:seed` run twice, `pnpm test:db` (36 and 120 tests) and `pnpm test:skeleton`.
-  - CI: not run. The foundation workflow runs on pull requests, and the new `pnpm db:seed` step is in it.
+  - CI (Node 24): hosted [foundation CI passed](https://github.com/arithachboss-cmyk/lilith/actions/runs/43694652824) on head `385e200`. Its log shows `pnpm db:migrate` applying `0001_extensions` and `0004_geo`, the new `pnpm db:seed` step inserting 5 locations and 24 stations, and `pnpm test:db` passing 36 and 120 tests.
   - Not covered, by design: `property_transit`, which needs the `properties` table of DB-004; districts, subdistricts and area boundaries; the search service, routes and page of SLICE-001. The work is on the session's branch, not `feat/DB-003-geo`, because this session may push only to that branch.
+
+## In Progress
+
+- PR #20 (DB-003) is open with `foundation` green; it merges on the owner's word.
 - ADR-0015, ADR-0016, ADR-0017, ADR-0018 and ADR-0019 are **proposed**; their interpretations wait on owner review.
 - ADR-0014 remains **proposed**: merging PR #9 approved the change, not the ADR's interpretations (R-AMI-03).
 - `W-20261016-01` is paused at HR-01 after round 7 and the LQ-18 queue, with no failed checks and no wording waiting on an answer. It waits on the owner finding a Thai lawyer and sending the brief (Q30), counsel's answers, the pre-publication checks (Q44, Q45) and the owner's approval.
@@ -135,7 +137,7 @@ Updated: 2026-11-14. Current task: DB-003 (geo tables and the station seed) is i
 
 1. Owner review of ADR-0014 (shared-team stewards, team split, English drafts), then AMI-002 (bilingual strings) and AMI-003..007 against the merged contract. AMI-008 brings the roster into `packages/contracts` after AMI-003.
 2. `W-20261016-01`: the owner finds a Thai lawyer and sends the eight-topic brief (Q30); counsel's answers go back through the route; then PUBLISH-GATE compares the tag-free copy (Q44) and the live page text (Q45), the web person tests the button, and the owner approves.
-3. DB-003: open a PR when the owner asks, and merge it on the owner's word once CI is green. Then SLICE-001: the search service in core, `GET /api/geo/search` and `GET /api/geo/stations` without login, and a search section on the foundation page that shows a straight-line distance in metres. ARCH-005 (the CI pipeline) remains the next Blueprint task.
+3. DB-003: merge PR #20 on the owner's word. Then SLICE-001: the search service in core, `GET /api/geo/search` and `GET /api/geo/stations` without login, and a search section on the foundation page that shows a straight-line distance in metres. ARCH-005 (the CI pipeline) remains the next Blueprint task.
 4. Implement data constraints before feature endpoints; demonstrate invalid writes failing directly in PostgreSQL.
 
 ## Open risks
